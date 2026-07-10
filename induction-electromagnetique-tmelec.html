@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Éducatif : Obtenir de l’Énergie Électrique par Induction Électromagnétique</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #001f3f, #00bfff);
+            color: #ffffff;
+            line-height: 1.6;
+            background-attachment: fixed;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0, 31, 63, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid #ffd700;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffd700;
+        }
+        header p {
+            font-size: 1.4em;
+            opacity: 0.95;
+        }
+        .objectives {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+        .objectives h2 {
+            color: #ffd700;
+            font-size: 2em;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+        .objectives ul {
+            list-style-type: square;
+            margin-left: 25px;
+        }
+        nav {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 31, 63, 0.95);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            margin: 0 25px;
+            text-decoration: none;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 12px 25px;
+            border-radius: 30px;
+            transition: background 0.4s, color 0.4s;
+        }
+        nav a:hover {
+            background: #ffd700;
+            color: #001f3f;
+        }
+        section {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.4s;
+            backdrop-filter: blur(5px);
+        }
+        section:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            color: #ffd700;
+            font-size: 2em;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+        h3 {
+            color: #00bfff;
+            margin-top: 35px;
+        }
+        p {
+            font-size: 1.15em;
+            margin-bottom: 25px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 25px;
+        }
+        iframe {
+            display: block;
+            margin: 25px auto;
+            border: 3px solid #ffd700;
+            border-radius: 10px;
+            max-width: 100%;
+        }
+        .quiz {
+            background: rgba(0, 31, 63, 0.8);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #ffd700;
+        }
+        .quiz label {
+            display: block;
+            margin: 12px 0;
+            color: #ffffff;
+        }
+        .quiz button {
+            background: #ffd700;
+            color: #001f3f;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .quiz button:hover {
+            background: #00bfff;
+            color: #ffffff;
+        }
+        .result {
+            margin-top: 25px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .checklist {
+            background: rgba(0, 191, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #00bfff;
+            margin-top: 25px;
+        }
+        .checklist label {
+            display: block;
+            margin: 12px 0;
+        }
+        .summary {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 18px;
+            border-left: 5px solid #ffd700;
+            margin-bottom: 25px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: rgba(0, 31, 63, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            padding: 18px;
+            color: #ffffff;
+        }
+        .card .head {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #ffd700;
+        }
+        .card .head .muted {
+            font-size: 0.95em;
+            color: #a9a9a9;
+        }
+        .card .body {
+            font-size: 1.05em;
+        }
+        canvas {
+            display: block;
+            margin: 25px auto;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 31, 63, 0.9);
+            color: #ffd700;
+            margin-top: 50px;
+            border-top: 3px solid #ffd700;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .interactive-sim {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .interactive-sim button {
+            background: #00bfff;
+            color: #ffffff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .interactive-sim button:hover {
+            background: #ffd700;
+            color: #001f3f;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Obtenir de l’Énergie Électrique par Induction Électromagnétique</h1>
+        <p>Site éducatif pour élèves de Bac Pro MELEC : Explorer les phénomènes d'induction pour produire de l'énergie électrique.</p>
+    </header>
+   
+    <div class="objectives">
+        <h2>Objectifs d'Apprentissage</h2>
+        <ul>
+            <li>Produire expérimentalement une tension alternative dans un circuit fixe soumis à un champ magnétique variable dans le temps.</li>
+            <li>Produire expérimentalement une tension alternative dans un circuit mobile soumis à un champ magnétique constant dans le temps.</li>
+            <li>Mettre en évidence la loi de Lenz dans une expérience d’induction électromagnétique.</li>
+        </ul>
+    </div>
+   
+    <nav>
+        <a href="#section1">Circuit Fixe, Champ Variable</a>
+        <a href="#section2">Circuit Mobile, Champ Constant</a>
+        <a href="#section3">Loi de Lenz</a>
+    </nav>
+   
+    <section id="section1">
+        <h2>Produire une Tension Alternative dans un Circuit Fixe Soumis à un Champ Magnétique Variable</h2>
+        <p>Cette section explore comment générer une tension alternative en variant le champ magnétique à travers un circuit fixe, basé sur la loi de Faraday.</p>
+        <h3>Étapes Expérimentales</h3>
+        <ul>
+            <li>Préparez une bobine fixe connectée à un voltmètre ou oscilloscope.</li>
+            <li>Utilisez un aimant rotatif pour varier le champ magnétique traversant la bobine.</li>
+            <li>Observez la tension induite qui alterne en fonction de la rotation de l'aimant.</li>
+            <li>Analysez l'amplitude et la fréquence en fonction de la vitesse de rotation.</li>
+        </ul>
+        <div class="card">
+            <div class="head">Simulation Interactive <span class="badge">Animation 3D</span></div>
+            <div class="body">
+                <div id="threeJsSim" style="width: 400px; height: 200px; margin: 0 auto;"></div>
+                <div class="interactive-sim">
+                    <button onclick="setRotationSpeed(1)">Lent (1 rad/s)</button>
+                    <button onclick="setRotationSpeed(2)">Moyen (2 rad/s)</button>
+                    <button onclick="setRotationSpeed(4)">Rapide (4 rad/s)</button>
+                </div>
+                <canvas id="voltageGraph" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <p>Vidéo Démonstrative :</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/6o9D5eb5AnY" title="Induction Électromagnétique" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       
+        <h3>Récapitulatif</h3>
+        <div class="summary">
+            Selon la loi de Faraday, une variation du flux magnétique à travers un circuit fixe induit une force électromotrice (fém) proportionnelle au taux de variation de ce flux : e = -dΦ/dt, où Φ est le flux magnétique. Pour un circuit fixe comme une bobine, le flux varie si le champ magnétique B change dans le temps, par exemple via un aimant rotatif dont les pôles nord et sud alternent. Cela crée une tension alternative si la variation est périodique, comme dans les transformateurs où le primaire crée un B variable induisant une tension dans le secondaire. Expérimentalement, un aimant tournant dans une bobine fixe génère un flux sinusoïdal, produisant une fém alternative proportionnelle à la vitesse de rotation (ω) et au nombre de spires (N) : e = N * A * B * ω * sin(ωt). Cette méthode convertit l'énergie mécanique en électrique, utilisée dans les alternateurs ou les capteurs inductifs. L'amplitude augmente avec ω, et la fréquence de la tension suit celle de la rotation.
+        </div>
+       
+        <h3>Quiz Interactif</h3>
+        <div class="quiz">
+            <form id="quiz1">
+                <p>1. Quelle loi décrit l'induction ?</p>
+                <label><input type="radio" name="q1" value="a"> Ampère</label>
+                <label><input type="radio" name="q1" value="b"> Faraday</label>
+                <label><input type="radio" name="q1" value="c"> Ohm</label>
+               
+                <p>2. Pour un circuit fixe, qu'est-ce qui varie ?</p>
+                <label><input type="radio" name="q2" value="a"> Le circuit</label>
+                <label><input type="radio" name="q2" value="b"> Le champ magnétique</label>
+                <label><input type="radio" name="q2" value="c"> La tension</label>
+               
+                <p>3. La fém induite est proportionnelle à ?</p>
+                <label><input type="radio" name="q3" value="a"> Flux constant</label>
+                <label><input type="radio" name="q3" value="b"> Variation du flux</label>
+                <label><input type="radio" name="q3" value="c"> Résistance</label>
+               
+                <p>4. Exemple d'application ?</p>
+                <label><input type="radio" name="q4" value="a"> Transformateur</label>
+                <label><input type="radio" name="q4" value="b"> Batterie</label>
+                <label><input type="radio" name="q4" value="c"> Condensateur</label>
+               
+                <p>5. Si le flux augmente, le courant induit tend à ?</p>
+                <label><input type="radio" name="q5" value="a"> Augmenter le flux</label>
+                <label><input type="radio" name="q5" value="b"> Diminuer le flux</label>
+                <label><input type="radio" name="q5" value="c"> Rien changer</label>
+               
+                <p>6. La tension est alternative si la variation est ?</p>
+                <label><input type="radio" name="q6" value="a"> Constante</label>
+                <label><input type="radio" name="q6" value="b"> Périodique</label>
+                <label><input type="radio" name="q6" value="c"> Nulle</label>
+               
+                <button type="button" onclick="checkQuiz1()">Valider</button>
+            </form>
+            <div id="result1" class="result"></div>
+        </div>
+       
+        <div class="checklist">
+            <h3>Auto-Évaluation</h3>
+            <label><input type="checkbox"> Comprendre la loi de Faraday.</label>
+            <label><input type="checkbox"> Réaliser l'expérience avec circuit fixe.</label>
+            <label><input type="checkbox"> Observer la tension alternative induite.</label>
+        </div>
+    </section>
+   
+    <section id="section2">
+        <h2>Produire une Tension Alternative dans un Circuit Mobile Soumis à un Champ Magnétique Constant</h2>
+        <p>Cette section couvre la génération de tension par mouvement d'un circuit dans un champ magnétique fixe, comme dans les générateurs.</p>
+        <h3>Étapes Expérimentales</h3>
+        <ul>
+            <li>Préparez une bobine mobile dans un champ magnétique constant (aimant permanent).</li>
+            <li>Connectez la bobine à un voltmètre et faites-la tourner entre les pôles d’un aimant, sans contact.</li>
+            <li>Observez la tension induite alternant avec la rotation.</li>
+            <li>Variez la vitesse de rotation pour voir l’effet sur l’amplitude et la fréquence.</li>
+        </ul>
+        <div class="card">
+            <div class="head">Simulation Interactive <span class="badge">Animation 3D</span></div>
+            <div class="body">
+                <div id="mobileCircuitSim" style="width: 400px; height: 200px; margin: 0 auto;"></div>
+                <div class="interactive-sim">
+                    <button onclick="setMobileRotationSpeed(1)">Lent (1 rad/s)</button>
+                    <button onclick="setMobileRotationSpeed(2)">Moyen (2 rad/s)</button>
+                    <button onclick="setMobileRotationSpeed(4)">Rapide (4 rad/s)</button>
+                </div>
+                <canvas id="mobileVoltageGraph" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <p>Vidéo Démonstrative :</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/EHFkmYO4DJk" title="Expériences Induction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       
+        <h3>Récapitulatif</h3>
+        <div class="summary">
+            Lorsqu’un circuit conducteur se déplace dans un champ magnétique constant, une fém est induite selon la loi de Faraday : e = -dΦ/dt, où le flux Φ change en raison du mouvement. Pour une bobine rotative dans un champ constant (comme dans un alternateur), le flux varie sinusoïdalement, produisant une tension alternative : e = N * A * B * ω * sin(ωt), où N est le nombre de spires, A la surface, B le champ, ω la vitesse angulaire. L’amplitude de la tension augmente avec ω, et la fréquence est proportionnelle à la vitesse de rotation. Expérimentalement, une bobine tournant entre les pôles d’un aimant en U, sans contact, génère un courant alternant, observable sur un oscilloscope, illustrant la conversion d’énergie mécanique en électrique. Cette méthode est essentielle dans les centrales électriques (hydroélectriques, éoliennes) où la rotation mécanique produit une tension alternative stable, avec une efficacité dépendant de la conception de la bobine et de la force du champ magnétique.
+        </div>
+       
+        <h3>Quiz Interactif</h3>
+        <div class="quiz">
+            <form id="quiz2">
+                <p>1. Qu'est-ce qui est constant ?</p>
+                <label><input type="radio" name="q1" value="a"> Le circuit</label>
+                <label><input type="radio" name="q1" value="b"> Le champ magnétique</label>
+                <label><input type="radio" name="q1" value="c"> La tension</label>
+               
+                <p>2. La fém dépend de ?</p>
+                <label><input type="radio" name="q2" value="a"> Vitesse du mouvement</label>
+                <label><input type="radio" name="q2" value="b"> Résistance</label>
+                <label><input type="radio" name="q2" value="c"> Couleur du fil</label>
+               
+                <p>3. Exemple d'application ?</p>
+                <label><input type="radio" name="q3" value="a"> Alternateur</label>
+                <label><input type="radio" name="q3" value="b"> Pile</label>
+                <label><input type="radio" name="q3" value="c"> Fusible</label>
+               
+                <p>4. Si la vitesse augmente, la fém ?</p>
+                <label><input type="radio" name="q4" value="a"> Diminue</label>
+                <label><input type="radio" name="q4" value="b"> Augmente</label>
+                <label><input type="radio" name="q4" value="c"> Reste constante</label>
+               
+                <p>5. Le flux change à cause du ?</p>
+                <label><input type="radio" name="q5" value="a"> Mouvement</label>
+                <label><input type="radio" name="q5" value="b"> Champ variable</label>
+                <label><input type="radio" name="q5" value="c"> Courant fixe</label>
+               
+                <p>6. La tension est alternative avec mouvement ?</p>
+                <label><input type="radio" name="q6" value="a"> Constant</label>
+                <label><input type="radio" name="q6" value="b"> Oscillant</label>
+                <label><input type="radio" name="q6" value="c"> Nul</label>
+               
+                <button type="button" onclick="checkQuiz2()">Valider</button>
+            </form>
+            <div id="result2" class="result"></div>
+        </div>
+       
+        <div class="checklist">
+            <h3>Auto-Évaluation</h3>
+            <label><input type="checkbox"> Comprendre l'induction par mouvement.</label>
+            <label><input type="checkbox"> Réaliser l'expérience avec circuit mobile.</label>
+            <label><input type="checkbox"> Observer l'effet de la vitesse.</label>
+        </div>
+    </section>
+   
+    <section id="section3">
+        <h2>Mettre en Évidence la Loi de Lenz dans une Expérience d’Induction Électromagnétique</h2>
+        <p>Cette section démontre comment le courant induit s'oppose à la variation du flux, selon la loi de Lenz.</p>
+        <h3>Étapes Expérimentales</h3>
+        <ul>
+            <li>Utilisez un tube en cuivre et un aimant tombant librement.</li>
+            <li>Observez le ralentissement de la chute dû aux courants induits.</li>
+            <li>Comparez avec un tube non conducteur pour voir la différence.</li>
+            <li>Analysez comment le champ induit oppose le mouvement.</li>
+        </ul>
+        <div class="card">
+            <div class="head">Simulation Interactive <span class="badge">Animation</span></div>
+            <div class="body">
+                <canvas id="lenzSim" width="400" height="300"></canvas>
+                <div class="interactive-sim">
+                    <button onclick="setFallSpeed(1)">Lent</button>
+                    <button onclick="setFallSpeed(2)">Moyen</button>
+                    <button onclick="setFallSpeed(4)">Rapide</button>
+                </div>
+            </div>
+        </div>
+        <p>Vidéo Démonstrative :</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Ny2LWsCIaOQ" title="Loi de Lenz" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/tJmeXBSeNfo?si=ssqxVwDsDEenfhYf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+       
+        <h3>Récapitulatif</h3>
+        <div class="summary">
+            La loi de Lenz, formulée en 1834, stipule que le courant induit par une variation de flux magnétique crée un champ qui s'oppose à cette variation, assurant la conservation de l'énergie. C'est le signe négatif dans la loi de Faraday : e = -dΦ/dt. Expérimentalement, dans un tube conducteur (cuivre), un aimant tombant induit des courants de Foucault qui génèrent un champ opposant sa chute, ralentissant sa descente comme dans un frein magnétique. Sans conducteur, il tombe librement. Dans une bobine, approcher un aimant nord induit un courant créant un pôle nord opposant, repoussant l'aimant. Cela illustre une rétroaction négative : l'induction modère sa cause. Applications incluent freins électromagnétiques, amortisseurs, ou induction heating où les courants dissipent énergie. Cette loi explique pourquoi l'énergie induite provient du travail mécanique contre la force d'opposition, évitant création d'énergie gratuite.
+        </div>
+       
+        <h3>Quiz Interactif</h3>
+        <div class="quiz">
+            <form id="quiz3">
+                <p>1. La loi de Lenz s'oppose à ?</p>
+                <label><input type="radio" name="q1" value="a"> La variation du flux</label>
+                <label><input type="radio" name="q1" value="b"> Le courant constant</label>
+                <label><input type="radio" name="q1" value="c"> La résistance</label>
+               
+                <p>2. Dans l'expérience du tube, l'aimant ?</p>
+                <label><input type="radio" name="q2" value="a"> Accélère</label>
+                <label><input type="radio" name="q2" value="b"> Ralentit</label>
+                <label><input type="radio" name="q2" value="c"> S'arrête</label>
+               
+                <p>3. Le courant induit crée un champ qui ?</p>
+                <label><input type="radio" name="q3" value="a"> Augmente le flux</label>
+                <label><input type="radio" name="q3" value="b"> Oppose la variation</label>
+                <label><input type="radio" name="q3" value="c"> Annule le champ</label>
+               
+                <p>4. Exemple d'application ?</p>
+                <label><input type="radio" name="q4" value="a"> Frein magnétique</label>
+                <label><input type="radio" name="q4" value="b"> Batterie</label>
+                <label><input type="radio" name="q4" value="c"> Interrupteur</label>
+               
+                <p>5. Le signe négatif dans Faraday vient de ?</p>
+                <label><input type="radio" name="q5" value="a"> Lenz</label>
+                <label><input type="radio" name="q5" value="b"> Ohm</label>
+                <label><input type="radio" name="q5" value="c"> Ampère</label>
+               
+                <p>6. Sans opposition, cela violerait ?</p>
+                <label><input type="radio" name="q6" value="a"> Conservation énergie</label>
+                <label><input type="radio" name="q6" value="b"> Loi de gravité</label>
+                <label><input type="radio" name="q6" value="c"> Rien</label>
+               
+                <button type="button" onclick="checkQuiz3()">Valider</button>
+            </form>
+            <div id="result3" class="result"></div>
+        </div>
+       
+        <div class="checklist">
+            <h3>Auto-Évaluation</h3>
+            <label><input type="checkbox"> Comprendre la loi de Lenz.</label>
+            <label><input type="checkbox"> Observer l'opposition dans l'expérience.</label>
+            <label><input type="checkbox"> Relier à la conservation d'énergie.</label>
+        </div>
+    </section>
+   
+    <footer>
+        <p>Site créé pour les élèves de Bac Pro MELEC - Terminale. Conforme au programme officiel 2025. Sources : YouTube et ressources éducatives.</p>
+        <div class="footer-content">
+            <p><strong>M. KANDE</strong> — boubacar.kande@ac-creteil.fr</p>
+            <p>Lycée Gustave Eiffel, Varennes-sur-Seine</p>
+        </div>
+    </footer>
+    <script>
+        // Section 1: 3D Rotating Magnet Simulation with THREE.js
+        let rotationSpeed = 2;
+        function setRotationSpeed(speed) {
+            rotationSpeed = speed;
+        }
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 400 / 200, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(400, 200);
+        document.getElementById('threeJsSim').appendChild(renderer.domElement);
+        
+        const coilGeometry = new THREE.TorusGeometry(50, 5, 16, 100);
+        const coilMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+        const coil = new THREE.Mesh(coilGeometry, coilMaterial);
+        scene.add(coil);
+        
+        const magnetN = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 15, 32), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+        const magnetS = new THREE.Mesh(new THREE.CylinderGeometry(10, 10, 15, 32), new THREE.MeshBasicMaterial({ color: 0x0000ff }));
+        magnetN.position.y = 15;
+        magnetS.position.y = -15;
+        const magnet = new THREE.Group();
+        magnet.add(magnetN, magnetS);
+        scene.add(magnet);
+        
+        camera.position.z = 100;
+        
+        const voltageCtx = document.getElementById('voltageGraph').getContext('2d');
+        let time1 = 0;
+        function drawVoltageGraph() {
+            voltageCtx.clearRect(0, 0, 400, 200);
+            voltageCtx.strokeStyle = '#ffffff';
+            voltageCtx.beginPath();
+            voltageCtx.moveTo(0, 100);
+            voltageCtx.lineTo(400, 100);
+            voltageCtx.moveTo(50, 0);
+            voltageCtx.lineTo(50, 200);
+            voltageCtx.stroke();
+            
+            voltageCtx.fillStyle = '#ffffff';
+            voltageCtx.font = '12px Roboto';
+            voltageCtx.fillText('Temps', 350, 120);
+            voltageCtx.fillText('Tension', 10, 20);
+            voltageCtx.fillText('+V', 60, 20);
+            voltageCtx.fillText('0', 60, 105);
+            voltageCtx.fillText('-V', 60, 190);
+            
+            voltageCtx.strokeStyle = '#444444';
+            for (let y = 0; y <= 200; y += 50) {
+                voltageCtx.beginPath();
+                voltageCtx.moveTo(50, y);
+                voltageCtx.lineTo(400, y);
+                voltageCtx.stroke();
+            }
+            for (let x = 50; x <= 400; x += 50) {
+                voltageCtx.beginPath();
+                voltageCtx.moveTo(x, 0);
+                voltageCtx.lineTo(x, 200);
+                voltageCtx.stroke();
+            }
+            
+            voltageCtx.strokeStyle = '#00ff00';
+            voltageCtx.beginPath();
+            for (let x = 0; x < 350; x++) {
+                let y = 100 - 80 * rotationSpeed * Math.sin((x / (50 / rotationSpeed)) + time1 * rotationSpeed);
+                voltageCtx.lineTo(x + 50, y);
+            }
+            voltageCtx.stroke();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            magnet.rotation.z += rotationSpeed * 0.01;
+            drawVoltageGraph();
+            time1 += 0.05;
+            renderer.render(scene, camera);
+        }
+        animate();
+        
+        // Section 2
+        let mobileRotationSpeed = 2;
+        function setMobileRotationSpeed(speed) {
+            mobileRotationSpeed = speed;
+        }
+        const scene2 = new THREE.Scene();
+        const camera2 = new THREE.PerspectiveCamera(75, 400 / 200, 0.1, 1000);
+        const renderer2 = new THREE.WebGLRenderer({ antialias: true });
+        renderer2.setSize(400, 200);
+        document.getElementById('mobileCircuitSim').appendChild(renderer2.domElement);
+        
+        const magnetN2 = new THREE.Mesh(new THREE.BoxGeometry(40, 40, 10), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+        const magnetS2 = new THREE.Mesh(new THREE.BoxGeometry(40, 40, 10), new THREE.MeshBasicMaterial({ color: 0x0000ff }));
+        magnetN2.position.set(0, 60, 0);
+        magnetS2.position.set(0, -60, 0);
+        scene2.add(magnetN2, magnetS2);
+        
+        const coil2 = new THREE.Mesh(new THREE.TorusGeometry(25, 3, 16, 100), new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true }));
+        scene2.add(coil2);
+        camera2.position.z = 120;
+        
+        const mobileVoltageCtx = document.getElementById('mobileVoltageGraph').getContext('2d');
+        let time2 = 0;
+        function drawMobileVoltageGraph() {
+            mobileVoltageCtx.clearRect(0, 0, 400, 200);
+            mobileVoltageCtx.strokeStyle = '#ffffff';
+            mobileVoltageCtx.beginPath();
+            mobileVoltageCtx.moveTo(0, 100);
+            mobileVoltageCtx.lineTo(400, 100);
+            mobileVoltageCtx.moveTo(50, 0);
+            mobileVoltageCtx.lineTo(50, 200);
+            mobileVoltageCtx.stroke();
+            
+            mobileVoltageCtx.fillStyle = '#ffffff';
+            mobileVoltageCtx.font = '12px Roboto';
+            mobileVoltageCtx.fillText('Temps', 350, 120);
+            mobileVoltageCtx.fillText('Tension', 10, 20);
+            mobileVoltageCtx.fillText('+V', 60, 20);
+            mobileVoltageCtx.fillText('0', 60, 105);
+            mobileVoltageCtx.fillText('-V', 60, 190);
+            
+            mobileVoltageCtx.strokeStyle = '#444444';
+            for (let y = 0; y <= 200; y += 50) {
+                mobileVoltageCtx.beginPath();
+                mobileVoltageCtx.moveTo(50, y);
+                mobileVoltageCtx.lineTo(400, y);
+                mobileVoltageCtx.stroke();
+            }
+            for (let x = 50; x <= 400; x += 50) {
+                mobileVoltageCtx.beginPath();
+                mobileVoltageCtx.moveTo(x, 0);
+                mobileVoltageCtx.lineTo(x, 200);
+                mobileVoltageCtx.stroke();
+            }
+            
+            mobileVoltageCtx.strokeStyle = '#00ff00';
+            mobileVoltageCtx.beginPath();
+            for (let x = 0; x < 350; x++) {
+                let y = 100 - 80 * mobileRotationSpeed * Math.sin((x / (50 / mobileRotationSpeed)) + time2 * mobileRotationSpeed);
+                mobileVoltageCtx.lineTo(x + 50, y);
+            }
+            mobileVoltageCtx.stroke();
+        }
+        
+        function animateMobile() {
+            requestAnimationFrame(animateMobile);
+            coil2.rotation.x += mobileRotationSpeed * 0.01;
+            drawMobileVoltageGraph();
+            time2 += 0.05;
+            renderer2.render(scene2, camera2);
+        }
+        animateMobile();
+        
+        // Section 3: Lenz
+        let fallSpeed = 2;
+        function setFallSpeed(speed) {
+            fallSpeed = speed;
+        }
+        const lenzCtx = document.getElementById('lenzSim').getContext('2d');
+        let fallPos = 0;
+        function drawLenz() {
+            lenzCtx.clearRect(0, 0, 400, 300);
+            lenzCtx.strokeStyle = '#ffffff';
+            lenzCtx.beginPath();
+            lenzCtx.moveTo(100, 0);
+            lenzCtx.lineTo(100, 300);
+            lenzCtx.moveTo(300, 0);
+            lenzCtx.lineTo(300, 300);
+            lenzCtx.stroke();
+            
+            fallPos += fallSpeed * (fallPos > 150 ? 0.5 : 1);
+            if (fallPos > 300) fallPos = 0;
+            
+            lenzCtx.fillStyle = '#ff0000';
+            lenzCtx.fillRect(180, fallPos - 20, 40, 20);
+            lenzCtx.fillStyle = '#0000ff';
+            lenzCtx.fillRect(180, fallPos, 40, 20);
+            lenzCtx.fillStyle = '#ffffff';
+            lenzCtx.font = '12px Roboto';
+            lenzCtx.fillText('N', 190, fallPos - 5);
+            lenzCtx.fillText('S', 190, fallPos + 15);
+            
+            if (fallPos > 150) {
+                lenzCtx.strokeStyle = '#00ff00';
+                lenzCtx.beginPath();
+                lenzCtx.moveTo(120, fallPos);
+                lenzCtx.lineTo(280, fallPos);
+                lenzCtx.stroke();
+                lenzCtx.beginPath();
+                lenzCtx.moveTo(280, fallPos);
+                lenzCtx.lineTo(270, fallPos - 10);
+                lenzCtx.moveTo(280, fallPos);
+                lenzCtx.lineTo(270, fallPos + 10);
+                lenzCtx.stroke();
+            }
+            requestAnimationFrame(drawLenz);
+        }
+        drawLenz();
+        
+        // Quizzes
+        function checkQuiz1() {
+            const form = document.getElementById('quiz1');
+            const result = document.getElementById('result1');
+            let score = 0;
+            let feedback = '';
+            
+            if (form.q1.value === 'b') { score++; feedback += '<p style="color:green;">Q1 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q1 : Incorrect. Bonne réponse : Faraday.</p>'; }
+            if (form.q2.value === 'b') { score++; feedback += '<p style="color:green;">Q2 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q2 : Incorrect. Bonne réponse : Le champ magnétique.</p>'; }
+            if (form.q3.value === 'b') { score++; feedback += '<p style="color:green;">Q3 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q3 : Incorrect. Bonne réponse : Variation du flux.</p>'; }
+            if (form.q4.value === 'a') { score++; feedback += '<p style="color:green;">Q4 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q4 : Incorrect. Bonne réponse : Transformateur.</p>'; }
+            if (form.q5.value === 'b') { score++; feedback += '<p style="color:green;">Q5 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q5 : Incorrect. Bonne réponse : Diminuer le flux.</p>'; }
+            if (form.q6.value === 'b') { score++; feedback += '<p style="color:green;">Q6 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q6 : Incorrect. Bonne réponse : Périodique.</p>'; }
+            
+            feedback += `<p>Score total : ${score}/6</p>`;
+            result.innerHTML = feedback;
+        }
+        
+        function checkQuiz2() {
+            const form = document.getElementById('quiz2');
+            const result = document.getElementById('result2');
+            let score = 0;
+            let feedback = '';
+            
+            if (form.q1.value === 'b') { score++; feedback += '<p style="color:green;">Q1 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q1 : Incorrect. Bonne réponse : Le champ magnétique.</p>'; }
+            if (form.q2.value === 'a') { score++; feedback += '<p style="color:green;">Q2 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q2 : Incorrect. Bonne réponse : Vitesse du mouvement.</p>'; }
+            if (form.q3.value === 'a') { score++; feedback += '<p style="color:green;">Q3 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q3 : Incorrect. Bonne réponse : Alternateur.</p>'; }
+            if (form.q4.value === 'b') { score++; feedback += '<p style="color:green;">Q4 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q4 : Incorrect. Bonne réponse : Augmente.</p>'; }
+            if (form.q5.value === 'a') { score++; feedback += '<p style="color:green;">Q5 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q5 : Incorrect. Bonne réponse : Mouvement.</p>'; }
+            if (form.q6.value === 'b') { score++; feedback += '<p style="color:green;">Q6 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q6 : Incorrect. Bonne réponse : Oscillant.</p>'; }
+            
+            feedback += `<p>Score total : ${score}/6</p>`;
+            result.innerHTML = feedback;
+        }
+        
+        function checkQuiz3() {
+            const form = document.getElementById('quiz3');
+            const result = document.getElementById('result3');
+            let score = 0;
+            let feedback = '';
+            
+            if (form.q1.value === 'a') { score++; feedback += '<p style="color:green;">Q1 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q1 : Incorrect. Bonne réponse : La variation du flux.</p>'; }
+            if (form.q2.value === 'b') { score++; feedback += '<p style="color:green;">Q2 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q2 : Incorrect. Bonne réponse : Ralentit.</p>'; }
+            if (form.q3.value === 'b') { score++; feedback += '<p style="color:green;">Q3 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q3 : Incorrect. Bonne réponse : Oppose la variation.</p>'; }
+            if (form.q4.value === 'a') { score++; feedback += '<p style="color:green;">Q4 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q4 : Incorrect. Bonne réponse : Frein magnétique.</p>'; }
+            if (form.q5.value === 'a') { score++; feedback += '<p style="color:green;">Q5 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q5 : Incorrect. Bonne réponse : Lenz.</p>'; }
+            if (form.q6.value === 'a') { score++; feedback += '<p style="color:green;">Q6 : Correct !</p>'; } else { feedback += '<p style="color:red;">Q6 : Incorrect. Bonne réponse : Conservation énergie.</p>'; }
+            
+            feedback += `<p>Score total : ${score}/6</p>`;
+            result.innerHTML = feedback;
+        }
+    </script>
+</body>
+</html>

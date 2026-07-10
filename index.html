@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressources Maths &amp; Sciences • Lycée Professionnel</title>
+    <!-- Manifeste PWA -->
+    <link rel="manifest" href="./manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #1e40af;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .class-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .class-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-active {
+            color: #1e40af;
+            font-weight: 600;
+            border-bottom: 2px solid #1e40af;
+        }
+
+        .resource-item {
+            transition: all 0.2s ease;
+        }
+        
+        .resource-item:hover {
+            transform: translateX(4px);
+            background-color: #f8fafc;
+        }
+
+        .modal {
+            animation: modalPop 0.2s ease-out forwards;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .filter-pill {
+            transition: all 0.2s ease;
+        }
+        
+        .filter-pill.active {
+            background-color: #1e40af;
+            color: white;
+            border-color: #1e40af;
+        }
+
+        .math-bg {
+            background-image: url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill-rule=%22evenodd%22%3E%3Cpath fill=%22%23e0e7ff%22 fill-opacity=%22006%22 d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-10V8h-2v16h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 6v-4H4v4H0v2h4v4h2V8h4V6H6z%22/%3E%3C/g%3E%3C/svg%27');
+            background-size: 60px 60px;
+        }
+
+        .formation-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 9999px;
+        }
+
+        .resource-tab {
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .resource-tab.active {
+            border-bottom-color: #1e40af;
+            color: #1e40af;
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-square-root-variable text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-display text-2xl font-semibold tracking-tighter">Maths &amp; Sciences</span>
+                        <span class="text-xs font-medium text-slate-500 tracking-[1px] block -mt-1">LYCÉE PROFESSIONNEL</span>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#formations" class="font-medium text-slate-600 hover:text-slate-900 transition-colors">Formations</a>
+                    <a href="#transversales" class="font-medium text-slate-600 hover:text-slate-900 transition-colors">Ressources transversales</a>
+                    <a href="#outils" class="font-medium text-slate-600 hover:text-slate-900 transition-colors">Outils &amp; Liens</a>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <!-- Global Search -->
+                    <div class="relative hidden md:block w-72">
+                        <input 
+                            id="global-search"
+                            type="text" 
+                            placeholder="Rechercher une ressource ou une classe..." 
+                            class="w-full bg-slate-100 border border-slate-200 focus:border-indigo-300 rounded-3xl pl-10 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-200">
+                        <i class="fa-solid fa-search absolute left-4 top-2.5 text-slate-400"></i>
+                    </div>
+                    
+                    <!-- Teacher badge -->
+                    <div class="hidden sm:flex items-center gap-x-2 bg-slate-100 rounded-3xl px-3 py-1.5 text-sm">
+                        <div class="w-7 h-7 bg-emerald-600 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-user text-white text-xs"></i>
+                        </div>
+                        <span class="font-semibold text-slate-700" id="teacher-name-nav">M. KANDE</span>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-6 pt-14 pb-12">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-x-2 bg-white/20 backdrop-blur-md rounded-3xl px-4 py-1 mb-6 text-sm font-medium">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span>Année scolaire 2025-2026 • <span id="app-version">v1.1.0</span></span>
+                </div>
+                
+                <h1 class="font-display text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-4">
+                    Bienvenue sur votre<br>espace ressources
+                </h1>
+                <p class="text-xl md:text-2xl text-indigo-100 max-w-lg mb-8">
+                    Tous les cours, exercices, fiches et supports de maths et sciences pour réussir dans vos formations.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#formations" 
+                       class="inline-flex items-center justify-center gap-x-2 bg-white text-indigo-700 hover:bg-indigo-50 font-semibold px-8 h-12 rounded-3xl shadow-sm transition-all active:scale-[0.985]">
+                        <span>Voir mes formations</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <button onclick="document.getElementById('global-search').focus()"
+                            class="inline-flex items-center justify-center gap-x-2 bg-white/20 hover:bg-white/30 backdrop-blur font-semibold px-6 h-12 rounded-3xl border border-white/30 transition-all">
+                        <i class="fa-solid fa-search"></i>
+                        <span>Rechercher une ressource</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="border-t border-white/20 bg-white/10 backdrop-blur">
+            <div class="max-w-7xl mx-auto px-6 py-4 grid grid-cols-2 md:grid-cols-4 gap-y-4 text-center md:text-left">
+                <div>
+                    <div class="text-3xl font-semibold tracking-tight" id="stat-classes">23</div>
+                    <div class="text-indigo-200 text-sm">Classes / Divisions</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-semibold tracking-tight">280+</div>
+                    <div class="text-indigo-200 text-sm">Ressources disponibles</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-semibold tracking-tight">8</div>
+                    <div class="text-indigo-200 text-sm">Formations différentes</div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="inline-flex items-center gap-2 text-sm bg-white/20 px-4 py-1.5 rounded-3xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span class="font-medium">~220 élèves accompagnés</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- FILTRES -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 pb-4" id="formations">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-y-4 mb-6">
+            <div>
+                <h2 class="section-title text-slate-900">Mes formations &amp; classes</h2>
+                <p class="text-slate-600 mt-1">Cliquez sur une carte pour accéder à toutes les ressources</p>
+            </div>
+            
+            <!-- Search mobile -->
+            <div class="md:hidden">
+                <input id="global-search-mobile" type="text" placeholder="Rechercher..." 
+                       class="w-full bg-white border border-slate-300 rounded-3xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-400">
+            </div>
+        </div>
+
+        <!-- Filtres Niveau -->
+        <div class="mb-3">
+            <div class="text-xs font-semibold text-slate-500 tracking-wider mb-2 px-1">PAR NIVEAU</div>
+            <div class="flex flex-wrap gap-2" id="level-filters">
+                <button onclick="filterByLevel('all')" class="filter-pill active px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="all">Toutes</button>
+                <button onclick="filterByLevel('3eme')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="3eme">3ème</button>
+                <button onclick="filterByLevel('cap')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="cap">CAP</button>
+                <button onclick="filterByLevel('seconde')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="seconde">Seconde</button>
+                <button onclick="filterByLevel('premiere')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="premiere">Première</button>
+                <button onclick="filterByLevel('terminale')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="terminale">Terminale</button>
+                <button onclick="filterByLevel('postbac')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="postbac">Post-Bac</button>
+                <button onclick="filterByLevel('bts')" class="filter-pill px-5 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-level="bts">BTS</button>
+            </div>
+        </div>
+
+        <!-- Filtres Filière -->
+        <div>
+            <div class="text-xs font-semibold text-slate-500 tracking-wider mb-2 px-1">PAR FILIÈRE</div>
+            <div class="flex flex-wrap gap-2" id="filiere-filters">
+                <button onclick="filterByFiliere('all')" class="filter-pill active px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="all">Toutes</button>
+                <button onclick="filterByFiliere('maintenance')" class="filter-pill px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="maintenance">Maintenance</button>
+                <button onclick="filterByFiliere('chaudronnerie')" class="filter-pill px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="chaudronnerie">Chaudronnerie</button>
+                <button onclick="filterByFiliere('modelisation')" class="filter-pill px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="modelisation">Modélisation 3D</button>
+                <button onclick="filterByFiliere('electrique')" class="filter-pill px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="electrique">Électricité / Énergétique</button>
+                <button onclick="filterByFiliere('mecanique')" class="filter-pill px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="mecanique">Mécanique / REMI</button>
+                <button onclick="filterByFiliere('bts')" class="filter-pill px-4 py-1.5 text-sm font-semibold border border-slate-200 bg-white rounded-3xl" data-filiere="bts">BTS</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRILLE DES CLASSES -->
+    <div class="max-w-7xl mx-auto px-6 pb-12">
+        <div id="classes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+            <!-- Les cartes sont générées dynamiquement par JavaScript -->
+        </div>
+    </div>
+
+    <!-- RESSOURCES TRANSVERSALES -->
+    <div id="transversales" class="max-w-7xl mx-auto px-6 pb-16">
+        <div class="flex items-end justify-between mb-6">
+            <div>
+                <h2 class="section-title text-slate-900">Ressources transversales</h2>
+                <p class="text-slate-600">Documents utiles pour plusieurs formations</p>
+            </div>
+            <a href="#" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700 hidden md:flex items-center gap-x-1">
+                Voir tout <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+            </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Transversales cards (static examples) -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-5 hover:border-indigo-200 transition-colors group">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <span class="formation-tag bg-violet-100 text-violet-700">Maths • Commun</span>
+                        <h4 class="font-semibold mt-2.5 text-lg leading-tight">Trigonométrie appliquée aux métiers</h4>
+                        <p class="text-sm text-slate-600 mt-1">Cours + exercices résolus • 28 pages</p>
+                    </div>
+                    <i class="fa-solid fa-file-pdf text-3xl text-red-400 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="mt-5 flex items-center justify-between">
+                    <div class="text-xs text-slate-500">Mis à jour le 12/01/2026</div>
+                    <button onclick="downloadResource('trans', 'trigometrie-metiers.pdf')" 
+                            class="text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-2xl flex items-center gap-x-2 transition-colors">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Télécharger</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-5 hover:border-indigo-200 transition-colors group">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <span class="formation-tag bg-emerald-100 text-emerald-700">Sciences • Commun</span>
+                        <h4 class="font-semibold mt-2.5 text-lg leading-tight">Puissance, couple et rendement</h4>
+                        <p class="text-sm text-slate-600 mt-1">Fiche synthèse + applications mécaniques</p>
+                    </div>
+                    <i class="fa-solid fa-file-pdf text-3xl text-red-400 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="mt-5 flex items-center justify-between">
+                    <div class="text-xs text-slate-500">Mis à jour le 19/01/2026</div>
+                    <button onclick="downloadResource('trans', 'puissance-rendement.pdf')" 
+                            class="text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-2xl flex items-center gap-x-2 transition-colors">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Télécharger</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-5 hover:border-indigo-200 transition-colors group">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <span class="formation-tag bg-amber-100 text-amber-700">Maths • CAP &amp; Bac Pro</span>
+                        <h4 class="font-semibold mt-2.5 text-lg leading-tight">Aires et volumes dans les métiers industriels</h4>
+                        <p class="text-sm text-slate-600 mt-1">Cours complet + 45 exercices corrigés</p>
+                    </div>
+                    <i class="fa-solid fa-file-pdf text-3xl text-red-400 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="mt-5 flex items-center justify-between">
+                    <div class="text-xs text-slate-500">Mis à jour le 28/01/2026</div>
+                    <button onclick="downloadResource('trans', 'aires-volumes-industrie.pdf')" 
+                            class="text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-2xl flex items-center gap-x-2 transition-colors">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Télécharger</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OUTILS & LIENS UTILES -->
+    <div id="outils" class="bg-white border-t border-b border-slate-100 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="section-title text-slate-900 mb-2">Outils &amp; ressources complémentaires</h2>
+            <p class="text-slate-600 mb-8">Liens utiles pour travailler en autonomie</p>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                <a href="https://www.geogebra.org/" target="_blank" class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-cube text-2xl text-indigo-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">GeoGebra</div>
+                        <div class="text-xs text-slate-500">Géométrie dynamique</div>
+                    </div>
+                </a>
+                <a href="https://www.desmos.com/calculator" target="_blank" class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-chart-line text-2xl text-emerald-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">Desmos</div>
+                        <div class="text-xs text-slate-500">Graphiques interactifs</div>
+                    </div>
+                </a>
+                <a href="https://www.wolframalpha.com/" target="_blank" class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-calculator text-2xl text-violet-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">Wolfram Alpha</div>
+                        <div class="text-xs text-slate-500">Résolution de calculs</div>
+                    </div>
+                </a>
+                <a href="https://phet.colorado.edu/fr/simulations" target="_blank" class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-flask text-2xl text-amber-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">PhET Simulations</div>
+                        <div class="text-xs text-slate-500">Physique &amp; Chimie</div>
+                    </div>
+                </a>
+                <a href="#" class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-video text-2xl text-rose-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">Chaîne YouTube</div>
+                        <div class="text-xs text-slate-500">Vidéos explicatives</div>
+                    </div>
+                </a>
+
+                <!-- NOUVEAUX OUTILS DEMANDÉS -->
+                <a href="https://www.libreoffice.org/" target="_blank" class="flex items-center gap-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-file-excel text-2xl text-emerald-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">LibreOffice</div>
+                        <div class="text-xs text-emerald-600">Calc • Draw • Impress</div>
+                    </div>
+                </a>
+                <a href="https://www.numworks.com/" target="_blank" class="flex items-center gap-3 bg-violet-50 hover:bg-violet-100 border border-violet-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-calculator text-2xl text-violet-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">NumWorks</div>
+                        <div class="text-xs text-violet-600">Calculatrice graphique</div>
+                    </div>
+                </a>
+                <a href="https://scratch.mit.edu/" target="_blank" class="flex items-center gap-3 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-solid fa-puzzle-piece text-2xl text-orange-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">Scratch</div>
+                        <div class="text-xs text-orange-600">Programmation visuelle</div>
+                    </div>
+                </a>
+                <a href="https://www.python.org/" target="_blank" class="flex items-center gap-3 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-3xl px-5 py-4 transition-colors">
+                    <i class="fa-brands fa-python text-2xl text-sky-600 w-8"></i>
+                    <div>
+                        <div class="font-semibold">Python</div>
+                        <div class="text-xs text-sky-600">Programmation &amp; scripts</div>
+                    </div>
+                </a>
+
+                <!-- LABO MATHS-SCIENCES - Application en développement -->
+                <div class="col-span-2 md:col-span-3 lg:col-span-4 xl:col-span-5 mt-2">
+                    <div class="bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200 rounded-3xl p-5 flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-teal-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-flask text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-lg text-teal-800">Labo Maths-Sciences</div>
+                                <div class="text-sm text-teal-700 mt-0.5">
+                                    Télécharger gratuitement l'application pour découvrir le guide des équipements de notre labo et les fonctionnalités des appareils...
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 md:ml-auto">
+                            <a href="#" onclick="alert('Lien de téléchargement à remplacer par le vrai fichier (.exe / .zip) une fois l\\'application prête'); return false;" 
+                               class="inline-flex items-center px-4 py-2 text-sm font-semibold bg-white border border-teal-300 hover:bg-teal-50 text-teal-700 rounded-2xl transition-colors">
+                                <i class="fa-brands fa-windows mr-2"></i>
+                                Windows (bientôt)
+                            </a>
+                            <a href="#" onclick="alert('Lien de téléchargement à remplacer par le vrai fichier (.dmg / .zip) une fois l\\'application prête'); return false;" 
+                               class="inline-flex items-center px-4 py-2 text-sm font-semibold bg-white border border-teal-300 hover:bg-teal-50 text-teal-700 rounded-2xl transition-colors">
+                                <i class="fa-brands fa-apple mr-2"></i>
+                                macOS (bientôt)
+                            </a>
+                            <a href="https://stackblitz.com/edit/vitejs-vite-ixazpfsm?file=src%2FApp.jsx" target="_blank"
+                               class="inline-flex items-center px-4 py-2 text-sm font-semibold bg-teal-600 hover:bg-teal-700 text-white rounded-2xl transition-colors">
+                                <i class="fa-solid fa-external-link-alt mr-2"></i>
+                                Version en développement
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- CONTACT / À PROPOS -->
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 md:p-10 text-white flex flex-col md:flex-row gap-8 items-center">
+            <div class="flex-1">
+                <h3 class="font-display text-3xl tracking-tighter">Besoin d'aide ou d'une explication ?</h3>
+                <p class="mt-3 text-slate-300 max-w-md">N'hésitez pas à me contacter par mail ou pendant les permanences. Je reste disponible pour vous accompagner.</p>
+                
+                <div class="mt-6 flex flex-wrap gap-3 text-sm">
+                    <div class="bg-white/10 px-4 py-2 rounded-2xl flex items-center gap-x-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span class="font-medium">boubacar.kande@ac-creteil.fr</span>
+                    </div>
+                    <div class="bg-white/10 px-4 py-2 rounded-2xl">
+                        Permanences : <span class="font-medium">Mardi 16h-18h</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button onclick="openContactModal()" 
+                        class="bg-white text-slate-900 font-semibold px-8 py-3 rounded-3xl flex items-center gap-x-3 hover:bg-amber-100 transition-colors">
+                    <span>Envoyer un message</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-y-2">
+            <div>© 2025-2026 • Ressources Maths &amp; Sciences — Lycée Professionnel Gustave Eiffel</div>
+            <div class="flex items-center gap-x-4">
+                <span>Site réalisé pour les élèves</span>
+                <button onclick="showTeacherInstructions()" class="hover:text-slate-200 underline underline-offset-2">Comment personnaliser ce site ?</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALE RESSOURCES D'UNE CLASSE -->
+    <div id="class-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[70] flex items-center justify-center p-4">
+        <div class="modal bg-white w-full max-w-4xl rounded-3xl shadow-2xl max-h-[90vh] flex flex-col overflow-hidden">
+            <!-- Header modal -->
+            <div class="px-7 pt-6 pb-4 border-b flex items-center justify-between bg-slate-50">
+                <div id="modal-header-content" class="flex-1"></div>
+                <button onclick="closeModal()" class="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-2xl transition-colors">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="px-2 pt-2 bg-white border-b">
+                <div id="modal-tabs" class="flex gap-x-1 overflow-x-auto scrollbar-hide">
+                    <!-- Généré en JS -->
+                </div>
+            </div>
+
+            <!-- Contenu des ressources -->
+            <div class="flex-1 overflow-y-auto p-6" id="modal-resources-content">
+                <!-- Rempli dynamiquement -->
+            </div>
+
+            <div class="px-7 py-4 bg-slate-50 border-t flex items-center justify-between text-xs text-slate-500">
+                <div id="modal-footer-info"></div>
+                <button onclick="downloadAllResources()" 
+                        class="text-indigo-600 hover:text-indigo-700 font-semibold flex items-center gap-x-2 text-sm">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Télécharger tout le pack de la classe</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DONNÉES DES FORMATIONS (CHARGEMENT DYNAMIQUE)
+        // ============================================
+        // Priorité : data/formations.json (fichier externe facile à éditer)
+        // Fallback : données intégrées ci-dessous (compatibilité fichier://)
+        let formations = []; // rempli dynamiquement
+
+        // Fallback complet (conservé pour robustesse)
+        const FALLBACK_FORMATIONS = [
+            {
+                id: "3pm",
+                short: "3ème Prépa Métiers",
+                full: "3ème Prépa Métiers",
+                niveau: "3eme",
+                filiere: "maintenance",
+                effectif: 24,
+                annee: "3ème",
+                couleur: "#6366f1",
+                description: "Découverte des métiers et renforcement des bases en maths et sciences.",
+                resources: {
+                    cours: [
+                        { id: 1, titre: "Proportionnalité et pourcentages", type: "Cours", desc: "Cours complet + exemples du quotidien", url: "#", date: "12/09/2025" },
+                        { id: 2, titre: "Géométrie plane et aires", type: "Cours", desc: "Triangles, cercles, quadrilatères", url: "#", date: "03/10/2025" }
+                    ],
+                    exercices: [
+                        { id: 3, titre: "TD 1 - Proportionnalité", type: "Exercices", desc: "12 exercices corrigés", url: "#", date: "15/09/2025" },
+                        { id: 4, titre: "Exercices types brevet", type: "Exercices", desc: "Série d'entraînement", url: "#", date: "20/11/2025" }
+                    ],
+                    fiches: [
+                        { id: 5, titre: "Fiche révision - Calculs numériques", type: "Fiche", desc: "Priorités opératoires et puissances", url: "#", date: "08/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "cap1-rics",
+                short: "Seconde CAP RICS",
+                full: "CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)",
+                niveau: "cap",
+                filiere: "chaudronnerie",
+                effectif: 12,
+                annee: "Seconde CAP",
+                couleur: "#f59e0b",
+                description: "Chaudronnerie et soudure : calculs d'aires, volumes, développés.",
+                resources: {
+                    maths: {
+                        cours: [
+                            { id: 1001, titre: "Développés de surfaces - Cylindre et cône", type: "Cours", desc: "Méthode de traçage et calculs", url: "#", date: "22/09/2025" },
+                            { id: 1002, titre: "Trigonométrie pour le chaudronnier", type: "Cours", desc: "Angles, sinus, cosinus en atelier", url: "#", date: "14/10/2025" }
+                        ],
+                        exercices: [
+                            { id: 1003, titre: "TD Développés et traçage", type: "Exercices", desc: "10 exercices corrigés", url: "#", date: "06/10/2025" },
+                            { id: 1004, titre: "Calculs de masse et volume des métaux", type: "Exercices", desc: "Application directe atelier", url: "#", date: "18/11/2025" }
+                        ],
+                        fiches: [
+                            { id: 1005, titre: "Formulaire Chaudronnerie", type: "Fiche", desc: "Aires, volumes, longueurs développées", url: "#", date: "12/01/2026" }
+                        ],
+                        qcm: [
+                            { id: 1006, titre: "Quiz - Trigonométrie CAP", type: "QCM", desc: "15 questions interactives", url: "#", date: "20/01/2026" }
+                        ],
+                        tp: []
+                    },
+                    sciences: {
+                        cours: [],
+                        exercices: [],
+                        fiches: [],
+                        qcm: [],
+                        tp: []
+                    }
+                }
+            },
+            {
+                id: "cap2-rics",
+                short: "Terminale CAP RICS",
+                full: "CAP RICS - 2ème année (Réalisation Industrielle Chaudronnerie Soudure)",
+                niveau: "cap",
+                filiere: "chaudronnerie",
+                effectif: 12,
+                annee: "Terminale CAP",
+                couleur: "#f59e0b",
+                description: "Approfondissement : résistance des matériaux, calculs de structures.",
+                resources: {
+                    cours: [
+                        { id: 20, titre: "Notions de résistance des matériaux", type: "Cours", desc: "Contrainte, section, allongement", url: "#", date: "09/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 21, titre: "TD RDM - Dimensionnement simple", type: "Exercices", desc: "8 exercices + corrigés", url: "#", date: "17/10/2025" }
+                    ],
+                    fiches: [
+                        { id: 22, titre: "Tableau des sections courantes", type: "Fiche", desc: "Aide-mémoire rapide", url: "#", date: "05/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            // BAC PRO - MAINTENANCE
+            {
+                id: "2mmv",
+                short: "Seconde MMV",
+                full: "Seconde Bac Pro - Maintenance des Matériels et Véhicules",
+                niveau: "seconde",
+                filiere: "maintenance",
+                effectif: 20,
+                annee: "Seconde",
+                couleur: "#10b981",
+                description: "Bases maths/sciences pour la maintenance automobile et engins.",
+                resources: {
+                    cours: [
+                        { id: 30, titre: "Fonctions et vitesses de rotation", type: "Cours", desc: "Relation vitesse / couple / puissance", url: "#", date: "11/09/2025" },
+                        { id: 31, titre: "Électricité automobile - Bases", type: "Cours", desc: "Tension, intensité, résistance (loi d'Ohm)", url: "#", date: "25/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 32, titre: "TD Mécanique - Rapport de transmission", type: "Exercices", desc: "14 exercices corrigés", url: "#", date: "03/10/2025" }
+                    ],
+                    fiches: [
+                        { id: 33, titre: "Fiche - Unités et conversions", type: "Fiche", desc: "SI et unités courantes en mécanique", url: "#", date: "14/01/2026" }
+                    ],
+                    qcm: [
+                        { id: 34, titre: "QCM Électricité auto", type: "QCM", desc: "20 questions", url: "#", date: "22/01/2026" }
+                    ],
+                    tp: []
+                }
+            },
+            {
+                id: "1mvm",
+                short: "Première MVM",
+                full: "Première Bac Pro - Maintenance des Véhicules option Motocycles",
+                niveau: "premiere",
+                filiere: "maintenance",
+                effectif: 10,
+                annee: "Première",
+                couleur: "#10b981",
+                description: "Motos et deux-roues : géométrie, électricité, thermique.",
+                resources: {
+                    cours: [
+                        { id: 40, titre: "Angles et géométrie du châssis moto", type: "Cours", desc: "Chasse, angle de chasse, carrossage", url: "#", date: "15/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 41, titre: "TD - Calculs de puissance moteur", type: "Exercices", desc: "Exercices sur couple et puissance", url: "#", date: "08/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: [
+                        { id: 42, titre: "TP Diagnostic électrique moto", type: "TP", desc: "Fiche de procédure + mesures", url: "#", date: "12/12/2025" }
+                    ]
+                }
+            },
+            {
+                id: "tmvm",
+                short: "Terminale MVM",
+                full: "Terminale Bac Pro - Maintenance des Véhicules option Motocycles",
+                niveau: "terminale",
+                filiere: "maintenance",
+                effectif: 10,
+                annee: "Terminale",
+                couleur: "#10b981",
+                description: "Niveau expert : diagnostic, calculs avancés, réglementation.",
+                resources: {
+                    cours: [
+                        { id: 50, titre: "Diagnostic électronique et OBD", type: "Cours", desc: "Lecture de paramètres et codes défauts", url: "#", date: "10/09/2025" }
+                    ],
+                    exercices: [],
+                    fiches: [
+                        { id: 51, titre: "Fiche révision - Épreuve E3", type: "Fiche", desc: "Points essentiels pour l'examen", url: "#", date: "18/01/2026" }
+                    ],
+                    qcm: [
+                        { id: 52, titre: "Annales corrigées - Bac Pro MVM", type: "QCM", desc: "Session 2024 + 2025", url: "#", date: "05/01/2026" }
+                    ],
+                    tp: []
+                }
+            },
+            {
+                id: "1mmev",
+                short: "Première MMEV",
+                full: "Première Bac Pro - Maintenance de Matériels Espaces Verts",
+                niveau: "premiere",
+                filiere: "maintenance",
+                effectif: 10,
+                annee: "Première",
+                couleur: "#059669",
+                description: "Matériels de travaux publics et espaces verts.",
+                resources: {
+                    cours: [
+                        { id: 60, titre: "Hydraulique - Notions de base", type: "Cours", desc: "Pression, débit, vérins", url: "#", date: "18/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 61, titre: "TD Hydraulique appliquée", type: "Exercices", desc: "Exercices de dimensionnement", url: "#", date: "07/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "tmmev",
+                short: "Terminale MMEV",
+                full: "Terminale Bac Pro - Maintenance de Matériels Espaces Verts",
+                niveau: "terminale",
+                filiere: "maintenance",
+                effectif: 10,
+                annee: "Terminale",
+                couleur: "#059669",
+                description: "Maintenance avancée des engins d'espaces verts.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [
+                        { id: 70, titre: "Fiche révision Bac Pro - MMEV", type: "Fiche", desc: "Maths et sciences pour l'examen", url: "#", date: "20/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            // MP3D
+            {
+                id: "2mp3d",
+                short: "Seconde MP3D",
+                full: "Seconde Bac Pro - Modélisation et Prototypage 3D",
+                niveau: "seconde",
+                filiere: "modelisation",
+                effectif: 12,
+                annee: "Seconde",
+                couleur: "#7c3aed",
+                description: "Mathématiques pour la modélisation et l'impression 3D.",
+                resources: {
+                    maths: {
+                        cours: [
+                            { id: 801, titre: "Géométrie dans l'espace et projections", type: "Cours", desc: "Vues, coupes, développés", url: "#", date: "16/09/2025" },
+                            { id: 802, titre: "Fonctions et courbes paramétriques", type: "Cours", desc: "Modélisation de formes", url: "#", date: "30/09/2025" }
+                        ],
+                        exercices: [
+                            { id: 803, titre: "TD Modélisation 3D - Volumes", type: "Exercices", desc: "Calculs et représentation", url: "#", date: "14/10/2025" }
+                        ],
+                        fiches: [
+                            { id: 804, titre: "Raccourcis et astuces Fusion 360", type: "Fiche", desc: "Aide-mémoire modélisation", url: "#", date: "22/01/2026" }
+                        ],
+                        qcm: [],
+                        tp: [
+                            { id: 805, titre: "Projet : Modélisation d'une pièce mécanique", type: "TP", desc: "Consigne complète + grille", url: "#", date: "05/12/2025" }
+                        ]
+                    },
+                    sciences: {
+                        cours: [],
+                        exercices: [],
+                        fiches: [],
+                        qcm: [],
+                        tp: []
+                    }
+                }
+            },
+            {
+                id: "1mp3d",
+                short: "Première MP3D",
+                full: "Première Bac Pro - Modélisation et Prototypage 3D",
+                niveau: "premiere",
+                filiere: "modelisation",
+                effectif: 15,
+                annee: "Première",
+                couleur: "#7c3aed",
+                description: "Approfondissement CAO et calculs de résistance.",
+                resources: {
+                    cours: [
+                        { id: 90, titre: "Nombres complexes et rotation 3D", type: "Cours", desc: "Application à la modélisation", url: "#", date: "12/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 91, titre: "TD - Maillage et optimisation", type: "Exercices", desc: "Exercices de calculs de surfaces", url: "#", date: "21/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "tmp3d",
+                short: "Terminale MP3D",
+                full: "Terminale Bac Pro - Modélisation et Prototypage 3D",
+                niveau: "terminale",
+                filiere: "modelisation",
+                effectif: 12,
+                annee: "Terminale",
+                couleur: "#7c3aed",
+                description: "Niveau avancé : simulation, prototypage et dossier technique.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [
+                        { id: 100, titre: "Fiche révision - Épreuve maths/sciences", type: "Fiche", desc: "Points clés Terminale MP3D", url: "#", date: "15/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            // MTNE
+            {
+                id: "2mtne",
+                short: "Seconde MTNE",
+                full: "Seconde Bac Pro - Métiers des Transitions Numériques et Énergétiques",
+                niveau: "seconde",
+                filiere: "electrique",
+                effectif: 27,
+                annee: "Seconde",
+                couleur: "#0ea5e9",
+                description: "Transition énergétique, numérique et bases scientifiques.",
+                resources: {
+                    cours: [
+                        { id: 110, titre: "Énergie et puissance électrique", type: "Cours", desc: "Bilan énergétique et rendement", url: "#", date: "17/09/2025" },
+                        { id: 111, titre: "Fonctions et modélisation de phénomènes", type: "Cours", desc: "Croissance, évolution", url: "#", date: "01/10/2025" }
+                    ],
+                    exercices: [
+                        { id: 112, titre: "TD - Consommation et facturation électrique", type: "Exercices", desc: "Exercices concrets", url: "#", date: "08/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            // MELEC
+            {
+                id: "1melec",
+                short: "Première MELEC",
+                full: "Première Bac Pro - Métiers de l'Électricité et ses Environnements Connectés",
+                niveau: "premiere",
+                filiere: "electrique",
+                effectif: 27,
+                annee: "Première",
+                couleur: "#f59e0b",
+                description: "Électricité, automatismes et réseaux connectés.",
+                resources: {
+                    maths: {
+                        cours: [
+                            { id: 1201, titre: "Nombres complexes en électrotechnique", type: "Cours", desc: "Impédance et diagrammes de Fresnel", url: "#", date: "06/10/2025" }
+                        ],
+                        exercices: [
+                            { id: 1202, titre: "TD Circuits RL - RC - RLC", type: "Exercices", desc: "12 exercices corrigés", url: "#", date: "14/10/2025" }
+                        ],
+                        fiches: [],
+                        qcm: [],
+                        tp: []
+                    },
+                    sciences: {
+                        cours: [
+                            { id: 1203, titre: "Courant alternatif et déphasage", type: "Cours", desc: "Sinusoïdes, valeur efficace", url: "#", date: "15/09/2025" }
+                        ],
+                        exercices: [],
+                        fiches: [
+                            { id: 1204, titre: "Formulaire Électrotechnique", type: "Fiche", desc: "Impédances, puissances, Q", url: "#", date: "28/01/2026" }
+                        ],
+                        qcm: [],
+                        tp: []
+                    }
+                }
+            },
+            {
+                id: "tmelec",
+                short: "Terminale MELEC",
+                full: "Terminale Bac Pro - Métiers de l'Électricité et ses Environnements Connectés",
+                niveau: "terminale",
+                filiere: "electrique",
+                effectif: 24,
+                annee: "Terminale",
+                couleur: "#f59e0b",
+                description: "Automatismes, domotique, énergie et réseaux intelligents.",
+                resources: {
+                    maths: {
+                        cours: [
+                            { id: 1301, titre: "Nombres complexes et circuits AC", type: "Cours", desc: "Impédance, diagrammes de Fresnel", url: "#", date: "10/09/2025" }
+                        ],
+                        exercices: [
+                            { id: 1302, titre: "TD - Calculs d'impédance et puissance", type: "Exercices", desc: "15 exercices corrigés", url: "#", date: "22/10/2025" }
+                        ],
+                        fiches: [],
+                        qcm: [],
+                        tp: []
+                    },
+                    sciences: {
+                        cours: [
+                            { id: 1303, titre: "Automatismes et langage ladder", type: "Cours", desc: "Bases de la programmation d'automates", url: "#", date: "12/09/2025" }
+                        ],
+                        exercices: [],
+                        fiches: [
+                            { id: 1304, titre: "Fiche révision Bac Pro MELEC", type: "Fiche", desc: "Maths et physique pour l'examen", url: "#", date: "25/01/2026" }
+                        ],
+                        qcm: [
+                            { id: 1305, titre: "Quiz - Électrotechnique avancée", type: "QCM", desc: "20 questions", url: "#", date: "19/01/2026" }
+                        ],
+                        tp: [
+                            { id: 1306, titre: "Site Interactif Complet : Induction Électromagnétique", type: "Site Interactif", desc: "Simulations 3D, quiz, expériences virtuelles (Faraday & Lenz) — Ressource officielle Terminale MELEC", url: "induction-electromagnetique-tmelec.html", date: "04/02/2026" },
+                            { id: 1307, titre: "Induction Électromagnétique - Site interactif en ligne (GitHub Pages)", type: "Ressource en ligne", desc: "Version complète hébergée : animations 3D, quiz et expériences virtuelles", url: "https://kande-b.github.io/bacpro-Induction-Electromagnetique/", date: "04/02/2026" }
+                        ]
+                    }
+                }
+            },
+            // REMI
+            {
+                id: "2remi",
+                short: "Seconde REMI",
+                full: "Seconde Bac Pro - Réalisation d'Ensembles Mécaniques et Industriels",
+                niveau: "seconde",
+                filiere: "mecanique",
+                effectif: 36,
+                annee: "Seconde",
+                couleur: "#e11d48",
+                description: "Deux divisions. Mécanique de précision et usinage.",
+                resources: {
+                    cours: [
+                        { id: 140, titre: "Lecture de plans et cotation", type: "Cours", desc: "Interprétation de dessins industriels", url: "#", date: "10/09/2025" },
+                        { id: 141, titre: "Trigonométrie et géométrie dans l'atelier", type: "Cours", desc: "Applications directes usinage", url: "#", date: "24/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 142, titre: "TD - Calculs d'usinage et vitesses", type: "Exercices", desc: "20 exercices corrigés", url: "#", date: "01/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            // TCI
+            {
+                id: "1tci",
+                short: "Première TCI",
+                full: "Première Bac Pro - Technicien Chaudronnerie Industrielle",
+                niveau: "premiere",
+                filiere: "chaudronnerie",
+                effectif: 36,
+                annee: "Première",
+                couleur: "#ea580c",
+                description: "Deux divisions. Chaudronnerie industrielle avancée.",
+                resources: {
+                    cours: [
+                        { id: 150, titre: "Calcul des développés complexes", type: "Cours", desc: "Pièces à double courbure", url: "#", date: "18/09/2025" },
+                        { id: 151, titre: "RDM - Notions avancées", type: "Cours", desc: "Flexion et torsion", url: "#", date: "09/10/2025" }
+                    ],
+                    exercices: [
+                        { id: 152, titre: "TD Chaudronnerie - Projets réels", type: "Exercices", desc: "Exercices d'entreprise", url: "#", date: "15/10/2025" }
+                    ],
+                    fiches: [
+                        { id: 153, titre: "Formulaire Chaudronnerie Industrielle", type: "Fiche", desc: "Tout le programme Première", url: "#", date: "27/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "ttci",
+                short: "Terminale TCI",
+                full: "Terminale Bac Pro - Technicien Chaudronnerie Industrielle",
+                niveau: "terminale",
+                filiere: "chaudronnerie",
+                effectif: 24,
+                annee: "Terminale",
+                couleur: "#ea580c",
+                description: "Niveau technicien : dossiers de fabrication et contrôle.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [
+                        { id: 160, titre: "Fiche révision - Bac Pro TCI", type: "Fiche", desc: "Maths &amp; sciences - Terminale", url: "#", date: "14/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: [
+                        { id: 161, titre: "Dossier technique - Exemple complet", type: "TP", desc: "Projet de fin d'études", url: "#", date: "08/01/2026" }
+                    ]
+                }
+            },
+            // POST-BAC CS
+            {
+                id: "csta",
+                short: "CSTA - Technicien Ascensoriste",
+                full: "Certification de Spécialisation - Technicien Ascensoriste",
+                niveau: "postbac",
+                filiere: "maintenance",
+                effectif: 12,
+                annee: "CS 1 an",
+                couleur: "#14b8a6",
+                description: "Formation intensive post-Bac Pro.",
+                resources: {
+                    cours: [
+                        { id: 170, titre: "Maths appliquées aux ascenseurs", type: "Cours", desc: "Vitesse, accélération, sécurité", url: "#", date: "09/09/2025" }
+                    ],
+                    exercices: [],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "cstt",
+                short: "CSTT - Technicien en Tuyauterie",
+                full: "Certification de Spécialisation - Technicien en Tuyauterie",
+                niveau: "postbac",
+                filiere: "chaudronnerie",
+                effectif: 12,
+                annee: "CS 1 an",
+                couleur: "#14b8a6",
+                description: "Tuyauterie industrielle et soudure.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [
+                        { id: 180, titre: "Fiche - Calculs de tuyauterie", type: "Fiche", desc: "Débits, pertes de charge", url: "#", date: "16/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "csmiop",
+                short: "CSMIOP - Maintenance Oléo-Hydraulique",
+                full: "CS - Maintenance des Installations Oléo-Hydrauliques et Pneumatiques",
+                niveau: "postbac",
+                filiere: "maintenance",
+                effectif: 12,
+                annee: "CS 1 an",
+                couleur: "#14b8a6",
+                description: "Hydraulique et pneumatique industrielles.",
+                resources: {
+                    cours: [
+                        { id: 190, titre: "Hydraulique proportionnelle", type: "Cours", desc: "Régulation et asservissement", url: "#", date: "22/09/2025" }
+                    ],
+                    exercices: [],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "fcil-mb",
+                short: "FCIL Mobilité Urbaine",
+                full: "Formation Complémentaire d'Initiative Locale - Mobilité Urbaine",
+                niveau: "postbac",
+                filiere: "maintenance",
+                effectif: 12,
+                annee: "FCIL 1 an",
+                couleur: "#14b8a6",
+                description: "Mobilité électrique et nouvelles technologies urbaines.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            // BTS
+            {
+                id: "bts-cri1",
+                short: "BTS CRI 1ère année",
+                full: "BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)",
+                niveau: "bts",
+                filiere: "bts",
+                effectif: 12,
+                annee: "BTS 1ère année",
+                couleur: "#475569",
+                description: "Niveau technicien supérieur en alternance.",
+                resources: {
+                    cours: [
+                        { id: 200, titre: "Résistance des matériaux - Niveau BTS", type: "Cours", desc: "Flexion composée, flambement", url: "#", date: "10/09/2025" },
+                        { id: 201, titre: "Calculs de structures soudées", type: "Cours", desc: "Normes et dimensionnement", url: "#", date: "01/10/2025" }
+                    ],
+                    exercices: [
+                        { id: 202, titre: "TD RDM - BTS CRI", type: "Exercices", desc: "Série complète corrigée", url: "#", date: "15/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "bts-cri2",
+                short: "BTS CRI 2ème année",
+                full: "BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)",
+                niveau: "bts",
+                filiere: "bts",
+                effectif: 12,
+                annee: "BTS 2ème année",
+                couleur: "#475569",
+                description: "Approfondissement et projet de fin d'études.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [
+                        { id: 210, titre: "Fiche révision - BTS CRI", type: "Fiche", desc: "Maths et sciences pour les partiels", url: "#", date: "12/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "bts-elt1",
+                short: "BTS Electrotechnique 1ère année",
+                full: "BTS Electrotechnique par alternance (GRETA)",
+                niveau: "bts",
+                filiere: "bts",
+                effectif: 12,
+                annee: "BTS 1ère année",
+                couleur: "#475569",
+                description: "Niveau supérieur en électrotechnique.",
+                resources: {
+                    cours: [
+                        { id: 220, titre: "Électrotechnique - Machines tournantes", type: "Cours", desc: "Moteurs asynchrones et synchrones", url: "#", date: "18/09/2025" }
+                    ],
+                    exercices: [
+                        { id: 221, titre: "TD - Bilans de puissance et rendement", type: "Exercices", desc: "Exercices de BTS", url: "#", date: "14/10/2025" }
+                    ],
+                    fiches: [],
+                    qcm: [],
+                    tp: []
+                }
+            },
+            {
+                id: "bts-elt2",
+                short: "BTS Electrotechnique 2ème année",
+                full: "BTS Electrotechnique par alternance (GRETA)",
+                niveau: "bts",
+                filiere: "bts",
+                effectif: 24,
+                annee: "BTS 2ème année",
+                couleur: "#475569",
+                description: "Projet industriel et soutenance.",
+                resources: {
+                    cours: [],
+                    exercices: [],
+                    fiches: [
+                        { id: 230, titre: "Fiche révision finale - BTS Electrotechnique", type: "Fiche", desc: "Mathématiques et physique appliquées", url: "#", date: "20/01/2026" }
+                    ],
+                    qcm: [],
+                    tp: []
+                }
+            }
+        ]; // FIN FALLBACK_FORMATIONS
+
+        // ============================================
+        // CHARGEMENT DYNAMIQUE DES DONNÉES (JSON EXTERNE)
+        // ============================================
+        async function loadFormationsData() {
+            // Essaie d'abord de charger depuis data/formations.json (fichier externe)
+            try {
+                const response = await fetch('data/formations.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        console.log('%c[Data] Chargé depuis data/formations.json (' + data.length + ' formations)', 'color:#16a34a');
+                        formations = data;
+                        return true;
+                    }
+                }
+            } catch (e) {
+                // Échec silencieux (cas fichier:// ou absence du fichier)
+            }
+
+            // Fallback : utilise les données intégrées dans le HTML
+            console.log('%c[Data] Utilisation des données intégrées (fallback)', 'color:#64748b');
+            formations = FALLBACK_FORMATIONS;
+            return false;
+        }
+
+        // État des filtres
+        let currentLevelFilter = 'all';
+        let currentFiliereFilter = 'all';
+        let currentSearchTerm = '';
+        let currentModalClassId = null;
+        let currentResourceTab = 'all';
+
+        // Rendu des cartes de classes
+        function renderClasses(filteredFormations) {
+            const container = document.getElementById('classes-grid');
+            container.innerHTML = '';
+
+            if (filteredFormations.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center">
+                        <i class="fa-solid fa-search text-5xl text-slate-300 mb-4"></i>
+                        <p class="text-lg text-slate-500">Aucune formation ne correspond à votre recherche.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredFormations.forEach(formation => {
+                const card = document.createElement('div');
+                card.className = `class-card bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl cursor-pointer flex flex-col`;
+                
+                const resourceCount = Object.values(formation.resources).flat().length;
+                
+                card.innerHTML = `
+                    <div class="h-2.5" style="background-color: ${formation.couleur}"></div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <div class="flex items-center gap-x-2 mb-1">
+                                    <span class="text-xs font-bold px-2.5 py-0.5 rounded-full" 
+                                          style="background-color: ${formation.couleur}20; color: ${formation.couleur}">
+                                        ${formation.annee}
+                                    </span>
+                                    <span class="text-xs text-slate-500 font-medium">${formation.effectif} élèves</span>
+                                </div>
+                                <h3 class="font-semibold text-xl leading-tight tracking-tight">${formation.short}</h3>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 mt-2.5 line-clamp-2 flex-1">${formation.description}</p>
+                        
+                        <div class="mt-auto pt-4 flex items-center justify-between">
+                            <div class="flex items-center text-xs">
+                                <span class="font-semibold text-emerald-600">${resourceCount}</span>
+                                <span class="ml-1 text-slate-500">ressources</span>
+                            </div>
+                            
+                            <button onclick="event.stopImmediatePropagation(); openClassModal('${formation.id}')"
+                                    class="inline-flex items-center text-xs font-semibold px-4 h-9 rounded-2xl bg-slate-900 hover:bg-indigo-600 text-white transition-colors">
+                                Accéder
+                                <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                card.onclick = () => openClassModal(formation.id);
+                container.appendChild(card);
+            });
+        }
+
+        // Filtrage
+        function applyFilters() {
+            let results = formations;
+
+            // Filtre niveau
+            if (currentLevelFilter !== 'all') {
+                results = results.filter(f => f.niveau === currentLevelFilter);
+            }
+
+            // Filtre filière
+            if (currentFiliereFilter !== 'all') {
+                results = results.filter(f => f.filiere === currentFiliereFilter);
+            }
+
+            // Recherche texte
+            if (currentSearchTerm.length > 1) {
+                const term = currentSearchTerm.toLowerCase();
+                results = results.filter(f => 
+                    f.short.toLowerCase().includes(term) ||
+                    f.full.toLowerCase().includes(term) ||
+                    f.description.toLowerCase().includes(term) ||
+                    Object.values(f.resources).flat().some(r => 
+                        r.titre.toLowerCase().includes(term) || 
+                        (r.desc && r.desc.toLowerCase().includes(term))
+                    )
+                );
+            }
+
+            renderClasses(results);
+        }
+
+        function filterByLevel(level) {
+            currentLevelFilter = level;
+            
+            // Mise à jour visuelle des pills
+            document.querySelectorAll('#level-filters button').forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-700', 'text-white');
+                btn.classList.add('bg-white', 'border-slate-200');
+                
+                if ((level === 'all' && btn.dataset.level === 'all') || btn.dataset.level === level) {
+                    btn.classList.add('active', 'bg-indigo-700', 'text-white');
+                    btn.classList.remove('bg-white', 'border-slate-200');
+                }
+            });
+            
+            applyFilters();
+        }
+
+        function filterByFiliere(filiere) {
+            currentFiliereFilter = filiere;
+            
+            document.querySelectorAll('#filiere-filters button').forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-700', 'text-white');
+                btn.classList.add('bg-white', 'border-slate-200');
+                
+                if ((filiere === 'all' && btn.dataset.filiere === 'all') || btn.dataset.filiere === filiere) {
+                    btn.classList.add('active', 'bg-indigo-700', 'text-white');
+                    btn.classList.remove('bg-white', 'border-slate-200');
+                }
+            });
+            
+            applyFilters();
+        }
+
+        // Recherche globale
+        function setupSearch() {
+            const searchInputs = [
+                document.getElementById('global-search'),
+                document.getElementById('global-search-mobile')
+            ];
+
+            searchInputs.forEach(input => {
+                if (!input) return;
+                
+                input.addEventListener('input', (e) => {
+                    currentSearchTerm = e.target.value;
+                    
+                    // Synchroniser les deux champs
+                    searchInputs.forEach(otherInput => {
+                        if (otherInput && otherInput !== input) otherInput.value = currentSearchTerm;
+                    });
+                    
+                    applyFilters();
+                });
+            });
+        }
+
+        // Variables pour la gestion Maths / Sciences dans la modale
+        let currentDomain = 'maths'; // 'maths' ou 'sciences'
+
+        // Ouverture de la modale d'une classe
+        function openClassModal(formationId) {
+            const formation = formations.find(f => f.id === formationId);
+            if (!formation) return;
+
+            currentModalClassId = formationId;
+            currentResourceTab = 'all';
+            
+            // Par défaut : Sciences pour Terminale MELEC (à cause de la grosse ressource induction)
+            currentDomain = (formationId === 'tmelec') ? 'sciences' : 'maths';
+
+            // Header
+            const header = document.getElementById('modal-header-content');
+            header.innerHTML = `
+                <div class="flex items-center gap-x-4">
+                    <div class="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center text-white shadow-inner" 
+                         style="background-color: ${formation.couleur}">
+                        <i class="fa-solid fa-graduation-cap text-3xl opacity-90"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-x-2">
+                            <span class="font-bold text-2xl tracking-tight">${formation.short}</span>
+                            <span class="text-xs px-3 py-0.5 rounded-2xl font-bold mt-0.5" 
+                                  style="background-color: ${formation.couleur}15; color: ${formation.couleur}">
+                                ${formation.effectif} élèves
+                            </span>
+                        </div>
+                        <div class="text-sm text-slate-600">${formation.full}</div>
+                    </div>
+                </div>
+            `;
+
+            // Ajout du sélecteur Maths / Sciences
+            renderDomainSelector(formation);
+
+            // Afficher la modale
+            document.getElementById('class-modal').classList.remove('hidden');
+            document.getElementById('class-modal').classList.add('flex');
+        }
+
+        // Affiche les deux gros boutons Maths / Sciences
+        function renderDomainSelector(formation) {
+            const hasMaths = formation.resources && formation.resources.maths;
+            const hasSciences = formation.resources && formation.resources.sciences;
+
+            const selectorHTML = `
+                <div class="px-6 pt-4 pb-2 bg-white border-b">
+                    <div class="flex items-center gap-3">
+                        <div class="text-xs font-semibold text-slate-500 mr-2">DOMAINE :</div>
+                        
+                        <button id="btn-maths"
+                                onclick="switchDomain('maths', '${formation.id}')"
+                                class="flex-1 sm:flex-none px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all flex items-center justify-center gap-x-2 ${currentDomain === 'maths' ? 'bg-indigo-600 text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span>Mathématiques</span>
+                        </button>
+                        
+                        <button id="btn-sciences"
+                                onclick="switchDomain('sciences', '${formation.id}')"
+                                class="flex-1 sm:flex-none px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all flex items-center justify-center gap-x-2 ${currentDomain === 'sciences' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+                            <i class="fa-solid fa-flask"></i>
+                            <span>Sciences</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // On insère le sélecteur juste après le header
+            const headerEl = document.getElementById('modal-header-content');
+            let selectorContainer = document.getElementById('domain-selector-container');
+            
+            if (!selectorContainer) {
+                selectorContainer = document.createElement('div');
+                selectorContainer.id = 'domain-selector-container';
+                headerEl.parentNode.insertBefore(selectorContainer, headerEl.nextSibling);
+            }
+            
+            selectorContainer.innerHTML = selectorHTML;
+
+            // Affiche les onglets + contenu du domaine sélectionné
+            renderResourceTabs(formation);
+            renderModalResources(formation, 'all');
+        }
+
+        function switchDomain(domain, formationId) {
+            currentDomain = domain;
+            const formation = formations.find(f => f.id === formationId);
+            if (!formation) return;
+
+            // Re-render du sélecteur (pour mettre à jour les styles actifs)
+            renderDomainSelector(formation);
+        }
+
+        function renderResourceTabs(formation) {
+            const tabsContainer = document.getElementById('modal-tabs');
+            tabsContainer.innerHTML = '';
+
+            const domainResources = formation.resources && formation.resources[currentDomain] 
+                ? formation.resources[currentDomain] 
+                : { cours: [], exercices: [], fiches: [], qcm: [], tp: [] };
+
+            const categories = [
+                { key: 'all', label: 'Toutes', icon: 'fa-list' },
+                { key: 'cours', label: 'Cours', icon: 'fa-book' },
+                { key: 'exercices', label: 'Exercices / TD', icon: 'fa-pencil-alt' },
+                { key: 'fiches', label: 'Fiche', icon: 'fa-sticky-note' },
+                { key: 'qcm', label: 'QCM / Quiz', icon: 'fa-question-circle' },
+                { key: 'tp', label: 'TP & Projet', icon: 'fa-tools' }
+            ];
+
+            categories.forEach(cat => {
+                const count = cat.key === 'all' 
+                    ? Object.values(domainResources).flat().length 
+                    : (domainResources[cat.key] || []).length;
+
+                if (count === 0 && cat.key !== 'all') return;
+
+                const tab = document.createElement('button');
+                tab.className = `resource-tab flex-shrink-0 flex items-center gap-x-2 px-5 py-2 text-sm font-semibold rounded-t-2xl ${cat.key === 'all' ? 'active' : 'text-slate-600 hover:text-slate-800'}`;
+                
+                tab.innerHTML = `
+                    <i class="fa-solid ${cat.icon}"></i>
+                    <span>${cat.label}</span>
+                    <span class="text-xs font-normal px-1.5 py-px bg-slate-100 rounded text-slate-500">${count}</span>
+                `;
+
+                tab.onclick = () => {
+                    currentResourceTab = cat.key;
+                    document.querySelectorAll('#modal-tabs button').forEach(b => b.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderModalResources(formation, cat.key);
+                };
+
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        function renderModalResources(formation, category) {
+            const content = document.getElementById('modal-resources-content');
+            content.innerHTML = '';
+
+            // Récupère les ressources du domaine actuel (maths ou sciences)
+            let domainData = {};
+            if (formation.resources && formation.resources[currentDomain]) {
+                domainData = formation.resources[currentDomain];
+            } else if (currentDomain === 'maths' && formation.resources) {
+                // Fallback : ancienne structure plate → tout va dans Maths
+                domainData = formation.resources;
+            } else {
+                domainData = { cours: [], exercices: [], fiches: [], qcm: [], tp: [] };
+            }
+
+            let resourcesToShow = [];
+            
+            if (category === 'all') {
+                resourcesToShow = Object.entries(domainData).flatMap(([type, items]) => 
+                    items.map(item => ({...item, category: type}))
+                );
+            } else {
+                resourcesToShow = (domainData[category] || []).map(item => ({...item, category}));
+            }
+
+            if (resourcesToShow.length === 0) {
+                const domainLabel = currentDomain === 'maths' ? 'Mathématiques' : 'Sciences';
+                content.innerHTML = `
+                    <div class="text-center py-10">
+                        <i class="fa-solid fa-folder-open text-5xl text-slate-300 mb-4"></i>
+                        <p class="text-slate-500">Aucune ressource ${domainLabel} dans cette catégorie pour le moment.</p>
+                        <p class="text-xs text-slate-400 mt-1">Ajoutez des documents dans le code (tableau formations).</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'grid gap-3';
+
+            resourcesToShow.forEach(resource => {
+                const div = document.createElement('div');
+                div.className = `resource-item border border-slate-200 bg-white rounded-2xl p-4 flex gap-4 items-start`;
+                
+                const icon = getResourceIcon(resource.category);
+                
+                div.innerHTML = `
+                    <div class="pt-1">
+                        <i class="fa-solid ${icon} text-xl text-slate-400 w-6"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-x-2">
+                            <span class="font-semibold">${resource.titre}</span>
+                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 bg-slate-100 text-slate-500 rounded">${resource.type}</span>
+                        </div>
+                        <div class="text-sm text-slate-600 mt-0.5">${resource.desc || ''}</div>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="text-xs text-slate-400">Ajouté le ${resource.date}</span>
+                            <button onclick="downloadResource('${formation.id}', '${resource.titre}')" 
+                                    class="text-xs font-bold flex items-center gap-x-1.5 px-4 py-1.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 transition-colors text-white">
+                                <i class="fa-solid fa-download text-xs"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(div);
+            });
+
+            content.appendChild(grid);
+        }
+
+        function getResourceIcon(category) {
+            const icons = {
+                'cours': 'fa-book-open',
+                'exercices': 'fa-tasks',
+                'fiches': 'fa-file-alt',
+                'qcm': 'fa-question-circle',
+                'tp': 'fa-cogs',
+                'all': 'fa-file'
+            };
+            return icons[category] || 'fa-file';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('class-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Téléchargement simulé (à remplacer par de vrais liens)
+        function downloadResource(classId, filename) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-x-3 text-sm z-[80]`;
+            toast.innerHTML = `
+                <i class="fa-solid fa-check-circle text-emerald-400"></i>
+                <span>Téléchargement de <strong>${filename}</strong> (lien à personnaliser)</span>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.transition = 'all .3s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 200);
+            }, 2600);
+
+            // TODO: Remplacer par le vrai lien
+            // window.open('https://votre-lien-reel.pdf', '_blank');
+        }
+
+        function downloadAllResources() {
+            const formation = formations.find(f => f.id === currentModalClassId);
+            if (!formation) return;
+
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-x-3 text-sm z-[80]`;
+            toast.innerHTML = `
+                <i class="fa-solid fa-check-double"></i>
+                <span>Pack complet "${formation.short}" prêt (simulation)</span>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.transition = 'all .3s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 200);
+            }, 2400);
+        }
+
+        // Contact
+        function openContactModal() {
+            const modal = document.createElement('div');
+            modal.className = `fixed inset-0 bg-black/70 z-[90] flex items-center justify-center p-4`;
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-lg w-full p-7 shadow-2xl">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-bold text-2xl text-slate-900">Envoyer un message à M. KANDE</h3>
+                            <p class="text-sm text-slate-500 mt-1">Décrivez votre problème ou votre besoin. Je vous répondrai par mail.</p>
+                        </div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-300 hover:text-slate-500 leading-none">×</button>
+                    </div>
+
+                    <form id="contact-form" class="space-y-4 mt-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600 block mb-1">Votre nom / Prénom</label>
+                                <input type="text" id="contact-name" required class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-400" placeholder="Ex: Lucas Moreau">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600 block mb-1">Votre classe</label>
+                                <input type="text" id="contact-class" required class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-400" placeholder="Ex: Terminale MELEC ou 1ère TCI">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-semibold text-slate-600 block mb-1">Objet</label>
+                            <input type="text" id="contact-subject" required value="Demande d'aide - Maths/Sciences" class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-400">
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-semibold text-slate-600 block mb-1">Votre message / Question</label>
+                            <textarea id="contact-message" required rows="5" class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-400 resize-y" placeholder="Décrivez votre problème, la notion que vous ne comprenez pas, ou ce dont vous avez besoin..."></textarea>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" onclick="this.closest('.fixed').remove()" class="flex-1 py-3 rounded-2xl font-semibold border border-slate-300 hover:bg-slate-50 text-sm">Annuler</button>
+                            <button type="submit" class="flex-1 py-3 rounded-2xl font-semibold bg-indigo-600 hover:bg-indigo-700 text-white text-sm flex items-center justify-center gap-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Envoyer par mail</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="text-[10px] text-center text-slate-400 mt-4">Le formulaire va ouvrir votre logiciel de messagerie avec le message pré-rempli (à destination de boubacar.kande@ac-creteil.fr).</p>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Handle form submission
+            const form = modal.querySelector('#contact-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('contact-name').value.trim();
+                const classe = document.getElementById('contact-class').value.trim();
+                const subject = document.getElementById('contact-subject').value.trim();
+                const message = document.getElementById('contact-message').value.trim();
+
+                const fullBody = 
+`Bonjour M. KANDE,
+
+Je suis ${name} de la classe ${classe}.
+
+${message}
+
+Cordialement,
+${name}`;
+
+                const mailtoLink = `mailto:boubacar.kande@ac-creteil.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+                
+                window.location.href = mailtoLink;
+                
+                // Close modal after a short delay
+                setTimeout(() => {
+                    modal.remove();
+                }, 800);
+            });
+        }
+
+        // Instructions pour le professeur
+        function showTeacherInstructions() {
+            const modal = document.createElement('div');
+            modal.className = `fixed inset-0 bg-black/70 z-[90] flex items-center justify-center p-4`;
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-3xl w-full p-8 max-h-[85vh] overflow-y-auto">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="font-bold text-2xl">Comment personnaliser ce site ?</h3>
+                            <p class="text-sm text-emerald-600 mt-1">C'est très simple, tout est dans le fichier index.html</p>
+                        </div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-2xl text-slate-400 hover:text-slate-600">×</button>
+                    </div>
+                    
+                    <div class="space-y-6 text-sm">
+                        <div>
+                            <div class="font-semibold text-indigo-700">1. Changer votre nom</div>
+                            <div class="mt-1 text-slate-600">Le nom est déjà mis à "M. KANDE". Si vous voulez modifier, cherchez "M. KANDE" dans le fichier.</div>
+                        </div>
+                        
+                        <div>
+                            <div class="font-semibold text-indigo-700">2. Ajouter ou modifier des ressources</div>
+                            <div class="mt-1 text-slate-600">En haut du fichier, dans la variable <code class="bg-slate-100 px-1.5 py-px rounded">formations</code>, vous pouvez :</div>
+                            <ul class="list-disc pl-5 mt-2 text-slate-600 space-y-1">
+                                <li>Ajouter de nouvelles classes</li>
+                                <li>Ajouter des ressources dans <strong>cours</strong>, <strong>exercices</strong>, <strong>fiches</strong>, <strong>qcm</strong> ou <strong>tp</strong></li>
+                                <li>Modifier les URLs pour pointer vers vos vrais PDFs (Google Drive, OneDrive, etc.)</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <div class="font-semibold text-indigo-700">3. Mettre de vrais liens de téléchargement</div>
+                            <div class="mt-1 text-slate-600">Dans la fonction <code class="bg-slate-100 px-1.5 py-px rounded">downloadResource</code>, décommentez la ligne <code class="bg-slate-100 px-1.5 py-px rounded">window.open(...)</code> et mettez vos vrais liens.</div>
+                        </div>
+
+                        <div>
+                            <div class="font-semibold text-indigo-700">4. Héberger le site (gratuitement)</div>
+                            <ul class="list-disc pl-5 mt-2 text-slate-600 space-y-1">
+                                <li><strong>GitHub Pages</strong> : gratuit et très simple</li>
+                                <li><strong>Netlify</strong> : glissez-déposez le dossier</li>
+                                <li><strong>Vercel</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t text-center">
+                        <button onclick="this.closest('.fixed').remove()" class="bg-slate-900 text-white px-8 py-3 rounded-2xl font-semibold">J'ai compris, fermer</button>
+                    </div>
+                    <div class="mt-4 text-[10px] text-center text-slate-400">
+                        Les données sont maintenant dans <code>data/formations.json</code> (fichier externe).<br>
+                        Utilisez le <strong>Mode Enseignant</strong> (bouton vert) ou le menu pour exporter/importer.
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // ============================================
+        // INITIALISATION (ASYNCHRONE)
+        // ============================================
+        async function init() {
+            // 1. Charger les données (JSON externe prioritaire)
+            await loadFormationsData();
+
+            // 2. Rendu initial des classes
+            renderClasses(formations);
+
+            // 3. Configuration des recherches
+            setupSearch();
+
+            // 4. Filtres actifs par défaut
+            const allLevelBtn = document.querySelector('#level-filters button[data-level="all"]');
+            const allFiliereBtn = document.querySelector('#filiere-filters button[data-filiere="all"]');
+            if (allLevelBtn) allLevelBtn.classList.add('active', 'bg-indigo-700', 'text-white');
+            if (allFiliereBtn) allFiliereBtn.classList.add('active', 'bg-indigo-700', 'text-white');
+
+            // 5. Raccourci clavier "/" pour la recherche
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "/" && document.activeElement.tagName === "BODY") {
+                    e.preventDefault();
+                    document.getElementById('global-search').focus();
+                }
+            });
+
+            // 6. Intégration Electron (menu natif, admin, export/import)
+            if (window.electronAPI) {
+                console.log('%c[Electron] API disponible — Mode application desktop activé', 'color:#6366f1');
+
+                // Écoute des actions du menu natif
+                window.electronAPI.onMenuAction?.((action, payload) => {
+                    if (action === 'export-data') {
+                        const data = { formations, exportedAt: new Date().toISOString() };
+                        window.electronAPI.exportData(data, 'formations-export.json');
+                    }
+                    if (action === 'import-data') {
+                        window.electronAPI.importData().then(result => {
+                            if (result.success && Array.isArray(result.data)) {
+                                formations = result.data;
+                                renderClasses(formations);
+                                alert('Données importées avec succès ! (rechargement nécessaire pour persistance)');
+                            }
+                        });
+                    }
+                    if (action === 'open-teacher-admin') {
+                        showTeacherAdminPanel();
+                    }
+                });
+
+                // Bouton "Mode Enseignant" flottant (visible seulement dans l'app Electron)
+                addTeacherAdminButton();
+            }
+
+            // Message console pour le prof
+            console.log('%c[INFO] Maths-Sciences prêt. Données = ' + formations.length + ' formations. Guide : GUIDE-ENSEIGNANT.md', 'color:#64748b');
+        }
+
+        // ============================================
+        // BOUTON MODE ENSEIGNANT (dans l'app Electron)
+        // ============================================
+        function addTeacherAdminButton() {
+            const btn = document.createElement('button');
+            btn.innerHTML = '<i class="fa-solid fa-user-shield mr-2"></i>Mode Enseignant';
+            btn.className = 'fixed bottom-6 right-6 z-[95] bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 rounded-3xl shadow-xl flex items-center text-sm font-semibold transition-all active:scale-[0.985]';
+            btn.onclick = showTeacherAdminPanel;
+            document.body.appendChild(btn);
+        }
+
+        // ============================================
+        // PANNEAU ADMIN ENSEIGNANT (basique v1)
+        // ============================================
+        function showTeacherAdminPanel() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/70 z-[99] flex items-center justify-center p-4';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+                    <div class="px-6 py-4 border-b bg-slate-50 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-xl">Panneau Enseignant</div>
+                            <div class="text-xs text-slate-500">Ajoutez, modifiez et exportez vos ressources</div>
+                        </div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-2xl text-slate-400 hover:text-slate-600 leading-none">&times;</button>
+                    </div>
+
+                    <div class="p-6 flex-1 overflow-auto text-sm">
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-6">
+                            <strong>Version 1 (basique)</strong><br>
+                            Pour l'instant, modifiez directement le fichier <code>data/formations.json</code> puis relancez l'application.<br>
+                            Bientôt : édition complète en direct + export/import depuis cette interface.
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <button onclick="exportCurrentData()" 
+                                    class="flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-4 rounded-2xl font-semibold">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Exporter formations.json</span>
+                            </button>
+                            
+                            <button onclick="importDataFromFile()" 
+                                    class="flex items-center justify-center gap-2 bg-white border border-slate-300 hover:bg-slate-50 px-6 py-4 rounded-2xl font-semibold">
+                                <i class="fa-solid fa-upload"></i>
+                                <span>Importer un fichier JSON</span>
+                            </button>
+                        </div>
+
+                        <div class="mt-6 text-xs text-slate-500">
+                            ${formations.length} formations actuellement chargées.<br>
+                            Raccourci clavier : <kbd>Ctrl+Shift+A</kbd> (ou Cmd+Shift+A)
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-t bg-slate-50 flex gap-3 text-sm">
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="flex-1 py-3 rounded-2xl border border-slate-300 hover:bg-white font-semibold">Fermer</button>
+                        <button onclick="window.location.reload()" 
+                                class="flex-1 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">Recharger l'application</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function exportCurrentData() {
+            const data = { formations, exportedAt: new Date().toISOString(), version: "1.1" };
+            
+            if (window.electronAPI?.exportData) {
+                window.electronAPI.exportData(data, 'formations-export.json');
+            } else {
+                // Fallback navigateur
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'formations-export.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        async function importDataFromFile() {
+            if (window.electronAPI?.importData) {
+                const result = await window.electronAPI.importData();
+                if (result.success) {
+                    formations = result.data;
+                    renderClasses(formations);
+                    alert("Données importées. Pensez à recharger pour persistance.");
+                }
+            } else {
+                alert("Import via fichier : fonctionnalité complète disponible dans l'application desktop.");
+            }
+        }
+
+        // Lancement
+        window.onload = init;
+
+        // Petit helper : permet de filtrer depuis la console si besoin
+        window.filterFormations = applyFilters;
+    </script>
+  <!-- Service Worker Registration for PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js').then(function(registration) {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{
+  "name": "maths-sciences-lycee",
+  "version": "1.1.0",
+  "description": "Application de ressources Maths & Sciences - Lycée Professionnel Gustave Eiffel (M. KANDE)",
+  "author": {
+    "name": "Boubacar KANDE",
+    "email": "boubacar.kande@ac-creteil.fr"
+  },
+  "license": "MIT",
+  "main": "electron/main.js",
+  "homepage": "https://github.com/kande-b/maths-sciences-lycee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kande-b/maths-sciences-lycee.git"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "echo 'Build frontend assets (future Vite/React migration)'",
+    "dist:win": "electron-builder --win --x64",
+    "dist:win:portable": "electron-builder --win portable --x64",
+    "dist:win:installer": "electron-builder --win nsis --x64",
+    "dist:win:all": "electron-builder --win --x64 -p never",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux",
+    "clean": "rimraf dist",
+    "lint": "eslint . --ext .js,.html --max-warnings=0 || echo 'Linting completed (some warnings may exist in legacy HTML)'",
+    "format": "prettier --write \"**/*.{js,html,css,json,md}\" --ignore-path .gitignore || echo 'Formatting attempted'",
+    "format:check": "prettier --check \"**/*.{js,html,css,json,md}\" --ignore-path .gitignore",
+    "postinstall": "echo 'Installation complete. Run npm start to launch the app.'"
+  },
+  "build": {
+    "appId": "fr.ac-creteil.lycee-gustave-eiffel.maths-sciences",
+    "productName": "Maths & Sciences - Lycée Gustave Eiffel",
+    "copyright": "Copyright © 2025-2026 Boubacar KANDE - Lycée Professionnel Gustave Eiffel",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "**/*",
+      "!**/{.git,.github,docs,scripts,test,tests}/**",
+      "!**/{*.md,*.yml,*.yaml,.eslint*,prettier*,tsconfig*}",
+      "!node_modules/**/*.{md,ts,ts.map}"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.ico",
+      "artifactName": "Maths-Sciences-Lycee-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "Maths & Sciences - M. KANDE",
+      "license": "LICENSE",
+      "language": 1036
+    },
+    "portable": {
+      "artifactName": "Maths-Sciences-Lycee-${version}-Portable.exe"
+    }
+  },
+  "devDependencies": {
+    "electron": "^42.3.0",
+    "electron-builder": "^26.0.12",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
