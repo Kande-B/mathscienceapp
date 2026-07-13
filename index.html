@@ -548,6 +548,18 @@
     <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 text-xs py-6">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-y-2">
+            <div>
+                &copy; 2025-2026 KANDE B. - Labo Maths-Sciences
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="https://hits.seeyoufarm.com">
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fprofpro-mathsciences.fr&count_bg=%234F46E5&title_bg=%231E293B&icon=&icon_color=%23E7E7E7&title=visites&edge_flat=false" alt="Compteur de visites" class="inline-block rounded-lg shadow-sm" />
+                </a>
+                <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
+                <a href="#" class="hover:text-white transition-colors">Politique de confidentialité</a>
+            </div>
+        </div>
             <div>© 2025-2026 • Ressources Maths &amp; Sciences — Lycée Professionnel Gustave Eiffel</div>
             <div class="flex items-center gap-x-4">
                 <span>Site réalisé pour les élèves</span>
@@ -1232,7 +1244,7 @@
         async function loadFormationsData() {
             // Essaie d'abord de charger depuis data/formations.json (fichier externe)
             try {
-                const response = await fetch('data/formations.json');
+                const response = await fetch('data/formations.json?t=' + new Date().getTime());
                 if (response.ok) {
                     const data = await response.json();
                     if (Array.isArray(data) && data.length > 0) {
@@ -1338,7 +1350,7 @@
                     f.short.toLowerCase().includes(term) ||
                     f.full.toLowerCase().includes(term) ||
                     f.description.toLowerCase().includes(term) ||
-                    Object.values(f.resources).flat().some(r =>
+                    Object.values(f.resources).flatMap(domain => Array.isArray(domain) ? domain.flatMap(seq => seq.items || []) : []).some(r =>
                         r.titre.toLowerCase().includes(term) ||
                         (r.desc && r.desc.toLowerCase().includes(term))
                     )
@@ -1447,13 +1459,12 @@
             document.getElementById('class-modal').classList.add('flex');
         }
 
-        // Affiche les deux gros boutons Maths / Sciences
         function renderDomainSelector(formation) {
             const hasMaths = formation.resources && formation.resources.maths;
             const hasSciences = formation.resources && formation.resources.sciences;
 
             const selectorHTML = `
-                <div class="px-6 pt-4 pb-2 bg-white border-b">
+                <div class="px-6 pt-4 pb-4 bg-white border-b">
                     <div class="flex items-center gap-3">
                         <div class="text-xs font-semibold text-slate-500 mr-2">DOMAINE :</div>
                         
@@ -1485,135 +1496,121 @@
             }
 
             selectorContainer.innerHTML = selectorHTML;
+            
+            // Plus d'onglets : on nettoie
+            const tabsContainer = document.getElementById('modal-tabs');
+            if (tabsContainer) tabsContainer.innerHTML = '';
 
-            // Affiche les onglets + contenu du domaine sélectionné
-            renderResourceTabs(formation);
-            renderModalResources(formation, 'all');
+            // Affiche directement les séquences du domaine
+            renderModalSequences(formation);
         }
 
         function switchDomain(domain, formationId) {
             currentDomain = domain;
             const formation = formations.find(f => f.id === formationId);
             if (!formation) return;
-
-            // Re-render du sélecteur (pour mettre à jour les styles actifs)
             renderDomainSelector(formation);
         }
 
-        function renderResourceTabs(formation) {
-            const tabsContainer = document.getElementById('modal-tabs');
-            tabsContainer.innerHTML = '';
-
-            const domainResources = formation.resources && formation.resources[currentDomain]
-                ? formation.resources[currentDomain]
-                : { cours: [], exercices: [], fiches: [], qcm: [], tp: [] };
-
-            const categories = [
-                { key: 'all', label: 'Toutes', icon: 'fa-list' },
-                { key: 'cours', label: 'Cours', icon: 'fa-book' },
-                { key: 'exercices', label: 'Exercices / TD', icon: 'fa-pencil-alt' },
-                { key: 'fiches', label: 'Fiche', icon: 'fa-sticky-note' },
-                { key: 'qcm', label: 'QCM / Quiz', icon: 'fa-question-circle' },
-                { key: 'tp', label: 'TP & Projet', icon: 'fa-tools' }
-            ];
-
-            categories.forEach(cat => {
-                const count = cat.key === 'all'
-                    ? Object.values(domainResources).flat().length
-                    : (domainResources[cat.key] || []).length;
-
-                if (count === 0 && cat.key !== 'all') return;
-
-                const tab = document.createElement('button');
-                tab.className = `resource-tab flex-shrink-0 flex items-center gap-x-2 px-5 py-2 text-sm font-semibold rounded-t-2xl ${cat.key === 'all' ? 'active' : 'text-slate-600 hover:text-slate-800'}`;
-
-                tab.innerHTML = `
-                    <i class="fa-solid ${cat.icon}"></i>
-                    <span>${cat.label}</span>
-                    <span class="text-xs font-normal px-1.5 py-px bg-slate-100 rounded text-slate-500">${count}</span>
-                `;
-
-                tab.onclick = () => {
-                    currentResourceTab = cat.key;
-                    document.querySelectorAll('#modal-tabs button').forEach(b => b.classList.remove('active'));
-                    tab.classList.add('active');
-                    renderModalResources(formation, cat.key);
-                };
-
-                tabsContainer.appendChild(tab);
-            });
-        }
-
-        function renderModalResources(formation, category) {
+        function renderModalSequences(formation) {
             const content = document.getElementById('modal-resources-content');
             content.innerHTML = '';
 
-            // Récupère les ressources du domaine actuel (maths ou sciences)
-            let domainData = {};
+            let domainData = [];
             if (formation.resources && formation.resources[currentDomain]) {
                 domainData = formation.resources[currentDomain];
-            } else if (currentDomain === 'maths' && formation.resources) {
-                // Fallback : ancienne structure plate → tout va dans Maths
-                domainData = formation.resources;
-            } else {
-                domainData = { cours: [], exercices: [], fiches: [], qcm: [], tp: [] };
             }
 
-            let resourcesToShow = [];
-
-            if (category === 'all') {
-                resourcesToShow = Object.entries(domainData).flatMap(([type, items]) =>
-                    items.map(item => ({ ...item, category: type }))
-                );
-            } else {
-                resourcesToShow = (domainData[category] || []).map(item => ({ ...item, category }));
-            }
-
-            if (resourcesToShow.length === 0) {
+            if (!Array.isArray(domainData) || domainData.length === 0) {
                 const domainLabel = currentDomain === 'maths' ? 'Mathématiques' : 'Sciences';
                 content.innerHTML = `
                     <div class="text-center py-10">
                         <i class="fa-solid fa-folder-open text-5xl text-slate-300 mb-4"></i>
-                        <p class="text-slate-500">Aucune ressource ${domainLabel} dans cette catégorie pour le moment.</p>
-                        <p class="text-xs text-slate-400 mt-1">Ajoutez des documents dans le code (tableau formations).</p>
+                        <p class="text-slate-500">Aucune séquence de ${domainLabel} pour le moment.</p>
                     </div>
                 `;
                 return;
             }
 
-            const grid = document.createElement('div');
-            grid.className = 'grid gap-3';
-
-            resourcesToShow.forEach(resource => {
-                const div = document.createElement('div');
-                div.className = `resource-item border border-slate-200 bg-white rounded-2xl p-4 flex gap-4 items-start`;
-
-                const icon = getResourceIcon(resource.category);
-
-                div.innerHTML = `
-                    <div class="pt-1">
-                        <i class="fa-solid ${icon} text-xl text-slate-400 w-6"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-x-2">
-                            <span class="font-semibold">${resource.titre}</span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 bg-slate-100 text-slate-500 rounded">${resource.type}</span>
+            domainData.forEach((sequence, index) => {
+                const seqDiv = document.createElement('div');
+                seqDiv.className = 'mb-4 last:mb-0';
+                
+                // On utilise <details> pour faire un dossier déroulant. On ouvre le premier par défaut.
+                const isOpen = index === 0 ? 'open' : '';
+                
+                seqDiv.innerHTML = `
+                    <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden" ${isOpen}>
+                        <summary class="px-5 py-4 cursor-pointer flex items-center justify-between font-bold text-lg text-slate-800 select-none hover:bg-slate-100 transition-colors list-none">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-folder text-indigo-500 group-open:fa-folder-open transition-colors"></i> 
+                                ${sequence.title || sequence.titre || 'Séquence'}
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-xs font-normal text-slate-500 bg-slate-200 px-2 py-1 rounded-full">${(sequence.items || []).length} ressource(s)</span>
+                                <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
+                            </div>
+                        </summary>
+                        <div class="px-5 pb-5 pt-1 border-t border-slate-100">
+                            ${sequence.description ? `<p class="text-sm text-slate-500 mb-3">${sequence.description}</p>` : ''}
+                            <div class="grid gap-3 resource-grid">
+                                ${(sequence.items || []).length > 0 ? '' : '<div class="text-sm text-slate-400 italic">Aucune ressource dans cette séquence</div>'}
+                            </div>
                         </div>
-                        <div class="text-sm text-slate-600 mt-0.5">${resource.desc || ''}</div>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-xs text-slate-400">Ajouté le ${resource.date}</span>
-                            <button onclick="downloadResource('${formation.id}', '${resource.titre}')" 
-                                    class="text-xs font-bold flex items-center gap-x-1.5 px-4 py-1.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 transition-colors text-white">
-                                <i class="fa-solid fa-download text-xs"></i>
-                                <span>Télécharger</span>
-                            </button>
-                        </div>
-                    </div>
+                    </details>
                 `;
-                grid.appendChild(div);
+                
+                // Add a small style block to remove the default details triangle marker if it appears
+                if (!document.getElementById('details-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'details-style';
+                    style.innerHTML = 'details summary::-webkit-details-marker { display: none; } details > summary { list-style: none; }';
+                    document.head.appendChild(style);
+                }
+                
+                const grid = seqDiv.querySelector('.resource-grid');
+                (sequence.items || []).forEach(resource => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = `resource-item border border-slate-200 bg-white rounded-2xl p-4 flex gap-4 items-start`;
+                    const icon = getResourceIcon(resource.category || 'cours');
+                    const badgeColor = getCategoryColor(resource.category || 'cours');
+                    
+                    itemDiv.innerHTML = `
+                        <div class="pt-1">
+                            <i class="fa-solid ${icon} text-xl text-slate-400 w-6"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-x-2">
+                                <span class="font-semibold">${resource.titre}</span>
+                                <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 ${badgeColor} rounded">${resource.category || resource.type}</span>
+                            </div>
+                            <div class="text-sm text-slate-600 mt-0.5">${resource.desc || ''}</div>
+                            <div class="flex items-center justify-between mt-3">
+                                <span class="text-xs text-slate-400">Ajouté le ${resource.date || 'Récemment'}</span>
+                                <a href="${resource.url}" target="_blank"
+                                        class="text-xs font-bold flex items-center gap-x-1.5 px-4 py-1.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 transition-colors text-white">
+                                    <i class="fa-solid fa-external-link-alt text-xs"></i>
+                                    <span>Consulter</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(itemDiv);
+                });
+                
+                content.appendChild(seqDiv);
             });
+        }
 
-            content.appendChild(grid);
+        function getCategoryColor(category) {
+            const colors = {
+                'cours': 'bg-blue-100 text-blue-700',
+                'exercices': 'bg-orange-100 text-orange-700',
+                'fiches': 'bg-amber-100 text-amber-700',
+                'qcm': 'bg-purple-100 text-purple-700',
+                'tp': 'bg-emerald-100 text-emerald-700'
+            };
+            return colors[category] || 'bg-slate-100 text-slate-700';
         }
 
         function getResourceIcon(category) {
