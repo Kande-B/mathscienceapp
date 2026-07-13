@@ -553,13 +553,27 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <a href="https://hits.seeyoufarm.com">
-                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fprofpro-mathsciences.fr&count_bg=%234F46E5&title_bg=%231E293B&icon=&icon_color=%23E7E7E7&title=visites&edge_flat=false" alt="Compteur de visites" class="inline-block rounded-lg shadow-sm" />
-                </a>
+                <div class="flex items-center gap-1.5 text-slate-300 bg-slate-800 px-3 py-1 rounded-full text-[11px] font-medium tracking-wide">
+                    <i class="fa-solid fa-eye text-indigo-400"></i>
+                    <span id="visit-counter">...</span> visites
+                </div>
                 <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
                 <a href="#" class="hover:text-white transition-colors">Politique de confidentialité</a>
             </div>
+            
+            <script>
+                // Fetch simple visitor counter
+                fetch('https://api.counterapi.dev/v1/profpro/mathsciences/up')
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data && data.count) {
+                            document.getElementById('visit-counter').innerText = data.count.toLocaleString('fr-FR');
+                        }
+                    })
+                    .catch(err => console.error('Erreur compteur:', err));
+            </script>
         </div>
+        <div class="max-w-7xl mx-auto px-6 mt-4 flex flex-col md:flex-row justify-between items-center gap-y-2">
             <div>© 2025-2026 • Ressources Maths &amp; Sciences — Lycée Professionnel Gustave Eiffel</div>
             <div class="flex items-center gap-x-4">
                 <span>Site réalisé pour les élèves</span>
