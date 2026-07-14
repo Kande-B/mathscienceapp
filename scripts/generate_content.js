@@ -1,10 +1,8 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
 const { GoogleGenAI } = require('@google/genai');
 
-// Check if API key is provided
 if (!process.env.GEMINI_API_KEY) {
     console.error("ERREUR : Vous devez définir GEMINI_API_KEY dans un fichier .env à la racine du projet.");
     process.exit(1);
@@ -14,16 +12,6 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const dataPath = path.join(__dirname, '..', 'data', 'formations.json');
 let data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-async function askQuestion(query) {
-    return new Promise(resolve => rl.question(query, resolve));
-}
-
-// Prompts templates
 const COURS_PROMPT = `Tu es un professeur de Mathématiques/Sciences en lycée professionnel.
 Rédige le code HTML complet (juste le HTML, sans Markdown autour) d'un cours structuré pour des élèves de lycée professionnel sur le thème : "{SEQUENCE_TITLE}".
 Utilise le même design HTML Tailwind CSS que le fichier de référence fourni (avec des encadrés bleus pour Définitions, verts pour Propriétés, jaunes pour Méthodes, violets pour Applications pro).
@@ -41,9 +29,7 @@ Rédige le code HTML complet d'un Travail Pratique (TP) sur le thème : "{SEQUEN
 Utilise le même design HTML Tailwind CSS que le modèle fourni.
 Le TP doit présenter une "Mise en situation" professionnelle concrète (avec documents de référence) suivie d'un "Travail à réaliser" (missions à accomplir par l'élève). Ne mets pas les balises markdown \`\`\`html.`;
 
-// Boilerplate template for the AI to follow the exact same visual structure
-const REFERENCE_HTML = `
-<!DOCTYPE html>
+const REFERENCE_HTML = `<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -60,12 +46,17 @@ const REFERENCE_HTML = `
         .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
         .ex-box { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
     </style>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
     <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">... (Même header avec icônes appropriées)</header>
     <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">...</main>
-</body></html>
-`;
+</body></html>`;
 
 async function generateHTML(prompt, sequenceTitle) {
     const fullPrompt = prompt.replace('{SEQUENCE_TITLE}', sequenceTitle) + 
@@ -73,11 +64,9 @@ async function generateHTML(prompt, sequenceTitle) {
     
     console.log("⏳ Génération par l'IA en cours...");
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-1.5-flash',
         contents: fullPrompt,
-        config: {
-            temperature: 0.2,
-        }
+        config: { temperature: 0.2 }
     });
     
     let text = response.text;
@@ -101,31 +90,27 @@ async function main() {
     console.log("🤖 Générateur Automatique de Séquences IA");
     console.log("==========================================\n");
 
-    console.log("Classes disponibles :");
-    data.forEach(f => console.log(`- ${f.id} : ${f.short}`));
-    
-    const classId = await askQuestion("\nEntrez l'ID de la classe (ex: 3pm) : ");
+    const classId = process.argv[2];
+    const domain = process.argv[3];
+    const seqIdx = process.argv[4];
+
+    if (!classId || !domain || !seqIdx) {
+        console.error("Usage: node generate_content.js <classId> <domain> <sequenceIndex>");
+        process.exit(1);
+    }
+
     const classe = data.find(f => f.id === classId);
-    
     if (!classe) {
         console.error("Classe introuvable.");
         process.exit(1);
     }
 
-    const domain = await askQuestion("Entrez le domaine (maths ou sciences) : ");
     if (!classe.resources[domain]) {
         console.error("Domaine invalide.");
         process.exit(1);
     }
 
-    console.log(`\nSéquences disponibles pour ${classe.short} (${domain}) :`);
-    classe.resources[domain].forEach((seq, idx) => {
-        console.log(`[${idx}] ${seq.title || seq.titre}`);
-    });
-
-    const seqIdx = await askQuestion("\nEntrez le numéro de la séquence à générer : ");
     const sequence = classe.resources[domain][parseInt(seqIdx)];
-
     if (!sequence) {
         console.error("Séquence introuvable.");
         process.exit(1);
@@ -155,7 +140,6 @@ async function main() {
 
         console.log("\n✅ Fichiers HTML générés avec succès !");
 
-        // Mise à jour de formations.json
         sequence.items = [
             {
                 "id": Date.now() + 1,
@@ -192,8 +176,6 @@ async function main() {
     } catch (error) {
         console.error("Erreur lors de la génération :", error);
     }
-
-    rl.close();
 }
 
 main();
