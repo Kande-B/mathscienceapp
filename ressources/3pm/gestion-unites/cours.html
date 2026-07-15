@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Gestion d'unités</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        .def-box   { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
+        .prop-box  { border-left: 4px solid #10b981; background-color: #ecfdf5; }
+        .meth-box  { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
+        .ex-box    { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
+        .warn-box  { border-left: 4px solid #ef4444; background-color: #fef2f2; }
+    </style>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="text-slate-800 antialiased pb-20">
+
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
+            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner flex-shrink-0">
+                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Mathématiques</p>
+                <h1 class="text-xl md:text-2xl font-bold text-slate-800">Chapitre : Gestion d'unités</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 md:px-6 mt-8 space-y-10">
+
+        <!-- INTRODUCTION -->
+        <section>
+            <div class="bg-indigo-600 text-white rounded-2xl p-5 mb-4 flex items-start gap-3">
+                <i class="fa-solid fa-ruler-combined text-2xl mt-1 flex-shrink-0"></i>
+                <div>
+                    <p class="font-bold text-lg">Pourquoi maîtriser les unités ?</p>
+                    <p class="text-indigo-100 text-sm mt-1">En atelier, on travaille en millimètres, alors qu'un terrain s'exprime en mètres. De même, les temps sur les fiches de paie sont souvent en "heures décimales" et non en minutes. Sans conversion correcte, tout calcul est faux !</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE I -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">I. Les unités simples (1 dimension)</h2>
+
+            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-table"></i> Le tableau classique (Mètres, Grammes, Litres)
+                </h3>
+                <p class="text-emerald-900 text-sm mb-3">Pour les longueurs (m), les masses (g) ou les capacités (L), le tableau de conversion comporte <strong>une seule colonne par unité</strong>.</p>
+                
+                <div class="overflow-x-auto bg-white p-3 rounded border border-emerald-200 shadow-sm mb-3">
+                    <table class="w-full text-center text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-emerald-50 text-emerald-800 border-b border-emerald-200">
+                                <th class="p-2 border-r border-emerald-200">k...</th>
+                                <th class="p-2 border-r border-emerald-200">h...</th>
+                                <th class="p-2 border-r border-emerald-200">da...</th>
+                                <th class="p-2 border-r border-emerald-200 font-bold bg-emerald-100">UNITÉ</th>
+                                <th class="p-2 border-r border-emerald-200">d...</th>
+                                <th class="p-2 border-r border-emerald-200">c...</th>
+                                <th class="p-2">m...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2 border-r border-emerald-100">km</td>
+                                <td class="p-2 border-r border-emerald-100">hm</td>
+                                <td class="p-2 border-r border-emerald-100">dam</td>
+                                <td class="p-2 border-r border-emerald-100 font-bold bg-emerald-50">m</td>
+                                <td class="p-2 border-r border-emerald-100">dm</td>
+                                <td class="p-2 border-r border-emerald-100">cm</td>
+                                <td class="p-2">mm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <ul class="list-disc list-inside text-sm text-emerald-900">
+                    <li>$1 \text{ m} = 100 \text{ cm}$</li>
+                    <li>$1 \text{ kg} = 1\ 000 \text{ g}$</li>
+                    <li>$5 \text{ cL} = 0{,}05 \text{ L}$</li>
+                </ul>
+            </div>
+            
+            <div class="warn-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-red-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Règle d'or du tableau
+                </h3>
+                <p class="text-sm text-red-900">On place toujours le <strong>chiffre des unités</strong> dans la colonne de l'unité donnée ! Par exemple pour $15{,}4 \text{ cm}$, on place le « 5 » dans la colonne « cm », pas le 4.</p>
+            </div>
+        </section>
+
+        <!-- CHAPITRE II -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">II. Aires et Volumes</h2>
+
+            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-square"></i> Les Aires (Carré ²)
+                </h3>
+                <p class="text-amber-900 text-sm mb-2">Pour les aires (en m², cm²...), on travaille en 2 dimensions (Longueur $\times$ Largeur). <strong>Chaque unité contient donc 2 colonnes dans le tableau.</strong></p>
+                <div class="bg-white p-3 rounded border border-amber-200 shadow-sm text-sm mb-2">
+                    <p class="font-bold text-amber-900">Exemple :</p>
+                    <p>$1 \text{ m}^2 = 100 \text{ dm}^2 = 10\ 000 \text{ cm}^2$</p>
+                </div>
+            </div>
+
+            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-cube"></i> Les Volumes (Cube ³)
+                </h3>
+                <p class="text-amber-900 text-sm mb-2">Pour les volumes (en m³, cm³...), on travaille en 3 dimensions. <strong>Chaque unité contient 3 colonnes dans le tableau.</strong></p>
+                <div class="bg-white p-3 rounded border border-amber-200 shadow-sm text-sm mb-2">
+                    <p class="font-bold text-amber-900">L'équivalence primordiale à retenir par cœur :</p>
+                    <div class="bg-amber-100 p-2 text-center rounded mt-2 font-bold text-lg text-amber-900 border border-amber-300">
+                        1 dm³ = 1 Litre (L)
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded border border-amber-200 shadow-sm text-sm">
+                    <p class="font-bold text-amber-900">Ce qui implique :</p>
+                    <ul class="list-disc list-inside mt-1">
+                        <li>$1 \text{ m}^3 = 1\ 000 \text{ dm}^3 = \mathbf{1\ 000 \text{ Litres}}$</li>
+                        <li>$1 \text{ cm}^3 = 1 \text{ mL}$</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE III -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">III. La gestion du Temps</h2>
+
+            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-clock"></i> Le système sexagésimal (base 60)
+                </h3>
+                <p class="text-blue-900 text-sm md:text-base">Contrairement aux mètres, le temps ne fonctionne pas de 10 en 10, mais de 60 en 60 !</p>
+                <ul class="list-disc list-inside text-sm md:text-base text-blue-900 mt-2 space-y-1 bg-white p-3 rounded shadow-sm">
+                    <li>1 heure (h) = 60 minutes (min)</li>
+                    <li>1 minute (min) = 60 secondes (s)</li>
+                    <li>1 heure (h) = 3 600 secondes (s)</li>
+                </ul>
+            </div>
+
+            <div class="ex-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-3">
+                    <i class="fa-solid fa-calculator"></i> Heures sexagésimales $\leftrightarrow$ Heures décimales
+                </h3>
+                <p class="text-purple-900 text-sm mb-2">
+                    En paie, un salarié qui travaille "3 heures et demie" ne verra pas « 3h30 » sur sa fiche, mais <strong>3,5 h</strong> (qui est un nombre décimal). 
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <!-- Cas 1 -->
+                    <div class="bg-white p-4 rounded-lg border border-purple-200 text-sm">
+                        <p class="font-bold text-purple-900 mb-2 border-b border-purple-100 pb-1">Passer de (h:min) aux Heures décimales</p>
+                        <p class="text-xs text-slate-500 mb-2">Règle : on divise les minutes par 60.</p>
+                        <p><strong>Exemple : 2h15 min = ?</strong></p>
+                        <p>$\frac{15}{60} = 0{,}25$ heure</p>
+                        <p>Donc : $2\text{h}15 = \mathbf{2{,}25 \text{ h}}$</p>
+                    </div>
+
+                    <!-- Cas 2 -->
+                    <div class="bg-white p-4 rounded-lg border border-purple-200 text-sm">
+                        <p class="font-bold text-purple-900 mb-2 border-b border-purple-100 pb-1">Passer des Heures décimales à (h:min)</p>
+                        <p class="text-xs text-slate-500 mb-2">Règle : on multiplie la partie décimale par 60.</p>
+                        <p><strong>Exemple : 4,4 h = ?</strong></p>
+                        <p>C'est 4 heures pleines.</p>
+                        <p>Reste $0{,}4 \times 60 = 24$ minutes.</p>
+                        <p>Donc : $4{,}4 \text{ h} = \mathbf{4\text{h}24\text{min}}$</p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+    </main>
+
+</body>
+</html>
