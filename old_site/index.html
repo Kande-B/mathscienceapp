@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Dépôts GitHub - Kande-B</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --accent-color: #00ff88;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --placeholder-color: rgba(255, 255, 255, 0.5);
+            --desc-color: rgba(255, 255, 255, 0.7);
+            --meta-color: rgba(255, 255, 255, 0.5);
+            --lang-bg: rgba(0, 255, 136, 0.2);
+        }
+        body.light-mode {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --accent-color: #007acc;
+            --card-bg: #fff;
+            --border-color: #ddd;
+            --placeholder-color: #888;
+            --desc-color: #666;
+            --meta-color: #888;
+            --lang-bg: #e1e4e8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+        }
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: block;
+        }
+        body.light-mode #stars { display: none; }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: shootingStar linear infinite;
+        }
+        .star:nth-child(1) { width: 2px; height: 2px; top: 10%; left: 15%; animation-duration: 2.5s; }
+        .star:nth-child(2) { width: 1px; height: 1px; top: 30%; left: 70%; animation-duration: 3.5s; animation-delay: 0.5s; }
+        .star:nth-child(3) { width: 3px; height: 3px; top: 50%; left: 25%; animation-duration: 4s; animation-delay: 1s; }
+        .star:nth-child(4) { width: 1.5px; height: 1.5px; top: 70%; left: 55%; animation-duration: 3s; animation-delay: 1.5s; }
+        .star:nth-child(5) { width: 2.5px; height: 2.5px; top: 5%; left: 40%; animation-duration: 4.5s; animation-delay: 2s; }
+        .star:nth-child(6) { width: 2px; height: 2px; top: 25%; left: 85%; animation-duration: 3s; animation-delay: 2.5s; }
+        .star:nth-child(7) { width: 1px; height: 1px; top: 45%; left: 5%; animation-duration: 5s; animation-delay: 3s; }
+        .star:nth-child(8) { width: 3px; height: 3px; top: 65%; left: 35%; animation-duration: 2.8s; animation-delay: 3.5s; }
+        .star:nth-child(9) { width: 1.5px; height: 1.5px; top: 85%; left: 65%; animation-duration: 4s; animation-delay: 4s; }
+        .star:nth-child(10) { width: 2.5px; height: 2.5px; top: 15%; left: 95%; animation-duration: 3.2s; animation-delay: 4.5s; }
+        @keyframes shootingStar {
+            0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateX(200vw) translateY(200vh) rotate(45deg); opacity: 0; }
+        }
+        .sidebar {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            transition: left 0.3s;
+            position: relative;
+            left: 0;
+        }
+        body.light-mode .sidebar { background: rgba(255, 255, 255, 0.8); }
+        .logo { text-align: center; padding: 20px; font-size: 1.5em; color: var(--accent-color); font-weight: bold; }
+        .search-container { padding: 0 20px 20px; }
+        .search-container input { width: 100%; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-size: 1em; }
+        .search-container input::placeholder { color: var(--placeholder-color); }
+        .tabs { flex: 1; padding-bottom: 20px; }
+        .tab { padding: 12px 20px; cursor: pointer; border-radius: 0; border-left: 3px solid transparent; transition: background 0.2s; display: flex; align-items: center; color: var(--text-color); }
+        .tab:hover { background: rgba(255, 255, 255, 0.05); }
+        .tab.active { background: rgba(0, 255, 136, 0.1); border-left-color: var(--accent-color); color: var(--accent-color); }
+        .theme-switch { padding: 12px 20px; text-align: center; }
+        .theme-switch button { background: var(--accent-color); color: #000; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+        .theme-switch button:hover { opacity: 0.9; }
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; }
+        .menu-toggle { display: none; position: fixed; top: 20px; left: 20px; background: var(--accent-color); color: #000; border: none; padding: 10px; border-radius: 6px; cursor: pointer; z-index: 101; }
+        .header { font-size: 2em; margin-bottom: 20px; color: var(--accent-color); }
+        .sub-section { margin: 20px 0; }
+        .sub-section h3 { color: var(--accent-color); margin-bottom: 10px; font-size: 1.3em; }
+        .repo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 10px; }
+        .repo-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; transition: all 0.3s; position: relative; }
+        .repo-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+        .repo-title { font-size: 1.2em; margin-bottom: 8px; }
+        .repo-title a { color: var(--text-color); text-decoration: none; }
+        .repo-title a:hover { color: var(--accent-color); }
+        .repo-desc { color: var(--desc-color); margin-bottom: 10px; font-size: 0.95em; }
+        .repo-meta { font-size: 0.85em; color: var(--meta-color); }
+        .repo-lang { background: var(--lang-bg); color: var(--accent-color); padding: 4px 8px; border-radius: 4px; margin-right: 8px; }
+        .repo-document { margin-top: 10px; }
+        .repo-document a { color: var(--accent-color); text-decoration: none; font-size: 0.9em; }
+        .repo-document a:hover { text-decoration: underline; }
+        .edit-delete-buttons { position: absolute; top: 20px; right: 20px; display: none; }
+        .repo-card:hover .edit-delete-buttons { display: block; }
+        .edit-delete-buttons button { background: var(--accent-color); color: #000; border: none; padding: 6px 12px; margin-left: 8px; border-radius: 6px; cursor: pointer; font-size: 0.85em; }
+        .edit-delete-buttons button:hover { background: #00cc6a; }
+        .delete-btn { background: #ff4444; color: #fff; }
+        .delete-btn:hover { background: #cc3333; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .search-results { margin-top: 20px; display: none; }
+        .search-results.active { display: block; }
+        .no-results { color: var(--desc-color); text-align: center; padding: 40px; }
+        .form-container, .auth-container { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 20px; display: none; color: var(--text-color); }
+        .auth-container.active, .form-container.active { display: block; }
+        .form-container label, .auth-container label { display: block; margin: 10px 0 5px; color: var(--desc-color); }
+        .form-container input, .form-container textarea, .form-container select, .auth-container input { width: 100%; padding: 12px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); margin-bottom: 10px; }
+        .form-container input::placeholder, .form-container textarea::placeholder, .auth-container input::placeholder { color: var(--placeholder-color); }
+        .form-container input[type="file"] { padding: 8px; }
+        .form-container button, .auth-container button { background: var(--accent-color); color: #000; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1em; }
+        .form-container button:hover, .auth-container button:hover { background: #00cc6a; }
+        .hidden { display: none; }
+        @media (max-width: 768px) {
+            .sidebar { width: 280px; height: 100vh; position: fixed; z-index: 100; top: 0; left: -280px; transition: left 0.3s; }
+            .sidebar.open { left: 0; }
+            .main-content { flex: 1; padding: 20px; }
+            .menu-toggle { display: block; }
+            .repo-grid { grid-template-columns: 1fr; }
+        }
+        .welcome-section { line-height: 1.8; color: var(--desc-color); font-size: 1.1em; }
+        .welcome-section h3 { color: var(--accent-color); margin-top: 30px; font-size: 1.4em; }
+        .welcome-section ul { list-style: disc; margin-left: 20px; margin-bottom: 20px; }
+        .welcome-section a { color: var(--accent-color); text-decoration: none; }
+        .welcome-section a:hover { text-decoration: underline; }
+        .badge { background: var(--accent-color); color: #000; padding: 4px 8px; border-radius: 4px; margin: 5px 0; display: inline-block; }
+        .comments-section { margin-top: 10px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 6px; }
+        .comments-section textarea { width: 100%; padding: 8px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 5px; color: var(--text-color); }
+        .comments-section button { background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+        .comments-section button:hover { background: #00cc6a; }
+        .comment { margin: 5px 0; padding: 5px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+        .share-buttons { margin-top: 10px; }
+        .share-buttons a { margin-right: 10px; color: var(--text-color); text-decoration: none; font-size: 0.9em; }
+        .share-buttons a:hover { color: var(--accent-color); }
+        .sub-tabs { display: flex; margin-bottom: 20px; }
+        .sub-tab { padding: 10px 20px; cursor: pointer; border-bottom: 2px solid transparent; color: var(--text-color); margin-right: 10px; }
+        .sub-tab:hover { color: var(--accent-color); }
+        .sub-tab.active { border-bottom-color: var(--accent-color); color: var(--accent-color); }
+        .sub-tab-content { display: none; }
+        .sub-tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+    <div id="stars"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">Kande-B</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Rechercher..." aria-label="Barre de recherche pour dépôts">
+        </div>
+        <div class="tabs" role="tablist">
+            <div class="tab active" onclick="showTab('Accueil')" role="tab" aria-selected="true" tabindex="0">Accueil</div>
+            <div class="tab" onclick="showTab('3emePrepa')" role="tab" aria-selected="false" tabindex="0">3ème Prépa-Métiers</div>
+            <div class="tab" onclick="showTab('CAP')" role="tab" aria-selected="false" tabindex="0">CAP</div>
+            <div class="tab" onclick="showTab('Seconde')" role="tab" aria-selected="false" tabindex="0">Seconde Bac Pro</div>
+            <div class="tab" onclick="showTab('Premiere')" role="tab" aria-selected="false" tabindex="0">Première Bac Pro</div>
+            <div class="tab" onclick="showTab('Terminale')" role="tab" aria-selected="false" tabindex="0">Terminale Bac Pro</div>
+            <div class="tab" onclick="showTab('Profil')" role="tab" aria-selected="false" tabindex="0">Profil</div>
+        </div>
+        <div class="theme-switch">
+            <button onclick="toggleTheme()">Changer Thème</button>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="auth-container" id="auth-container">
+            <h2>Connexion</h2>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" placeholder="Entrez le mot de passe" aria-label="Champ mot de passe">
+            <button onclick="authenticate()">Connexion</button>
+        </div>
+        <div class="form-container" id="form-container">
+            <h2>Ajouter ou modifier un dépôt</h2>
+            <label for="repo-title">Titre du dépôt</label>
+            <input type="text" id="repo-title" placeholder="Ex: Animation Fractale de Sierpinski" aria-label="Titre du dépôt">
+            <label for="repo-desc">Description</label>
+            <textarea id="repo-desc" placeholder="Description du dépôt" aria-label="Description du dépôt"></textarea>
+            <label for="repo-url">URL du dépôt</label>
+            <input type="text" id="repo-url" placeholder="Ex: https://github.com/Kande-B/..." aria-label="URL du dépôt">
+            <label for="repo-date">Date de mise à jour (YYYY-MM-DD)</label>
+            <input type="text" id="repo-date" placeholder="Ex: 2025-09-20" aria-label="Date de mise à jour">
+            <label for="repo-file">Document (PDF ou Word, facultatif)</label>
+            <input type="file" id="repo-file" accept=".pdf,.doc,.docx" aria-label="Uploader un document PDF ou Word">
+            <label for="repo-level">Niveau</label>
+            <select id="repo-level" aria-label="Sélectionner le niveau">
+                <option value="Accueil">Accueil</option>
+                <option value="3emePrepa">3ème Prépa-Métiers</option>
+                <option value="CAP">CAP</option>
+                <option value="Seconde">Seconde Bac Pro</option>
+                <option value="Premiere">Première Bac Pro</option>
+                <option value="Terminale">Terminale Bac Pro</option>
+            </select>
+            <label for="repo-subject">Matière</label>
+            <select id="repo-subject" aria-label="Sélectionner la matière">
+                <option value="Mathématiques">Mathématiques</option>
+                <option value="Sciences Physiques">Sciences Physiques</option>
+                <option value="N/A">Non applicable</option>
+            </select>
+            <label for="sim-url">URL de Simulation (facultatif)</label>
+            <input type="text" id="sim-url" placeholder="Ex: https://example.com/sim.html" aria-label="URL de la simulation">
+            <button onclick="addRepo()">Ajouter/Modifier le dépôt</button>
+        </div>
+        <div class="search-results" id="search-results">
+            <h3>Résultats de la recherche</h3>
+            <div class="repo-grid" id="search-results-grid"></div>
+        </div>
+        <div id="repo-content">
+            <div id="Accueil" class="tab-content active">
+                <h2 class="header">Bienvenue sur Mes Dépôts GitHub - Kande-B</h2>
+                <div class="welcome-section">
+                    <p>Chers élèves, enseignants et passionnés d'éducation, bienvenue sur ce site dédié aux ressources éducatives pour le lycée professionnel, incluant la 3ème Prépa-Métiers, CAP, et Bac Pro. Ce site est un espace collaboratif pour explorer, apprendre et contribuer à des projets couvrant mathématiques, sciences physiques et compétences techniques variées.</p>
+                    
+                    <h3>Présentation du Site</h3>
+                    <p>Ce site regroupe des dépôts GitHub transformés en ressources éducatives, alignés sur les programmes officiels du lycée professionnel. Chaque dépôt offre des récapitulatifs, des simulations visuelles et des exercices pratiques pour les niveaux 3ème Prépa-Métiers, CAP, Seconde, Première et Terminale Bac Pro. Les thèmes incluent des bases en mathématiques, sciences physiques, et d'autres sujets généraux.</p>
+                   
+                 
+                    
+                    <h3>Ressources Officielles du Programme</h3>
+                    <p>Consultez les programmes 2025 du Ministère de l'Éducation pour les détails sur les spécialités professionnelles. 
+                    <ul>
+                        <li><a href="https://eduscol.education.fr/1793/programmes-et-ressources-en-mathematiques-voie-professionnelle" target="_blank" rel="noopener">Programme de Mathématiques - Bac Pro</a></li>
+                        <li><a href="https://eduscol.education.fr/1795/programmes-et-ressources-en-physique-chimie-voie-professionnelle" target="_blank" rel="noopener">Programme de Sciences Physiques - Bac Pro</a></li>
+                        <li><a href="https://eduscol.education.fr/1793/programmes-et-ressources-en-mathematiques-voie-professionnelle" target="_blank" rel="noopener">Programme de Mathématiques - CAP</a></li>
+                        <li><a href="https://eduscol.education.fr/1795/programmes-et-ressources-en-physique-chimie-voie-professionnelle" target="_blank" rel="noopener">Programme de Sciences Physiques - CAP</a></li>
+                        <li><a href="https://eduscol.education.fr/1793/programmes-et-ressources-en-mathematiques-voie-professionnelle" target="_blank" rel="noopener">Programme de Mathématiques - 3ème Prépa-Métiers</a></li>
+                        <li><a href="https://eduscol.education.fr/1795/programmes-et-ressources-en-physique-chimie-voie-professionnelle" target="_blank" rel="noopener">Programme de Sciences Physiques - 3ème Prépa-Métiers</a></li>
+                    </p>
+
+                </div>
+            </div>
+            <div id="3emePrepa" class="tab-content">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" onclick="showSubTab('3emePrepa', 'Mathématiques')">Mathématiques</div>
+                    <div class="sub-tab" onclick="showSubTab('3emePrepa', 'Sciences Physiques')">Sciences Physiques</div>
+                </div>
+                <div class="sub-tab-content active" id="3emePrepa-Mathématiques">
+                    <div class="sub-section">
+                        <h3>Mathématiques</h3>
+                        <div class="repo-grid" data-level="3emePrepa" data-subject="Mathématiques"></div>
+                    </div>
+                </div>
+                <div class="sub-tab-content" id="3emePrepa-Sciences Physiques">
+                    <div class="sub-section">
+                        <h3>Sciences Physiques</h3>
+                        <div class="repo-grid" data-level="3emePrepa" data-subject="Sciences Physiques"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="CAP" class="tab-content">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" onclick="showSubTab('CAP', 'Mathématiques')">Mathématiques</div>
+                    <div class="sub-tab" onclick="showSubTab('CAP', 'Sciences Physiques')">Sciences Physiques</div>
+                </div>
+                <div class="sub-tab-content active" id="CAP-Mathématiques">
+                    <div class="sub-section">
+                        <h3>Mathématiques</h3>
+                        <div class="repo-grid" data-level="CAP" data-subject="Mathématiques"></div>
+                    </div>
+                </div>
+                <div class="sub-tab-content" id="CAP-Sciences Physiques">
+                    <div class="sub-section">
+                        <h3>Sciences Physiques</h3>
+                        <div class="repo-grid" data-level="CAP" data-subject="Sciences Physiques"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="Seconde" class="tab-content">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" onclick="showSubTab('Seconde', 'Mathématiques')">Mathématiques</div>
+                    <div class="sub-tab" onclick="showSubTab('Seconde', 'Sciences Physiques')">Sciences Physiques</div>
+                </div>
+                <div class="sub-tab-content active" id="Seconde-Mathématiques">
+                    <div class="sub-section">
+                        <h3>Mathématiques</h3>
+                        <div class="repo-grid" data-level="Seconde" data-subject="Mathématiques"></div>
+                    </div>
+                </div>
+                <div class="sub-tab-content" id="Seconde-Sciences Physiques">
+                    <div class="sub-section">
+                        <h3>Sciences Physiques</h3>
+                        <div class="repo-grid" data-level="Seconde" data-subject="Sciences Physiques"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="Premiere" class="tab-content">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" onclick="showSubTab('Premiere', 'Mathématiques')">Mathématiques</div>
+                    <div class="sub-tab" onclick="showSubTab('Premiere', 'Sciences Physiques')">Sciences Physiques</div>
+                </div>
+                <div class="sub-tab-content active" id="Premiere-Mathématiques">
+                    <div class="sub-section">
+                        <h3>Mathématiques</h3>
+                        <div class="repo-grid" data-level="Premiere" data-subject="Mathématiques"></div>
+                    </div>
+                </div>
+                <div class="sub-tab-content" id="Premiere-Sciences Physiques">
+                    <div class="sub-section">
+                        <h3>Sciences Physiques</h3>
+                        <div class="repo-grid" data-level="Premiere" data-subject="Sciences Physiques"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="Terminale" class="tab-content">
+                <div class="sub-tabs">
+                    <div class="sub-tab active" onclick="showSubTab('Terminale', 'Mathématiques')">Mathématiques</div>
+                    <div class="sub-tab" onclick="showSubTab('Terminale', 'Sciences Physiques')">Sciences Physiques</div>
+                </div>
+                <div class="sub-tab-content active" id="Terminale-Mathématiques">
+                    <div class="sub-section">
+                        <h3>Mathématiques</h3>
+                        <div class="repo-grid" data-level="Terminale" data-subject="Mathématiques"></div>
+                    </div>
+                </div>
+                <div class="sub-tab-content" id="Terminale-Sciences Physiques">
+                    <div class="sub-section">
+                        <h3>Sciences Physiques</h3>
+                        <div class="repo-grid" data-level="Terminale" data-subject="Sciences Physiques"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="Profil" class="tab-content">
+                <h2 class="header">Mon Profil</h2>
+                <div class="welcome-section">
+                    <h3>Vos Badges</h3>
+                    <div id="badge-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Créer les étoiles filantes
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDuration = Math.random() * 3 + 2 + 's';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            document.getElementById('stars').appendChild(star);
+            setTimeout(() => star.remove(), 10000);
+        }
+        setInterval(createShootingStar, 2000);
+        createShootingStar();
+
+        // Toggle sidebar on mobile
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // Theme toggle and persistence
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+
+        // Keyboard navigation for tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') tab.click();
+            });
+        });
+
+        const PASSWORD = "admin123";
+        let isAuthenticated = false;
+        let currentEditId = null;
+        let allRepos = [];
+        let userBadges = JSON.parse(localStorage.getItem('badges')) || [];
+        let comments = JSON.parse(localStorage.getItem('comments')) || {};
+        function initRepos() {
+const savedRepos = JSON.parse(localStorage.getItem('repos')) || [];
+allRepos = [
+{ id: "1", title: "Statistique à une variable", desc: "Module sur la statistique à une variable pour CAP, incluant regroupement par classes, effectifs, fréquences, diagrammes en bâtons et circulaires, moyenne.", url: "https://github.com/Kande-B/Statistique-A-Une-Variable-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "2", title: "Probabilités", desc: "Module sur les probabilités pour CAP, avec expériences aléatoires, fluctuation et stabilisation des fréquences, calcul de probabilités dans des cas simples.", url: "https://github.com/Kande-B/Probabilites-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html" },
+{ id: "3", title: "Résolution d’un problème relevant de la proportionnalité", desc: "Module sur la proportionnalité pour CAP, avec suites proportionnelles, coefficient de proportionnalité, pourcentages et échelles.", url: "https://github.com/Kande-B/Resolution-Proportionnalite-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "4", title: "Résolution d’un problème du premier degré", desc: "Module sur la résolution d'équations du premier degré pour CAP, avec modélisation de problèmes et méthode algébrique.", url: "https://github.com/Kande-B/Resolution-Premier-Degre-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "5", title: "Fonctions", desc: "Module sur les fonctions pour CAP, avec tableau de valeurs, représentation graphique, variations, fonctions linéaires et affines.", url: "https://github.com/Kande-B/Fonctions-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "6", title: "Calculs commerciaux et financiers", desc: "Module sur les calculs commerciaux et financiers pour CAP (groupement 2), avec pourcentages, coefficients multiplicateurs, intérêts simples, valeurs acquises.", url: "https://github.com/Kande-B/Calculs-Commerciaux-Et-Financiers-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "7", title: "Géométrie", desc: "Module sur la géométrie pour CAP (groupement 1), avec figures planes, solides usuels, calculs de périmètres, aires, volumes, théorèmes de Pythagore et Thalès.", url: "https://github.com/Kande-B/Geometrie-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/3d" },
+{ id: "8", title: "Calculs numériques", desc: "Module transversal sur les calculs numériques pour CAP, avec opérations sur nombres décimaux, ordres de grandeur, notation scientifique, racines carrées, puissances.", url: "https://github.com/Kande-B/Calculs-Numeriques-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "9", title: "Algorithmique et programmation", desc: "Module transversal sur l'algorithmique et programmation pour CAP, avec décomposition de problèmes, séquences d'instructions, boucles, conditionnelles.", url: "https://github.com/Kande-B/Algorithmique-Et-Programmation-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "10", title: "Automatismes", desc: "Module transversal sur les automatismes pour CAP, avec multiplication, addition, soustraction, division, ordres de grandeur, conversions d'unités, racines carrées.", url: "https://github.com/Kande-B/Automatismes-CAP", date: "2025-09-27", lang: "HTML", level: "CAP", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "11", title: "Statistique et probabilités", desc: "Module sur la statistique et probabilités pour seconde pro, avec séries statistiques, diagrammes, moyenne, médiane, étendue, expériences aléatoires, événement, probabilité d'un événement.", url: "https://github.com/Kande-B/Statistique-Et-Probabilites-Seconde-Pro", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "12", title: "Algèbre – Analyse", desc: "Module sur l'algèbre et l'analyse pour seconde pro, avec fonctions, représentation graphique, variations, taux de variation, résolution d'équations et inéquations du premier degré.", url: "https://github.com/Kande-B/Algebre-Analyse-Seconde-Pro", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "13", title: "Géométrie", desc: "Module sur la géométrie pour seconde pro, avec figures planes, solides usuels, calculs de périmètres, aires, volumes, théorèmes de Pythagore et Thalès, trigonométrie.", url: "https://github.com/Kande-B/Geometrie-Seconde-Pro", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/3d" },
+{ id: "14", title: "Algorithmique et programmation", desc: "Module sur l'algorithmique et programmation pour seconde pro, avec décomposition de problèmes, séquences d'instructions, boucles, conditionnelles, variables, fonctions.", url: "https://github.com/Kande-B/Algorithmique-Et-Programmation-Seconde-Pro", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "15", title: "Automatismes", desc: "Module sur les automatismes pour seconde pro, avec opérations numériques, conversions d'unités, notation scientifique, ordres de grandeur, calculs automatisés.", url: "https://github.com/Kande-B/Automatismes-Seconde-Pro", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "16", title: "Vocabulaire ensembliste et logique", desc: "Module sur le vocabulaire ensembliste et logique pour seconde pro, avec ensembles, opérations, propositions logiques, connecteurs, tables de vérité.", url: "https://github.com/Kande-B/Vocabulaire-Ensembliste-Et-Logique-Seconde-Pro", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "17", title: "Animation Fractale de Sierpinski", desc: "Exploration des fractales 3D.", url: "https://github.com/Kande-B/Animation-Fractale-de-Sierpinski", date: "2025-09-20", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "18", title: "Caractériser la propagation d'un signal sonore", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Caractériser-la-propagation-d-un-signal-sonore", date: "2025-09-16", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html" },
+{ id: "19", title: "Signaux : Comment transmettre l'information ?", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Signaux", date: "2025-09-16", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "20", title: "Prévoir une réaction d'oxydoréduction et protéger les métaux contre la corrosion", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Prévoir-une-réaction-d-oxydoréduction-et-protéger-les-métaux-contre-la-corrosion", date: "2025-09-16", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "21", title: "Stocker l'énergie à l'aide d'un système électrochimique", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Stocker-l-énergie-à-l-aide-d-un-système-électrochimique", date: "2025-09-16", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "22", title: "Comment obtenir de l'énergie électrique par induction électromagnétique ?", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Comment-obtenir-de-l-énergie-électrique-par-induction-électromagnétique", date: "2025-09-14", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "23", title: "Caractériser le réseau triphasé", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Caractériser-le-réseau-triphasé", date: "2025-09-13", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "24", title: "Suites Géométriques Mémo", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Suites-Géométriques-Mémo", date: "2025-09-06", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "25", title: "Exercices sur les suites géométrique", desc: "Exercices Terminale Bac Pro.", url: "https://github.com/Kande-B/Exercices-sur-les-suites-géométrique", date: "2025-09-03", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "26", title: "Comment obtenir de l'énergie mécanique à l'aide d'un moteur électrique synchrone ou asynchrone ?", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Comment-obtenir-de-l-énergie-mécanique-à-l-aide-d-un-moteur-électrique-synchrone-ou-asynchrone", date: "2025-08-26", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "27", title: "Conversion Courant Alternatif/Continu", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Conversion-Courant-Alternatif-Continu", date: "2025-08-24", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "28", title: "Rayonnement Thermique et Effet de Serre", desc: "Site éducatif Bac Pro.", url: "https://github.com/Kande-B/Rayonnement-Thermique-et-Effet-de-Serre", date: "2025-08-24", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "29", title: "Statistique à deux variables quantitatives", desc: "Module sur la statistique à deux variables quantitatives pour Première Bac Pro, incluant nuage de points, corrélation, droite d'ajustement.", url: "https://github.com/Kande-B/Statistique-A-Deux-Variables-Quantitatives-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "30", title: "Probabilités", desc: "Module sur les probabilités pour Première Bac Pro, avec probabilité conditionnelle, indépendance, arbres pondérés.", url: "https://github.com/Kande-B/Probabilites-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html" },
+{ id: "31", title: "Suites numériques", desc: "Module sur les suites numériques pour Première Bac Pro, avec suites arithmétiques, géométriques, récurrence.", url: "https://github.com/Kande-B/Suites-Numeriques-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "32", title: "Résolution graphique d’équations et d’inéquations", desc: "Module sur la résolution graphique d’équations et d’inéquations pour Première Bac Pro, avec intersections et domaines.", url: "https://github.com/Kande-B/Resolution-Graphique-Equations-Inequations-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "33", title: "Fonctions polynômes de degré 2", desc: "Module sur les fonctions polynômes de degré 2 pour Première Bac Pro, avec discriminant, racines, paraboles.", url: "https://github.com/Kande-B/Fonctions-Polynomes-Degré-2-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "34", title: "Fonction dérivée et étude des variations d’une fonction", desc: "Module sur la fonction dérivée et l’étude des variations pour Première Bac Pro, avec tangente, extrema.", url: "https://github.com/Kande-B/Fonction-Derivee-Etude-Variations-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "35", title: "Calculs commerciaux et financiers", desc: "Module sur les calculs commerciaux et financiers pour Première Bac Pro (spécialités sans physique-chimie), avec intérêts composés, amortissements.", url: "https://github.com/Kande-B/Calculs-Commerciaux-Financiers-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "36", title: "Géométrie dans l’espace", desc: "Module sur la géométrie dans l’espace pour Première Bac Pro, avec sections planes, volumes de solides.", url: "https://github.com/Kande-B/Geometrie-Dans-Espace-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/3d" },
+{ id: "37", title: "Vecteurs du plan", desc: "Module sur les vecteurs du plan pour Première Bac Pro (groupements A et B), avec addition, produit scalaire.", url: "https://github.com/Kande-B/Vecteurs-Du-Plan-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "38", title: "Trigonométrie", desc: "Module sur la trigonométrie pour Première Bac Pro (groupements A et B), avec sinus, cosinus, tangente.", url: "https://github.com/Kande-B/Trigonométrie-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "39", title: "Algorithmique et programmation", desc: "Module transversal sur l'algorithmique et programmation pour Première Bac Pro, avec structures de données, algorithmes de tri.", url: "https://github.com/Kande-B/Algorithmique-Et-Programmation-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "40", title: "Automatismes", desc: "Module transversal sur les automatismes pour Première Bac Pro, avec systèmes automatisés, capteurs, actionneurs.", url: "https://github.com/Kande-B/Automatismes-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "41", title: "Vocabulaire ensembliste et logique", desc: "Module sur le vocabulaire ensembliste et logique pour Première Bac Pro, avec ensembles complexes, logique propositionnelle.", url: "https://github.com/Kande-B/Vocabulaire-Ensembliste-Et-Logique-Premiere-Pro", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "42", title: "Statistique à deux variables quantitatives", desc: "Module sur la statistique à deux variables quantitatives pour Terminale Bac Pro, incluant nuage de points, corrélation, droite d'ajustement.", url: "https://github.com/Kande-B/Statistique-A-Deux-Variables-Quantitatives-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "43", title: "Probabilités conditionnelles et indépendance", desc: "Module sur les probabilités conditionnelles et indépendance pour Terminale Bac Pro, avec calculs et arbres pondérés.", url: "https://github.com/Kande-B/Probabilites-Conditionnelles-Independance-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html" },
+{ id: "44", title: "Suites numériques", desc: "Module sur les suites numériques pour Terminale Bac Pro, avec suites arithmétiques, géométriques, et récurrence avancée.", url: "https://github.com/Kande-B/Suites-Numeriques-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "45", title: "Limite d’une fonction en un point et en l’infini", desc: "Module sur les limites d’une fonction pour Terminale Bac Pro, avec asymptotes et comportements.", url: "https://github.com/Kande-B/Limite-Fonction-Point-Infini-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "46", title: "Fonction exponentielle", desc: "Module sur la fonction exponentielle pour Terminale Bac Pro, avec croissance et décroissance.", url: "https://github.com/Kande-B/Fonction-Exponentielle-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "47", title: "Fonction dérivée et étude des variations d’une fonction", desc: "Module sur la fonction dérivée et l’étude des variations pour Terminale Bac Pro, avec extrema et concavité.", url: "https://github.com/Kande-B/Fonction-Derivee-Etude-Variations-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "48", title: "Calculs commerciaux et financiers", desc: "Module sur les calculs commerciaux et financiers pour Terminale Bac Pro (sans physique-chimie), avec intérêts composés et amortissements.", url: "https://github.com/Kande-B/Calculs-Commerciaux-Financiers-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "49", title: "Produit scalaire et applications", desc: "Module sur le produit scalaire et ses applications pour Terminale Bac Pro, avec angles et projections.", url: "https://github.com/Kande-B/Produit-Scalaire-Applications-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "50", title: "Trigonométrie", desc: "Module sur la trigonométrie pour Terminale Bac Pro (groupements A et B), avec formules et applications.", url: "https://github.com/Kande-B/Trigonométrie-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "51", title: "Algorithmique et programmation", desc: "Module transversal sur l'algorithmique et programmation pour Terminale Bac Pro, avec algorithmes avancés.", url: "https://github.com/Kande-B/Algorithmique-Et-Programmation-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "52", title: "Automatismes", desc: "Module transversal sur les automatismes pour Terminale Bac Pro, avec systèmes complexes.", url: "https://github.com/Kande-B/Automatismes-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "53", title: "Vocabulaire ensembliste et logique", desc: "Module sur le vocabulaire ensembliste et logique pour Terminale Bac Pro, avec logique avancée.", url: "https://github.com/Kande-B/Vocabulaire-Ensembliste-Et-Logique-Terminale-Pro", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "54", title: "Opérations sur les nombres rationnels", desc: "Ce site pédagogique est conçu pour aider les élèves de 3ème prépa-métiers à comprendre et maîtriser les opérations sur les nombres rationnels. À travers des explications claires, des exemples pas à pas et des exercices interactifs.", url: "https://kande-b.github.io/3pm-nombres-rationnels", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "55", title: "Puissances", desc: "Ce site pédagogique permet aux élèves de 3ème prépa-métiers de découvrir et d’utiliser les puissances et les exposants. Grâce à des rappels simples, des exemples concrets et des exercices variés, ils apprennent à manipuler les puissances dans leurs calculs.", url: "https://kande-b.github.io/3pm-puissances", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "56", title: "Fraction irréductible, PGCD", desc: "Ce site pédagogique aide les élèves de 3ème prépa-métiers à réduire une fraction à sa forme irréductible et à comprendre le rôle du PGCD. Des méthodes claires et des exercices pratiques permettent d’automatiser ces techniques de simplification.", url: "https://kande-b.github.io/3pm-fraction-pgcd", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "57", title: "Calcul littéral, identités remarquables", desc: "Ce site pédagogique accompagne les élèves de 3ème prépa-métiers dans la découverte du calcul littéral et des identités remarquables. Des explications pas à pas les aident à développer, factoriser et simplifier des expressions algébriques.", url: "https://kande-b.github.io/3pm-calcul-litteral", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "58", title: "Équation du premier degré à une inconnue", desc: "Ce site pédagogique permet aux élèves de 3ème prépa-métiers d’apprendre à résoudre des équations du premier degré. Des situations concrètes et des exercices progressifs facilitent la compréhension et la mise en pratique.", url: "https://kande-b.github.io/3pm-equations", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "59", title: "Proportionnalité, pourcentages", desc: "Ce site pédagogique aide les élèves de 3ème prépa-métiers à maîtriser la proportionnalité et les pourcentages. Des exemples du quotidien, des méthodes simples et des exercices guidés permettent d’acquérir des réflexes utiles.", url: "https://kande-b.github.io/3pm-proportionnalite", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "60", title: "Statistiques", desc: "Ce site pédagogique initie les élèves de 3ème prépa-métiers aux statistiques. Ils y apprennent à calculer une moyenne, une médiane, une étendue et à représenter des données à l’aide de graphiques.", url: "https://kande-b.github.io/3pm-statistiques", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "61", title: "Notion de fonction", desc: "Ce site pédagogique introduit la notion de fonction aux élèves de 3ème prépa-métiers. Des tableaux et des graphiques simples permettent de comprendre comment relier deux grandeurs.", url: "https://kande-b.github.io/3pm-fonction", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "62", title: "Fonctions linéaires et affines", desc: "Ce site pédagogique explique aux élèves de 3ème prépa-métiers les fonctions linéaires et affines. Des exercices visuels et concrets les aident à tracer et interpréter leurs graphiques.", url: "https://kande-b.github.io/3pm-fonctions-affines", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "63", title: "Probabilités", desc: "Ce site pédagogique est conçu pour initier les élèves de 3ème prépa-métiers aux probabilités. Ils découvrent comment calculer et interpréter les chances d’un événement grâce à des expériences simples.", url: "https://kande-b.github.io/3pm-probabilites", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://phet.colorado.edu/sims/html/plinko-probability/latest/plinko-probability_en.html" },
+{ id: "64", title: "Agrandissement et réduction", desc: "Ce site pédagogique aide les élèves de 3ème prépa-métiers à comprendre l’agrandissement et la réduction de figures. Des exemples pratiques et des exercices guidés leur montrent comment utiliser les échelles et les proportions.", url: "https://kande-b.github.io/3pm-agrandissement-reduction", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "65", title: "Gestion d’unités", desc: "Ce site pédagogique permet aux élèves de 3ème prépa-métiers de s’entraîner à convertir les unités de longueur, de masse, de surface, de volume et de temps. Des méthodes simples facilitent la mémorisation.", url: "https://kande-b.github.io/3pm-unites", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "" },
+{ id: "66", title: "Calculs de longueurs, aires, volumes", desc: "Ce site pédagogique propose aux élèves de 3ème prépa-métiers des méthodes pas à pas pour calculer des longueurs, des aires et des volumes. Les exercices sont adaptés à des situations réelles et concrètes.", url: "https://kande-b.github.io/3pm-aires-volumes", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/3d" },
+{ id: "67", title: "Théorème de Thalès", desc: "Ce site pédagogique est conçu pour expliquer le théorème de Thalès aux élèves de 3ème prépa-métiers. Les schémas et exercices proposés facilitent la compréhension et l’application en géométrie.", url: "https://kande-b.github.io/3pm-thales", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "68", title: "Géométrie plane", desc: "Ce site pédagogique aide les élèves de 3ème prépa-métiers à revoir et maîtriser les figures usuelles en géométrie plane. Les propriétés des triangles, quadrilatères et cercles sont expliquées avec des exemples visuels.", url: "https://kande-b.github.io/3pm-geometrie-plane", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "69", title: "Trigonométrie", desc: "Ce site pédagogique initie les élèves de 3ème prépa-métiers à la trigonométrie. Ils y apprennent à utiliser sinus, cosinus et tangente pour calculer des longueurs ou des angles dans un triangle rectangle.", url: "https://kande-b.github.io/3pm-trigonometrie", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/classic" },
+{ id: "70", title: "Géométrie dans l’espace", desc: "Ce site pédagogique accompagne les élèves de 3ème prépa-métiers dans la découverte des solides de l’espace. Ils apprennent à calculer des volumes, des aires et à lire des représentations en perspective.", url: "https://kande-b.github.io/3pm-geometrie-espace", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://www.geogebra.org/3d" },
+{ id: "71", title: "Introduction à la programmation", desc: "Ce site pédagogique introduit les élèves de 3ème prépa-métiers à la logique de la programmation. Des activités simples leur permettent de créer leurs premiers algorithmes.", url: "https://kande-b.github.io/3pm-programmation", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "72", title: "Variables, fonctions dans le codage", desc: "Ce site pédagogique aide les élèves de 3ème prépa-métiers à comprendre le rôle des variables et des fonctions dans le codage. Des exemples guidés les initient à structurer leurs programmes.", url: "https://kande-b.github.io/3pm-variables-fonctions", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "73", title: "Création d’algorithmes", desc: "Ce site pédagogique accompagne les élèves de 3ème prépa-métiers dans la création d’algorithmes simples. Ils apprennent à résoudre des calculs numériques ou algébriques en suivant des étapes logiques.", url: "https://kande-b.github.io/3pm-algorithmes", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "74", title: "Usage d’outils comme Scratch", desc: "Ce site pédagogique invite les élèves de 3ème prépa-métiers à utiliser Scratch et d’autres logiciels ludiques pour mettre en pratique la programmation. Ils développent ainsi créativité et logique.", url: "https://kande-b.github.io/3pm-scratch", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Mathématiques", file: null, simUrl: "https://scratch.mit.edu" },
+{ id: "75", title: "Organisation et transformations de la matière", desc: "Ce site pédagogique aide les élèves de 3ᵉ prépa-métiers à comprendre la constitution de la matière, ses états, les mélanges et les transformations chimiques.", url: "https://kande-b.github.io/3pm-phys-chimie-matiere", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "79", title: "Constitution de la matière (atomes, ions, molécules)", desc: "Ce sous-thème présente la structure de la matière, les atomes, les ions et les molécules, avec des exemples concrets pour les élèves.", url: "https://kande-b.github.io/3pm-phys-chimie-matiere-constitution", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "80", title: "États de la matière et changements d’état", desc: "Ce sous-thème explique les états solide, liquide et gaz, ainsi que les transformations entre ces états, illustrés par des expériences simples.", url: "https://kande-b.github.io/3pm-phys-chimie-etats", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "81", title: "Mélanges, solutions et corps purs", desc: "Ce sous-thème montre la différence entre corps purs et mélanges, la préparation de solutions et les méthodes de séparation.", url: "https://kande-b.github.io/3pm-phys-chimie-melanges", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "82", title: "Transformations chimiques et conservation de la matière", desc: "Les élèves découvrent les réactions chimiques, l’équation de réaction et le principe de conservation de la matière.", url: "https://kande-b.github.io/3pm-phys-chimie-transformations", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "83", title: "Organisation de la matière dans l’Univers", desc: "Ce sous-thème présente les échelles de grandeur de la matière et son organisation dans l’Univers.", url: "https://kande-b.github.io/3pm-phys-chimie-univers", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "76", title: "Mouvements et interactions", desc: "Ce site pédagogique permet aux élèves de 3ᵉ prépa-métiers d’explorer les mouvements, forces et interactions, et d’appliquer les lois fondamentales de la mécanique.", url: "https://kande-b.github.io/3pm-phys-chimie-mouvements", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "84", title: "Caractérisation d’un mouvement (trajectoire, vitesse)", desc: "Ce sous-thème introduit les notions de trajectoire, vitesse moyenne et instantanée pour analyser le mouvement des objets.", url: "https://kande-b.github.io/3pm-phys-chimie-mouvements-trajectoire", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "85", title: "Forces et interactions (contact, à distance)", desc: "Les élèves découvrent les forces, les types d’interactions et comment elles modifient les mouvements.", url: "https://kande-b.github.io/3pm-phys-chimie-forces", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "86", title: "Lois du mouvement et principe d’inertie", desc: "Ce sous-thème explique les lois fondamentales de Newton et le principe d’inertie, avec des exercices pratiques.", url: "https://kande-b.github.io/3pm-phys-chimie-lois-mouvement", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "87", title: "Actions mutuelles et effets sur le mouvement", desc: "Les élèves apprennent à analyser comment deux objets interagissent et comment cela influence leur mouvement.", url: "https://kande-b.github.io/3pm-phys-chimie-actions", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "77", title: "Énergie et ses conversions", desc: "Ce site pédagogique accompagne les élèves de 3ᵉ prépa-métiers dans la découverte de l’énergie, ses formes, ses conversions et l’utilisation des concepts de travail et puissance.", url: "https://kande-b.github.io/3pm-phys-chimie-energie", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "88", title: "Formes d’énergie (mécanique, chimique, thermique…)", desc: "Ce sous-thème présente les différentes formes d’énergie et leurs caractéristiques.", url: "https://kande-b.github.io/3pm-phys-chimie-energie-formes", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "89", title: "Transferts et conversions d’énergie", desc: "Les élèves apprennent comment l’énergie se transfère et se transforme entre différentes formes.", url: "https://kande-b.github.io/3pm-phys-chimie-energie-transferts", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "90", title: "Travail mécanique et puissance", desc: "Ce sous-thème explique le calcul du travail et de la puissance, et leur interprétation dans des situations concrètes.", url: "https://kande-b.github.io/3pm-phys-chimie-energie-travail", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "91", title: "Chaînes et bilans énergétiques", desc: "Les élèves découvrent comment représenter et analyser des bilans d’énergie dans des systèmes simples.", url: "https://kande-b.github.io/3pm-phys-chimie-energie-bilans", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "92", title: "Énergie électrique simple (tension, courant)", desc: "Ce sous-thème introduit les notions de tension, courant et puissance électrique dans des circuits simples.", url: "https://kande-b.github.io/3pm-phys-chimie-energie-electrique", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "78", title: "Des signaux pour observer et communiquer", desc: "Ce site pédagogique introduit les signaux lumineux et sonores, leur propagation, leurs caractéristiques et leur rôle dans la communication.", url: "https://kande-b.github.io/3pm-phys-chimie-signaux", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "93", title: "Signaux lumineux et signaux sonores", desc: "Ce sous-thème présente les signaux lumineux et sonores et leur rôle dans l’observation et la communication.", url: "https://kande-b.github.io/3pm-phys-chimie-signaux-lumineux-sonores", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "94", title: "Caractéristiques : amplitude, fréquence, longueur d’onde", desc: "Les élèves découvrent les propriétés des signaux et leur influence sur la perception et la transmission.", url: "https://kande-b.github.io/3pm-phys-chimie-signaux-caracteristiques", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "95", title: "Propagation des signaux (milieux, vitesse)", desc: "Ce sous-thème explique comment les signaux se propagent dans différents milieux et à quelles vitesses.", url: "https://kande-b.github.io/3pm-phys-chimie-signaux-propagation", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "96", title: "Conversion d’un signal en information", desc: "Les élèves apprennent comment un signal peut être converti en information exploitable.", url: "https://kande-b.github.io/3pm-phys-chimie-signaux-conversion", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "97", title: "Analyse et traitement des signaux", desc: "Ce sous-thème montre comment analyser et filtrer les signaux pour extraire les informations importantes.", url: "https://kande-b.github.io/3pm-phys-chimie-signaux-analyse", date: "2025-09-28", lang: "HTML", level: "3emePrepa", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "98", title: "Sécurité : travailler en toute sécurité", desc: "Ce site pédagogique sensibilise les élèves de CAP aux risques liés à l’utilisation d’appareils électriques, de produits chimiques et de sources lumineuses ou sonores, et aux mesures de prévention.", url: "https://kande-b.github.io/cap-phys-chimie-securite", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "99", title: "Risques électriques et mesures de prévention", desc: "Les élèves découvrent les risques électriques et apprennent les mesures de prévention pour travailler en toute sécurité.", url: "https://kande-b.github.io/cap-phys-chimie-securite-electrique", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "100", title: "Manipulation sécurisée des produits chimiques", desc: "Ce sous-thème enseigne aux élèves les bonnes pratiques pour manipuler les produits chimiques en toute sécurité.", url: "https://kande-b.github.io/cap-phys-chimie-securite-chimique", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "101", title: "Protection contre les rayonnements lumineux et sonores", desc: "Les élèves apprennent à se protéger contre les effets des rayonnements lumineux et sonores dans un contexte professionnel.", url: "https://kande-b.github.io/cap-phys-chimie-securite-rayonnements", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "102", title: "Électricité : caractériser et exploiter un signal électrique", desc: "Ce site pédagogique permet aux élèves de CAP de consolider leurs connaissances en électricité, d’étudier les circuits simples et d’appliquer les lois fondamentales.", url: "https://kande-b.github.io/cap-phys-chimie-electricite", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "103", title: "Circuits électriques simples", desc: "Les élèves découvrent comment construire et analyser des circuits électriques simples.", url: "https://kande-b.github.io/cap-phys-chimie-circuits-simples", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "104", title: "Grandeurs électriques : tension, courant, résistance", desc: "Ce sous-thème introduit les grandeurs électriques et leur mesure dans des circuits simples.", url: "https://kande-b.github.io/cap-phys-chimie-grandeurs-electriques", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "105", title: "Lois de l’électricité : loi d’Ohm, lois des mailles et des nœuds", desc: "Les élèves apprennent à appliquer les lois fondamentales de l’électricité pour résoudre des problèmes de circuits.", url: "https://kande-b.github.io/cap-phys-chimie-lois-electricite", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "106", title: "Mécanique : décrire le mouvement", desc: "Ce site pédagogique permet aux élèves de CAP de comprendre le mouvement des objets, les forces qui les influencent et d’appliquer les lois de Newton.", url: "https://kande-b.github.io/cap-phys-chimie-mecanique", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "107", title: "Notion de mouvement et de repos", desc: "Les élèves découvrent comment caractériser un mouvement ou un objet au repos.", url: "https://kande-b.github.io/cap-phys-chimie-mouvement-repos", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "108", title: "Forces et interactions", desc: "Ce sous-thème permet d’identifier les forces agissant sur un objet et d’analyser les interactions entre objets.", url: "https://kande-b.github.io/cap-phys-chimie-forces-interactions", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "109", title: "Lois de Newton", desc: "Les élèves appliquent les lois de Newton pour expliquer les mouvements des objets et résoudre des exercices pratiques.", url: "https://kande-b.github.io/cap-phys-chimie-lois-newton", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "110", title: "Chimie : caractériser une solution", desc: "Ce site pédagogique aide les élèves de CAP à comprendre la notion de solution, sa concentration et les techniques de préparation.", url: "https://kande-b.github.io/cap-phys-chimie-solution", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "111", title: "Concentration massique d’une solution", desc: "Les élèves apprennent à calculer et utiliser la concentration massique d’une solution.", url: "https://kande-b.github.io/cap-phys-chimie-concentration", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "112", title: "Techniques de dilution", desc: "Ce sous-thème explique comment diluer une solution pour obtenir une concentration souhaitée.", url: "https://kande-b.github.io/cap-phys-chimie-dilution", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "113", title: "Préparation de solutions de concentration donnée", desc: "Les élèves s’exercent à préparer des solutions à une concentration précise à partir de solutions plus concentrées.", url: "https://kande-b.github.io/cap-phys-chimie-preparation-solutions", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "114", title: "Acoustique : exploiter un signal sonore", desc: "Ce site pédagogique permet aux élèves de CAP de comprendre les caractéristiques du son et son rôle dans les applications professionnelles.", url: "https://kande-b.github.io/cap-phys-chimie-acoustique", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "115", title: "Propagation du son dans différents milieux", desc: "Les élèves découvrent comment le son se propage dans l’air, l’eau ou les solides.", url: "https://kande-b.github.io/cap-phys-chimie-propagation-son", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "116", title: "Caractéristiques du son : fréquence, amplitude, timbre", desc: "Ce sous-thème explique les propriétés du son et leur influence sur la perception.", url: "https://kande-b.github.io/cap-phys-chimie-caracteristiques-son", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "117", title: "Applications de l’acoustique dans le domaine professionnel", desc: "Les élèves découvrent comment l’acoustique est utilisée dans différents métiers et technologies.", url: "https://kande-b.github.io/cap-phys-chimie-acoustique-applications", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "118", title: "Thermique : caractériser les échanges d’énergie", desc: "Ce site pédagogique permet aux élèves de CAP de comprendre la notion de température, les transferts thermiques et les changements d’état.", url: "https://kande-b.github.io/cap-phys-chimie-thermique", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "119", title: "Mesure de la température", desc: "Les élèves apprennent à mesurer la température avec différents instruments et à interpréter les résultats.", url: "https://kande-b.github.io/cap-phys-chimie-thermique-mesure", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "120", title: "Transfert thermique : conduction, convection, rayonnement", desc: "Ce sous-thème explique les différents modes de transfert thermique et leur impact dans des situations concrètes.", url: "https://kande-b.github.io/cap-phys-chimie-thermique-transfert", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "121", title: "Changements d’état et chaleur latente", desc: "Les élèves découvrent les changements d’état de la matière et apprennent à calculer la chaleur latente correspondante.", url: "https://kande-b.github.io/cap-phys-chimie-thermique-changements", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "122", title: "Optique : caractériser un signal lumineux", desc: "Ce site pédagogique aide les élèves de CAP à comprendre la propagation de la lumière, la réflexion, la réfraction et l’utilisation des instruments optiques.", url: "https://kande-b.github.io/cap-phys-chimie-optique", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "123", title: "Propagation de la lumière", desc: "Les élèves découvrent comment la lumière se propage dans différents milieux et ses propriétés fondamentales.", url: "https://kande-b.github.io/cap-phys-chimie-optique-propagation", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "124", title: "Réflexion et réfraction", desc: "Ce sous-thème explique les phénomènes de réflexion et de réfraction et leur application dans la vie quotidienne et professionnelle.", url: "https://kande-b.github.io/cap-phys-chimie-optique-reflexion-refraction", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "125", title: "Instruments optiques : lentilles et miroirs", desc: "Les élèves apprennent à utiliser et comprendre le fonctionnement des instruments optiques tels que lentilles et miroirs.", url: "https://kande-b.github.io/cap-phys-chimie-optique-instruments", date: "2025-09-28", lang: "HTML", level: "CAP", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "200", title: "Sécurité : travailler en toute sécurité", desc: "Sensibilisation aux risques liés à l’utilisation d’appareils électriques, de produits chimiques, de sources lumineuses ou sonores, et aux mesures de prévention associées.", url: "https://kande-b.github.io/bacpro-physique-securite", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "201", title: "Risques électriques et mesures de prévention", desc: "Identification des risques électriques et apprentissage des mesures de prévention pour travailler en toute sécurité.", url: "https://kande-b.github.io/bacpro-physique-securite-electrique", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "202", title: "Manipulation sécurisée des produits chimiques", desc: "Apprentissage des bonnes pratiques pour manipuler les produits chimiques en toute sécurité.", url: "https://kande-b.github.io/bacpro-physique-securite-chimique", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "203", title: "Protection contre les rayonnements lumineux et sonores", desc: "Sensibilisation aux effets des rayonnements lumineux et sonores et aux mesures de protection associées.", url: "https://kande-b.github.io/bacpro-physique-securite-rayonnements", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "204", title: "Électricité : caractériser et exploiter un signal électrique", desc: "Étude des circuits simples, des grandeurs électriques (tension, courant, résistance) et application des lois fondamentales de l’électricité.", url: "https://kande-b.github.io/bacpro-physique-electricite", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "205", title: "Circuits électriques simples", desc: "Construction et analyse de circuits électriques simples.", url: "https://kande-b.github.io/bacpro-physique-circuits-simples", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "206", title: "Grandeurs électriques : tension, courant, résistance", desc: "Introduction aux grandeurs électriques et leur mesure dans des circuits simples.", url: "https://kande-b.github.io/bacpro-physique-grandeurs-electriques", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "207", title: "Lois de l’électricité : loi d’Ohm, lois des mailles et des nœuds", desc: "Application des lois fondamentales de l’électricité pour résoudre des problèmes de circuits.", url: "https://kande-b.github.io/bacpro-physique-lois-electricite", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "208", title: "Mécanique : décrire le mouvement", desc: "Compréhension du mouvement des objets, des forces qui les influencent et application des lois de Newton.", url: "https://kande-b.github.io/bacpro-physique-mecanique", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "209", title: "Notion de mouvement et de repos", desc: "Caractérisation d'un mouvement ou d'un objet au repos.", url: "https://kande-b.github.io/bacpro-physique-mouvement-repos", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "210", title: "Forces et interactions", desc: "Identification des forces agissant sur un objet et analyse des interactions entre objets.", url: "https://kande-b.github.io/bacpro-physique-forces-interactions", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "211", title: "Lois de Newton", desc: "Application des lois de Newton pour expliquer les mouvements des objets et résoudre des exercices pratiques.", url: "https://kande-b.github.io/bacpro-physique-lois-newton", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "212", title: "Chimie : caractériser une solution", desc: "Compréhension de la notion de solution, sa concentration et les techniques de préparation.", url: "https://kande-b.github.io/bacpro-physique-solution", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "213", title: "Concentration massique d’une solution", desc: "Calcul et utilisation de la concentration massique d’une solution.", url: "https://kande-b.github.io/bacpro-physique-concentration", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "214", title: "Techniques de dilution", desc: "Comment diluer une solution pour obtenir une concentration souhaitée.", url: "https://kande-b.github.io/bacpro-physique-dilution", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "215", title: "Préparation de solutions de concentration donnée", desc: "Préparation de solutions à une concentration précise à partir de solutions plus concentrées.", url: "https://kande-b.github.io/bacpro-physique-preparation-solutions", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "216", title: "Acoustique : exploiter un signal sonore", desc: "Compréhension des caractéristiques du son et son rôle dans les applications professionnelles.", url: "https://kande-b.github.io/bacpro-physique-acoustique", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "217", title: "Propagation du son dans différents milieux", desc: "Comment le son se propage dans l’air, l’eau ou les solides.", url: "https://kande-b.github.io/bacpro-physique-propagation-son", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "218", title: "Caractéristiques du son : fréquence, amplitude, timbre", desc: "Les propriétés du son et leur influence sur la perception.", url: "https://kande-b.github.io/bacpro-physique-caracteristiques-son", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "219", title: "Applications de l’acoustique dans le domaine professionnel", desc: "Comment l’acoustique est utilisée dans différents métiers et technologies.", url: "https://kande-b.github.io/bacpro-physique-acoustique-applications", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "220", title: "Thermique : caractériser les échanges d’énergie", desc: "Compréhension de la notion de température, des transferts thermiques et des changements d’état.", url: "https://kande-b.github.io/bacpro-physique-thermique", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "221", title: "Mesure de la température", desc: "Apprentissage de la mesure de la température avec différents instruments et interprétation des résultats.", url: "https://kande-b.github.io/bacpro-physique-thermique-mesure", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "222", title: "Transfert thermique : conduction, convection, rayonnement", desc: "Les différents modes de transfert thermique et leur impact dans des situations concrètes.", url: "https://kande-b.github.io/bacpro-physique-thermique-transfert", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "223", title: "Changements d’état et chaleur latente", desc: "Découverte des changements d’état de la matière et calcul de la chaleur latente correspondante.", url: "https://kande-b.github.io/bacpro-physique-thermique-changements", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "224", title: "Optique : caractériser un signal lumineux", desc: "Compréhension de la propagation de la lumière, de la réflexion, de la réfraction et de l’utilisation des instruments optiques.", url: "https://kande-b.github.io/bacpro-physique-optique", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "225", title: "Propagation de la lumière", desc: "Comment la lumière se propage dans différents milieux et ses propriétés fondamentales.", url: "https://kande-b.github.io/bacpro-physique-optique-propagation", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "226", title: "Réflexion et réfraction", desc: "Explication des phénomènes de réflexion et de réfraction et applications concrètes.", url: "https://kande-b.github.io/bacpro-physique-optique-reflexion-refraction", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "227", title: "Instruments optiques : lentilles et miroirs", desc: "Utilisation et compréhension des instruments optiques tels que lentilles et miroirs.", url: "https://kande-b.github.io/bacpro-physique-optique-instruments", date: "2025-09-28", lang: "HTML", level: "Seconde", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "300", title: "Mesures et incertitudes", desc: "Ce site pédagogique introduit aux élèves de Première les notions de mesure, de variabilité, d’erreurs et d’incertitudes. On apprend à identifier les sources d’erreur et à présenter les résultats avec des chiffres significatifs.", url: "https://kande-b.github.io/bacpro-physique-incertitudes", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "301", title: "Sources d’erreur et dispersion", desc: "Identification des différentes sources d’erreur (méthode, instrument, variabilité) et étude de la dispersion d’une série de mesures.", url: "https://kande-b.github.io/bacpro-physique-erreurs", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "302", title: "Chiffres significatifs et incertitude", desc: "Apprentissage des règles des chiffres significatifs et estimation qualitative d’incertitude selon l’instrument ou la méthode utilisée.", url: "https://kande-b.github.io/bacpro-physique-chiffres-significatifs", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "303", title: "Organisation et transformations de la matière", desc: "Ce module permet aux élèves de Première d’étudier la structure de la matière, les réactions chimiques, les dosages et les transferts chimiques.", url: "https://kande-b.github.io/bacpro-physique-matiere", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "304", title: "Structure atomique, liaison chimique", desc: "Étude de la structure des atomes, des liaisons (covalente, ionique) et des interactions moléculaires.", url: "https://kande-b.github.io/bacpro-physique-liaisons", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "305", title: "Transformations chimiques et bilan", desc: "Écriture et interprétation d’équations chimiques, bilan de matière, notion d’avancement.", url: "https://kande-b.github.io/bacpro-physique-transformations", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "306", title: "Dosages et réactivité", desc: "Techniques de dosage (par titrage, dilution) et étude de la réactivité chimique.", url: "https://kande-b.github.io/bacpro-physique-dosages", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "307", title: "Mouvement, interactions et champs", desc: "Ce module traite des mouvements, des forces, et introduit la notion de champ (gravitationnel, électrique).", url: "https://kande-b.github.io/bacpro-physique-mouvements", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "308", title: "Champ de gravitation et électrostatique", desc: "Étude des champs gravitationnel et électrostatique, de leurs formules vectorielles et de leurs interactions.", url: "https://kande-b.github.io/bacpro-physique-champs", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "309", title: "Fluide au repos : pression et loi de Mariotte", desc: "Notions de masse volumique, pression, loi de Mariotte et application aux fluides au repos.", url: "https://kande-b.github.io/bacpro-physique-fluide", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "310", title: "Variations de vitesse / forces", desc: "Relation entre la somme des forces et la variation du vecteur vitesse — application des lois de la dynamique.", url: "https://kande-b.github.io/bacpro-physique-dynamique", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "311", title: "Énergie : conversions et transferts", desc: "Examen des conversions d’énergie dans des machines, des systèmes électriques ou mécaniques, et des bilans énergétiques.", url: "https://kande-b.github.io/bacpro-physique-energie", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "312", title: "Énergie électrique et mécanique", desc: "Étude des aspects énergétiques liés à l’électricité (courant, puissance) et à la mécanique (énergie cinétique, potentielle).", url: "https://kande-b.github.io/bacpro-physique-energie-electricite", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "313", title: "Bilans et chaînes énergétiques", desc: "Réalisation de bilans d’énergie dans des systèmes complets, identification des pertes et efficacité.", url: "https://kande-b.github.io/bacpro-physique-bilans", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "314", title: "Ondes et signaux", desc: "Ce module aborde les ondes mécaniques et électromagnétiques, les signaux, leurs caractéristiques et applications.", url: "https://kande-b.github.io/bacpro-physique-ondes", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "315", title: "Ondes mécaniques et acoustiques", desc: "Propagation, fréquence, amplitude, et propriétés des ondes mécaniques (incluant le son).", url: "https://kande-b.github.io/bacpro-physique-ondes-mecaniques", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "316", title: "Lumière : propagation, spectre", desc: "Propriétés de la lumière, spectre électromagnétique, propagation et notion de photon.", url: "https://kande-b.github.io/bacpro-physique-lumiere", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "317", title: "Signal et information", desc: "Conversion d’un signal en information, modulation, filtrage et applications de communication.", url: "https://kande-b.github.io/bacpro-physique-signal", date: "2025-09-28", lang: "HTML", level: "Premiere", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "400", title: "Transporter l’énergie sous forme électrique", desc: "Étudier les principes de transport de l'énergie électrique à travers les réseaux, incluant les notions de tension, courant et pertes par effet Joule.", url: "https://kande-b.github.io/bacpro-physique-transport-energie", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "401", title: "Stocker l’énergie à l’aide d’un système électrochimique", desc: "Analyser le fonctionnement des systèmes électrochimiques (piles, batteries) pour stocker et restituer l'énergie électrique.", url: "https://kande-b.github.io/bacpro-physique-stockage-energie", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "402", title: "Obtenir un courant continu à partir d’un courant alternatif et inversement", desc: "Étudier les dispositifs de conversion (redresseurs, onduleurs) pour passer d’un courant alternatif à un courant continu et vice-versa.", url: "https://kande-b.github.io/bacpro-physique-conversion-courant", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "403", title: "Obtenir de l’énergie mécanique à l’aide d’un moteur électrique", desc: "Comprendre le fonctionnement des moteurs électriques synchrones et asynchrones pour convertir l'énergie électrique en énergie mécanique.", url: "https://kande-b.github.io/bacpro-physique-moteur-electrique", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "404", title: "Caractériser le réseau triphasé", desc: "Analyser les spécificités des réseaux triphasés, incluant la répartition des phases et la mesure de la puissance.", url: "https://kande-b.github.io/bacpro-Caracteriser-reseau-triphase/", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "405", title: "Évaluer la puissance consommée par un appareil électrique", desc: "Calculer la puissance électrique consommée par un appareil à partir de ses caractéristiques (tension, courant, facteur de puissance).", url: "https://kande-b.github.io/bacpro-physique-puissance-electrique", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "406", title: "Distinguer les trois modes de transfert thermique", desc: "Identifier et différencier la conduction, la convection et le rayonnement comme modes de transfert thermique.", url: "https://kande-b.github.io/bacpro-physique-transfert-thermique", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "407", title: "Comparer les propriétés de matériaux vis-à-vis de la conduction thermique", desc: "Étudier les propriétés thermiques des matériaux (conductivité thermique, isolants, conducteurs) pour des applications pratiques.", url: "https://kande-b.github.io/bacpro-physique-conduction-thermique", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "408", title: "Déterminer la conductance thermique d’une paroi plane", desc: "Calculer la conductance thermique d’une paroi plane à partir de ses dimensions et de la conductivité thermique du matériau.", url: "https://kande-b.github.io/bacpro-physique-conductance-thermique", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "409", title: "Exploiter la relation de Pascal (hydraulique)", desc: "Appliquer la relation de Pascal pour analyser le fonctionnement des systèmes hydrauliques (pression, transmission des forces).", url: "https://kande-b.github.io/bacpro-physique-relation-pascal", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "410", title: "Mettre en évidence la force de traînée et la force de portance", desc: "Étudier expérimentalement les forces de traînée et de portance dans des contextes aérodynamiques ou hydrodynamiques.", url: "https://kande-b.github.io/bacpro-physique-forces-aerodynamiques", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "411", title: "Mettre en évidence l’effet Venturi", desc: "Analyser l’effet Venturi pour comprendre la variation de pression dans un fluide en mouvement dans un conduit rétréci.", url: "https://kande-b.github.io/bacpro-physique-effet-venturi", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "412", title: "Exploiter la relation de Bernoulli", desc: "Utiliser la relation de Bernoulli pour relier pression, vitesse et altitude dans un fluide en écoulement.", url: "https://kande-b.github.io/bacpro-physique-relation-bernoulli", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "413", title: "Réaliser une transformation d’oxydoréduction", desc: "Étudier les réactions d’oxydoréduction, incluant la corrosion et l’utilisation d’anodes sacrificielles pour la protection des métaux.", url: "https://kande-b.github.io/bacpro-physique-oxydoreduction", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "414", title: "Établir un tableau d’avancement d’une réaction chimique", desc: "Construire un tableau d’avancement pour suivre l’évolution des quantités de matière au cours d’une réaction chimique.", url: "https://kande-b.github.io/bacpro-physique-tableau-avancement", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "415", title: "Identifier un réactif limitant", desc: "Déterminer le réactif limitant dans une réaction chimique à partir des quantités initiales des réactifs.", url: "https://kande-b.github.io/bacpro-physique-reactif-limitant", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "416", title: "Étudier l’influence de paramètres sur la vitesse d’une réaction chimique", desc: "Analyser l’impact de paramètres comme la température, la concentration ou la catalyse sur la cinétique d’une réaction.", url: "https://kande-b.github.io/bacpro-physique-vitesse-reaction", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "417", title: "Utiliser la nomenclature IUPAC", desc: "Appliquer les règles de la nomenclature IUPAC pour nommer les composés chimiques organiques et inorganiques.", url: "https://kande-b.github.io/bacpro-physique-nomenclature-iupac", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "418", title: "Synthétiser expérimentalement un polymère / bioplastique", desc: "Réaliser une synthèse expérimentalement d’un polymère ou bioplastique et en étudier les propriétés.", url: "https://kande-b.github.io/bacpro-physique-synthese-polymere", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "419", title: "Transmission par propagation libre ou guidée", desc: "Étudier les principes de transmission des signaux par propagation libre (ondes radio) ou guidée (câbles, fibres optiques).", url: "https://kande-b.github.io/bacpro-physique-transmission-signaux", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "420", title: "Fonctionnement de la fibre optique (réflexion totale)", desc: "Analyser le principe de la réflexion totale dans les fibres optiques pour la transmission de données.", url: "https://kande-b.github.io/bacpro-physique-fibre-optique", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "421", title: "Étudier la diffraction des ondes lumineuses", desc: "Observer et analyser les phénomènes de diffraction des ondes lumineuses à travers des fentes ou des réseaux.", url: "https://kande-b.github.io/bacpro-physique-diffraction-ondes", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "422", title: "Étudier la chaîne de transmission d’informations", desc: "Analyser les étapes de la chaîne de transmission (modulation, canal, démodulation) pour comprendre le transfert d’informations.", url: "https://kande-b.github.io/bacpro-physique-transmission-informations", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "423", title: "Étudier le principe du haut-parleur et du microphone", desc: "Comprendre le fonctionnement des haut-parleurs et microphones en lien avec la conversion des signaux électriques et sonores.", url: "https://kande-b.github.io/bacpro-physique-hautparleur-microphone", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "424", title: "Exploiter des représentations graphiques", desc: "Interpréter et utiliser des graphiques pour analyser des données expérimentales ou résoudre des problèmes scientifiques.", url: "https://kande-b.github.io/bacpro-physique-representations-graphiques", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" },
+{ id: "425", title: "Résolution d’équations et identification de proportionnalité", desc: "Résoudre des équations et identifier des relations de proportionnalité dans le cadre d’analyses physiques et chimiques.", url: "https://kande-b.github.io/bacpro-physique-equations-proportionnalite", date: "2025-09-28", lang: "HTML", level: "Terminale", subject: "Sciences Physiques", file: null, simUrl: "" }
+].concat(savedRepos);
+updateRepoDisplay();
+updateBadges();
+}
+       
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initRepos();
+            showTab('Accueil');
+            document.addEventListener('keydown', (event) => {
+                if (event.ctrlKey && event.shiftKey && event.key === 'B' && !event.repeat) {
+                    event.preventDefault();
+                    document.getElementById('auth-container').classList.add('active');
+                }
+            });
+            document.getElementById('search-input').addEventListener('input', updateRepoDisplay);
+        });
+
+        function authenticate() {
+            const password = document.getElementById('password').value;
+            if (password === PASSWORD) {
+                isAuthenticated = true;
+                document.getElementById('auth-container').classList.remove('active');
+                document.getElementById('form-container').classList.add('active');
+                showEditButtons(true);
+                document.getElementById('password').value = '';
+                updateRepoDisplay();
+            } else {
+                alert('Mot de passe incorrect !');
+            }
+        }
+
+        function showEditButtons(show) {
+            const display = show ? 'block' : 'none';
+            document.querySelectorAll('.edit-delete-buttons').forEach(btn => btn.style.display = display);
+        }
+
+        function showTab(level) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            const activeTab = document.querySelector(`.tab[onclick="showTab('${level}')"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+                activeTab.setAttribute('aria-selected', 'true');
+            }
+            const activeContent = document.getElementById(level);
+            if (activeContent) {
+                activeContent.classList.add('active');
+            }
+            if (['3emePrepa', 'CAP', 'Seconde', 'Premiere', 'Terminale'].includes(level)) {
+                showSubTab(level, 'Mathématiques');
+            }
+            updateRepoDisplay();
+            if (level === 'Profil') updateBadges();
+        }
+
+        function showSubTab(level, subject) {
+            const tabContent = document.getElementById(level);
+            if (!tabContent) return;
+            tabContent.querySelectorAll('.sub-tab').forEach(subTab => subTab.classList.remove('active'));
+            tabContent.querySelectorAll('.sub-tab-content').forEach(content => content.classList.remove('active'));
+            const activeSubTab = tabContent.querySelector(`.sub-tab[onclick="showSubTab('${level}', '${subject}')"]`);
+            if (activeSubTab) activeSubTab.classList.add('active');
+            const activeSubContent = document.getElementById(`${level}-${subject}`);
+            if (activeSubContent) activeSubContent.classList.add('active');
+        }
+
+        function updateRepoDisplay() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            const searchResultsContainer = document.getElementById('search-results');
+            const searchResultsGrid = document.getElementById('search-results-grid');
+            const repoContent = document.getElementById('repo-content');
+            document.querySelectorAll('.repo-grid').forEach(grid => {
+                grid.innerHTML = '';
+            });
+            if (searchTerm) {
+                searchResultsContainer.classList.add('active');
+                repoContent.classList.add('hidden');
+                const filteredRepos = allRepos.filter(repo => repo.title.toLowerCase().includes(searchTerm) || repo.desc.toLowerCase().includes(searchTerm));
+                searchResultsGrid.innerHTML = '';
+                if (filteredRepos.length === 0) {
+                    searchResultsGrid.innerHTML = '<p class="no-results">Aucun résultat trouvé.</p>';
+                } else {
+                    filteredRepos.forEach(repo => {
+                        const repoCard = createRepoCard(repo);
+                        searchResultsGrid.appendChild(repoCard);
+                    });
+                }
+            } else {
+                searchResultsContainer.classList.remove('active');
+                repoContent.classList.remove('hidden');
+                allRepos.forEach(repo => addRepoToGrid(repo));
+            }
+        }
+
+        function createRepoCard(repo) {
+            const repoCard = document.createElement('div');
+            repoCard.className = 'repo-card';
+            repoCard.setAttribute('data-id', repo.id);
+            let documentLink = '';
+            if (repo.file && repo.file.data && repo.file.name) {
+                documentLink = `<div class="repo-document"><a href="${repo.file.data}" download="${repo.file.name}">📎 ${repo.file.name}</a></div>`;
+            }
+            let simIframe = '';
+            if (repo.simUrl) {
+                simIframe = `<iframe src="${repo.simUrl}" width="100%" height="200" style="border: none;" title="Simulation ${repo.title}"></iframe>`;
+            }
+            let commentsSection = '';
+            if (isAuthenticated) {
+                commentsSection = `
+                    <div class="comments-section">
+                        <textarea id="comment-${repo.id}" placeholder="Ajouter un commentaire..." aria-label="Ajouter un commentaire pour ${repo.title}"></textarea>
+                        <button onclick="addComment('${repo.id}')">Envoyer</button>
+                        <div id="comments-${repo.id}">${displayComments(repo.id)}</div>
+                    </div>
+                `;
+            }
+            let shareButtons = `
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(repo.url)}&text=Découvrez ce dépôt éducatif : ${repo.title}" target="_blank">Partager sur X</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(repo.url)}" target="_blank">Partager sur LinkedIn</a>
+                </div>
+            `;
+            repoCard.innerHTML = `
+                <h3 class="repo-title"><a href="${repo.url}" target="_blank">${repo.title}</a></h3>
+                <p class="repo-desc">${repo.desc}</p>
+                <div class="repo-meta">
+                    <span class="repo-lang">${repo.lang}</span> ${repo.date}
+                </div>
+                ${documentLink}
+                ${simIframe}
+                ${commentsSection}
+                ${shareButtons}
+                <button onclick="window.open('${repo.url}', '_blank')" style="margin-top: 10px; background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Contribuer</button>
+                <div class="edit-delete-buttons" style="display: ${isAuthenticated ? 'block' : 'none'}">
+                    <button onclick="editRepo('${repo.id}')">Modifier</button>
+                    <button class="delete-btn" onclick="deleteRepo('${repo.id}')">Supprimer</button>
+                </div>
+            `;
+            return repoCard;
+        }
+
+        function addComment(repoId) {
+            if (!isAuthenticated) {
+                alert('Veuillez vous connecter d\'abord !');
+                return;
+            }
+            const commentText = document.getElementById(`comment-${repoId}`).value.trim();
+            if (commentText) {
+                comments[repoId] = comments[repoId] || [];
+                comments[repoId].push(commentText);
+                localStorage.setItem('comments', JSON.stringify(comments));
+                document.getElementById(`comment-${repoId}`).value = '';
+                document.getElementById(`comments-${repoId}`).innerHTML = displayComments(repoId);
+            }
+        }
+
+        function displayComments(repoId) {
+            return (comments[repoId] || []).map(c => `<div class="comment">${c}</div>`).join('');
+        }
+
+        function addRepoToGrid(repo) {
+            if (repo.level === 'Accueil') return;
+            const grid = document.querySelector(`.repo-grid[data-level="${repo.level}"][data-subject="${repo.subject}"]`);
+            if (!grid) {
+                console.error('Grille non trouvée pour level:', repo.level, 'subject:', repo.subject);
+                return;
+            }
+            const existingCard = document.querySelector(`.repo-card[data-id="${repo.id}"]`);
+            if (existingCard) existingCard.remove();
+            const repoCard = createRepoCard(repo);
+            grid.appendChild(repoCard);
+        }
+
+        function addRepo() {
+            if (!isAuthenticated) {
+                alert('Veuillez vous connecter d\'abord !');
+                return;
+            }
+            const title = document.getElementById('repo-title').value;
+            const desc = document.getElementById('repo-desc').value;
+            const url = document.getElementById('repo-url').value;
+            const date = document.getElementById('repo-date').value;
+            const level = document.getElementById('repo-level').value;
+            const subject = document.getElementById('repo-subject').value;
+            const fileInput = document.getElementById('repo-file');
+            const file = fileInput.files[0];
+            const simUrl = document.getElementById('sim-url').value;
+            if (!title || !desc || !url || !date || !level || !subject) {
+                alert('Veuillez remplir tous les champs obligatoires !');
+                return;
+            }
+            if (level === 'Accueil') {
+                alert('L\'onglet Accueil ne peut pas contenir de dépôts !');
+                return;
+            }
+            if (file && !['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type)) {
+                alert('Veuillez sélectionner un fichier PDF ou Word (.pdf, .doc, .docx) !');
+                return;
+            }
+            function saveRepo(fileData, fileName) {
+                const repo = {
+                    id: currentEditId || Date.now().toString(),
+                    title,
+                    desc,
+                    url,
+                    date,
+                    lang: 'HTML',
+                    level,
+                    subject,
+                    file: fileData ? { data: fileData, name: fileName } : null,
+                    simUrl: simUrl || ''
+                };
+                if (currentEditId) {
+                    const savedRepos = JSON.parse(localStorage.getItem('repos')) || [];
+                    const index = savedRepos.findIndex(r => r.id === currentEditId);
+                    if (index !== -1) {
+                        savedRepos[index] = repo;
+                    } else {
+                        savedRepos.push(repo);
+                    }
+                    localStorage.setItem('repos', JSON.stringify(savedRepos));
+                    const allIndex = allRepos.findIndex(r => r.id === currentEditId);
+                    if (allIndex !== -1) {
+                        allRepos[allIndex] = repo;
+                    }
+                    initRepos();
+                    currentEditId = null;
+                    alert('Dépôt modifié avec succès !');
+                } else {
+                    const savedRepos = JSON.parse(localStorage.getItem('repos')) || [];
+                    savedRepos.push(repo);
+                    localStorage.setItem('repos', JSON.stringify(savedRepos));
+                    allRepos.push(repo);
+                    addRepoToGrid(repo);
+                    alert('Dépôt ajouté avec succès !');
+                }
+                document.getElementById('repo-title').value = '';
+                document.getElementById('repo-desc').value = '';
+                document.getElementById('repo-url').value = '';
+                document.getElementById('repo-date').value = '';
+                document.getElementById('repo-level').value = 'Seconde';
+                document.getElementById('repo-subject').value = 'Mathématiques';
+                document.getElementById('repo-file').value = '';
+                document.getElementById('sim-url').value = '';
+                updateRepoDisplay();
+            }
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    saveRepo(e.target.result, file.name);
+                };
+                reader.onerror = function() {
+                    alert('Erreur lors de la lecture du fichier !');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                saveRepo(null, null);
+            }
+        }
+
+        function editRepo(id) {
+            if (!isAuthenticated) {
+                alert('Veuillez vous connecter d\'abord !');
+                return;
+            }
+            const repo = allRepos.find(r => r.id === id);
+            if (repo) {
+                document.getElementById('repo-title').value = repo.title;
+                document.getElementById('repo-desc').value = repo.desc;
+                document.getElementById('repo-url').value = repo.url;
+                document.getElementById('repo-date').value = repo.date;
+                document.getElementById('repo-level').value = repo.level;
+                document.getElementById('repo-subject').value = repo.subject;
+                document.getElementById('repo-file').value = '';
+                document.getElementById('sim-url').value = repo.simUrl || '';
+                currentEditId = id;
+                document.getElementById('form-container').scrollIntoView();
+                alert('Modifiez les champs, puis cliquez sur Ajouter/Modifier.');
+            } else {
+                alert('Dépôt non trouvé.');
+            }
+        }
+
+        function deleteRepo(id) {
+            if (!isAuthenticated) {
+                alert('Veuillez vous connecter d\'abord !');
+                return;
+            }
+            if (confirm('Voulez-vous vraiment supprimer ce dépôt ?')) {
+                const savedRepos = JSON.parse(localStorage.getItem('repos')) || [];
+                const updatedSaved = savedRepos.filter(r => r.id !== id);
+                localStorage.setItem('repos', JSON.stringify(updatedSaved));
+                allRepos = allRepos.filter(r => r.id !== id);
+                initRepos();
+                alert('Dépôt supprimé avec succès !');
+            }
+        }
+
+        function updateBadges() {
+            const badgeContainer = document.getElementById('badge-container');
+            badgeContainer.innerHTML = userBadges.length ? userBadges.map(b => `<span class="badge">${b}</span>`).join('') : '<p>Aucun badge obtenu pour le moment.</p>';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
