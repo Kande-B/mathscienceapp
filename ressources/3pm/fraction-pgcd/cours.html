@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Fraction irréductible et PGCD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
+        .prop-box { border-left: 4px solid #10b981; background-color: #ecfdf5; }
+        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
+        .ex-box { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
+    </style>
+    <script>
+        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="text-slate-800 antialiased pb-20">
+
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
+            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner flex-shrink-0">
+                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Mathématiques</p>
+                <h1 class="text-xl md:text-2xl font-bold text-slate-800">Chapitre : Fraction irréductible et PGCD</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 md:px-6 mt-8 space-y-10">
+        
+        <!-- CHAPITRE 1 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">I. Fraction irréductible</h2>
+            
+            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-book"></i> Définition
+                </h3>
+                <p class="text-blue-900 mb-2 text-sm md:text-base">
+                    Une fraction est dite <strong>irréductible</strong> lorsqu'elle est simplifiée au maximum. Cela signifie que son numérateur et son dénominateur n'ont plus de diviseur commun autre que 1. On ne peut plus la réduire !
+                </p>
+                <p class="bg-blue-100 p-2 md:p-3 rounded mt-2 font-mono text-center text-blue-900 text-sm">
+                    $\frac{2}{3}$ est irréductible. Mais $\frac{10}{15}$ n'est pas irréductible (divisible par 5).
+                </p>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 2 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">II. Les critères de divisibilité</h2>
+            
+            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-check-circle"></i> Astuces pour simplifier (Rappels)
+                </h3>
+                <p class="text-emerald-900 mb-3 text-sm md:text-base">Avant de chercher des calculs compliqués, vérifiez toujours si vous pouvez utiliser ces règles simples :</p>
+                <ul class="list-none space-y-2 text-sm text-emerald-900">
+                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100"><strong>Divisible par 2 :</strong> Le nombre se termine par 0, 2, 4, 6 ou 8 (nombre pair).</li>
+                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100"><strong>Divisible par 5 :</strong> Le nombre se termine par 0 ou 5.</li>
+                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100"><strong>Divisible par 3 :</strong> La somme de ses chiffres est un multiple de 3.</li>
+                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100"><strong>Divisible par 10 :</strong> Le nombre se termine par 0.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 3 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">III. Le PGCD (Plus Grand Commun Diviseur)</h2>
+            
+            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-star"></i> Définition
+                </h3>
+                <p class="text-blue-900 text-sm md:text-base">
+                    Le <strong>PGCD</strong> de deux nombres est le <strong>Plus Grand Commun Diviseur</strong>. En divisant le numérateur et le dénominateur d'une fraction directement par leur PGCD, on obtient du premier coup la fraction irréductible !
+                </p>
+            </div>
+            
+            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-calculator"></i> Méthode : La liste des diviseurs
+                </h3>
+                <div class="bg-white p-4 rounded-lg border border-amber-200 text-sm md:text-base">
+                    <p class="mb-2 font-bold text-amber-900">Simplifions $\frac{24}{36}$ en trouvant le PGCD de 24 et 36 :</p>
+                    <ul class="list-decimal list-inside text-slate-700 space-y-2">
+                        <li><strong>Diviseurs de 24 :</strong> 1, 2, 3, 4, 6, 8, <strong>12</strong>, 24.</li>
+                        <li><strong>Diviseurs de 36 :</strong> 1, 2, 3, 4, 6, 9, <strong>12</strong>, 18, 36.</li>
+                        <li>Le PGCD est <strong>12</strong> (le plus grand nombre présent dans les deux listes).</li>
+                        <li class="font-bold text-emerald-600 mt-2">Donc : $\frac{24}{36} = \frac{24 \div 12}{36 \div 12} = \frac{2}{3}$ (irréductible !)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ex-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
+                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-boxes-stacked"></i> Application Professionnelle (Logistique / Commerce)
+                </h3>
+                <p class="text-purple-900 text-sm md:text-base mb-3">Un confiseur possède 60 bonbons à la fraise et 84 bonbons au citron. Il veut faire des sachets identiques contenant le même nombre de bonbons de chaque sorte. Combien de sachets maximum peut-il faire pour ne rien gaspiller ?</p>
+                <div class="bg-white p-3 rounded-lg border border-purple-200 text-sm">
+                    <p>Il faut trouver le <strong>PGCD de 60 et 84</strong>.</p>
+                    <p class="mt-1">Diviseurs de 60 : 1, 2, 3, 4, 5, 6, 10, <strong>12</strong>, 15, 20, 30, 60.</p>
+                    <p>Diviseurs de 84 : 1, 2, 3, 4, 6, 7, <strong>12</strong>, 14, 21, 28, 42, 84.</p>
+                    <p class="font-bold mt-2 text-indigo-700">Le PGCD est 12. Il pourra faire 12 sachets identiques (composés chacun de 5 bonbons fraise et 7 bonbons citron).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
