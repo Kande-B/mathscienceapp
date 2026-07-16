@@ -162,7 +162,8 @@
                     </div>
 
                     <!-- Menu Mobile Button -->
-                    <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-10 h-10 bg-slate-100 rounded-full text-slate-600">
+                    <button id="mobile-menu-btn"
+                        class="md:hidden flex items-center justify-center w-10 h-10 bg-slate-100 rounded-full text-slate-600">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
@@ -171,11 +172,15 @@
     </nav>
 
     <!-- Mobile Menu Dropdown -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 shadow-sm fixed w-full z-40 top-16 left-0">
+    <div id="mobile-menu"
+        class="hidden md:hidden bg-white border-b border-slate-200 shadow-sm fixed w-full z-40 top-16 left-0">
         <div class="px-6 py-4 flex flex-col gap-4">
-            <a href="#formations" class="font-medium text-slate-700 hover:text-indigo-600" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Formations</a>
-            <a href="#transversales" class="font-medium text-slate-700 hover:text-indigo-600" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Ressources transversales</a>
-            <a href="#outils" class="font-medium text-slate-700 hover:text-indigo-600" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Outils &amp; Liens</a>
+            <a href="#formations" class="font-medium text-slate-700 hover:text-indigo-600"
+                onclick="document.getElementById('mobile-menu').classList.add('hidden')">Formations</a>
+            <a href="#transversales" class="font-medium text-slate-700 hover:text-indigo-600"
+                onclick="document.getElementById('mobile-menu').classList.add('hidden')">Ressources transversales</a>
+            <a href="#outils" class="font-medium text-slate-700 hover:text-indigo-600"
+                onclick="document.getElementById('mobile-menu').classList.add('hidden')">Outils &amp; Liens</a>
         </div>
     </div>
 
@@ -189,7 +194,8 @@
                     <span>Année scolaire 2025-2026 • <span id="app-version">v1.1.0</span></span>
                 </div>
 
-                <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tighter leading-none mb-4">
+                <h1
+                    class="font-display text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tighter leading-none mb-4">
                     Bienvenue sur votre<br>espace ressources
                 </h1>
                 <p class="text-xl md:text-2xl text-indigo-100 max-w-lg mb-8">
@@ -563,22 +569,23 @@
             <div>
                 &copy; 2025-2026 KANDE B. - Labo Maths-Sciences
             </div>
-            
+
             <div class="flex items-center gap-4">
-                <div class="flex items-center gap-1.5 text-slate-300 bg-slate-800 px-3 py-1 rounded-full text-[11px] font-medium tracking-wide">
+                <div
+                    class="flex items-center gap-1.5 text-slate-300 bg-slate-800 px-3 py-1 rounded-full text-[11px] font-medium tracking-wide">
                     <i class="fa-solid fa-eye text-indigo-400"></i>
                     <span id="visit-counter">...</span> visites
                 </div>
                 <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
                 <a href="#" class="hover:text-white transition-colors">Politique de confidentialité</a>
             </div>
-            
+
             <script>
                 // Fetch simple visitor counter
                 fetch('https://api.counterapi.dev/v1/profpro/mathsciences/up')
                     .then(res => res.json())
                     .then(data => {
-                        if(data && data.count) {
+                        if (data && data.count) {
                             document.getElementById('visit-counter').innerText = data.count.toLocaleString('fr-FR');
                         }
                     })
@@ -1264,29 +1271,120 @@
             }
         ]; // FIN FALLBACK_FORMATIONS
 
+        // Mettez l'URL de votre application web Google Apps Script ici (laissez vide si non utilisé)
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4OSUmQ2HcyScKjL1PhxIMAviqwD3aAFID1yVdpn0XP2MKIy-qxHNiDi_IiEzU0JwO/exec';
+
         // ============================================
-        // CHARGEMENT DYNAMIQUE DES DONNÉES (JSON EXTERNE)
+        // CHARGEMENT DYNAMIQUE DES DONNÉES (JSON EXTERNE + GOOGLE DRIVE)
         // ============================================
         async function loadFormationsData() {
-            // Essaie d'abord de charger depuis data/formations.json (fichier externe)
+            let loadedData = null;
+
+            // 1. Essaie d'abord de charger depuis data/formations.json (fichier externe)
             try {
                 const response = await fetch('data/formations.json?t=' + new Date().getTime());
                 if (response.ok) {
                     const data = await response.json();
                     if (Array.isArray(data) && data.length > 0) {
                         console.log('%c[Data] Chargé depuis data/formations.json (' + data.length + ' formations)', 'color:#16a34a');
-                        formations = data;
-                        return true;
+                        loadedData = data;
                     }
                 }
             } catch (e) {
-                // Échec silencieux (cas fichier:// ou absence du fichier)
+                // Échec silencieux
             }
 
-            // Fallback : utilise les données intégrées dans le HTML
-            console.log('%c[Data] Utilisation des données intégrées (fallback)', 'color:#64748b');
-            formations = FALLBACK_FORMATIONS;
-            return false;
+            if (!loadedData) {
+                console.log('%c[Data] Utilisation des données intégrées (fallback)', 'color:#64748b');
+                loadedData = FALLBACK_FORMATIONS;
+            }
+
+            formations = loadedData;
+
+
+            return true;
+        }
+
+        // Fonction pour normaliser une chaîne de caractères (retirer accents, mettre en minuscules)
+        function normalizeStr(str) {
+            if (!str) return '';
+            return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+        }
+
+        // Fonction pour vérifier si deux noms de séquences correspondent
+        function isMatchingSequence(appSeq, driveSeq) {
+            const normApp = normalizeStr(appSeq);
+            const normDrive = normalizeStr(driveSeq);
+            if (normApp === normDrive || normApp.includes(normDrive) || normDrive.includes(normApp)) return true;
+            
+            // Comparaison par mots (si au moins 1 mot long correspond)
+            const appWords = normApp.match(/[a-z0-9]+/g) || [];
+            const driveWords = normDrive.match(/[a-z0-9]+/g) || [];
+            return driveWords.some(w => w.length >= 4 && appWords.includes(w));
+        }
+
+        // Fonction pour fusionner les fichiers de Google Drive dans formations
+        function mergeDriveData(localFormations, driveData) {
+            // Créer une map avec les clés de classes normalisées
+            const normDriveData = {};
+            Object.keys(driveData).forEach(k => {
+                normDriveData[normalizeStr(k)] = driveData[k];
+            });
+
+            localFormations.forEach(formation => {
+                const driveClassData = normDriveData[normalizeStr(formation.id)] || normDriveData[normalizeStr(formation.folderName || formation.id)];
+                if (!driveClassData) return;
+
+                // Parcourir maths et sciences
+                ['maths', 'sciences'].forEach(matiere => {
+                    if (formation.resources && formation.resources[matiere]) {
+                        formation.resources[matiere].forEach(seq => {
+                            // Nettoyer le nom de la séquence pour correspondre au nom de dossier Drive
+                            let cleanSeqName = seq.title.replace('Séquence : ', '').trim();
+                            const driveMatiereData = driveClassData[matiere];
+                            if (!driveMatiereData) return;
+
+                            let driveFiles = [];
+                            // Chercher tous les dossiers qui correspondent (ex: si l'utilisateur a créé un doublon)
+                            for (let driveSeqName in driveMatiereData) {
+                                if (isMatchingSequence(cleanSeqName, driveSeqName)) {
+                                    driveFiles = driveFiles.concat(driveMatiereData[driveSeqName]);
+                                }
+                            }
+
+                            if (driveFiles && driveFiles.length > 0) {
+                                driveFiles.forEach(file => {
+                                    // Vérifier si le fichier n'est pas déjà dans la séquence (par URL)
+                                    const exists = seq.items.some(item => item.url === file.url);
+                                    if (!exists) {
+                                        // Déduire la catégorie en fonction du type MIME ou du nom
+                                        let category = 'fiches';
+                                        let type = 'Drive';
+
+                                        if (file.type.includes('pdf')) { type = 'PDF'; category = 'cours'; }
+                                        else if (file.type.includes('document')) { type = 'Doc'; category = 'exercices'; }
+                                        else if (file.type.includes('presentation')) { type = 'Diapo'; category = 'cours'; }
+
+                                        if (file.name.toLowerCase().includes('td') || file.name.toLowerCase().includes('exercice')) { category = 'exercices'; }
+                                        if (file.name.toLowerCase().includes('tp')) { category = 'tp'; }
+                                        if (file.name.toLowerCase().includes('cours') || file.name.toLowerCase().includes('leçon')) { category = 'cours'; }
+
+                                        seq.items.push({
+                                            id: file.id,
+                                            titre: file.name + " ☁️",
+                                            type: type,
+                                            desc: "Document synchronisé depuis Google Drive",
+                                            url: file.url,
+                                            date: new Date(file.date).toLocaleDateString('fr-FR'),
+                                            category: category
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            });
         }
 
         // État des filtres
@@ -1446,7 +1544,7 @@
         let currentDomain = 'maths'; // 'maths' ou 'sciences'
 
         // Ouverture de la modale d'une classe
-        function openClassModal(formationId) {
+        async function openClassModal(formationId) {
             const formation = formations.find(f => f.id === formationId);
             if (!formation) return;
 
@@ -1456,7 +1554,7 @@
             // Par défaut : Sciences pour Terminale MELEC (à cause de la grosse ressource induction)
             currentDomain = (formationId === 'tmelec') ? 'sciences' : 'maths';
 
-            // Header
+            // Header (afficher un loader pour Drive)
             const header = document.getElementById('modal-header-content');
             header.innerHTML = `
                 <div class="flex items-center gap-x-4">
@@ -1475,14 +1573,38 @@
                         <div class="text-sm text-slate-600">${formation.full}</div>
                     </div>
                 </div>
+                <div id="drive-loader" class="mt-4 flex items-center text-sm text-blue-600 font-medium">
+                    <i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Synchronisation avec Google Drive...
+                </div>
             `;
 
-            // Ajout du sélecteur Maths / Sciences
-            renderDomainSelector(formation);
-
-            // Afficher la modale
+            // Afficher la modale tout de suite avec le loader
             document.getElementById('class-modal').classList.remove('hidden');
             document.getElementById('class-modal').classList.add('flex');
+
+            // Charger les données Drive spécifiquement pour cette classe (évite le timeout)
+            if (GOOGLE_APPS_SCRIPT_URL && !formation.driveLoaded) {
+                try {
+                    const fetchUrl = GOOGLE_APPS_SCRIPT_URL + (GOOGLE_APPS_SCRIPT_URL.includes('?') ? '&' : '?') + 'classId=' + formationId + '&t=' + new Date().getTime();
+                    const driveResponse = await fetch(fetchUrl);
+                    if (driveResponse.ok) {
+                        const driveData = await driveResponse.json();
+                        if (!driveData.error) {
+                            mergeDriveData([formation], driveData);
+                            formation.driveLoaded = true; // Empêcher le rechargement si on reclique
+                        }
+                    }
+                } catch (e) {
+                    console.error('[Drive] Erreur lors de la récupération pour ' + formationId, e);
+                }
+            }
+
+            // Enlever le loader
+            const loader = document.getElementById('drive-loader');
+            if (loader) loader.remove();
+
+            // Ajout du sélecteur Maths / Sciences et rendu final
+            renderDomainSelector(formation);
         }
 
         function renderDomainSelector(formation) {
@@ -1522,7 +1644,7 @@
             }
 
             selectorContainer.innerHTML = selectorHTML;
-            
+
             // Plus d'onglets : on nettoie
             const tabsContainer = document.getElementById('modal-tabs');
             if (tabsContainer) tabsContainer.innerHTML = '';
@@ -1561,10 +1683,10 @@
             domainData.forEach((sequence, index) => {
                 const seqDiv = document.createElement('div');
                 seqDiv.className = 'mb-4 last:mb-0';
-                
+
                 // On utilise <details> pour faire un dossier déroulant. On ouvre le premier par défaut.
                 const isOpen = index === 0 ? 'open' : '';
-                
+
                 seqDiv.innerHTML = `
                     <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden" ${isOpen}>
                         <summary class="px-5 py-4 cursor-pointer flex items-center justify-between font-bold text-lg text-slate-800 select-none hover:bg-slate-100 transition-colors list-none">
@@ -1585,7 +1707,7 @@
                         </div>
                     </details>
                 `;
-                
+
                 // Add a small style block to remove the default details triangle marker if it appears
                 if (!document.getElementById('details-style')) {
                     const style = document.createElement('style');
@@ -1593,14 +1715,14 @@
                     style.innerHTML = 'details summary::-webkit-details-marker { display: none; } details > summary { list-style: none; }';
                     document.head.appendChild(style);
                 }
-                
+
                 const grid = seqDiv.querySelector('.resource-grid');
                 (sequence.items || []).forEach(resource => {
                     const itemDiv = document.createElement('div');
                     itemDiv.className = `resource-item border border-slate-200 bg-white rounded-2xl p-4 flex gap-4 items-start`;
                     const icon = getResourceIcon(resource.category || 'cours');
                     const badgeColor = getCategoryColor(resource.category || 'cours');
-                    
+
                     itemDiv.innerHTML = `
                         <div class="pt-1">
                             <i class="fa-solid ${icon} text-xl text-slate-400 w-6"></i>
@@ -1623,7 +1745,7 @@
                     `;
                     grid.appendChild(itemDiv);
                 });
-                
+
                 content.appendChild(seqDiv);
             });
         }
