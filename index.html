@@ -181,6 +181,10 @@
                 onclick="document.getElementById('mobile-menu').classList.add('hidden')">Ressources transversales</a>
             <a href="#outils" class="font-medium text-slate-700 hover:text-indigo-600"
                 onclick="document.getElementById('mobile-menu').classList.add('hidden')">Outils &amp; Liens</a>
+            <div class="h-px bg-slate-200 my-1"></div>
+            <button onclick="forceRefresh()" class="flex items-center gap-x-3 font-medium text-emerald-600 text-left">
+                <i class="fa-solid fa-arrows-rotate"></i> Mettre à jour l'application
+            </button>
         </div>
     </div>
 
@@ -1581,6 +1585,10 @@
             // Afficher la modale tout de suite avec le loader
             document.getElementById('class-modal').classList.remove('hidden');
             document.getElementById('class-modal').classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Empêcher le scroll derrière la modale
+
+            // Gestion du bouton 'Retour' sur mobile
+            history.pushState({ modal: 'class' }, '', '#class-' + formationId);
 
             // Charger les données Drive spécifiquement pour cette classe (évite le timeout)
             if (GOOGLE_APPS_SCRIPT_URL && !formation.driveLoaded) {
@@ -1612,23 +1620,24 @@
             const hasSciences = formation.resources && formation.resources.sciences;
 
             const selectorHTML = `
-                <div class="px-6 pt-4 pb-4 bg-white border-b">
-                    <div class="flex items-center gap-3">
-                        <div class="text-xs font-semibold text-slate-500 mr-2">DOMAINE :</div>
-                        
-                        <button id="btn-maths"
-                                onclick="switchDomain('maths', '${formation.id}')"
-                                class="flex-1 sm:flex-none px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all flex items-center justify-center gap-x-2 ${currentDomain === 'maths' ? 'bg-indigo-600 text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-                            <i class="fa-solid fa-calculator"></i>
-                            <span>Mathématiques</span>
-                        </button>
-                        
-                        <button id="btn-sciences"
-                                onclick="switchDomain('sciences', '${formation.id}')"
-                                class="flex-1 sm:flex-none px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all flex items-center justify-center gap-x-2 ${currentDomain === 'sciences' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-                            <i class="fa-solid fa-flask"></i>
-                            <span>Sciences</span>
-                        </button>
+                <div class="px-4 sm:px-6 pt-4 pb-4 bg-white border-b">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                        <div class="text-xs font-semibold text-slate-500 sm:mr-2">DOMAINE :</div>
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <button id="btn-maths"
+                                    onclick="switchDomain('maths', '${formation.id}')"
+                                    class="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all flex items-center justify-center gap-x-2 ${currentDomain === 'maths' ? 'bg-indigo-600 text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+                                <i class="fa-solid fa-calculator"></i>
+                                <span>Mathématiques</span>
+                            </button>
+                            
+                            <button id="btn-sciences"
+                                    onclick="switchDomain('sciences', '${formation.id}')"
+                                    class="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-2xl font-semibold text-sm transition-all flex items-center justify-center gap-x-2 ${currentDomain === 'sciences' ? 'bg-emerald-600 text-white shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+                                <i class="fa-solid fa-flask"></i>
+                                <span>Sciences</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -1773,10 +1782,38 @@
             return icons[category] || 'fa-file';
         }
 
-        function closeModal() {
+        function closeModal(fromHistory = false) {
             const modal = document.getElementById('class-modal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restaurer le scroll
+
+            // Si on ferme via le bouton X, on supprime l'état hash de l'URL pour ne pas bloquer le bouton retour suivant
+            if (!fromHistory && window.location.hash.startsWith('#class-')) {
+                history.back();
+            }
+        }
+
+        // Écouter le bouton 'Retour' physique du téléphone ou du navigateur
+        window.addEventListener('popstate', (e) => {
+            const modal = document.getElementById('class-modal');
+            if (!modal.classList.contains('hidden')) {
+                // Fermer la modale sans rappeler history.back()
+                closeModal(true);
+            }
+        });
+
+        // Fonction pour forcer la mise à jour (vidage cache + rechargement)
+        function forceRefresh() {
+            if (navigator.serviceWorker) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for (let registration of registrations) {
+                        registration.unregister();
+                    }
+                });
+            }
+            // Utiliser un paramètre pour forcer le bypass du cache du navigateur
+            window.location.href = window.location.href.split('?')[0].split('#')[0] + '?t=' + new Date().getTime();
         }
 
         // Téléchargement simulé (à remplacer par de vrais liens)
