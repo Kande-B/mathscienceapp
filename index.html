@@ -1642,14 +1642,15 @@
                 </div>
             `;
 
-            // On insère le sélecteur juste après le header
+            // On insère le sélecteur juste en dessous du header (et non à l'intérieur de son conteneur flex)
             const headerEl = document.getElementById('modal-header-content');
+            const headerParent = headerEl.parentNode;
             let selectorContainer = document.getElementById('domain-selector-container');
 
             if (!selectorContainer) {
                 selectorContainer = document.createElement('div');
                 selectorContainer.id = 'domain-selector-container';
-                headerEl.parentNode.insertBefore(selectorContainer, headerEl.nextSibling);
+                headerParent.parentNode.insertBefore(selectorContainer, headerParent.nextSibling);
             }
 
             selectorContainer.innerHTML = selectorHTML;
