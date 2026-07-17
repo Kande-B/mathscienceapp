@@ -749,7 +749,7 @@
             `).join('');
         }
 
-        function openArticleModal(index) {
+        async function openArticleModal(index) {
             const article = actualites[index];
             if (!article) return;
 
@@ -757,13 +757,33 @@
             document.getElementById('article-modal-category').textContent = article.category || 'Actualité';
             document.getElementById('article-modal-date').textContent = new Date(article.date).toLocaleDateString('fr-FR');
             document.getElementById('article-modal-title').textContent = article.title;
-            document.getElementById('article-modal-content').innerHTML = article.content;
+            
+            const contentEl = document.getElementById('article-modal-content');
+            contentEl.innerHTML = '<div class="text-center py-8"><i class="fa-solid fa-circle-notch fa-spin text-2xl text-indigo-500 mb-2"></i><br><span class="text-slate-500 text-sm">Chargement de l\\'article...</span></div>';
 
             const modal = document.getElementById('article-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
             history.pushState({ modal: 'article' }, '', '#article-' + article.id);
+
+            // Charger le contenu
+            if (article.file) {
+                try {
+                    const res = await fetch(article.file + '?t=' + new Date().getTime());
+                    if (res.ok) {
+                        contentEl.innerHTML = await res.text();
+                    } else {
+                        contentEl.innerHTML = '<p class="text-red-500">Erreur lors du chargement de l\\'article.</p>';
+                    }
+                } catch (e) {
+                    contentEl.innerHTML = '<p class="text-red-500">Impossible de charger l\\'article. Vérifiez votre connexion.</p>';
+                }
+            } else if (article.content) {
+                contentEl.innerHTML = article.content;
+            } else {
+                contentEl.innerHTML = '<p class="text-slate-500 italic">Contenu non disponible.</p>';
+            }
         }
 
         function closeArticleModal(fromHistory = false) {
