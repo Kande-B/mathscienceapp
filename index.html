@@ -136,6 +136,8 @@
 
                 <!-- Navigation -->
                 <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#actualites"
+                        class="font-medium text-slate-600 hover:text-slate-900 transition-colors">Actualités</a>
                     <a href="#formations"
                         class="font-medium text-slate-600 hover:text-slate-900 transition-colors">Formations</a>
                     <a href="#transversales"
@@ -175,6 +177,8 @@
     <div id="mobile-menu"
         class="hidden md:hidden bg-white border-b border-slate-200 shadow-sm fixed w-full z-40 top-16 left-0">
         <div class="px-6 py-4 flex flex-col gap-4">
+            <a href="#actualites" class="font-medium text-slate-700 hover:text-indigo-600"
+                onclick="document.getElementById('mobile-menu').classList.add('hidden')">Actualités</a>
             <a href="#formations" class="font-medium text-slate-700 hover:text-indigo-600"
                 onclick="document.getElementById('mobile-menu').classList.add('hidden')">Formations</a>
             <a href="#transversales" class="font-medium text-slate-700 hover:text-indigo-600"
@@ -246,7 +250,18 @@
         </div>
     </header>
 
-    <!-- FILTRES -->
+    <!-- ACTUALITÉS / BLOG -->
+    <div class="max-w-7xl mx-auto px-6 pt-12 pb-4" id="actualites">
+        <div class="flex items-end justify-between mb-6">
+            <div>
+                <h2 class="section-title text-slate-900">Actualités & Infos</h2>
+                <p class="text-slate-600 mt-1">Dernières nouvelles, conseils et orientation</p>
+            </div>
+        </div>
+        <div id="actualites-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Articles chargés dynamiquement -->
+        </div>
+    </div>
     <div class="max-w-7xl mx-auto px-6 pt-8 pb-4" id="formations">
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-y-4 mb-6">
             <div>
@@ -642,7 +657,124 @@
         </div>
     </div>
 
+    <!-- MODALE VISIONNEUSE IFRAME -->
+    <div id="resource-viewer-modal" class="hidden fixed inset-0 bg-black/95 z-[100] flex flex-col">
+        <div class="px-4 py-3 bg-slate-900 border-b border-white/10 flex items-center justify-between shadow-xl">
+            <div class="flex items-center gap-4">
+                <button onclick="closeResourceViewer()" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="text-white font-medium truncate max-w-[200px] sm:max-w-md" id="viewer-title">Chargement...</div>
+            </div>
+            <div class="flex items-center gap-2">
+                <a id="viewer-external-link" href="#" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors" title="Ouvrir dans un nouvel onglet (Google Drive)">
+                    <i class="fa-solid fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+        <div class="flex-1 w-full bg-slate-100 flex items-center justify-center">
+            <!-- Loader centré -->
+            <div class="absolute flex flex-col items-center justify-center text-slate-400 z-0">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-4 text-indigo-500"></i>
+                <span class="text-sm">Chargement du document...</span>
+            </div>
+            <iframe id="viewer-iframe" class="w-full h-full border-none z-10 relative bg-transparent" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- MODALE LECTURE ARTICLE -->
+    <div id="article-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[80] flex items-center justify-center p-4">
+        <div class="modal bg-white w-full max-w-3xl rounded-3xl shadow-2xl max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="relative h-48 sm:h-64 flex-shrink-0">
+                <img id="article-modal-image" src="" class="w-full h-full object-cover" alt="Image">
+                <button onclick="closeArticleModal()" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur text-white rounded-full transition-colors">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6 sm:p-10 prose prose-slate max-w-none">
+                <div class="flex items-center gap-3 mb-4">
+                    <span id="article-modal-category" class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Catégorie</span>
+                    <span id="article-modal-date" class="text-sm text-slate-500">Date</span>
+                </div>
+                <h2 id="article-modal-title" class="text-3xl font-display font-bold leading-tight mb-8 mt-0 text-slate-900">Titre de l'article</h2>
+                <div id="article-modal-content" class="text-slate-700 leading-relaxed text-lg">
+                    <!-- Contenu -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ============================================
+        // ACTUALITÉS / BLOG (CHARGEMENT DYNAMIQUE)
+        // ============================================
+        let actualites = [];
+
+        async function loadActualites() {
+            try {
+                const res = await fetch('data/actualites.json?t=' + new Date().getTime());
+                if (!res.ok) throw new Error('Fichier actualites.json non trouvé');
+                actualites = await res.json();
+                renderActualites(actualites);
+            } catch (err) {
+                console.log("Section actualités désactivée (pas de fichier).");
+                document.getElementById('actualites').style.display = 'none';
+            }
+        }
+
+        function renderActualites(articles) {
+            const container = document.getElementById('actualites-grid');
+            if (!articles || articles.length === 0) {
+                document.getElementById('actualites').style.display = 'none';
+                return;
+            }
+
+            container.innerHTML = articles.map((article, index) => `
+                <div onclick="openArticleModal(${index})" class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-lg cursor-pointer transition-all flex flex-col group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${article.image || 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="${article.title}">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-white/90 backdrop-blur text-indigo-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm">${article.category || 'Actualité'}</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="text-xs text-slate-400 mb-2"><i class="fa-regular fa-calendar mr-1"></i> ${new Date(article.date).toLocaleDateString('fr-FR')}</div>
+                        <h3 class="font-bold text-lg text-slate-900 leading-tight mb-2 group-hover:text-indigo-600 transition-colors">${article.title}</h3>
+                        <p class="text-sm text-slate-600 line-clamp-3 mb-4 flex-1">${article.excerpt}</p>
+                        <div class="text-sm font-semibold text-indigo-600 flex items-center gap-1 mt-auto">
+                            Lire l'article <i class="fa-solid fa-arrow-right text-xs ml-1 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openArticleModal(index) {
+            const article = actualites[index];
+            if (!article) return;
+
+            document.getElementById('article-modal-image').src = article.image || 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800';
+            document.getElementById('article-modal-category').textContent = article.category || 'Actualité';
+            document.getElementById('article-modal-date').textContent = new Date(article.date).toLocaleDateString('fr-FR');
+            document.getElementById('article-modal-title').textContent = article.title;
+            document.getElementById('article-modal-content').innerHTML = article.content;
+
+            const modal = document.getElementById('article-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            history.pushState({ modal: 'article' }, '', '#article-' + article.id);
+        }
+
+        function closeArticleModal(fromHistory = false) {
+            const modal = document.getElementById('article-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+            if (!fromHistory && window.location.hash.startsWith('#article-')) {
+                history.back();
+            }
+        }
         // ============================================
         // DONNÉES DES FORMATIONS (CHARGEMENT DYNAMIQUE)
         // ============================================
@@ -1590,28 +1722,65 @@
             // Gestion du bouton 'Retour' sur mobile
             history.pushState({ modal: 'class' }, '', '#class-' + formationId);
 
-            // Charger les données Drive spécifiquement pour cette classe (évite le timeout)
-            if (GOOGLE_APPS_SCRIPT_URL && !formation.driveLoaded) {
-                try {
-                    const fetchUrl = GOOGLE_APPS_SCRIPT_URL + (GOOGLE_APPS_SCRIPT_URL.includes('?') ? '&' : '?') + 'classId=' + formationId + '&t=' + new Date().getTime();
-                    const driveResponse = await fetch(fetchUrl);
-                    if (driveResponse.ok) {
-                        const driveData = await driveResponse.json();
-                        if (!driveData.error) {
-                            mergeDriveData([formation], driveData);
-                            formation.driveLoaded = true; // Empêcher le rechargement si on reclique
-                        }
+            // Charger les données Drive spécifiquement pour cette classe avec cache (Stale-While-Revalidate)
+            if (GOOGLE_APPS_SCRIPT_URL) {
+                const cacheKey = 'driveData_' + formationId;
+                const cachedDataStr = localStorage.getItem(cacheKey);
+                
+                // 1. Lire depuis le cache d'abord (affichage instantané)
+                if (cachedDataStr && !formation.driveLoadedFromCache) {
+                    try {
+                        const cachedData = JSON.parse(cachedDataStr);
+                        mergeDriveData([formation], cachedData);
+                        formation.driveLoadedFromCache = true;
+                    } catch (e) {
+                        console.warn("Erreur de lecture du cache Drive", e);
                     }
-                } catch (e) {
-                    console.error('[Drive] Erreur lors de la récupération pour ' + formationId, e);
                 }
+                
+                // Ajuster le loader si on a le cache
+                const loader = document.getElementById('drive-loader');
+                if (formation.driveLoadedFromCache && loader) {
+                    loader.innerHTML = '<i class="fa-solid fa-cloud text-slate-400 mr-2 text-xs"></i><span class="text-xs text-slate-500">Actualisation en arrière-plan...</span>';
+                }
+
+                // 2. Fetch en arrière-plan sans bloquer l'UI
+                if (!formation.driveLoadedFromServer) {
+                    (async () => {
+                        try {
+                            const fetchUrl = GOOGLE_APPS_SCRIPT_URL + (GOOGLE_APPS_SCRIPT_URL.includes('?') ? '&' : '?') + 'classId=' + formationId + '&t=' + new Date().getTime();
+                            const driveResponse = await fetch(fetchUrl);
+                            if (driveResponse.ok) {
+                                const driveData = await driveResponse.json();
+                                if (!driveData.error) {
+                                    localStorage.setItem(cacheKey, JSON.stringify(driveData));
+                                    
+                                    // mergeDriveData gère déjà les doublons grâce à la vérification par URL
+                                    mergeDriveData([formation], driveData);
+                                    formation.driveLoadedFromServer = true;
+                                    formation.driveLoadedFromCache = true;
+                                    
+                                    // Si la modale est toujours ouverte sur cette classe, on rafraîchit l'affichage
+                                    if (currentModalClassId === formationId) {
+                                        renderDomainSelector(formation);
+                                        const bgLoader = document.getElementById('drive-loader');
+                                        if (bgLoader) bgLoader.remove();
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            console.error('[Drive] Erreur lors de la récupération pour ' + formationId, e);
+                            const bgLoader = document.getElementById('drive-loader');
+                            if (bgLoader) bgLoader.remove();
+                        }
+                    })();
+                }
+            } else {
+                const loader = document.getElementById('drive-loader');
+                if (loader) loader.remove();
             }
 
-            // Enlever le loader
-            const loader = document.getElementById('drive-loader');
-            if (loader) loader.remove();
-
-            // Ajout du sélecteur Maths / Sciences et rendu final
+            // Ajout du sélecteur Maths / Sciences et rendu final immédiatement (avec les données locales/cache)
             renderDomainSelector(formation);
         }
 
@@ -1745,11 +1914,11 @@
                             <div class="text-sm text-slate-600 mt-0.5">${resource.desc || ''}</div>
                             <div class="flex items-center justify-between mt-3">
                                 <span class="text-xs text-slate-400">Ajouté le ${resource.date || 'Récemment'}</span>
-                                <a href="${resource.url}" target="_blank"
+                                <button onclick="openResourceViewer('${resource.url}', '${resource.titre.replace(/'/g, "\\'")}')"
                                         class="text-xs font-bold flex items-center gap-x-1.5 px-4 py-1.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 transition-colors text-white">
-                                    <i class="fa-solid fa-external-link-alt text-xs"></i>
+                                    <i class="fa-solid fa-eye text-xs"></i>
                                     <span>Consulter</span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     `;
@@ -1797,12 +1966,60 @@
 
         // Écouter le bouton 'Retour' physique du téléphone ou du navigateur
         window.addEventListener('popstate', (e) => {
+            const viewerModal = document.getElementById('resource-viewer-modal');
+            if (!viewerModal.classList.contains('hidden')) {
+                closeResourceViewer(true);
+                return;
+            }
+
+            const articleModal = document.getElementById('article-modal');
+            if (articleModal && !articleModal.classList.contains('hidden')) {
+                closeArticleModal(true);
+                return;
+            }
+
             const modal = document.getElementById('class-modal');
             if (!modal.classList.contains('hidden')) {
-                // Fermer la modale sans rappeler history.back()
                 closeModal(true);
             }
         });
+
+        // --- Fonctions de la visionneuse de ressources ---
+        function openResourceViewer(url, title) {
+            const modal = document.getElementById('resource-viewer-modal');
+            const iframe = document.getElementById('viewer-iframe');
+            const titleEl = document.getElementById('viewer-title');
+            const externalLink = document.getElementById('viewer-external-link');
+            
+            // Format Google Drive link to use preview instead of view
+            let embedUrl = url;
+            if (embedUrl.includes('drive.google.com/file/d/')) {
+                embedUrl = embedUrl.replace(/\/view(?:\?.*)?$/, '/preview');
+            }
+            
+            titleEl.textContent = title;
+            externalLink.href = url;
+            iframe.src = embedUrl;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Empêcher scroll arrière-plan
+            
+            // Ajouter à l'historique pour le bouton retour
+            history.pushState({ modal: 'viewer' }, '', '#viewer');
+        }
+
+        function closeResourceViewer(fromHistory = false) {
+            const modal = document.getElementById('resource-viewer-modal');
+            const iframe = document.getElementById('viewer-iframe');
+            
+            modal.classList.add('hidden');
+            iframe.src = ''; // Clean up pour arrêter les vidéos/audios
+            
+            // Si on ne vient pas de 'popstate', on nettoie l'URL
+            if (!fromHistory && window.location.hash === '#viewer') {
+                history.back();
+            }
+        }
 
         // Fonction pour forcer la mise à jour (vidage cache + rechargement)
         function forceRefresh() {
@@ -2151,6 +2368,10 @@ ${name}`;
         }
 
         // Lancement
+        async function init() {
+            await loadFormationsData();
+            await loadActualites();
+        }
         window.onload = init;
 
         // Petit helper : permet de filtrer depuis la console si besoin
