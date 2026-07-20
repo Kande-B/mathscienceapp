@@ -67,6 +67,19 @@ Maths-Sciences-App/
 
 ---
 
+## 🔒 Sécurité et Architecture
+
+L'application a été conçue en respectant les bonnes pratiques de sécurité d'Electron.js :
+- **Content Security Policy (CSP)** stricte : Limite les sources autorisées pour les scripts, styles et iframes, empêchant l'exécution de code malveillant (XSS).
+- **Isolation IPC sécurisée** : Utilisation du `contextBridge` (`electron/preload.js`) sans exposer les modules Node.js critiques au processus de rendu (`nodeIntegration: false`, `contextIsolation: true`).
+- **Validation stricte** :
+  - L'import de données vérifie la taille du fichier (maximum 50 Mo) avant chargement.
+  - Le contenu est validé (obligation de fournir un tableau JSON) pour éviter la corruption de données.
+  - Résolution et vérification strictes des chemins de fichiers.
+- **Minimisation de la surface d'attaque** : Suppression de toutes les dépendances inutilisées du projet.
+
+---
+
 ## ✏️ Comment modifier le contenu (pour l’enseignant)
 
 **C’est très simple :**

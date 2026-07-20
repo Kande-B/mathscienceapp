@@ -369,6 +369,14 @@ function setupIPC() {
     }
   });
 
+  // Afficher un élément dans le dossier (sécurisé)
+  ipcMain.on('shell:show-item', (event, itemPath) => {
+    if (typeof itemPath === 'string') {
+      const resolvedPath = path.resolve(itemPath);
+      shell.showItemInFolder(resolvedPath);
+    }
+  });
+
   // Exporter des données (JSON)
   ipcMain.handle('data:export', async (event, data, filename = 'formations-export.json') => {
     const result = await dialog.showSaveDialog(mainWindow, {
@@ -387,7 +395,7 @@ function setupIPC() {
     }
   });
 
-  // Importer des données
+  // Importer des données (Sécurisé)
   ipcMain.handle('data:import', async () => {
     const result = await dialog.showOpenDialog(mainWindow, {
       title: 'Importer des données',
@@ -400,8 +408,21 @@ function setupIPC() {
     }
 
     try {
-      const content = fs.readFileSync(result.filePaths[0], 'utf-8');
+      const filePath = path.resolve(result.filePaths[0]);
+      const stats = fs.statSync(filePath);
+      const MAX_SIZE = 50 * 1024 * 1024; // 50MB
+
+      if (stats.size > MAX_SIZE) {
+        throw new Error('Le fichier est trop volumineux (maximum 50 Mo).');
+      }
+
+      const content = fs.readFileSync(filePath, 'utf-8');
       const data = JSON.parse(content);
+      
+      if (!Array.isArray(data)) {
+        throw new Error('Le format du fichier est invalide. Un tableau JSON est attendu.');
+      }
+
       return { success: true, data };
     } catch (error) {
       return { success: false, error: error.message };
