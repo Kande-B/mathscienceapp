@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Seconde Pro - Statistique à une variable</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
+        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
+        .ex-box { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased pb-20">
+
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-chart-pie text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Seconde Professionnelle • Mathématiques</p>
+                    <h1 class="text-2xl font-bold text-slate-800">Séquence 2 : Statistique à une variable</h1>
+                </div>
+            </div>
+            <button onclick="window.parent.closeResourceViewer()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-colors">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Retour
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+        
+        <!-- Objectifs -->
+        <div class="bg-indigo-600 text-white p-6 rounded-xl shadow-md flex gap-4 items-start">
+            <i class="fa-solid fa-bullseye text-2xl mt-1 text-indigo-300"></i>
+            <div>
+                <h2 class="text-lg font-bold mb-2">Ce que vous allez apprendre</h2>
+                <ul class="list-disc list-inside text-indigo-100 space-y-1">
+                    <li>Organiser des données dans un tableau (effectifs, fréquences).</li>
+                    <li>Calculer une moyenne simple ou pondérée.</li>
+                    <li>Lire et construire des représentations graphiques (diagrammes en bâtons, circulaires).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">I. Vocabulaire et Tableaux</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div class="def-box p-5 rounded-xl shadow-sm">
+                    <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-font"></i> Le Vocabulaire
+                    </h3>
+                    <ul class="text-sm text-blue-900 space-y-3">
+                        <li><strong>Population :</strong> L'ensemble que l'on étudie (ex: Les clients d'un magasin).</li>
+                        <li><strong>Caractère :</strong> Ce que l'on étudie sur la population (ex: La couleur de leur voiture).</li>
+                        <li><strong>Valeurs :</strong> Les différentes réponses possibles (ex: Rouge, Bleu, Noir).</li>
+                    </ul>
+                </div>
+
+                <div class="def-box p-5 rounded-xl shadow-sm border-l-4 border-green-500 bg-green-50">
+                    <h3 class="font-bold text-green-800 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-table"></i> Effectifs et Fréquences
+                    </h3>
+                    <ul class="text-sm text-green-900 space-y-3">
+                        <li><strong>Effectif :</strong> Le nombre de fois qu'une valeur apparait (ex: 15 clients ont une voiture rouge).</li>
+                        <li><strong>Effectif total :</strong> La somme de tous les effectifs.</li>
+                        <li><strong>Fréquence :</strong> La part de l'effectif par rapport au total. <em>Fréquence = Effectif ÷ Effectif Total</em>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="meth-box p-5 rounded-xl shadow-sm mb-6">
+                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-check-double"></i> Exemple de tableau statistique
+                </h3>
+                <p class="text-sm text-amber-900 mb-3">On a demandé à 50 personnes leur boisson préférée au petit-déjeuner :</p>
+                
+                <div class="bg-white rounded-lg border border-amber-200 overflow-x-auto">
+                    <table class="w-full text-center text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-amber-100 text-amber-900">
+                                <th class="p-2 border border-amber-200">Boisson (Caractère)</th>
+                                <th class="p-2 border border-amber-200">Café</th>
+                                <th class="p-2 border border-amber-200">Thé</th>
+                                <th class="p-2 border border-amber-200">Jus</th>
+                                <th class="p-2 border border-amber-200 font-bold bg-amber-200">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2 border border-amber-200 font-semibold bg-amber-50">Effectif</td>
+                                <td class="p-2 border border-amber-200">25</td>
+                                <td class="p-2 border border-amber-200">15</td>
+                                <td class="p-2 border border-amber-200">10</td>
+                                <td class="p-2 border border-amber-200 font-bold bg-amber-200">50</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border border-amber-200 font-semibold bg-amber-50">Fréquence (%)</td>
+                                <td class="p-2 border border-amber-200">50% <br><span class="text-xs text-slate-400">(25÷50×100)</span></td>
+                                <td class="p-2 border border-amber-200">30% <br><span class="text-xs text-slate-400">(15÷50×100)</span></td>
+                                <td class="p-2 border border-amber-200">20% <br><span class="text-xs text-slate-400">(10÷50×100)</span></td>
+                                <td class="p-2 border border-amber-200 font-bold bg-amber-200">100%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CHAPITRE 2 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">II. Les Représentations Graphiques</h2>
+            
+            <p class="text-slate-700 mb-4">Pour rendre les données plus faciles à lire, on utilise souvent des graphiques. Les plus courants en CAP sont :</p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <!-- Diagramme en bâtons -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center">
+                    <h3 class="font-bold text-slate-800 mb-3 w-full text-left">📊 Diagramme en bâtons</h3>
+                    <p class="text-sm text-slate-600 mb-4 w-full">Idéal pour comparer des effectifs. La hauteur du bâton est proportionnelle à l'effectif.</p>
+                    <div class="flex items-end gap-4 h-32 mt-auto border-b-2 border-l-2 border-slate-400 p-2 w-full max-w-[200px]">
+                        <div class="w-8 bg-blue-500 rounded-t" style="height: 100%;"></div>
+                        <div class="w-8 bg-blue-400 rounded-t" style="height: 60%;"></div>
+                        <div class="w-8 bg-blue-300 rounded-t" style="height: 40%;"></div>
+                    </div>
+                </div>
+
+                <!-- Diagramme circulaire -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center">
+                    <h3 class="font-bold text-slate-800 mb-3 w-full text-left">🥧 Diagramme circulaire</h3>
+                    <p class="text-sm text-slate-600 mb-4 w-full">Idéal pour voir la répartition par rapport au total (souvent en %). L'angle du secteur est proportionnel à l'effectif.</p>
+                    <div class="mt-auto relative w-24 h-24 rounded-full" style="background: conic-gradient(#3b82f6 0% 50%, #60a5fa 50% 80%, #93c5fd 80% 100%);"></div>
+                    <p class="text-xs text-slate-500 mt-2">Calcul de l'angle : Fréquence × 360°</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- CHAPITRE 3 -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">III. La Moyenne</h2>
+            
+            <div class="meth-box p-5 rounded-xl shadow-sm mb-6 border-l-4 border-purple-500 bg-purple-50">
+                <h3 class="font-bold text-purple-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator"></i> Calculer une moyenne pondérée
+                </h3>
+                <p class="text-sm text-purple-900 mb-3">Lorsqu'on a un tableau d'effectifs, on ne peut pas juste additionner les valeurs et diviser par leur nombre. Il faut prendre en compte l'effectif de chaque valeur.</p>
+                
+                <div class="bg-white p-4 rounded border border-purple-200 text-sm">
+                    <p class="mb-2"><strong>Exemple :</strong> Notes obtenues lors d'un contrôle de qualité (sur 10)</p>
+                    <table class="border-collapse border border-slate-300 text-center mb-3 w-full max-w-sm">
+                        <tr>
+                            <td class="border border-slate-300 p-1 bg-slate-50">Note (Valeur)</td>
+                            <td class="border border-slate-300 p-1">5</td>
+                            <td class="border border-slate-300 p-1">7</td>
+                            <td class="border border-slate-300 p-1">9</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-300 p-1 bg-slate-50">Nombre de pièces (Effectif)</td>
+                            <td class="border border-slate-300 p-1">2</td>
+                            <td class="border border-slate-300 p-1">5</td>
+                            <td class="border border-slate-300 p-1">3</td>
+                        </tr>
+                    </table>
+                    <p class="font-bold text-slate-700">Calcul :</p>
+                    <ol class="list-decimal list-inside ml-2">
+                        <li>On multiplie chaque note par son effectif et on additionne tout :<br> (5 × 2) + (7 × 5) + (9 × 3) = 10 + 35 + 27 = <strong>72</strong></li>
+                        <li>On divise par l'effectif total (2+5+3 = 10) :<br> 72 ÷ 10 = <strong>7,2</strong></li>
+                    </ol>
+                    <p class="mt-2 text-purple-800 font-semibold">La note moyenne est de 7,2 / 10.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fin -->
+        <div class="text-center pb-10 mt-10 border-t border-slate-200 pt-8">
+            <button onclick="window.parent.openResourceViewer('ressources/seconde/statistique-une-variable/exercices.html?v=' + Date.now(), 'Exercices - Statistique à une variable')" class="px-6 py-3 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-colors shadow-lg">
+                <i class="fa-solid fa-dumbbell mr-2"></i> Faire les exercices
+            </button>
+        </div>
+
+    </main>
+
+</body>
+</html>
