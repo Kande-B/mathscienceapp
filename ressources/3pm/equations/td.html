@@ -3,222 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Équation du premier degré</title>
+    <title>TD - Équations du 1er degré</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        @media print {
-            .print-hidden { display: none !important; }
-            body { background: white; font-size: 12pt; }
-            section { break-inside: avoid; }
-        }
-        .answer-line {
-            border-bottom: 1px dashed #cbd5e1;
-            min-height: 28px;
-            margin: 4px 0;
-        }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50 print-hidden">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-tasks text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Équations du 1er degré</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Exercices</p>
-                <h1 class="text-2xl font-bold text-slate-800">Fiche de TD : Équation du premier degré</h1>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
             </div>
         </div>
     </header>
 
-    <!-- En-tête d'impression -->
-    <div class="hidden print:block max-w-4xl mx-auto px-6 pt-4 pb-2 border-b-2 border-slate-800 mb-4">
-        <div class="flex justify-between items-end">
-            <div>
-                <p class="font-bold text-lg">3ème Prépa Métiers – Mathématiques</p>
-                <h1 class="text-2xl font-bold">TD : Équation du premier degré</h1>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
-            <div class="text-sm space-y-1">
-                <p>Nom : ..................................................</p>
-                <p>Date : .................. Note : ...... / 20</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Tester une solution</h3>
+                    <p class="text-sm text-slate-600 mb-4">Le nombre <strong>$x = 4$</strong> est-il solution de l'équation $3x - 2 = 10$ ?</p>
+                    
+                    <div class="flex gap-2 mb-4">
+                        <button onclick="setBtnGroup('ex1', 'oui', this)" class="btn-group-ex1 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1 font-bold">Oui</button>
+                        <button onclick="setBtnGroup('ex1', 'non', this)" class="btn-group-ex1 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1 font-bold">Non</button>
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Résolution additive ($x + a = b$)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $x + 15 = 42$</p>
+                    
+                    <div class="flex items-center gap-3 mb-4 font-mono text-sm">
+                        <span class="text-right">$x = $</span>
+                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded px-2 py-1 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Résolution multiplicative ($ax = b$)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $6x = 48$</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$x = $</span>
+                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8 print:mt-0 print:space-y-6">
-
-        <!-- NIVEAU 1 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-emerald-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-emerald-500 mr-2">Niveau 1</span> Équations simples
-                </h2>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
 
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 1 : Opérations inverses</h3>
-                <p class="text-sm text-slate-600 mb-3">Résous les équations suivantes (trouve la valeur de $x$) :</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
-                    <div>
-                        <p class="font-bold mb-1">a) $x + 6 = 15$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">b) $x - 4 = 9$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">c) $4x = 24$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">d) $\frac{x}{2} = 8$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NIVEAU 2 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-blue-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-blue-500 mr-2">Niveau 2</span> Équations classiques (ax + b = c)
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 2 : Résolution en 2 étapes</h3>
-                <p class="text-sm text-slate-600 mb-3">Résous en détaillant les étapes (isoler d'abord les $x$, puis diviser) :</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
-                    <div>
-                        <p class="font-bold mb-1">a) $2x + 5 = 17$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">b) $3x - 4 = 11$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">c) $-4x + 7 = 15$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">d) $5 - 2x = 9$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NIVEAU 3 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-amber-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-amber-500 mr-2">Niveau 3</span> Inconnues des deux côtés (ax + b = cx + d)
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 3 : Regrouper les termes</h3>
-                <p class="text-sm text-slate-600 mb-3">Résous ces équations en regroupant d'abord tous les $x$ d'un côté :</p>
-                <div class="space-y-6 text-sm">
-                    <div>
-                        <p class="font-bold mb-1">a) $5x + 2 = 3x + 10$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">b) $7x - 3 = 4x + 12$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">c) $2x + 8 = 6x - 4$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NIVEAU 4 : Problèmes -->
-        <section class="bg-indigo-50 rounded-3xl p-8 border border-indigo-200 shadow-sm print:bg-white print:border-black print:border print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-indigo-600 pb-2">
-                <h2 class="text-xl font-bold text-indigo-900">
-                    <span class="text-indigo-600 mr-2">Niveau 4</span> Mise en équation (Problèmes)
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-indigo-900 mb-2">Problème 1 : Achats en atelier</h3>
-                <p class="text-sm text-indigo-800 mb-3">
-                    Pour l'atelier, le professeur achète une perceuse à 85 € et 5 boîtes de forets. Il paie au total 140 €.<br>
-                    <strong>Quel est le prix d'une boîte de forets ?</strong>
-                </p>
-                <div class="text-sm text-indigo-900 space-y-2">
-                    <p>1. Choix de l'inconnue $x$ : ................................................................................</p>
-                    <p>2. Mise en équation : ....................................................................................</p>
-                    <p>3. Résolution :</p>
-                    <div class="answer-line mt-1"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                    <p>4. Conclusion : ........................................................................................</p>
-                </div>
-            </div>
-
-            <div class="mt-8">
-                <h3 class="font-bold text-indigo-900 mb-2">Problème 2 : Comparaison de tarifs</h3>
-                <p class="text-sm text-indigo-800 mb-3">
-                    Une entreprise de location d'outillage propose deux tarifs pour louer un marteau-piqueur :
-                </p>
-                <ul class="list-disc list-inside text-sm text-indigo-800 mb-3">
-                    <li><strong>Tarif A :</strong> 30 € par jour.</li>
-                    <li><strong>Tarif B :</strong> Un abonnement de 50 €, puis 20 € par jour.</li>
-                </ul>
-                <p class="text-sm font-bold text-indigo-900 mb-2">À partir de combien de jours de location les deux tarifs sont-ils identiques ?</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
-                <div class="text-sm text-indigo-900 space-y-2">
-                    <p>1. Soit $x$ le nombre de jours. Exprimer le prix payé avec le tarif A : .......................................</p>
-                    <p>2. Exprimer le prix payé avec le tarif B : ...................................................................</p>
-                    <p>3. Écrire l'équation (Tarif A = Tarif B) : ...................................................................</p>
-                    <p>4. Résolution :</p>
-                    <div class="answer-line mt-1"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                    <p>5. Conclusion : ........................................................................................</p>
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Équation à deux étapes ($ax + b = c$)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $2x + 5 = 17$</p>
+                    
+                    <div class="flex flex-col gap-2 mb-4 font-mono text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="w-12 text-right">$2x = $</span>
+                            <input type="number" id="ex4-step1" class="border border-slate-300 rounded p-1 w-20 text-center" placeholder="17 - 5">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-12 text-right">$x = $</span>
+                            <input type="number" id="ex4-step2" class="border border-slate-300 rounded p-1 w-20 text-center">
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
+
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Les x des deux côtés ($ax + b = cx + d$)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $5x - 3 = 2x + 12$</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <span>$x = $</span>
+                        <input type="number" id="ex5-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Mise en équation</h3>
+                    <p class="text-sm text-slate-600 mb-4">"Le double d'un nombre augmenté de 4 est égal à 20". <br>Si ce nombre est $x$, quelle équation traduit cette phrase ?</p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex6-options">
+                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-mono">2(x + 4) = 20</button>
+                        <button onclick="selectRadio('ex6', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-mono">2x + 4 = 20</button>
+                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-mono">x/2 + 4 = 20</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex6', 'Le double d\'un nombre, c\'est 2x. Augmenté de 4, c\'est + 4.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
             </div>
-        </section>
+        </div>
+
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-ruler-combined text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Menuiserie - Coupe de plinthes</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un menuisier a coupé un tasseau de <strong>240 cm</strong> en 3 morceaux. <br>
+                                Les deux premiers morceaux ont la même longueur $x$. Le 3ème morceau est plus long de 30 cm par rapport aux autres (il mesure $x + 30$).
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">1. L'équation de la somme des morceaux est : $x + x + (x + 30) = 240$. Réduisez cette équation :</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <input type="text" id="ex7-eq" class="border border-slate-300 rounded p-1 w-24 text-center" placeholder="ex: 3x+30"> $= 240$
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-bold block mb-1">2. Résolvez l'équation pour trouver la longueur $x$ (en cm) :</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        $x = $ <input type="number" id="ex7-x" class="border border-slate-300 rounded p-1 w-20 text-center"> cm
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-truck-fast text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Logistique - Commande de matériel</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Une entreprise commande des casques de chantier. Les frais de livraison sont fixes : <strong>25 €</strong>. <br>
+                        Chaque casque coûte <strong>12 €</strong>. L'entreprise a un budget total (facture) de <strong>169 €</strong>.
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div>
+                            <label class="font-bold block mb-1">Soit $n$ le nombre de casques. Quelle est l'équation correspondante ?</label>
+                            <input type="text" id="ex8-q1" class="border border-slate-300 rounded p-1 w-40 text-center font-mono" placeholder="ex: 12n + 25 = 169">
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Combien de casques ont été commandés ?</label>
+                            <div class="flex items-center gap-2 font-mono">
+                                $n = $ <input type="number" id="ex8-q2" class="border border-slate-300 rounded p-1 w-20 text-center">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+            </div>
+        </div>
 
     </main>
 
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+        
+        function cleanStr(str) {
+            return str.replace(/\s+/g, '').toLowerCase();
+        }
+
+        let groupAns = {};
+        function setBtnGroup(groupId, val, btn) {
+            groupAns[groupId] = val;
+            const buttons = document.querySelectorAll(`.btn-group-${groupId}`);
+            buttons.forEach(b => b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50'));
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+        }
+
+        // QCM Logic
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+
+        // Ex 1
+        function checkEx1() {
+            if (groupAns['ex1'] === 'oui') {
+                showFeedback('fb-ex1', true, "Parfait ! Si on remplace x par 4, on a : 3 × 4 - 2 = 12 - 2 = 10. L'égalité est vraie.");
+            } else if (groupAns['ex1'] === 'non') {
+                showFeedback('fb-ex1', false, "Incorrect. Essaie de calculer 3 × 4 - 2 et regarde si ça fait bien 10.");
+            } else {
+                showFeedback('fb-ex1', false, "Veuillez choisir Oui ou Non.");
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const ans = document.getElementById('ex2-ans').value;
+            if (ans === "27") {
+                showFeedback('fb-ex2', true, "Excellent ! x = 42 - 15 = 27.");
+            } else {
+                showFeedback('fb-ex2', false, "Erreur. Pour isoler x, il faut soustraire 15 de chaque côté.");
+            }
+        }
+
+        // Ex 3
+        function checkEx3() {
+            const ans = document.getElementById('ex3-ans').value;
+            if (ans === "8") {
+                showFeedback('fb-ex3', true, "Exact ! x = 48 ÷ 6 = 8.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. Pour enlever le ×6, il faut diviser par 6 de l'autre côté.");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const step1 = document.getElementById('ex4-step1').value;
+            const step2 = document.getElementById('ex4-step2').value;
+            
+            if (step1 === "12" && step2 === "6") {
+                showFeedback('fb-ex4', true, "Bravo ! Étape 1 : on fait 17 - 5 = 12. Étape 2 : on divise par 2 (12 ÷ 2 = 6).");
+            } else {
+                showFeedback('fb-ex4', false, "Erreur. 1) Passe le +5 de l'autre côté (-5). 2) Divise le résultat par 2.");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const ans = document.getElementById('ex5-ans').value;
+            if (ans === "5") {
+                showFeedback('fb-ex5', true, "Félicitations ! On regroupe les x : 5x - 2x = 3x. Les nombres : 12 + 3 = 15. On a 3x = 15, donc x = 5.");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. Passe les x à gauche (5x - 2x) et les nombres à droite (12 + 3).");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const eq = cleanStr(document.getElementById('ex7-eq').value);
+            const x = document.getElementById('ex7-x').value;
+            
+            if ((eq === "3x+30" || eq === "30+3x") && x === "70") {
+                showFeedback('fb-ex7', true, "Bravo ! 1) x+x+x+30 = 3x+30. 2) 3x = 240 - 30 = 210, donc x = 210/3 = 70 cm.");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. 1) Additionne les 'x'. 2) Résous l'équation 3x + 30 = 240.");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const q1 = cleanStr(document.getElementById('ex8-q1').value);
+            const q2 = document.getElementById('ex8-q2').value;
+            
+            if ((q1 === "12n+25=169" || q1 === "25+12n=169") && q2 === "12") {
+                showFeedback('fb-ex8', true, "Excellent ! 1) L'équation est bien 12n + 25 = 169. 2) 12n = 169 - 25 = 144, donc n = 144/12 = 12 casques.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. 1) Prix d'un casque multiplié par n, plus la livraison fixe. Égal au total. 2) Résous l'équation.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>

@@ -3,288 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Calcul littéral et identités remarquables</title>
+    <title>TD - Calcul Littéral</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        @media print {
-            .print-hidden { display: none !important; }
-            body { background: white; font-size: 12pt; }
-            section { break-inside: avoid; }
-        }
-        .answer-line {
-            border-bottom: 1px dashed #cbd5e1;
-            min-height: 28px;
-            margin: 4px 0;
-        }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50 print-hidden">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-tasks text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Calcul Littéral</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Exercices</p>
-                <h1 class="text-2xl font-bold text-slate-800">Fiche de TD : Calcul littéral &amp; Identités remarquables</h1>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
             </div>
         </div>
     </header>
 
-    <!-- En-tête d'impression -->
-    <div class="hidden print:block max-w-4xl mx-auto px-6 pt-4 pb-2 border-b-2 border-slate-800 mb-4">
-        <div class="flex justify-between items-end">
-            <div>
-                <p class="font-bold text-lg">3ème Prépa Métiers – Mathématiques</p>
-                <h1 class="text-2xl font-bold">TD : Calcul littéral &amp; Identités remarquables</h1>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
-            <div class="text-sm space-y-1">
-                <p>Nom : ..................................................</p>
-                <p>Date : .................. Note : ...... / 20</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Simplification d'écriture</h3>
+                    <p class="text-sm text-slate-600 mb-4">Écrivez ces expressions le plus simplement possible (sans le signe $\times$ si possible) :</p>
+                    
+                    <div class="space-y-3 font-mono text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="w-20 text-right">$3 \times x =$</span>
+                            <input type="text" id="ex1-1" class="border border-slate-300 rounded px-2 py-1 w-24 text-center">
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-20 text-right">$x \times x =$</span>
+                            <input type="text" id="ex1-2" class="border border-slate-300 rounded px-2 py-1 w-24 text-center" placeholder="ex: x^2">
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Réduire une expression</h3>
+                    <p class="text-sm text-slate-600 mb-4">Réduisez l'expression suivante en regroupant les termes de même nature :<br> $A = 4x + 3 + 2x - 1$</p>
+                    
+                    <div class="flex items-center gap-3 mb-4 font-mono text-sm">
+                        <span class="text-right">A =</span>
+                        <input type="text" id="ex2-ans" class="border border-slate-300 rounded px-2 py-1 w-32 text-center" placeholder="ex: 3x + 2">
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Développement simple</h3>
+                    <p class="text-sm text-slate-600 mb-4">Développez l'expression : $B = 3(x + 5)$</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <span>B =</span>
+                        <input type="text" id="ex3-ans" class="border border-slate-300 rounded p-2 w-32 text-center" placeholder="... x + ...">
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8 print:mt-0 print:space-y-6">
-
-        <!-- NIVEAU 1 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-emerald-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-emerald-500 mr-2">Niveau 1</span> Automatismes — Vocabulaire et substitution
-                </h2>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
 
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 1 : Calculer la valeur d'une expression</h3>
-                <p class="text-sm text-slate-600 mb-3">Calcule la valeur des expressions suivantes pour les valeurs données :</p>
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <p>a) $3x + 7$ pour $x = 2$ &nbsp;&nbsp;&nbsp; Réponse : <span class="answer-line inline-block w-32"></span></p>
-                        <div class="answer-line mt-2"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Double Développement</h3>
+                    <p class="text-sm text-slate-600 mb-4">Développez et réduisez : $C = (x + 2)(x + 3)$</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <span>C =</span>
+                        <input type="text" id="ex4-ans" class="border border-slate-300 rounded p-2 w-48 text-center" placeholder="ex: x^2 + 5x + 6">
                     </div>
-                    <div>
-                        <p>b) $5a - 3$ pour $a = -1$ &nbsp;&nbsp; Réponse : <span class="answer-line inline-block w-32"></span></p>
-                        <div class="answer-line mt-2"></div>
-                    </div>
-                    <div>
-                        <p>c) $2x^2 + 1$ pour $x = 3$ &nbsp;&nbsp;&nbsp; Réponse : <span class="answer-line inline-block w-32"></span></p>
-                        <div class="answer-line mt-2"></div>
-                    </div>
-                    <div>
-                        <p>d) $\frac{1}{2}bh$ pour $b = 10$ et $h = 6$ (base et hauteur d'un triangle) &nbsp; Réponse : <span class="answer-line inline-block w-24"></span></p>
-                        <div class="answer-line mt-2"></div>
-                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
-            </div>
 
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 2 : Développer (distributivité simple)</h3>
-                <p class="text-sm text-slate-600 mb-3">Développe les expressions suivantes :</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                        <p>a) $4(x + 3) = $ ...............................</p>
-                        <div class="answer-line mt-2"></div>
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Factorisation (Facteur commun)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Factorisez l'expression : $D = 5x + 15$<br><span class="text-xs italic text-slate-500">Astuce : Cherchez un nombre qui divise 5 et 15.</span></p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <span>D =</span>
+                        <input type="text" id="ex5-ans" class="border border-slate-300 rounded p-2 w-32 text-center" placeholder="ex: 5(x+3)">
                     </div>
-                    <div>
-                        <p>b) $2(5a - 6) = $ ...............................</p>
-                        <div class="answer-line mt-2"></div>
-                    </div>
-                    <div>
-                        <p>c) $-3(y + 2) = $ ...............................</p>
-                        <div class="answer-line mt-2"></div>
-                    </div>
-                    <div>
-                        <p>d) $7(2b - 1) = $ ...............................</p>
-                        <div class="answer-line mt-2"></div>
-                    </div>
+                    
+                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- NIVEAU 2 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-blue-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-blue-500 mr-2">Niveau 2</span> Application — Développement et réduction
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 3 : Développer et réduire</h3>
-                <p class="text-sm text-slate-600 mb-3">Développe puis réduis les expressions suivantes :</p>
-                <div class="space-y-5 text-sm">
-                    <div>
-                        <p class="mb-1">a) $3(x + 4) + 2x$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calculer la valeur d'une expression</h3>
+                    <p class="text-sm text-slate-600 mb-4">Soit l'expression $E = 2x^2 - 3x + 4$. <br>Calculez la valeur de E pour <strong>x = 3</strong>.</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <span>E =</span>
+                        <input type="number" id="ex6-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
                     </div>
-                    <div>
-                        <p class="mb-1">b) $5(2a - 3) - 4a + 10$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="mb-1">c) $2(x + 1) - (x - 5)$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="mb-1">d) $4(b + 3) + 2(b - 1)$</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
+                    
+                    <button onclick="checkEx6()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
+
+            </div>
+        </div>
+
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
 
-            <div>
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 4 : Factoriser</h3>
-                <p class="text-sm text-slate-600 mb-3">Mets en facteur commun :</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                        <p>a) $6x + 10$ = .......................................</p>
-                        <div class="answer-line"></div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-ruler-combined text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Bâtiment - Périmètre à la carte</h3>
                     </div>
-                    <div>
-                        <p>b) $15a - 9$ = .......................................</p>
-                        <div class="answer-line"></div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un menuisier conçoit un cadre rectangulaire. La largeur mesure <strong>$x$ cm</strong>. La longueur est toujours <strong>10 cm plus grande</strong> que la largeur.
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">1. Quelle expression correspond à la Longueur ?</label>
+                                    <div class="flex gap-2">
+                                        <button onclick="setBtnGroup('ex7-1', 'x+10', this)" class="btn-group-ex7-1 px-3 py-1 border rounded">x + 10</button>
+                                        <button onclick="setBtnGroup('ex7-1', '10x', this)" class="btn-group-ex7-1 px-3 py-1 border rounded">10x</button>
+                                        <button onclick="setBtnGroup('ex7-1', 'x-10', this)" class="btn-group-ex7-1 px-3 py-1 border rounded">x - 10</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-bold block mb-1">2. Le périmètre d'un rectangle est $P = 2 \times (\text{Largeur} + \text{Longueur})$. <br>Quelle expression RÉDUITE donne le périmètre du cadre ?</label>
+                                    <input type="text" id="ex7-2" class="border border-slate-300 rounded p-1 w-32 text-center" placeholder="ex: 4x + 20">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p>c) $8y + 12y^2$ = .......................................</p>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p>d) $3x^2 - 6x$ = .......................................</p>
-                        <div class="answer-line"></div>
-                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- NIVEAU 3 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-amber-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-amber-500 mr-2">Niveau 3</span> Identités remarquables
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 5 : Développer à l'aide des identités</h3>
-                <p class="text-sm text-slate-600 mb-1">Rappel : $(a+b)^2 = a^2+2ab+b^2$ &nbsp;|&nbsp; $(a-b)^2 = a^2-2ab+b^2$ &nbsp;|&nbsp; $(a+b)(a-b) = a^2-b^2$</p>
-                <div class="space-y-5 mt-3 text-sm">
-                    <div>
-                        <p class="mb-1">a) $(x + 5)^2 = $ ..........................................................................
-                        </p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Commerce - Facturation</h3>
                     </div>
-                    <div>
-                        <p class="mb-1">b) $(a - 4)^2 = $ ..........................................................................</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un électricien facture son intervention avec une <strong>part fixe de 40 €</strong> (déplacement) et une <strong>part variable de 35 € par heure</strong> de travail.
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div>
+                            <label class="font-bold block mb-1">1. Soit $h$ le nombre d'heures de travail. Quelle expression donne le prix total $P$ ?</label>
+                            <input type="text" id="ex8-q1" class="border border-slate-300 rounded p-1 w-32 text-center font-mono" placeholder="ex: 35h + 40">
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">2. Calculez la facture pour une intervention de 3 heures :</label>
+                            <div class="flex items-center gap-2">
+                                <input type="number" id="ex8-q2" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>€</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p class="mb-1">c) $(2x + 3)(2x - 3) = $ .....................................................................</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="mb-1">d) $(3a + 1)^2 = $ ..........................................................................</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
                 </div>
-            </div>
 
-            <div>
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 6 : Factoriser à l'aide des identités</h3>
-                <p class="text-sm text-slate-600 mb-3">Reconnaître et factoriser (différence de deux carrés ou carré parfait) :</p>
-                <div class="space-y-5 text-sm">
-                    <div>
-                        <p class="mb-1">a) $x^2 - 25 = $ ..........................................................................</p>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="mb-1">b) $x^2 + 6x + 9 = $ ..................................................................</p>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="mb-1">c) $4a^2 - 1 = $ ..........................................................................</p>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="mb-1">d) $x^2 - 10x + 25 = $ ..............................................................</p>
-                        <div class="answer-line"></div>
-                    </div>
-                </div>
             </div>
-        </section>
-
-        <!-- NIVEAU 4 : Tâche complexe -->
-        <section class="bg-indigo-50 rounded-3xl p-8 border border-indigo-200 shadow-sm print:bg-white print:border-black print:border print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-indigo-600 pb-2">
-                <h2 class="text-xl font-bold text-indigo-900">
-                    <span class="text-indigo-600 mr-2">Niveau 4</span> Tâche complexe — Contexte professionnel
-                </h2>
-            </div>
-
-            <div class="bg-indigo-100 rounded-xl p-4 mb-5 text-sm text-indigo-900">
-                <p class="font-bold mb-2"><i class="fa-solid fa-hard-hat mr-2"></i>Mise en situation : Conception d'un sol en béton</p>
-                <p>
-                    Un maçon doit couler une dalle rectangulaire dont la longueur est $(x + 6)$ m et la largeur est $(x + 6)$ m également (dalle carrée). Au centre, il découpe un carré de côté $(x - 2)$ m pour y placer un regard de visite.
-                </p>
-            </div>
-
-            <ol class="list-decimal list-inside space-y-6 text-sm text-indigo-900">
-                <li>
-                    <strong>Exprimer la surface totale</strong> $S_{\text{totale}}$ de la dalle en développant $(x + 6)^2$.
-                    <div class="answer-line mt-2"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                </li>
-                <li>
-                    <strong>Exprimer la surface du regard</strong> $S_{\text{regard}}$ en développant $(x - 2)^2$.
-                    <div class="answer-line mt-2"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                </li>
-                <li>
-                    <strong>Calculer la surface de béton</strong> $S_{\text{béton}} = S_{\text{totale}} - S_{\text{regard}}$. Développe et réduis l'expression.
-                    <div class="answer-line mt-2"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                </li>
-                <li>
-                    <strong>Application numérique :</strong> Pour $x = 4$ m, calculer la surface de béton en m².
-                    <div class="answer-line mt-2"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                </li>
-                <li>
-                    <strong>Vérification :</strong> Calculer directement $(4+6)^2$ et $(4-2)^2$, puis la différence. Les résultats sont-ils identiques ?
-                    <div class="answer-line mt-2"></div>
-                    <div class="answer-line"></div>
-                    <div class="answer-line"></div>
-                </li>
-            </ol>
-        </section>
+        </div>
 
     </main>
 
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+        
+        function cleanStr(str) {
+            return str.replace(/\s+/g, '').toLowerCase();
+        }
+
+        let groupAns = {};
+        function setBtnGroup(groupId, val, btn) {
+            groupAns[groupId] = val;
+            const buttons = document.querySelectorAll(`.btn-group-${groupId}`);
+            buttons.forEach(b => b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50'));
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const v1 = cleanStr(document.getElementById('ex1-1').value);
+            const v2 = cleanStr(document.getElementById('ex1-2').value);
+            
+            if (v1 === "3x" && (v2 === "x^2" || v2 === "x²")) {
+                showFeedback('fb-ex1', true, "Parfait ! On peut enlever le signe multiplié devant une lettre, et x fois x s'écrit x².");
+            } else {
+                showFeedback('fb-ex1', false, "Incorrect. Rappel : 3 fois x = 3x, et un nombre multiplié par lui-même donne ce nombre au carré (² ou ^2).");
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const ans = cleanStr(document.getElementById('ex2-ans').value);
+            if (ans === "6x+2" || ans === "2+6x") {
+                showFeedback('fb-ex2', true, "Excellent ! 4x + 2x = 6x, et 3 - 1 = 2.");
+            } else {
+                showFeedback('fb-ex2', false, "Erreur. Ajoute les termes avec 'x' ensemble, et les nombres seuls ensemble.");
+            }
+        }
+
+        // Ex 3
+        function checkEx3() {
+            const ans = cleanStr(document.getElementById('ex3-ans').value);
+            if (ans === "3x+15" || ans === "15+3x") {
+                showFeedback('fb-ex3', true, "Exact ! 3 multiplie le x ET le 5. Donc 3×x + 3×5 = 3x + 15.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. N'oublie pas de distribuer le 3 au 'x' ET au '5'.");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const ans = cleanStr(document.getElementById('ex4-ans').value);
+            if (ans === "x^2+5x+6" || ans === "x²+5x+6" || ans === "6+5x+x^2" || ans === "6+5x+x²") {
+                showFeedback('fb-ex4', true, "Bravo ! (x)(x) + (x)(3) + (2)(x) + (2)(3) = x² + 3x + 2x + 6 = x² + 5x + 6.");
+            } else {
+                showFeedback('fb-ex4', false, "Erreur. Fais la double distributivité, puis regroupe les termes en x (3x + 2x).");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const ans = cleanStr(document.getElementById('ex5-ans').value);
+            if (ans === "5(x+3)") {
+                showFeedback('fb-ex5', true, "Félicitations ! Le facteur commun est 5 car 5x = 5×x et 15 = 5×3. On met 5 en facteur.");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. Trouve le plus grand nombre qui divise 5 et 15, place-le devant la parenthèse.");
+            }
+        }
+        
+        // Ex 6
+        function checkEx6() {
+            const ans = document.getElementById('ex6-ans').value;
+            // 2(3^2) - 3(3) + 4 = 2(9) - 9 + 4 = 18 - 9 + 4 = 13
+            if (ans === "13") {
+                showFeedback('fb-ex6', true, "Exact ! 2×(3²) - 3×3 + 4 = 2×9 - 9 + 4 = 18 - 9 + 4 = 13.");
+            } else {
+                showFeedback('fb-ex6', false, "Faux. Remplace x par 3 : 2 × 3² - 3 × 3 + 4. Priorité à la puissance, puis aux multiplications.");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const q1 = groupAns['ex7-1'];
+            const q2 = cleanStr(document.getElementById('ex7-2').value);
+            
+            if (q1 === "x+10" && (q2 === "4x+20" || q2 === "20+4x")) {
+                showFeedback('fb-ex7', true, "Bravo ! 1) La longueur est x+10. 2) P = 2(x + (x+10)) = 2(2x+10) = 4x + 20.");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. 1) '10 cm plus grande' = on ajoute 10. 2) P = 2 × (x + x + 10). Développe !");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const q1 = cleanStr(document.getElementById('ex8-q1').value);
+            const q2 = document.getElementById('ex8-q2').value;
+            
+            if ((q1 === "35h+40" || q1 === "40+35h") && q2 === "145") {
+                showFeedback('fb-ex8', true, "Excellent ! 1) 35h (variable) + 40 (fixe). 2) 35 × 3 + 40 = 105 + 40 = 145 €.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. 1) On paie 35 POUR CHAQUE heure h, donc 35×h. Le 40 est ajouté une seule fois. 2) Remplace h par 3.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>
