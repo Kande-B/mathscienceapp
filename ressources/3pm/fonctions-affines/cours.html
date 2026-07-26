@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Fonctions affines</title>
+    <title>Cours - Fonctions</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -37,14 +37,9 @@
         .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
         
         .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
         
         .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
         @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
-        
-        .machine-gear { animation: spin 4s linear infinite; transform-origin: center; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
@@ -53,11 +48,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-chart-line text-2xl"></i>
+                    <i class="fa-solid fa-project-diagram text-2xl"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Fonctions</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Fonctions Affines</h1>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Analyse</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Notion de Fonction</h1>
                 </div>
             </div>
             <div class="hidden md:flex gap-3">
@@ -70,249 +65,175 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 : Vocabulaire de base -->
+        <!-- SECTION 1 : Machine à calculer -->
         <section class="course-layout items-start">
             <div class="space-y-6">
+                <!-- Définition -->
                 <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
                     <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le Vocabulaire</h2>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Qu'est-ce qu'une fonction ?</h2>
                 </div>
                 
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-cogs text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">La Machine Mathématique</h3>
-                    </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-base mb-4">
-                        Une fonction (notée souvent $f$) agit comme une machine de fabrication : on y insère une matière première (un nombre de départ), et elle la transforme pour ressortir un produit fini (le résultat).
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Une fonction est comme une <strong>machine de production</strong> mathématique : vous y entrez un nombre, elle le transforme (par des calculs programmés) et ressort un nouveau nombre.
                     </p>
                     
-                    <ul class="space-y-3 text-slate-700 mb-6 font-mono text-sm">
-                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
-                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded font-bold">x</span>
-                            <span>= <strong>Antécédent</strong> (Ce qui rentre, le départ)</span>
+                    <h3 class="font-bold text-slate-800 text-base mb-2 border-b border-slate-200 pb-1">Le Vocabulaire Essentiel</h3>
+                    <ul class="space-y-3 mt-3 text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-arrow-right-to-bracket text-blue-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold text-slate-900">Antécédent ($x$) :</span> C'est la matière première. Le nombre qui <strong>entre</strong> dans la machine.
+                            </div>
                         </li>
-                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
-                            <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded font-bold">f(x) ou y</span>
-                            <span>= <strong>Image</strong> (Ce qui sort, le résultat)</span>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-gears text-purple-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold text-slate-900">La fonction ($f$) :</span> Le mécanisme de la machine. L'expression qui calcule.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-box-open text-emerald-500 mt-1"></i>
+                            <div>
+                                <span class="font-bold text-slate-900">Image ($f(x)$) :</span> Le produit fini. Le nombre qui <strong>sort</strong> de la machine.
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Visualization: Machine -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
-                <h3 class="font-bold text-slate-800 mb-4 font-heading text-center">
-                    Simulateur de Fonction
+            <!-- Visualization : L'usine à Fonctions -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-purple-500">
+                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
+                    L'Usine à Fonctions
                 </h3>
+                <p class="text-xs text-slate-500 mb-6 text-center">Sélectionnez une machine, entrez un Antécédent (x) et regardez l'Image $f(x)$ sortir.</p>
                 
-                <div class="bg-slate-100 p-6 rounded-xl border border-slate-300 relative overflow-hidden text-center">
-                    <p class="text-xs text-slate-500 font-bold uppercase mb-2">Fonction : $f(x) = 2x + 3$</p>
+                <div class="bg-slate-800 rounded-xl p-5 shadow-inner relative overflow-hidden mb-4">
+                    <!-- Factory background decoration -->
+                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-400 via-slate-800 to-slate-900"></div>
                     
-                    <div class="flex justify-between items-center gap-2">
-                        <!-- Input -->
-                        <div class="w-1/3">
-                            <p class="text-xs text-blue-600 font-bold mb-1">Antécédent ($x$)</p>
-                            <input type="number" id="machInp" value="4" class="w-16 p-2 text-center border-2 border-blue-400 rounded-lg text-lg font-bold font-mono focus:outline-none" oninput="calcMachine()">
-                        </div>
-                        
-                        <!-- Machine -->
-                        <div class="w-1/3 flex flex-col items-center">
-                            <i class="fa-solid fa-arrow-right-long text-slate-400 mb-2"></i>
-                            <div class="w-16 h-16 bg-slate-700 rounded-xl text-white flex items-center justify-center relative shadow-lg">
-                                <i class="fa-solid fa-gear text-3xl text-slate-400 machine-gear"></i>
-                                <span class="absolute font-bold">f</span>
-                            </div>
-                            <i class="fa-solid fa-arrow-right-long text-slate-400 mt-2"></i>
-                        </div>
-                        
-                        <!-- Output -->
-                        <div class="w-1/3">
-                            <p class="text-xs text-emerald-600 font-bold mb-1">Image $f(x)$</p>
-                            <div id="machOut" class="w-16 p-2 text-center border-2 border-emerald-400 bg-white rounded-lg text-lg font-bold font-mono text-emerald-700 mx-auto">11</div>
-                        </div>
+                    <!-- Selection -->
+                    <div class="flex justify-center gap-2 mb-6 relative z-10">
+                        <button onclick="setFunc('x2', 'f(x) = x²')" id="btnf1" class="px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded">f(x) = x²</button>
+                        <button onclick="setFunc('2x', 'g(x) = 2x - 3')" id="btnf2" class="px-3 py-1 bg-slate-600 hover:bg-slate-500 text-white text-xs font-bold rounded">g(x) = 2x - 3</button>
                     </div>
-                    
-                    <div class="mt-6 text-sm text-slate-600 font-mono bg-white p-2 rounded shadow-sm">
-                        $f($<span id="txtX" class="text-blue-600 font-bold">4</span>$) = 2 \times $<span id="txtX2" class="text-blue-600 font-bold">4</span>$ + 3 = $<span id="txtY" class="text-emerald-600 font-bold">11</span>
+
+                    <!-- Flow -->
+                    <div class="flex justify-between items-center relative z-10">
+                        <!-- Antécédent -->
+                        <div class="w-16 h-16 bg-blue-100 border-2 border-blue-500 rounded-full flex flex-col items-center justify-center relative">
+                            <span class="text-[10px] text-blue-700 font-bold absolute -top-4">Antécédent</span>
+                            <input type="number" id="inpX" class="w-10 bg-transparent text-center font-bold text-blue-900 outline-none" value="4" oninput="processFactory()">
+                        </div>
+
+                        <!-- L'Usine (Function) -->
+                        <div class="flex flex-col items-center px-2">
+                            <i class="fa-solid fa-arrow-right text-slate-500 mb-1"></i>
+                            <div class="w-20 h-20 bg-slate-700 border-2 border-purple-500 rounded-lg flex items-center justify-center text-white font-mono font-bold text-sm shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+                                <i class="fa-solid fa-gears text-purple-400 opacity-50 absolute"></i>
+                                <span class="relative z-10" id="funcLabel">f(x) = x²</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-slate-500 mt-1"></i>
+                        </div>
+
+                        <!-- Image -->
+                        <div class="w-16 h-16 bg-emerald-100 border-2 border-emerald-500 rounded-lg flex flex-col items-center justify-center relative shadow-inner">
+                            <span class="text-[10px] text-emerald-700 font-bold absolute -top-4">Image</span>
+                            <span id="outY" class="font-bold text-emerald-900 text-lg">16</span>
+                        </div>
                     </div>
                 </div>
-                
+
+                <div class="bg-purple-50 border border-purple-200 p-3 rounded text-sm text-center">
+                    <p class="font-mono text-purple-900 font-bold">On écrit : <span id="mathWrite" class="bg-white px-2 py-1 rounded">f(4) = 16</span></p>
+                </div>
+
                 <script>
-                    function calcMachine() {
-                        const x = parseFloat(document.getElementById('machInp').value) || 0;
-                        const y = 2 * x + 3;
-                        document.getElementById('machOut').innerText = y;
-                        document.getElementById('txtX').innerText = x;
-                        document.getElementById('txtX2').innerText = x;
-                        document.getElementById('txtY').innerText = y;
+                    let currentFunc = 'x2';
+                    let currentLabel = 'f';
+
+                    function setFunc(type, textLabel) {
+                        currentFunc = type;
+                        currentLabel = textLabel[0]; // f or g
+                        document.getElementById('funcLabel').innerText = textLabel;
+                        
+                        document.getElementById('btnf1').className = type === 'x2' ? "px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded" : "px-3 py-1 bg-slate-600 hover:bg-slate-500 text-white text-xs font-bold rounded";
+                        document.getElementById('btnf2').className = type === '2x' ? "px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded" : "px-3 py-1 bg-slate-600 hover:bg-slate-500 text-white text-xs font-bold rounded";
+                        
+                        processFactory();
+                    }
+
+                    function processFactory() {
+                        const x = parseFloat(document.getElementById('inpX').value) || 0;
+                        let y = 0;
+                        
+                        if(currentFunc === 'x2') y = x * x;
+                        if(currentFunc === '2x') y = 2 * x - 3;
+                        
+                        document.getElementById('outY').innerText = y;
+                        document.getElementById('mathWrite').innerText = `${currentLabel}(${x}) = ${y}`;
                     }
                 </script>
             </div>
         </section>
 
-        <!-- SECTION 2 : Linéaire vs Affine -->
+        <!-- SECTION 2 : Graphiques -->
         <section class="mt-12">
             <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
                 <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Linéaires vs Affines</h2>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Représentation Graphique</h2>
             </div>
             
+            <p class="text-slate-700 mb-6">Un tableau de valeurs peut être traduit en un graphique (une courbe ou une droite) dans un repère.</p>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- Linéaire -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500 interactive-hover">
-                    <h3 class="font-bold text-emerald-800 mb-3 text-lg flex items-center gap-2 font-heading">
-                        <i class="fa-solid fa-arrow-trend-up"></i> Fonction Linéaire
-                    </h3>
-                    <div class="text-center font-mono text-2xl text-emerald-900 bg-emerald-50 py-3 rounded-lg border border-emerald-200 mb-4 font-bold shadow-inner">
-                        $f(x) = \mathbf{a}x$
-                    </div>
-                    <ul class="space-y-2 text-sm text-slate-700 list-disc list-inside">
-                        <li>Représente une situation de <strong>proportionnalité</strong> (ex: prix au kilo).</li>
-                        <li>Le graphique est une droite <strong>qui passe par l'origine $(0;0)$</strong>.</li>
-                        <li>Le nombre <strong class="text-emerald-700">a</strong> est le <em>coefficient directeur</em>.</li>
-                    </ul>
-                </div>
-
-                <!-- Affine -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500 interactive-hover">
-                    <h3 class="font-bold text-purple-800 mb-3 text-lg flex items-center gap-2 font-heading">
-                        <i class="fa-solid fa-chart-line"></i> Fonction Affine
-                    </h3>
-                    <div class="text-center font-mono text-2xl text-purple-900 bg-purple-50 py-3 rounded-lg border border-purple-200 mb-4 font-bold shadow-inner">
-                        $f(x) = \mathbf{a}x + \mathbf{b}$
-                    </div>
-                    <ul class="space-y-2 text-sm text-slate-700 list-disc list-inside">
-                        <li>Souvent utilisée pour un <strong>coût fixe + coût variable</strong> (ex: forfait 10€ + 2€/min).</li>
-                        <li>Le graphique est une droite <strong>qui ne passe pas forcément par l'origine</strong>.</li>
-                        <li><strong class="text-purple-700">b</strong> s'appelle <em>l'ordonnée à l'origine</em> (le point de départ sur l'axe vertical).</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3 : Graphique Interactif -->
-        <section class="course-layout items-start mt-12">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">3</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Lire le Graphique</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
-                    <p class="text-slate-700 mb-4 text-sm leading-relaxed">
-                        Sur un repère, la droite d'une fonction $y = \mathbf{a}x + \mathbf{b}$ dépend de ses deux paramètres :
-                    </p>
+                <div class="bg-white rounded-2xl border border-slate-100 card-shadow p-6 text-center">
+                    <h3 class="font-bold text-slate-800 mb-4 text-lg">Fonction Linéaire</h3>
+                    <p class="text-sm text-slate-500 mb-4 font-mono">$f(x) = ax$ (ex: $f(x) = 2x$)</p>
                     
-                    <div class="space-y-4">
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2">
-                                <span class="bg-blue-100 text-blue-800 w-6 h-6 rounded flex items-center justify-center font-mono">a</span>
-                                Le Coefficient directeur (La pente)
-                            </h4>
-                            <p class="text-sm text-slate-600">Il indique de combien on "monte" ou "descend" quand on avance de 1 case vers la droite.</p>
-                            <p class="text-xs text-blue-700 mt-1 font-bold">Si a > 0 : ça monte. Si a < 0 : ça descend.</p>
-                        </div>
-                        
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-800 flex items-center gap-2 mb-2">
-                                <span class="bg-rose-100 text-rose-800 w-6 h-6 rounded flex items-center justify-center font-mono">b</span>
-                                L'Ordonnée à l'origine (Le départ)
-                            </h4>
-                            <p class="text-sm text-slate-600">C'est la hauteur à laquelle la droite coupe l'axe vertical (axe des y), quand $x=0$.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Graph Simulator -->
-            <div class="bg-white rounded-2xl card-shadow border border-slate-200 overflow-hidden sticky top-28">
-                <div class="bg-slate-800 p-3 flex justify-between items-center">
-                    <div class="flex items-center gap-2 text-white">
-                        <i class="fa-solid fa-chart-line text-purple-400"></i>
-                        <span class="font-semibold text-sm">Générateur de Droite : $y = ax + b$</span>
-                    </div>
-                </div>
-                
-                <div class="p-5 bg-slate-50">
-                    <!-- Controls -->
-                    <div class="space-y-4 mb-6">
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-slate-700">Pente (<span class="text-blue-600">a</span>)</label>
-                                <span id="valA" class="font-mono font-bold text-blue-600">1</span>
-                            </div>
-                            <input type="range" id="sliderA" min="-5" max="5" step="0.5" value="1" class="w-full accent-blue-500" oninput="updateGraph()">
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-slate-700">Origine (<span class="text-rose-600">b</span>)</label>
-                                <span id="valB" class="font-mono font-bold text-rose-600">2</span>
-                            </div>
-                            <input type="range" id="sliderB" min="-5" max="5" step="1" value="2" class="w-full accent-rose-500" oninput="updateGraph()">
-                        </div>
-                    </div>
-
-                    <!-- SVG Graph -->
-                    <div class="bg-white border border-slate-300 rounded-xl shadow-inner relative overflow-hidden flex justify-center py-4">
-                        <svg id="svgGraph" width="200" height="200" viewBox="-5 -5 10 10" class="overflow-visible">
-                            <!-- Grid -->
-                            <g stroke="#e2e8f0" stroke-width="0.1">
-                                <line x1="-5" y1="-5" x2="-5" y2="5"/><line y1="-5" y2="5" x1="-4" x2="-4"/><line y1="-5" y2="5" x1="-3" x2="-3"/><line y1="-5" y2="5" x1="-2" x2="-2"/><line y1="-5" y2="5" x1="-1" x2="-1"/>
-                                <line y1="-5" y2="5" x1="1" x2="1"/><line y1="-5" y2="5" x1="2" x2="2"/><line y1="-5" y2="5" x1="3" x2="3"/><line y1="-5" y2="5" x1="4" x2="4"/><line y1="-5" y2="5" x1="5" x2="5"/>
-                                
-                                <line x1="-5" x2="5" y1="-5" y2="-5"/><line x1="-5" x2="5" y1="-4" y2="-4"/><line x1="-5" x2="5" y1="-3" y2="-3"/><line x1="-5" x2="5" y1="-2" y2="-2"/><line x1="-5" x2="5" y1="-1" y2="-1"/>
-                                <line x1="-5" x2="5" y1="1" y2="1"/><line x1="-5" x2="5" y1="2" y2="2"/><line x1="-5" x2="5" y1="3" y2="3"/><line x1="-5" x2="5" y1="4" y2="4"/><line x1="-5" x2="5" y1="5" y2="5"/>
-                            </g>
-                            <!-- Axes -->
-                            <line x1="-5" y1="0" x2="5" y2="0" stroke="#475569" stroke-width="0.2"/>
-                            <line x1="0" y1="-5" x2="0" y2="5" stroke="#475569" stroke-width="0.2"/>
-                            
-                            <!-- Equation Line (y mapped to -y for SVG coords) -->
-                            <line id="graphLine" x1="-5" y1="0" x2="5" y2="0" stroke="#8b5cf6" stroke-width="0.2"/>
-                            
-                            <!-- Origin Point (b) -->
-                            <circle id="pointB" cx="0" cy="-2" r="0.2" fill="#e11d48"/>
+                    <div class="w-full h-32 bg-slate-50 border border-slate-200 rounded relative mb-4 flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-full h-full opacity-80">
+                            <!-- Grille -->
+                            <path d="M0,50 L100,50 M50,0 L50,100" stroke="#cbd5e1" stroke-width="1"/>
+                            <!-- Droite (passe par l'origine) -->
+                            <line x1="10" y1="90" x2="90" y2="10" stroke="#3b82f6" stroke-width="2"/>
+                            <!-- Origin -->
+                            <circle cx="50" cy="50" r="2" fill="#ef4444"/>
                         </svg>
                     </div>
-                    
-                    <div class="mt-4 text-center font-mono font-bold text-lg text-slate-800 bg-white py-2 rounded-lg border border-slate-200">
-                        $f(x) = $<span id="eqA" class="text-blue-600">1</span>$x $<span id="eqB" class="text-rose-600">+ 2</span>
-                    </div>
+                    <p class="text-xs text-slate-600 bg-blue-50 p-2 rounded">
+                        C'est toujours une <strong>droite qui passe par l'origine</strong> (zéro). Elle modélise la proportionnalité !
+                    </p>
                 </div>
 
-                <script>
-                    function updateGraph() {
-                        const a = parseFloat(document.getElementById('sliderA').value);
-                        const b = parseFloat(document.getElementById('sliderB').value);
-                        
-                        document.getElementById('valA').innerText = a;
-                        document.getElementById('valB').innerText = b;
-                        
-                        document.getElementById('eqA').innerText = a;
-                        document.getElementById('eqB').innerText = (b >= 0 ? "+ " + b : "- " + Math.abs(b));
-                        
-                        // Calc line points for x=-5 to x=5
-                        // y = ax+b, but in SVG y goes down, so we do -y
-                        const y1 = -(a * (-5) + b);
-                        const y2 = -(a * (5) + b);
-                        
-                        const line = document.getElementById('graphLine');
-                        line.setAttribute('y1', y1);
-                        line.setAttribute('y2', y2);
-                        
-                        const pt = document.getElementById('pointB');
-                        pt.setAttribute('cy', -b);
-                    }
-                    updateGraph();
-                </script>
+                <div class="bg-white rounded-2xl border border-slate-100 card-shadow p-6 text-center">
+                    <h3 class="font-bold text-slate-800 mb-4 text-lg">Fonction Affine</h3>
+                    <p class="text-sm text-slate-500 mb-4 font-mono">$f(x) = ax + b$ (ex: $f(x) = 2x - 3$)</p>
+                    
+                    <div class="w-full h-32 bg-slate-50 border border-slate-200 rounded relative mb-4 flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-full h-full opacity-80">
+                            <!-- Grille -->
+                            <path d="M0,50 L100,50 M50,0 L50,100" stroke="#cbd5e1" stroke-width="1"/>
+                            <!-- Droite (ne passe pas par l'origine) -->
+                            <line x1="20" y1="90" x2="80" y2="10" stroke="#8b5cf6" stroke-width="2"/>
+                            <!-- Y intercept -->
+                            <circle cx="50" cy="50" r="2" fill="#cbd5e1"/>
+                            <circle cx="50" cy="50" r="0" fill="none"/>
+                            <circle cx="50" cy="50" r="0" fill="none"/>
+                        </svg>
+                    </div>
+                    <p class="text-xs text-slate-600 bg-purple-50 p-2 rounded">
+                        C'est une <strong>droite qui ne passe pas par l'origine</strong>. Utile pour les tarifs avec un abonnement fixe + un prix unitaire.
+                    </p>
+                </div>
+
             </div>
         </section>
-        
+
     </main>
 
     <div class="h-24"></div>

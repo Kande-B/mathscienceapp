@@ -3,323 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Calcul littéral et identités remarquables</title>
+    <title>Cours - Calcul Littéral</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box   { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box  { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box  { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-        .ex-box    { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
-        .warn-box  { border-left: 4px solid #ef4444; background-color: #fef2f2; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner flex-shrink-0">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-puzzle-piece text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Algèbre</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Calcul Littéral</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Mathématiques</p>
-                <h1 class="text-xl md:text-2xl font-bold text-slate-800">Chapitre : Calcul littéral et identités remarquables</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 md:px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
+        
+        <!-- SECTION 1 : Conventions et Substitution -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <!-- Définition -->
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Règles d'écriture</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-book text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Le langage de l'algèbre</h3>
+                    </div>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        En mathématiques, pour alléger l'écriture avec des lettres, on peut "cacher" le signe multiplier (×) dans certains cas :
+                    </p>
+                    <ul class="text-sm text-slate-700 space-y-3 font-mono">
+                        <li class="bg-blue-50 p-2 rounded">Devant une lettre : <span class="text-blue-600 font-bold ml-2">3 × x = 3x</span></li>
+                        <li class="bg-blue-50 p-2 rounded">Devant une parenthèse : <span class="text-blue-600 font-bold ml-2">2 × (x + 1) = 2(x + 1)</span></li>
+                        <li class="bg-blue-50 p-2 rounded">Entre deux lettres : <span class="text-blue-600 font-bold ml-2">a × b = ab</span></li>
+                        <li class="bg-indigo-50 p-2 rounded border border-indigo-200 text-indigo-700">Et x multiplié par x : <span class="font-bold ml-2">x × x = x²</span></li>
+                    </ul>
+                </div>
+            </div>
 
-        <!-- INTRODUCTION -->
-        <section>
-            <div class="bg-indigo-600 text-white rounded-2xl p-5 mb-4 flex items-start gap-3">
-                <i class="fa-solid fa-lightbulb text-2xl mt-1 flex-shrink-0"></i>
-                <div>
-                    <p class="font-bold text-lg">Pourquoi apprendre le calcul littéral ?</p>
-                    <p class="text-indigo-100 text-sm mt-1">En atelier ou sur chantier, on utilise des formules avec des lettres (surface, volume, résistance…). Savoir manipuler ces expressions permet de calculer plus vite et d'éviter les erreurs.</p>
+            <!-- Visualization : Substitute Machine -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-indigo-500">
+                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
+                    La Machine à Calculer
+                </h3>
+                <p class="text-xs text-slate-500 mb-6 text-center">Remplace $x$ par une valeur pour calculer l'expression.</p>
+                
+                <div class="bg-slate-800 rounded-xl p-5 shadow-inner text-center relative overflow-hidden">
+                    <div class="absolute -right-4 -bottom-4 opacity-10"><i class="fa-solid fa-cogs text-[100px] text-white"></i></div>
+                    
+                    <div class="text-white font-mono text-xl mb-4 bg-slate-700 p-2 rounded border border-slate-600">
+                        Expression : <span class="text-indigo-400 font-bold">2x + 5</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="text-slate-300 font-bold">Pour x = </span>
+                        <input type="number" id="substituteInput" value="3" class="w-20 p-2 bg-slate-900 text-white font-mono font-bold text-center border-2 border-indigo-500 rounded-lg focus:outline-none">
+                    </div>
+                    
+                    <button onclick="calculateSubst()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg transition-colors shadow-lg">
+                        Calculer
+                    </button>
+                    
+                    <div id="substResult" class="mt-4 text-emerald-400 font-mono text-lg font-bold min-h-[30px]">
+                        2 × 3 + 5 = 11
+                    </div>
+                </div>
+
+                <script>
+                    function calculateSubst() {
+                        const val = parseFloat(document.getElementById('substituteInput').value) || 0;
+                        const res = 2 * val + 5;
+                        const displayStr = val < 0 ? `(${val})` : val;
+                        document.getElementById('substResult').innerHTML = `2 × <span class="text-white">${displayStr}</span> + 5 = <span class="text-2xl">${res}</span>`;
+                    }
+                </script>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : Développement & Factorisation -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Développement et Factorisation</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Distributivité (Développer) -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500 interactive-hover">
+                    <h3 class="font-bold text-emerald-800 mb-4 text-lg"><i class="fa-solid fa-expand mr-2"></i> Développer (Distribuer)</h3>
+                    <p class="text-sm text-slate-600 mb-4">C'est transformer un <strong>produit</strong> en une somme ou soustraction. On distribue le facteur extérieur à l'intérieur des parenthèses.</p>
+                    
+                    <div class="bg-emerald-50 p-4 rounded-xl font-mono text-center border border-emerald-200 text-emerald-900 font-bold text-lg mb-4">
+                        k(a + b) = ka + kb
+                    </div>
+                    
+                    <div class="space-y-2 text-sm bg-slate-50 p-3 rounded border border-slate-200 font-mono">
+                        <p>Exemple : <span class="font-bold">3(x + 4)</span></p>
+                        <p class="text-slate-500">➜ 3 × x + 3 × 4</p>
+                        <p class="text-emerald-600 font-bold">➜ 3x + 12</p>
+                    </div>
+                </div>
+
+                <!-- Factorisation -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-amber-500 interactive-hover">
+                    <h3 class="font-bold text-amber-800 mb-4 text-lg"><i class="fa-solid fa-compress mr-2"></i> Factoriser (Regrouper)</h3>
+                    <p class="text-sm text-slate-600 mb-4">C'est le chemin inverse ! On transforme une somme en <strong>produit</strong> en trouvant un "facteur commun".</p>
+                    
+                    <div class="bg-amber-50 p-4 rounded-xl font-mono text-center border border-amber-200 text-amber-900 font-bold text-lg mb-4">
+                        ka + kb = k(a + b)
+                    </div>
+                    
+                    <div class="space-y-2 text-sm bg-slate-50 p-3 rounded border border-slate-200 font-mono">
+                        <p>Exemple : <span class="font-bold">5x + 15</span></p>
+                        <p class="text-slate-500">➜ <span class="text-amber-500 font-bold">5</span>×x + <span class="text-amber-500 font-bold">5</span>×3</p>
+                        <p class="text-amber-600 font-bold">➜ 5(x + 3)</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAPITRE I -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">I. Le calcul littéral – rappels</h2>
-
-            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Définition
-                </h3>
-                <p class="text-blue-900 text-sm md:text-base">
-                    Une <strong>expression littérale</strong> (ou algébrique) est une expression mathématique qui contient au moins une <strong>lettre</strong> représentant un nombre (appelée variable).
-                </p>
-                <p class="bg-blue-100 p-3 rounded mt-3 font-mono text-center text-blue-900 text-sm">
-                    Exemples : $3x + 2$, $2(a + b)$, $\frac{1}{2} \times b \times h$
-                </p>
+        <!-- SECTION 3 : Identités Remarquables -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">3</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Identités Remarquables</h2>
             </div>
+            
+            <p class="text-slate-700 mb-6">Ce sont des formules de développement "raccourcies" qu'il faut connaître par cœur pour gagner du temps.</p>
 
-            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-check-circle"></i> Règles de base
-                </h3>
-                <ul class="list-none space-y-2 text-sm md:text-base text-emerald-900">
-                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100">
-                        <strong>$a \times b$</strong> s'écrit $ab$ (le signe × est souvent omis).
-                    </li>
-                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100">
-                        <strong>$3 \times x$</strong> s'écrit $3x$ — le chiffre est toujours avant la lettre.
-                    </li>
-                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100">
-                        <strong>$1 \times x$</strong> s'écrit simplement $x$ (le coefficient 1 est implicite).
-                    </li>
-                    <li class="bg-white p-2 rounded shadow-sm border border-emerald-100">
-                        <strong>$x \times x$</strong> s'écrit $x^2$ (lire « x au carré »).
-                    </li>
-                </ul>
-            </div>
-
-            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-calculator"></i> Calcul d'une expression — Substitution
-                </h3>
-                <p class="text-amber-900 text-sm mb-3">Pour calculer la valeur d'une expression, on <strong>remplace</strong> la lettre par la valeur donnée, puis on effectue les calculs.</p>
-                <div class="bg-white p-4 rounded-lg border border-amber-200 text-sm">
-                    <p class="font-bold text-amber-900 mb-2">Exemple : Calcule $3x - 1$ pour $x = 4$.</p>
-                    <p>$3x - 1 = 3 \times 4 - 1 = 12 - 1 = \mathbf{11}$</p>
-                    <hr class="my-3 border-amber-100">
-                    <p class="font-bold text-amber-900 mb-2">Application métier : La formule de la surface d'un rectangle est $S = L \times l$. Calcule $S$ pour $L = 8$ m et $l = 3{,}5$ m.</p>
-                    <p>$S = 8 \times 3{,}5 = \mathbf{28 \text{ m}^2}$</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- ID 1 -->
+                <div class="bg-gradient-to-br from-indigo-500 to-indigo-700 p-5 rounded-xl text-white shadow-lg relative overflow-hidden interactive-hover">
+                    <div class="absolute -right-4 -bottom-4 opacity-20"><i class="fa-solid fa-plus text-6xl"></i></div>
+                    <h4 class="font-bold text-indigo-100 mb-2 uppercase text-xs tracking-wider">Le carré d'une somme</h4>
+                    <div class="font-mono text-xl font-bold mb-3 border-b border-indigo-400 pb-2">
+                        (a + b)² = a² + 2ab + b²
+                    </div>
+                    <div class="text-sm font-mono opacity-90">
+                        Ex: (x + 3)²<br>
+                        = x² + 2(x)(3) + 3²<br>
+                        = <span class="font-bold text-white bg-indigo-900/50 px-1 rounded">x² + 6x + 9</span>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- CHAPITRE II -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">II. Développement et réduction</h2>
-
-            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Définitions
-                </h3>
-                <ul class="list-none space-y-3 text-sm md:text-base text-blue-900">
-                    <li><strong>Développer</strong> : supprimer les parenthèses en utilisant la distributivité.</li>
-                    <li><strong>Réduire</strong> : regrouper les termes semblables (même lettre, même exposant).</li>
-                </ul>
-            </div>
-
-            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-arrows-left-right"></i> La distributivité simple
-                </h3>
-                <p class="text-emerald-900 text-sm mb-3">C'est la règle de base pour développer :</p>
-                <div class="bg-emerald-900 text-white p-4 rounded-xl text-center font-mono text-base my-3">
-                    $k(a + b) = ka + kb$ &nbsp;&nbsp; et &nbsp;&nbsp; $k(a - b) = ka - kb$
+                <!-- ID 2 -->
+                <div class="bg-gradient-to-br from-rose-500 to-rose-700 p-5 rounded-xl text-white shadow-lg relative overflow-hidden interactive-hover">
+                    <div class="absolute -right-4 -bottom-4 opacity-20"><i class="fa-solid fa-minus text-6xl"></i></div>
+                    <h4 class="font-bold text-rose-100 mb-2 uppercase text-xs tracking-wider">Le carré d'une différence</h4>
+                    <div class="font-mono text-xl font-bold mb-3 border-b border-rose-400 pb-2">
+                        (a - b)² = a² - 2ab + b²
+                    </div>
+                    <div class="text-sm font-mono opacity-90">
+                        Ex: (x - 5)²<br>
+                        = x² - 2(x)(5) + 5²<br>
+                        = <span class="font-bold text-white bg-rose-900/50 px-1 rounded">x² - 10x + 25</span>
+                    </div>
                 </div>
-                <div class="bg-white p-4 rounded-lg border border-emerald-200 text-sm mt-3 space-y-3">
-                    <p><strong>Exemple 1 :</strong> $3(x + 5) = 3x + 15$</p>
-                    <p><strong>Exemple 2 :</strong> $2(4a - 7) = 8a - 14$</p>
-                    <p><strong>Exemple 3 :</strong> $-4(y + 3) = -4y - 12$</p>
-                </div>
-            </div>
 
-            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-layer-group"></i> Méthode : Développer puis réduire
-                </h3>
-                <div class="bg-white p-4 rounded-lg border border-amber-200 text-sm space-y-2">
-                    <p class="font-bold text-amber-900 mb-2">Développe et réduis : $2(3x + 4) + 5x - 1$</p>
-                    <p>$= 6x + 8 + 5x - 1$ &nbsp; <span class="text-slate-400">(distributivité)</span></p>
-                    <p>$= 6x + 5x + 8 - 1$ &nbsp; <span class="text-slate-400">(on regroupe les termes semblables)</span></p>
-                    <p class="font-bold text-emerald-600">$= 11x + 7$</p>
-                </div>
-            </div>
-
-            <div class="warn-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-red-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Attention au signe « – » devant les parenthèses !
-                </h3>
-                <div class="bg-white p-4 rounded-lg border border-red-200 text-sm space-y-2">
-                    <p>$-(3x - 2) = -3x + 2$ (on change <em>tous</em> les signes)</p>
-                    <p class="text-red-700 mt-2 font-bold">Erreur fréquente : $-(3x - 2) \neq -3x - 2$ ✗</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPITRE III -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">III. Factorisation</h2>
-
-            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Définition
-                </h3>
-                <p class="text-blue-900 text-sm md:text-base">
-                    <strong>Factoriser</strong> une expression, c'est l'opération <em>inverse</em> du développement : on met un facteur commun en évidence pour écrire l'expression sous forme d'un <strong>produit</strong>.
-                </p>
-            </div>
-
-            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-search"></i> Méthode : Trouver le facteur commun
-                </h3>
-                <ol class="list-decimal list-inside text-amber-900 text-sm space-y-2 mb-3">
-                    <li>Identifier le facteur commun à tous les termes (nombre ou lettre).</li>
-                    <li>Le mettre devant des parenthèses.</li>
-                    <li>Écrire dans les parenthèses ce qui reste après division par ce facteur.</li>
-                    <li>Vérifier en développant le résultat.</li>
-                </ol>
-                <div class="bg-white p-4 rounded-lg border border-amber-200 text-sm space-y-3">
-                    <p><strong>Exemple 1 :</strong> $6x + 9 = 3(2x + 3)$ &nbsp; <span class="text-slate-400">(facteur commun : 3)</span></p>
-                    <p><strong>Exemple 2 :</strong> $5a - 15a^2 = 5a(1 - 3a)$ &nbsp; <span class="text-slate-400">(facteur commun : 5a)</span></p>
-                    <p><strong>Exemple 3 :</strong> $4x + 12 = 4(x + 3)$ &nbsp; <span class="text-slate-400">(facteur commun : 4)</span></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPITRE IV : IDENTITES REMARQUABLES -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">IV. Les identités remarquables</h2>
-
-            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-star"></i> Définition
-                </h3>
-                <p class="text-blue-900 text-sm md:text-base">
-                    Les <strong>identités remarquables</strong> sont des formules algébriques toujours vraies, qu'il est utile de connaître par cœur. Elles permettent de développer ou de factoriser très rapidement certaines expressions.
-                </p>
-            </div>
-
-            <!-- Identité 1 -->
-            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-4">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-1 mr-1 bg-emerald-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"></i>
-                    Carré d'une somme
-                </h3>
-                <div class="bg-emerald-900 text-white p-4 rounded-xl text-center font-mono text-lg my-3">
-                    $(a + b)^2 = a^2 + 2ab + b^2$
-                </div>
-                <div class="bg-white p-4 rounded-lg border border-emerald-200 text-sm space-y-2 mt-2">
-                    <p class="font-bold text-emerald-900 mb-1">Exemple :</p>
-                    <p>$(x + 3)^2 = x^2 + 2 \times x \times 3 + 3^2 = x^2 + 6x + 9$</p>
-                    <p>$(2a + 5)^2 = (2a)^2 + 2 \times 2a \times 5 + 5^2 = 4a^2 + 20a + 25$</p>
-                </div>
-                <p class="text-xs text-emerald-700 mt-2 italic">
-                    <i class="fa-solid fa-lightbulb mr-1"></i>Moyen mnémotechnique : « le carré du premier + 2 × premier × second + le carré du second »
-                </p>
-            </div>
-
-            <!-- Identité 2 -->
-            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-4">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-2 mr-1 bg-emerald-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"></i>
-                    Carré d'une différence
-                </h3>
-                <div class="bg-emerald-900 text-white p-4 rounded-xl text-center font-mono text-lg my-3">
-                    $(a - b)^2 = a^2 - 2ab + b^2$
-                </div>
-                <div class="bg-white p-4 rounded-lg border border-emerald-200 text-sm space-y-2 mt-2">
-                    <p class="font-bold text-emerald-900 mb-1">Exemple :</p>
-                    <p>$(x - 4)^2 = x^2 - 2 \times x \times 4 + 4^2 = x^2 - 8x + 16$</p>
-                    <p>$(3a - 2)^2 = 9a^2 - 12a + 4$</p>
-                </div>
-            </div>
-
-            <!-- Identité 3 -->
-            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-3 mr-1 bg-emerald-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"></i>
-                    Différence de deux carrés
-                </h3>
-                <div class="bg-emerald-900 text-white p-4 rounded-xl text-center font-mono text-lg my-3">
-                    $(a + b)(a - b) = a^2 - b^2$
-                </div>
-                <div class="bg-white p-4 rounded-lg border border-emerald-200 text-sm space-y-2 mt-2">
-                    <p class="font-bold text-emerald-900 mb-1">Exemple (développement) :</p>
-                    <p>$(x + 5)(x - 5) = x^2 - 25$</p>
-                    <p class="font-bold text-emerald-900 mb-1 mt-2">Exemple (factorisation) :</p>
-                    <p>$x^2 - 9 = (x + 3)(x - 3)$</p>
-                    <p>$4a^2 - 49 = (2a + 7)(2a - 7)$</p>
-                </div>
-                <p class="text-xs text-emerald-700 mt-2 italic">
-                    <i class="fa-solid fa-lightbulb mr-1"></i>Très utile pour factoriser rapidement. Repérez la forme $\square^2 - \square^2$.
-                </p>
-            </div>
-
-            <!-- Tableau récapitulatif -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-6">
-                <div class="bg-indigo-600 text-white px-5 py-3 font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-table"></i> Tableau récapitulatif
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead class="bg-slate-50 text-slate-600 text-xs uppercase">
-                            <tr>
-                                <th class="px-4 py-3 text-left">Identité</th>
-                                <th class="px-4 py-3 text-left">Formule</th>
-                                <th class="px-4 py-3 text-left">Exemple</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-4 py-3 font-medium">Carré d'une somme</td>
-                                <td class="px-4 py-3 font-mono text-indigo-700">$(a+b)^2 = a^2+2ab+b^2$</td>
-                                <td class="px-4 py-3">$(x+2)^2 = x^2+4x+4$</td>
-                            </tr>
-                            <tr class="bg-slate-50/50">
-                                <td class="px-4 py-3 font-medium">Carré d'une différence</td>
-                                <td class="px-4 py-3 font-mono text-indigo-700">$(a-b)^2 = a^2-2ab+b^2$</td>
-                                <td class="px-4 py-3">$(x-3)^2 = x^2-6x+9$</td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-3 font-medium">Diff. de deux carrés</td>
-                                <td class="px-4 py-3 font-mono text-indigo-700">$(a+b)(a-b) = a^2-b^2$</td>
-                                <td class="px-4 py-3">$(x+4)(x-4) = x^2-16$</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- APPLICATION PROFESSIONNELLE -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">V. Application professionnelle</h2>
-
-            <div class="ex-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-hard-hat"></i> Calcul de surface en carrelage
-                </h3>
-                <p class="text-purple-900 text-sm md:text-base mb-3">
-                    Un carreleur pose des dalles carrées de côté $(x + 2)$ cm. Il veut connaître la surface d'une dalle en développant l'expression $(x + 2)^2$.
-                </p>
-                <div class="bg-white p-4 rounded-lg border border-purple-200 text-sm space-y-2">
-                    <p>$(x + 2)^2 = x^2 + 2 \times x \times 2 + 2^2 = x^2 + 4x + 4$ cm²</p>
-                    <p class="mt-2">Pour $x = 8$ cm : $S = 8^2 + 4 \times 8 + 4 = 64 + 32 + 4 = \mathbf{100 \text{ cm}^2}$</p>
-                    <p class="text-purple-700 font-bold">Vérification : $(8 + 2)^2 = 10^2 = 100$ ✓</p>
-                </div>
-            </div>
-
-            <div class="ex-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-bolt"></i> Puissance électrique (contexte maintenance)
-                </h3>
-                <p class="text-purple-900 text-sm md:text-base mb-3">
-                    La puissance dissipée dans une résistance est $P = R \times I^2$. Si la résistance est $R = 50\ \Omega$ et le courant $I = (a + 1)$ A, exprimer $P$ sous forme développée.
-                </p>
-                <div class="bg-white p-4 rounded-lg border border-purple-200 text-sm space-y-2">
-                    <p>$I^2 = (a + 1)^2 = a^2 + 2a + 1$</p>
-                    <p>$P = 50(a^2 + 2a + 1) = 50a^2 + 100a + 50$ W</p>
+                <!-- ID 3 -->
+                <div class="bg-gradient-to-br from-emerald-500 to-emerald-700 p-5 rounded-xl text-white shadow-lg relative overflow-hidden interactive-hover">
+                    <div class="absolute -right-4 -bottom-4 opacity-20"><i class="fa-solid fa-layer-group text-6xl"></i></div>
+                    <h4 class="font-bold text-emerald-100 mb-2 uppercase text-xs tracking-wider">Différence de deux carrés</h4>
+                    <div class="font-mono text-xl font-bold mb-3 border-b border-emerald-400 pb-2">
+                        (a + b)(a - b) = a² - b²
+                    </div>
+                    <div class="text-sm font-mono opacity-90">
+                        Ex: (x + 4)(x - 4)<br>
+                        = x² - 4²<br>
+                        = <span class="font-bold text-white bg-emerald-900/50 px-1 rounded">x² - 16</span>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <div class="h-24"></div>
 </body>
 </html>

@@ -38,17 +38,14 @@
         
         .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
         .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
         
         .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
         @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
         
-        .side-hyp { stroke: #eab308; stroke-width: 4; transition: all 0.3s ease; }
-        .side-adj { stroke: #3b82f6; stroke-width: 4; transition: all 0.3s ease; }
-        .side-opp { stroke: #ef4444; stroke-width: 4; transition: all 0.3s ease; }
-        
-        .dimmed { opacity: 0.2; }
-        .highlighted { stroke-width: 6; }
+        .poly-base { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2; stroke-linejoin: round; }
+        .hl-hypo { stroke: #10b981; stroke-width: 4; }
+        .hl-opp { stroke: #ef4444; stroke-width: 4; }
+        .hl-adj { stroke: #3b82f6; stroke-width: 4; }
     </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
@@ -74,174 +71,207 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 : Vocabulaire & SOH CAH TOA -->
+        <!-- SECTION 1 : Le Vocabulaire -->
         <section class="course-layout items-start">
             <div class="space-y-6">
+                <!-- Définition -->
                 <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
                     <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">SOH CAH TOA</h2>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Repérer les côtés du triangle</h2>
                 </div>
                 
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-spell-check text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Le mot magique</h3>
-                    </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-base mb-4">
-                        La trigonométrie s'utilise <strong>uniquement dans un triangle rectangle</strong>. Selon l'angle que l'on étudie, chaque côté porte un nom. Pour retenir les formules, on utilise <strong>SOH CAH TOA</strong> :
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Comme Pythagore, la trigonométrie s'utilise <strong>uniquement dans un triangle rectangle</strong>. La première étape, avant tout calcul, est de savoir nommer les 3 côtés par rapport à l'angle qui nous intéresse.
                     </p>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono">
-                        <div class="bg-rose-50 p-4 rounded-xl text-center border border-rose-200 shadow-sm interactive-hover cursor-pointer" onmouseover="highlight('SOH')" onmouseout="resetHighlight()">
-                            <p class="text-xl font-bold text-rose-700 mb-2">S O H</p>
-                            <p class="text-rose-900 text-sm">Sinus = <br> <span class="text-rose-600">O</span>pposé ÷ <span class="text-amber-600">H</span>ypoténuse</p>
-                        </div>
-                        <div class="bg-blue-50 p-4 rounded-xl text-center border border-blue-200 shadow-sm interactive-hover cursor-pointer" onmouseover="highlight('CAH')" onmouseout="resetHighlight()">
-                            <p class="text-xl font-bold text-blue-700 mb-2">C A H</p>
-                            <p class="text-blue-900 text-sm">Cosinus = <br> <span class="text-blue-600">A</span>djacent ÷ <span class="text-amber-600">H</span>ypoténuse</p>
-                        </div>
-                        <div class="bg-purple-50 p-4 rounded-xl text-center border border-purple-200 shadow-sm interactive-hover cursor-pointer" onmouseover="highlight('TOA')" onmouseout="resetHighlight()">
-                            <p class="text-xl font-bold text-purple-700 mb-2">T O A</p>
-                            <p class="text-purple-900 text-sm">Tangente = <br> <span class="text-rose-600">O</span>pposé ÷ <span class="text-blue-600">A</span>djacent</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-4 text-center italic"><i class="fa-solid fa-hand-pointer"></i> Passez la souris sur les cases ci-dessus pour voir le triangle s'animer.</p>
+                    <ul class="space-y-3 mt-4 text-sm">
+                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="w-4 h-4 bg-emerald-500 rounded-full flex-shrink-0"></div>
+                            <div>
+                                <span class="font-bold text-slate-800">L'Hypoténuse</span><br>
+                                <span class="text-slate-500 text-xs">C'est le plus long côté, face à l'angle droit (Il ne change jamais).</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="w-4 h-4 bg-red-500 rounded-full flex-shrink-0"></div>
+                            <div>
+                                <span class="font-bold text-slate-800">Le côté Opposé</span><br>
+                                <span class="text-slate-500 text-xs">C'est le côté situé <strong>en face</strong> de l'angle pointé.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full flex-shrink-0"></div>
+                            <div>
+                                <span class="font-bold text-slate-800">Le côté Adjacent</span><br>
+                                <span class="text-slate-500 text-xs">C'est le côté qui <strong>touche</strong> l'angle pointé (mais qui n'est pas l'hypoténuse).</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Visualization: Triangle Interactive -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28">
+            <!-- Visualization : Le Triangle Interactif SOH CAH TOA -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-brand-500">
                 <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Par rapport à l'angle visé
+                    Le Détecteur de Côtés
                 </h3>
+                <p class="text-xs text-slate-500 mb-6 text-center">Sélectionnez un angle aigu pour voir comment les noms des côtés changent !</p>
                 
-                <div class="flex justify-center my-4 relative">
-                    <svg width="250" height="200" viewBox="0 0 250 200">
-                        <!-- Right Angle Marker -->
-                        <polyline points="30,150 50,150 50,170" fill="none" stroke="#64748b" stroke-width="2"/>
-                        <!-- Angle Alpha (at C) -->
-                        <path d="M 180 170 A 30 30 0 0 0 195 145" fill="none" stroke="#8b5cf6" stroke-width="3"/>
-                        <text x="160" y="160" font-size="16" fill="#8b5cf6" font-weight="bold" font-family="serif">α</text>
-                        
-                        <!-- Triangle Sides -->
-                        <line id="lineOpp" x1="30" y1="30" x2="30" y2="170" class="side-opp"/>
-                        <line id="lineAdj" x1="30" y1="170" x2="210" y2="170" class="side-adj"/>
-                        <line id="lineHyp" x1="30" y1="30" x2="210" y2="170" class="side-hyp"/>
-                        
-                        <!-- Labels -->
-                        <text x="10" y="30" font-size="14" font-weight="bold" fill="#334155">A</text>
-                        <text x="10" y="185" font-size="14" font-weight="bold" fill="#334155">B</text>
-                        <text x="215" y="185" font-size="14" font-weight="bold" fill="#334155">C</text>
-
-                        <!-- Labels for sides -->
-                        <text id="labelOpp" x="-15" y="100" font-size="12" font-weight="bold" fill="#ef4444" transform="rotate(-90 -15,100)">OPPOSÉ</text>
-                        <text id="labelAdj" x="100" y="195" font-size="12" font-weight="bold" fill="#3b82f6">ADJACENT</text>
-                        <text id="labelHyp" x="120" y="80" font-size="12" font-weight="bold" fill="#d97706" transform="rotate(38 120,80)">HYPOTÉNUSE</text>
-                    </svg>
+                <div class="flex flex-col items-center">
+                    <!-- SVG Triangle -->
+                    <div class="relative w-full aspect-video bg-slate-900 border border-slate-700 rounded-xl mb-4 flex justify-center items-center overflow-hidden shadow-inner">
+                        <svg id="trigSvg" width="100%" height="100%" viewBox="0 0 200 150">
+                            <!-- Base Triangle for background -->
+                            <polygon points="50,120 160,120 50,40" class="poly-base" fill="#1e293b" stroke="#334155"/>
+                            
+                            <!-- Angle Droit A -->
+                            <polyline points="50,110 60,110 60,120" fill="none" stroke="#ef4444" stroke-width="2"/>
+                            
+                            <!-- Angle B (Top) Arc -->
+                            <path id="arcB" d="M 50,60 A 20,20 0 0,0 62,49" fill="none" stroke="#fbbf24" stroke-width="3" opacity="0.2"/>
+                            <polygon id="wedgeB" points="50,40 50,60 62,49" fill="#fbbf24" opacity="0.1"/>
+                            
+                            <!-- Angle C (Right) Arc -->
+                            <path id="arcC" d="M 140,120 A 20,20 0 0,1 133,110" fill="none" stroke="#fbbf24" stroke-width="3" opacity="0.2"/>
+                            <polygon id="wedgeC" points="160,120 140,120 133,110" fill="#fbbf24" opacity="0.1"/>
+                            
+                            <!-- Dynamic Sides -->
+                            <line id="sideHypo" x1="50" y1="40" x2="160" y2="120" class="hl-hypo"/>
+                            <line id="sideVert" x1="50" y1="40" x2="50" y2="120" class="hl-opp"/> <!-- Will be changed dynamically -->
+                            <line id="sideHorz" x1="50" y1="120" x2="160" y2="120" class="hl-adj"/> <!-- Will be changed dynamically -->
+                            
+                            <!-- Labels Point -->
+                            <text x="35" y="130" font-weight="bold" fill="#94a3b8">A</text>
+                            <text x="35" y="40" font-weight="bold" fill="#f8fafc">B</text>
+                            <text x="170" y="130" font-weight="bold" fill="#f8fafc">C</text>
+                            
+                            <!-- Text overlays for sides -->
+                            <text id="lblHypo" x="120" y="70" font-size="10" font-weight="bold" fill="#10b981" transform="rotate(35, 120, 70)">HYPOTÉNUSE</text>
+                            <text id="lblVert" x="30" y="85" font-size="10" font-weight="bold" fill="#ef4444" transform="rotate(-90, 30, 85)">OPPOSÉ</text>
+                            <text id="lblHorz" x="105" y="135" font-size="10" font-weight="bold" fill="#3b82f6" text-anchor="middle">ADJACENT</text>
+                        </svg>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="setAngle('C')" id="btnC" class="px-4 py-2 bg-brand-500 text-white font-bold rounded-lg border-b-4 border-brand-700 active:border-b-0 active:translate-y-1 transition-all">
+                            Je choisis l'angle C
+                        </button>
+                        <button onclick="setAngle('B')" id="btnB" class="px-4 py-2 bg-slate-200 text-slate-700 font-bold rounded-lg border-b-4 border-slate-300 hover:bg-slate-300 active:border-b-0 active:translate-y-1 transition-all">
+                            Je choisis l'angle B
+                        </button>
+                    </div>
                 </div>
-                
+
                 <script>
-                    function highlight(type) {
-                        const opp = document.getElementById('lineOpp');
-                        const adj = document.getElementById('lineAdj');
-                        const hyp = document.getElementById('lineHyp');
-                        
-                        const lblOpp = document.getElementById('labelOpp');
-                        const lblAdj = document.getElementById('labelAdj');
-                        const lblHyp = document.getElementById('labelHyp');
-                        
-                        // Reset
-                        opp.classList.add('dimmed'); lblOpp.classList.add('dimmed');
-                        adj.classList.add('dimmed'); lblAdj.classList.add('dimmed');
-                        hyp.classList.add('dimmed'); lblHyp.classList.add('dimmed');
-                        
-                        if(type === 'SOH') {
-                            opp.classList.remove('dimmed'); lblOpp.classList.remove('dimmed');
-                            hyp.classList.remove('dimmed'); lblHyp.classList.remove('dimmed');
-                            opp.classList.add('highlighted'); hyp.classList.add('highlighted');
-                        } else if(type === 'CAH') {
-                            adj.classList.remove('dimmed'); lblAdj.classList.remove('dimmed');
-                            hyp.classList.remove('dimmed'); lblHyp.classList.remove('dimmed');
-                            adj.classList.add('highlighted'); hyp.classList.add('highlighted');
-                        } else if(type === 'TOA') {
-                            opp.classList.remove('dimmed'); lblOpp.classList.remove('dimmed');
-                            adj.classList.remove('dimmed'); lblAdj.classList.remove('dimmed');
-                            opp.classList.add('highlighted'); adj.classList.add('highlighted');
+                    function setAngle(angle) {
+                        const btnC = document.getElementById('btnC');
+                        const btnB = document.getElementById('btnB');
+                        const sideVert = document.getElementById('sideVert');
+                        const sideHorz = document.getElementById('sideHorz');
+                        const lblVert = document.getElementById('lblVert');
+                        const lblHorz = document.getElementById('lblHorz');
+                        const arcB = document.getElementById('arcB');
+                        const wedgeB = document.getElementById('wedgeB');
+                        const arcC = document.getElementById('arcC');
+                        const wedgeC = document.getElementById('wedgeC');
+
+                        if(angle === 'C') {
+                            // Buttons
+                            btnC.className = "px-4 py-2 bg-brand-500 text-white font-bold rounded-lg border-b-4 border-brand-700 active:border-b-0 active:translate-y-1 transition-all";
+                            btnB.className = "px-4 py-2 bg-slate-200 text-slate-700 font-bold rounded-lg border-b-4 border-slate-300 hover:bg-slate-300 active:border-b-0 active:translate-y-1 transition-all";
+                            
+                            // Highlight arcs
+                            arcC.setAttribute('opacity', '1'); wedgeC.setAttribute('opacity', '0.5');
+                            arcB.setAttribute('opacity', '0.2'); wedgeB.setAttribute('opacity', '0.1');
+
+                            // C is selected. Opposite is Vertical (AB), Adjacent is Horizontal (AC)
+                            sideVert.className.baseVal = "hl-opp";
+                            sideHorz.className.baseVal = "hl-adj";
+                            lblVert.textContent = "OPPOSÉ"; lblVert.setAttribute('fill', '#ef4444');
+                            lblHorz.textContent = "ADJACENT"; lblHorz.setAttribute('fill', '#3b82f6');
+                        } else {
+                            // Buttons
+                            btnB.className = "px-4 py-2 bg-brand-500 text-white font-bold rounded-lg border-b-4 border-brand-700 active:border-b-0 active:translate-y-1 transition-all";
+                            btnC.className = "px-4 py-2 bg-slate-200 text-slate-700 font-bold rounded-lg border-b-4 border-slate-300 hover:bg-slate-300 active:border-b-0 active:translate-y-1 transition-all";
+                            
+                            // Highlight arcs
+                            arcB.setAttribute('opacity', '1'); wedgeB.setAttribute('opacity', '0.5');
+                            arcC.setAttribute('opacity', '0.2'); wedgeC.setAttribute('opacity', '0.1');
+
+                            // B is selected. Opposite is Horizontal (AC), Adjacent is Vertical (AB)
+                            sideVert.className.baseVal = "hl-adj";
+                            sideHorz.className.baseVal = "hl-opp";
+                            lblVert.textContent = "ADJACENT"; lblVert.setAttribute('fill', '#3b82f6');
+                            lblHorz.textContent = "OPPOSÉ"; lblHorz.setAttribute('fill', '#ef4444');
                         }
                     }
-                    
-                    function resetHighlight() {
-                        const els = ['lineOpp', 'lineAdj', 'lineHyp', 'labelOpp', 'labelAdj', 'labelHyp'];
-                        els.forEach(id => {
-                            document.getElementById(id).classList.remove('dimmed', 'highlighted');
-                        });
-                    }
+                    // Initialize
+                    setAngle('C');
                 </script>
             </div>
         </section>
 
-        <!-- SECTION 2 : Les deux problèmes -->
+        <!-- SECTION 2 : SOH CAH TOA -->
         <section class="mt-12">
             <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
                 <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les 2 types de calculs</h2>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">La formule magique : SOH CAH TOA</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <p class="text-slate-700 mb-6">Il existe 3 formules en trigonométrie. Pour s'en souvenir facilement, on utilise le mot "SOHCAHTOA" (qui se prononce "so-ca-to-a").</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <!-- Calculer Longueur -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-amber-500">
-                    <h3 class="font-bold text-amber-800 mb-4 text-xl flex items-center gap-2">
-                        <i class="fa-solid fa-ruler"></i> Je cherche une Longueur
-                    </h3>
-                    
-                    <p class="text-sm text-slate-600 mb-4">On me donne un angle et une longueur. Je cherche une autre longueur.</p>
-                    
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-sm">
-                        <p class="text-slate-800 mb-2 font-bold">Exemple : Je cherche l'Opposé, je connais l'Hypoténuse et l'angle $30^\circ$.</p>
-                        <ul class="list-none space-y-2 text-slate-700">
-                            <li><i class="fa-solid fa-check text-emerald-500"></i> Opposé + Hypoténuse $\rightarrow$ Formule <strong>SOH</strong> (Sinus)</li>
-                            <li class="bg-white p-2 rounded border border-slate-200 mt-2">
-                                $\sin(30^\circ) = \frac{\text{Opposé}}{10}$
-                            </li>
-                            <li class="text-amber-700 font-bold mt-2">
-                                $\text{Opposé} = 10 \times \sin(30^\circ)$
-                            </li>
-                        </ul>
+                <!-- SOH -->
+                <div class="bg-white rounded-2xl border border-slate-100 card-shadow overflow-hidden interactive-hover">
+                    <div class="bg-gradient-to-r from-rose-500 to-rose-600 p-4 text-center">
+                        <h3 class="font-bold text-white text-3xl font-heading tracking-widest">SOH</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="font-mono text-center mb-4">
+                            <span class="text-rose-600 font-bold text-xl">S</span>inus = <br>
+                            <div class="inline-block mt-2 text-sm font-bold border-b-2 border-slate-400 pb-1 px-2"><span class="text-rose-600">O</span>pposé</div><br>
+                            <div class="inline-block pt-1 text-sm font-bold px-2"><span class="text-rose-600">H</span>ypoténuse</div>
+                        </div>
+                        <p class="text-xs text-slate-500 text-center">Utilisez le <strong>Sinus</strong> quand vous connaissez (ou cherchez) l'Opposé et l'Hypoténuse.</p>
                     </div>
                 </div>
 
-                <!-- Calculer Angle -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
-                    <h3 class="font-bold text-purple-800 mb-4 text-xl flex items-center gap-2">
-                        <i class="fa-solid fa-angle-left"></i> Je cherche un Angle
-                    </h3>
-                    
-                    <p class="text-sm text-slate-600 mb-4">On me donne deux longueurs. Je cherche l'angle en degrés.</p>
-                    
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-sm">
-                        <p class="text-slate-800 mb-2 font-bold">Exemple : Je connais l'Opposé (3) et l'Adjacent (4).</p>
-                        <ul class="list-none space-y-2 text-slate-700">
-                            <li><i class="fa-solid fa-check text-emerald-500"></i> Opposé + Adjacent $\rightarrow$ Formule <strong>TOA</strong> (Tangente)</li>
-                            <li class="bg-white p-2 rounded border border-slate-200 mt-2">
-                                $\tan(\alpha) = \frac{3}{4} = 0.75$
-                            </li>
-                            <li class="text-purple-700 font-bold mt-2 flex items-center gap-2">
-                                <i class="fa-solid fa-calculator text-slate-500"></i>
-                                $\alpha = \text{Arctan}(0.75) \approx 37^\circ$
-                            </li>
-                        </ul>
+                <!-- CAH -->
+                <div class="bg-white rounded-2xl border border-slate-100 card-shadow overflow-hidden interactive-hover">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-center">
+                        <h3 class="font-bold text-white text-3xl font-heading tracking-widest">CAH</h3>
                     </div>
-                    <p class="text-xs text-rose-500 mt-3 italic text-center font-bold">
-                        ATTENTION : N'oubliez pas de régler votre calculatrice en DEGRÉS (DEG) !
-                    </p>
+                    <div class="p-6">
+                        <div class="font-mono text-center mb-4">
+                            <span class="text-blue-600 font-bold text-xl">C</span>osinus = <br>
+                            <div class="inline-block mt-2 text-sm font-bold border-b-2 border-slate-400 pb-1 px-2"><span class="text-blue-600">A</span>djacent</div><br>
+                            <div class="inline-block pt-1 text-sm font-bold px-2"><span class="text-blue-600">H</span>ypoténuse</div>
+                        </div>
+                        <p class="text-xs text-slate-500 text-center">Utilisez le <strong>Cosinus</strong> quand vous connaissez (ou cherchez) l'Adjacent et l'Hypoténuse.</p>
+                    </div>
                 </div>
-                
+
+                <!-- TOA -->
+                <div class="bg-white rounded-2xl border border-slate-100 card-shadow overflow-hidden interactive-hover">
+                    <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 p-4 text-center">
+                        <h3 class="font-bold text-white text-3xl font-heading tracking-widest">TOA</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="font-mono text-center mb-4">
+                            <span class="text-emerald-600 font-bold text-xl">T</span>angente = <br>
+                            <div class="inline-block mt-2 text-sm font-bold border-b-2 border-slate-400 pb-1 px-2"><span class="text-emerald-600">O</span>pposé</div><br>
+                            <div class="inline-block pt-1 text-sm font-bold px-2"><span class="text-emerald-600">A</span>djacent</div>
+                        </div>
+                        <p class="text-xs text-slate-500 text-center">Utilisez la <strong>Tangente</strong> quand l'hypoténuse n'est ni connue, ni recherchée !</p>
+                    </div>
+                </div>
+
             </div>
         </section>
-        
+
     </main>
 
     <div class="h-24"></div>
