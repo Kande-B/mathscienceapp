@@ -3,144 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Algorithmique</title>
+    <title>TD - Algorithmique et Programmation</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        
+        /* Scratch blocks styles */
+        .scratch-event { background-color: #ffbf00; border: 1px solid #cc9900; color: #fff; padding: 4px 12px; border-radius: 8px 8px 0 0; font-weight: bold; font-family: sans-serif; font-size: 14px;}
+        .scratch-motion { background-color: #4c97ff; border: 1px solid #3373cc; color: #fff; padding: 6px 12px; border-radius: 4px; margin-bottom: 2px; font-family: sans-serif; font-size: 14px;}
+        .scratch-control { background-color: #ffab19; border: 1px solid #cf8b17; color: #fff; padding: 6px 12px; border-radius: 4px; margin-bottom: 2px; font-family: sans-serif; font-size: 14px;}
+        .scratch-var { background-color: #ff8c1a; border: 1px solid #db6e00; color: #fff; padding: 6px 12px; border-radius: 4px; margin-bottom: 2px; font-family: sans-serif; font-size: 14px;}
+        .scratch-input { background-color: #fff; color: #000; border-radius: 12px; padding: 0 6px; margin: 0 4px; font-family: monospace; display: inline-block; min-width: 20px; text-align: center;}
     </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                </div>
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Algorithmique (Scratch)</h1>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Algorithmique</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Programme de calcul (sans variable)
-            </h3>
-            <p class="mb-4">Voici un petit algorithme écrit en langage naturel :</p>
-            <div class="bg-slate-50 p-4 border border-slate-200 rounded font-mono text-sm mb-4">
-                - Choisir un nombre<br>
-                - Multiplier ce nombre par 3<br>
-                - Ajouter 5 au résultat
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Exécutez ce programme si l'on choisit le nombre <strong>4</strong> au départ. Quel est le résultat final ?</li>
-                <li>Exécutez ce programme si l'on choisit le nombre <strong>-2</strong> au départ. Quel est le résultat final ?</li>
-            </ol>
-        </div>
 
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Tracer une figure (La boucle)
-            </h3>
-            <p class="mb-4">On donne le script Scratch suivant :</p>
-            <div class="bg-slate-50 p-4 border border-slate-200 rounded font-mono text-sm mb-4">
-                Quand [Drapeau vert] est cliqué<br>
-                Effacer tout<br>
-                Stylo en position d'écriture<br>
-                <strong>Répéter (3) fois :</strong><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Avancer de 100 pas<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Tourner de 120 degrés<br>
-                Relever le stylo
-            </div>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Combien de fois les actions de tracé (avancer et tourner) sont-elles répétées ?</li>
-                <li>Quelle figure géométrique ce script permet-il de dessiner ? (Indice : regardez le nombre de côtés).</li>
-            </ol>
-        </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Variables (Affectation)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Lisez ce court algorithme :</p>
+                    
+                    <div class="bg-slate-100 p-3 rounded font-mono text-sm mb-4 border border-slate-200">
+                        A ← 5 <br>
+                        B ← A + 3 <br>
+                        A ← B * 2
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">À la fin du programme, que contient la variable A ?</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>A =</span>
+                        <input type="number" id="ex1-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
 
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Comprendre les variables
-            </h3>
-            <p class="mb-4">Lisez le script suivant qui utilise la variable "Score" :</p>
-            <div class="bg-slate-50 p-4 border border-slate-200 rounded font-mono text-sm mb-4 text-orange-800">
-                Mettre [Score] à 10<br>
-                Ajouter 5 à [Score]<br>
-                Mettre [Score] à (Score * 2)
-            </div>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Que vaut la variable "Score" à la fin de la première ligne ?</li>
-                <li>Que vaut-elle à la fin de la deuxième ligne ?</li>
-                <li>Que vaut-elle tout à la fin du programme ?</li>
-            </ol>
-        </div>
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Boucle "Répéter"</h3>
+                    
+                    <div class="mb-4 flex flex-col items-start">
+                        <div class="scratch-event">quand le drapeau vert est cliqué</div>
+                        <div class="scratch-control">répéter <span class="scratch-input">4</span> fois
+                            <div class="ml-4 pl-2 border-l-2 border-white/50 mt-1">
+                                <div class="scratch-motion">avancer de <span class="scratch-input">50</span> pas</div>
+                                <div class="scratch-motion">tourner ↻ de <span class="scratch-input">90</span> degrés</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">Combien de pas le lutin aura-t-il parcouru au total à la fin de la boucle ?</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>Distance totale =</span>
+                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>pas</span>
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Condition (Si... Alors... Sinon)
-            </h3>
-            <p class="mb-4">Voici un script de jeu vidéo :</p>
-            <div class="bg-slate-50 p-4 border border-slate-200 rounded font-mono text-sm mb-4">
-                Demander "Quel est l'âge du joueur ?" et attendre<br>
-                Si (réponse >= 18) Alors<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Dire "Accès autorisé"<br>
-                Sinon<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Dire "Accès refusé. Trop jeune."
-            </div>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Si le joueur tape "15", que va dire le lutin ?</li>
-                <li>Si le joueur tape "18", que va dire le lutin ?</li>
-            </ol>
-        </div>
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Instruction Conditionnelle (Si)</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Considérez l'algorithme suivant :
+                    </p>
+                    
+                    <div class="bg-slate-100 p-3 rounded font-mono text-sm mb-4 border border-slate-200">
+                        Température ← 18 <br>
+                        Si Température &lt; 15 Alors <br>
+                        &nbsp;&nbsp;&nbsp;Message ← "Mets un manteau" <br>
+                        Sinon <br>
+                        &nbsp;&nbsp;&nbsp;Message ← "En t-shirt" <br>
+                        Fin Si
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">Quel message sera affiché ?</p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex3-options">
+                        <button onclick="selectRadio('ex3', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Mets un manteau</button>
+                        <button onclick="selectRadio('ex3', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">En t-shirt</button>
+                        <button onclick="selectRadio('ex3', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Aucun message</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex3', 'Exact ! 18 n\'est pas inférieur à 15, donc le programme exécute la partie Sinon.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Traduire en Scratch (Équation)
-            </h3>
-            <p class="mb-2">Nous voulons écrire un programme qui calcule la valeur de l'expression $y = 5x - 2$.</p>
-            <p class="mb-4">Complétez le script suivant avec les bons blocs opérateurs ($+$, $-$, $\times$, $\div$) :</p>
-            <div class="bg-slate-50 p-4 border border-slate-200 rounded font-mono text-sm mb-4">
-                Demander "Choisis un nombre pour x :" et attendre<br>
-                Mettre [Résultat] à ( ............. * ............. )<br>
-                Mettre [Résultat] à ( [Résultat] - ............. )<br>
-                Dire (Regrouper "Le calcul donne : " et [Résultat])
             </div>
         </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Vrai ou Faux ?
-            </h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>L'instruction "Répéter indéfiniment" est une boucle qui ne s'arrête jamais. (Vrai / Faux)</li>
-                <li>Dans Scratch, pour faire une multiplication, on utilise le symbole "x" majuscule. (Vrai / Faux)</li>
-                <li>Une "variable" permet de retenir le score du joueur pendant la partie. (Vrai / Faux)</li>
-            </ul>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Dessin Scratch</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Regardez à nouveau le programme Scratch de l'exercice 2. <br>
+                        Le lutin avance de 50 pas, puis tourne de 90°. Il fait cela 4 fois.
+                    </p>
+                    <p class="text-sm text-slate-600 mb-4 font-bold">Quelle figure géométrique va-t-il dessiner ?</p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex4-options">
+                        <button onclick="selectRadio('ex4', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Un triangle rectangle</button>
+                        <button onclick="selectRadio('ex4', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Un carré</button>
+                        <button onclick="selectRadio('ex4', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Un cercle</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex4', 'Bravo ! Il y a 4 côtés égaux de 50 pas, et 4 angles droits (90°). C\'est donc un carré.')" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Coordonnées (x, y)</h3>
+                    
+                    <div class="mb-4 flex flex-col items-start">
+                        <div class="scratch-motion">aller à x: <span class="scratch-input">0</span> y: <span class="scratch-input">0</span></div>
+                        <div class="scratch-motion">ajouter <span class="scratch-input">10</span> à x</div>
+                        <div class="scratch-motion">ajouter <span class="scratch-input">-5</span> à y</div>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Quelles sont les coordonnées finales du lutin ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>x =</span> <input type="number" id="ex5-x" class="border border-slate-300 rounded p-1 w-16 text-center">
+                        <span class="ml-2">y =</span> <input type="number" id="ex5-y" class="border border-slate-300 rounded p-1 w-16 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Programme de calcul</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Voici un programme de calcul : <br>
+                        1. Choisir un nombre <br>
+                        2. Le multiplier par 3 <br>
+                        3. Ajouter 5 <br>
+                        On choisit le nombre <strong>4</strong> au départ. Quel est le résultat final ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>Résultat =</span>
+                        <input type="number" id="ex6-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx6()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-gear text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Industrie - Fraiseuse Numérique (G-Code)</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Une machine CNC se déplace selon les axes X (gauche/droite) et Y (avant/arrière). <br>
+                                L'outil de coupe est à la position de départ X=0, Y=0. <br>
+                                Il reçoit la séquence d'instructions suivante (en mm) :
+                            </p>
+                            
+                            <ul class="text-sm font-mono bg-slate-100 p-3 rounded mb-4">
+                                <li>Deplacer X = 50</li>
+                                <li>Deplacer Y = 20</li>
+                                <li>Deplacer X = 50, Y = -20 (Il s'agit d'un déplacement RELATIF, il ajoute 50 à X et enlève 20 à Y)</li>
+                            </ul>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">Quelle est la position finale de l'outil ?</label>
+                                    <div class="flex items-center gap-2 font-mono mt-2">
+                                        <span>X =</span> <input type="number" id="ex7-x" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>mm</span>
+                                        <span class="ml-4">Y =</span> <input type="number" id="ex7-y" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-truck-fast text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Logistique - Algorithme de tri</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un centre logistique automatise le tri des colis selon leur masse $M$ (en kg) : <br>
+                        - Si $M \le 2$ kg : Tapis "Petit Format" <br>
+                        - Si $M > 2$ kg ET $M \le 10$ kg : Tapis "Standard" <br>
+                        - Si $M > 10$ kg : Tapis "Lourd"
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div>
+                            <label class="font-bold block mb-1">Un colis de 2 kg arrive sur le tapis. Où va-t-il ?</label>
+                            <select id="ex8-1" class="border border-slate-300 rounded p-2">
+                                <option value="">Choisir...</option>
+                                <option value="petit">Petit Format</option>
+                                <option value="standard">Standard</option>
+                                <option value="lourd">Lourd</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Un colis de 10.5 kg arrive sur le tapis. Où va-t-il ?</label>
+                            <select id="ex8-2" class="border border-slate-300 rounded p-2">
+                                <option value="">Choisir...</option>
+                                <option value="petit">Petit Format</option>
+                                <option value="standard">Standard</option>
+                                <option value="lourd">Lourd</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
     </main>
+
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+
+        // QCM Logic
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const ans = document.getElementById('ex1-ans').value;
+            if (ans === "16") {
+                showFeedback('fb-ex1', true, "Parfait ! A = 5. Puis B = 5 + 3 = 8. Puis A = 8 * 2 = 16. La variable A contient donc 16 à la fin.");
+            } else {
+                showFeedback('fb-ex1', false, "Incorrect. Suis l'algorithme ligne par ligne : d'abord A vaut 5. Calcule B, puis recalcule A.");
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const ans = document.getElementById('ex2-ans').value;
+            if (ans === "200") {
+                showFeedback('fb-ex2', true, "Excellent ! 4 fois 50 pas = 200 pas.");
+            } else {
+                showFeedback('fb-ex2', false, "Faux. Multiplie la distance d'un seul mouvement par le nombre de répétitions de la boucle.");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const x = document.getElementById('ex5-x').value;
+            const y = document.getElementById('ex5-y').value;
+            
+            if (x === "10" && y === "-5") {
+                showFeedback('fb-ex5', true, "Bravo ! On part de (0,0). On ajoute 10 à x (0+10=10) et on ajoute -5 à y (0-5=-5).");
+            } else {
+                showFeedback('fb-ex5', false, "Erreur. Fais simplement l'addition pour chaque coordonnée en partant de 0.");
+            }
+        }
+
+        // Ex 6
+        function checkEx6() {
+            const ans = document.getElementById('ex6-ans').value;
+            if (ans === "17") {
+                showFeedback('fb-ex6', true, "Bravo ! 4 × 3 = 12. Puis 12 + 5 = 17.");
+            } else {
+                showFeedback('fb-ex6', false, "Erreur. Calcule 4 * 3, puis ajoute 5 au résultat.");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const x = document.getElementById('ex7-x').value;
+            const y = document.getElementById('ex7-y').value;
+            
+            if (x === "100" && y === "0") {
+                showFeedback('fb-ex7', true, "Excellent ! X = 0 + 50 + 50 = 100. Y = 0 + 20 - 20 = 0. Position finale : (100, 0).");
+            } else {
+                showFeedback('fb-ex7', false, "Faux. Additionne les déplacements pour chaque axe. Pour Y : +20 puis -20, ça donne 0 !");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const q1 = document.getElementById('ex8-1').value;
+            const q2 = document.getElementById('ex8-2').value;
+            
+            if (q1 === "petit" && q2 === "lourd") {
+                showFeedback('fb-ex8', true, "Parfait ! 2 kg est inférieur ou ÉGAL à 2, donc 'Petit Format'. 10.5 kg est strictement supérieur à 10, donc 'Lourd'.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. Fais attention au symbole $\\le$ (qui inclut le nombre). 2 kg rentre dans '$\\le 2$'. Et 10.5 kg est plus grand que 10.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>

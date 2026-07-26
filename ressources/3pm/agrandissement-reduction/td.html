@@ -3,184 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Agrandissement et réduction</title>
+    <title>TD - Agrandissement et Réduction</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        @media print {
-            .print-hidden { display: none !important; }
-            body { background: white; font-size: 12pt; }
-            section { break-inside: avoid; }
-        }
-        .answer-line {
-            border-bottom: 1px dashed #cbd5e1;
-            min-height: 28px;
-            margin: 4px 0;
-        }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50 print-hidden">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-tasks text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Agrandissement & Réduction</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Exercices</p>
-                <h1 class="text-2xl font-bold text-slate-800">Fiche de TD : Agrandissement & Réduction</h1>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
             </div>
         </div>
     </header>
 
-    <!-- En-tête d'impression -->
-    <div class="hidden print:block max-w-4xl mx-auto px-6 pt-4 pb-2 border-b-2 border-slate-800 mb-4">
-        <div class="flex justify-between items-end">
-            <div>
-                <p class="font-bold text-lg">3ème Prépa Métiers – Mathématiques</p>
-                <h1 class="text-2xl font-bold">TD : Agrandissement & Réduction</h1>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
-            <div class="text-sm space-y-1">
-                <p>Nom : ..................................................</p>
-                <p>Date : .................. Note : ...... / 20</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Coefficient k (Longueur)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Un rectangle a une longueur de 5 cm. On l'agrandit avec un coefficient <strong>$k = 3$</strong>. <br>Quelle est la nouvelle longueur ?</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>L' =</span>
+                        <input type="number" id="ex1-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>cm</span>
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Coefficient d'une aire ($k^2$)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Si on multiplie toutes les longueurs d'une figure par <strong>$k = 4$</strong>, par combien son <strong>aire</strong> est-elle multipliée ?</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>Aire' = Aire ×</span>
+                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Coefficient d'un volume ($k^3$)</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Si on multiplie toutes les arêtes d'un cube par <strong>$k = 2$</strong>, par combien son <strong>volume</strong> est-il multiplié ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>Volume' = Volume ×</span>
+                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8 print:mt-0 print:space-y-6">
-
-        <!-- NIVEAU 1 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-emerald-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-emerald-500 mr-2">Niveau 1</span> Calculer le coefficient
-                </h2>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
 
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 1 : Agrandissement ou réduction ?</h3>
-                <p class="text-sm text-slate-600 mb-3">Pour chaque cas, calcule le coefficient $k$ et précise s'il s'agit d'un agrandissement ou d'une réduction :</p>
-                <div class="space-y-5 text-sm">
-                    <div>
-                        <p class="font-bold mb-1">a) Une longueur passe de 5 cm à 15 cm.</p>
-                        <p>$k =$ <span class="answer-line inline-block w-32"></span> C'est un(e) <span class="answer-line inline-block w-48"></span></p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calculer un coefficient de réduction</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Une maquette de voiture mesure <strong>15 cm</strong>. La vraie voiture mesure <strong>450 cm</strong>. <br>
+                        Quel est le coefficient de réduction (sous forme de fraction) de la vraie voiture vers la maquette ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$k =$</span>
+                        <input type="text" id="ex4-ans" class="border border-slate-300 rounded p-2 w-24 text-center" placeholder="ex: 1/10">
                     </div>
-                    <div>
-                        <p class="font-bold mb-1">b) Une longueur passe de 20 m à 4 m.</p>
-                        <p>$k =$ <span class="answer-line inline-block w-32"></span> C'est un(e) <span class="answer-line inline-block w-48"></span></p>
-                    </div>
-                    <div>
-                        <p class="font-bold mb-1">c) Une figure est dessinée à l'échelle $\frac{1}{50}$.</p>
-                        <p>$k =$ <span class="answer-line inline-block w-32"></span> C'est un(e) <span class="answer-line inline-block w-48"></span></p>
-                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- NIVEAU 2 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-blue-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-blue-500 mr-2">Niveau 2</span> Effet sur les longueurs
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 2 : Plan de maison</h3>
-                <p class="text-sm text-slate-600 mb-3">Sur le plan de construction d'une maison à l'échelle $\frac{1}{100}$, une pièce rectangulaire mesure 4 cm de long sur 3 cm de large.</p>
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <p class="font-bold">1. Quel est le coefficient d'agrandissement pour passer du plan à la réalité ?</p>
-                        <div class="answer-line"></div>
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Nature du coefficient</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Pour qu'une transformation soit une <strong>réduction</strong>, il faut que le coefficient $k$ respecte une règle précise. Laquelle ?
+                    </p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex5-options">
+                        <button onclick="selectRadio('ex5', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">$k$ doit être négatif ($k < 0$)</button>
+                        <button onclick="selectRadio('ex5', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">$k$ doit être compris entre 0 et 1 ($0 < k < 1$)</button>
+                        <button onclick="selectRadio('ex5', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">$k$ doit être supérieur à 1 ($k > 1$)</button>
                     </div>
-                    <div>
-                        <p class="font-bold">2. Quelles sont les dimensions réelles de la pièce (en cm, puis en m) ?</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
+                    
+                    <button onclick="checkRadio('ex5', 'Exact ! Si 0 < k < 1, c\'est une réduction (ex: 0.5 = 1/2). Si k > 1, c\'est un agrandissement. Les distances ne sont jamais négatives.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- NIVEAU 3 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-amber-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-amber-500 mr-2">Niveau 3</span> Effet sur les aires
-                </h2>
-            </div>
-
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 3 : L'aire d'un terrain</h3>
-                <p class="text-sm text-slate-600 mb-3">Un terrain de sport a une aire de $4\ 000 \text{ m}^2$. Sur le cadastre de la mairie, ce terrain est dessiné avec une réduction de coefficient $k = 0{,}01$.</p>
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <p class="font-bold">1. Par quel nombre doit-on multiplier l'aire réelle pour obtenir l'aire sur le plan ? (attention, il s'agit d'une aire !)</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Réduction d'une aire</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        L'aire d'un carré est de <strong>100 cm²</strong>. <br>
+                        On effectue une réduction de coefficient <strong>$k = 0,5$</strong> (ou 1/2). <br>
+                        Quelle est la nouvelle aire ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>Aire' =</span>
+                        <input type="number" id="ex6-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>cm²</span>
                     </div>
-                    <div>
-                        <p class="font-bold">2. Calcule l'aire du terrain sur le cadastre (en m² puis en cm²).</p>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
+                    
+                    <button onclick="checkEx6()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
+
             </div>
-        </section>
+        </div>
 
-        <!-- NIVEAU 4 -->
-        <section class="bg-indigo-50 rounded-3xl p-8 border border-indigo-200 shadow-sm print:bg-white print:border-black print:border print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-indigo-600 pb-2">
-                <h2 class="text-xl font-bold text-indigo-900">
-                    <span class="text-indigo-600 mr-2">Niveau 4</span> Tâche complexe (Aires et Volumes)
-                </h2>
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
 
-            <div class="mb-6">
-                <h3 class="font-bold text-indigo-900 mb-2">Exercice 4 : Maquette de conteneur maritime</h3>
-                <p class="text-sm text-indigo-800 mb-3">
-                    Une entreprise de logistique utilise des conteneurs maritimes ayant la forme de pavés droits. Les dimensions réelles d'un conteneur sont :<br>
-                    <strong>Longueur : 6 m | Largeur : 2,5 m | Hauteur : 2,5 m</strong>
-                </p>
-                <p class="text-sm text-indigo-800 mb-4">
-                    Pour une exposition, on souhaite fabriquer une maquette de ce conteneur à l'échelle $\frac{1}{20}$.
-                </p>
-
-                <div class="text-sm text-indigo-900 space-y-4">
-                    <div>
-                        <p class="font-bold">1. Calcule le volume RÉEL du conteneur en m³.</p>
-                        <div class="answer-line mt-1"></div>
-                        <div class="answer-line"></div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-house-user text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Architecture - Surface au sol</h3>
                     </div>
-                    <div>
-                        <p class="font-bold">2. Quel est le coefficient de réduction $k$ ?</p>
-                        <div class="answer-line mt-1"></div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un architecte réalise la maquette d'une maison à l'échelle <strong>1/50</strong>. <br>
+                                La surface au sol de la vraie maison est de <strong>150 m²</strong>.
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">1. Par quoi faut-il multiplier l'aire réelle pour obtenir l'aire sur la maquette ?</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <input type="text" id="ex7-1" class="border border-slate-300 rounded p-1 w-32 text-center" placeholder="ex: (1/50)^2">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-bold block mb-1">2. Calculez la surface au sol de la maquette (en m²) :</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <input type="number" step="0.001" id="ex7-2" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>m²</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 italic mt-1">(150 divisé par 50², soit 150 ÷ 2500)</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-bold">3. Par quel nombre faut-il multiplier le volume réel pour obtenir le volume de la maquette ?</p>
-                        <div class="answer-line mt-1"></div>
-                        <div class="answer-line"></div>
-                    </div>
-                    <div>
-                        <p class="font-bold">4. Déduis-en le volume de la maquette en m³, puis en cm³.</p>
-                        <p class="text-xs italic text-indigo-700">(Rappel : $1 \text{ m}^3 = 1\ 000\ 000 \text{ cm}^3$)</p>
-                        <div class="answer-line mt-1"></div>
-                        <div class="answer-line"></div>
-                        <div class="answer-line"></div>
-                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
                 </div>
+
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-cube text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Logistique - Cuve et Volume</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Une entreprise fabrique des cuves cylindriques. Le modèle classique a un volume de <strong>200 Litres</strong>. <br>
+                        Le nouveau modèle "Maxi" a toutes ses dimensions (rayon et hauteur) <strong>multipliées par 3</strong>.
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div>
+                            <label class="font-bold block mb-1">1. Par quel nombre le volume de la cuve est-il multiplié ? ($k^3$)</label>
+                            <input type="number" id="ex8-1" class="border border-slate-300 rounded p-1 w-24 text-center font-mono">
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">2. Quel est le volume de la cuve "Maxi" ? (en Litres)</label>
+                            <input type="number" id="ex8-2" class="border border-slate-300 rounded p-1 w-24 text-center font-mono"> <span>Litres</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
             </div>
-        </section>
+        </div>
 
     </main>
 
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+        
+        function cleanStr(str) {
+            return str.replace(/\s+/g, '').replace(',', '.').toLowerCase();
+        }
+
+        // QCM Logic
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const ans = document.getElementById('ex1-ans').value;
+            if (ans === "15") {
+                showFeedback('fb-ex1', true, "Parfait ! Nouvelle longueur = 5 × 3 = 15 cm.");
+            } else {
+                showFeedback('fb-ex1', false, "Incorrect. Il suffit de multiplier la longueur de départ par le coefficient k.");
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const ans = document.getElementById('ex2-ans').value;
+            if (ans === "16") {
+                showFeedback('fb-ex2', true, "Excellent ! Si les longueurs sont multipliées par 4, l'aire est multipliée par 4² = 16.");
+            } else {
+                showFeedback('fb-ex2', false, "Faux. Pour les aires, on multiplie par le carré du coefficient (k²).");
+            }
+        }
+
+        // Ex 3
+        function checkEx3() {
+            const ans = document.getElementById('ex3-ans').value;
+            if (ans === "8") {
+                showFeedback('fb-ex3', true, "Exact ! Si les longueurs sont multipliées par 2, le volume est multiplié par 2³ = 2 × 2 × 2 = 8.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. Pour les volumes, on multiplie par le cube du coefficient (k³).");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const ans = cleanStr(document.getElementById('ex4-ans').value);
+            if (ans === "15/450" || ans === "1/30") {
+                showFeedback('fb-ex4', true, "Bravo ! k = (dimension réduite) / (dimension initiale) = 15 / 450. En simplifiant, ça donne 1/30.");
+            } else {
+                showFeedback('fb-ex4', false, "Erreur. Divise la taille de la maquette par la vraie taille (15/450). Tu peux aussi simplifier.");
+            }
+        }
+
+        // Ex 6
+        function checkEx6() {
+            const ans = document.getElementById('ex6-ans').value.replace(',', '.');
+            if (parseFloat(ans) === 25) {
+                showFeedback('fb-ex6', true, "Bravo ! L'aire est multipliée par k², c'est-à-dire 0.5² = 0.25. 100 × 0.25 = 25 cm².");
+            } else {
+                showFeedback('fb-ex6', false, "Erreur. Multiplie l'aire par (0.5)².");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const q1 = cleanStr(document.getElementById('ex7-1').value);
+            const q2 = document.getElementById('ex7-2').value.replace(',', '.');
+            
+            if ((q1 === "(1/50)^2" || q1 === "1/2500" || q1 === "(1/50)²") && parseFloat(q2) === 0.06) {
+                showFeedback('fb-ex7', true, "Bravo ! 1) k² = (1/50)². 2) 150 × (1/2500) = 150 ÷ 2500 = 0.06 m² (soit 600 cm²).");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. 1) C'est k au carré : (1/50)^2. 2) 150 ÷ 2500 = 0.06.");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const q1 = document.getElementById('ex8-1').value;
+            const q2 = document.getElementById('ex8-2').value;
+            
+            if (q1 === "27" && q2 === "5400") {
+                showFeedback('fb-ex8', true, "Excellent ! 1) k³ = 3³ = 27. Le volume est 27 fois plus grand ! 2) 200 × 27 = 5400 Litres.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. 1) k au cube (3³ = 3×3×3). 2) Multiplie l'ancien volume par ce résultat.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>
