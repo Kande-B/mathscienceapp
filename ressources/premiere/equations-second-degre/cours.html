@@ -3,114 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Résolution graphique d'équations</title>
+    <title>Cours - Résolution Graphique d'Équations</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-        .ex-box { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-bezier-curve text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Première Pro • Mathématiques</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Équations du Second Degré</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Première Pro • Mathématiques</p>
-                <h1 class="text-2xl font-bold text-slate-800">Séquence 2 : Résolution d'équations du second degré</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">1. Résolution graphique de $f(x) = c$</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-eye"></i> Principe de la lecture graphique
-                </h3>
-                <p class="text-blue-900 mb-3">Résoudre graphiquement l'équation $f(x) = c$, c'est trouver les <strong>abscisses ($x$)</strong> des points d'intersection entre la courbe de $f$ (la parabole) et la droite horizontale d'équation $y = c$.</p>
-            </div>
-
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-list-ol"></i> Méthode pas à pas
-                </h3>
-                <ol class="list-decimal list-inside text-amber-900 space-y-2 font-semibold">
-                    <li>Tracer la parabole représentative de la fonction $f$.</li>
-                    <li>Tracer la droite horizontale qui passe par $y = c$ sur l'axe des ordonnées.</li>
-                    <li>Repérer le ou les points de croisement.</li>
-                    <li>Lire les abscisses ($x$) de ces points. Ces valeurs sont les <strong>solutions</strong>.</li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- SECTION 2 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">2. Nombre de solutions possibles</h2>
-            
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 mb-6">
-                <p class="mb-4">Une équation du second degré peut avoir 0, 1 ou 2 solutions selon l'endroit où la droite horizontale coupe la parabole.</p>
+        <!-- SECTION 1 : Méthode & Visualisation -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <!-- Principe -->
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Résolution Graphique $f(x) = c$</h2>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-red-50 p-4 rounded border border-red-200 text-center">
-                        <h4 class="font-bold text-red-700 mb-2">0 solution</h4>
-                        <p class="text-sm text-red-900">La droite ne coupe jamais la parabole.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-eye text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Principe</h3>
                     </div>
-                    <div class="bg-amber-50 p-4 rounded border border-amber-200 text-center">
-                        <h4 class="font-bold text-amber-700 mb-2">1 solution</h4>
-                        <p class="text-sm text-amber-900">La droite touche la parabole en un seul point (son sommet).</p>
-                    </div>
-                    <div class="bg-emerald-50 p-4 rounded border border-emerald-200 text-center">
-                        <h4 class="font-bold text-emerald-700 mb-2">2 solutions</h4>
-                        <p class="text-sm text-emerald-900">La droite traverse la parabole en deux points distincts.</p>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Résoudre graphiquement l'équation $f(x) = c$, c'est trouver les <strong>abscisses ($x$)</strong> des points d'intersection entre :
+                    </p>
+                    <ul class="list-disc list-inside text-sm text-slate-700 mb-4 ml-2">
+                        <li>La courbe de la fonction (la <strong>parabole</strong>).</li>
+                        <li>La <strong>droite horizontale</strong> d'équation $y = c$.</li>
+                    </ul>
+                </div>
+
+                <!-- Méthode -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
+                    <h3 class="font-bold text-slate-900 mb-3 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol text-amber-500"></i> Méthode pas à pas
+                    </h3>
+                    
+                    <div class="space-y-3 font-mono text-sm">
+                        <div class="flex items-center gap-3 bg-amber-50 p-2 rounded">
+                            <span class="bg-amber-200 text-amber-800 px-2 rounded-full font-bold">1</span>
+                            <span class="text-amber-900">Je trace la droite horizontale sur $y = c$.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-amber-50 p-2 rounded">
+                            <span class="bg-amber-200 text-amber-800 px-2 rounded-full font-bold">2</span>
+                            <span class="text-amber-900">Je repère les points de croisement avec la parabole.</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-amber-50 p-2 rounded">
+                            <span class="bg-amber-200 text-amber-800 px-2 rounded-full font-bold">3</span>
+                            <span class="text-amber-900">Je descends verticalement pour lire les abscisses (les $x$).</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Visualization : Traceur (SVG) Interactive Intersections -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-indigo-500">
+                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
+                    Simulateur d'Intersections
+                </h3>
+                <p class="text-xs text-slate-500 mb-4 text-center">Déplacez la droite bleue ($y = c$) pour observer le nombre de solutions.</p>
+                
+                <div class="mb-4 bg-indigo-50 p-3 rounded-lg border border-indigo-200 text-center">
+                    <label class="text-sm font-bold text-indigo-800 block mb-1">Valeur de c : <span id="valCDisp" class="text-indigo-600 bg-white px-2 py-0.5 rounded border border-indigo-200">2.0</span></label>
+                    <input type="range" id="sliderC" min="-2" max="6" step="0.5" value="2" class="w-full accent-indigo-500" oninput="updateGraph()">
+                </div>
+
+                <div class="relative w-full aspect-square bg-white border-2 border-slate-200 rounded-xl overflow-hidden cursor-crosshair">
+                    <svg id="graphSvg" viewBox="0 0 400 400" class="w-full h-full">
+                        <defs>
+                            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                            </pattern>
+                            <pattern id="grid-major" width="100" height="100" patternUnits="userSpaceOnUse">
+                                <rect width="100" height="100" fill="url(#grid)" />
+                                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                            </pattern>
+                        </defs>
+                        <!-- Grid (Centered at 200,200. 1 unit = 20px) -->
+                        <rect width="400" height="400" fill="url(#grid-major)" />
+                        <!-- Axes -->
+                        <line x1="200" y1="0" x2="200" y2="400" stroke="#475569" stroke-width="2"/>
+                        <line x1="0" y1="200" x2="400" y2="200" stroke="#475569" stroke-width="2"/>
+                        
+                        <!-- Fixed Parabola: f(x) = -0.5x^2 + x + 4 -->
+                        <path id="parabolaPath" d="" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                        
+                        <!-- Horizontal Line y=c -->
+                        <line id="lineC" x1="0" y1="160" x2="400" y2="160" stroke="#3b82f6" stroke-width="3"/>
+                        
+                        <!-- Intersections and Projections -->
+                        <g id="intersectionsGroup"></g>
+                    </svg>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="font-bold text-lg text-slate-800" id="solutionStatus">2 Solutions : x₁ = -1.2, x₂ = 3.2</p>
+                    <p class="text-xs text-slate-500 mt-1">Fonction : $f(x) = -0.5x^2 + x + 4$</p>
+                </div>
+
+                <script>
+                    const a = -0.5;
+                    const b = 1;
+                    const c_para = 4;
+                    
+                    const mapX = (x) => 200 + (x * 40); // 1 unit = 40px
+                    const mapY = (y) => 200 - (y * 40); 
+
+                    // Draw static parabola
+                    let d = "";
+                    for(let x = -5; x <= 5; x += 0.1) {
+                        let y = (a * x * x) + (b * x) + c_para;
+                        if (x === -5) d += `M ${mapX(x)} ${mapY(y)}`;
+                        else d += ` L ${mapX(x)} ${mapY(y)}`;
+                    }
+                    document.getElementById('parabolaPath').setAttribute("d", d);
+
+                    function updateGraph() {
+                        let c_val = parseFloat(document.getElementById('sliderC').value);
+                        document.getElementById('valCDisp').innerText = c_val.toFixed(1);
+                        
+                        // Move horizontal line
+                        document.getElementById('lineC').setAttribute("y1", mapY(c_val));
+                        document.getElementById('lineC').setAttribute("y2", mapY(c_val));
+                        
+                        // Calculate intersections: ax^2 + bx + (c_para - c_val) = 0
+                        let a_eq = a;
+                        let b_eq = b;
+                        let c_eq = c_para - c_val;
+                        let delta = (b_eq * b_eq) - (4 * a_eq * c_eq);
+                        
+                        const group = document.getElementById('intersectionsGroup');
+                        group.innerHTML = ''; // clear
+                        
+                        let statusText = "";
+                        
+                        if (delta < 0) {
+                            statusText = `<span class="text-red-600">0 Solution</span>`;
+                        } else if (Math.abs(delta) < 0.01) { // 1 solution
+                            let x0 = -b_eq / (2 * a_eq);
+                            drawIntersectionPoint(group, x0, c_val);
+                            statusText = `<span class="text-amber-600">1 Solution : x = ${x0.toFixed(2)}</span>`;
+                        } else { // 2 solutions
+                            let x1 = (-b_eq - Math.sqrt(delta)) / (2 * a_eq);
+                            let x2 = (-b_eq + Math.sqrt(delta)) / (2 * a_eq);
+                            // Sort them
+                            if(x1 > x2) { let temp = x1; x1 = x2; x2 = temp; }
+                            
+                            drawIntersectionPoint(group, x1, c_val);
+                            drawIntersectionPoint(group, x2, c_val);
+                            statusText = `<span class="text-emerald-600">2 Solutions : x₁ = ${x1.toFixed(2)} &nbsp;&nbsp; x₂ = ${x2.toFixed(2)}</span>`;
+                        }
+                        
+                        document.getElementById('solutionStatus').innerHTML = statusText;
+                    }
+                    
+                    function drawIntersectionPoint(group, x, y) {
+                        let px = mapX(x);
+                        let py = mapY(y);
+                        
+                        // Projection dashed line to X axis (y=0 -> mapY(0) = 200)
+                        let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute("x1", px);
+                        line.setAttribute("y1", py);
+                        line.setAttribute("x2", px);
+                        line.setAttribute("y2", 200);
+                        line.setAttribute("stroke", "#64748b");
+                        line.setAttribute("stroke-dasharray", "4,4");
+                        line.setAttribute("stroke-width", "2");
+                        group.appendChild(line);
+                        
+                        // Intersection dot
+                        let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        circle.setAttribute("cx", px);
+                        circle.setAttribute("cy", py);
+                        circle.setAttribute("r", "5");
+                        circle.setAttribute("fill", "#3b82f6");
+                        group.appendChild(circle);
+                        
+                        // X axis dot
+                        let xDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        xDot.setAttribute("cx", px);
+                        xDot.setAttribute("cy", 200);
+                        xDot.setAttribute("r", "4");
+                        xDot.setAttribute("fill", "#64748b");
+                        group.appendChild(xDot);
+                    }
+                    
+                    updateGraph();
+                </script>
+            </div>
         </section>
 
-        <!-- SECTION 3 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">3. Résoudre $f(x) = 0$ (Recherche de racines)</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6 border-l-purple-500 bg-purple-50">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-arrows-to-dot"></i> Les racines
-                </h3>
-                <p class="text-purple-900 mb-3">Résoudre $f(x) = 0$, c'est chercher les points où la parabole croise <strong>l'axe des abscisses</strong> (l'axe horizontal où $y=0$).</p>
-                <p class="text-purple-900">Les solutions de cette équation s'appellent les <strong>racines</strong> du polynôme du second degré.</p>
+        <!-- SECTION 2 & 3 : Racines et Cas concrets -->
+        <section class="mt-12 space-y-6">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Cas particulier : Les Racines</h2>
             </div>
             
-            <div class="ex-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-rocket"></i> Modélisation (Balistique)
-                </h3>
-                <p class="text-purple-900 mb-2">
-                    On lance une fusée de détresse. Sa hauteur en mètres est donnée en fonction du temps en secondes par la fonction $h(t) = -5t^2 + 20t$.
-                </p>
-                <div class="bg-white p-3 rounded border border-purple-200 text-sm mt-3">
-                    <p class="font-bold text-slate-800 mb-1">Question : Au bout de combien de temps la fusée retombe-t-elle au sol ?</p>
-                    <p class="text-slate-600 mb-2">Le sol correspond à la hauteur $0$. On doit donc résoudre l'équation $h(t) = 0$.</p>
-                    <p class="text-slate-600">Sur le graphique, on verrait que la parabole croise l'axe horizontal en $t=0$ (le lancement) et en $t=4$ (la retombée).</p>
-                    <p class="font-bold text-purple-700 mt-2">Réponse : La fusée retombe au sol au bout de 4 secondes.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Racines -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
+                    <h3 class="font-bold text-purple-800 mb-2 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-to-dot"></i> Résoudre $f(x) = 0$
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        C'est chercher l'intersection avec <strong>l'axe horizontal</strong> (des abscisses). Les solutions s'appellent les <strong>racines</strong>.
+                    </p>
+                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-sm text-purple-900">
+                        <i class="fa-solid fa-lightbulb text-purple-600 mr-2"></i> Dans le simulateur, réglez $c = 0$ pour trouver les racines de la parabole.
+                    </div>
+                </div>
+
+                <!-- Cas Concret Balistique -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500">
+                    <h3 class="font-bold text-emerald-800 mb-2 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-rocket"></i> Cas concret : Balistique
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-3">
+                        On lance une fusée. Sa hauteur (m) en fonction du temps (s) est $h(t) = -5t^2 + 20t$.
+                    </p>
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-sm text-emerald-900">
+                        <p class="font-bold mb-2">Quand retombe-t-elle au sol ?</p>
+                        <p class="mb-2 text-emerald-700">➔ Le sol = hauteur 0. On résout $h(t) = 0$.</p>
+                        <p>Graphiquement, la courbe croise l'axe horizontal en $t = 0$ (lancement) et en $t = 4$. <br><strong>Elle retombe au bout de 4s.</strong></p>
+                    </div>
                 </div>
             </div>
         </section>
         
     </main>
+
+    <div class="h-24"></div>
 </body>
 </html>

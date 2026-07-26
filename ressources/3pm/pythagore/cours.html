@@ -4,107 +4,282 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cours - Théorème de Pythagore</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-ruler-triangle text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Géométrie</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Théorème de Pythagore</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • Mathématiques</p>
-                <h1 class="text-2xl font-bold text-slate-800">Séquence : Le théorème de Pythagore</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">1. Le vocabulaire du triangle rectangle</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <p class="text-blue-900 mb-2">Le théorème de Pythagore ne s'applique <strong>que dans les triangles rectangles</strong> (qui ont un angle droit, 90°).</p>
-                <ul class="list-disc list-inside text-blue-900 space-y-1">
-                    <li>Le côté situé en face de l'angle droit s'appelle l'<strong>hypoténuse</strong>.</li>
-                    <li>C'est toujours le <strong>plus grand côté</strong> du triangle.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SECTION 2 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">2. Le Théorème (Calculer une longueur)</h2>
-            
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-ruler-triangle"></i> Énoncé du théorème
-                </h3>
-                <p class="text-emerald-900 mb-2">Si un triangle est rectangle, alors <strong>le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés</strong>.</p>
+        <!-- SECTION 1 : Vocabulaire -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le Vocabulaire</h2>
+                </div>
                 
-                <div class="bg-emerald-50 p-3 mt-3 rounded-lg border border-emerald-200 text-center font-bold font-mono text-lg text-emerald-900">
-                    $\text{Hypoténuse}^2 = \text{Côté 1}^2 + \text{Côté 2}^2$
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-triangle-exclamation text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Seulement pour les triangles rectangles !</h3>
+                    </div>
+                    
+                    <p class="text-slate-700 leading-relaxed text-base mb-4">
+                        Le théorème de Pythagore ne s'applique <strong>QUE</strong> si le triangle possède un angle droit (90°). Dans ce triangle, le plus grand côté porte un nom spécial :
+                    </p>
+                    
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <h4 class="font-bold text-blue-900 mb-1">L'Hypoténuse</h4>
+                        <ul class="list-disc list-inside text-blue-800 space-y-1 mt-2 text-sm">
+                            <li>C'est toujours le côté <strong>le plus long</strong>.</li>
+                            <li>Il est toujours situé <strong>en face</strong> de l'angle droit.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6 border-l-amber-500 bg-amber-50">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-pencil"></i> Méthode de rédaction
+            <!-- Visualization: Right Triangle -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
+                <h3 class="font-bold text-slate-800 mb-4 font-heading text-center">
+                    Repérer l'Hypoténuse
                 </h3>
-                <p class="text-amber-900 mb-2 font-bold">Exemple : On a un triangle ABC rectangle en A, avec $AB = 3$ cm et $AC = 4$ cm. Calculer l'hypoténuse $BC$.</p>
-                <div class="bg-white p-4 rounded border border-amber-200 text-sm font-mono text-slate-700">
-                    <p>Le triangle $ABC$ est rectangle en $A$.</p>
-                    <p>D'après le théorème de Pythagore, on a :</p>
-                    <p class="mt-2">$BC^2 = AB^2 + AC^2$</p>
-                    <p>$BC^2 = 3^2 + 4^2$</p>
-                    <p>$BC^2 = 9 + 16$</p>
-                    <p>$BC^2 = 25$</p>
-                    <p class="mt-2 text-amber-700 font-bold">$BC = \sqrt{25} = 5 \text{ cm}$</p>
+                
+                <div class="flex justify-center my-4">
+                    <svg width="200" height="150" viewBox="0 0 200 150">
+                        <!-- Right Angle Marker -->
+                        <polyline points="20,110 40,110 40,130" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <circle cx="28" cy="122" r="2" fill="#ef4444" />
+                        
+                        <!-- Triangle -->
+                        <polygon points="20,20 20,130 180,130" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="3"/>
+                        
+                        <!-- Labels -->
+                        <text x="5" y="25" font-size="14" font-weight="bold" fill="#334155">A</text>
+                        <text x="5" y="145" font-size="14" font-weight="bold" fill="#334155">B</text>
+                        <text x="185" y="145" font-size="14" font-weight="bold" fill="#334155">C</text>
+
+                        <!-- Hypoténuse Highlight -->
+                        <line x1="20" y1="20" x2="180" y2="130" stroke="#f59e0b" stroke-width="4"/>
+                        <text x="110" y="65" font-size="12" font-weight="bold" fill="#d97706" transform="rotate(33 110,65)">HYPOTÉNUSE (AC)</text>
+                        
+                        <text x="-70" y="20" font-size="12" fill="#64748b" transform="rotate(-90 0,0)">Côté de l'angle droit</text>
+                        <text x="70" y="145" font-size="12" fill="#64748b">Côté de l'angle droit</text>
+                    </svg>
                 </div>
-                <p class="text-xs text-slate-500 mt-2">Note : On utilise la touche racine carrée ($\sqrt{}$) de la calculatrice pour passer de $BC^2$ à $BC$.</p>
             </div>
         </section>
 
-        <!-- SECTION 3 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">3. La Réciproque (Vérifier si c'est rectangle)</h2>
-            
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6 border-l-purple-500 bg-purple-50">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-check-double"></i> Énoncé de la réciproque
-                </h3>
-                <p class="text-purple-900 mb-2">Si, dans un triangle, le carré du plus grand côté est égal à la somme des carrés des deux autres côtés, alors <strong>le triangle est rectangle</strong>.</p>
-                <p class="text-purple-900 text-sm italic">Ceci sert à vérifier si un mur est droit (équerre), si un meuble est bien rectangulaire, etc.</p>
+        <!-- SECTION 2 : Le Théorème -->
+        <section class="course-layout items-start mt-12">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le Théorème</h2>
+                </div>
                 
-                <div class="bg-white p-4 rounded border border-purple-200 text-sm mt-4">
-                    <h4 class="font-bold text-purple-800 mb-2">Méthode de vérification :</h4>
-                    <p>On a un triangle de côtés 5 cm, 12 cm et 13 cm. Est-il rectangle ?</p>
-                    <ol class="list-decimal list-inside space-y-1 font-mono mt-2">
-                        <li>Le plus grand côté est 13. On calcule son carré seul : $13^2 = 169$.</li>
-                        <li>On calcule la somme des carrés des deux autres : $5^2 + 12^2 = 25 + 144 = 169$.</li>
-                        <li>On compare : $169 = 169$. L'égalité de Pythagore est vraie.</li>
-                    </ol>
-                    <p class="mt-2 font-bold text-purple-700">Conclusion : D'après la réciproque du théorème de Pythagore, le triangle est bien rectangle.</p>
+                <p class="text-lg text-slate-700">Il permet de <strong>calculer la longueur d'un côté</strong> quand on connaît les deux autres.</p>
+
+                <!-- Method Box -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
+                    
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">La Formule Magique</h3>
+                    <div class="bg-amber-50 text-amber-900 p-4 rounded-xl font-mono text-center border border-amber-200 font-bold mb-6 text-lg shadow-inner">
+                        $\text{Hypoténuse}^2 = \text{Côté 1}^2 + \text{Côté 2}^2$
+                    </div>
+
+                    <h4 class="font-bold text-slate-800 mb-3">La Rédaction Parfaite (Brevet)</h4>
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm font-mono text-sm text-slate-700 space-y-2">
+                        <p>1. <span class="text-emerald-600">On sait que</span> le triangle $ABC$ est rectangle en $B$.</p>
+                        <p>2. <span class="text-emerald-600">D'après</span> le théorème de Pythagore :</p>
+                        <p class="ml-4 font-bold text-slate-900">$AC^2 = AB^2 + BC^2$</p>
+                        <p class="ml-4">$AC^2 = 3^2 + 4^2$</p>
+                        <p class="ml-4">$AC^2 = 9 + 16$</p>
+                        <p class="ml-4">$AC^2 = 25$</p>
+                        <p>3. <span class="text-emerald-600">Donc</span> $AC = \sqrt{25} = \mathbf{5 \text{ cm}}$</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Proof/Calculator -->
+            <div class="bg-white rounded-2xl card-shadow border border-slate-200 overflow-hidden sticky top-28">
+                <div class="bg-slate-800 p-3 flex justify-between items-center">
+                    <div class="flex items-center gap-2 text-white">
+                        <i class="fa-solid fa-calculator text-amber-400"></i>
+                        <span class="font-semibold text-sm">Calculateur Visuel : Les 3 Carrés</span>
+                    </div>
+                </div>
+                
+                <div class="p-5 bg-slate-50">
+                    <p class="text-xs text-slate-500 mb-4 text-center uppercase">Entrez les côtés de l'angle droit</p>
+                    
+                    <div class="flex gap-4 justify-center mb-6">
+                        <div class="text-center">
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Côté 1</label>
+                            <input type="number" id="sideA" value="3" min="1" max="20" class="w-16 p-2 text-center border border-slate-300 rounded focus:border-brand-500 font-mono" onchange="updatePythagore()">
+                        </div>
+                        <div class="text-center">
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Côté 2</label>
+                            <input type="number" id="sideB" value="4" min="1" max="20" class="w-16 p-2 text-center border border-slate-300 rounded focus:border-brand-500 font-mono" onchange="updatePythagore()">
+                        </div>
+                    </div>
+
+                    <!-- Visual Equation -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between font-mono text-center mb-2">
+                            <div>
+                                <div id="sqA" class="text-blue-600 font-bold text-xl">3²</div>
+                                <div id="areaA" class="text-xs text-slate-500">9</div>
+                            </div>
+                            <div class="text-xl text-slate-400">+</div>
+                            <div>
+                                <div id="sqB" class="text-emerald-600 font-bold text-xl">4²</div>
+                                <div id="areaB" class="text-xs text-slate-500">16</div>
+                            </div>
+                            <div class="text-xl text-slate-400">=</div>
+                            <div>
+                                <div class="text-amber-600 font-bold text-xl">Hyp²</div>
+                                <div id="areaC" class="text-xs text-slate-500">25</div>
+                            </div>
+                        </div>
+                        <hr class="my-3 border-slate-100">
+                        <div class="text-center">
+                            <span class="text-sm text-slate-600">L'hypoténuse vaut : </span>
+                            <span id="finalResult" class="font-bold text-2xl text-amber-600 font-mono">√25 = 5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function updatePythagore() {
+                        const a = parseFloat(document.getElementById('sideA').value) || 0;
+                        const b = parseFloat(document.getElementById('sideB').value) || 0;
+                        
+                        const a2 = a * a;
+                        const b2 = b * b;
+                        const c2 = a2 + b2;
+                        
+                        let c = Math.sqrt(c2);
+                        // Format c to avoid long decimals
+                        c = Number.isInteger(c) ? c : c.toFixed(2);
+                        
+                        document.getElementById('sqA').innerText = a + '²';
+                        document.getElementById('areaA').innerText = a2;
+                        
+                        document.getElementById('sqB').innerText = b + '²';
+                        document.getElementById('areaB').innerText = b2;
+                        
+                        document.getElementById('areaC').innerText = c2;
+                        
+                        document.getElementById('finalResult').innerText = `√${c2} = ${c}`;
+                    }
+                    // Init
+                    updatePythagore();
+                </script>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : La Réciproque -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">3</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">La Réciproque</h2>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden border-l-4 border-l-purple-500">
+                <h3 class="font-bold text-purple-800 mb-3 text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-check-double"></i> Vérifier si un triangle est rectangle
+                </h3>
+                
+                <p class="text-slate-700 mb-6">
+                    On vous donne 3 longueurs et on vous demande : <strong>"Ce triangle a-t-il un angle droit ?"</strong>. <br>
+                    C'est très utile dans le bâtiment pour vérifier qu'un mur est bien droit (monté "à l'équerre").
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-200">
+                        <h4 class="font-bold text-purple-900 mb-2">Exemple 1 : Côtés de 5, 12 et 13.</h4>
+                        <ol class="list-decimal list-inside space-y-1 text-sm text-slate-700 font-mono">
+                            <li>Le plus long côté est 13 : <br> $\rightarrow 13^2 = 169$</li>
+                            <li class="mt-2">La somme des deux autres : <br> $\rightarrow 5^2 + 12^2 = 25 + 144 = 169$</li>
+                            <li class="mt-2 font-bold text-emerald-600">On compare : $169 = 169$. C'est égal !</li>
+                        </ol>
+                        <p class="mt-3 font-bold text-slate-800 text-sm">Conclusion : D'après la réciproque du théorème de Pythagore, le triangle EST rectangle.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-900 mb-2">Exemple 2 : Côtés de 4, 5 et 7.</h4>
+                        <ol class="list-decimal list-inside space-y-1 text-sm text-slate-700 font-mono">
+                            <li>Le plus long côté est 7 : <br> $\rightarrow 7^2 = 49$</li>
+                            <li class="mt-2">La somme des deux autres : <br> $\rightarrow 4^2 + 5^2 = 16 + 25 = 41$</li>
+                            <li class="mt-2 font-bold text-rose-600">On compare : $49 \neq 41$. Ce n'est pas égal !</li>
+                        </ol>
+                        <p class="mt-3 font-bold text-slate-800 text-sm">Conclusion : Le triangle N'EST PAS rectangle.</p>
+                    </div>
                 </div>
             </div>
         </section>
         
     </main>
+
+    <div class="h-24"></div>
 </body>
 </html>

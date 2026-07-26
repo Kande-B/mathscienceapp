@@ -4,102 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cours - Algorithmique et Programmation</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' },
+                        scratch: {
+                            event: '#ffbf00',
+                            motion: '#4c97ff',
+                            looks: '#9966ff',
+                            control: '#ffab19',
+                            variable: '#ff8c1a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        
+        /* Pseudo Scratch Blocks */
+        .sb { padding: 8px 12px; border-radius: 4px; color: white; font-weight: bold; font-family: sans-serif; font-size: 13px; margin-bottom: 2px; display: inline-block; box-shadow: inset 0 -2px rgba(0,0,0,0.2); }
+        .sb-hat { border-radius: 12px 12px 4px 4px; }
+        .sb-event { background-color: #ffbf00; }
+        .sb-motion { background-color: #4c97ff; }
+        .sb-control { background-color: #ffab19; }
+        .sb-var { background-color: #ff8c1a; }
+        .sb-cond { background-color: #ffab19; }
+        
+        .sb-wrap { margin-left: 15px; border-left: 10px solid #ffab19; padding-left: 5px; padding-top: 2px; padding-bottom: 2px; }
+        .sb-end { background-color: #ffab19; height: 10px; border-radius: 0 0 4px 4px; margin-bottom: 2px; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-code text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-code text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Informatique</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Algorithmique (Scratch)</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • Mathématiques</p>
-                <h1 class="text-2xl font-bold text-slate-800">Séquence : Algorithmique (Scratch)</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">1. Qu'est-ce qu'un Algorithme ?</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <p class="text-blue-900 mb-3">Un <strong>algorithme</strong> est une suite d'instructions précises et ordonnées, permettant de résoudre un problème ou d'obtenir un résultat. (C'est comme une recette de cuisine !).</p>
-                <p class="text-blue-900">En mathématiques au collège, on utilise souvent le logiciel <strong>Scratch</strong>, où les instructions sont des <em>blocs</em> de couleur que l'on emboîte.</p>
-                
-                <h4 class="font-bold text-blue-800 mt-4 mb-2">Les 3 grandes familles de blocs (Scratch) :</h4>
-                <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
-                    <li><span class="font-bold text-yellow-600">Événements (Jaune) :</span> Pour démarrer (Ex: "Quand le drapeau vert est cliqué").</li>
-                    <li><span class="font-bold text-blue-600">Mouvement (Bleu) :</span> Pour déplacer le lutin (Ex: "Avancer de 10 pas").</li>
-                    <li><span class="font-bold text-purple-600">Apparence (Violet) :</span> Pour parler ou changer de costume (Ex: "Dire Bonjour").</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SECTION 2 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">2. Les Variables</h2>
-            
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6 border-l-orange-500 bg-orange-50">
-                <h3 class="font-bold text-orange-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-box-open"></i> Stocker une information
-                </h3>
-                <p class="text-orange-900 mb-2">Une <strong>variable</strong> est comme une "boîte" dans l'ordinateur, qui porte un nom, et dans laquelle on peut ranger une valeur (souvent un nombre).</p>
-                <p class="text-orange-900 text-sm">Dans Scratch (blocs oranges foncés) :</p>
-                <ul class="list-disc list-inside text-orange-900 text-sm mt-2">
-                    <li><strong>Mettre [Score] à 0</strong> : On vide la boîte et on met 0 dedans.</li>
-                    <li><strong>Ajouter 1 à [Score]</strong> : On prend ce qu'il y a dans la boîte, on ajoute 1, et on remet le nouveau résultat dans la boîte.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SECTION 3 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">3. Les Boucles (Répétitions) et Conditions</h2>
-            
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6 border-l-amber-500 bg-amber-50">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-rotate-right"></i> Répéter des actions (Boucle)
-                </h3>
-                <p class="text-amber-900 mb-2">Pour éviter d'écrire 100 fois la même chose, on utilise une boucle (blocs Contrôle orange/jaune) :</p>
-                <div class="bg-white p-3 rounded border border-amber-200 text-sm font-mono text-slate-700">
-                    <p class="font-bold text-amber-600">Répéter (4) fois</p>
-                    <p class="ml-4 border-l-2 border-amber-300 pl-2">Avancer de 50 pas</p>
-                    <p class="ml-4 border-l-2 border-amber-300 pl-2">Tourner de 90 degrés</p>
+        <!-- SECTION 1 : Algorithme et Variables -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Bases & Les Variables</h2>
                 </div>
-                <p class="text-xs text-slate-500 mt-1 italic">Ce script permet de tracer un carré ! (4 côtés, angles de 90°).</p>
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-list-ol text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Qu'est-ce qu'un algorithme ?</h3>
+                    </div>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Un algorithme est une suite d'instructions précises pour accomplir une tâche, comme une recette de cuisine. En cours, on utilise souvent le logiciel visuel <strong>Scratch</strong>.
+                    </p>
+
+                    <h4 class="font-bold text-slate-800 mb-2 mt-6 flex items-center gap-2">
+                        <i class="fa-solid fa-box-open text-orange-500"></i> La Variable
+                    </h4>
+                    <p class="text-slate-700 text-sm mb-3">
+                        Une variable est une "boîte" avec un nom (ex: "Score", "Vitesse") qui permet à l'ordinateur de mémoriser une information qui peut changer pendant le programme.
+                    </p>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-start">
+                        <div class="sb sb-var w-full md:w-auto mb-2">mettre [ Score v ] à 0</div>
+                        <p class="text-xs text-slate-500 mb-4 ml-2">➔ Initialisation : On vide la boîte et on met 0.</p>
+                        
+                        <div class="sb sb-var w-full md:w-auto mb-2">ajouter à [ Score v ] 1</div>
+                        <p class="text-xs text-slate-500 ml-2">➔ L'ordi regarde le score actuel, ajoute 1, et range le nouveau résultat.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6 border-l-emerald-500 bg-emerald-50">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-code-branch"></i> Faire un choix (Condition)
+            <!-- Visualization : Traceur (Boucles) -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
+                <h3 class="font-bold text-slate-800 mb-4 font-heading text-center">
+                    Simulateur de Tracé
                 </h3>
-                <p class="text-emerald-900 mb-2">Le programme peut prendre des décisions grâce au bloc <strong>Si ... Alors ... Sinon</strong>.</p>
-                <div class="bg-white p-3 rounded border border-emerald-200 text-sm font-mono text-slate-700">
-                    <p class="font-bold text-emerald-600">Si (Moyenne > 10) Alors</p>
-                    <p class="ml-4 border-l-2 border-emerald-300 pl-2">Dire "Bravo, c'est validé !"</p>
-                    <p class="font-bold text-emerald-600">Sinon</p>
-                    <p class="ml-4 border-l-2 border-emerald-300 pl-2">Dire "Il faut encore travailler."</p>
+                
+                <p class="text-sm text-slate-600 mb-4 text-center">Observez comment le programme dessine en exécutant la boucle.</p>
+                
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
+                    <!-- Code -->
+                    <div class="flex flex-col items-start w-full md:w-auto">
+                        <div class="sb sb-event sb-hat">quand 🚩 est cliqué</div>
+                        <div class="sb sb-motion">aller à x:0 y:0</div>
+                        <div class="sb sb-motion" style="background:#0fbd8c">stylo en position d'écriture</div>
+                        <div class="sb sb-control w-full">répéter (4) fois</div>
+                        <div class="sb-wrap">
+                            <div class="sb sb-motion w-full" id="b-move">avancer de 50 pas</div>
+                            <div class="sb sb-motion w-full" id="b-turn">tourner ↻ de 90 degrés</div>
+                        </div>
+                        <div class="sb-end w-full"></div>
+                        
+                        <button onclick="runDrawing()" class="mt-4 w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded transition">
+                            <i class="fa-solid fa-play mr-2"></i> Exécuter
+                        </button>
+                    </div>
+                    
+                    <!-- Canvas -->
+                    <div class="bg-slate-100 border border-slate-300 rounded-xl w-48 h-48 relative overflow-hidden flex items-center justify-center">
+                        <svg id="drawCanvas" width="120" height="120" viewBox="-10 -110 120 120">
+                            <!-- Trace sera injectée ici -->
+                            <path id="drawPath" d="" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+                            <!-- Lutin -->
+                            <polygon id="turtle" points="-5,5 5,5 0,-10" fill="#f59e0b" transform="translate(0,0) rotate(90)" />
+                        </svg>
+                    </div>
+                </div>
+
+                <script>
+                    let drawInterval;
+                    function runDrawing() {
+                        clearInterval(drawInterval);
+                        
+                        const path = document.getElementById('drawPath');
+                        const turtle = document.getElementById('turtle');
+                        
+                        // Start point (Scratch uses Y up, our SVG viewbox is -10 to 110, y down in svg so we map it)
+                        // Actually let's just do a simple square animation in the SVG space
+                        let x = 0; let y = 0;
+                        let angle = 90; // pointing right
+                        let step = 0;
+                        
+                        let dString = `M ${x} ${y}`;
+                        path.setAttribute('d', dString);
+                        updateTurtle(x, y, angle);
+                        
+                        drawInterval = setInterval(() => {
+                            if(step >= 4) {
+                                clearInterval(drawInterval);
+                                return;
+                            }
+                            
+                            // Move 50 (actually 100 in our small svg)
+                            if(angle === 90) x += 100;
+                            else if(angle === 180) y += 100; // down in svg
+                            else if(angle === 270) x -= 100;
+                            else if(angle === 0 || angle === 360) y -= 100;
+                            
+                            dString += ` L ${x} ${y}`;
+                            path.setAttribute('d', dString);
+                            
+                            // Turn 90
+                            angle += 90;
+                            if(angle >= 360) angle = 0;
+                            
+                            updateTurtle(x, y, angle);
+                            step++;
+                        }, 500);
+                    }
+                    
+                    function updateTurtle(x, y, a) {
+                        // Math to SVG angle : Scratch 90 is right, SVG 0 is right for a polygon pointing right.
+                        // Our polygon points UP natively. So rotate by a.
+                        document.getElementById('turtle').setAttribute('transform', `translate(${x},${y}) rotate(${a})`);
+                    }
+                </script>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : Conditions & Boucles -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Structures de Contrôle</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Boucles -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-amber-500">
+                    <h3 class="font-bold text-amber-800 mb-3 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Les Boucles
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Une boucle sert à <strong>répéter</strong> des instructions sans avoir à les réécrire plusieurs fois.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200 flex flex-col items-start">
+                            <div class="sb sb-control">répéter (10) fois</div>
+                            <div class="sb-wrap"><div class="sb sb-motion bg-slate-400">...</div></div>
+                            <div class="sb-end"></div>
+                            <p class="text-xs mt-2 text-slate-500 w-full">Répète un nombre précis de fois (très utilisé pour tracer des polygones).</p>
+                        </div>
+                        
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200 flex flex-col items-start">
+                            <div class="sb sb-control">répéter indéfiniment</div>
+                            <div class="sb-wrap"><div class="sb sb-motion bg-slate-400">...</div></div>
+                            <div class="sb-end"></div>
+                            <p class="text-xs mt-2 text-slate-500 w-full">Boucle infinie (utilisée pour les mouvements constants dans les jeux).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conditions -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500">
+                    <h3 class="font-bold text-emerald-800 mb-3 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-code-branch"></i> Les Conditions (Si... Alors)
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Permet au programme de prendre une <strong>décision</strong>. L'ordinateur vérifie une condition et agit en fonction.
+                    </p>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-start font-mono">
+                        <div class="sb sb-cond w-full">si <span class="bg-emerald-600 px-2 rounded-full mx-1 font-sans">moyenne > 10</span> alors</div>
+                        <div class="sb-wrap w-full">
+                            <div class="sb sb-looks w-full" style="background:#9966ff">dire [Bravo !] pendant 2s</div>
+                        </div>
+                        <div class="sb sb-cond w-full">sinon</div>
+                        <div class="sb-wrap w-full">
+                            <div class="sb sb-looks w-full" style="background:#9966ff">dire [Il faut travailler] pendant 2s</div>
+                        </div>
+                        <div class="sb-end w-full"></div>
+                    </div>
+                    
+                    <p class="text-xs mt-4 text-slate-500">Si la condition (verte hexagonale) est VRAIE, il fait le premier bloc. Si elle est FAUSSE, il fait le bloc dans le "sinon".</p>
                 </div>
             </div>
         </section>
         
     </main>
+
+    <div class="h-24"></div>
 </body>
 </html>

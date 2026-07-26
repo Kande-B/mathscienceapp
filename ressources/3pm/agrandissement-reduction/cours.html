@@ -3,158 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Agrandissement et réduction</title>
+    <title>Cours - Agrandissement et Réduction</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box   { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box  { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box  { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-        .ex-box    { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
-        .warn-box  { border-left: 4px solid #ef4444; background-color: #fef2f2; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        
+        .grid-cell { transition: all 0.3s ease; }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner flex-shrink-0">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-expand text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Géométrie</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Agrandissement et Réduction</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Mathématiques</p>
-                <h1 class="text-xl md:text-2xl font-bold text-slate-800">Chapitre : Agrandissement et réduction</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 md:px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
+        
+        <!-- SECTION 1 : Coefficient -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le Coefficient k</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-magnifying-glass text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Qu'est-ce qu'un agrandissement ?</h3>
+                    </div>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Agrandir ou réduire une figure, c'est <strong>multiplier toutes ses longueurs</strong> par un même nombre, appelé le <strong>coefficient $k$</strong>. La forme de la figure reste identique, seules ses dimensions changent.
+                    </p>
+                    
+                    <ul class="space-y-3 text-slate-700 font-mono text-sm mb-6">
+                        <li class="bg-blue-50 p-3 rounded-lg border border-blue-200 flex items-center gap-3">
+                            <span class="font-bold text-blue-800 text-lg">k > 1</span>
+                            <span>C'est un <strong>agrandissement</strong>. (ex: x2, x3)</span>
+                        </li>
+                        <li class="bg-emerald-50 p-3 rounded-lg border border-emerald-200 flex items-center gap-3">
+                            <span class="font-bold text-emerald-800 text-lg">k < 1</span>
+                            <span>C'est une <strong>réduction</strong>. (ex: x0.5, soit la moitié)</span>
+                        </li>
+                    </ul>
 
-        <!-- INTRODUCTION -->
-        <section>
-            <div class="bg-indigo-600 text-white rounded-2xl p-5 mb-4 flex items-start gap-3">
-                <i class="fa-solid fa-magnifying-glass-plus text-2xl mt-1 flex-shrink-0"></i>
-                <div>
-                    <p class="font-bold text-lg">Pourquoi étudier ce chapitre ?</p>
-                    <p class="text-indigo-100 text-sm mt-1">Dans la vie professionnelle, on travaille souvent avec des plans (architecte, bâtiment) ou des maquettes (industrie, design). Il faut savoir passer de la réalité à la maquette (réduction) ou du plan à la taille réelle (agrandissement).</p>
+                    <h4 class="font-bold text-slate-800 mb-2">Comment calculer k ?</h4>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center font-bold font-mono shadow-inner text-slate-900">
+                        $k = \frac{\text{Longueur FINALE}}{\text{Longueur INITIALE}}$
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization : k, k², k³ -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
+                <h3 class="font-bold text-slate-800 mb-4 font-heading text-center">
+                    Le Piège des Aires et Volumes
+                </h3>
+                
+                <p class="text-sm text-slate-600 mb-4 text-center">Modifiez le coefficient <strong class="text-rose-600">k</strong> pour voir l'effet sur le carré de départ (côté 1).</p>
+                
+                <div class="mb-6 flex justify-center">
+                    <div class="w-full max-w-xs text-center">
+                        <label class="text-xs font-bold text-slate-500 uppercase">Coefficient <span class="text-rose-600 text-base">k</span></label>
+                        <div class="flex items-center gap-4 mt-2">
+                            <span class="font-bold">x1</span>
+                            <input type="range" id="sliderK" min="1" max="4" step="1" value="1" class="w-full accent-rose-500" oninput="updateVisualizer()">
+                            <span class="font-bold">x4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Longueurs -->
+                    <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                        <p class="text-xs font-bold text-slate-500 uppercase mb-2">Longueurs</p>
+                        <div class="font-mono font-bold text-rose-600 text-xl mb-2">x <span id="valK">1</span></div>
+                        <p class="text-[10px] text-slate-400">Périmètre, Côtés, Hauteur</p>
+                    </div>
+                    
+                    <!-- Aires -->
+                    <div class="bg-amber-50 p-3 rounded border border-amber-200 text-center">
+                        <p class="text-xs font-bold text-amber-700 uppercase mb-2">Aires (Surface)</p>
+                        <div class="font-mono font-bold text-amber-600 text-xl mb-2">x <span id="valK2">1</span></div>
+                        <p class="text-[10px] text-amber-600 font-bold">Règle : x k²</p>
+                    </div>
+                </div>
+                
+                <!-- Grid Viz -->
+                <div class="mt-6 flex justify-center h-48 items-end">
+                    <!-- The Grid -->
+                    <div id="visualGrid" class="flex flex-wrap" style="width: 32px; height: 32px;">
+                        <!-- Cells injected via JS -->
+                    </div>
+                </div>
+                
+                <p id="gridText" class="text-center font-bold text-amber-700 mt-4 font-mono">1 Carré</p>
+
+                <script>
+                    function updateVisualizer() {
+                        const k = parseInt(document.getElementById('sliderK').value);
+                        
+                        document.getElementById('valK').innerText = k;
+                        document.getElementById('valK2').innerText = k * k;
+                        
+                        const grid = document.getElementById('visualGrid');
+                        const baseSize = 32; // px per cell
+                        
+                        grid.style.width = (k * baseSize) + 'px';
+                        grid.style.height = (k * baseSize) + 'px';
+                        
+                        grid.innerHTML = ''; // clear
+                        const totalCells = k * k;
+                        
+                        for(let i=0; i<totalCells; i++) {
+                            const cell = document.createElement('div');
+                            cell.className = 'border border-amber-400 bg-amber-200 grid-cell';
+                            cell.style.width = baseSize + 'px';
+                            cell.style.height = baseSize + 'px';
+                            grid.appendChild(cell);
+                        }
+                        
+                        document.getElementById('gridText').innerText = `${totalCells} Carré${totalCells>1?'s':''}`;
+                    }
+                    updateVisualizer();
+                </script>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : Règles fondamentales -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les règles pour les Aires et Volumes</h2>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
+                <p class="text-slate-700 mb-6">Lorsqu'on agrandit ou réduit une figure de coefficient $k$, il faut appliquer la bonne puissance selon ce que l'on cherche à calculer :</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-5 rounded-xl border border-blue-200 text-center">
+                        <i class="fa-solid fa-ruler-horizontal text-2xl text-blue-500 mb-2"></i>
+                        <h3 class="font-bold text-blue-900 mb-2">1D : Longueurs</h3>
+                        <p class="text-sm text-blue-800 mb-4">(Côté, Rayon, Périmètre)</p>
+                        <div class="bg-white py-2 rounded font-mono font-bold text-blue-700 border border-blue-100">
+                            Multipliées par $k$
+                        </div>
+                    </div>
+                    
+                    <div class="bg-emerald-50 p-5 rounded-xl border border-emerald-200 text-center relative">
+                        <div class="absolute -top-3 -right-3 text-2xl">⚠️</div>
+                        <i class="fa-solid fa-square text-2xl text-emerald-500 mb-2"></i>
+                        <h3 class="font-bold text-emerald-900 mb-2">2D : Aires</h3>
+                        <p class="text-sm text-emerald-800 mb-4">(Surface)</p>
+                        <div class="bg-white py-2 rounded font-mono font-bold text-emerald-700 border border-emerald-100 text-xl">
+                            Multipliées par $k^2$
+                        </div>
+                    </div>
+                    
+                    <div class="bg-rose-50 p-5 rounded-xl border border-rose-200 text-center relative">
+                        <div class="absolute -top-3 -right-3 text-2xl">⚠️</div>
+                        <i class="fa-solid fa-cube text-2xl text-rose-500 mb-2"></i>
+                        <h3 class="font-bold text-rose-900 mb-2">3D : Volumes</h3>
+                        <p class="text-sm text-rose-800 mb-4">(Contenance)</p>
+                        <div class="bg-white py-2 rounded font-mono font-bold text-rose-700 border border-rose-100 text-xl">
+                            Multipliés par $k^3$
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAPITRE I -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">I. Notion de coefficient</h2>
-
-            <div class="def-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Définition du coefficient $k$
-                </h3>
-                <p class="text-blue-900 text-sm md:text-base">
-                    Un <strong>agrandissement</strong> ou une <strong>réduction</strong> consiste à multiplier toutes les longueurs d'une figure par un même nombre strictement positif appelé <strong>coefficient</strong> (noté souvent $k$).
-                </p>
-                <ul class="list-disc list-inside text-sm md:text-base text-blue-900 mt-2 space-y-1">
-                    <li>Si <strong>$k > 1$</strong>, c'est un <strong>agrandissement</strong>.</li>
-                    <li>Si <strong>$0 < k < 1$</strong>, c'est une <strong>réduction</strong>.</li>
-                </ul>
+        <!-- SECTION 3 : Exemples -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">3</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Exemples d'application</h2>
             </div>
-
-            <div class="meth-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-calculator"></i> Comment trouver le coefficient $k$ ?
-                </h3>
-                <p class="text-amber-900 text-sm mb-3">Pour trouver le coefficient, on divise toujours la longueur de la figure <span class="font-bold">FINALE</span> par la longueur correspondante de la figure <span class="font-bold">INITIALE</span>.</p>
-                <div class="bg-amber-100 p-3 rounded font-mono text-center text-amber-900 text-base font-bold my-3">
-                    $k = \frac{\text{Longueur FINALE}}{\text{Longueur INITIALE}}$
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Exemple Aire -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
+                    <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <i class="fa-regular fa-image text-emerald-600"></i> Agrandir une photo
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">Une photo d'identité a une aire de $12 \text{ cm}^2$. On l'agrandit pour faire un poster (coefficient $k = 4$).</p>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-sm">
+                        <p class="text-slate-500 mb-1">On cherche une Aire, donc on utilise $k^2$.</p>
+                        <p class="mb-2">$k = 4 \implies k^2 = 4^2 = 16$</p>
+                        <p class="font-bold text-slate-800">Aire Finale = Aire Initiale $\times 16$</p>
+                        <p class="font-bold text-emerald-600 bg-white p-2 border border-slate-200 rounded mt-2 inline-block">Aire Finale = $12 \times 16 = 192 \text{ cm}^2$</p>
+                    </div>
                 </div>
-                <div class="bg-white p-4 rounded-lg border border-amber-200 text-sm">
-                    <p class="font-bold text-amber-900 mb-2">Exemple :</p>
-                    <p>Un rectangle a une longueur initiale de 4 cm. Après transformation, sa longueur est de 12 cm.</p>
-                    <p>$k = \frac{12}{4} = \mathbf{3}$. C'est un agrandissement de rapport 3.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPITRE II -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">II. Effet sur les longueurs, aires et volumes</h2>
-
-            <div class="prop-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-arrows-up-down-left-right"></i> Règle fondamentale
-                </h3>
-                <p class="text-emerald-900 text-sm md:text-base mb-3">Lors d'un agrandissement ou d'une réduction de rapport $k$ :</p>
-                <ul class="list-none space-y-3 text-sm md:text-base text-emerald-900">
-                    <li class="bg-white p-3 rounded shadow-sm border border-emerald-100 flex items-center gap-3">
-                        <div class="bg-emerald-100 p-2 rounded-lg"><i class="fa-solid fa-ruler"></i></div>
-                        <div>Les <strong>longueurs</strong> sont multipliées par <span class="font-bold text-lg text-emerald-700">$k$</span>.</div>
-                    </li>
-                    <li class="bg-white p-3 rounded shadow-sm border border-emerald-100 flex items-center gap-3">
-                        <div class="bg-emerald-100 p-2 rounded-lg"><i class="fa-solid fa-square"></i></div>
-                        <div>Les <strong>aires</strong> sont multipliées par <span class="font-bold text-lg text-emerald-700">$k^2$</span>.</div>
-                    </li>
-                    <li class="bg-white p-3 rounded shadow-sm border border-emerald-100 flex items-center gap-3">
-                        <div class="bg-emerald-100 p-2 rounded-lg"><i class="fa-solid fa-cube"></i></div>
-                        <div>Les <strong>volumes</strong> sont multipliés par <span class="font-bold text-lg text-emerald-700">$k^3$</span>.</div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="warn-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-red-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Piège classique !
-                </h3>
-                <p class="text-sm text-red-900">
-                    Si on double les dimensions d'une figure ($k = 2$), son aire <strong>n'est pas doublée</strong> ! Elle est multipliée par $2^2$, soit par 4. <br>
-                    De même, son volume est multiplié par $2^3$, soit par 8 !
-                </p>
-            </div>
-        </section>
-
-        <!-- CHAPITRE III -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">III. Exemples d'application</h2>
-
-            <div class="ex-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-image"></i> Exemple 1 : Agrandissement d'une photo (Aires)
-                </h3>
-                <p class="text-purple-900 text-sm md:text-base mb-3">
-                    Une petite photo a une aire de $15 \text{ cm}^2$. On l'agrandit avec un coefficient $k = 3$. Quelle est l'aire de la grande photo ?
-                </p>
-                <div class="bg-white p-4 rounded-lg border border-purple-200 text-sm space-y-2">
-                    <p>On sait que pour les aires, on multiplie par $k^2$.</p>
-                    <p>Ici, $k = 3$, donc $k^2 = 3^2 = 9$.</p>
-                    <p>Aire finale = Aire initiale $\times\ k^2$</p>
-                    <p>Aire finale = $15 \times 9 = \mathbf{135 \text{ cm}^2}$</p>
-                </div>
-            </div>
-
-            <div class="ex-box p-4 md:p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-3">
-                    <i class="fa-solid fa-box-open"></i> Exemple 2 : Maquette (Volumes)
-                </h3>
-                <p class="text-purple-900 text-sm md:text-base mb-3">
-                    Une entreprise construit une cuve d'un volume de $2 000 \text{ L}$. Pour la présentation, elle réalise une maquette à l'échelle $\frac{1}{10}$ (c'est une réduction, donc $k = \frac{1}{10}$). Quel est le volume de la maquette ?
-                </p>
-                <div class="bg-white p-4 rounded-lg border border-purple-200 text-sm space-y-2">
-                    <p>Pour les volumes, on multiplie par $k^3$.</p>
-                    <p>Ici, $k = \frac{1}{10} = 0{,}1$.</p>
-                    <p>Donc $k^3 = (0{,}1)^3 = 0{,}001$.</p>
-                    <p>Volume maquette = Volume réel $\times\ k^3$</p>
-                    <p>Volume maquette = $2 000 \times 0{,}001 = \mathbf{2 \text{ L}}$</p>
-                    <p class="text-purple-700 italic mt-2">Remarque : La cuve fait 2000 litres, mais la maquette au dixième ne contient que 2 litres !</p>
+                
+                <!-- Exemple Volume -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
+                    <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-box text-rose-600"></i> Réduire une cuve
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">Une cuve contient $1000 \text{ L}$. On fait une maquette à l'échelle $\frac{1}{10}$ (donc $k = 0,1$).</p>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-sm">
+                        <p class="text-slate-500 mb-1">On cherche un Volume, donc on utilise $k^3$.</p>
+                        <p class="mb-2">$k = 0,1 \implies k^3 = 0,1^3 = 0,001$</p>
+                        <p class="font-bold text-slate-800">Volume Final = Vol Initial $\times 0,001$</p>
+                        <p class="font-bold text-rose-600 bg-white p-2 border border-slate-200 rounded mt-2 inline-block">Vol Final = $1000 \times 0,001 = 1 \text{ L}$</p>
+                    </div>
                 </div>
             </div>
         </section>
-
+        
     </main>
 
+    <div class="h-24"></div>
 </body>
 </html>

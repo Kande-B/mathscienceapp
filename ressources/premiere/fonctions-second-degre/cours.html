@@ -4,117 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cours - Fonctions du second degré</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-chart-area text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Première Pro • Mathématiques</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Séquence 1 : Fonctions du 2nd Degré</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Première Pro • Mathématiques</p>
-                <h1 class="text-2xl font-bold text-slate-800">Séquence 1 : Fonctions du second degré</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">1. Qu'est-ce qu'une fonction du second degré ?</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Définition
-                </h3>
-                <p class="text-blue-900 mb-3">Une fonction $f$ du second degré est définie sur un intervalle par une expression algébrique de la forme :</p>
-                <div class="bg-white p-3 rounded-lg border border-blue-200 text-center font-bold font-mono text-xl text-blue-900 mb-3">
-                    $f(x) = ax^2 + bx + c$
+        <!-- SECTION 1 & 2 : Cours -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <!-- Définition -->
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">La fonction du second degré</h2>
                 </div>
-                <p class="text-blue-900 text-sm">Où $a, b$ et $c$ sont des nombres réels (avec $a \neq 0$).</p>
                 
-                <h4 class="font-bold mt-4 mb-2 text-blue-900">Exemples :</h4>
-                <ul class="list-disc list-inside text-blue-900 space-y-1">
-                    <li>$f(x) = 2x^2 - 3x + 1$ $\rightarrow$ $a=2$, $b=-3$, $c=1$</li>
-                    <li>$g(x) = -x^2 + 5$ $\rightarrow$ $a=-1$, $b=0$, $c=5$</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SECTION 2 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">2. Représentation Graphique : La Parabole</h2>
-            
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-chart-line"></i> Allure de la courbe
-                </h3>
-                <p class="text-emerald-900 mb-3">La représentation graphique d'une fonction du second degré est une courbe appelée <strong>parabole</strong>. L'allure de cette parabole dépend uniquement du signe du coefficient $a$.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white p-4 rounded border border-emerald-200 text-center">
-                        <h4 class="font-bold text-emerald-700 mb-2">Si $a > 0$ (Positif)</h4>
-                        <p class="text-3xl text-emerald-500 mb-2"><i class="fa-solid fa-face-smile"></i></p>
-                        <p class="text-sm text-emerald-900">La parabole est tournée vers le haut. Elle admet un <strong>minimum</strong>.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-book text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Qu'est-ce que c'est ?</h3>
                     </div>
-                    <div class="bg-white p-4 rounded border border-emerald-200 text-center">
-                        <h4 class="font-bold text-emerald-700 mb-2">Si $a < 0$ (Négatif)</h4>
-                        <p class="text-3xl text-red-500 mb-2"><i class="fa-solid fa-face-frown"></i></p>
-                        <p class="text-sm text-emerald-900">La parabole est tournée vers le bas. Elle admet un <strong>maximum</strong>.</p>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Une fonction $f$ du second degré s'écrit sous la forme algébrique :
+                    </p>
+                    
+                    <div class="bg-blue-50 py-3 rounded-xl border border-blue-200 text-center shadow-inner mb-6">
+                        <span class="text-xl font-bold font-mono text-blue-900">
+                            $f(x) = \textcolor{#ef4444}{a}x^2 + \textcolor{#eab308}{b}x + \textcolor{#3b82f6}{c}$
+                        </span>
+                        <p class="text-xs text-blue-700 mt-2">Où $a, b$ et $c$ sont des réels, et $a \neq 0$.</p>
+                    </div>
+
+                    <h3 class="font-bold text-slate-800 mb-3 font-heading border-t border-slate-100 pt-4"><i class="fa-solid fa-chart-line text-emerald-500 mr-2"></i>La Parabole</h3>
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Sa représentation graphique est une courbe appelée <strong>parabole</strong>. Son allure (ouverte vers le haut ou vers le bas) dépend uniquement du <strong>signe de $a$</strong>.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-center">
+                            <p class="font-bold text-emerald-800 mb-1">$a > 0$ (Positif)</p>
+                            <p class="text-2xl mb-1 text-emerald-500"><i class="fa-solid fa-face-smile"></i></p>
+                            <p class="text-xs text-emerald-700">Tournée vers le haut.<br>Admet un <strong>minimum</strong>.</p>
+                        </div>
+                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-center">
+                            <p class="font-bold text-rose-800 mb-1">$a < 0$ (Négatif)</p>
+                            <p class="text-2xl mb-1 text-rose-500"><i class="fa-solid fa-face-frown"></i></p>
+                            <p class="text-xs text-rose-700">Tournée vers le bas.<br>Admet un <strong>maximum</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sommet -->
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mt-10">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Coordonnées du Sommet</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-calculator text-amber-500 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Comment trouver le sommet $S$ ?</h3>
+                    </div>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        La parabole possède un axe de symétrie vertical qui passe par son sommet $S(x_S ; y_S)$.
+                    </p>
+
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 font-mono text-amber-900">
+                        <div class="mb-4">
+                            <p class="text-xs text-amber-700 mb-1 font-sans font-bold">1. L'abscisse (axe de symétrie) :</p>
+                            <div class="bg-white text-center py-2 rounded border border-amber-200 text-lg">
+                                $x_S = \frac{-b}{2a}$
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-amber-700 mb-1 font-sans font-bold">2. L'ordonnée (minimum ou maximum) :</p>
+                            <div class="bg-white text-center py-2 rounded border border-amber-200 text-lg">
+                                $y_S = f(x_S)$
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- SECTION 3 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">3. Axe de symétrie et Sommet</h2>
-            
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-calculator"></i> Calculer les coordonnées du sommet
+            <!-- Visualization : Traceur (SVG) -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-indigo-500">
+                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
+                    Simulateur de Parabole
                 </h3>
-                <p class="text-amber-900 mb-2">Toute parabole possède un <strong>axe de symétrie</strong> vertical. Cet axe passe par le <strong>sommet $S$</strong> de la parabole.</p>
-                <p class="text-amber-900 mb-4">Pour trouver les coordonnées $S(x_S ; y_S)$ du sommet :</p>
+                <p class="text-xs text-slate-500 mb-6 text-center">Modifiez $a$, $b$, et $c$ pour voir la parabole changer.</p>
                 
-                <div class="bg-white p-4 rounded border border-amber-200 mb-4">
-                    <ol class="list-decimal list-inside text-amber-900 space-y-3 font-semibold">
-                        <li>On calcule l'abscisse du sommet (axe de symétrie) :
-                            <span class="block bg-amber-50 p-2 mt-1 rounded border border-amber-100 text-center text-lg font-mono">$x_S = \frac{-b}{2a}$</span>
-                        </li>
-                        <li>On calcule l'ordonnée en remplaçant $x$ par ce résultat dans l'équation :
-                            <span class="block bg-amber-50 p-2 mt-1 rounded border border-amber-100 text-center text-lg font-mono">$y_S = f(x_S)$</span>
-                        </li>
-                    </ol>
+                <!-- Controls -->
+                <div class="flex flex-col gap-3 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="flex items-center justify-between">
+                        <label class="text-sm font-bold text-slate-700 w-16">a = <span id="valA" class="text-red-500">1</span></label>
+                        <input type="range" id="sliderA" min="-5" max="5" step="0.1" value="1" class="w-full mx-2 accent-red-500" oninput="drawParabola()">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <label class="text-sm font-bold text-slate-700 w-16">b = <span id="valB" class="text-yellow-600">0</span></label>
+                        <input type="range" id="sliderB" min="-10" max="10" step="0.5" value="0" class="w-full mx-2 accent-yellow-500" oninput="drawParabola()">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <label class="text-sm font-bold text-slate-700 w-16">c = <span id="valC" class="text-blue-500">0</span></label>
+                        <input type="range" id="sliderC" min="-10" max="10" step="0.5" value="0" class="w-full mx-2 accent-blue-500" oninput="drawParabola()">
+                    </div>
                 </div>
-            </div>
-            
-            <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-slate-400 mb-6">
-                <h3 class="font-bold text-slate-800 mb-2">Exemple concret :</h3>
-                <p class="text-slate-700 mb-2">Soit la fonction $f(x) = -2x^2 + 8x + 3$.</p>
-                <p class="text-slate-700 ml-4">$a = -2$, $b = 8$, $c = 3$. Comme $a < 0$, la parabole est tournée vers le bas (elle a un maximum).</p>
-                <p class="text-slate-700 ml-4 mt-2 font-mono">1. $x_S = \frac{-8}{2 \times (-2)} = \frac{-8}{-4} = 2$</p>
-                <p class="text-slate-700 ml-4 mt-1 font-mono">2. $y_S = f(2) = -2(2)^2 + 8(2) + 3 = -8 + 16 + 3 = 11$</p>
-                <p class="text-slate-800 font-bold mt-2">Le sommet a pour coordonnées $S(2 ; 11)$. Le maximum est donc 11 et il est atteint pour $x=2$.</p>
+
+                <!-- SVG Graph -->
+                <div class="relative w-full aspect-square bg-white border-2 border-slate-200 rounded-xl overflow-hidden">
+                    <svg id="graphSvg" viewBox="0 0 400 400" class="w-full h-full">
+                        <defs>
+                            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                            </pattern>
+                            <pattern id="grid-major" width="100" height="100" patternUnits="userSpaceOnUse">
+                                <rect width="100" height="100" fill="url(#grid)" />
+                                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                            </pattern>
+                        </defs>
+                        <!-- Grid -->
+                        <rect width="400" height="400" fill="url(#grid-major)" />
+                        <!-- Axes -->
+                        <line x1="200" y1="0" x2="200" y2="400" stroke="#475569" stroke-width="2"/>
+                        <line x1="0" y1="200" x2="400" y2="200" stroke="#475569" stroke-width="2"/>
+                        
+                        <!-- Axis of symmetry -->
+                        <line id="axisSym" x1="200" y1="0" x2="200" y2="400" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                        
+                        <!-- Parabola Path -->
+                        <path id="parabolaPath" d="" fill="none" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/>
+                        
+                        <!-- Vertex Dot -->
+                        <circle id="vertexDot" cx="200" cy="200" r="6" fill="#ef4444" stroke="white" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                <!-- Info Display -->
+                <div class="mt-4 text-center">
+                    <p class="font-mono font-bold text-indigo-700 text-lg" id="eqDisplay">f(x) = 1x² + 0x + 0</p>
+                    <p class="text-sm text-slate-600 mt-1" id="vertexDisplay">Sommet S(0 ; 0)</p>
+                </div>
+
+                <script>
+                    function drawParabola() {
+                        let a = parseFloat(document.getElementById('sliderA').value);
+                        let b = parseFloat(document.getElementById('sliderB').value);
+                        let c = parseFloat(document.getElementById('sliderC').value);
+                        
+                        // Prevent a = 0 (becomes a line)
+                        if (a === 0) {
+                            a = 0.1; 
+                            document.getElementById('sliderA').value = 0.1;
+                        }
+
+                        document.getElementById('valA').innerText = a;
+                        document.getElementById('valB').innerText = b;
+                        document.getElementById('valC').innerText = c;
+                        
+                        // Display Equation
+                        let signB = b >= 0 ? "+ " + b : "- " + Math.abs(b);
+                        let signC = c >= 0 ? "+ " + c : "- " + Math.abs(c);
+                        document.getElementById('eqDisplay').innerText = `f(x) = ${a}x² ${signB}x ${signC}`;
+                        
+                        // Math setup (Graph is from x=-10 to 10, y=-10 to 10)
+                        // Scale: 20 pixels = 1 unit. Center is (200, 200).
+                        const mapX = (x) => 200 + (x * 20);
+                        const mapY = (y) => 200 - (y * 20); // SVG y is inverted
+                        
+                        // Calculate path
+                        let d = "";
+                        for(let x = -10; x <= 10; x += 0.2) {
+                            let y = (a * x * x) + (b * x) + c;
+                            let px = mapX(x);
+                            let py = mapY(y);
+                            
+                            if (x === -10) {
+                                d += `M ${px} ${py}`;
+                            } else {
+                                d += ` L ${px} ${py}`;
+                            }
+                        }
+                        document.getElementById('parabolaPath').setAttribute("d", d);
+                        
+                        // Sommet
+                        let xS = -b / (2 * a);
+                        let yS = (a * xS * xS) + (b * xS) + c;
+                        
+                        document.getElementById('vertexDot').setAttribute("cx", mapX(xS));
+                        document.getElementById('vertexDot').setAttribute("cy", mapY(yS));
+                        
+                        document.getElementById('axisSym').setAttribute("x1", mapX(xS));
+                        document.getElementById('axisSym').setAttribute("x2", mapX(xS));
+                        
+                        let dispXs = xS.toFixed(2).replace('.00', '');
+                        let dispYs = yS.toFixed(2).replace('.00', '');
+                        document.getElementById('vertexDisplay').innerHTML = `Sommet <span class="font-bold text-red-500">S(${dispXs} ; ${dispYs})</span>`;
+                    }
+                    
+                    // Init
+                    drawParabola();
+                </script>
             </div>
         </section>
         
     </main>
+
+    <div class="h-24"></div>
 </body>
 </html>

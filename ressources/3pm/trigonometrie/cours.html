@@ -4,112 +4,246 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cours - Trigonométrie</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        
+        .side-hyp { stroke: #eab308; stroke-width: 4; transition: all 0.3s ease; }
+        .side-adj { stroke: #3b82f6; stroke-width: 4; transition: all 0.3s ease; }
+        .side-opp { stroke: #ef4444; stroke-width: 4; transition: all 0.3s ease; }
+        
+        .dimmed { opacity: 0.2; }
+        .highlighted { stroke-width: 6; }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-compass-drafting text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Géométrie</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Trigonométrie</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • Mathématiques</p>
-                <h1 class="text-2xl font-bold text-slate-800">Séquence : Trigonométrie</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">1. Le vocabulaire (Triangle rectangle)</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <p class="text-blue-900 mb-3">La trigonométrie s'utilise <strong>uniquement dans un triangle rectangle</strong>. Pour un angle aigu donné (noté $\alpha$), on identifie 3 côtés :</p>
-                <ul class="list-disc list-inside text-blue-900 space-y-2">
-                    <li><strong>L'hypoténuse :</strong> le plus grand côté (en face de l'angle droit).</li>
-                    <li><strong>Le côté adjacent :</strong> le côté qui "touche" l'angle $\alpha$ (mais qui n'est pas l'hypoténuse).</li>
-                    <li><strong>Le côté opposé :</strong> le côté situé "en face" de l'angle $\alpha$.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SECTION 2 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">2. Les formules : SOH CAH TOA</h2>
-            
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-memory"></i> Le moyen mnémotechnique
-                </h3>
-                <p class="text-emerald-900 mb-4">Pour retenir les formules du sinus, cosinus et de la tangente, on utilise le mot magique : <strong>SOH CAH TOA</strong>.</p>
+        <!-- SECTION 1 : Vocabulaire & SOH CAH TOA -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">SOH CAH TOA</h2>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-sm">
-                    <div class="bg-white p-4 rounded border border-emerald-200 text-center shadow-sm">
-                        <p class="text-xl font-bold text-emerald-700 mb-2">S O H</p>
-                        <p class="text-emerald-900">$\sin(\alpha) = \frac{\text{Opposé}}{\text{Hypoténuse}}$</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-spell-check text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Le mot magique</h3>
                     </div>
-                    <div class="bg-white p-4 rounded border border-emerald-200 text-center shadow-sm">
-                        <p class="text-xl font-bold text-emerald-700 mb-2">C A H</p>
-                        <p class="text-emerald-900">$\cos(\alpha) = \frac{\text{Adjacent}}{\text{Hypoténuse}}$</p>
+                    
+                    <p class="text-slate-700 leading-relaxed text-base mb-4">
+                        La trigonométrie s'utilise <strong>uniquement dans un triangle rectangle</strong>. Selon l'angle que l'on étudie, chaque côté porte un nom. Pour retenir les formules, on utilise <strong>SOH CAH TOA</strong> :
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono">
+                        <div class="bg-rose-50 p-4 rounded-xl text-center border border-rose-200 shadow-sm interactive-hover cursor-pointer" onmouseover="highlight('SOH')" onmouseout="resetHighlight()">
+                            <p class="text-xl font-bold text-rose-700 mb-2">S O H</p>
+                            <p class="text-rose-900 text-sm">Sinus = <br> <span class="text-rose-600">O</span>pposé ÷ <span class="text-amber-600">H</span>ypoténuse</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-xl text-center border border-blue-200 shadow-sm interactive-hover cursor-pointer" onmouseover="highlight('CAH')" onmouseout="resetHighlight()">
+                            <p class="text-xl font-bold text-blue-700 mb-2">C A H</p>
+                            <p class="text-blue-900 text-sm">Cosinus = <br> <span class="text-blue-600">A</span>djacent ÷ <span class="text-amber-600">H</span>ypoténuse</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl text-center border border-purple-200 shadow-sm interactive-hover cursor-pointer" onmouseover="highlight('TOA')" onmouseout="resetHighlight()">
+                            <p class="text-xl font-bold text-purple-700 mb-2">T O A</p>
+                            <p class="text-purple-900 text-sm">Tangente = <br> <span class="text-rose-600">O</span>pposé ÷ <span class="text-blue-600">A</span>djacent</p>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded border border-emerald-200 text-center shadow-sm">
-                        <p class="text-xl font-bold text-emerald-700 mb-2">T O A</p>
-                        <p class="text-emerald-900">$\tan(\alpha) = \frac{\text{Opposé}}{\text{Adjacent}}$</p>
-                    </div>
+                    <p class="text-xs text-slate-400 mt-4 text-center italic"><i class="fa-solid fa-hand-pointer"></i> Passez la souris sur les cases ci-dessus pour voir le triangle s'animer.</p>
                 </div>
+            </div>
+
+            <!-- Visualization: Triangle Interactive -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28">
+                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
+                    Par rapport à l'angle visé
+                </h3>
+                
+                <div class="flex justify-center my-4 relative">
+                    <svg width="250" height="200" viewBox="0 0 250 200">
+                        <!-- Right Angle Marker -->
+                        <polyline points="30,150 50,150 50,170" fill="none" stroke="#64748b" stroke-width="2"/>
+                        <!-- Angle Alpha (at C) -->
+                        <path d="M 180 170 A 30 30 0 0 0 195 145" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+                        <text x="160" y="160" font-size="16" fill="#8b5cf6" font-weight="bold" font-family="serif">α</text>
+                        
+                        <!-- Triangle Sides -->
+                        <line id="lineOpp" x1="30" y1="30" x2="30" y2="170" class="side-opp"/>
+                        <line id="lineAdj" x1="30" y1="170" x2="210" y2="170" class="side-adj"/>
+                        <line id="lineHyp" x1="30" y1="30" x2="210" y2="170" class="side-hyp"/>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="30" font-size="14" font-weight="bold" fill="#334155">A</text>
+                        <text x="10" y="185" font-size="14" font-weight="bold" fill="#334155">B</text>
+                        <text x="215" y="185" font-size="14" font-weight="bold" fill="#334155">C</text>
+
+                        <!-- Labels for sides -->
+                        <text id="labelOpp" x="-15" y="100" font-size="12" font-weight="bold" fill="#ef4444" transform="rotate(-90 -15,100)">OPPOSÉ</text>
+                        <text id="labelAdj" x="100" y="195" font-size="12" font-weight="bold" fill="#3b82f6">ADJACENT</text>
+                        <text id="labelHyp" x="120" y="80" font-size="12" font-weight="bold" fill="#d97706" transform="rotate(38 120,80)">HYPOTÉNUSE</text>
+                    </svg>
+                </div>
+                
+                <script>
+                    function highlight(type) {
+                        const opp = document.getElementById('lineOpp');
+                        const adj = document.getElementById('lineAdj');
+                        const hyp = document.getElementById('lineHyp');
+                        
+                        const lblOpp = document.getElementById('labelOpp');
+                        const lblAdj = document.getElementById('labelAdj');
+                        const lblHyp = document.getElementById('labelHyp');
+                        
+                        // Reset
+                        opp.classList.add('dimmed'); lblOpp.classList.add('dimmed');
+                        adj.classList.add('dimmed'); lblAdj.classList.add('dimmed');
+                        hyp.classList.add('dimmed'); lblHyp.classList.add('dimmed');
+                        
+                        if(type === 'SOH') {
+                            opp.classList.remove('dimmed'); lblOpp.classList.remove('dimmed');
+                            hyp.classList.remove('dimmed'); lblHyp.classList.remove('dimmed');
+                            opp.classList.add('highlighted'); hyp.classList.add('highlighted');
+                        } else if(type === 'CAH') {
+                            adj.classList.remove('dimmed'); lblAdj.classList.remove('dimmed');
+                            hyp.classList.remove('dimmed'); lblHyp.classList.remove('dimmed');
+                            adj.classList.add('highlighted'); hyp.classList.add('highlighted');
+                        } else if(type === 'TOA') {
+                            opp.classList.remove('dimmed'); lblOpp.classList.remove('dimmed');
+                            adj.classList.remove('dimmed'); lblAdj.classList.remove('dimmed');
+                            opp.classList.add('highlighted'); adj.classList.add('highlighted');
+                        }
+                    }
+                    
+                    function resetHighlight() {
+                        const els = ['lineOpp', 'lineAdj', 'lineHyp', 'labelOpp', 'labelAdj', 'labelHyp'];
+                        els.forEach(id => {
+                            document.getElementById(id).classList.remove('dimmed', 'highlighted');
+                        });
+                    }
+                </script>
             </div>
         </section>
 
-        <!-- SECTION 3 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">3. Les deux types de calculs</h2>
-            
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6 border-l-amber-500 bg-amber-50">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-ruler"></i> Calculer une longueur
-                </h3>
-                <p class="text-amber-900 mb-2">On connaît un angle et une longueur. On cherche une autre longueur.</p>
-                <div class="bg-white p-3 rounded border border-amber-200 text-sm">
-                    <ol class="list-decimal list-inside space-y-1">
-                        <li>Je repère les côtés : ce que je <strong>cherche</strong> et ce que je <strong>connais</strong>.</li>
-                        <li>Je choisis la bonne formule grâce à SOH CAH TOA.</li>
-                        <li>J'écris l'égalité et je fais un produit en croix pour trouver la longueur.</li>
-                    </ol>
-                </div>
+        <!-- SECTION 2 : Les deux problèmes -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les 2 types de calculs</h2>
             </div>
-
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6 border-l-purple-500 bg-purple-50">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-angle-left"></i> Calculer un angle
-                </h3>
-                <p class="text-purple-900 mb-2">On connaît deux longueurs. On cherche la mesure de l'angle en degrés.</p>
-                <div class="bg-white p-3 rounded border border-purple-200 text-sm">
-                    <ol class="list-decimal list-inside space-y-1">
-                        <li>Je repère les deux côtés connus (ex: Opposé et Adjacent).</li>
-                        <li>Je choisis la formule (ici Tangente : TOA).</li>
-                        <li>Je calcule la fraction : $\tan(\alpha) = \dots$</li>
-                        <li>J'utilise la touche <strong>ArcTan</strong> (ou $tan^{-1}$) de la calculatrice pour trouver l'angle.</li>
-                    </ol>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Calculer Longueur -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-amber-500">
+                    <h3 class="font-bold text-amber-800 mb-4 text-xl flex items-center gap-2">
+                        <i class="fa-solid fa-ruler"></i> Je cherche une Longueur
+                    </h3>
+                    
+                    <p class="text-sm text-slate-600 mb-4">On me donne un angle et une longueur. Je cherche une autre longueur.</p>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-sm">
+                        <p class="text-slate-800 mb-2 font-bold">Exemple : Je cherche l'Opposé, je connais l'Hypoténuse et l'angle $30^\circ$.</p>
+                        <ul class="list-none space-y-2 text-slate-700">
+                            <li><i class="fa-solid fa-check text-emerald-500"></i> Opposé + Hypoténuse $\rightarrow$ Formule <strong>SOH</strong> (Sinus)</li>
+                            <li class="bg-white p-2 rounded border border-slate-200 mt-2">
+                                $\sin(30^\circ) = \frac{\text{Opposé}}{10}$
+                            </li>
+                            <li class="text-amber-700 font-bold mt-2">
+                                $\text{Opposé} = 10 \times \sin(30^\circ)$
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
+                <!-- Calculer Angle -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
+                    <h3 class="font-bold text-purple-800 mb-4 text-xl flex items-center gap-2">
+                        <i class="fa-solid fa-angle-left"></i> Je cherche un Angle
+                    </h3>
+                    
+                    <p class="text-sm text-slate-600 mb-4">On me donne deux longueurs. Je cherche l'angle en degrés.</p>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-sm">
+                        <p class="text-slate-800 mb-2 font-bold">Exemple : Je connais l'Opposé (3) et l'Adjacent (4).</p>
+                        <ul class="list-none space-y-2 text-slate-700">
+                            <li><i class="fa-solid fa-check text-emerald-500"></i> Opposé + Adjacent $\rightarrow$ Formule <strong>TOA</strong> (Tangente)</li>
+                            <li class="bg-white p-2 rounded border border-slate-200 mt-2">
+                                $\tan(\alpha) = \frac{3}{4} = 0.75$
+                            </li>
+                            <li class="text-purple-700 font-bold mt-2 flex items-center gap-2">
+                                <i class="fa-solid fa-calculator text-slate-500"></i>
+                                $\alpha = \text{Arctan}(0.75) \approx 37^\circ$
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="text-xs text-rose-500 mt-3 italic text-center font-bold">
+                        ATTENTION : N'oubliez pas de régler votre calculatrice en DEGRÉS (DEG) !
+                    </p>
+                </div>
+                
             </div>
         </section>
         
     </main>
+
+    <div class="h-24"></div>
 </body>
 </html>
