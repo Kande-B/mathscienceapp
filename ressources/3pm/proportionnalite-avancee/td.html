@@ -3,162 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Proportionnalité avancée</title>
+    <title>TD - Proportionnalité Avancée</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                </div>
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Proportionnalité, Pourcentages, Échelles</h1>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Proportionnalité Avancée</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Produit en croix de base
-            </h3>
-            <p class="mb-4">Trouvez la valeur de $x$ dans les situations suivantes :</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-4">
-                <div>
-                    <table class="text-center border-collapse">
-                        <tr><td class="border border-slate-300 p-2 w-16">5</td><td class="border border-slate-300 p-2 w-16">12</td></tr>
-                        <tr><td class="border border-slate-300 p-2 font-bold text-teal-600">x</td><td class="border border-slate-300 p-2">36</td></tr>
-                    </table>
-                    <p class="mt-2 text-sm">$x = \dots$</p>
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Produit en croix</h3>
+                    <p class="text-sm text-slate-600 mb-4">Calculez la valeur manquante $x$ dans ce tableau de proportionnalité :</p>
+                    
+                    <div class="flex justify-center mb-4 text-sm">
+                        <table class="border-collapse">
+                            <tr>
+                                <td class="border border-slate-400 px-4 py-2 font-bold bg-slate-100">Grandeur A</td>
+                                <td class="border border-slate-400 px-4 py-2 text-center">4</td>
+                                <td class="border border-slate-400 px-4 py-2 text-center">7</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-400 px-4 py-2 font-bold bg-slate-100">Grandeur B</td>
+                                <td class="border border-slate-400 px-4 py-2 text-center">10</td>
+                                <td class="border border-slate-400 px-4 py-2 text-center font-bold text-blue-600">$x$</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <span>$x =$</span>
+                        <input type="number" step="0.1" id="ex1-ans" class="border border-slate-300 rounded p-1 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
-                <div>
-                    <table class="text-center border-collapse">
-                        <tr><td class="border border-slate-300 p-2 w-16">10</td><td class="border border-slate-300 p-2 w-16 font-bold text-teal-600">x</td></tr>
-                        <tr><td class="border border-slate-300 p-2">15</td><td class="border border-slate-300 p-2">45</td></tr>
-                    </table>
-                    <p class="mt-2 text-sm">$x = \dots$</p>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Vitesse moyenne</h3>
+                    <p class="text-sm text-slate-600 mb-4">Un train parcourt <strong>210 km</strong> en <strong>1,5 heure</strong>. <br>Quelle est sa vitesse moyenne en km/h ? (Rappel : $v = \frac{d}{t}$)</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$v =$</span>
+                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>km/h</span>
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
                 </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Débit d'eau</h3>
+                    <p class="text-sm text-slate-600 mb-4">Un robinet laisse couler <strong>24 litres</strong> d'eau en <strong>3 minutes</strong>. <br>Quel est son débit en L/min ?</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>Débit =</span>
+                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>L/min</span>
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
             </div>
         </div>
 
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Augmentations et Réductions
-            </h3>
-            <ol class="list-decimal list-inside space-y-4 ml-4">
-                <li>Un téléphone coûte 250 €. Son prix augmente de 10%. Quel est son nouveau prix ?</li>
-                <li>Une paire de chaussures à 80 € est soldée à -30%. Quel est le montant de la réduction ? Quel est le prix final payé en caisse ?</li>
-            </ol>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Masse volumique</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un bloc de métal a un volume de <strong>5 m³</strong> et une masse de <strong>40 000 kg</strong>. <br>
+                        Calculez sa masse volumique en kg/m³. <br>
+                        (Rappel : $\rho = \frac{m}{V}$)
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$\rho =$</span>
+                        <input type="number" id="ex4-ans" class="border border-slate-300 rounded p-2 w-32 text-center"> <span>kg/m³</span>
+                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Pourcentage (Réduction)</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un outil coûte <strong>80 €</strong>. Il est soldé à <strong>-15%</strong>. <br>
+                        Quel est son nouveau prix ?
+                    </p>
+                    
+                    <div class="flex flex-col gap-2 mb-4 font-mono text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="w-20 text-right">Montant de la réduc :</span>
+                            <input type="number" id="ex5-reduc" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>€</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-20 text-right">Nouveau prix :</span>
+                            <input type="number" id="ex5-ans" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>€</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Échelles</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Sur une carte à l'échelle <strong>1 / 50 000</strong>, une route mesure <strong>4 cm</strong>. <br>
+                        Quelle est la longueur réelle de la route en <strong>kilomètres</strong> ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono">
+                        <input type="number" id="ex6-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>km</span>
+                    </div>
+                    
+                    <button onclick="checkEx6()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Trouver un pourcentage
-            </h3>
-            <p class="mb-2">Dans une classe de 25 élèves, 15 sont des filles.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Quelle est la proportion de filles sous forme de fraction ?</li>
-                <li>Calculez le pourcentage de filles dans cette classe.</li>
-                <li>Déduisez-en le pourcentage de garçons.</li>
-            </ol>
-        </div>
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Lecture d'une carte (Échelle)
-            </h3>
-            <p class="mb-2">Sur une carte de France à l'échelle $\frac{1}{1 000 000}$, la distance entre Paris et Lyon est mesurée à 46 cm.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Que signifie cette échelle ? ($1 \text{ cm}$ sur la carte = $\dots \text{ cm}$ en réalité).</li>
-                <li>Calculez la distance réelle en centimètres.</li>
-                <li>Convertissez cette distance en kilomètres. ($1 \text{ km} = 100\,000 \text{ cm}$).</li>
-            </ol>
-        </div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-utensils text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Cuisine - Ajuster une recette</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Une recette de pâte à crêpes pour <strong>4 personnes</strong> nécessite : <br>
+                                - 250 g de farine <br>
+                                - 3 œufs <br>
+                                - 0,5 L de lait
+                            </p>
+                            <p class="text-sm text-slate-600 mb-4 font-bold">
+                                Vous devez préparer cette recette pour un banquet de 14 personnes.
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div class="flex items-center gap-2">
+                                    <label class="w-32">Farine :</label>
+                                    <input type="number" id="ex7-farine" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>g</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <label class="w-32">Lait :</label>
+                                    <input type="number" step="0.1" id="ex7-lait" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>L</span>
+                                </div>
+                                <p class="text-xs text-slate-500 italic mt-2">Astuce : Calculez d'abord le coefficient de proportionnalité ($14 \div 4$).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Calculer une échelle
-            </h3>
-            <p class="mb-4">Un architecte dessine le plan d'une maison. Sur son plan, le mur du salon qui fait 6 mètres de long en réalité, est représenté par un trait de 12 centimètres.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Convertissez la longueur réelle du mur en centimètres.</li>
-                <li>Calculez l'échelle du plan (Formule : $\frac{\text{Distance plan}}{\text{Distance réelle}}$) et donnez-la sous la forme d'une fraction irréductible $\frac{1}{\dots}$.</li>
-            </ol>
-        </div>
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-paint-roller text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Bâtiment - Rendement d'une peinture</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Le pot de peinture indique un rendement de <strong>12 m² / Litre</strong>. <br>
+                        Vous devez peindre un plafond rectangulaire de <strong>6 m de long</strong> sur <strong>5 m de large</strong>. <br>
+                        Vous prévoyez de passer <strong>2 couches</strong>.
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div class="flex items-center gap-2">
+                            <label class="w-48">1. Surface totale à peindre (pour 2 couches) :</label>
+                            <input type="number" id="ex8-surface" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>m²</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <label class="w-48">2. Quantité de peinture nécessaire :</label>
+                            <input type="number" id="ex8-litres" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>L</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Vitesse, Distance, Temps
-            </h3>
-            <p class="mb-4">Un cycliste participe à une course de 120 km. Il roule à une vitesse moyenne de $30 \text{ km/h}$.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Rappelez la formule reliant Vitesse ($v$), Distance ($d$) et Temps ($t$).</li>
-                <li>Calculez le temps qu'il lui faudra pour terminer la course.</li>
-            </ol>
-        </div>
-
-        <!-- Exercice 7 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">7</span>
-                Temps décimal vs Temps en heures/minutes
-            </h3>
-            <p class="mb-2">Un train part de Bordeaux pour Paris. La distance est d'environ 600 km, et la vitesse moyenne du TGV est de $240 \text{ km/h}$.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Calculez le temps de parcours $t$ en heures (sous forme décimale, ex: $1,5 \text{ h}$).</li>
-                <li>Convertissez ce résultat en heures et minutes. (Astuce : $0,5 \text{ heure}$ = 30 minutes).</li>
-            </ol>
-        </div>
-
-        <!-- Exercice 8 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">8</span>
-                Problème professionnel : Le peintre
-            </h3>
-            <p class="mb-4">Un artisan peintre achète sa peinture en gros. Le grossiste lui propose les tarifs suivants :</p>
-            <ul class="list-disc list-inside ml-4 mb-4">
-                <li>10 pots coûtent 150 €</li>
-                <li>25 pots coûtent 350 €</li>
-            </ul>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Calculez le prix d'un pot pour le premier tarif, puis pour le deuxième tarif.</li>
-                <li>Le prix payé est-il proportionnel au nombre de pots achetés ? Justifiez.</li>
-                <li>Si le grossiste faisait une remise de 15% sur la commande de 25 pots, combien paierait l'artisan ?</li>
-            </ol>
+            </div>
         </div>
 
     </main>
+
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const ans = document.getElementById('ex1-ans').value.replace(',', '.');
+            if (parseFloat(ans) === 17.5) {
+                showFeedback('fb-ex1', true, "Parfait ! Produit en croix : (7 × 10) ÷ 4 = 70 ÷ 4 = 17,5.");
+            } else {
+                showFeedback('fb-ex1', false, "Erreur. Fais le produit en croix : multiplie les valeurs en diagonale et divise par la valeur restante.");
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const ans = document.getElementById('ex2-ans').value;
+            if (ans === "140") {
+                showFeedback('fb-ex2', true, "Excellent ! v = 210 ÷ 1,5 = 140 km/h.");
+            } else {
+                showFeedback('fb-ex2', false, "Faux. Divise la distance (210) par le temps (1,5).");
+            }
+        }
+
+        // Ex 3
+        function checkEx3() {
+            const ans = document.getElementById('ex3-ans').value;
+            if (ans === "8") {
+                showFeedback('fb-ex3', true, "Exact ! Débit = Volume / Temps = 24 ÷ 3 = 8 L/min.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. Divise le volume (24) par le temps (3).");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const ans = document.getElementById('ex4-ans').value;
+            if (ans === "8000") {
+                showFeedback('fb-ex4', true, "Bravo ! masse volumique = 40 000 ÷ 5 = 8 000 kg/m³.");
+            } else {
+                showFeedback('fb-ex4', false, "Erreur. Il faut diviser la masse par le volume (40000 / 5).");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const r = document.getElementById('ex5-reduc').value;
+            const ans = document.getElementById('ex5-ans').value;
+            if (r === "12" && ans === "68") {
+                showFeedback('fb-ex5', true, "Félicitations ! Réduction = 80 × 15/100 = 12 €. Nouveau prix = 80 - 12 = 68 €.");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. Calcule d'abord 15% de 80 (80 × 0,15), puis soustrais ce résultat à 80.");
+            }
+        }
+        
+        // Ex 6
+        function checkEx6() {
+            const ans = document.getElementById('ex6-ans').value;
+            if (ans === "2") {
+                showFeedback('fb-ex6', true, "Exact ! Longueur réelle = 4 cm × 50 000 = 200 000 cm. Or 200 000 cm = 2 000 m = 2 km.");
+            } else {
+                showFeedback('fb-ex6', false, "Faux. 1 cm sur la carte = 50 000 cm en réalité. Calcule pour 4 cm, puis convertis en kilomètres.");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const farine = document.getElementById('ex7-farine').value;
+            const lait = document.getElementById('ex7-lait').value.replace(',', '.');
+            
+            if (farine === "875" && parseFloat(lait) === 1.75) {
+                showFeedback('fb-ex7', true, "Bravo ! Le coefficient est 14 ÷ 4 = 3,5. Farine : 250 × 3,5 = 875 g. Lait : 0,5 × 3,5 = 1,75 L.");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. Multiplie chaque quantité par le coefficient multiplicateur (14/4, soit 3.5).");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const surf = document.getElementById('ex8-surface').value;
+            const l = document.getElementById('ex8-litres').value;
+            
+            if (surf === "60" && l === "5") {
+                showFeedback('fb-ex8', true, "Excellent ! Surface = (6 × 5) × 2 couches = 60 m². Litres = 60 ÷ 12 = 5 Litres.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. 1) Surface d'une couche = 6×5. N'oublie pas de multiplier par 2. 2) Divise la surface totale par 12.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>

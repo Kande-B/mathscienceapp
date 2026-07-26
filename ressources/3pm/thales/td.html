@@ -3,142 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Théorème de Thalès</title>
+    <title>TD - Théorème de Thalès</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                </div>
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Théorème de Thalès</h1>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Théorème de Thalès</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Écrire l'égalité de Thalès
-            </h3>
-            <p class="mb-4">Dans un triangle $ABC$, $M$ est un point du côté $[AB]$ et $N$ un point du côté $[AC]$. Les droites $(MN)$ et $(BC)$ sont parallèles.</p>
-            <p class="mb-2">Complétez l'égalité des rapports de Thalès avec les bonnes lettres (Sommet commun : $A$) :</p>
-            <p class="font-mono text-center mb-2">$\frac{A\dots}{A\dots} = \frac{A\dots}{A\dots} = \frac{MN}{\dots}$</p>
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Configurations de Thalès</h3>
+                    <p class="text-sm text-slate-600 mb-4">Pour utiliser le théorème de Thalès, il faut deux droites sécantes coupées par deux droites...</p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex1-options">
+                        <button onclick="selectRadio('ex1', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Perpendiculaires</button>
+                        <button onclick="selectRadio('ex1', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Parallèles</button>
+                        <button onclick="selectRadio('ex1', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Sécantes</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex1', 'Exact ! Le théorème de Thalès s\'applique lorsqu\'on a des droites parallèles.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Égalité des rapports</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Soit un triangle ABC. M est sur [AB] et N sur [AC]. <br>
+                        (MN) est parallèle à (BC). <br>
+                        Complétez l'égalité des rapports (Petit Triangle / Grand Triangle) :
+                    </p>
+                    
+                    <div class="flex items-center justify-center gap-4 mb-4 font-mono text-lg">
+                        <div class="flex flex-col items-center">
+                            <span class="border-b border-black px-2">AM</span>
+                            <span class="px-2">AB</span>
+                        </div>
+                        <span>=</span>
+                        <div class="flex flex-col items-center">
+                            <input type="text" id="ex2-1" class="border border-slate-300 rounded p-1 w-12 text-center text-sm uppercase">
+                            <span class="px-2">AC</span>
+                        </div>
+                        <span>=</span>
+                        <div class="flex flex-col items-center">
+                            <span class="border-b border-black px-2">MN</span>
+                            <input type="text" id="ex2-2" class="border border-slate-300 rounded p-1 w-12 text-center text-sm uppercase mt-1">
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calcul avec Produit en croix</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        On obtient l'égalité suivante avec Thalès : $\frac{3}{5} = \frac{x}{15}$ <br>
+                        Calculez la valeur de $x$.
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$x =$</span>
+                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Application directe
-            </h3>
-            <p class="mb-2">En utilisant la figure de l'exercice 1, on donne : $AM = 4 \text{ cm}$, $AB = 10 \text{ cm}$ et $AN = 6 \text{ cm}$. Les droites $(MN)$ et $(BC)$ sont parallèles.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Écrivez l'égalité des rapports avec les valeurs : $\frac{4}{10} = \frac{6}{AC}$.</li>
-                <li>Utilisez le produit en croix pour calculer la longueur de $AC$.</li>
-            </ol>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calcul d'une longueur</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        (MN) // (BC). <br>
+                        $AM = 4$ cm, $AB = 10$ cm, $MN = 6$ cm. <br>
+                        On a : $\frac{4}{10} = \frac{6}{BC}$. Calculez BC.
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$BC =$</span>
+                        <input type="number" id="ex4-ans" class="border border-slate-300 rounded p-2 w-24 text-center"> <span>cm</span>
+                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Coefficient d'agrandissement</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Dans une configuration de Thalès, le grand triangle est un agrandissement du petit triangle. <br>
+                        Si $\frac{Petit}{Grand} = \frac{2}{6}$, quel est le coefficient d'agrandissement $k$ (de Petit vers Grand) ?
+                    </p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$k =$</span>
+                        <input type="number" id="ex5-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Réciproque de Thalès</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        On veut vérifier si (MN) et (BC) sont parallèles. <br>
+                        On calcule les rapports : $\frac{AM}{AB} = \frac{3}{12} = 0,25$ et $\frac{AN}{AC} = \frac{4}{16} = 0,25$. <br>
+                        Les droites sont-elles parallèles ?
+                    </p>
+                    
+                    <div class="flex gap-2 mb-4">
+                        <button onclick="setBtnGroup('ex6', 'oui', this)" class="btn-group-ex6 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1 font-bold">Oui</button>
+                        <button onclick="setBtnGroup('ex6', 'non', this)" class="btn-group-ex6 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1 font-bold">Non</button>
+                    </div>
+                    
+                    <button onclick="checkEx6()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Calcul d'une longueur parallèle
-            </h3>
-            <p class="mb-2">Toujours dans le même type de figure de Thalès (sommet $S$, petit triangle $SMN$, grand triangle $SBC$). Les droites $(MN)$ et $(BC)$ sont parallèles.</p>
-            <p class="mb-4">On a $\frac{SM}{SB} = \frac{3}{7}$. On sait que $MN = 6 \text{ cm}$.</p>
-            <p>Calculez la longueur du segment $BC$ à l'aide d'un produit en croix.</p>
-        </div>
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Problème : La hauteur de l'arbre
-            </h3>
-            <p class="mb-2">Un randonneur se place devant un arbre. Il plante un bâton de $1,5 \text{ m}$ de haut (droite verticale). L'arbre est aussi vertical. Les rayons du soleil forment un triangle alignant le sommet de l'arbre, le haut du bâton et une pierre au sol.</p>
-            <ul class="list-disc list-inside space-y-1 ml-4 mb-4">
-                <li>Distance Pierre-Bâton = $2 \text{ m}$.</li>
-                <li>Distance Pierre-Arbre = $10 \text{ m}$.</li>
-            </ul>
-            <p class="mb-2">1. Justifiez pourquoi on peut utiliser le théorème de Thalès (les deux objets verticaux sont-ils parallèles ?).</p>
-            <p>2. Calculez la hauteur de l'arbre en utilisant l'égalité des rapports.</p>
-        </div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-tree text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Forêt - Hauteur d'un arbre</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un bûcheron veut estimer la hauteur d'un arbre. <br>
+                                Il place un bâton de <strong>2 m</strong> de haut (MN) verticalement. <br>
+                                Son œil (point A) est au sol à <strong>3 m</strong> du bâton (AM = 3). <br>
+                                L'arbre (BC) est à <strong>15 m</strong> de son œil (AB = 15). <br>
+                                Les rayons visuels forment une configuration de Thalès.
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">1. L'égalité de Thalès donne : $\frac{3}{15} = \frac{2}{BC}$. <br> Calculez la hauteur de l'arbre $BC$ :</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <input type="number" id="ex7-ans" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>m</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Configuration en "papillon"
-            </h3>
-            <p class="mb-4">Les droites $(AB)$ et $(CD)$ sont sécantes en $O$. Les droites $(AC)$ et $(BD)$ sont parallèles.</p>
-            <p class="mb-2">On donne : $OA = 3 \text{ cm}$, $OB = 5 \text{ cm}$, $AC = 4 \text{ cm}$.</p>
-            <p>1. Écrivez l'égalité des rapports de Thalès : $\frac{OA}{OB} = \frac{...}{...} = \frac{AC}{BD}$.</p>
-            <p>2. Calculez la longueur $BD$.</p>
-        </div>
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-chair text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Menuiserie - Étagère pyramidale</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Une étagère a une forme de triangle (configuration papillon). <br>
+                        Le sommet est le point O. La planche du haut (AB) est parallèle à la planche du bas (CD). <br>
+                        $OA = 40$ cm, $OC = 60$ cm. La planche $AB$ mesure $50$ cm.
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div>
+                            <label class="font-bold block mb-1">Les rapports de Thalès donnent : $\frac{OA}{OC} = \frac{AB}{CD}$. <br> Calculez la longueur de la planche $CD$ :</label>
+                            <div class="flex items-center gap-2 font-mono">
+                                <input type="number" id="ex8-ans" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>cm</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Réciproque : Droites parallèles ?
-            </h3>
-            <p class="mb-4">Sur un dessin, on a un triangle $ADE$. $B$ est sur $[AD]$ et $C$ sur $[AE]$. On veut savoir si $(BC)$ est parallèle à $(DE)$.</p>
-            <p class="mb-2">On mesure : $AB = 4 \text{ cm}$, $AD = 12 \text{ cm}$. $AC = 5 \text{ cm}$, $AE = 15 \text{ cm}$.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Calculez la fraction $\frac{AB}{AD}$ et simplifiez-la.</li>
-                <li>Calculez la fraction $\frac{AC}{AE}$ et simplifiez-la.</li>
-                <li>Les fractions sont-elles égales ? Que peut-on conclure pour les droites $(BC)$ et $(DE)$ ?</li>
-            </ol>
-        </div>
-
-        <!-- Exercice 7 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">7</span>
-                Contraposée : L'étagère de travers
-            </h3>
-            <p class="mb-4">On fixe une étagère au mur. Le point de fixation haut est à 20 cm, le point bas à 40 cm. Le support mesure 25 cm, et le mur total derrière fait 55 cm.</p>
-            <p>1. Calculez $\frac{20}{40}$ (ce qui donne 0,5).</p>
-            <p>2. Calculez $\frac{25}{55}$ (arrondissez à deux décimales).</p>
-            <p>3. Les résultats sont-ils égaux ? L'étagère est-elle parallèle au sol ?</p>
-        </div>
-
-        <!-- Exercice 8 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">8</span>
-                Vrai ou Faux ?
-            </h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>On peut appliquer le théorème de Thalès même si les droites ne sont pas parallèles. (Vrai / Faux)</li>
-                <li>La configuration en "papillon" fonctionne exactement avec la même méthode (produit en croix). (Vrai / Faux)</li>
-                <li>Thalès sert surtout à calculer des angles. (Vrai / Faux)</li>
-            </ul>
+            </div>
         </div>
 
     </main>
+
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+        
+        function cleanStr(str) {
+            return str.replace(/\s+/g, '').toUpperCase();
+        }
+
+        let groupAns = {};
+        function setBtnGroup(groupId, val, btn) {
+            groupAns[groupId] = val;
+            const buttons = document.querySelectorAll(`.btn-group-${groupId}`);
+            buttons.forEach(b => b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50'));
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+        }
+
+        // QCM Logic
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const v1 = cleanStr(document.getElementById('ex2-1').value);
+            const v2 = cleanStr(document.getElementById('ex2-2').value);
+            
+            if (v1 === "AN" && (v2 === "BC" || v2 === "CB")) {
+                showFeedback('fb-ex2', true, "Parfait ! Petit côté sur Grand côté : AM/AB = AN/AC = MN/BC.");
+            } else {
+                showFeedback('fb-ex2', false, "Incorrect. Sur [AC], le petit côté est AN. Et les droites parallèles sont MN et BC.");
+            }
+        }
+
+        // Ex 3
+        function checkEx3() {
+            const ans = document.getElementById('ex3-ans').value;
+            if (ans === "9") {
+                showFeedback('fb-ex3', true, "Excellent ! Produit en croix : (3 × 15) ÷ 5 = 45 ÷ 5 = 9.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. Utilise le produit en croix : multiplie 3 par 15 et divise par 5.");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const ans = document.getElementById('ex4-ans').value;
+            if (ans === "15") {
+                showFeedback('fb-ex4', true, "Bravo ! (10 × 6) ÷ 4 = 60 ÷ 4 = 15 cm.");
+            } else {
+                showFeedback('fb-ex4', false, "Erreur. Produit en croix : (10 × 6) ÷ 4.");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const ans = document.getElementById('ex5-ans').value;
+            if (ans === "3") {
+                showFeedback('fb-ex5', true, "Félicitations ! Pour passer de 2 à 6, on multiplie par 3. C'est le coefficient d'agrandissement.");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. Demande-toi par quel nombre on multiplie 2 pour obtenir 6 (6 ÷ 2).");
+            }
+        }
+
+        // Ex 6
+        function checkEx6() {
+            if (groupAns['ex6'] === 'oui') {
+                showFeedback('fb-ex6', true, "Exact ! Les rapports sont égaux (0,25 = 0,25) et les points sont alignés dans le même ordre, donc d'après la réciproque de Thalès, les droites sont parallèles.");
+            } else if (groupAns['ex6'] === 'non') {
+                showFeedback('fb-ex6', false, "Faux. Regarde bien, les deux résultats (0,25) sont identiques !");
+            } else {
+                showFeedback('fb-ex6', false, "Veuillez choisir Oui ou Non.");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const ans = document.getElementById('ex7-ans').value;
+            if (ans === "10") {
+                showFeedback('fb-ex7', true, "Bravo ! Produit en croix : (15 × 2) ÷ 3 = 30 ÷ 3 = 10 m. L'arbre fait 10 mètres de haut.");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. Utilise le produit en croix avec la proportion donnée : (15 × 2) ÷ 3.");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const ans = document.getElementById('ex8-ans').value;
+            if (ans === "75") {
+                showFeedback('fb-ex8', true, "Excellent ! 40/60 = 50/CD => CD = (60 × 50) ÷ 40 = 3000 ÷ 40 = 75 cm.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. Pose l'égalité : 40/60 = 50/CD, puis fais le produit en croix.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>

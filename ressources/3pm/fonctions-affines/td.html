@@ -3,151 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Fonctions affines</title>
+    <title>TD - Fonctions</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                </div>
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Fonctions (Image, Antécédent)</h1>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Fonctions (Image, Antécédent, Graphique)</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Vocabulaire
-            </h3>
-            <p class="mb-4">Complétez le texte avec les mots : <strong>image</strong>, <strong>antécédent</strong>, <strong>fonction</strong>.</p>
-            <p class="ml-4 space-y-2 leading-relaxed">
-                "La ...................... $f$ transforme le nombre de départ $x$ en un résultat $y$. <br>
-                Le nombre $x$ est appelé ...................... de $y$. <br>
-                Le nombre $y$ est appelé ...................... de $x$ par $f$."
-            </p>
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Vocabulaire (Image / Antécédent)</h3>
+                    <p class="text-sm text-slate-600 mb-4">On a la relation : $f(3) = 15$. <br>Complétez les phrases avec les mots <strong>image</strong> ou <strong>antécédent</strong>.</p>
+                    
+                    <div class="space-y-4 text-sm font-mono mb-4">
+                        <div class="flex items-center gap-2">
+                            <span>15 est l'</span>
+                            <select id="ex1-1" class="border rounded p-1">
+                                <option value="">---</option>
+                                <option value="image">image</option>
+                                <option value="antecedent">antécédent</option>
+                            </select>
+                            <span>de 3.</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span>3 est un</span>
+                            <select id="ex1-2" class="border rounded p-1">
+                                <option value="">---</option>
+                                <option value="image">image</option>
+                                <option value="antecedent">antécédent</option>
+                            </select>
+                            <span>de 15.</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calcul d'une image</h3>
+                    <p class="text-sm text-slate-600 mb-4">Soit la fonction $f(x) = 2x + 5$. <br>Calculez l'image de <strong>4</strong>. (C'est-à-dire, calculez $f(4)$).</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$f(4) =$</span>
+                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx2()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calcul d'un antécédent</h3>
+                    <p class="text-sm text-slate-600 mb-4">Soit la fonction $g(x) = 3x - 1$. <br>Trouvez l'antécédent de <strong>14</strong>. (Trouvez $x$ tel que $3x - 1 = 14$).</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
+                        <span>$x =$</span>
+                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Reconnaître la nature d'une fonction
-            </h3>
-            <p class="mb-4">Indiquez pour chaque fonction si elle est Linéaire ($ax$), Affine ($ax+b$), ou autre :</p>
-            <ul class="list-disc list-inside space-y-2 ml-4 font-mono text-sm">
-                <li>$f(x) = 3x$ : ......................</li>
-                <li>$g(x) = 5x - 2$ : ......................</li>
-                <li>$h(x) = x^2 + 1$ : ......................</li>
-                <li>$k(x) = -4x + 7$ : ......................</li>
-            </ul>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement (Graphique)</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative flex flex-col md:flex-row gap-8">
+                    <!-- Graphique commun aux ex 4 et 5 -->
+                    <div class="w-full md:w-1/2 flex justify-center items-center">
+                        <svg viewBox="-20 -20 240 240" class="w-full max-w-sm">
+                            <!-- Grille -->
+                            <g stroke="#e2e8f0" stroke-width="1">
+                                <line x1="0" y1="0" x2="200" y2="0"/>
+                                <line x1="0" y1="40" x2="200" y2="40"/>
+                                <line x1="0" y1="80" x2="200" y2="80"/>
+                                <line x1="0" y1="120" x2="200" y2="120"/>
+                                <line x1="0" y1="160" x2="200" y2="160"/>
+                                <line x1="0" y1="200" x2="200" y2="200"/>
+                                
+                                <line x1="0" y1="0" x2="0" y2="200"/>
+                                <line x1="40" y1="0" x2="40" y2="200"/>
+                                <line x1="80" y1="0" x2="80" y2="200"/>
+                                <line x1="120" y1="0" x2="120" y2="200"/>
+                                <line x1="160" y1="0" x2="160" y2="200"/>
+                                <line x1="200" y1="0" x2="200" y2="200"/>
+                            </g>
+                            <!-- Axes -->
+                            <g stroke="#1e293b" stroke-width="2">
+                                <line x1="100" y1="0" x2="100" y2="200"/> <!-- Axe Y -->
+                                <line x1="0" y1="100" x2="200" y2="100"/> <!-- Axe X -->
+                            </g>
+                            <!-- Labels Axes (Origin 100,100, scale 40px = 1 unit) -->
+                            <text x="90" y="115" font-size="10" font-family="monospace">0</text>
+                            <text x="135" y="115" font-size="10" font-family="monospace">1</text>
+                            <text x="175" y="115" font-size="10" font-family="monospace">2</text>
+                            <text x="85" y="65" font-size="10" font-family="monospace">1</text>
+                            <text x="85" y="25" font-size="10" font-family="monospace">2</text>
+                            <text x="80" y="145" font-size="10" font-family="monospace">-1</text>
+                            <!-- Droite f(x) = 0.5x + 1 -->
+                            <!-- Pour x=0, y=1 (px: x=100, y=60) -->
+                            <!-- Pour x=2, y=2 (px: x=180, y=20) -->
+                            <!-- Pour x=-2, y=0 (px: x=20, y=100) -->
+                            <!-- Point x=1 => y=1.5 => px: 140, 40 -->
+                            <line x1="0" y1="110" x2="200" y2="10" stroke="#0ea5e9" stroke-width="3"/>
+                            <text x="180" y="15" font-size="12" fill="#0ea5e9" font-weight="bold">C_f</text>
+                        </svg>
+                    </div>
+
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <!-- Ex 4 -->
+                        <div class="relative">
+                            <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md z-10">4</div>
+                            <h3 class="font-bold text-slate-800 mb-2 pl-6">Lecture d'image</h3>
+                            <p class="text-sm text-slate-600 mb-2 pl-6">En lisant sur le graphique (droite bleue), déterminez l'image de <strong>2</strong>.</p>
+                            
+                            <div class="flex items-center gap-2 mb-2 pl-6 font-mono text-sm">
+                                <span>$f(2) =$</span>
+                                <input type="number" id="ex4-ans" class="border border-slate-300 rounded p-1 w-20 text-center">
+                            </div>
+                            <button onclick="checkEx4()" class="ml-6 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-1 rounded transition-colors">Vérifier</button>
+                            <div id="fb-ex4" class="mt-2 ml-6 text-sm hidden p-2 rounded"></div>
+                        </div>
+
+                        <hr class="border-slate-100">
+
+                        <!-- Ex 5 -->
+                        <div class="relative">
+                            <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md z-10">5</div>
+                            <h3 class="font-bold text-slate-800 mb-2 pl-6">Lecture d'antécédent</h3>
+                            <p class="text-sm text-slate-600 mb-2 pl-6">En lisant sur le graphique, déterminez l'antécédent de <strong>0</strong>. (Quelle valeur sur l'axe horizontal correspond à 0 sur l'axe vertical ?)</p>
+                            
+                            <div class="flex items-center gap-2 mb-2 pl-6 font-mono text-sm">
+                                <span>$f($</span>
+                                <input type="number" id="ex5-ans" class="border border-slate-300 rounded p-1 w-16 text-center">
+                                <span>$) = 0$</span>
+                            </div>
+                            <button onclick="checkEx5()" class="ml-6 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-1 rounded transition-colors">Vérifier</button>
+                            <div id="fb-ex5" class="mt-2 ml-6 text-sm hidden p-2 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Nature de la fonction</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        La fonction du graphique ci-dessus a pour droite représentative une ligne droite qui <strong>ne passe pas</strong> par l'origine du repère. <br>
+                        Comment appelle-t-on ce type de fonction ?
+                    </p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex6-options">
+                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Fonction linéaire</button>
+                        <button onclick="selectRadio('ex6', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Fonction affine</button>
+                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Fonction constante</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex6', 'Exact ! Une droite qui ne passe pas par l\'origine (0,0) représente une fonction affine ($f(x) = ax + b$). Si elle passe par l\'origine, c\'est une fonction linéaire.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Calcul d'image
-            </h3>
-            <p class="mb-4">Soit la fonction affine $f(x) = 4x - 5$. Calculez :</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4 font-mono text-sm">
-                <li>$f(2) = $ (Remplacez $x$ par 2)</li>
-                <li>$f(0) = $</li>
-                <li>L'image de $3$ par la fonction $f$.</li>
-            </ol>
-        </div>
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Calcul d'antécédent (Équation)
-            </h3>
-            <p class="mb-4">Soit la fonction $g(x) = 2x + 6$.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>On cherche l'antécédent de $10$. Cela signifie que le résultat est 10. <br>Écrivez l'équation à résoudre ($2x + 6 = \dots$).</li>
-                <li>Résolvez cette équation pour trouver $x$.</li>
-            </ol>
-        </div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-mobile-screen text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Télécom - Facturation d'un forfait</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un forfait de téléphone coûte <strong>15 € d'abonnement fixe par mois</strong>, plus <strong>0,10 € par minute</strong> de communication. <br>
+                                Soit $x$ le nombre de minutes de communication. La fonction $P(x)$ donne le prix total à payer.
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">1. Quelle est l'expression de la fonction affine $P(x)$ ?</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span>$P(x) =$</span>
+                                        <input type="text" id="ex7-expr" class="border border-slate-300 rounded p-1 w-32 text-center" placeholder="ex: 0.10x + 15">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="font-bold block mb-1">2. Calculez la facture pour 100 minutes de communication :</label>
+                                    <div class="flex items-center gap-2 font-mono">
+                                        <span>$P(100) =$</span>
+                                        <input type="number" id="ex7-ans" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>€</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Modélisation : Location de vélo
-            </h3>
-            <p class="mb-2">Pour louer un vélo dans une station, il faut payer 5 € d'abonnement pour la journée, puis 2 € par heure d'utilisation.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Si un client loue le vélo 3 heures, combien va-t-il payer ?</li>
-                <li>On appelle $x$ le nombre d'heures de location. Quelle est la fonction $P(x)$ qui donne le prix total à payer ?</li>
-                <li>Cette fonction est-elle linéaire ou affine ?</li>
-            </ol>
-        </div>
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-briefcase text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Commerce - Salaire et Prime</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un vendeur gagne un <strong>salaire fixe de 1200 €</strong> par mois. Il touche en plus une <strong>prime de 5 € par article vendu</strong>. <br>
+                        Soit $x$ le nombre d'articles vendus. Son salaire est $S(x) = 5x + 1200$. <br>
+                        Le vendeur souhaite gagner <strong>au moins 1500 €</strong> ce mois-ci.
+                    </p>
+                    
+                    <div class="space-y-4 text-sm text-slate-700 mb-4">
+                        <div>
+                            <label class="font-bold block mb-1">Chercher le nombre d'articles à vendre revient à calculer :</label>
+                            <div class="flex gap-2 mb-2" id="ex8-options">
+                                <button onclick="selectRadio('ex8', this, 'wrong')" class="border border-slate-200 rounded px-2 py-1 hover:bg-slate-50">L'image de 1500</button>
+                                <button onclick="selectRadio('ex8', this, 'correct')" class="border border-slate-200 rounded px-2 py-1 hover:bg-slate-50">L'antécédent de 1500</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Combien d'articles (minimum) doit-il vendre ?</label>
+                            <div class="flex items-center gap-2 font-mono">
+                                <input type="number" id="ex8-ans" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>articles</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Lecture Graphique
-            </h3>
-            <p class="mb-2">Dans un repère, on a tracé une droite $D$ représentant une fonction $f$. Cette droite passe par les points $A(0 ; 2)$ et $B(2 ; 8)$.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Quelle est l'image de 0 ?</li>
-                <li>Quelle est l'ordonnée à l'origine ($b$) de cette droite ?</li>
-                <li>La fonction est-elle linéaire ou affine ? Pourquoi ?</li>
-            </ol>
-        </div>
-
-        <!-- Exercice 7 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">7</span>
-                Modélisation : Le salaire du commercial
-            </h3>
-            <p class="mb-2">Un vendeur de voitures gagne un salaire fixe de 1500 € par mois, plus une prime de 200 € par voiture vendue.</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Soit $x$ le nombre de voitures vendues. Exprimez son salaire $S(x)$ en fonction de $x$.</li>
-                <li>Calculez $S(4)$. Que représente ce résultat pour le vendeur ?</li>
-                <li>Le vendeur souhaite gagner 2500 € ce mois-ci. Combien de voitures doit-il vendre ? (Posez une équation et résolvez-la).</li>
-            </ol>
-        </div>
-
-        <!-- Exercice 8 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">8</span>
-                Vrai ou Faux ?
-            </h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>La droite d'une fonction linéaire passe toujours par l'origine. (Vrai / Faux)</li>
-                <li>Si $f(x) = -3x$, alors l'image de 2 est -6. (Vrai / Faux)</li>
-                <li>L'antécédent de 10 par la fonction $f(x) = x + 2$ est 12. (Vrai / Faux)</li>
-            </ul>
+            </div>
         </div>
 
     </main>
+
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+        
+        function cleanStr(str) {
+            return str.replace(/\s+/g, '').replace(',', '.').toLowerCase();
+        }
+
+        // QCM Logic
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const v1 = document.getElementById('ex1-1').value;
+            const v2 = document.getElementById('ex1-2').value;
+            
+            if (v1 === "image" && v2 === "antecedent") {
+                showFeedback('fb-ex1', true, "Parfait ! Le résultat (15) est l'image. Le nombre de départ (3) est l'antécédent.");
+            } else {
+                showFeedback('fb-ex1', false, "Incorrect. f(Antécédent) = Image. 3 entre dans la machine, 15 en sort.");
+            }
+        }
+
+        // Ex 2
+        function checkEx2() {
+            const ans = document.getElementById('ex2-ans').value;
+            if (ans === "13") {
+                showFeedback('fb-ex2', true, "Excellent ! f(4) = 2 × 4 + 5 = 8 + 5 = 13.");
+            } else {
+                showFeedback('fb-ex2', false, "Faux. Remplace x par 4 dans la formule : calcule d'abord la multiplication, puis l'addition.");
+            }
+        }
+
+        // Ex 3
+        function checkEx3() {
+            const ans = document.getElementById('ex3-ans').value;
+            if (ans === "5") {
+                showFeedback('fb-ex3', true, "Exact ! 3x - 1 = 14 => 3x = 15 => x = 15 / 3 = 5.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. Résous l'équation : 3x - 1 = 14.");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const ans = document.getElementById('ex4-ans').value;
+            if (ans === "2") {
+                showFeedback('fb-ex4', true, "Bravo ! On se place sur 2 sur l'axe horizontal (X), on monte jusqu'à la droite, et on lit 2 sur l'axe vertical (Y).");
+            } else {
+                showFeedback('fb-ex4', false, "Erreur. L'image de 2 se lit sur l'axe vertical (Y). Place-toi à 2 sur l'axe horizontal (X) et rejoins la droite.");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const ans = document.getElementById('ex5-ans').value;
+            if (ans === "-2") {
+                showFeedback('fb-ex5', true, "Félicitations ! On se place sur 0 sur l'axe vertical (Y), on rejoint la droite, et on lit -2 sur l'axe horizontal (X).");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. L'antécédent se lit sur l'axe horizontal (X). Place-toi à 0 sur l'axe vertical (Y).");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const expr = cleanStr(document.getElementById('ex7-expr').value);
+            const ans = document.getElementById('ex7-ans').value;
+            
+            const isExprCorrect = (expr === "0.10x+15" || expr === "15+0.10x" || expr === "0.1x+15" || expr === "15+0.1x");
+            
+            if (isExprCorrect && ans === "25") {
+                showFeedback('fb-ex7', true, "Bravo ! 1) P(x) = 0.10x + 15. 2) P(100) = 0.10 × 100 + 15 = 10 + 15 = 25 €.");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. 1) Multiplie le prix de la minute (0.10) par x, puis ajoute le fixe (15). 2) Calcule P(100).");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            if (radioAnswers['ex8'] !== 'correct') {
+                showFeedback('fb-ex8', false, "Question 1 : Mauvaise réponse. On connaît le salaire final (1500), on cherche le nombre d'articles de départ. On cherche donc l'antécédent.");
+                return;
+            }
+            
+            const ans = document.getElementById('ex8-ans').value;
+            if (ans === "60") {
+                showFeedback('fb-ex8', true, "Excellent ! 1) Antécédent. 2) 5x + 1200 = 1500 => 5x = 300 => x = 300 / 5 = 60 articles.");
+            } else {
+                showFeedback('fb-ex8', false, "Erreur à la question 2. Résous l'équation : 5x + 1200 = 1500.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>
