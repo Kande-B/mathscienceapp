@@ -3,145 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Divisibilité et fractions irréductibles</title>
+    <title>TD - Divisibilité & Nombres Premiers</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                </div>
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Divisibilité et Nombres Premiers</h1>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Divisibilité & Nombres Premiers</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Critères de divisibilité
-            </h3>
-            <p class="mb-4">Parmi les nombres suivants, entourer ceux qui sont divisibles par 2, souligner ceux divisibles par 3 et rayer ceux divisibles par 5 :</p>
-            <div class="flex gap-4 flex-wrap text-lg font-mono mb-4">
-                <span class="p-2 border rounded">45</span>
-                <span class="p-2 border rounded">122</span>
-                <span class="p-2 border rounded">30</span>
-                <span class="p-2 border rounded">81</span>
-                <span class="p-2 border rounded">150</span>
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Critères de divisibilité</h3>
+                    <p class="text-sm text-slate-600 mb-4">Le nombre <strong>3 420</strong> est divisible par : <em>(Cochez les bonnes réponses)</em></p>
+                    
+                    <div class="space-y-2 text-sm font-bold text-slate-700 mb-4 pl-2">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ex1-c2" class="w-4 h-4 text-brand-600"> 2</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ex1-c3" class="w-4 h-4 text-brand-600"> 3</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ex1-c4" class="w-4 h-4 text-brand-600"> 4</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ex1-c5" class="w-4 h-4 text-brand-600"> 5</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ex1-c9" class="w-4 h-4 text-brand-600"> 9</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ex1-c10" class="w-4 h-4 text-brand-600"> 10</label>
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Vocabulaire</h3>
+                    <p class="text-sm text-slate-600 mb-4">Laquelle de ces phrases est vraie concernant <strong>45 et 5</strong> ?</p>
+                    
+                    <div class="grid grid-cols-1 gap-2" id="ex2-options">
+                        <button onclick="selectRadio('ex2', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors">A) 5 est un multiple de 45</button>
+                        <button onclick="selectRadio('ex2', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors">B) 5 est un diviseur de 45</button>
+                        <button onclick="selectRadio('ex2', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors">C) 45 est divisible par 10</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex2', 'Explication : 45 = 5 × 9. Donc 5 est un diviseur de 45, et 45 est un multiple de 5.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Vrai ou Faux : Nombres Premiers</h3>
+                    <p class="text-sm text-slate-600 mb-4">Un nombre est premier s'il possède <strong>exactement deux diviseurs</strong> (1 et lui-même).</p>
+                    
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>Le nombre 1 est premier.</span>
+                            <div class="flex gap-2">
+                                <button onclick="setVF('q1', false, this)" class="px-2 py-1 bg-white border rounded hover:bg-slate-200 vf-q1">V</button>
+                                <button onclick="setVF('q1', true, this)" class="px-2 py-1 bg-white border rounded hover:bg-slate-200 vf-q1">F</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>Le nombre 2 est premier.</span>
+                            <div class="flex gap-2">
+                                <button onclick="setVF('q2', true, this)" class="px-2 py-1 bg-white border rounded hover:bg-slate-200 vf-q2">V</button>
+                                <button onclick="setVF('q2', false, this)" class="px-2 py-1 bg-white border rounded hover:bg-slate-200 vf-q2">F</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                            <span>Le nombre 9 est premier.</span>
+                            <div class="flex gap-2">
+                                <button onclick="setVF('q3', false, this)" class="px-2 py-1 bg-white border rounded hover:bg-slate-200 vf-q3">V</button>
+                                <button onclick="setVF('q3', true, this)" class="px-2 py-1 bg-white border rounded hover:bg-slate-200 vf-q3">F</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx3()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
             </div>
         </div>
 
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Vrai ou Faux ?
-            </h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>Tout nombre se terminant par 3 est divisible par 3. (Vrai / Faux)</li>
-                <li>Si un nombre est divisible par 10, alors il est divisible par 5. (Vrai / Faux)</li>
-                <li>Un nombre premier est toujours impair. (Vrai / Faux)</li>
-                <li>27 est un nombre premier. (Vrai / Faux)</li>
-            </ul>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Décomposition en facteurs premiers</h3>
+                    <p class="text-sm text-slate-600 mb-4">Décomposez le nombre <strong>60</strong> en produit de facteurs premiers.</p>
+                    
+                    <div class="flex flex-wrap items-center gap-2 mb-4 justify-center font-mono text-lg">
+                        <span>60 =</span>
+                        <input type="number" id="ex4-1" class="w-10 text-center border border-slate-300 rounded p-1">
+                        <span>×</span>
+                        <input type="number" id="ex4-2" class="w-10 text-center border border-slate-300 rounded p-1">
+                        <span>×</span>
+                        <input type="number" id="ex4-3" class="w-10 text-center border border-slate-300 rounded p-1">
+                        <span>×</span>
+                        <input type="number" id="ex4-4" class="w-10 text-center border border-slate-300 rounded p-1">
+                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Rendre irréductible</h3>
+                    <p class="text-sm text-slate-600 mb-4">À l'aide de la décomposition, rendez la fraction $\frac{120}{84}$ irréductible.</p>
+                    
+                    <div class="flex items-center gap-2 mb-4 justify-center font-mono">
+                        <input type="number" id="ex5-num" class="w-12 text-center border border-slate-300 rounded p-1" placeholder="N">
+                        <span>/</span>
+                        <input type="number" id="ex5-den" class="w-12 text-center border border-slate-300 rounded p-1" placeholder="D">
+                    </div>
+                    
+                    <button onclick="checkEx5()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">PGCD Mystère</h3>
+                    <p class="text-sm text-slate-600 mb-4">Quel est le plus grand commun diviseur (PGCD) de <strong>24</strong> et <strong>36</strong> ?</p>
+                    
+                    <input type="number" id="ex6-ans" class="border border-slate-300 rounded p-2 w-full text-center font-bold mb-4" placeholder="Ex: 6">
+                    
+                    <button onclick="checkEx6()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Division Euclidienne
-            </h3>
-            <p class="mb-2">Effectuer les divisions euclidiennes suivantes en donnant le quotient ($q$) et le reste ($r$) :</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>$85$ divisé par $7$</li>
-                <li>$143$ divisé par $12$</li>
-                <li>$205$ divisé par $15$</li>
-            </ol>
-        </div>
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Nombres premiers
-            </h3>
-            <p class="mb-2">1. Citer tous les nombres premiers compris entre 10 et 30.</p>
-            <p>2. Pourquoi 33 n'est-il pas un nombre premier ?</p>
-        </div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-boxes-packing text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Logistique - Composition de colis</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un pâtissier dispose de <strong>120 croissants</strong> et <strong>90 pains au chocolat</strong>. 
+                                Il veut faire le plus grand nombre possible de sachets identiques (même nombre de croissants et même nombre de pains au chocolat dans chaque sachet), sans qu'il ne reste de viennoiserie.
+                            </p>
+                            
+                            <div class="space-y-4 text-sm text-slate-700">
+                                <div>
+                                    <label class="font-bold block mb-1">1. Combien de sachets au maximum peut-il préparer ? (PGCD)</label>
+                                    <input type="number" id="ex7-q1" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>sachets</span>
+                                </div>
+                                <div>
+                                    <label class="font-bold block mb-1">2. Que contiendra chaque sachet ?</label>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" id="ex7-q2c" class="border border-slate-300 rounded p-1 w-16 text-center"> <span>croissants et</span>
+                                        <input type="number" id="ex7-q2p" class="border border-slate-300 rounded p-1 w-16 text-center"> <span>pains au choco.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Décomposition en facteurs premiers
-            </h3>
-            <p class="mb-2">Décomposer les nombres suivants en produit de facteurs premiers :</p>
-            <ul class="list-disc list-inside space-y-2 ml-4 grid grid-cols-2">
-                <li>$a = 24$</li>
-                <li>$b = 45$</li>
-                <li>$c = 150$</li>
-                <li>$d = 98$</li>
-            </ul>
-        </div>
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-border-all text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Carrelage - Découpe sans perte</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un carreleur doit recouvrir un mur rectangulaire de <strong>210 cm</strong> de long sur <strong>135 cm</strong> de haut avec des carreaux carrés (les plus grands possibles) sans avoir à les couper.
+                    </p>
+                    
+                    <label class="font-bold text-sm block mb-1">Quelle sera la taille (le côté) d'un carreau en cm ?</label>
+                    <input type="number" id="ex8-ans" class="border border-slate-300 rounded p-2 w-24 text-center font-bold text-slate-700 mb-4">
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Simplification de fractions
-            </h3>
-            <p class="mb-2">En utilisant les décompositions de l'exercice précédent, ou en trouvant un diviseur commun, rendre irréductibles les fractions suivantes :</p>
-            <ol class="list-decimal list-inside space-y-4 ml-4 grid grid-cols-2">
-                <li>$\frac{24}{45} = $</li>
-                <li>$\frac{45}{150} = $</li>
-                <li>$\frac{42}{24} = $</li>
-            </ol>
-        </div>
-
-        <!-- Exercice 7 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">7</span>
-                Problème : Emballage (Logistique)
-            </h3>
-            <p class="mb-2">Une entreprise de confiserie dispose de $84$ bonbons au chocolat et $126$ bonbons à la fraise. Elle souhaite faire des sachets identiques contenant à la fois des chocolats et des fraises, en utilisant tous les bonbons.</p>
-            <p class="mb-2">1. Quel est le nombre maximum de sachets qu'elle peut préparer ? (Indice : trouver le plus grand diviseur commun)</p>
-            <p>2. Quelle sera la composition de chaque sachet (combien de chocolats et combien de fraises) ?</p>
-        </div>
-
-        <!-- Exercice 8 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">8</span>
-                Problème : Chantier
-            </h3>
-            <p class="mb-2">Un carreleur doit recouvrir un sol rectangulaire de $180\text{ cm}$ de long et $105\text{ cm}$ de large avec des dalles carrées toutes identiques. Il ne veut faire aucune découpe et il souhaite utiliser les dalles les plus grandes possibles.</p>
-            <p class="mb-2">1. Quelle doit être la taille du côté d'une dalle ?</p>
-            <p>2. Combien de dalles lui faudra-t-il au total ?</p>
+            </div>
         </div>
 
     </main>
+
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const c2 = document.getElementById('ex1-c2').checked;
+            const c3 = document.getElementById('ex1-c3').checked;
+            const c4 = document.getElementById('ex1-c4').checked;
+            const c5 = document.getElementById('ex1-c5').checked;
+            const c9 = document.getElementById('ex1-c9').checked;
+            const c10 = document.getElementById('ex1-c10').checked;
+            
+            if (c2 && c3 && c4 && c5 && c9 && c10) {
+                showFeedback('fb-ex1', true, "Parfait ! 3420 est pair (2), finit par 0 (5, 10), 3+4+2=9 (3, 9) et finit par 20 (4).");
+            } else {
+                showFeedback('fb-ex1', false, "Incorrect. En fait... 3420 est divisible par TOUS ces nombres ! Regarde bien les critères.");
+            }
+        }
+
+        // QCM Ex 2
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+
+        // V/F Ex 3
+        let vfAns = { q1: null, q2: null, q3: null };
+        function setVF(q, isCorrect, btn) {
+            vfAns[q] = isCorrect;
+            const buttons = document.querySelectorAll(`.vf-${q}`);
+            buttons.forEach(b => b.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-700', 'font-bold'));
+            btn.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-700', 'font-bold');
+        }
+
+        function checkEx3() {
+            if(vfAns.q1 === null || vfAns.q2 === null || vfAns.q3 === null) {
+                showFeedback('fb-ex3', false, "Cochez toutes les cases."); return;
+            }
+            if(vfAns.q1 && vfAns.q2 && vfAns.q3) {
+                showFeedback('fb-ex3', true, "Parfait ! 1 n'a qu'un diviseur. 2 est le seul pair premier. 9 est divisible par 3, donc pas premier.");
+            } else {
+                showFeedback('fb-ex3', false, "Faux. Rappel : 1 n'est PAS premier. 2 EST premier. 9 n'est PAS premier (divisible par 3).");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const arr = [
+                document.getElementById('ex4-1').value,
+                document.getElementById('ex4-2').value,
+                document.getElementById('ex4-3').value,
+                document.getElementById('ex4-4').value
+            ].map(Number).sort((a,b)=>a-b).join();
+            
+            if (arr === "2,2,3,5") {
+                showFeedback('fb-ex4', true, "Bravo ! 60 = 2 × 2 × 3 × 5.");
+            } else {
+                showFeedback('fb-ex4', false, "Faux. Essaie de diviser 60 par 2, puis encore par 2, etc.");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const n = document.getElementById('ex5-num').value;
+            const d = document.getElementById('ex5-den').value;
+            if (n === "10" && d === "7") {
+                showFeedback('fb-ex5', true, "Correct ! Le PGCD de 120 et 84 est 12. 120/12 = 10 et 84/12 = 7.");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. Décompose 120 (2³×3×5) et 84 (2²×3×7) pour simplifier.");
+            }
+        }
+        
+        // Ex 6
+        function checkEx6() {
+            if (document.getElementById('ex6-ans').value === "12") {
+                showFeedback('fb-ex6', true, "Excellent ! 12 divise bien 24 et 36, et c'est le plus grand.");
+            } else {
+                showFeedback('fb-ex6', false, "Faux. Cherche tous les diviseurs communs (1,2,3,4,6,12...) et prends le plus grand.");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const q1 = document.getElementById('ex7-q1').value;
+            const q2c = document.getElementById('ex7-q2c').value;
+            const q2p = document.getElementById('ex7-q2p').value;
+            
+            if (q1 === "30" && q2c === "4" && q2p === "3") {
+                showFeedback('fb-ex7', true, "Bravo ! Le PGCD de 120 et 90 est 30. Chaque sachet aura 120/30=4 croissants et 90/30=3 pains choco.");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. 1) Trouve le PGCD de 120 et 90. 2) Divise les quantités par ce PGCD.");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const ans = document.getElementById('ex8-ans').value;
+            if (ans === "15") {
+                showFeedback('fb-ex8', true, "Parfait ! Le côté du carreau est le PGCD de 210 et 135, soit 15 cm.");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. Il faut chercher le PGCD de 210 et 135.");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>

@@ -3,152 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Repérage</title>
+    <title>TD - Repérage</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                </div>
+                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Repérage (Axe, Plan, Espace)</h1>
+                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Repérage (Droite, Plan, Espace)</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <div class="hidden md:block">
+                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Repérage sur une droite (Abscisse)
-            </h3>
-            <p class="mb-4">Tracez une droite graduée d'origine $O$, d'unité 1 cm. Placez les points suivants :</p>
-            <ul class="list-disc list-inside space-y-1 ml-4 font-mono">
-                <li>$A(-3)$</li>
-                <li>$B(4)$</li>
-                <li>$C(2,5)$</li>
-                <li>$D(-1,5)$</li>
-            </ul>
-        </div>
-
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Lecture de coordonnées
-            </h3>
-            <p class="mb-4">Dans un repère, on donne les coordonnées suivantes. Indiquez quelle est l'abscisse et quelle est l'ordonnée pour chaque point :</p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>$E(4 ; -2)$ : L'abscisse est ... et l'ordonnée est ...</li>
-                <li>$F(-1 ; 5)$ : L'abscisse est ... et l'ordonnée est ...</li>
-                <li>$G(0 ; 3)$ : L'abscisse est ... et l'ordonnée est ...</li>
-            </ul>
-        </div>
-
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Placement de points dans le plan
-            </h3>
-            <p class="mb-4">Sur une feuille à carreaux, tracez un repère orthonormé (1 carreau = 1 unité) et placez les points suivants :</p>
-            <div class="grid grid-cols-2 gap-4 ml-4 font-mono">
-                <div>$P(2 ; 3)$</div>
-                <div>$Q(-3 ; 1)$</div>
-                <div>$R(-2 ; -4)$</div>
-                <div>$S(4 ; -2)$</div>
+        <!-- Section: Acquisition -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
-            <p class="mt-4">Quelle figure géométrique obtenez-vous en reliant $P-Q-R-S$ ?</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Sur une droite graduée</h3>
+                    
+                    <div class="w-full h-16 relative bg-slate-50 border border-slate-200 mb-4 flex items-center justify-center px-4">
+                        <!-- Ligne -->
+                        <div class="w-full h-0.5 bg-slate-400 absolute"></div>
+                        <!-- Graduations -->
+                        <div class="w-full flex justify-between absolute px-10">
+                            <div class="flex flex-col items-center"><div class="w-0.5 h-3 bg-slate-600"></div><span class="text-xs font-bold mt-1">-2</span></div>
+                            <div class="flex flex-col items-center"><div class="w-0.5 h-3 bg-slate-600"></div></div>
+                            <div class="flex flex-col items-center"><div class="w-0.5 h-3 bg-slate-600"></div><span class="text-xs font-bold mt-1 text-red-500">0</span></div>
+                            <div class="flex flex-col items-center"><div class="w-0.5 h-3 bg-slate-600"></div></div>
+                            <div class="flex flex-col items-center"><div class="w-0.5 h-3 bg-slate-600"></div><span class="text-xs font-bold mt-1">2</span></div>
+                        </div>
+                        
+                        <!-- Point A (at 1) -->
+                        <div class="absolute w-3 h-3 bg-blue-600 rounded-full" style="left: 71.5%; transform: translateX(-50%);"></div>
+                        <span class="absolute font-bold text-blue-600" style="left: 71.5%; top: 5px; transform: translateX(-50%);">A</span>
+                        
+                        <!-- Point B (at -1.5) -->
+                        <div class="absolute w-3 h-3 bg-purple-600 rounded-full" style="left: 21%; transform: translateX(-50%);"></div>
+                        <span class="absolute font-bold text-purple-600" style="left: 21%; top: 5px; transform: translateX(-50%);">B</span>
+                    </div>
+
+                    <p class="text-sm text-slate-600 mb-2">Lisez les abscisses des points :</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center gap-2 font-mono">A( <input type="number" id="ex1-a" class="w-16 border rounded text-center"> )</div>
+                        <div class="flex items-center gap-2 font-mono">B( <input type="number" id="ex1-b" class="w-16 border rounded text-center"> )</div>
+                    </div>
+                    
+                    <button onclick="checkEx1()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Dans le plan (x, y)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Dans le point <strong>M(3 ; -4)</strong>, que représente le nombre -4 ?</p>
+                    
+                    <div class="grid grid-cols-1 gap-2" id="ex2-options">
+                        <button onclick="selectRadio('ex2', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors">A) L'abscisse (axe horizontal)</button>
+                        <button onclick="selectRadio('ex2', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors">B) L'ordonnée (axe vertical)</button>
+                        <button onclick="selectRadio('ex2', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors">C) L'altitude (axe de la profondeur)</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex2', 'Explication : Dans un couple (x ; y), le premier nombre est toujours l\'abscisse (horizontal) et le deuxième l\'ordonnée (vertical).')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Signe des coordonnées</h3>
+                    <p class="text-sm text-slate-600 mb-4">Où se trouve le point <strong>K(-2 ; -5)</strong> dans un repère classique ?</p>
+                    
+                    <div class="grid grid-cols-1 gap-2" id="ex3-options">
+                        <button onclick="selectRadio('ex3', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors text-sm">En haut à droite (Positif, Positif)</button>
+                        <button onclick="selectRadio('ex3', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors text-sm">En bas à droite (Positif, Négatif)</button>
+                        <button onclick="selectRadio('ex3', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors text-sm">En bas à gauche (Négatif, Négatif)</button>
+                    </div>
+                    
+                    <button onclick="checkRadio('ex3', 'Les deux nombres étant négatifs, on va à gauche sur l\'axe horizontal et en bas sur l\'axe vertical !')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Vrai ou Faux ?
-            </h3>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>L'axe horizontal est l'axe des ordonnées. (Vrai / Faux)</li>
-                <li>Le point $M(0 ; 5)$ est situé sur l'axe des ordonnées. (Vrai / Faux)</li>
-                <li>Le point d'intersection des deux axes s'appelle l'origine et a pour coordonnées $(0 ; 0)$. (Vrai / Faux)</li>
-                <li>Pour le point $N(-3 ; 2)$, le nombre -3 est l'abscisse. (Vrai / Faux)</li>
-            </ul>
+        <!-- Section: Entraînement -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Ex 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Distance sur un axe</h3>
+                    <p class="text-sm text-slate-600 mb-4">Sur un axe gradué en centimètres, on a les points <strong>A(-3)</strong> et <strong>B(8)</strong>.</p>
+                    
+                    <label class="font-bold text-sm block mb-1">Quelle est la distance AB en centimètres ?</label>
+                    <div class="flex items-center gap-2 mb-4">
+                        <input type="number" id="ex4-ans" class="w-20 text-center border border-slate-300 rounded p-2">
+                        <span class="text-slate-600 font-bold">cm</span>
+                    </div>
+                    
+                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 5 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Repérage dans l'Espace (3D)</h3>
+                    <p class="text-sm text-slate-600 mb-4">Dans un repère (x ; y ; z), les coordonnées d'un drone sont <strong>(15 ; 20 ; 45)</strong> en mètres.</p>
+                    
+                    <div class="grid grid-cols-1 gap-2 mb-4">
+                        <div class="flex justify-between items-center bg-slate-50 p-2 rounded">
+                            <span class="text-sm">À quelle altitude vole le drone ?</span>
+                            <div class="flex items-center gap-1"><input type="number" id="ex5-z" class="w-16 border rounded text-center">m</div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx5()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex5" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 6 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Latitude & Longitude (Sphère)</h3>
+                    <p class="text-sm text-slate-600 mb-4">La ville de Paris a pour coordonnées <strong>(48° Nord ; 2° Est)</strong>. <br>L'Equateur est à 0°.</p>
+                    
+                    <p class="text-sm text-slate-700 mb-2 font-bold">Paris est-elle au dessus (Nord) ou en dessous (Sud) de l'équateur ?</p>
+                    <div class="flex gap-2 mb-4">
+                        <button onclick="setBtnGroup('ex6', 'nord', this)" class="btn-group-ex6 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1">Au Nord (Dessus)</button>
+                        <button onclick="setBtnGroup('ex6', 'sud', this)" class="btn-group-ex6 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1">Au Sud (Dessous)</button>
+                    </div>
+                    
+                    <button onclick="checkEx6()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
+                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Problème : Relevé de coordonnées (Topographie)
-            </h3>
-            <p class="mb-4">Un géomètre doit placer 3 piquets pour délimiter un terrain triangulaire. Le piquet A est à l'origine $(0 ; 0)$. Le piquet B est situé à 4 mètres à l'Est (droite) et 0 mètre au Nord. Le piquet C est situé à 0 mètre à l'Est et 3 mètres au Nord.</p>
-            <p class="mb-2">1. Donnez les coordonnées des points $A$, $B$ et $C$.</p>
-            <p>2. Placez ces points dans un repère (1 carreau = 1 mètre).</p>
-            <p>3. Quelle est la nature du triangle $ABC$ ?</p>
-        </div>
+        <!-- Section: Pro -->
+        <div class="mb-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="h-px bg-slate-300 flex-grow"></div>
+                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
+                <div class="h-px bg-slate-300 flex-grow"></div>
+            </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Repérage dans l'espace
-            </h3>
-            <p class="mb-4">Dans un repère de l'espace à trois dimensions, un point est défini par 3 coordonnées : $(x ; y ; z)$ représentant (abscisse ; ordonnée ; altitude). Indiquez l'altitude des points suivants :</p>
-            <ul class="list-disc list-inside space-y-2 ml-4">
-                <li>Un drone $D$ est situé aux coordonnées $(15 ; 20 ; 45)$. Son altitude est de ... mètres.</li>
-                <li>Un sous-marin $S$ est situé aux coordonnées $(120 ; 300 ; -50)$. Son altitude est de ... mètres.</li>
-                <li>Une voiture $V$ garée au sol aux coordonnées $(10 ; 5 ; 0)$. Son altitude est de ... mètres.</li>
-            </ul>
-        </div>
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- Ex 7 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-truck-fast text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Logistique - Grille d'entrepôt</h3>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/2">
+                            <p class="text-sm text-slate-600 mb-4">
+                                Un magasinier range des palettes. L'entrepôt utilise un repère <strong>(Allée, Rangée)</strong>. <br>
+                                Il part de la position <strong>(2 ; 3)</strong>. Il avance de <strong>4 Allées</strong> vers la droite (axe X) et recule de <strong>2 Rangées</strong> (axe Y vers le bas).
+                            </p>
+                            <label class="font-bold block mb-1 text-sm">Quelles sont ses nouvelles coordonnées ?</label>
+                            <div class="flex items-center gap-2 font-mono mt-2">
+                                ( <input type="number" id="ex7-x" class="w-16 border border-slate-300 rounded p-1 text-center"> ;
+                                  <input type="number" id="ex7-y" class="w-16 border border-slate-300 rounded p-1 text-center"> )
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 flex items-center justify-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <!-- Small grid SVG -->
+                            <svg width="150" height="150" viewBox="0 0 100 100">
+                                <path d="M0,20 L100,20 M0,40 L100,40 M0,60 L100,60 M0,80 L100,80" stroke="#cbd5e1" stroke-width="1"/>
+                                <path d="M20,0 L20,100 M40,0 L40,100 M60,0 L60,100 M80,0 L80,100" stroke="#cbd5e1" stroke-width="1"/>
+                                <!-- Starting point at X=2 (40), Y=3 (60) - Y grows down in standard screen coords but up in math, let's keep it abstract -->
+                                <circle cx="40" cy="40" r="4" fill="#ef4444" />
+                                <text x="45" y="35" font-size="10" font-weight="bold" fill="#ef4444">(2;3)</text>
+                                <!-- Arrow -->
+                                <path d="M45,40 L80,40 L80,60" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
+                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 7 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">7</span>
-                Problème de la bataille navale
-            </h3>
-            <p class="mb-4">Dans un jeu vidéo inspiré de la bataille navale, la carte est un repère. Votre bateau est en $B(3 ; -2)$ et le trésor est en $T(-1 ; 4)$.</p>
-            <p class="mb-2">1. Placez ces points dans un repère.</p>
-            <p>2. De combien de cases vers la gauche (horizontalement) et vers le haut (verticalement) devez-vous avancer pour aller de $B$ à $T$ ?</p>
-        </div>
+                <!-- Ex 8 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
+                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-map-location-dot text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Topographie - Décalage GPS</h3>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-4">
+                        Un géomètre place une balise au point de référence <strong>R(-45 ; 120)</strong> (en mètres). <br>
+                        Le client lui demande de la déplacer au point <strong>D(-20 ; 100)</strong>.
+                    </p>
+                    
+                    <p class="text-sm text-slate-700 mb-3 font-bold">Complétez la phrase décrivant le déplacement :</p>
+                    <div class="text-sm flex flex-wrap items-center gap-2 mb-4">
+                        "Je dois avancer de <input type="number" id="ex8-x" class="w-16 border rounded p-1 text-center"> mètres sur l'axe horizontal (vers la droite) et reculer de <input type="number" id="ex8-y" class="w-16 border rounded p-1 text-center"> mètres sur l'axe vertical (vers le bas)."
+                    </div>
+                    
+                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
 
-        <!-- Exercice 8 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">8</span>
-                Déplacement d'un bras robotique (Industrie)
-            </h3>
-            <p class="mb-4">Un bras robotique industriel doit souder des pièces sur une carte mère. L'origine $(0;0)$ est le coin inférieur gauche de la carte. Les coordonnées sont en millimètres.</p>
-            <ul class="list-disc list-inside space-y-1 ml-4 mb-4">
-                <li>Le point de soudure 1 est à $S1(20 ; 50)$.</li>
-                <li>Le point de soudure 2 est à $S2(60 ; 50)$.</li>
-                <li>Le point de soudure 3 est à $S3(60 ; 10)$.</li>
-            </ul>
-            <p class="mb-2">1. Représentez la carte (1 carreau = 10 mm) et placez les 3 points de soudure.</p>
-            <p>2. Le robot se déplace en ligne droite de S1 à S2, puis de S2 à S3. Décrivez ses mouvements (exemple : "il avance de X mm vers la droite").</p>
+            </div>
         </div>
 
     </main>
+
+    <!-- JS Logic -->
+    <script>
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
+            
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+
+        // QCM Logic
+        let radioAnswers = {};
+        function selectRadio(exId, btn, status) {
+            const container = document.getElementById(`${exId}-options`);
+            const buttons = container.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+            });
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+            radioAnswers[exId] = status;
+        }
+
+        function checkRadio(exId, explanation) {
+            if (!radioAnswers[exId]) {
+                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
+                return;
+            }
+            if (radioAnswers[exId] === 'correct') {
+                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
+            } else {
+                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
+            }
+        }
+        
+        let groupAns = {};
+        function setBtnGroup(exId, val, btn) {
+            groupAns[exId] = val;
+            const buttons = document.querySelectorAll(`.btn-group-${exId}`);
+            buttons.forEach(b => b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50'));
+            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
+        }
+
+        // Ex 1
+        function checkEx1() {
+            const a = document.getElementById('ex1-a').value;
+            const b = document.getElementById('ex1-b').value;
+            
+            if (a === "1" && (b === "-1.5" || b === "-1,5")) {
+                showFeedback('fb-ex1', true, "Parfait ! A est à 1 (au milieu entre 0 et 2). B est entre -1 et -2, soit -1,5.");
+            } else {
+                showFeedback('fb-ex1', false, "Incorrect. Regarde bien les graduations. Chaque tiret vaut 1 unité.");
+            }
+        }
+
+        // Ex 4
+        function checkEx4() {
+            const ans = document.getElementById('ex4-ans').value;
+            if (ans === "11") {
+                showFeedback('fb-ex4', true, "Bravo ! Pour aller de -3 à 0, il y a 3 cm. Et de 0 à 8, il y a 8 cm. Total : 11 cm (ou 8 - (-3) = 11).");
+            } else {
+                showFeedback('fb-ex4', false, "Faux. Fais un schéma ou calcule : Distance = Grand - Petit.");
+            }
+        }
+
+        // Ex 5
+        function checkEx5() {
+            const z = document.getElementById('ex5-z').value;
+            if (z === "45") {
+                showFeedback('fb-ex5', true, "Correct ! Dans (x;y;z), la dernière coordonnée (z) correspond à l'altitude.");
+            } else {
+                showFeedback('fb-ex5', false, "Incorrect. L'altitude est toujours la coordonnée Z (la 3ème valeur).");
+            }
+        }
+
+        // Ex 6
+        function checkEx6() {
+            if (groupAns['ex6'] === 'nord') {
+                showFeedback('fb-ex6', true, "Exact ! La latitude de Paris est 48° Nord, donc elle est au-dessus de l'équateur (qui est à 0°).");
+            } else if (!groupAns['ex6']) {
+                showFeedback('fb-ex6', false, "Veuillez choisir une réponse.");
+            } else {
+                showFeedback('fb-ex6', false, "Faux. 48° Nord signifie bien... au Nord !");
+            }
+        }
+
+        // Ex 7
+        function checkEx7() {
+            const x = document.getElementById('ex7-x').value;
+            const y = document.getElementById('ex7-y').value;
+            
+            if (x === "6" && y === "1") {
+                showFeedback('fb-ex7', true, "Bravo ! L'abscisse devient 2 + 4 = 6. L'ordonnée devient 3 - 2 = 1. Nouvelle position : (6 ; 1).");
+            } else {
+                showFeedback('fb-ex7', false, "Erreur. Fais 2 + 4 pour X, et 3 - 2 pour Y.");
+            }
+        }
+
+        // Ex 8
+        function checkEx8() {
+            const x = document.getElementById('ex8-x').value;
+            const y = document.getElementById('ex8-y').value;
+            
+            if (x === "25" && y === "20") {
+                showFeedback('fb-ex8', true, "Félicitations ! X passe de -45 à -20 (différence de +25). Y passe de 120 à 100 (différence de -20, donc il recule de 20).");
+            } else {
+                showFeedback('fb-ex8', false, "Faux. Pour aller de -45 à -20, combien faut-il ajouter ? Pour aller de 120 à 100, combien faut-il enlever ?");
+            }
+        }
+    </script>
+
+    <div class="h-24"></div>
 </body>
 </html>
