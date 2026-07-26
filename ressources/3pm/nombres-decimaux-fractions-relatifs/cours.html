@@ -3,128 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Nombres décimaux, fractions, relatifs</title>
+    <title>Cours - Nombres, Fractions, Relatifs</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-        .def-box { border-left: 4px solid #3b82f6; background-color: #eff6ff; }
-        .prop-box { border-left: 4px solid #10b981; background-color: #ecfdf5; }
-        .meth-box { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
-        .ex-box { border-left: 4px solid #8b5cf6; background-color: #f5f3ff; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+    </style>
 </head>
 <body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-calculator text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Mathématiques</p>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Opérations sur les nombres</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa-Métiers • Mathématiques</p>
-                <h1 class="text-2xl font-bold text-slate-800">Séquence 1 : Nombres décimaux, fractions, relatifs</h1>
+            <div class="hidden md:flex gap-3">
+                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-10">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
-        <!-- SECTION 1 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">1. Les Nombres Décimaux et Relatifs</h2>
-            
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Définitions
-                </h3>
-                <ul class="list-disc list-inside text-blue-900 space-y-2">
-                    <li><strong>Nombre décimal :</strong> C'est un nombre qui peut s'écrire avec un nombre fini de chiffres après la virgule. <br><span class="text-sm text-slate-600 ml-5">Exemples : $2,5$ ; $-0,75$ ; $4$ (car $4 = 4,0$)</span></li>
-                    <li><strong>Nombre relatif :</strong> C'est un nombre muni d'un signe positif ($+$) ou négatif ($-$). Il représente un gain/une perte, une température au-dessus/en-dessous de zéro.</li>
-                </ul>
-            </div>
-
-            <div class="meth-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-calculator"></i> Règles de calcul (Nombres relatifs)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-amber-900 text-sm">
-                    <div class="bg-white p-3 rounded border border-amber-200">
-                        <h4 class="font-bold mb-1">Addition</h4>
-                        <p><strong>Même signe :</strong> On garde le signe et on ajoute les distances à zéro. ($-3 + (-4) = -7$)</p>
-                        <p><strong>Signes différents :</strong> On prend le signe de celui qui a la plus grande distance à zéro et on soustrait. ($-8 + 5 = -3$)</p>
+        <!-- SECTION 1 : Nombres relatifs -->
+        <section class="course-layout items-start">
+            <div class="space-y-6">
+                <!-- Définition -->
+                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Nombres Relatifs</h2>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-book text-blue-600 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Définition</h3>
                     </div>
-                    <div class="bg-white p-3 rounded border border-amber-200">
-                        <h4 class="font-bold mb-1">Multiplication & Division</h4>
-                        <p><strong>Règle des signes :</strong></p>
-                        <ul class="list-none space-y-1">
-                            <li>$(+) \times (+) = (+)$</li>
-                            <li>$(-) \times (-) = (+)$</li>
-                            <li>$(+) \times (-) = (-)$</li>
-                        </ul>
+                    
+                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
+                        Un nombre relatif est un nombre muni d'un <strong>signe</strong> : positif ($+$) ou négatif ($-$). Il sert à représenter des gains/pertes, des températures, des altitudes...
+                    </p>
+                    <div class="bg-blue-50 p-3 rounded text-sm text-blue-900 border border-blue-200">
+                        Exemples : $+15$ (gain), $-4$ (perte), $0$ (neutre).
                     </div>
                 </div>
+
+                <!-- Règles de calcul -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-plus-minus text-amber-500 text-xl"></i>
+                        <h3 class="font-bold text-slate-900 text-lg">Addition et Soustraction</h3>
+                    </div>
+                    
+                    <ul class="text-sm text-slate-700 space-y-3 mb-4">
+                        <li><strong>Même signe :</strong> On garde le signe et on ajoute. <br><span class="text-xs text-amber-600 bg-amber-50 px-2 rounded font-mono">-3 - 4 = -7</span></li>
+                        <li><strong>Signes différents :</strong> Le plus "fort" (la plus grande distance à zéro) l'emporte, et on soustrait. <br><span class="text-xs text-amber-600 bg-amber-50 px-2 rounded font-mono">-8 + 5 = -3</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Visualization : Simulateur d'ascenseur (Relatifs) -->
+            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-indigo-500">
+                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
+                    Simulateur : L'Ascenseur
+                </h3>
+                <p class="text-xs text-slate-500 mb-4 text-center">Additionner des nombres relatifs, c'est comme monter ou descendre dans un immeuble.</p>
+                
+                <div class="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <!-- Ascenseur UI -->
+                    <div class="w-16 h-48 bg-slate-200 rounded border-2 border-slate-400 relative overflow-hidden flex flex-col justify-between">
+                        <div class="w-full h-[20%] border-b border-slate-300 text-[10px] text-center pt-1 text-slate-500">+2</div>
+                        <div class="w-full h-[20%] border-b border-slate-300 text-[10px] text-center pt-1 text-slate-500">+1</div>
+                        <div class="w-full h-[20%] border-b-2 border-slate-400 bg-slate-300 text-[10px] text-center pt-1 font-bold">0 (RDC)</div>
+                        <div class="w-full h-[20%] border-b border-slate-300 text-[10px] text-center pt-1 text-slate-500">-1</div>
+                        <div class="w-full h-[20%] text-[10px] text-center pt-1 text-slate-500">-2</div>
+                        
+                        <!-- Cabine -->
+                        <div id="cabine" class="absolute w-12 h-[18%] bg-indigo-500 left-1 rounded-sm shadow-md transition-all duration-500 flex items-center justify-center text-white font-bold" style="bottom: 41%;">0</div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="flex flex-col gap-3">
+                        <div class="text-center mb-2">
+                            <span class="text-xs text-slate-500">Position actuelle :</span><br>
+                            <span id="posText" class="text-lg font-bold text-indigo-600">0</span>
+                        </div>
+                        <button onclick="moveElevator(1)" class="px-4 py-2 bg-emerald-500 text-white rounded shadow hover:bg-emerald-600 font-bold text-sm">+1 (Monter)</button>
+                        <button onclick="moveElevator(-1)" class="px-4 py-2 bg-rose-500 text-white rounded shadow hover:bg-rose-600 font-bold text-sm">-1 (Descendre)</button>
+                        <button onclick="resetElevator()" class="px-4 py-1 mt-2 bg-slate-300 text-slate-700 rounded text-xs hover:bg-slate-400">Reset</button>
+                    </div>
+                </div>
+                
+                <div class="mt-4 p-3 bg-indigo-50 border border-indigo-200 rounded text-sm font-mono text-center text-indigo-900" id="calculTrace">
+                    0
+                </div>
+
+                <script>
+                    let currentPos = 0;
+                    let trace = "0";
+                    
+                    function moveElevator(val) {
+                        let newPos = currentPos + val;
+                        if(newPos > 2 || newPos < -2) return; // limits
+                        
+                        currentPos = newPos;
+                        
+                        // Update Trace
+                        if(val > 0) trace += ` + ${val}`;
+                        else trace += ` - ${Math.abs(val)}`;
+                        
+                        document.getElementById('calculTrace').innerText = `${trace} = ${currentPos}`;
+                        document.getElementById('posText').innerText = currentPos;
+                        document.getElementById('cabine').innerText = currentPos;
+                        
+                        // Move Cabine visually
+                        // bottom: -2 is 1%, -1 is 21%, 0 is 41%, 1 is 61%, 2 is 81%
+                        let bottomPct = 41 + (currentPos * 20);
+                        document.getElementById('cabine').style.bottom = bottomPct + "%";
+                    }
+                    
+                    function resetElevator() {
+                        currentPos = 0;
+                        trace = "0";
+                        document.getElementById('calculTrace').innerText = "0";
+                        document.getElementById('posText').innerText = "0";
+                        document.getElementById('cabine').innerText = "0";
+                        document.getElementById('cabine').style.bottom = "41%";
+                    }
+                </script>
             </div>
         </section>
 
-        <!-- SECTION 2 -->
-        <section>
-            <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-slate-200 pb-2">2. Les Fractions</h2>
+        <!-- SECTION 2 : Les Fractions -->
+        <section class="mt-12">
+            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
+                <h2 class="text-2xl font-bold text-slate-800 font-heading">Opérations sur les Fractions</h2>
+            </div>
             
-            <div class="def-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-blue-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book"></i> Qu'est-ce qu'une fraction ?
-                </h3>
-                <p class="text-blue-900 mb-2">
-                    Une fraction $\frac{a}{b}$ représente le quotient de $a$ par $b$ ($b \neq 0$). 
-                    <br>$a$ est le <strong>numérateur</strong> et $b$ est le <strong>dénominateur</strong>.
-                </p>
-            </div>
+            <p class="text-slate-700 mb-6">Une fraction est un partage. Le <strong>dénominateur</strong> (en bas) indique en combien on coupe l'unité. Le <strong>numérateur</strong> (en haut) indique combien de parts on prend.</p>
 
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-emerald-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-check-circle"></i> Addition et Soustraction
-                </h3>
-                <p class="text-emerald-900 mb-3">Pour additionner ou soustraire des fractions, on doit les réduire au <strong>même dénominateur</strong>.</p>
-                <div class="bg-white p-3 rounded border border-emerald-200 text-sm text-center font-mono text-emerald-900">
-                    $\frac{2}{3} + \frac{1}{4} = \frac{2 \times 4}{3 \times 4} + \frac{1 \times 3}{4 \times 3} = \frac{8}{12} + \frac{3}{12} = \frac{11}{12}$
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Addition -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500">
+                    <h3 class="font-bold text-emerald-800 mb-4 text-lg"><i class="fa-solid fa-plus mr-2"></i> Addition & Soustraction</h3>
+                    
+                    <p class="text-sm text-slate-600 mb-3">
+                        <span class="text-rose-500 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Règle d'or :</span> On doit avoir le <strong>même dénominateur</strong> ! On ne peut pas additionner des demis et des tiers directement.
+                    </p>
+                    
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm font-mono text-center overflow-x-auto">
+                        <p class="mb-2 text-slate-500 text-xs">Exemple :</p>
+                        <p class="mb-2">$\frac{2}{3} + \frac{1}{4}$</p>
+                        <p class="mb-2 text-emerald-600">$= \frac{2 \times 4}{3 \times 4} + \frac{1 \times 3}{4 \times 3}$</p>
+                        <p class="mb-2">$= \frac{8}{12} + \frac{3}{12}$</p>
+                        <p class="font-bold bg-emerald-100 p-1 inline-block rounded">$= \frac{11}{12}$</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="prop-box p-5 rounded-r-xl shadow-sm mb-6 border-l-purple-500 bg-purple-50">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-check-circle"></i> Multiplication
-                </h3>
-                <p class="text-purple-900 mb-3">Pour multiplier des fractions, on multiplie les numérateurs entre eux et les dénominateurs entre eux.</p>
-                <div class="bg-white p-3 rounded border border-purple-200 text-sm text-center font-mono text-purple-900">
-                    $\frac{2}{5} \times \frac{3}{7} = \frac{2 \times 3}{5 \times 7} = \frac{6}{35}$
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3 -->
-        <section>
-            <div class="ex-box p-5 rounded-r-xl shadow-sm mb-6">
-                <h3 class="font-bold text-purple-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-briefcase"></i> Application Professionnelle (Logistique / Gestion)
-                </h3>
-                <p class="text-purple-900 text-sm mb-3">
-                    Dans une chambre froide, la température est réglée à $-4°\text{C}$. Lors d'une livraison, la porte reste ouverte et la température augmente de $6°\text{C}$. Après la fermeture, le groupe frigorifique abaisse la température de $3°\text{C}$.
-                </p>
-                <div class="bg-white p-3 rounded-lg border border-purple-200 text-sm">
-                    <p class="font-bold">Calcul de la température finale :</p>
-                    <p class="font-mono mt-1">$-4 + 6 - 3 = 2 - 3 = -1°\text{C}$</p>
-                    <p class="mt-2 text-slate-600">La température finale est de $-1°\text{C}$.</p>
+                <!-- Multiplication -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
+                    <h3 class="font-bold text-purple-800 mb-4 text-lg"><i class="fa-solid fa-xmark mr-2"></i> Multiplication</h3>
+                    
+                    <p class="text-sm text-slate-600 mb-3">
+                        C'est la plus simple ! On multiplie les numérateurs entre eux, et les dénominateurs entre eux.
+                    </p>
+                    
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm font-mono text-center mt-8 overflow-x-auto">
+                        <p class="mb-2 text-slate-500 text-xs">Exemple :</p>
+                        <p class="mb-2">$\frac{2}{5} \times \frac{3}{7}$</p>
+                        <p class="mb-2 text-purple-600">$= \frac{2 \times 3}{5 \times 7}$</p>
+                        <p class="font-bold bg-purple-100 p-1 inline-block rounded mt-2">$= \frac{6}{35}$</p>
+                    </div>
                 </div>
             </div>
         </section>
-        
+
     </main>
+
+    <div class="h-24"></div>
 </body>
 </html>
