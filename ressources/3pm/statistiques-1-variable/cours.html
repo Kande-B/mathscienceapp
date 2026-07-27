@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Statistiques à une variable</title>
+    <title>Séquence - Statistiques</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -30,276 +30,470 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
         .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
         
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        /* Sidebar active link */
+        .nav-link.active { background-color: #e0f2fe; color: #0284c7; border-left: 4px solid #0ea5e9; font-weight: bold; }
+        .nav-link { border-left: 4px solid transparent; }
         
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
-        
-        /* Bar chart animations */
-        .bar-chart-col { transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 flex flex-col md:flex-row min-h-screen">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-chart-simple text-2xl"></i>
-                </div>
-                <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Gestion de données</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Statistiques</h1>
-                </div>
-            </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-72 bg-white border-r border-slate-200 md:h-screen sticky top-0 flex-shrink-0 z-40 overflow-y-auto">
+        <div class="p-6 border-b border-slate-100">
+            <p class="text-xs font-bold text-brand-500 uppercase tracking-widest mb-1">3ème Prépa-Métiers</p>
+            <h1 class="text-xl font-extrabold text-slate-900 font-heading">Statistiques</h1>
         </div>
-    </header>
+        <nav class="p-4 space-y-1" id="toc">
+            <a href="#avant-de-commencer" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-flag-checkered w-6"></i> Avant de commencer</a>
+            <a href="#activites" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-lightbulb w-6"></i> Activités d'introduction</a>
+            <a href="#cours" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-book-open w-6"></i> Je note l'essentiel</a>
+            <a href="#automatismes" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-bolt w-6"></i> Automatismes</a>
+            <a href="#tp" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-laptop-code w-6"></i> TP Numérique</a>
+            <a href="#exercices" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-dumbbell w-6"></i> Exercices</a>
+            <a href="#problemes" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-industry w-6"></i> Problèmes</a>
+            <a href="#brevet" class="nav-link block px-4 py-2.5 rounded-r-lg text-sm text-slate-600 hover:bg-slate-50 transition-colors"><i class="fa-solid fa-graduation-cap w-6"></i> Vers le Brevet</a>
+        </nav>
+    </aside>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
+    <!-- Main Content -->
+    <main class="flex-grow p-4 md:p-8 max-w-5xl">
         
-        <!-- SECTION 1 : Vocabulaire -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le Vocabulaire Statistique</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-language text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Les mots de la statistique</h3>
-                    </div>
-                    <p class="text-slate-700 leading-relaxed text-base mb-4">
-                        Faire des statistiques, c'est récolter des données sur un groupe pour en tirer des informations. Il faut maîtriser un vocabulaire précis :
-                    </p>
-                    <ul class="space-y-3 text-slate-700">
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-users text-blue-500 mt-1"></i>
-                            <div><strong>La Population :</strong> L'ensemble des éléments étudiés (ex: Les élèves de la 3PM).</div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-user text-blue-500 mt-1"></i>
-                            <div><strong>L'Individu :</strong> Un élément de la population (ex: Un élève).</div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-tag text-blue-500 mt-1"></i>
-                            <div><strong>Le Caractère :</strong> Ce que l'on étudie (ex: La pointure, la couleur des yeux).</div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-hashtag text-blue-500 mt-1"></i>
-                            <div><strong>L'Effectif :</strong> Le nombre de fois qu'une valeur apparaît.</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
-                <h3 class="font-bold text-slate-800 mb-4 font-heading flex items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass text-brand-500"></i> Exemple visuel
-                </h3>
-                <div class="bg-slate-50 p-4 rounded-xl text-sm border border-slate-200">
-                    <p class="mb-2 font-bold text-slate-800">Enquête : "Combien de frères et sœurs avez-vous ?"</p>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-600">Population :</span>
-                        <span class="font-mono bg-blue-100 text-blue-800 px-2 py-1 rounded">Classe de 3PM</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-600">Caractère :</span>
-                        <span class="font-mono bg-purple-100 text-purple-800 px-2 py-1 rounded">Nombre de frères/sœurs</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-600">Type de caractère :</span>
-                        <span class="font-mono bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Quantitatif (nombres)</span>
-                    </div>
-                </div>
-                
-                <div class="mt-4 p-4 border border-rose-200 bg-rose-50 rounded-xl">
-                    <p class="text-xs text-rose-800 font-bold uppercase mb-1">Fréquence (%)</p>
-                    <p class="text-sm text-rose-900">La <strong>fréquence</strong> se calcule avec la formule :</p>
-                    <div class="mt-2 text-center font-mono font-bold bg-white p-2 rounded border border-rose-200">
-                        Fréquence = Effectif ÷ Effectif Total
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2 : Graphiques -->
-        <section class="course-layout items-start mt-12">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Représentations Graphiques</h2>
-                </div>
-                
-                <p class="text-lg text-slate-700">Pour analyser des données, un graphique est souvent plus parlant qu'un long tableau de nombres.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white rounded-xl p-5 border-t-4 border-emerald-400 card-shadow interactive-hover">
-                        <h4 class="font-bold text-lg text-slate-800 mb-2">Diagramme en bâtons</h4>
-                        <p class="text-sm text-slate-600">La hauteur du bâton est proportionnelle à l'effectif. Idéal pour comparer des quantités discrètes (comme des notes).</p>
-                    </div>
-                    <div class="bg-white rounded-xl p-5 border-t-4 border-amber-400 card-shadow interactive-hover">
-                        <h4 class="font-bold text-lg text-slate-800 mb-2">Diagramme circulaire</h4>
-                        <p class="text-sm text-slate-600">L'angle (la part de camembert) est proportionnel à l'effectif ou à la fréquence. Idéal pour voir des répartitions.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Graph Tool -->
-            <div class="bg-white rounded-2xl card-shadow border border-slate-200 overflow-hidden sticky top-28">
-                <div class="bg-slate-800 p-3 flex justify-between items-center">
-                    <div class="flex items-center gap-2 text-white">
-                        <i class="fa-solid fa-chart-column text-emerald-400"></i>
-                        <span class="font-semibold text-sm">Outil Interactif : Générateur de Bâtons</span>
-                    </div>
-                </div>
-                
-                <div class="p-5 bg-slate-50">
-                    <p class="text-xs text-slate-500 mb-3 text-center uppercase tracking-wider">Modifiez les effectifs pour voir le graphique évoluer</p>
-                    
-                    <div class="flex gap-2 mb-4 justify-center">
-                        <div class="text-center">
-                            <label class="text-xs font-bold text-slate-700 block mb-1">0 frère</label>
-                            <input type="number" id="val1" value="5" min="0" max="20" class="w-14 p-1 text-center border border-slate-300 rounded focus:border-brand-500" onchange="updateChart()">
-                        </div>
-                        <div class="text-center">
-                            <label class="text-xs font-bold text-slate-700 block mb-1">1 frère</label>
-                            <input type="number" id="val2" value="12" min="0" max="20" class="w-14 p-1 text-center border border-slate-300 rounded focus:border-brand-500" onchange="updateChart()">
-                        </div>
-                        <div class="text-center">
-                            <label class="text-xs font-bold text-slate-700 block mb-1">2 frères</label>
-                            <input type="number" id="val3" value="6" min="0" max="20" class="w-14 p-1 text-center border border-slate-300 rounded focus:border-brand-500" onchange="updateChart()">
-                        </div>
-                        <div class="text-center">
-                            <label class="text-xs font-bold text-slate-700 block mb-1">3+ frères</label>
-                            <input type="number" id="val4" value="2" min="0" max="20" class="w-14 p-1 text-center border border-slate-300 rounded focus:border-brand-500" onchange="updateChart()">
-                        </div>
-                    </div>
-
-                    <!-- CSS Bar Chart -->
-                    <div class="h-40 border-l-2 border-b-2 border-slate-400 relative flex items-end justify-around px-2 pb-0 pt-4">
-                        <!-- Y Axis labels -->
-                        <div class="absolute left-[-20px] top-0 text-xs text-slate-400">20</div>
-                        <div class="absolute left-[-20px] top-1/2 text-xs text-slate-400">10</div>
+        <!-- ============================================== -->
+        <section id="avant-de-commencer" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-flag-checkered text-amber-500"></i> Avant de commencer
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">1. Fractions et Pourcentages</h3>
+                    <p class="text-sm text-slate-600 mb-4">Relie chaque fraction à son pourcentage correspondant :</p>
+                    <div class="grid grid-cols-2 gap-4 items-center">
+                        <div class="text-center font-bold text-lg bg-slate-50 p-2 rounded">$\frac{1}{2}$</div>
+                        <select id="av-q1" class="border border-slate-300 rounded p-2 text-sm bg-white">
+                            <option value="">Choisir...</option>
+                            <option value="25">25 %</option>
+                            <option value="50">50 %</option>
+                            <option value="75">75 %</option>
+                        </select>
                         
-                        <!-- Bars -->
-                        <div id="bar1" class="w-10 bg-blue-500 rounded-t-sm bar-chart-col relative group" style="height: 25%;">
-                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity" id="label1">5</span>
-                        </div>
-                        <div id="bar2" class="w-10 bg-emerald-500 rounded-t-sm bar-chart-col relative group" style="height: 60%;">
-                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity" id="label2">12</span>
-                        </div>
-                        <div id="bar3" class="w-10 bg-amber-500 rounded-t-sm bar-chart-col relative group" style="height: 30%;">
-                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity" id="label3">6</span>
-                        </div>
-                        <div id="bar4" class="w-10 bg-purple-500 rounded-t-sm bar-chart-col relative group" style="height: 10%;">
-                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity" id="label4">2</span>
-                        </div>
+                        <div class="text-center font-bold text-lg bg-slate-50 p-2 rounded">$\frac{3}{4}$</div>
+                        <select id="av-q2" class="border border-slate-300 rounded p-2 text-sm bg-white">
+                            <option value="">Choisir...</option>
+                            <option value="25">25 %</option>
+                            <option value="50">50 %</option>
+                            <option value="75">75 %</option>
+                        </select>
                     </div>
+                    <button onclick="checkAvant()" class="mt-4 text-xs bg-slate-800 text-white px-4 py-2 rounded w-full">Vérifier</button>
+                    <div id="fb-av" class="mt-2 text-sm hidden p-2 rounded"></div>
                 </div>
-
-                <script>
-                    function updateChart() {
-                        const maxVal = 20; // Y-axis max
-                        for(let i=1; i<=4; i++) {
-                            let val = parseInt(document.getElementById('val'+i).value) || 0;
-                            if(val > maxVal) val = maxVal;
-                            if(val < 0) val = 0;
-                            // Calculate percentage height
-                            let heightPct = (val / maxVal) * 100;
-                            document.getElementById('bar'+i).style.height = heightPct + '%';
-                            document.getElementById('label'+i).innerText = val;
-                        }
-                    }
-                </script>
             </div>
         </section>
 
-        <!-- SECTION 3 : Indicateurs -->
-        <section class="course-layout items-start mt-12">
+        <!-- ============================================== -->
+        <section id="activites" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-lightbulb text-emerald-500"></i> Activité d'introduction
+            </h2>
+            
+            <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 card-shadow">
+                <h3 class="font-bold text-xl text-slate-800 mb-4">Combien d'applications sur ton téléphone ?</h3>
+                <p class="text-slate-700 mb-6">On a demandé à 24 élèves de la classe le nombre d'applications installées sur leur smartphone. Voici les données brutes récoltées :<br>
+                <strong class="text-slate-900 tracking-wide font-mono bg-slate-100 p-2 rounded inline-block mt-2">12 - 15 - 18 - 12 - 25 - 32 - 15 - 12 - 18 - 25 - 15 - 12 - 40 - 15 - 18 - 12 - 25 - 15 - 18 - 32 - 12 - 15 - 25 - 18</strong></p>
+                
+                <h4 class="font-bold text-slate-800 mb-2">Partie A : Organiser les données</h4>
+                <p class="text-sm text-slate-600 mb-4">Complète le tableau des effectifs :</p>
+                
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-center border-collapse text-sm">
+                        <tr class="bg-slate-100">
+                            <th class="border border-slate-300 p-2">Nb d'applications</th>
+                            <th class="border border-slate-300 p-2">12</th>
+                            <th class="border border-slate-300 p-2">15</th>
+                            <th class="border border-slate-300 p-2">18</th>
+                            <th class="border border-slate-300 p-2">25</th>
+                            <th class="border border-slate-300 p-2">32</th>
+                            <th class="border border-slate-300 p-2">40</th>
+                        </tr>
+                        <tr>
+                            <td class="border border-slate-300 p-2 font-bold bg-slate-50">Effectif</td>
+                            <td class="border border-slate-300 p-2"><input type="number" id="act-12" class="w-12 text-center border rounded"></td>
+                            <td class="border border-slate-300 p-2"><input type="number" id="act-15" class="w-12 text-center border rounded"></td>
+                            <td class="border border-slate-300 p-2"><input type="number" id="act-18" class="w-12 text-center border rounded"></td>
+                            <td class="border border-slate-300 p-2"><input type="number" id="act-25" class="w-12 text-center border rounded"></td>
+                            <td class="border border-slate-300 p-2"><input type="number" id="act-32" class="w-12 text-center border rounded"></td>
+                            <td class="border border-slate-300 p-2"><input type="number" id="act-40" class="w-12 text-center border rounded"></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <button onclick="checkActA()" class="mb-4 text-xs bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Vérifier le tableau</button>
+                <div id="fb-actA" class="mb-6 text-sm hidden p-2 rounded"></div>
+
+                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-blue-900 text-sm">
+                    <strong>Bilan de l'activité :</strong> C'est beaucoup plus facile de lire un tableau résumé que des données en vrac ! On appelle ça "dresser la distribution statistique".
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <section id="cours" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-book-open text-blue-500"></i> Je note l'essentiel
+            </h2>
+            
             <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">3</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Indicateurs</h2>
+                <!-- Vocab & Fréquences -->
+                <div class="bg-white p-6 rounded-2xl border-l-4 border-blue-500 card-shadow">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">1. Effectifs et Fréquences</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 mb-4">
+                        <li><strong>Effectif :</strong> Nombre de fois où une donnée apparaît.</li>
+                        <li><strong>Effectif total :</strong> La somme de tous les effectifs.</li>
+                    </ul>
+                    <div class="bg-slate-50 p-4 rounded text-center border border-slate-200 font-mono">
+                        Fréquence = $\frac{\text{effectif de la donnée}}{\text{effectif total}}$
+                    </div>
+                    <p class="text-sm text-slate-500 mt-2 text-center">Pour la fréquence en %, on multiplie par 100.</p>
                 </div>
-                
-                <p class="text-lg text-slate-700">Pour résumer une série statistique, on utilise des nombres appelés <strong>indicateurs</strong> : la moyenne, la médiane et l'étendue.</p>
 
-                <!-- Method Box -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
-                    
-                    <p class="mb-4 text-slate-600">Prenons les notes d'un élève : <strong class="text-slate-800 text-xl tracking-widest">8 - 12 - 15 - 9 - 15</strong></p>
-                    
-                    <div class="space-y-6">
-                        <!-- Moyenne -->
-                        <div>
-                            <h4 class="font-bold text-purple-700 flex items-center gap-2 mb-2"><i class="fa-solid fa-scale-balanced"></i> La Moyenne</h4>
-                            <p class="text-sm text-slate-600 mb-2">On additionne tout, et on divise par l'effectif total.</p>
-                            <div class="bg-purple-50 text-purple-900 p-3 rounded font-mono text-center border border-purple-200">
-                                $m = \frac{8 + 12 + 15 + 9 + 15}{5} = \frac{59}{5} = \mathbf{11,8}$
-                            </div>
-                        </div>
-
-                        <!-- Étendue -->
-                        <div>
-                            <h4 class="font-bold text-rose-700 flex items-center gap-2 mb-2"><i class="fa-solid fa-arrows-left-right"></i> L'Étendue</h4>
-                            <p class="text-sm text-slate-600 mb-2">L'écart entre le plus grand et le plus petit.</p>
-                            <div class="bg-rose-50 text-rose-900 p-3 rounded font-mono text-center border border-rose-200">
-                                $E = 15 - 8 = \mathbf{7}$
-                            </div>
-                        </div>
+                <!-- Classes et Histogramme -->
+                <div class="bg-white p-6 rounded-2xl border-l-4 border-rose-500 card-shadow">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">2. Regroupement par classes et Histogramme</h3>
+                    <p class="text-slate-700 mb-3">Quand une série contient beaucoup de valeurs différentes, on les regroupe dans des intervalles appelés <strong>classes</strong>.</p>
+                    <p class="text-slate-700 mb-3">On représente cela par un <strong>histogramme</strong> : des rectangles collés dont l'aire est proportionnelle à l'effectif.</p>
+                    <div class="bg-rose-50 p-4 rounded text-sm text-rose-900 border border-rose-200">
+                        <em>Exemple :</em> La classe <strong>[10 ; 20[</strong> contient les nombres supérieurs ou égaux à 10, mais strictement inférieurs à 20.
                     </div>
                 </div>
-            </div>
 
-            <!-- Médiane Focus -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow interactive-hover sticky top-28">
-                <h3 class="font-bold text-emerald-700 flex items-center gap-2 mb-4 font-heading text-xl">
-                    <i class="fa-solid fa-arrows-to-circle"></i> Focus : La Médiane
-                </h3>
-                <p class="text-sm text-slate-600 mb-4">
-                    La médiane est la valeur qui coupe la série en <strong>deux groupes égaux</strong> (50% en dessous, 50% au dessus). <br><br>
-                    <strong class="text-rose-600">ATTENTION :</strong> Il faut TOUJOURS ranger les valeurs dans l'ordre croissant d'abord !
-                </p>
-                
-                <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
-                    <p class="text-xs text-emerald-800 font-bold uppercase mb-2">Étape 1 : On trie</p>
-                    <div class="flex justify-center gap-2 font-mono text-lg font-bold text-slate-500 mb-4">
-                        <span>8</span><span class="text-slate-300">≤</span>
-                        <span>9</span><span class="text-slate-300">≤</span>
-                        <span class="text-emerald-600 text-xl border-b-2 border-emerald-500">12</span><span class="text-slate-300">≤</span>
-                        <span>15</span><span class="text-slate-300">≤</span>
-                        <span>15</span>
-                    </div>
-
-                    <p class="text-xs text-emerald-800 font-bold uppercase mb-2">Étape 2 : On coupe</p>
-                    <div class="flex items-center justify-between">
-                        <div class="bg-white px-2 py-1 rounded shadow-sm text-xs border border-emerald-100">2 valeurs avant</div>
-                        <div class="text-emerald-700 font-bold text-2xl">Médiane = 12</div>
-                        <div class="bg-white px-2 py-1 rounded shadow-sm text-xs border border-emerald-100">2 valeurs après</div>
+                <!-- Indicateurs -->
+                <div class="bg-white p-6 rounded-2xl border-l-4 border-purple-500 card-shadow">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">3. Moyenne, Médiane et Étendue</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                            <h4 class="font-bold text-purple-700 mb-2"><i class="fa-solid fa-scale-balanced"></i> Moyenne</h4>
+                            On additionne toutes les valeurs et on divise par l'effectif total.
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                            <h4 class="font-bold text-purple-700 mb-2"><i class="fa-solid fa-arrows-to-circle"></i> Médiane</h4>
+                            Valeur qui coupe la série triée en deux parties d'effectifs égaux. (Attention : <strong>Toujours trier les valeurs</strong> en ordre croissant).
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded border border-slate-200 md:col-span-2">
+                            <h4 class="font-bold text-purple-700 mb-2"><i class="fa-solid fa-arrows-left-right"></i> Étendue (Dispersion)</h4>
+                            Étendue = Valeur Maximale - Valeur Minimale.
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
+        <!-- ============================================== -->
+        <section id="automatismes" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-bolt text-yellow-500"></i> Automatismes
+            </h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
+                <p class="text-slate-600 mb-4">Réponds rapidement (Calcul mental et définitions) :</p>
+                <div class="space-y-4 text-sm">
+                    <div class="flex items-center gap-4 border-b border-slate-100 pb-2">
+                        <span class="font-bold w-1/2">Série : 2 ; 5 ; 8. Quelle est la moyenne ?</span>
+                        <input type="number" id="auto-1" class="border rounded p-1 w-16 text-center">
+                    </div>
+                    <div class="flex items-center gap-4 border-b border-slate-100 pb-2">
+                        <span class="font-bold w-1/2">Série : 10 ; 12 ; 15. Quelle est l'étendue ?</span>
+                        <input type="number" id="auto-2" class="border rounded p-1 w-16 text-center">
+                    </div>
+                    <div class="flex items-center gap-4 border-b border-slate-100 pb-2">
+                        <span class="font-bold w-1/2">Série : 1 ; 7 ; 9 ; 15 ; 20. Quelle est la médiane ?</span>
+                        <input type="number" id="auto-3" class="border rounded p-1 w-16 text-center">
+                    </div>
+                </div>
+                <button onclick="checkAuto()" class="mt-4 text-xs bg-slate-800 text-white px-4 py-2 rounded">Vérifier</button>
+                <div id="fb-auto" class="mt-2 text-sm hidden p-2 rounded"></div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <section id="tp" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-laptop-code text-indigo-500"></i> TP Numérique : Tableur
+            </h2>
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
+                <p class="text-sm text-slate-600 mb-4">
+                    On a relevé le temps passé (en minutes) par 20 élèves sur les réseaux sociaux. <br>
+                    Les données sont tapées dans un tableur dans les cellules <strong>A1 à A20</strong>.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold mb-2">1. Formule de la moyenne</h4>
+                        <p class="text-xs text-slate-500 mb-2">Quelle formule taper pour obtenir la moyenne des temps ?</p>
+                        <select id="tp-q1" class="border rounded p-2 text-sm w-full font-mono">
+                            <option value="">Choisir...</option>
+                            <option value="somme">=SOMME(A1:A20)</option>
+                            <option value="moyenne">=MOYENNE(A1:A20)</option>
+                            <option value="nbsi">=NB.SI(A1:A20; ">60")</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">2. Fonction de comptage</h4>
+                        <p class="text-xs text-slate-500 mb-2">Quelle formule taper pour compter les élèves qui passent PLUS de 60 minutes ?</p>
+                        <select id="tp-q2" class="border rounded p-2 text-sm w-full font-mono">
+                            <option value="">Choisir...</option>
+                            <option value="somme">=SOMME(A1:A20)</option>
+                            <option value="moyenne">=MOYENNE(A1:A20)</option>
+                            <option value="nbsi">=NB.SI(A1:A20; ">60")</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="checkTP()" class="mt-6 text-xs bg-indigo-600 text-white px-4 py-2 rounded">Valider le TP</button>
+                <div id="fb-tp" class="mt-2 text-sm hidden p-2 rounded"></div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <section id="exercices" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-dumbbell text-slate-500"></i> Exercices d'application
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Ex 1 : Tableau par classe -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">Classes et Effectifs</h3>
+                    <table class="w-full text-sm text-center border-collapse mb-4">
+                        <tr class="bg-slate-100 border border-slate-300">
+                            <th class="p-2 border border-slate-300">Distance (km)</th>
+                            <th class="p-2 border border-slate-300">[0 ; 5[</th>
+                            <th class="p-2 border border-slate-300">[5 ; 10[</th>
+                            <th class="p-2 border border-slate-300">[10 ; 15[</th>
+                        </tr>
+                        <tr>
+                            <td class="p-2 border border-slate-300 font-bold bg-slate-50">Effectif</td>
+                            <td class="p-2 border border-slate-300">45</td>
+                            <td class="p-2 border border-slate-300">20</td>
+                            <td class="p-2 border border-slate-300">10</td>
+                        </tr>
+                    </table>
+                    <label class="font-bold text-sm block mb-1">Combien de personnes parcourent 5 km ou plus ?</label>
+                    <input type="number" id="ex1-ans" class="border rounded p-2 w-24 text-center font-bold mb-4">
+                    <button onclick="checkEx1()" class="block text-xs bg-slate-800 text-white px-4 py-2 rounded w-full">Vérifier</button>
+                    <div id="fb-ex1" class="mt-2 text-sm hidden p-2 rounded"></div>
+                </div>
+
+                <!-- Ex 2 : Médiane et tri -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
+                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-slate-700 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">La Médiane</h3>
+                    <p class="text-sm text-slate-600 mb-4">Voici la pointure de 5 clients : <strong>42, 38, 45, 41, 39</strong>.</p>
+                    <label class="font-bold text-sm block mb-1">Quelle est la pointure médiane ?</label>
+                    <input type="number" id="ex2-ans" class="border rounded p-2 w-24 text-center font-bold mb-4">
+                    <button onclick="checkEx2()" class="block text-xs bg-slate-800 text-white px-4 py-2 rounded w-full">Vérifier</button>
+                    <div id="fb-ex2" class="mt-2 text-sm hidden p-2 rounded"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <section id="problemes" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-industry text-purple-600"></i> Problèmes
+            </h2>
+            
+            <div class="bg-white p-6 rounded-2xl border-t-4 border-purple-500 card-shadow">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Gestion de flotte automobile</h3>
+                <p class="text-slate-700 mb-4 text-sm">
+                    Une entreprise possède 4 véhicules de livraison. Voici leur consommation de carburant (en L/100km) : <strong>6,2 | 7,1 | 5,8 | 8,9</strong>.
+                </p>
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <label class="font-bold block mb-1">1. Calcule la consommation moyenne de la flotte.</label>
+                        <input type="number" id="prob-1" step="0.1" class="border rounded p-1 w-24 text-center"> L/100km
+                    </div>
+                    <div>
+                        <label class="font-bold block mb-1">2. Calcule l'étendue des consommations.</label>
+                        <input type="number" id="prob-2" step="0.1" class="border rounded p-1 w-24 text-center"> L/100km
+                    </div>
+                </div>
+                <button onclick="checkProb()" class="mt-4 text-xs bg-purple-600 text-white px-4 py-2 rounded">Valider le problème</button>
+                <div id="fb-prob" class="mt-2 text-sm hidden p-2 rounded"></div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <section id="brevet" class="mb-16 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-slate-800 font-heading flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-graduation-cap text-slate-800"></i> Vers le Brevet
+            </h2>
+            
+            <div class="bg-slate-800 text-white p-6 md:p-8 rounded-2xl card-shadow">
+                <h3 class="font-bold text-xl text-brand-400 mb-4">Sujet Type : Le marathon</h3>
+                <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                    Lors d'une course, les organisateurs ont relevé les temps (en minutes) d'un échantillon de 7 coureurs :<br>
+                    <strong>215, 185, 230, 240, 195, 205, 220</strong>.
+                </p>
+                <div class="bg-slate-700 p-5 rounded-xl border border-slate-600 space-y-4">
+                    <p class="text-sm font-bold">Le vainqueur déclare : "La moitié des coureurs de ce groupe a fait un temps inférieur ou égal à 215 minutes".</p>
+                    <p class="text-sm text-slate-200">Cette affirmation est-elle vraie ou fausse ? Justifie (Pense à la notion de médiane !).</p>
+                    
+                    <div class="mt-4">
+                        <select id="brevet-ans" class="bg-slate-800 border border-slate-500 text-white rounded p-2 text-sm">
+                            <option value="">Choix...</option>
+                            <option value="vrai">L'affirmation est VRAIE</option>
+                            <option value="faux">L'affirmation est FAUSSE</option>
+                        </select>
+                    </div>
+                    <button onclick="checkBrevet()" class="text-xs bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded">Vérifier l'analyse</button>
+                    <div id="fb-brevet" class="mt-2 text-sm hidden p-3 rounded"></div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <div class="h-24"></div>
+    <!-- JS Logic -->
+    <script>
+        // Scrollspy Logic
+        const sections = document.querySelectorAll("main section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // Feedback system
+        function showFeedback(id, isCorrect, message) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800', 'bg-green-900', 'text-green-200', 'bg-red-900', 'text-red-200');
+            
+            // Special styling for dark mode (Brevet section)
+            if(id === 'fb-brevet') {
+                if (isCorrect) {
+                    el.classList.add('bg-green-900', 'text-green-200');
+                    el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+                } else {
+                    el.classList.add('bg-red-900', 'text-red-200');
+                    el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+                }
+                return;
+            }
+
+            if (isCorrect) {
+                el.classList.add('correct-bg', 'text-green-800');
+                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
+            } else {
+                el.classList.add('wrong-bg', 'text-red-800');
+                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            }
+        }
+
+        function checkAvant() {
+            const q1 = document.getElementById('av-q1').value;
+            const q2 = document.getElementById('av-q2').value;
+            if (q1 === "50" && q2 === "75") {
+                showFeedback('fb-av', true, "Parfait ! 1/2 = 50% et 3/4 = 75%.");
+            } else {
+                showFeedback('fb-av', false, "Vérifie tes correspondances fraction / pourcentage.");
+            }
+        }
+
+        function checkActA() {
+            const ans = {
+                12: document.getElementById('act-12').value,
+                15: document.getElementById('act-15').value,
+                18: document.getElementById('act-18').value,
+                25: document.getElementById('act-25').value,
+                32: document.getElementById('act-32').value,
+                40: document.getElementById('act-40').value
+            };
+            
+            if(ans[12]=="6" && ans[15]=="6" && ans[18]=="5" && ans[25]=="4" && ans[32]=="2" && ans[40]=="1") {
+                showFeedback('fb-actA', true, "Excellent, tu as bien dépouillé les données ! Effectif total = 24.");
+            } else {
+                showFeedback('fb-actA', false, "Compte bien chaque valeur dans la liste ! (Le total doit faire 24).");
+            }
+        }
+
+        function checkAuto() {
+            const v1 = document.getElementById('auto-1').value;
+            const v2 = document.getElementById('auto-2').value;
+            const v3 = document.getElementById('auto-3').value;
+            if(v1=="5" && v2=="5" && v3=="9") {
+                showFeedback('fb-auto', true, "Parfait ! 15/3 = 5 ; 15-10 = 5 ; Valeur du milieu = 9.");
+            } else {
+                showFeedback('fb-auto', false, "Il y a une erreur. Moyenne = somme/3. Etendue = Max - Min. Médiane = Valeur du milieu.");
+            }
+        }
+
+        function checkTP() {
+            const q1 = document.getElementById('tp-q1').value;
+            const q2 = document.getElementById('tp-q2').value;
+            if(q1=="moyenne" && q2=="nbsi") {
+                showFeedback('fb-tp', true, "Exact ! =MOYENNE() pour la moyenne et =NB.SI() pour compter sous condition.");
+            } else {
+                showFeedback('fb-tp', false, "Vérifie les fonctions du tableur.");
+            }
+        }
+
+        function checkEx1() {
+            if(document.getElementById('ex1-ans').value == "30") {
+                showFeedback('fb-ex1', true, "Bravo ! Il faut additionner les effectifs des classes [5 ; 10[ et [10 ; 15[, soit 20 + 10 = 30.");
+            } else {
+                showFeedback('fb-ex1', false, "Attention, '5 km ou plus' regroupe la 2ème et la 3ème colonne.");
+            }
+        }
+
+        function checkEx2() {
+            if(document.getElementById('ex2-ans').value == "41") {
+                showFeedback('fb-ex2', true, "Exact ! Une fois trié (38, 39, 41, 42, 45), la valeur du milieu est 41.");
+            } else {
+                showFeedback('fb-ex2', false, "As-tu pensé à TRIER les valeurs du plus petit au plus grand d'abord ?");
+            }
+        }
+
+        function checkProb() {
+            const q1 = document.getElementById('prob-1').value;
+            const q2 = document.getElementById('prob-2').value;
+            if(q1 == "7" && q2 == "3.1") {
+                showFeedback('fb-prob', true, "Excellent. La flotte consomme 7 L/100km en moyenne, avec un écart de 3,1 L entre les véhicules.");
+            } else {
+                showFeedback('fb-prob', false, "Faux. Moyenne = Somme / 4. Etendue = Max - Min (attention aux décimales).");
+            }
+        }
+
+        function checkBrevet() {
+            if(document.getElementById('brevet-ans').value == "vrai") {
+                showFeedback('fb-brevet', true, "C'est VRAI ! La série triée est : 185, 195, 205, 215, 220, 230, 240. La médiane est 215, donc la moitié a fait 215 min ou moins.");
+            } else {
+                showFeedback('fb-brevet', false, "Faux. Trie la série du plus petit au plus grand et trouve la médiane.");
+            }
+        }
+    </script>
+
 </body>
 </html>
