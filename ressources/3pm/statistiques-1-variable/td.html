@@ -87,31 +87,29 @@
                 <!-- Ex 2 -->
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
                     <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Lecture de tableau</h3>
-                    <p class="text-sm text-slate-600 mb-4">Une classe compte 20 élèves. Voici le nombre de frères et soeurs :</p>
+                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Regroupement par classes</h3>
+                    <p class="text-sm text-slate-600 mb-4">On a relevé le temps passé par des élèves pour venir au collège :</p>
                     
                     <table class="w-full text-sm text-left mb-4 border-collapse">
                         <thead>
                             <tr class="bg-slate-100 border border-slate-300">
-                                <th class="p-2 border border-slate-300">Frères et soeurs (Valeur)</th>
-                                <th class="p-2 border border-slate-300">0</th>
-                                <th class="p-2 border border-slate-300">1</th>
-                                <th class="p-2 border border-slate-300">2</th>
-                                <th class="p-2 border border-slate-300">3</th>
+                                <th class="p-2 border border-slate-300">Temps (en min)</th>
+                                <th class="p-2 border border-slate-300">[0 ; 10[</th>
+                                <th class="p-2 border border-slate-300">[10 ; 20[</th>
+                                <th class="p-2 border border-slate-300">[20 ; 30[</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="p-2 border border-slate-300 font-bold bg-slate-50">Effectif (Nb d'élèves)</td>
-                                <td class="p-2 border border-slate-300 text-center">4</td>
-                                <td class="p-2 border border-slate-300 text-center">9</td>
-                                <td class="p-2 border border-slate-300 text-center">5</td>
-                                <td class="p-2 border border-slate-300 text-center">2</td>
+                                <td class="p-2 border border-slate-300 font-bold bg-slate-50">Effectif</td>
+                                <td class="p-2 border border-slate-300 text-center">8</td>
+                                <td class="p-2 border border-slate-300 text-center">15</td>
+                                <td class="p-2 border border-slate-300 text-center">7</td>
                             </tr>
                         </tbody>
                     </table>
                     
-                    <label class="font-bold text-sm block mb-1">Combien d'élèves ont <strong>exactement 2</strong> frères et soeurs ?</label>
+                    <label class="font-bold text-sm block mb-1">Combien d'élèves mettent <strong>entre 10 et moins de 20 minutes</strong> ?</label>
                     <input type="number" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center font-bold text-slate-700 mb-4">
                     
                     <button onclick="checkEx2()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
@@ -246,27 +244,27 @@
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
                     <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
                     <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-shop text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Commerce - Chiffre d'Affaires</h3>
+                        <i class="fa-solid fa-table-cells text-purple-600"></i>
+                        <h3 class="font-bold text-slate-800">Numérique - Tableur</h3>
                     </div>
                     
                     <p class="text-sm text-slate-600 mb-4">
-                        Une boutique a réalisé un chiffre d'affaires (C.A.) total de <strong>12 000 €</strong> sur la semaine (6 jours d'ouverture). 
-                        Le samedi seul représente <strong>30%</strong> du C.A. total de la semaine.
+                        Dans un tableur, les cellules A1 à A20 contiennent le nombre de SMS envoyés par 20 élèves. <br>
+                        On veut compter combien d'élèves ont envoyé <strong>plus de 50 SMS</strong>.
                     </p>
                     
                     <div class="space-y-4 text-sm text-slate-700 mb-4">
                         <div>
-                            <label class="font-bold block mb-1">1. Quel est le C.A. réalisé le samedi ?</label>
-                            <input type="number" id="ex8-q1" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>€</span>
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">2. Quel est le C.A. MOYEN par jour pour les 5 autres jours de la semaine (lundi à vendredi) ?</label>
-                            <input type="number" id="ex8-q2" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>€ / jour</span>
+                            <label class="font-bold block mb-1">Quelle formule doit-on saisir dans la cellule B1 ?</label>
+                            <div class="grid grid-cols-1 gap-2" id="ex8-options">
+                                <button onclick="selectRadio('ex8', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors font-mono">=SOMME(A1:A20)</button>
+                                <button onclick="selectRadio('ex8', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors font-mono">=NB.SI(A1:A20; ">50")</button>
+                                <button onclick="selectRadio('ex8', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 transition-colors font-mono">=MOYENNE(A1:A20)</button>
+                            </div>
                         </div>
                     </div>
                     
-                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
+                    <button onclick="checkRadio('ex8', 'Exact ! La fonction NB.SI permet de compter le nombre de cellules qui respectent un critère précis.')" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
                     <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
                 </div>
 
@@ -327,10 +325,10 @@
         // Ex 2
         function checkEx2() {
             const ans = document.getElementById('ex2-ans').value;
-            if (ans === "5") {
-                showFeedback('fb-ex2', true, "Bravo ! L'effectif correspondant à la valeur '2' frères/soeurs est bien de 5 élèves.");
+            if (ans === "15") {
+                showFeedback('fb-ex2', true, "Bravo ! L'effectif correspondant à la classe [10 ; 20[ est bien de 15 élèves.");
             } else {
-                showFeedback('fb-ex2', false, "Faux. Regarde la colonne de la valeur '2' dans le tableau et lis le chiffre du bas (l'effectif).");
+                showFeedback('fb-ex2', false, "Faux. Regarde la colonne de la classe [10 ; 20[ dans le tableau et lis l'effectif correspondant.");
             }
         }
 
@@ -378,17 +376,7 @@
             }
         }
 
-        // Ex 8
-        function checkEx8() {
-            const q1 = document.getElementById('ex8-q1').value;
-            const q2 = document.getElementById('ex8-q2').value;
-            
-            if (q1 === "3600" && q2 === "1680") {
-                showFeedback('fb-ex8', true, "Félicitations ! 1) 30% de 12000 = 3600€. 2) Le reste est 12000 - 3600 = 8400€. À diviser sur 5 jours = 1680€ par jour.");
-            } else {
-                showFeedback('fb-ex8', false, "Faux. 1) 12000 × 30/100. 2) Soustrait le CA du samedi au CA total, puis divise par 5 jours.");
-            }
-        }
+
     </script>
 
     <div class="h-24"></div>
