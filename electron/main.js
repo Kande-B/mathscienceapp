@@ -213,7 +213,7 @@ function createMenu() {
         {
           label: 'Contacter M. KANDE',
           click: () => {
-            shell.openExternal('mailto:boubacar.kande@ac-creteil.fr');
+            shell.openExternal('mailto:kande@profpro-mathsciences.fr');
           },
         },
         { type: 'separator' },
