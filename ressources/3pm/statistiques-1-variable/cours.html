@@ -195,11 +195,13 @@
                             <tr><td class="border p-2 font-bold">Fréquence (%)</td><td class="border p-2">10 %</td><td class="border p-2">25 %</td><td class="border p-2"><input type="number" id="act2-p3" class="w-12 text-center border rounded"> %</td><td class="border p-2">20 %</td><td class="border p-2 font-bold">100 %</td></tr>
                         </table>
                     </div>
-                    <label class="text-xs font-semibold text-slate-700 block mb-1">Pourcentage total d'élèves ayant validé la compétence (Très bonne + Satisfaisante) ?</label>
-                    <div class="flex gap-2 items-center">
+                    <label class="text-xs font-semibold text-slate-700 block mb-1">1. Pourcentage total d'élèves ayant validé la compétence (Très bonne + Satisfaisante) ?</label>
+                    <div class="flex gap-2 items-center mb-3">
                         <input type="number" id="act2-tot" class="border rounded p-1.5 w-24 text-xs font-bold" placeholder="10 + 25">
                         <span class="text-xs">%</span>
                     </div>
+                    <label class="text-xs font-semibold text-slate-700 block mb-1">2. Rédiger une phrase pour interpréter ce résultat :</label>
+                    <input type="text" id="act2-phrase" class="border rounded p-1.5 w-full text-xs" placeholder="Ex: ...% des élèves ont validé la compétence.">
                     <button onclick="checkAct2()" class="mt-4 bg-emerald-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-emerald-700">Vérifier l'activité 2</button>
                     <div id="fb-act2" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
@@ -221,6 +223,14 @@
                             <p class="font-semibold text-slate-700 mb-1">2. Sarah (13, 11, 12 -> Moyenne 12) et Ilona (7, 16, 13 -> Moyenne 12) ont la même moyenne. Quel critère permet de les départager ?</p>
                             <select id="act3-crit" class="border rounded p-1.5 w-full bg-white"><option value="">Choisir...</option><option value="etendue">L'étendue (l'écart entre la plus forte et la plus faible note)</option><option value="prenom">L'ordre alphabétique</option></select>
                         </div>
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-1">3. Calcule l'étendue des notes de chaque élève :</p>
+                            <input type="text" id="act3-etendue" class="border rounded p-1.5 w-full" placeholder="Ex: Sarah: ..., Ilona: ...">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-1">4. Propose une constitution de quatre binômes équilibrés :</p>
+                            <input type="text" id="act3-binomes" class="border rounded p-1.5 w-full" placeholder="Ex: Sarah et ..., Ilona et ...">
+                        </div>
                     </div>
                     <button onclick="checkAct3()" class="mt-4 bg-emerald-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-emerald-700">Vérifier l'activité 3</button>
                     <div id="fb-act3" class="mt-2 text-xs hidden p-2 rounded"></div>
@@ -233,14 +243,34 @@
                     <p class="text-xs text-slate-600 mb-3">Âge auquel des personnes ont eu leur premier smartphone (20 personnes) :<br>
                     12 - 16 - 14 - 13 - 17 - 9 - 6 - 8 - 12 - 15 - 19 - 11 - 4 - 8 - 12 - 14 - 16 - 12 - 15 - 17 - 7.</p>
 
-                    <p class="text-xs font-bold mb-2">Complète le tableau des classes :</p>
+                    <p class="text-xs font-bold mb-2">1. Complète le tableau des classes :</p>
                     <div class="overflow-x-auto mb-3">
                         <table class="w-full text-center border-collapse text-xs">
                             <tr class="bg-slate-100"><th class="border p-2">Âge (années)</th><th class="border p-2">[0 ; 5[</th><th class="border p-2">[5 ; 10[</th><th class="border p-2">[10 ; 15[</th><th class="border p-2">[15 ; 20[</th></tr>
                             <tr><td class="border p-2 font-bold">Effectif</td><td class="border p-2">1</td><td class="border p-2"><input type="number" id="act4-c2" class="w-12 text-center border rounded"></td><td class="border p-2"><input type="number" id="act4-c3" class="w-12 text-center border rounded"></td><td class="border p-2">7</td></tr>
                         </table>
                     </div>
-                    <button onclick="checkAct4()" class="mt-2 bg-emerald-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-emerald-700">Vérifier l'activité 4</button>
+                    
+                    <p class="text-xs font-bold mt-4 mb-2">2. Complète l'histogramme (hauteurs) :</p>
+                    <div class="flex items-end h-32 border-l-2 border-b-2 border-slate-600 gap-0 mt-2 pl-0 pb-0 ml-4 max-w-sm">
+                        <div class="w-1/4 bg-emerald-400 border border-emerald-500 flex flex-col justify-end relative" style="height: 10%;">
+                            <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-bold text-emerald-700">1</span>
+                        </div>
+                        <div class="w-1/4 bg-emerald-50 border-2 border-dashed border-emerald-400 flex flex-col justify-end relative h-full">
+                            <input type="number" id="act4-h2" class="absolute bottom-2 left-1/2 -translate-x-1/2 w-10 text-center text-xs border rounded bg-white" placeholder="?">
+                        </div>
+                        <div class="w-1/4 bg-emerald-50 border-2 border-dashed border-emerald-400 flex flex-col justify-end relative h-full">
+                            <input type="number" id="act4-h3" class="absolute bottom-2 left-1/2 -translate-x-1/2 w-10 text-center text-xs border rounded bg-white" placeholder="?">
+                        </div>
+                        <div class="w-1/4 bg-emerald-400 border border-emerald-500 flex flex-col justify-end relative" style="height: 70%;">
+                            <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-bold text-emerald-700">7</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-0 pl-0 mt-1 text-[10px] text-slate-600 font-mono ml-4 max-w-sm">
+                        <div class="w-1/4 text-center">[0;5[</div><div class="w-1/4 text-center">[5;10[</div><div class="w-1/4 text-center">[10;15[</div><div class="w-1/4 text-center">[15;20[</div>
+                    </div>
+
+                    <button onclick="checkAct4()" class="mt-6 bg-emerald-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-emerald-700">Vérifier l'activité 4</button>
                     <div id="fb-act4" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
             </div>
@@ -258,30 +288,60 @@
             <div class="space-y-6 text-sm">
                 <div class="bg-white p-6 rounded-2xl border-l-4 border-blue-500 card-shadow">
                     <h3 class="font-bold text-lg text-slate-800 mb-2">1. Effectifs et fréquences</h3>
-                    <ul class="list-disc list-inside space-y-1 text-slate-700 mb-3">
+                    <ul class="list-disc list-inside space-y-1 text-slate-700 mb-4">
                         <li><strong>Effectif d'une donnée :</strong> Nombre de fois où cette donnée apparaît.</li>
                         <li><strong>Effectif total :</strong> Somme de tous les effectifs.</li>
                         <li><strong>Fréquence :</strong> $\text{Fréquence} = \frac{\text{effectif de la donnée}}{\text{effectif total}}$.</li>
                         <li><strong>Fréquence en % :</strong> $\text{Fréquence} \times 100$.</li>
                     </ul>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Exemple : Fonction privilégiée d'un smartphone par 40 jeunes.</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center border-collapse text-xs bg-white">
+                                <tr class="bg-blue-100"><th class="border p-2 text-left">Fonction</th><th class="border p-2">Réseaux sociaux</th><th class="border p-2">Appels</th><th class="border p-2">Jeux</th><th class="border p-2 font-bold bg-blue-200">Total</th></tr>
+                                <tr><td class="border p-2 font-bold text-left bg-slate-50">Effectif</td><td class="border p-2">24</td><td class="border p-2">10</td><td class="border p-2">6</td><td class="border p-2 font-bold bg-blue-50">40</td></tr>
+                                <tr><td class="border p-2 font-bold text-left bg-slate-50">Fréquence (décimale)</td><td class="border p-2">24 ÷ 40 = 0,6</td><td class="border p-2">10 ÷ 40 = 0,25</td><td class="border p-2">6 ÷ 40 = 0,15</td><td class="border p-2 font-bold bg-blue-50">1</td></tr>
+                                <tr><td class="border p-2 font-bold text-left bg-slate-50">Fréquence (%)</td><td class="border p-2">60 %</td><td class="border p-2">25 %</td><td class="border p-2">15 %</td><td class="border p-2 font-bold bg-blue-50">100 %</td></tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border-l-4 border-rose-500 card-shadow">
                     <h3 class="font-bold text-lg text-slate-800 mb-2">2. Regroupement par classes et histogramme</h3>
                     <p class="text-slate-700 mb-2">Quand il y a beaucoup de valeurs, on les regroupe dans des intervalles appelés <strong>classes</strong> (ex: [0 ; 10[). L'amplitude est la différence entre les bornes.</p>
-                    <p class="text-slate-700">Dans un <strong>histogramme</strong>, chaque classe est représentée par un rectangle dont l'aire est proportionnelle à l'effectif.</p>
+                    <p class="text-slate-700 mb-4">Dans un <strong>histogramme</strong>, chaque classe est représentée par un rectangle dont l'aire est proportionnelle à l'effectif.</p>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Exemple : Distance collège-maison (en km) de 25 élèves.</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center border-collapse text-xs bg-white">
+                                <tr class="bg-rose-100"><th class="border p-2 text-left">Distance (km)</th><th class="border p-2">[0 ; 2[</th><th class="border p-2">[2 ; 4[</th><th class="border p-2">[4 ; 6[</th><th class="border p-2 font-bold bg-rose-200">Total</th></tr>
+                                <tr><td class="border p-2 font-bold text-left bg-slate-50">Effectif</td><td class="border p-2">12</td><td class="border p-2">9</td><td class="border p-2">4</td><td class="border p-2 font-bold bg-rose-50">25</td></tr>
+                            </table>
+                        </div>
+                        <p class="text-xs text-slate-600 mt-2">La classe [0 ; 2[ regroupe les élèves habitant à une distance $d$ telle que $0 \le d < 2$ km. L'amplitude est de $2 - 0 = 2$ km.</p>
+                    </div>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border-l-4 border-purple-500 card-shadow">
                     <h3 class="font-bold text-lg text-slate-800 mb-2">3. Indicateurs de position : Moyenne et Médiane</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                        <div class="p-3 bg-slate-50 rounded border">
-                            <h4 class="font-bold text-purple-700 mb-1"><i class="fa-solid fa-calculator"></i> Moyenne $\overline{x}$</h4>
-                            Somme de toutes les valeurs divisée par l'effectif total.
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-purple-700 mb-2"><i class="fa-solid fa-calculator"></i> Moyenne $\overline{x}$</h4>
+                            <p class="text-slate-700 mb-3">Somme de toutes les valeurs divisée par l'effectif total.</p>
+                            <div class="bg-white p-3 border rounded text-xs">
+                                <span class="font-bold">Exemple (Notes) :</span> 12 - 15 - 18 - 14 - 11<br>
+                                $\overline{x} = \frac{12 + 15 + 18 + 14 + 11}{5} = \frac{70}{5} = 14$
+                            </div>
                         </div>
-                        <div class="p-3 bg-slate-50 rounded border">
-                            <h4 class="font-bold text-purple-700 mb-1"><i class="fa-solid fa-sliders"></i> Médiane</h4>
-                            Valeur qui partage la série <strong>rangée par ordre croissant</strong> en deux séries de même effectif (50% au-dessus, 50% au-dessous).
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-purple-700 mb-2"><i class="fa-solid fa-sliders"></i> Médiane</h4>
+                            <p class="text-slate-700 mb-3">Valeur qui partage la série <strong>rangée par ordre croissant</strong> en deux séries de même effectif (50% au-dessus, 50% au-dessous).</p>
+                            <div class="bg-white p-3 border rounded text-xs space-y-2">
+                                <div><span class="font-bold">Ex. 1 (Effectif impair) :</span> 11 - 12 - <strong class="text-purple-600">14</strong> - 15 - 18 <br> La médiane est la 3ème valeur : <strong>14</strong>.</div>
+                                <hr class="my-2 border-slate-200">
+                                <div><span class="font-bold">Ex. 2 (Effectif pair) :</span> 8 - 10 - <strong class="text-purple-600">11 - 15</strong> - 16 - 19 <br> La médiane est la moyenne de la 3ème et 4ème valeur : $\frac{11 + 15}{2} = \mathbf{13}$.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -289,8 +349,11 @@
                 <div class="bg-white p-6 rounded-2xl border-l-4 border-amber-500 card-shadow">
                     <h3 class="font-bold text-lg text-slate-800 mb-2">4. Indicateur de dispersion : Étendue</h3>
                     <p class="text-slate-700 mb-2">L'<strong>étendue</strong> d'une série statistique est la différence entre la plus grande valeur et la plus petite valeur :</p>
-                    <div class="bg-amber-50 p-3 rounded font-mono text-center font-bold text-amber-900 border border-amber-200">
+                    <div class="bg-amber-50 p-3 rounded font-mono text-center font-bold text-amber-900 border border-amber-200 mb-3">
                         Étendue = Valeur maximale - Valeur minimale
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs">
+                        <span class="font-bold">Exemple :</span> Pour la série 8 - 10 - 11 - 15 - 16 - 19, l'étendue est $19 - 8 = \mathbf{11}$. L'écart entre la plus haute et la plus basse note est de 11 points.
                     </div>
                 </div>
             </div>
@@ -347,6 +410,7 @@
             </div>
 
             <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">Partie 1 : Comptage avec le tableur</h3>
                 <p class="text-xs text-slate-600 mb-4">
                     Un infirmier a demandé à 20 élèves leur temps d'écran quotidien (données saisies en colonne A1:A20).<br>
                     Il souhaite utiliser les formules du tableur pour compter les effectifs par tranche d'heures.
@@ -355,14 +419,38 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-4">
                     <div class="p-3 bg-slate-50 rounded border">
                         <label class="font-bold text-slate-800 block mb-1">a. Formule pour compter les valeurs < 2h (cellule D2) :</label>
-                        <select id="tp-a" class="border rounded p-1.5 w-full font-mono"><option value="">Choisir...</option><option value="1">=NB.SI(A1:A20; "<02:00:00")</option><option value="2">=SOMME(A1:A20)</option></select>
+                        <select id="tp-a" class="border rounded p-1.5 w-full font-mono"><option value="">Choisir...</option><option value="1">=NB.SI(A$1:A$20; "<02:00:00")</option><option value="2">=SOMME(A$1:A$20)</option></select>
                     </div>
                     <div class="p-3 bg-slate-50 rounded border">
                         <label class="font-bold text-slate-800 block mb-1">b. Formule pour la tranche entre 2h et 4h (cellule E2) :</label>
-                        <select id="tp-b" class="border rounded p-1.5 w-full font-mono"><option value="">Choisir...</option><option value="1">=NB.SI.ENS(A1:A20; ">=02:00:00"; A1:A20; "<04:00:00")</option><option value="2">=MOYENNE(A1:A20)</option></select>
+                        <select id="tp-b" class="border rounded p-1.5 w-full font-mono"><option value="">Choisir...</option><option value="1">=NB.SI.ENS(A$1:A$20; ">=02:00:00"; A$1:A$20; "<04:00:00")</option><option value="2">=MOYENNE(A$1:A$20)</option></select>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <label class="font-bold text-slate-800 block mb-1">c. Formule pour la tranche entre 4h et 6h (cellule F2) :</label>
+                        <select id="tp-c" class="border rounded p-1.5 w-full font-mono"><option value="">Choisir...</option><option value="1">=NB.SI.ENS(A$1:A$20; ">=04:00:00"; A$1:A$20; "<06:00:00")</option><option value="2">=MAX(A$1:A$20)</option></select>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <label class="font-bold text-slate-800 block mb-1">d. Formule pour les valeurs $\ge$ 6h (cellule G2) :</label>
+                        <select id="tp-d" class="border rounded p-1.5 w-full font-mono"><option value="">Choisir...</option><option value="1">=NB.SI(A$1:A$20; ">=06:00:00")</option><option value="2">=MIN(A$1:A$20)</option></select>
                     </div>
                 </div>
-                <button onclick="checkTP()" class="bg-indigo-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-indigo-700">Valider les formules TP</button>
+
+                <hr class="my-6 border-slate-200">
+
+                <h3 class="font-bold text-lg text-slate-800 mb-2">Partie 2 : Construction du graphique</h3>
+                <p class="text-xs text-slate-600 mb-4">L'infirmier souhaite maintenant représenter graphiquement ces résultats.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-4">
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <label class="font-bold text-slate-800 block mb-1">a. Quelles cellules doit-il sélectionner ?</label>
+                        <select id="tp2-a" class="border rounded p-1.5 w-full"><option value="">Choisir...</option><option value="1">C1 à G2</option><option value="2">A1 à A20</option></select>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded border">
+                        <label class="font-bold text-slate-800 block mb-1">b. Quel type de diagramme doit-il choisir ?</label>
+                        <select id="tp2-b" class="border rounded p-1.5 w-full"><option value="">Choisir...</option><option value="1">Diagramme en bâtons (ou circulaire)</option><option value="2">Nuage de points</option></select>
+                    </div>
+                </div>
+
+                <button onclick="checkTP()" class="bg-indigo-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-indigo-700">Valider le TP</button>
                 <div id="fb-tp" class="mt-2 text-xs hidden p-2 rounded"></div>
             </div>
         </section>
@@ -380,18 +468,35 @@
                 <!-- Ex 1 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 1 • Quantité d'eau</span>
-                    <p class="text-xs text-slate-600 mb-2">Consommation d'eau buée la veille (en L) : 0,5L (4 pers), 1L (10 pers), 1,5L (7 pers), 2L (3 pers).</p>
-                    <label class="text-xs font-semibold block mb-1">Nombre total de personnes interrogées ?</label>
-                    <input type="number" id="ex1-tot" class="border rounded p-1 w-full text-xs mb-2" placeholder="4 + 10 + 7 + 3">
-                    <button onclick="checkEx1()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 1</button>
+                    <p class="text-xs text-slate-600 mb-2">Le tableau indique la quantité d'eau, en litres, bue la veille par les élèves d'une classe.</p>
+                    <table class="w-full text-center border-collapse text-xs mb-3">
+                        <tr class="bg-slate-100"><th class="border p-1">Quantité d'eau (en L)</th><td class="border p-1">0,5</td><td class="border p-1">1</td><td class="border p-1">1,5</td><td class="border p-1">2</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">4</td><td class="border p-1">10</td><td class="border p-1">7</td><td class="border p-1">3</td></tr>
+                    </table>
+                    <label class="text-xs font-semibold block mb-1">1. Combien de personnes ont été interrogées ?</label>
+                    <input type="number" id="ex1-tot" class="border rounded p-1 w-full text-xs mb-2">
+                    <label class="text-xs font-semibold block mb-1">2. Quel est le nom du diagramme ci-contre (hauteurs à compléter) ?</label>
+                    <input type="text" id="ex1-nom" class="border rounded p-1 w-full text-xs mb-2" placeholder="Ex: diagramme en...">
+                    <div class="flex items-end h-24 border-l-2 border-b-2 border-slate-400 gap-1 mt-2 pl-1 pb-1">
+                        <div class="w-10 bg-blue-400 flex flex-col justify-end" style="height: 40%;"><span class="text-[9px] text-center text-white font-bold">4</span></div>
+                        <div class="w-10 bg-blue-100 border-2 border-dashed border-blue-400 flex flex-col justify-end h-full"><input type="number" id="ex1-h2" class="w-full text-center text-[10px] h-5 bg-white/80" placeholder="?"></div>
+                        <div class="w-10 bg-blue-100 border-2 border-dashed border-blue-400 flex flex-col justify-end h-full"><input type="number" id="ex1-h3" class="w-full text-center text-[10px] h-5 bg-white/80" placeholder="?"></div>
+                        <div class="w-10 bg-blue-400 flex flex-col justify-end" style="height: 30%;"><span class="text-[9px] text-center text-white font-bold">3</span></div>
+                    </div>
+                    <div class="flex gap-1 pl-1 mt-1 text-[9px] text-slate-600">
+                        <div class="w-10 text-center">0,5 L</div><div class="w-10 text-center">1 L</div><div class="w-10 text-center">1,5 L</div><div class="w-10 text-center">2 L</div>
+                    </div>
+                    <button onclick="checkEx1()" class="mt-3 bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 1</button>
                     <div id="fb-ex1" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
 
                 <!-- Ex 2 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 2 • Corrige l'erreur</span>
-                    <p class="text-xs text-slate-600 mb-2">Un sondage indique : 14% Satisfaisante, 36% Décevante, 50% Trop tôt pour se prononcer. Mais le diagramme montre le secteur vert (50%) plus petit que le bleu (36%).</p>
-                    <label class="text-xs font-semibold block mb-1">Quelle est l'erreur graphique ?</label>
+                    <p class="text-xs text-slate-600 mb-2">L'infographie présente les résultats d'un sondage. "Trop tôt pour se prononcer": 50%. "Décevante": 36%. "Satisfaisante": 14%.</p>
+                    <label class="text-xs font-semibold block mb-1">1. Sans calcul, justifie qu'il y a une erreur dans la construction du diagramme :</label>
+                    <input type="text" id="ex2-justif" class="border rounded p-1 w-full text-xs mb-2" placeholder="Ex: 50% représente la moitié donc...">
+                    <label class="text-xs font-semibold block mb-1">2. Quelle est l'erreur graphique ?</label>
                     <select id="ex2-err" class="border rounded p-1 w-full text-xs mb-2"><option value="">Choisir...</option><option value="1">Les secteurs 36% et 50% ont été inversés</option><option value="2">Le total ne fait pas 100%</option></select>
                     <button onclick="checkEx2()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 2</button>
                     <div id="fb-ex2" class="mt-2 text-xs hidden p-1.5 rounded"></div>
@@ -401,8 +506,13 @@
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 3 • Fréquence club de sport</span>
                     <p class="text-xs text-slate-600 mb-2">Fréquentation : Lun (96), Mar (128), Mer (272), Jeu (32), Ven (112).</p>
-                    <label class="text-xs font-semibold block mb-1">Effectif total de la semaine ?</label>
-                    <input type="number" id="ex3-tot" class="border rounded p-1 w-full text-xs mb-2" placeholder="96+128+272+32+112">
+                    <label class="text-xs font-semibold block mb-1">1. Effectif total de la semaine ?</label>
+                    <input type="number" id="ex3-tot" class="border rounded p-1 w-full text-xs mb-2">
+                    <label class="text-xs font-semibold block mb-1">2. Complète le tableau des fréquences (en %) :</label>
+                    <table class="w-full text-center border-collapse text-xs mb-2">
+                        <tr class="bg-slate-100"><th class="border p-1">Jour</th><td class="border p-1">Lun</td><td class="border p-1">Mar</td><td class="border p-1">Mer</td><td class="border p-1">Jeu</td><td class="border p-1">Ven</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Fréquence (%)</th><td class="border p-1"><input type="number" id="ex3-f1" class="w-8 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex3-f2" class="w-8 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex3-f3" class="w-8 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex3-f4" class="w-8 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex3-f5" class="w-8 border rounded text-center"></td></tr>
+                    </table>
                     <button onclick="checkEx3()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 3</button>
                     <div id="fb-ex3" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -411,8 +521,12 @@
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 4 • Cross du collège</span>
                     <p class="text-xs text-slate-600 mb-2">Temps au cross : [10; 20[ (85 élèves), [20; 30[ (105 élèves), [30; 40[ (25 élèves).</p>
-                    <label class="text-xs font-semibold block mb-1">Nombre total de coureurs ?</label>
-                    <input type="number" id="ex4-tot" class="border rounded p-1 w-full text-xs mb-2" placeholder="85 + 105 + 25">
+                    <label class="text-xs font-semibold block mb-1">Complète le tableau :</label>
+                    <table class="w-full text-center border-collapse text-xs mb-2">
+                        <tr class="bg-slate-100"><th class="border p-1">Temps (min)</th><td class="border p-1">[10; 20[</td><td class="border p-1">[20; 30[</td><td class="border p-1">[30; 40[</td><td class="border p-1 font-bold">Total</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">85</td><td class="border p-1">105</td><td class="border p-1">25</td><td class="border p-1"><input type="number" id="ex4-tot" class="w-10 border rounded text-center"></td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Fréquence (%) (arrondi)</th><td class="border p-1"><input type="number" id="ex4-f1" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex4-f2" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex4-f3" class="w-10 border rounded text-center"></td><td class="border p-1">100</td></tr>
+                    </table>
                     <button onclick="checkEx4()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 4</button>
                     <div id="fb-ex4" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -420,9 +534,13 @@
                 <!-- Ex 5 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 5 • Achats de vêtements</span>
-                    <p class="text-xs text-slate-600 mb-2">Enquête auprès de 250 personnes. Budget [0 ; 50[ € représente 56% de l'effectif.</p>
-                    <label class="text-xs font-semibold block mb-1">Combien de personnes cela représente-t-il (56% de 250) ?</label>
-                    <input type="number" id="ex5-val" class="border rounded p-1 w-full text-xs mb-2" placeholder="0.56 * 250">
+                    <p class="text-xs text-slate-600 mb-2">Enquête auprès de 250 personnes sur leur budget vêtements mensuel.</p>
+                    <label class="text-xs font-semibold block mb-1">Complète le tableau :</label>
+                    <table class="w-full text-center border-collapse text-xs mb-2">
+                        <tr class="bg-slate-100"><th class="border p-1">Budget (€)</th><td class="border p-1">[0 ; 50[</td><td class="border p-1">[50 ; 100[</td><td class="border p-1">[100 ; 150[</td><td class="border p-1 font-bold">Total</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Fréquence (%)</th><td class="border p-1">56</td><td class="border p-1"><input type="number" id="ex5-f2" class="w-8 border rounded text-center"></td><td class="border p-1">16</td><td class="border p-1">100</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1"><input type="number" id="ex5-e1" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex5-e2" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="ex5-e3" class="w-10 border rounded text-center"></td><td class="border p-1 font-bold">250</td></tr>
+                    </table>
                     <button onclick="checkEx5()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 5</button>
                     <div id="fb-ex5" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -430,9 +548,17 @@
                 <!-- Ex 6 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 6 • Redistribution d'étoiles</span>
-                    <p class="text-xs text-slate-600 mb-2">Samia a eu les notes 12, 16, 13, 17, 11, 15. Taho a eu 3 notes à 11, 2 notes à 15, 1 note à 18.</p>
-                    <label class="text-xs font-semibold block mb-1">Moyenne de Samia (84 / 6) ?</label>
-                    <input type="number" id="ex6-moy" class="border rounded p-1 w-full text-xs mb-2">
+                    <p class="text-xs text-slate-600 mb-2">Samia a eu les notes 12, 16, 13, 17, 11, 15.</p>
+                    <div class="flex gap-1 mb-2 text-yellow-500 text-xs">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <label class="text-xs font-semibold block mb-1">1a. Calcule la moyenne de Samia :</label>
+                    <input type="number" id="ex6-moy1" class="border rounded p-1 w-full text-xs mb-2">
+                    <p class="text-xs text-slate-600 mb-2">Taho a eu 3 notes à 11, 2 notes à 15, 1 note à 18.</p>
+                    <label class="text-xs font-semibold block mb-1">1b. Calcule la moyenne de Taho :</label>
+                    <input type="number" id="ex6-moy2" class="border rounded p-1 w-full text-xs mb-2">
+                    <label class="text-xs font-semibold block mb-1">2. Détermine la moyenne de la série : 15 - 12 - 14 - 15 - 19</label>
+                    <input type="number" id="ex6-moy3" class="border rounded p-1 w-full text-xs mb-2">
                     <button onclick="checkEx6()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 6</button>
                     <div id="fb-ex6" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -440,8 +566,12 @@
                 <!-- Ex 7 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 7 • Gain au jeu</span>
-                    <p class="text-xs text-slate-600 mb-2">Points gagnés : 500 pt (12 joueurs), 1 000 pt (5 joueurs), 2 000 pt (3 joueurs). Total = 20 joueurs.</p>
-                    <label class="text-xs font-semibold block mb-1">Gain moyen par joueur ?</label>
+                    <p class="text-xs text-slate-600 mb-2">Voici les points gagnés par 20 joueurs à un jeu vidéo.</p>
+                    <table class="w-full text-center border-collapse text-xs mb-2">
+                        <tr class="bg-slate-100"><th class="border p-1">Points</th><td class="border p-1">500</td><td class="border p-1">1 000</td><td class="border p-1">2 000</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">12</td><td class="border p-1">5</td><td class="border p-1">3</td></tr>
+                    </table>
+                    <label class="text-xs font-semibold block mb-1">Calcule le gain moyen par joueur (arrondi à l'unité) :</label>
                     <input type="number" id="ex7-gain" class="border rounded p-1 w-full text-xs mb-2" placeholder="(12*500 + 5*1000 + 3*2000)/20">
                     <button onclick="checkEx7()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 7</button>
                     <div id="fb-ex7" class="mt-2 text-xs hidden p-1.5 rounded"></div>
@@ -450,9 +580,11 @@
                 <!-- Ex 8 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 8 • Cookies au chocolat</span>
-                    <p class="text-xs text-slate-600 mb-2">Masses des cookies (en g) : 29, 27, 26, 28, 27, 29, 29, 26, 29, 27. (Série triée : 26, 26, 27, 27, 27 | 28, 29, 29, 29, 29).</p>
-                    <label class="text-xs font-semibold block mb-1">Masse médiane (entre la 5e et 6e valeur) ?</label>
+                    <p class="text-xs text-slate-600 mb-2">Masses des cookies (en g) : 29, 27, 26, 28, 27, 29, 29, 26, 29, 27.</p>
+                    <label class="text-xs font-semibold block mb-1">1. Calcule la masse médiane de ces cookies :</label>
                     <input type="number" step="0.5" id="ex8-med" class="border rounded p-1 w-full text-xs mb-2" placeholder="27,5">
+                    <label class="text-xs font-semibold block mb-1">2. Rédige une phrase pour interpréter ce résultat :</label>
+                    <input type="text" id="ex8-phrase" class="border rounded p-1 w-full text-xs mb-2" placeholder="Ex: La moitié des cookies pèse moins de...">
                     <button onclick="checkEx8()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 8</button>
                     <div id="fb-ex8" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -460,9 +592,15 @@
                 <!-- Ex 9 -->
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 9 • Tournoi</span>
-                    <p class="text-xs text-slate-600 mb-2">Points marqués au 1er tour par les équipes. La moitié ayant marqué le plus de points est qualifiée. Zaïa a marqué 7 points.</p>
-                    <label class="text-xs font-semibold block mb-1">Zaïa sera-t-elle qualifiée ?</label>
-                    <select id="ex9-qual" class="border rounded p-1 w-full text-xs mb-2"><option value="">Choisir...</option><option value="oui">Oui (7 pt est au-dessus de la valeur médiane 6)</option><option value="non">Non</option></select>
+                    <p class="text-xs text-slate-600 mb-2">Points marqués au 1er tour par 15 équipes.</p>
+                    <table class="w-full text-center border-collapse text-xs mb-2">
+                        <tr class="bg-slate-100"><th class="border p-1">Points</th><td class="border p-1">1</td><td class="border p-1">3</td><td class="border p-1">4</td><td class="border p-1">6</td><td class="border p-1">9</td><td class="border p-1">12</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">1</td><td class="border p-1">2</td><td class="border p-1">3</td><td class="border p-1">4</td><td class="border p-1">2</td><td class="border p-1">3</td></tr>
+                    </table>
+                    <label class="text-xs font-semibold block mb-1">1. Détermine la médiane de cette série :</label>
+                    <input type="number" id="ex9-med" class="border rounded p-1 w-full text-xs mb-2" placeholder="Ex: 6">
+                    <label class="text-xs font-semibold block mb-1">2. La moitié ayant marqué le plus de points est qualifiée. Zaïa a marqué 7 points. Sera-t-elle qualifiée ?</label>
+                    <select id="ex9-qual" class="border rounded p-1 w-full text-xs mb-2"><option value="">Choisir...</option><option value="oui">Oui</option><option value="non">Non</option></select>
                     <button onclick="checkEx9()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 9</button>
                     <div id="fb-ex9" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -471,8 +609,10 @@
                 <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-slate-200 text-slate-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Ex 10 • Équipe de France</span>
                     <p class="text-xs text-slate-600 mb-2">Âges des 11 joueurs : 34, 28, 23, 27, 27, 26, 21, 28, 25, 31, 30.</p>
-                    <label class="text-xs font-semibold block mb-1">Étendue des âges (Plus âgé - Plus jeune) ?</label>
+                    <label class="text-xs font-semibold block mb-1">1. Calcule l'étendue des âges :</label>
                     <input type="number" id="ex10-et" class="border rounded p-1 w-full text-xs mb-2" placeholder="34 - 21">
+                    <label class="text-xs font-semibold block mb-1">2. Rédige une phrase pour interpréter ce résultat :</label>
+                    <input type="text" id="ex10-phrase" class="border rounded p-1 w-full text-xs mb-2" placeholder="Ex: L'écart d'âge entre...">
                     <button onclick="checkEx10()" class="bg-slate-800 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier Ex 10</button>
                     <div id="fb-ex10" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                 </div>
@@ -493,9 +633,43 @@
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full mb-2 inline-block">Problème 11</span>
                     <h3 class="font-bold text-lg text-slate-800 mb-2">Appréciation sur le bulletin</h3>
-                    <p class="text-xs text-slate-600 mb-3">Lilou (15, 13, 12, 12, 13 -> Moyenne 13, Médiane 13, Étendue 3). Noah (17, 8, 12, 9, 19 -> Moyenne 13, Médiane 12, Étendue 11).</p>
-                    <label class="text-xs font-semibold text-slate-700 block mb-1">Quel élève aura l'appréciation "Ensemble satisfaisant mais résultats trop irréguliers" ?</label>
-                    <select id="p11-ans" class="border rounded p-1.5 text-xs w-full bg-white mb-2"><option value="">Choisir...</option><option value="noah">Noah (étendue de 11)</option><option value="lilou">Lilou</option></select>
+                    <p class="text-xs text-slate-600 mb-2">Notes obtenues par Lilou et Noah au cours du trimestre :</p>
+                    <table class="w-full text-center border-collapse text-xs mb-3 bg-slate-50">
+                        <tr><th class="border p-1 bg-purple-100">Lilou</th><td class="border p-1">15</td><td class="border p-1">13</td><td class="border p-1">12</td><td class="border p-1">12</td><td class="border p-1">13</td></tr>
+                        <tr><th class="border p-1 bg-purple-100">Noah</th><td class="border p-1">17</td><td class="border p-1">8</td><td class="border p-1">12</td><td class="border p-1">9</td><td class="border p-1">19</td></tr>
+                    </table>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">1a. Moyenne de Lilou :</label>
+                            <input type="number" id="p11-m1" class="border rounded p-1 text-xs w-full">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">1b. Moyenne de Noah :</label>
+                            <input type="number" id="p11-m2" class="border rounded p-1 text-xs w-full">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">2a. Médiane de Lilou :</label>
+                            <input type="number" id="p11-med1" class="border rounded p-1 text-xs w-full">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">2b. Médiane de Noah :</label>
+                            <input type="number" id="p11-med2" class="border rounded p-1 text-xs w-full">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">3a. Étendue de Lilou :</label>
+                            <input type="number" id="p11-et1" class="border rounded p-1 text-xs w-full">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">3b. Étendue de Noah :</label>
+                            <input type="number" id="p11-et2" class="border rounded p-1 text-xs w-full">
+                        </div>
+                    </div>
+                    <label class="text-xs font-semibold text-slate-700 block mb-1">4. Le professeur écrit : "Ensemble satisfaisant mais résultats trop irréguliers". À qui s'adresse cette appréciation ?</label>
+                    <select id="p11-ans" class="border rounded p-1.5 text-xs w-full bg-white mb-2"><option value="">Choisir...</option><option value="noah">Noah (étendue forte)</option><option value="lilou">Lilou</option></select>
                     <button onclick="checkP11()" class="bg-purple-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-purple-700">Vérifier P11</button>
                     <div id="fb-p11" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
@@ -504,9 +678,29 @@
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full mb-2 inline-block">Problème 12</span>
                     <h3 class="font-bold text-lg text-slate-800 mb-2">Restaurant classé</h3>
-                    <p class="text-xs text-slate-600 mb-3">Évaluation de 2 restaurants "Gourmet" et "Papilles" (notes sur 5). Les 2 ont une moyenne identique de 3,625/5. Mais Papilles a une étendue de 2 alors que Gourmet a une étendue de 4.</p>
-                    <label class="text-xs font-semibold text-slate-700 block mb-1">Quel restaurant est le plus régulier dans ses prestations ?</label>
-                    <select id="p12-ans" class="border rounded p-1.5 text-xs w-full bg-white mb-2"><option value="">Choisir...</option><option value="papilles">Papilles (étendue plus faible = plus régulier)</option><option value="gourmet">Gourmet</option></select>
+                    <p class="text-xs text-slate-600 mb-3">Évaluation de 2 restaurants "Gourmet" et "Papilles".</p>
+                    <div class="grid grid-cols-2 gap-4 mb-3">
+                        <div>
+                            <p class="text-xs font-bold text-center bg-slate-100 p-1 mb-1">Gourmet</p>
+                            <table class="w-full text-center border-collapse text-[10px]">
+                                <tr><th class="border p-1">Note /5</th><td class="border p-1">1</td><td class="border p-1">3</td><td class="border p-1">4</td><td class="border p-1">5</td></tr>
+                                <tr><th class="border p-1">Avis</th><td class="border p-1">1</td><td class="border p-1">3</td><td class="border p-1">2</td><td class="border p-1">2</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-center bg-slate-100 p-1 mb-1">Papilles</p>
+                            <table class="w-full text-center border-collapse text-[10px]">
+                                <tr><th class="border p-1">Note /5</th><td class="border p-1">2</td><td class="border p-1">3</td><td class="border p-1">4</td></tr>
+                                <tr><th class="border p-1">Avis</th><td class="border p-1">1</td><td class="border p-1">1</td><td class="border p-1">6</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <label class="text-xs font-semibold block mb-1">1. Calcule la moyenne pour chaque restaurant :</label>
+                    <input type="text" id="p12-moy" class="border rounded p-1 text-xs w-full mb-2" placeholder="Ex: Gourmet: ..., Papilles: ...">
+                    <label class="text-xs font-semibold block mb-1">2. Calcule la médiane pour chaque restaurant :</label>
+                    <input type="text" id="p12-med" class="border rounded p-1 text-xs w-full mb-2" placeholder="Ex: Gourmet: ..., Papilles: ...">
+                    <label class="text-xs font-semibold text-slate-700 block mb-1">3. Calcule l'étendue. Quel restaurant est le plus régulier ?</label>
+                    <select id="p12-ans" class="border rounded p-1.5 text-xs w-full bg-white mb-2"><option value="">Choisir...</option><option value="papilles">Papilles (étendue plus faible)</option><option value="gourmet">Gourmet (étendue plus faible)</option></select>
                     <button onclick="checkP12()" class="bg-purple-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-purple-700">Vérifier P12</button>
                     <div id="fb-p12" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
@@ -515,9 +709,18 @@
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full mb-2 inline-block">Problème 13</span>
                     <h3 class="font-bold text-lg text-slate-800 mb-2">Attention la facture !</h3>
-                    <p class="text-xs text-slate-600 mb-3">Consommation annuelle de 3 000 kWh : Froid (30%), Audiovisuel (20%), Lavage (15%), Éclairage (13%), Informatique (12%), Veille (10%).</p>
-                    <label class="text-xs font-semibold text-slate-700 block mb-1">Quelle est la consommation en kWh pour le Froid (30% de 3 000 kWh) ?</label>
-                    <input type="number" id="p13-kwh" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="0.30 * 3000">
+                    <p class="text-xs text-slate-600 mb-3">Répartition de la consommation d'électricité des ménages français. Total : 3 000 kWh.</p>
+                    <table class="w-full text-center border-collapse text-xs mb-3">
+                        <tr class="bg-slate-100"><th class="border p-1">Poste</th><th class="border p-1">Froid</th><th class="border p-1">Audiovisuel</th><th class="border p-1">Lavage</th><th class="border p-1">Éclairage</th><th class="border p-1">Informatique</th><th class="border p-1">Veille</th></tr>
+                        <tr><th class="border p-1 bg-slate-100">Fréquence (%)</th><td class="border p-1">30</td><td class="border p-1">20</td><td class="border p-1">15</td><td class="border p-1">13</td><td class="border p-1">12</td><td class="border p-1">10</td></tr>
+                        <tr><th class="border p-1 bg-slate-100">Énergie (kWh)</th><td class="border p-1">900</td><td class="border p-1">600</td><td class="border p-1"><input type="number" id="p13-k1" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="p13-k2" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="p13-k3" class="w-10 border rounded text-center"></td><td class="border p-1"><input type="number" id="p13-k4" class="w-10 border rounded text-center"></td></tr>
+                    </table>
+                    <label class="text-xs font-semibold block mb-1">1. D'après le tableau complété, combien de kWh sont utilisés pour le Lavage ?</label>
+                    <input type="number" id="p13-lavage" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="Ex: 450">
+                    <label class="text-xs font-semibold block mb-1">2. Quel pourcentage correspond aux appareils en veille ?</label>
+                    <input type="number" id="p13-veille" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="Ex: 10">
+                    <label class="text-xs font-semibold block mb-1">3. Donne 3 exemples d'appareils consommant de l'électricité alors qu'on ne s'en sert pas :</label>
+                    <input type="text" id="p13-exemples" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="Ex: TV, ordinateur, micro-ondes...">
                     <button onclick="checkP13()" class="bg-purple-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-purple-700">Vérifier P13</button>
                     <div id="fb-p13" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
@@ -526,9 +729,23 @@
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full mb-2 inline-block">Problème 14</span>
                     <h3 class="font-bold text-lg text-slate-800 mb-2">Champion du monde du 100m</h3>
-                    <p class="text-xs text-slate-600 mb-3">Temps des 8 finalistes (en s) : 9,76 ; 9,89 ; 9,90 ; 9,93 ; 9,97 ; 10,03 ; 10,07 ; 10,08.</p>
-                    <label class="text-xs font-semibold text-slate-700 block mb-1">Étendue de la finale (Dernier - Vainqueur) ?</label>
-                    <input type="number" step="0.01" id="p14-et" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="10.08 - 9.76">
+                    <p class="text-xs text-slate-600 mb-2">Temps des 8 athlètes (en s) lors de la finale : 10,03 ; 9,97 ; 9,89 ; 9,90 ; 10,07 ; 10,08 ; 9,76 ; 9,93.</p>
+                    <label class="text-xs font-semibold block mb-1">1. Calcule le temps moyen des finalistes :</label>
+                    <input type="number" step="0.01" id="p14-moy" class="border rounded p-1.5 text-xs w-full mb-2">
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">2a. Médiane :</label>
+                            <input type="number" step="0.01" id="p14-med" class="border rounded p-1.5 text-xs w-full">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">3a. Étendue :</label>
+                            <input type="number" step="0.01" id="p14-et" class="border rounded p-1.5 text-xs w-full">
+                        </div>
+                    </div>
+                    <label class="text-xs font-semibold block mb-1">2b. Interprète la médiane :</label>
+                    <input type="text" id="p14-phrase1" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="La moitié des athlètes a fait un temps inférieur à...">
+                    <label class="text-xs font-semibold block mb-1">3b. Interprète l'étendue :</label>
+                    <input type="text" id="p14-phrase2" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="L'écart de temps entre le 1er et le dernier est de...">
                     <button onclick="checkP14()" class="bg-purple-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-purple-700">Vérifier P14</button>
                     <div id="fb-p14" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
@@ -537,17 +754,32 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                         <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Problème 15 • C'est le pied !</span>
-                        <p class="text-xs text-slate-600 mb-2">Pointure 38 représente 42,5% des ventes (34 paires sur 80). Pour commander 120 paires, combien de paires en 38 commander ?</p>
-                        <input type="number" id="p15-cmd" class="border rounded p-1 text-xs w-full mb-2" placeholder="0.425 * 120">
+                        <p class="text-xs text-slate-600 mb-2">Tailles de chaussures des 80 ventes de samedi dernier :</p>
+                        <table class="w-full text-center border-collapse text-[10px] mb-2">
+                            <tr><th class="border p-1 bg-slate-100">Pointure</th><td class="border p-1">36</td><td class="border p-1">37</td><td class="border p-1">38</td><td class="border p-1">39</td><td class="border p-1">40</td><td class="border p-1">41</td></tr>
+                            <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">4</td><td class="border p-1">8</td><td class="border p-1">34</td><td class="border p-1">16</td><td class="border p-1">12</td><td class="border p-1">6</td></tr>
+                            <tr><th class="border p-1 bg-slate-100">Fréq (%)</th><td class="border p-1"><input type="number" id="p15-f1" class="w-6 border text-center"></td><td class="border p-1"><input type="number" id="p15-f2" class="w-6 border text-center"></td><td class="border p-1"><input type="number" id="p15-f3" class="w-6 border text-center"></td><td class="border p-1"><input type="number" id="p15-f4" class="w-6 border text-center"></td><td class="border p-1"><input type="number" id="p15-f5" class="w-6 border text-center"></td><td class="border p-1"><input type="number" id="p15-f6" class="w-6 border text-center"></td></tr>
+                        </table>
+                        <label class="text-xs font-semibold block mb-1">1/2. Complète les fréquences en %. (Total = 80)</label>
+                        <label class="text-xs font-semibold block mb-1 mt-2">3. Pour commander 120 paires, combien de paires en 38 commander ?</label>
+                        <input type="number" id="p15-cmd" class="border rounded p-1 text-xs w-full mb-2" placeholder="Ex: 51">
                         <button onclick="checkP15()" class="bg-purple-600 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier P15</button>
                         <div id="fb-p15" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                     </div>
 
                     <div class="bg-white p-5 rounded-2xl border border-slate-100 card-shadow">
                         <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded mb-2 inline-block">Problème 16 • Bon d'achat</span>
-                        <p class="text-xs text-slate-600 mb-2">92 clients fidèles. On offre 10€ à la moitié la plus assidue (46 clients). Norah est venue 9 fois (effet de 46 clients les plus assidus = 10 passages ou plus).</p>
-                        <label class="text-xs font-semibold block mb-1">Norah aura-t-elle le bon d'achat ?</label>
-                        <select id="p16-norah" class="border rounded p-1 w-full text-xs mb-2"><option value="">Choisir...</option><option value="non">Non (9 passages < 10 passages minimum)</option><option value="oui">Oui</option></select>
+                        <p class="text-xs text-slate-600 mb-2">Nombre de passages en caisse de clients fidèles sur l'année :</p>
+                        <table class="w-full text-center border-collapse text-[10px] mb-2">
+                            <tr><th class="border p-1 bg-slate-100">Passages</th><td class="border p-1">5</td><td class="border p-1">7</td><td class="border p-1">9</td><td class="border p-1">10</td><td class="border p-1">11</td><td class="border p-1">14</td><td class="border p-1">15</td><td class="border p-1">18</td></tr>
+                            <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">12</td><td class="border p-1">15</td><td class="border p-1">19</td><td class="border p-1">12</td><td class="border p-1">9</td><td class="border p-1">11</td><td class="border p-1">9</td><td class="border p-1">5</td></tr>
+                        </table>
+                        <label class="text-xs font-semibold block mb-1">1. Combien de clients compte-t-on ?</label>
+                        <input type="number" id="p16-tot" class="border rounded p-1 text-xs w-full mb-1">
+                        <label class="text-xs font-semibold block mb-1">2a. La moitié des clients ayant le plus grand nombre de passages reçoit 10€. Combien auront le bon ?</label>
+                        <input type="number" id="p16-moitie" class="border rounded p-1 text-xs w-full mb-1">
+                        <label class="text-xs font-semibold block mb-1">2b. Norah est venue 9 fois. Aura-t-elle le bon d'achat ?</label>
+                        <select id="p16-norah" class="border rounded p-1 w-full text-xs mb-2"><option value="">Choisir...</option><option value="non">Non</option><option value="oui">Oui</option></select>
                         <button onclick="checkP16()" class="bg-purple-600 text-white text-xs py-1.5 px-3 rounded w-full font-bold">Vérifier P16</button>
                         <div id="fb-p16" class="mt-2 text-xs hidden p-1.5 rounded"></div>
                     </div>
@@ -556,16 +788,33 @@
                 <!-- Prob 17 Scratch -->
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
                     <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full mb-2 inline-block">Problème 17 • Algorithme Scratch</span>
-                    <p class="text-xs text-slate-600 mb-3">Le Lutin Scratch calcule la moyenne annuelle : <code>Moyenne = (MT1*3 + MT2*5 + MT3*4) / 12</code>.<br>Hakim a obtenu MT1 = 12, MT2 = 11, MT3 = 14.</p>
-                    <label class="text-xs font-semibold text-slate-700 block mb-1">Que répond le Lutin à la fin du programme ?</label>
-                    <input type="number" step="0.01" id="p17-sc" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="(12*3 + 11*5 + 14*4)/12 = 12,25">
+                    <p class="text-xs text-slate-600 mb-2">Un professeur a écrit ce programme pour calculer la moyenne annuelle.</p>
+                    <div class="bg-slate-800 text-white p-3 rounded font-mono text-[10px] mb-3 leading-relaxed">
+                        quand [drapeau] cliqué<br>
+                        demander "Moyenne T1 ?" et attendre (réponse -> MT1)<br>
+                        demander "Moyenne T2 ?" et attendre (réponse -> MT2)<br>
+                        demander "Moyenne T3 ?" et attendre (réponse -> MT3)<br>
+                        dire regrouper "La moyenne est : " ( (MT1*3 + MT2*5 + MT3*4) / 12 )
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">1. Quelle est la somme des coefficients (3+5+4) ?</label>
+                            <input type="number" id="p17-coef" class="border rounded p-1 text-xs w-full">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold block mb-1">2. Que représente 12 dans la formule ?</label>
+                            <input type="text" id="p17-rep" class="border rounded p-1 text-xs w-full" placeholder="Ex: Le nombre total...">
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 mb-1">Hakim a obtenu MT1 = 12, MT2 = 11, MT3 = 14.</p>
+                    <label class="text-xs font-semibold block mb-1">3. Que répond le lutin à Hakim ?</label>
+                    <input type="number" step="0.01" id="p17-sc" class="border rounded p-1.5 text-xs w-full mb-2" placeholder="Résultat du calcul">
                     <button onclick="checkP17()" class="bg-purple-600 text-white text-xs px-4 py-2 rounded font-bold hover:bg-purple-700">Vérifier P17</button>
                     <div id="fb-p17" class="mt-2 text-xs hidden p-2 rounded"></div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: BREVET (18) -->
         <section id="brevet" class="scroll-mt-8">
             <div class="bg-slate-900 text-white p-6 md:p-8 rounded-2xl card-shadow">
                 <div class="flex items-center gap-3 mb-4">
@@ -575,10 +824,10 @@
                     </h2>
                 </div>
                 
-                <p class="text-xs text-slate-300 mb-6 leading-relaxed">
+                <p class="text-xs text-slate-300 mb-4 leading-relaxed">
                     Test de VMA (demi-Cooper 6 min) des 24 élèves de 3e.<br>
-                    • **Filles (12 élèves)** : VMA de 9 à 13,5 km/h. Étendue = 13,5 - 9 = 4,5 km/h.<br>
-                    • **Garçons (12 élèves)** : Nathan 12, Jules 14, Nicolas 14, Martin 11, Mathis 12, Simon 12, Lucas 11, Abdel 13.5, Thomas 14.5, Youssef 14, Léo 15, José 14. Étendue = 15 - 11 = 4 km/h.
+                    <strong class="text-pink-400">Filles (12) :</strong> 13,5 - 12 - 11 - 9 - 12,5 - 9,5 - 12 - 11,5 - 12 - 11,5 - 12 - 10,5<br>
+                    <strong class="text-sky-400">Garçons (12) :</strong> 12 - 14 - 14 - 11 - 12 - 12 - 11 - 13,5 - 14,5 - 14 - 15 - 14
                 </p>
 
                 <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 space-y-4 text-xs">
@@ -595,7 +844,7 @@
 
                     <div>
                         <p class="font-bold text-sky-400 mb-1">Affirmation 3 : "Lisa (VMA de 12 km/h) est sélectionnée parmi les 12 meilleures VMA."</p>
-                        <select id="br-a3" class="bg-slate-900 border border-slate-600 text-white rounded p-2 w-full"><option value="">Choisir...</option><option value="faux">Faux (Elle est en 12e/13e position ex-aequo mais pas dans le top strict)</option><option value="vrai">Vrai</option></select>
+                        <select id="br-a3" class="bg-slate-900 border border-slate-600 text-white rounded p-2 w-full"><option value="">Choisir...</option><option value="faux">Faux (La 12e VMA est 12,5 km/h ou plus)</option><option value="vrai">Vrai</option></select>
                     </div>
 
                     <button onclick="checkBrevet()" class="mt-4 bg-red-600 hover:bg-red-500 text-white text-xs px-6 py-2.5 rounded font-bold w-full">Valider l'épreuve Brevet</button>
@@ -699,20 +948,20 @@
         function checkEx3() { if(document.getElementById('ex3-tot').value=="640") showFB('fb-ex3', true, "Exact ! 640 personnes."); else showFB('fb-ex3', false, "Somme = 640."); }
         function checkEx4() { if(document.getElementById('ex4-tot').value=="215") showFB('fb-ex4', true, "Exact ! 85+105+25 = 215."); else showFB('fb-ex4', false, "Faux."); }
         function checkEx5() { if(document.getElementById('ex5-val').value=="140") showFB('fb-ex5', true, "Exact ! 0,56 * 250 = 140."); else showFB('fb-ex5', false, "Faux."); }
-        function checkEx6() { if(document.getElementById('ex6-moy').value=="14") showFB('fb-ex6', true, "Exact ! 84 / 6 = 14."); else showFB('fb-ex6', false, "Faux."); }
+        function checkEx6() { if(document.getElementById('ex6-moy1').value=="14" && document.getElementById('ex6-moy2').value=="13.5" && document.getElementById('ex6-moy3').value=="15") showFB('fb-ex6', true, "Exact !"); else showFB('fb-ex6', false, "Revérifie les moyennes (Samia = 14, Taho = 13.5, 3e série = 15)."); }
         function checkEx7() { if(document.getElementById('ex7-gain').value=="850") showFB('fb-ex7', true, "Exact ! 17 000 / 20 = 850 pts."); else showFB('fb-ex7', false, "Faux."); }
         function checkEx8() { if(document.getElementById('ex8-med').value=="27.5") showFB('fb-ex8', true, "Exact ! (27+28)/2 = 27,5 g."); else showFB('fb-ex8', false, "Faux."); }
-        function checkEx9() { if(document.getElementById('ex9-qual').value=="oui") showFB('fb-ex9', true, "Exact ! Médiane = 6, Zaïa a 7."); else showFB('fb-ex9', false, "Faux."); }
+        function checkEx9() { if(document.getElementById('ex9-med').value=="6" && document.getElementById('ex9-qual').value=="oui") showFB('fb-ex9', true, "Exact ! Médiane = 6, Zaïa a 7."); else showFB('fb-ex9', false, "Vérifie la médiane (6) et la qualification."); }
         function checkEx10() { if(document.getElementById('ex10-et').value=="13") showFB('fb-ex10', true, "Exact ! 34 - 21 = 13 ans."); else showFB('fb-ex10', false, "Faux."); }
 
         // PROBLEMES 11 A 17
-        function checkP11() { if(document.getElementById('p11-ans').value=="noah") showFB('fb-p11', true, "Exact ! Noah a une étendue de 11 notes très irrégulières."); else showFB('fb-p11', false, "Faux."); }
+        function checkP11() { if(document.getElementById('p11-m1').value=="13" && document.getElementById('p11-med1').value=="13" && document.getElementById('p11-et1').value=="3" && document.getElementById('p11-ans').value=="noah") showFB('fb-p11', true, "Exact ! Noah a une étendue de 11."); else showFB('fb-p11', false, "Vérifie tes calculs."); }
         function checkP12() { if(document.getElementById('p12-ans').value=="papilles") showFB('fb-p12', true, "Exact ! Étendue plus petite = plus régulier."); else showFB('fb-p12', false, "Faux."); }
-        function checkP13() { if(document.getElementById('p13-kwh').value=="900") showFB('fb-p13', true, "Exact ! 30% de 3 000 = 900 kWh."); else showFB('fb-p13', false, "Faux."); }
-        function checkP14() { if(document.getElementById('p14-et').value=="0.32") showFB('fb-p14', true, "Exact ! 10,08 - 9,76 = 0,32 s."); else showFB('fb-p14', false, "Faux."); }
-        function checkP15() { if(document.getElementById('p15-cmd').value=="51") showFB('fb-p15', true, "Exact ! 42,5% de 120 = 51 paires."); else showFB('fb-p15', false, "Faux."); }
-        function checkP16() { if(document.getElementById('p16-norah').value=="non") showFB('fb-p16', true, "Exact ! Seuls les clients venus 10 fois ou plus ont le bon."); else showFB('fb-p16', false, "Faux."); }
-        function checkP17() { if(document.getElementById('p17-sc').value=="12.25") showFB('fb-p17', true, "Exact ! Le Lutin annonce 12,25 !"); else showFB('fb-p17', false, "Faux."); }
+        function checkP13() { if(document.getElementById('p13-k1').value=="450" && document.getElementById('p13-lavage').value=="450" && document.getElementById('p13-veille').value=="10") showFB('fb-p13', true, "Exact ! 450 kWh pour le lavage et 10% en veille."); else showFB('fb-p13', false, "Vérifie le tableau (Lavage=450, Eclairage=390, Info=360, Veille=300)."); }
+        function checkP14() { if(document.getElementById('p14-moy').value=="9.95" && document.getElementById('p14-med').value=="9.95" && document.getElementById('p14-et').value=="0.32") showFB('fb-p14', true, "Exact ! Moyenne=9.95, Médiane=9.95, Etendue=0.32."); else showFB('fb-p14', false, "Re-calcule."); }
+        function checkP15() { if(document.getElementById('p15-f3').value=="42.5" && document.getElementById('p15-cmd').value=="51") showFB('fb-p15', true, "Exact ! 42,5% de 120 = 51 paires."); else showFB('fb-p15', false, "Faux."); }
+        function checkP16() { if(document.getElementById('p16-tot').value=="92" && document.getElementById('p16-moitie').value=="46" && document.getElementById('p16-norah').value=="non") showFB('fb-p16', true, "Exact ! Seuls les 46 premiers ont le bon."); else showFB('fb-p16', false, "Faux."); }
+        function checkP17() { if(document.getElementById('p17-coef').value=="12" && document.getElementById('p17-sc').value=="12.25") showFB('fb-p17', true, "Exact ! Le Lutin annonce 12,25 !"); else showFB('fb-p17', false, "Faux."); }
 
         // BREVET 18
         function checkBrevet() {
