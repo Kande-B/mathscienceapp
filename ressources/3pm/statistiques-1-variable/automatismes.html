@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & QCM - Statistiques 3PM</title>
+    <title>Automatismes & Calcul Mental - Statistiques 3PM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -28,11 +28,17 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        
+        /* Flashcard flip styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
     </style>
 </head>
-<body class="text-slate-800 bg-slate-50 min-h-screen pb-16">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
     <!-- Header & Nav unifiée pour la Séquence -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
@@ -58,71 +64,547 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- ENTÊTE AUTOMATISMES -->
-        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-2xl shadow-sm">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rapide</span>
-                <h2 class="text-2xl font-bold font-heading text-yellow-950">Automatismes & QCM Flash</h2>
+        <!-- BANNIERE D'ENTÊTE AUTOMATISMES -->
+        <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 text-slate-950 p-6 md:p-8 rounded-3xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2">
+                <span class="bg-slate-950 text-yellow-400 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Module Automatismes & Réflexes</span>
+                <h2 class="text-3xl font-extrabold font-heading text-slate-950">Calcul Mental & QCM Flash</h2>
+                <p class="text-sm text-slate-900 max-w-2xl font-medium">Développez des réflexes instantanés sur les fréquences, les moyennes, les étendues et les lectures de graphiques statistiques !</p>
             </div>
-            <p class="text-sm text-yellow-800">Développer ses réflexes de calcul mental et valider ses connaissances en 5 minutes chrono.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Auto 1 -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
-                <span class="bg-yellow-100 text-yellow-900 text-xs font-bold px-2.5 py-1 rounded-full mb-3 inline-block">1. Bonbons & Fréquences</span>
-                <p class="text-xs text-slate-600 mb-3">Associer la quantité de bonbons à sa fréquence sur un total de 20 bonbons :</p>
-                <div class="space-y-2 text-xs">
-                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded border">
-                        <span class="font-bold">10 bonbons bleus sur 20</span>
-                        <select id="aut1-a" class="border rounded p-1 text-xs bg-white"><option value="">Choisir...</option><option value="0.5">10/20 = 0,5 (50%)</option><option value="0.1">2/20 = 0,1 (10%)</option></select>
-                    </div>
-                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded border">
-                        <span class="font-bold">2 bonbons violets sur 20</span>
-                        <select id="aut1-b" class="border rounded p-1 text-xs bg-white"><option value="">Choisir...</option><option value="0.5">10/20 = 0,5 (50%)</option><option value="0.1">2/20 = 0,1 (10%)</option></select>
-                    </div>
-                </div>
-                <button onclick="checkAut1()" class="mt-4 w-full bg-yellow-500 text-slate-950 font-bold text-xs py-2 rounded-lg hover:bg-yellow-400 transition-colors">Vérifier les fréquences</button>
-                <div id="fb-aut1" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
-            </div>
-
-            <!-- Auto 2 QCM -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
-                <span class="bg-yellow-100 text-yellow-900 text-xs font-bold px-2.5 py-1 rounded-full mb-3 inline-block">2. Quiz QCM Définitions</span>
-                <div class="space-y-3 text-xs">
-                    <div>
-                        <label class="font-semibold text-slate-700 block mb-1">Le calcul de l'étendue est :</label>
-                        <select id="qcm-1" class="border rounded p-2 w-full bg-white text-xs"><option value="">Choisir la réponse...</option><option value="A">Somme des valeurs / effectif total</option><option value="C">Valeur Maximale - Valeur Minimale</option></select>
-                    </div>
-                    <div>
-                        <label class="font-semibold text-slate-700 block mb-1">Pour déterminer la médiane, il faut d'abord :</label>
-                        <select id="qcm-2" class="border rounded p-2 w-full bg-white text-xs"><option value="">Choisir la réponse...</option><option value="A">Ranger les valeurs par ordre croissant</option><option value="B">Calculer la moyenne</option></select>
-                    </div>
-                </div>
-                <button onclick="checkQCM()" class="mt-4 w-full bg-yellow-500 text-slate-950 font-bold text-xs py-2 rounded-lg hover:bg-yellow-400 transition-colors">Valider le QCM Flash</button>
-                <div id="fb-qcm" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
+            <!-- SCORE BOARD EN DIRECT -->
+            <div class="bg-slate-950 text-white p-5 rounded-2xl border border-yellow-400/30 text-center min-w-[200px] flex-shrink-0 shadow-inner">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">Score Global</span>
+                <div class="text-3xl font-extrabold text-yellow-400 font-heading" id="global-score">0 / 25</div>
+                <span class="text-[11px] text-slate-400 block mt-1" id="score-status">Commencez les exercices</span>
             </div>
         </div>
+
+        <!-- SECTION 1: FLASHCARDS INTERACTIVES (10 CARTE REVISON) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 bg-amber-500 text-slate-950 rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-layer-group"></i></span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Module 1 : Flashcards Définitions & Formules (10 cartes)</h3>
+                </div>
+                <span class="text-xs font-semibold text-slate-500">Cliquez sur une carte pour révéler la réponse</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- Card 1 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 1</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Qu'est-ce que l'effectif total $N$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">C'est la <strong>somme de tous les effectifs</strong> de la série : $N = n_1 + n_2 + ... + n_k$.</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 2</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la formule de la fréquence $f_i$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">$$f_i = \frac{\text{Effectif } n_i}{\text{Effectif total } N}$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 3</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Que vaut toujours la somme des fréquences ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Elle vaut toujours <strong>1</strong> (ou <strong>100 %</strong> en pourcentage).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 4</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Comment calcule-t-on l'étendue ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">$$\text{Étendue} = \text{Valeur Max} - \text{Valeur Min}$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 5</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la définition de la médiane ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Valeur partageant la série rangée en <strong>2 groupes égaux</strong> (50% au-dessous, 50% au-dessus).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 6</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Comment passer d'une fréquence décimale au pourcentage ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">On <strong>multiplie par 100</strong> (ex: $0,25 \times 100 = 25\,\%$).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 7</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est l'amplitude de la classe $[10 ; 15[$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center font-mono">$$\text{Amplitude} = 15 - 10 = \mathbf{5}$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 8</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la différence visuelle bâtons / histogramme ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-[11px] text-slate-200 text-center">Les bâtons sont espacés (valeurs isolées). L'histogramme a des <strong>rectangles accolés</strong> (classes continuës).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 9</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quel est le centre de la classe $[10 ; 20[$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center font-mono">$$\text{Centre} = \frac{10 + 20}{2} = \mathbf{15}$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 10 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d group-[.flipped]:rotate-y-180">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 10</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Comment retrouver l'effectif à partir de la fréquence ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">$$\text{Effectif } n_i = f_i \times N$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CALCULS MENTAUX RAPIDES DE FREQUENCES (6 DÉFIS) -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+                <span class="w-8 h-8 bg-sky-500 text-white rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-calculator"></i></span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Module 2 : Calcul Mental Rapide de Fréquences (6 Défis)</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Défi 1 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 1</span>
+                    <h4 class="font-bold text-slate-900 text-sm">5 élèves sur 20 portent des lunettes.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la fréquence en pourcentage ($f\,\%$) ?</p>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m1-q1" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez le %">
+                        <span class="text-xs font-bold">%</span>
+                    </div>
+                    <button onclick="checkModule1(1)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-1" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 2 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 2</span>
+                    <h4 class="font-bold text-slate-900 text-sm">10 ordinateurs défectueux sur 40.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la fréquence sous forme décimale ($f$) ?</p>
+                    <input type="number" step="0.01" id="m1-q2" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="ex: 0.25">
+                    <button onclick="checkModule1(2)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-2" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 3 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 3</span>
+                    <h4 class="font-bold text-slate-900 text-sm">4 billes rouges dans un sac de 10 billes.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la fréquence en pourcentage ($f\,\%$) ?</p>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m1-q3" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez le %">
+                        <span class="text-xs font-bold">%</span>
+                    </div>
+                    <button onclick="checkModule1(3)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-3" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 4 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 4</span>
+                    <h4 class="font-bold text-slate-900 text-sm">15 clients satisfaits sur 50 interrogés.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la fréquence en pourcentage ($f\,\%$) ?</p>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m1-q4" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez le %">
+                        <span class="text-xs font-bold">%</span>
+                    </div>
+                    <button onclick="checkModule1(4)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-4" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 5 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 5</span>
+                    <h4 class="font-bold text-slate-900 text-sm">3 personnes absentes dans un groupe de 25.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la fréquence en pourcentage ($f\,\%$) ?</p>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m1-q5" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez le %">
+                        <span class="text-xs font-bold">%</span>
+                    </div>
+                    <button onclick="checkModule1(5)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-5" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 6 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 6</span>
+                    <h4 class="font-bold text-slate-900 text-sm">1 quart des candidats est reçu.</h4>
+                    <p class="text-xs text-slate-600">Écrire la fréquence sous forme décimale :</p>
+                    <input type="number" step="0.01" id="m1-q6" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="ex: 0.25">
+                    <button onclick="checkModule1(6)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-6" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: MINI-CALCULS MOYENNE, MEDIANE ET ETENDUE (5 DÉFIS) -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+                <span class="w-8 h-8 bg-purple-500 text-white rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-sliders"></i></span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Module 3 : Moyenne, Médiane & Étendue en 30 sec (5 Défis)</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Défi M3-1 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 1</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Série de notes : 10 ; 12 ; 14.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la moyenne ($\bar{x}$) ?</p>
+                    <input type="number" id="m3-q1" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="12">
+                    <button onclick="checkModule3(1)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-1" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi M3-2 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 2</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Série rangée : 4 ; 7 ; 9 ; 11 ; 15.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la médiane ($Me$) ?</p>
+                    <input type="number" id="m3-q2" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="9">
+                    <button onclick="checkModule3(2)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-2" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi M3-3 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 3</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Températures (°C) : 5 ; 12 ; 18 ; 6 ; 2.</h4>
+                    <p class="text-xs text-slate-600">Quelle est l'étendue de la température ?</p>
+                    <input type="number" id="m3-q3" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="18 - 2">
+                    <button onclick="checkModule3(3)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-3" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi M3-4 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 4</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Série rangée de 4 valeurs : 6 ; 8 ; 12 ; 14.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la médiane ($Me$) ?</p>
+                    <input type="number" id="m3-q4" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="(8+12)/2">
+                    <button onclick="checkModule3(4)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-4" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi M3-5 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 5</span>
+                    <h4 class="font-bold text-slate-900 text-sm">3 pièces mesurent 5 cm et 1 pièce mesure 9 cm.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la moyenne de longueur des 4 pièces ?</p>
+                    <input type="number" id="m3-q5" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="(3*5 + 9)/4">
+                    <button onclick="checkModule3(5)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-5" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GRAND QCM D'AUTO-ÉVALUATION (10 QUESTIONS COMPLÈTES) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-list-check"></i></span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Module 4 : Grand QCM de Synthèse (10 Questions)</h3>
+                </div>
+                <span class="text-xs font-semibold text-slate-500">Testez l'ensemble du programme de 3PM</span>
+            </div>
+
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow space-y-6">
+
+                <!-- Q1 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q1. Dans un groupe de 50 personnes, la fréquence d'une caractéristique est de 0,34. Quel est l'effectif correspondant ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q1" value="A"> A. 17 personnes</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q1" value="B"> B. 34 personnes</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q1" value="C"> C. 12 personnes</label>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q2. Quel indicateur statistique est le plus perturbé par une seule valeur aberrante extrêmement forte ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q2" value="A"> A. La médiane</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q2" value="B"> B. La moyenne</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q2" value="C"> C. L'effectif total</label>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q3. Dans un diagramme circulaire complet, quel angle en degrés représente une fréquence de 25% ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q3" value="A"> A. 25°</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q3" value="B"> B. 90°</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q3" value="C"> C. 180°</label>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q4. Si la médiane des salaires d'une entreprise est de 1 800 €, cela signifie que :</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q4" value="A"> A. Tout le monde gagne 1 800 €</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q4" value="B"> B. Exactement 50% des salariés gagnent 1 800 € ou moins</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q4" value="C"> C. Le salaire moyen est obligatoirement 1 800 €</label>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q5. Quelle est l'amplitude de la classe d'âges $[12 ; 18[$ ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q5" value="A"> A. 6 ans</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q5" value="B"> B. 15 ans</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q5" value="C"> C. 30 ans</label>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q6. Dans l'intervalle $[10 ; 20[$, la valeur 20 est-elle incluse ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q6" value="A"> A. Oui, car le crochet est fermé</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q6" value="B"> B. Non, car le crochet est ouvert en 20</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q6" value="C"> C. Seulement si c'est un nombre entier</label>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q7. Pour calculer la moyenne d'un tableau regroupé par classes $[a ; b[$, quel point prend-on pour chaque classe ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q7" value="A"> A. La borne inférieure $a$</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q7" value="B"> B. Le centre de la classe $\frac{a+b}{2}$</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q7" value="C"> C. L'amplitude $b - a$</label>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q8. La somme de deux fréquences vaut $0,45$ et $0,35$. Que vaut la fréquence du restant ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q8" value="A"> A. 0,20 (soit 20%)</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q8" value="B"> B. 0,80 (soit 80%)</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q8" value="C"> C. 0,10 (soit 10%)</label>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="border-b border-slate-100 pb-4">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q9. Une étude statistique porte sur le groupe sanguin (A, B, AB, O) des élèves. Quel est le type du caractère étudié ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q9" value="A"> A. Quantitatif</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q9" value="B"> B. Qualitative</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q9" value="C"> C. Numérique</label>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="pb-2">
+                    <p class="font-bold text-slate-900 text-sm mb-2">Q10. Quelle fonction Excel permet de calculer l'effectif total d'une colonne de nombres ?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q10" value="A"> A. =NB(A1:A50)</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q10" value="B"> B. =MOYENNE(A1:A50)</label>
+                        <label class="p-3 border rounded-xl flex items-center gap-2 cursor-pointer hover:bg-slate-50"><input type="radio" name="qcm-q10" value="C"> C. =MAX(A1:A50)</label>
+                    </div>
+                </div>
+
+                <button onclick="checkQCMGlobal()" class="w-full bg-slate-900 text-white font-bold text-xs py-3.5 rounded-2xl hover:bg-slate-800 shadow-md transition-colors">
+                    <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Grand QCM (10 pts)
+                </button>
+                <div id="fb-qcm-global" class="text-xs hidden p-4 rounded-2xl font-bold text-center"></div>
+
+            </div>
+        </section>
 
     </main>
 
     <script>
-        function showFB(id, isCorrect, msg) {
-            const el = document.getElementById(id);
-            el.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-            if (isCorrect) { el.classList.add('correct-bg'); el.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-600 mr-2"></i> ${msg}`; }
-            else { el.classList.add('wrong-bg'); el.innerHTML = `<i class="fa-solid fa-times-circle text-red-600 mr-2"></i> ${msg}`; }
+        let scoreState = { m1: 0, m3: 0, qcm: 0 };
+
+        function updateGlobalScore() {
+            const total = scoreState.m1 + scoreState.m3 + scoreState.qcm;
+            const el = document.getElementById('global-score');
+            const st = document.getElementById('score-status');
+            el.innerText = `${total} / 21`;
+            if (total >= 18) { st.innerText = "🏆 Niveau Expert Mathématiques !"; st.className = "text-xs font-bold text-emerald-400 block mt-1"; }
+            else if (total >= 12) { st.innerText = "👍 Bon niveau ! Continuez."; st.className = "text-xs font-bold text-yellow-400 block mt-1"; }
+            else { st.innerText = "💪 Révisez encore un peu."; st.className = "text-xs font-bold text-amber-300 block mt-1"; }
         }
 
-        function checkAut1() {
-            if(document.getElementById('aut1-a').value=="0.5" && document.getElementById('aut1-b').value=="0.1") showFB('fb-aut1', true, "Parfait ! 10/20 = 0,5 (50%) et 2/20 = 0,1 (10%).");
-            else showFB('fb-aut1', false, "Revérifiez les divisions par 20.");
+        function flipCard(card) {
+            card.querySelector('.transform-style-3d').classList.toggle('flipped');
         }
-        function checkQCM() {
-            if(document.getElementById('qcm-1').value=="C" && document.getElementById('qcm-2').value=="A") showFB('fb-qcm', true, "Sans-faute sur les définitions de l'étendue et de la médiane !");
-            else showFB('fb-qcm', false, "Révisez vos fiches de cours.");
+
+        function checkModule1(num) {
+            let val = document.getElementById(`m1-q${num}`).value;
+            let fb = document.getElementById(`fb-m1-${num}`);
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            let isCorrect = false;
+
+            if (num === 1 && val === "25") isCorrect = true;
+            if (num === 2 && (val === "0.25" || val === "0,25")) isCorrect = true;
+            if (num === 3 && val === "40") isCorrect = true;
+            if (num === 4 && val === "30") isCorrect = true;
+            if (num === 5 && val === "12") isCorrect = true;
+            if (num === 6 && (val === "0.25" || val === "0,25")) isCorrect = true;
+
+            if (isCorrect) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Exact ! Bravo.`;
+                scoreState.m1 = Math.min(6, scoreState.m1 + 1);
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> Incorrect.`;
+            }
+            updateGlobalScore();
+        }
+
+        function checkModule3(num) {
+            let val = document.getElementById(`m3-q${num}`).value;
+            let fb = document.getElementById(`fb-m3-${num}`);
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            let isCorrect = false;
+
+            if (num === 1 && val === "12") isCorrect = true;
+            if (num === 2 && val === "9") isCorrect = true;
+            if (num === 3 && val === "16") isCorrect = true;
+            if (num === 4 && val === "10") isCorrect = true;
+            if (num === 5 && val === "6") isCorrect = true;
+
+            if (isCorrect) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Bravo ! Calcul exact.`;
+                scoreState.m3 = Math.min(5, scoreState.m3 + 1);
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> Faux. Revérifiez le calcul.`;
+            }
+            updateGlobalScore();
+        }
+
+        function checkQCMGlobal() {
+            const answers = { q1: "A", q2: "B", q3: "B", q4: "B", q5: "A", q6: "B", q7: "B", q8: "A", q9: "B", q10: "A" };
+            let pts = 0;
+
+            for (let i = 1; i <= 10; i++) {
+                const selected = document.querySelector(`input[name="qcm-q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    pts++;
+                }
+            }
+
+            scoreState.qcm = pts;
+            updateGlobalScore();
+
+            const fb = document.getElementById('fb-qcm-global');
+            fb.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+            if (pts >= 7) {
+                fb.classList.add('bg-green-100', 'text-green-800');
+                fb.innerHTML = `<i class="fa-solid fa-trophy mr-2 text-lg"></i> Score QCM : <strong>${pts} / 10</strong>. Excellent travail !`;
+            } else {
+                fb.classList.add('bg-red-100', 'text-red-800');
+                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2 text-lg"></i> Score QCM : <strong>${pts} / 10</strong>. Prenez le temps de revoir les fiches de cours.`;
+            }
         }
     </script>
 </body>
