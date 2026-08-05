@@ -1,17 +1,81 @@
-<p class="text-xl text-slate-600 font-light leading-relaxed mb-8" style="border-left: 4px solid #6366f1; padding-left: 1.5rem; font-style: italic;">
-    Le courant de nos prises électriques est alternatif sinusoïdal (50Hz). Que cachent ces termes techniques étudiés en physique ? ⚡
-</p>
-<p class="mb-4 text-slate-700 leading-relaxed">
-    L'électricité s'étudie à travers des grandeurs variables. Contrairement au courant continu d'une pile, le courant délivré par EDF a une forme de vague régulière : c'est le <strong>régime sinusoïdal</strong>.
-</p>
-<h4 class="text-lg font-bold text-slate-800 mt-8 mb-4">⏱️ Période (T) et Fréquence (f)</h4>
-<p class="mb-4 text-slate-700 leading-relaxed">
-    - <strong>La Période ($T$) :</strong> C'est la durée (en secondes) d'un motif élémentaire, c'est-à-dire le temps que met la "vague" pour se répéter. On la lit horizontalement sur un oscillogramme.<br><br>
-    - <strong>La Fréquence ($f$) :</strong> C'est le nombre de motifs par seconde, exprimée en Hertz (Hz). En France, elle est de $50 \text{ Hz}$. La formule qui lie les deux est très célèbre : $f = \frac{1}{T}$.
-</p>
-<div class="bg-gradient-to-br from-slate-50 to-indigo-50 border border-indigo-100 rounded-2xl p-6 md:p-8 mb-8 mt-10">
-    <h4 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">⚠️ Le piège classique</h4>
-    <p class="text-slate-700 leading-relaxed">
-        Sur un graphique, le temps est souvent exprimé en millisecondes (ms). N'oubliez jamais de <strong>convertir la période $T$ en secondes</strong> (diviser par 1000) avant d'appliquer la formule de la fréquence !
+<div class="article-content space-y-6">
+    <p class="text-2xl text-slate-700 font-light leading-relaxed mb-10" style="border-left: 6px solid #6366f1; padding-left: 2rem; font-style: italic;">
+        Le courant électrique qui alimente nos prises domestiques et nos machines industrielles n'est pas continu comme celui d'une pile : il est **alternatif sinusoïdal**. Pourquoi le réseau français fonctionne-t-il à une fréquence de 50 Hertz et une tension effective de 230 Volts ? Comment mesurer la période, la fréquence et la tension efficace à l'oscilloscope ? Guide complet du module d'électricité de Première et Terminale Pro.
     </p>
+
+    <h2 class="text-3xl font-extrabold text-slate-800 mt-12 mb-6">1. Qu'est-ce qu'une signal alternatif sinusoïdal ?</h2>
+    <p class="text-lg text-slate-700 leading-relaxed mb-4">
+        Contrairement à une tension continue délivrée par une batterie (qui reste constante au cours du temps), une **tension alternative sinusoïdal** varie de manière périodique en alternant des valeurs positives et négatives selon une courbe en forme de vague (la sinusoïde).
+    </p>
+    <p class="text-lg text-slate-700 leading-relaxed mb-4">
+        Ce signal est caractérisé par la répétition identique d'un même motif élémentaire au cours du temps.
+    </p>
+
+    <div class="bg-indigo-50 rounded-2xl p-8 my-10 border-l-4 border-indigo-600 shadow-sm">
+        <h3 class="text-xl font-bold text-indigo-900 mb-4"><i class="fa-solid fa-bolt-lightning mr-2"></i> La Formule Fondamentale de la Fréquence</h3>
+        <p class="text-lg text-indigo-800 leading-relaxed">
+            • **La Période ($T$) :** C'est la durée d'un motif complet exprimée en **secondes (s)**.<br>
+            • **La Fréquence ($f$) :** C'est le nombre de motifs effectués par seconde, exprimé en **Hertz (Hz)**.<br>
+            <strong class="text-2xl text-indigo-900 font-mono block mt-2 mb-2">f = \frac{1}{T} \quad \text{ou} \quad T = \frac{1}{f}</strong>
+            Exemple : En France, $f = 50 \text{ Hz}$, ce qui signifie que le courant change de sens 50 fois par seconde ! La période vaut donc $T = 1 / 50 = 0,02 \text{ s} = 20 \text{ ms}$.
+        </p>
+    </div>
+
+    <h2 class="text-3xl font-extrabold text-slate-800 mt-12 mb-6">2. Mesurer les caractéristiques à l'oscilloscope</h2>
+    <p class="text-lg text-slate-700 leading-relaxed mb-4">
+        En TP de physique, l'oscilloscope numérique ou le multimètre permettent de mesurer les grandeurs d'un signal alternatif :
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-wave-square text-blue-600"></i> Mesure de la Période ($T$)</h4>
+            <p class="text-slate-600 leading-relaxed">
+                Comptez le nombre de divisions horizontales $X$ pour un motif complet et multipliez par la sensibilité horizontale (Balayage $S_b$ en ms/div) : <br>
+                <strong class="font-mono text-indigo-900">T = X \times S_b</strong>
+            </p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <h4 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-gauge text-emerald-600"></i> Tension Max ($U_{max}$) & Effective ($U_{eff}$)</h4>
+            <p class="text-slate-600 leading-relaxed">
+                $U_{max}$ se compte sur l'axe vertical : $U_{max} = Y \times S_v$.<br>
+                La tension **effective ($U_{eff}$)** lue sur un voltmètre en mode AC vaut : <br>
+                <strong class="font-mono text-emerald-900">U_{eff} = \frac{U_{max}}{\sqrt{2}} \approx \frac{U_{max}}{1,414}</strong>
+            </p>
+        </div>
+    </div>
+
+    <h2 class="text-3xl font-extrabold text-slate-800 mt-12 mb-6">3. Pourquoi 230 V effectifs et non 325 V max ?</h2>
+    <p class="text-lg text-slate-700 leading-relaxed mb-4">
+        Lorsque vous branchez un appareil sur une prise électrique française, le voltmètre indique **230 Volts**. Il s'agit de la **tension effective $U_{eff}$**, c'est-à-dire la tension continue équivalente qui produirait le même dégagement de chaleur par effet Joule dans une résistance !
+    </p>
+    <p class="text-lg text-slate-700 leading-relaxed mb-6">
+        En réalité, la tension crête maximale qui sort de la prise atteint $U_{max} = 230 \times \sqrt{2} \approx \mathbf{325 \text{ Volts}}$ ! C'est cette valeur crête qui exige une isolation parfaite des équipements électriques.
+    </p>
+
+    <div class="bg-slate-900 rounded-2xl p-8 mt-12 text-white shadow-lg">
+        <h3 class="text-2xl font-bold mb-4 flex items-center gap-3"><i class="fa-solid fa-book-open text-sky-400"></i> Pour aller plus loin</h3>
+        <p class="text-slate-300 leading-relaxed mb-6">
+            Révisez l'électricité alternative avec des simulations interactives :
+        </p>
+        <ul class="space-y-4">
+            <li>
+                <a href="https://phet.colorado.edu/fr/simulations/circuit-construction-kit-ac" target="_blank" class="flex items-center gap-3 hover:bg-slate-800 p-3 rounded-lg transition-colors border border-slate-700">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-sky-400"></i>
+                    <div>
+                        <span class="block font-bold text-sky-100">PhET - Kit de Construction de Circuit AC</span>
+                        <span class="block text-sm text-slate-400">Simulateur gratuit pour câbler des générateurs sinusoïdaux et oscilloscopes.</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="https://eduscol.education.fr/1759/programmes-et-ressources-en-mathematiques-et-physique-chimie-voie-professionnelle" target="_blank" class="flex items-center gap-3 hover:bg-slate-800 p-3 rounded-lg transition-colors border border-slate-700">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-sky-400"></i>
+                    <div>
+                        <span class="block font-bold text-sky-100">Éduscol - Fiches Électricité Régime Sinusoïdal</span>
+                        <span class="block text-sm text-slate-400">Cours et sujets de CCF corrigés sur le courant alternatif en Bac Pro.</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
