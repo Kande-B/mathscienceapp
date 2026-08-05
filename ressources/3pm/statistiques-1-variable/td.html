@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de TD - Exercices & Problèmes - Statistiques 3PM</title>
+    <title>Fiche de TD - Statistiques à une variable (3PM)</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,22 +21,33 @@
             }
         }
     </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+
+        /* Style pour l'impression A4 Éducation Nationale */
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+            .page-break { page-break-before: always; }
+        }
     </style>
 </head>
-<body class="text-slate-800 bg-slate-50 min-h-screen pb-16">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+    <!-- Header & Navigation unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
@@ -58,141 +70,831 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- ENTÊTE TD -->
-        <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-2xl shadow-sm">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Travaux Dirigés</span>
-                <h2 class="text-2xl font-bold font-heading text-indigo-950">Fiche de TD - Exercices d'application & Problèmes</h2>
+        <!-- EN-TÊTE OFFICIEL FICHE D'EXERCICES ÉDUCATION NATIONALE -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Éducation Nationale</span> • <span>Classe de 3ème Prépa Métiers</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Fiche de Travaux Dirigés : Statistiques à une variable</h2>
+                </div>
+                <!-- Commandes rapides (Impression / Corrigé) -->
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher toutes les corrections</span>
+                    </button>
+                </div>
             </div>
-            <p class="text-sm text-indigo-800">Exercices d'entraînement progressifs (1 à 10) et Problèmes appliqués au monde réel (11 à 17) avec auto-correction dynamique.</p>
+
+            <!-- Grille de compétences visées -->
+            <div class="bg-slate-50 p-4 rounded-xl text-xs space-y-2 border border-slate-200">
+                <p class="font-bold text-slate-700 uppercase text-[11px] tracking-wider">Compétences travaillées du programme (3PM) :</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-slate-600">
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-indigo-500 mt-0.5"></i>
+                        <span><strong>S'informer :</strong> Extraire des données de tableaux, listes et graphiques.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-indigo-500 mt-0.5"></i>
+                        <span><strong>Calculer :</strong> Fréquences, moyennes simples/pondérées, médiane et étendue.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fa-solid fa-check text-indigo-500 mt-0.5"></i>
+                        <span><strong>Raisonner :</strong> Interpréter et comparer des séries en situation professionnelle.</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- EXERCISEC D'APPLICATION (1 à 10) -->
+        <!-- PARTIE 1 : EXERCICES D'APPLICATION DIRECTE -->
         <section class="space-y-6">
-            <h2 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2 border-b pb-2">
-                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Partie 1 : Exercices d'entraînement (1 à 10)
-            </h2>
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 1 : Application directe des fondamentaux du cours</h2>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Ex 1 -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-0.5 rounded mb-2 inline-block">Ex 1 • Consommation d'eau</span>
-                    <p class="text-xs text-slate-600 mb-2">Quantité d'eau (en L) bue par les élèves d'une classe :</p>
-                    <table class="w-full text-center border-collapse text-xs mb-3">
-                        <tr class="bg-slate-100"><th class="border p-1">Eau (L)</th><td class="border p-1">0,5</td><td class="border p-1">1</td><td class="border p-1">1,5</td><td class="border p-1">2</td></tr>
-                        <tr><th class="border p-1 bg-slate-100">Effectif</th><td class="border p-1">4</td><td class="border p-1">10</td><td class="border p-1">7</td><td class="border p-1">3</td></tr>
-                    </table>
-                    <label class="text-xs font-semibold block mb-1">Combien de personnes ont été interrogées ($N$) ?</label>
-                    <input type="number" id="ex1-tot" class="border rounded p-2 w-full text-xs font-bold mb-2" placeholder="4+10+7+3">
-                    <button onclick="checkEx1()" class="bg-slate-900 text-white text-xs py-2 px-4 rounded-lg w-full font-bold hover:bg-slate-800 transition-colors">Vérifier Ex 1</button>
-                    <div id="fb-ex1" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 1</span>
+                        Vocabulaire statistique & Tableau de fréquences (Enquête Transports)
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Savoir-faire de base</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un sondage est réalisé auprès de <strong>120 élèves</strong> de 3ème Prépa Métiers d'un lycée professionnel pour étudier leur principal mode de déplacement pour se rendre au lycée :</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                        <li><strong>Bus :</strong> 48 élèves</li>
+                        <li><strong>Train / TER :</strong> 30 élèves</li>
+                        <li><strong>Deux-roues (Vélo / Scooter) :</strong> 18 élèves</li>
+                        <li><strong>À pied :</strong> 12 élèves</li>
+                        <li><strong>Voiture (Accompagné) :</strong> 12 élèves</li>
+                    </ul>
+                    
+                    <div class="space-y-2 mt-4">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Précisez la <strong>population étudiée</strong> et le <strong>caractère étudié</strong>. Ce caractère est-il qualitatif ou quantitatif ?</li>
+                            <li>Quel est l'<strong>effectif total $N$</strong> de cette étude ?</li>
+                            <li>Recopiez et complétez le tableau d'effectifs et de fréquences ci-dessous :</li>
+                        </ol>
+                    </div>
+
+                    <!-- Tableau à compléter -->
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold text-slate-800">
+                                    <th class="border border-slate-300 p-2">Moyen de transport</th>
+                                    <th class="border border-slate-300 p-2">Bus</th>
+                                    <th class="border border-slate-300 p-2">Train</th>
+                                    <th class="border border-slate-300 p-2">Deux-roues</th>
+                                    <th class="border border-slate-300 p-2">À pied</th>
+                                    <th class="border border-slate-300 p-2">Voiture</th>
+                                    <th class="border border-slate-300 p-2 bg-indigo-50">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                    <td class="border border-slate-300 p-2">48</td>
+                                    <td class="border border-slate-300 p-2">30</td>
+                                    <td class="border border-slate-300 p-2">18</td>
+                                    <td class="border border-slate-300 p-2">12</td>
+                                    <td class="border border-slate-300 p-2">12</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-indigo-50">...</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Fréquence décimale ($f_i$)</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-indigo-50">...</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Fréquence (%)</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-indigo-50">...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <ol start="4" class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Quel est le pourcentage d'élèves empruntant un transport en commun (Bus ou Train) ?</li>
+                    </ol>
                 </div>
 
-                <!-- Ex 2 -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-0.5 rounded mb-2 inline-block">Ex 2 • Analyse de graphique</span>
-                    <p class="text-xs text-slate-600 mb-2">Un sondage indique : "Trop tôt": 50%, "Décevante": 36%, "Satisfaisante": 14%.</p>
-                    <label class="text-xs font-semibold block mb-1">Quelle est l'erreur dans la représentation ?</label>
-                    <select id="ex2-err" class="border rounded p-2 w-full text-xs bg-white mb-2"><option value="">Choisir...</option><option value="1">Les secteurs 36% et 50% ont été inversés graphiquement</option><option value="2">Le total des pourcentages ne fait pas 100%</option></select>
-                    <button onclick="checkEx2()" class="bg-slate-900 text-white text-xs py-2 px-4 rounded-lg w-full font-bold hover:bg-slate-800 transition-colors">Vérifier Ex 2</button>
-                    <div id="fb-ex2" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
+                <!-- CORRIGÉ EXERCICE 1 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 1 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Population :</strong> Les 120 élèves de 3PM interrogés. <br><strong>Caractère :</strong> Moyen de transport utilisé. C'est un caractère <strong>qualitatif</strong> (non numérique).</li>
+                        <li><strong>Effectif total :</strong> $N = 48 + 30 + 18 + 12 + 12 = 120$ élèves.</li>
+                        <li><strong>Tableau complété :</strong>
+                            <ul class="list-disc pl-4 mt-1 space-y-0.5">
+                                <li>Bus : $f_i = 48 / 120 = 0,40 = 40\%$</li>
+                                <li>Train : $f_i = 30 / 120 = 0,25 = 25\%$</li>
+                                <li>Deux-roues : $f_i = 18 / 120 = 0,15 = 15\%$</li>
+                                <li>À pied : $f_i = 12 / 120 = 0,10 = 10\%$</li>
+                                <li>Voiture : $f_i = 12 / 120 = 0,10 = 10\%$</li>
+                                <li>Total : Fréquence décimale = $1,00$ ; Fréquence = $100\%$.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Transports en commun :</strong> $40\% + 25\% = 65\%$ des élèves utilisent le bus ou le train.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 2</span>
+                        Calcul de moyennes simples et pondérées (Atelier d'usinage)
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Moyenne & Effectifs</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Lors d'un contrôle pratique de fabrication mécanique, les 15 élèves d'un groupe d'atelier ont obtenu les notes suivantes (sur 20) :</p>
+                    <div class="bg-slate-100 p-3 rounded-lg text-center font-mono font-bold text-slate-800 tracking-widest text-xs">
+                        11 • 14 • 08 • 15 • 12 • 14 • 09 • 14 • 16 • 11 • 12 • 14 • 15 • 08 • 16
+                    </div>
+                    <div class="space-y-2 mt-3">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Organisez ces données sous la forme d'un tableau à deux lignes : Note ($x_i$) et Effectif ($n_i$).</li>
+                            <li>Calculez la note moyenne de la classe ($\bar{x}$) en détaillant la formule de la moyenne pondérée :
+                                $$\bar{x} = \frac{\sum (n_i \times x_i)}{N}$$
+                                Arrondir le résultat au dixième.
+                            </li>
+                            <li>Le professeur considère que l'évaluation est réussie si la moyenne du groupe est au moins égale à $12,5 / 20$. Est-ce le cas ici ? Justifiez.</li>
+                        </ol>
+                    </div>
                 </div>
 
-                <!-- Ex 3 -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-0.5 rounded mb-2 inline-block">Ex 3 • Fréquentation sportive</span>
-                    <p class="text-xs text-slate-600 mb-2">Entrées au club : Lun (96), Mar (128), Mer (272), Jeu (32), Ven (112).</p>
-                    <label class="text-xs font-semibold block mb-1">1. Effectif total de la semaine ?</label>
-                    <input type="number" id="ex3-tot" class="border rounded p-2 w-full text-xs font-bold mb-2" placeholder="96+128+272+32+112">
-                    <button onclick="checkEx3()" class="bg-slate-900 text-white text-xs py-2 px-4 rounded-lg w-full font-bold hover:bg-slate-800 transition-colors">Vérifier Ex 3</button>
-                    <div id="fb-ex3" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
+                <!-- CORRIGÉ EXERCICE 2 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 2 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Tableau ordonné :</strong>
+                            <table class="w-full text-center border-collapse border border-slate-300 mt-1 mb-2">
+                                <tr class="bg-slate-200"><th class="border p-1">Note $x_i$</th><td class="border p-1">8</td><td class="border p-1">9</td><td class="border p-1">11</td><td class="border p-1">12</td><td class="border p-1">14</td><td class="border p-1">15</td><td class="border p-1">16</td><td class="border p-1 font-bold">Total</td></tr>
+                                <tr><th class="border p-1 bg-slate-100">Effectif $n_i$</th><td class="border p-1">2</td><td class="border p-1">1</td><td class="border p-1">2</td><td class="border p-1">2</td><td class="border p-1">4</td><td class="border p-1">2</td><td class="border p-1">2</td><td class="border p-1 font-bold">15</td></tr>
+                            </table>
+                        </li>
+                        <li><strong>Calcul de la moyenne pondérée :</strong>
+                            $$\bar{x} = \frac{(8 \times 2) + (9 \times 1) + (11 \times 2) + (12 \times 2) + (14 \times 4) + (15 \times 2) + (16 \times 2)}{15}$$
+                            $$\bar{x} = \frac{16 + 9 + 22 + 24 + 56 + 30 + 32}{15} = \frac{189}{15} = 12,6 / 20$$
+                        </li>
+                        <li><strong>Conclusion :</strong> Oui, l'évaluation est réussie car la moyenne de la classe ($12,6$) est supérieure au seuil fixé de $12,5 / 20$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 3</span>
+                        Médiane et Étendue (Séries de taille paire et impaire)
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Indicateurs de position & dispersion</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-4">
+                    <!-- Cas A -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-slate-800 text-xs uppercase tracking-wider text-indigo-600">Série A • Temps de réaction en karting (Effectif impair $N=9$)</p>
+                        <p class="text-xs">Voici 9 temps de réaction (en secondes) mesurés lors d'un entraînement sur piste :</p>
+                        <p class="font-mono text-xs font-bold text-slate-800 bg-white p-2 rounded border">0,42 s • 0,38 s • 0,55 s • 0,35 s • 0,40 s • 0,48 s • 0,36 s • 0,45 s • 0,39 s</p>
+                    </div>
+
+                    <!-- Cas B -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-slate-800 text-xs uppercase tracking-wider text-purple-600">Série B • Masses de colis en logistique (Effectif pair $N=10$)</p>
+                        <p class="text-xs">Voici les masses (en kg) de 10 colis réceptionnés sur un quai de déchargement :</p>
+                        <p class="font-mono text-xs font-bold text-slate-800 bg-white p-2 rounded border">14,2 kg • 15,0 kg • 12,8 kg • 18,5 kg • 13,5 kg • 14,8 kg • 16,1 kg • 12,5 kg • 17,0 kg • 14,6 kg</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Pour la <strong>Série A</strong> :
+                                <ol type="a" class="list-[lower-alpha] pl-4 space-y-1 mt-1">
+                                    <li>Rangez la série dans l'ordre croissant.</li>
+                                    <li>Déterminez la valeur médiane $Me_A$. Rédigez une phrase expliquant sa signification.</li>
+                                    <li>Calculez l'étendue $e_A$ de cette série.</li>
+                                </ol>
+                            </li>
+                            <li>Pour la <strong>Série B</strong> :
+                                <ol type="a" class="list-[lower-alpha] pl-4 space-y-1 mt-1">
+                                    <li>Rangez la série dans l'ordre croissant.</li>
+                                    <li>Déterminez la valeur médiane $Me_B$ (moyenne des deux valeurs centrales).</li>
+                                    <li>Calculez l'étendue $e_B$ de cette série.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
 
-                <!-- Ex 4 -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-0.5 rounded mb-2 inline-block">Ex 4 • Cross du collège</span>
-                    <p class="text-xs text-slate-600 mb-2">Temps au cross : [10; 20[ (85 élèves), [20; 30[ (105 élèves), [30; 40[ (25 élèves).</p>
-                    <label class="text-xs font-semibold block mb-1">Effectif total des coureurs ?</label>
-                    <input type="number" id="ex4-tot" class="border rounded p-2 w-full text-xs font-bold mb-2" placeholder="85+105+25">
-                    <button onclick="checkEx4()" class="bg-slate-900 text-white text-xs py-2 px-4 rounded-lg w-full font-bold hover:bg-slate-800 transition-colors">Vérifier Ex 4</button>
-                    <div id="fb-ex4" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
+                <!-- CORRIGÉ EXERCICE 3 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
                 </div>
-
-                <!-- Ex 6 -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-0.5 rounded mb-2 inline-block">Ex 6 • Calcul de Moyennes</span>
-                    <p class="text-xs text-slate-600 mb-2">Samia a eu les notes 12, 16, 13, 17, 11, 15.</p>
-                    <label class="text-xs font-semibold block mb-1">Moyenne de Samia ($\bar{x}$) ?</label>
-                    <input type="number" id="ex6-moy1" class="border rounded p-2 w-full text-xs font-bold mb-2" placeholder="14">
-                    <button onclick="checkEx6()" class="bg-slate-900 text-white text-xs py-2 px-4 rounded-lg w-full font-bold hover:bg-slate-800 transition-colors">Vérifier Ex 6</button>
-                    <div id="fb-ex6" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
-                </div>
-
-                <!-- Ex 8 -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-2.5 py-0.5 rounded mb-2 inline-block">Ex 8 • Masse de Cookies (Médiane)</span>
-                    <p class="text-xs text-slate-600 mb-2">Masses (en g) rangées : 26, 26, 27, 27, 27, 28, 29, 29, 29, 29.</p>
-                    <label class="text-xs font-semibold block mb-1">Masse médiane des cookies ?</label>
-                    <input type="number" step="0.5" id="ex8-med" class="border rounded p-2 w-full text-xs font-bold mb-2" placeholder="27.5">
-                    <button onclick="checkEx8()" class="bg-slate-900 text-white text-xs py-2 px-4 rounded-lg w-full font-bold hover:bg-slate-800 transition-colors">Vérifier Ex 8</button>
-                    <div id="fb-ex8" class="mt-2 text-xs hidden p-2 rounded-lg font-medium"></div>
+                <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 3 :
+                    </p>
+                    <div>
+                        <p class="font-bold text-indigo-800">1. Série A ($N=9$, impair) :</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Série ordonnée : 0,35 ; 0,36 ; 0,38 ; 0,39 ; <strong>0,40</strong> ; 0,42 ; 0,45 ; 0,48 ; 0,55.</li>
+                            <li>Le rang de la médiane est $\frac{9+1}{2} = 5^{\text{ème}}$ valeur. Donc <strong>$Me_A = 0,40\text{ s}$</strong>. <br><em>Signification :</em> Au moins 50% des pilotes ont un temps de réaction inférieur ou égal à 0,40 seconde.</li>
+                            <li>Étendue : $e_A = \text{Max} - \text{Min} = 0,55 - 0,35 = 0,20\text{ s}$.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold text-purple-800">2. Série B ($N=10$, pair) :</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Série ordonnée : 12,5 ; 12,8 ; 13,5 ; 14,2 ; <strong>14,6</strong> ; <strong>14,8</strong> ; 15,0 ; 16,1 ; 17,0 ; 18,5.</li>
+                            <li>$N=10$. La médiane est la moyenne entre la 5ème (14,6) et la 6ème (14,8) valeur :
+                                $$Me_B = \frac{14,6 + 14,8}{2} = 14,7\text{ kg}$$
+                            </li>
+                            <li>Étendue : $e_B = 18,5 - 12,5 = 6,0\text{ kg}$.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- PROBLEMES CONTEXTUALISES (11 à 17) -->
+        <!-- PARTIE 2 : ENTRAÎNEMENT & REGROUPEMENT DE DONNÉES -->
         <section class="space-y-6">
-            <h2 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2 border-b pb-2">
-                <i class="fa-solid fa-industry text-purple-600"></i> Partie 2 : Problèmes Complexes (11 à 17)
-            </h2>
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 2 : Regroupement de données & Représentations graphiques</h2>
+            </div>
 
-            <!-- Prob 11 -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
-                <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-3 py-1 rounded-full mb-3 inline-block">Problème 11</span>
-                <h3 class="font-bold text-lg text-slate-900 mb-2">Comparaison de deux bulletins scolaires</h3>
-                <p class="text-xs text-slate-600 mb-2">Notes obtenues par Lilou et Noah :</p>
-                <table class="w-full text-center border-collapse text-xs mb-3 bg-slate-50">
-                    <tr><th class="border p-2 bg-purple-100">Lilou</th><td class="border p-2">15</td><td class="border p-2">13</td><td class="border p-2">12</td><td class="border p-2">12</td><td class="border p-2">13</td></tr>
-                    <tr><th class="border p-2 bg-purple-100">Noah</th><td class="border p-2">17</td><td class="border p-2">8</td><td class="border p-2">12</td><td class="border p-2">9</td><td class="border p-2">19</td></tr>
-                </table>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs mb-3">
-                    <div>
-                        <label class="font-semibold block mb-1">Moyenne de Lilou :</label>
-                        <input type="number" id="p11-m1" class="border rounded p-2 w-full font-bold" placeholder="13">
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 4</span>
+                        Groupement en classes et centres de classe (Contrôle industriel)
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Données continues par intervalle</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Dans un atelier d'usinage, un opérateur contrôle la longueur (en mm) de <strong>40 pièces mécaniques</strong>. Les résultats sont regroupés dans le tableau ci-dessous :</p>
+
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold text-slate-800">
+                                    <th class="border border-slate-300 p-2">Longueur $L$ (en mm)</th>
+                                    <th class="border border-slate-300 p-2">[48 ; 49[</th>
+                                    <th class="border border-slate-300 p-2">[49 ; 50[</th>
+                                    <th class="border border-slate-300 p-2">[50 ; 51[</th>
+                                    <th class="border border-slate-300 p-2">[51 ; 52[</th>
+                                    <th class="border border-slate-300 p-2 bg-emerald-50">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                    <td class="border border-slate-300 p-2">4</td>
+                                    <td class="border border-slate-300 p-2">14</td>
+                                    <td class="border border-slate-300 p-2">18</td>
+                                    <td class="border border-slate-300 p-2">4</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-emerald-50">40</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Centre de classe ($x_i$)</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-emerald-50">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Produit ($n_i \times x_i$)</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-emerald-50">...</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div>
-                        <label class="font-semibold block mb-1">Moyenne de Noah :</label>
-                        <input type="number" id="p11-m2" class="border rounded p-2 w-full font-bold" placeholder="13">
-                    </div>
-                    <div>
-                        <label class="font-semibold block mb-1">Qui a une grande étendue (irrégulier) ?</label>
-                        <select id="p11-ans" class="border rounded p-2 w-full bg-white"><option value="">Choisir...</option><option value="noah">Noah (Étendue de 11)</option><option value="lilou">Lilou</option></select>
+
+                    <div class="space-y-2">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Rappelez la formule de calcul du <strong>centre d'une classe $[a ; b[$</strong>. Complétez la ligne des centres de classe $x_i$.</li>
+                            <li>Complétez la ligne des produits $n_i \times x_i$ et calculez la <strong>longueur moyenne $\bar{x}$</strong> des pièces usinées.</li>
+                            <li>Dans quelle classe se situe la <strong>classe médiane</strong> de cette série ? Expliquez votre raisonnement.</li>
+                            <li>Le cahier des charges spécifie que les pièces sont jugées conformes si leur longueur appartient à l'intervalle $[49 ; 51[$. Quel est le pourcentage de pièces conformes ?</li>
+                        </ol>
                     </div>
                 </div>
-                <button onclick="checkP11()" class="bg-purple-600 text-white text-xs px-5 py-2.5 rounded-lg font-bold hover:bg-purple-700 transition-colors">Vérifier P11</button>
-                <div id="fb-p11" class="mt-3 text-xs hidden p-3 rounded-lg font-medium"></div>
+
+                <!-- CORRIGÉ EXERCICE 4 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 4 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Centre de classe :</strong> $x_i = \frac{a + b}{2}$. <br>Centres : $48,5$ ; $49,5$ ; $50,5$ ; $51,5$.</li>
+                        <li><strong>Produits $n_i \times x_i$ :</strong>
+                            <ul class="list-disc pl-4 space-y-0.5 mt-1">
+                                <li>$4 \times 48,5 = 194$</li>
+                                <li>$14 \times 49,5 = 693$</li>
+                                <li>$18 \times 50,5 = 909$</li>
+                                <li>$4 \times 51,5 = 206$</li>
+                                <li>Somme totale = $194 + 693 + 909 + 206 = 2002$.</li>
+                            </ul>
+                            Moyenne : $\bar{x} = \frac{2002}{40} = 50,05\text{ mm}$.
+                        </li>
+                        <li><strong>Classe médiane :</strong> $N=40$. La médiane se situe entre la 20ème et la 21ème pièce. En calculant les Effectifs Cumulés Croissants (4, 18, 36, 40), la 20e et 21e pièce appartiennent à la classe <strong>$[50 ; 51[$</strong>.</li>
+                        <li><strong>Conformité :</strong> Pièces dans $[49 ; 51[$ : $14 + 18 = 32$ pièces. <br>Pourcentage : $\frac{32}{40} \times 100 = 80\%$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 5 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 5</span>
+                        Diagramme circulaire & Angles (Ventes en boulangerie)
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Représentation graphique</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un artisan boulanger enregistre la répartition des <strong>200 ventes</strong> de sa matinée selon la catégorie de produit :</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                        <li><strong>Baguettes :</strong> 90 articles</li>
+                        <li><strong>Viennoiseries :</strong> 60 articles</li>
+                        <li><strong>Pâtisseries :</strong> 30 articles</li>
+                        <li><strong>Sandwichs :</strong> 20 articles</li>
+                    </ul>
+
+                    <div class="space-y-2 mt-3">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Complétez le tableau ci-dessous pour calculer la fréquence (%) et l'angle au centre ($\alpha$ en degrés) pour la réalisation d'un diagramme circulaire :
+                                $$\text{Angle } \alpha = \text{Fréquence } f \times 360^\circ$$
+                            </li>
+                            <li>Détaillez le calcul d'angle pour la catégorie "Baguettes".</li>
+                            <li>Vérifiez la somme totale des angles obtenue.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Tableau à compléter -->
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold text-slate-800">
+                                    <th class="border border-slate-300 p-2">Catégorie</th>
+                                    <th class="border border-slate-300 p-2">Baguettes</th>
+                                    <th class="border border-slate-300 p-2">Viennoiseries</th>
+                                    <th class="border border-slate-300 p-2">Pâtisseries</th>
+                                    <th class="border border-slate-300 p-2">Sandwichs</th>
+                                    <th class="border border-slate-300 p-2 bg-emerald-50">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                    <td class="border border-slate-300 p-2">90</td>
+                                    <td class="border border-slate-300 p-2">60</td>
+                                    <td class="border border-slate-300 p-2">30</td>
+                                    <td class="border border-slate-300 p-2">20</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-emerald-50">200</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Fréquence (%)</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-emerald-50">100 %</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Angle $\alpha$ (degrés)</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2">...</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-emerald-50">360°</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 5 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 5 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Tableau complété :</strong>
+                            <ul class="list-disc pl-4 space-y-0.5 mt-1">
+                                <li>Baguettes : Fréquence = $45\%$ ; Angle = $0,45 \times 360^\circ = 162^\circ$.</li>
+                                <li>Viennoiseries : Fréquence = $30\%$ ; Angle = $0,30 \times 360^\circ = 108^\circ$.</li>
+                                <li>Pâtisseries : Fréquence = $15\%$ ; Angle = $0,15 \times 360^\circ = 54^\circ$.</li>
+                                <li>Sandwichs : Fréquence = $10\%$ ; Angle = $0,10 \times 360^\circ = 36^\circ$.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Détail pour Baguettes :</strong> $\frac{90}{200} \times 360^\circ = 0,45 \times 360^\circ = 162^\circ$.</li>
+                        <li><strong>Vérification :</strong> $162^\circ + 108^\circ + 54^\circ + 36^\circ = 360^\circ$.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 : PROBLÈMES MÉTIERS & SITUATIONS PROFESSIONNELLES 3PM -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 3 : Problèmes métiers & Contextes professionnels (3PM)</h2>
+            </div>
+
+            <!-- PROBLÈME 6 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 6</span>
+                        Restauration Collective • Contrôle de la masse des portions
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Secteur Hôtellerie - Restauration</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Le chef gérant d'une cantine scolaire contrôle la régularité des portions de dinde servies. La norme prescrite est de <strong>120 g</strong> par portion, avec une tolérance de $\pm 10\text{ g}$ (portions conformes si leur masse appartient à $[110 ; 130[$).</p>
+                    <p>Un échantillon de <strong>50 portions</strong> est pesé :</p>
+
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-purple-100 font-bold text-purple-950">
+                                    <th class="border border-slate-300 p-2">Masse de la portion (en g)</th>
+                                    <th class="border border-slate-300 p-2">[90 ; 100[</th>
+                                    <th class="border border-slate-300 p-2">[100 ; 110[</th>
+                                    <th class="border border-slate-300 p-2">[110 ; 120[</th>
+                                    <th class="border border-slate-300 p-2">[120 ; 130[</th>
+                                    <th class="border border-slate-300 p-2">[130 ; 140[</th>
+                                    <th class="border border-slate-300 p-2 bg-purple-200">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                    <td class="border border-slate-300 p-2">2</td>
+                                    <td class="border border-slate-300 p-2">5</td>
+                                    <td class="border border-slate-300 p-2">22</td>
+                                    <td class="border border-slate-300 p-2">18</td>
+                                    <td class="border border-slate-300 p-2">3</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-purple-100">50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Calculez la masse moyenne $\bar{x}$ d'une portion servie (en utilisant les centres de classe).</li>
+                            <li>Déterminez l'effectif des portions hors-normes (masse $< 110\text{ g}$ ou $\ge 130\text{ g}$).</li>
+                            <li>Calculez le pourcentage de portions hors-normes dans l'échantillon.</li>
+                            <li>Le cahier des charges autorise un maximum de $15\%$ de portions hors-normes. L'objectif de qualité est-il atteint ? Des réglages de la trancheuse sont-ils nécessaires ?</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 6 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p6')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p6" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 6 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Masse moyenne :</strong> Centres : 95, 105, 115, 125, 135.
+                            $$\sum n_i x_i = (2 \times 95) + (5 \times 105) + (22 \times 115) + (18 \times 125) + (3 \times 135) = 190 + 525 + 2530 + 2250 + 405 = 5900\text{ g}$$
+                            $$\bar{x} = \frac{5900}{50} = 118\text{ g}$$
+                        </li>
+                        <li><strong>Effectif hors-normes :</strong> $< 110\text{ g}$ ($2 + 5 = 7$) et $\ge 130\text{ g}$ ($3$), soit $7 + 3 = 10$ portions.</li>
+                        <li><strong>Pourcentage :</strong> $\frac{10}{50} \times 100 = 20\%$.</li>
+                        <li><strong>Conclusion :</strong> Non, l'objectif n'est pas atteint car $20\% > 15\%$. Il est nécessaire de régler la trancheuse pour réduire les portions trop légères.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 7 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 7</span>
+                        Logistique & Transport • Éco-conduite et consommation de carburant
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Secteur Automobile / Logistique</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Une entreprise de livraison fait suivre une formation d'éco-conduite à ses <strong>20 chauffeurs</strong>. Le responsable de parc enregistre la consommation moyenne de carburant (en L/100 km) de chaque véhicule avant et après la formation sur un trajet identique :</p>
+                    
+                    <div class="space-y-2 text-xs">
+                        <p class="font-bold text-slate-800">Série 1 (Avant le stage) :</p>
+                        <p class="font-mono bg-slate-100 p-2.5 rounded border text-slate-800">8,5 • 9,2 • 10,1 • 8,8 • 9,5 • 11,0 • 9,0 • 8,6 • 9,8 • 10,5 • 9,1 • 8,9 • 9,6 • 10,2 • 8,7 • 9,4 • 10,8 • 9,0 • 9,3 • 10,0</p>
+                        <p class="font-bold text-slate-800">Série 2 (Après le stage) :</p>
+                        <p class="font-mono bg-emerald-50 p-2.5 rounded border border-emerald-200 text-emerald-900">7,6 • 8,0 • 8,8 • 7,9 • 8,2 • 9,4 • 8,1 • 7,7 • 8,5 • 9,0 • 8,0 • 7,8 • 8,4 • 8,9 • 7,8 • 8,3 • 9,2 • 8,0 • 8,1 • 8,6</p>
+                    </div>
+
+                    <div class="space-y-2 mt-3">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Calculez la consommation moyenne $\bar{x}_1$ (avant) et $\bar{x}_2$ (après). Arrondir au centième.</li>
+                            <li>Déterminez la médiane $Me_1$ (avant) et $Me_2$ (après).</li>
+                            <li>Calculez l'étendue $e_1$ (avant) et $e_2$ (après).</li>
+                            <li><strong>Rapport de synthèse :</strong> Rédigez 3 à 4 lignes d'analyse démontrant l'efficacité financière et écologique de cette formation pour la direction.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 7 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p7')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p7" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 7 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Moyennes :</strong> <br>$\bar{x}_1 = \frac{188,8}{20} = 9,44\text{ L/100 km}$. <br>$\bar{x}_2 = \frac{166,6}{20} = 8,33\text{ L/100 km}$. (Gain moyen = $1,11\text{ L/100 km}$).</li>
+                        <li><strong>Médianes ($N=20$) :</strong> <br>Avant : Moyenne de la 10e (9,3) et 11e (9,4) valeur $\to Me_1 = 9,35\text{ L/100 km}$. <br>Après : Moyenne de la 10e (8,1) et 11e (8,2) valeur $\to Me_2 = 8,15\text{ L/100 km}$.</li>
+                        <li><strong>Étendues :</strong> <br>$e_1 = 11,0 - 8,5 = 2,5\text{ L/100 km}$. <br>$e_2 = 9,4 - 7,6 = 1,8\text{ L/100 km}$.</li>
+                        <li><strong>Synthèse :</strong> La formation est un franc succès. La consommation moyenne baisse de $1,11\text{ L/100 km}$ (soit une réduction de près de $12\%$). La réduction de l'étendue (de $2,5$ à $1,8$) montre que les conduites brutes des chauffeurs les plus gourmands ont été corrigées.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 8 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 8</span>
+                        Bâtiment & Travaux Publics • Essai de résistance d'un béton
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Secteur BTP / Génie Civil</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Sur un chantier de construction d'un bâtiment industriel, le bureau d'études exige un béton à haute résistance. <strong>50 éprouvettes cylindriques</strong> sont prélevées et écrasées à 28 jours à la presse hydraulique pour mesurer leur résistance à la compression $R$ (en MPa) :</p>
+
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-purple-100 font-bold text-purple-950">
+                                    <th class="border border-slate-300 p-2">Résistance $R$ (en MPa)</th>
+                                    <th class="border border-slate-300 p-2">[20 ; 25[</th>
+                                    <th class="border border-slate-300 p-2">[25 ; 30[</th>
+                                    <th class="border border-slate-300 p-2">[30 ; 35[</th>
+                                    <th class="border border-slate-300 p-2">[35 ; 40[</th>
+                                    <th class="border border-slate-300 p-2 bg-purple-200">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                    <td class="border border-slate-300 p-2">5</td>
+                                    <td class="border border-slate-300 p-2">20</td>
+                                    <td class="border border-slate-300 p-2">20</td>
+                                    <td class="border border-slate-300 p-2">5</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-purple-100">50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="font-semibold text-slate-800">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li>Calculez la résistance moyenne $\bar{R}$ du béton coulé.</li>
+                            <li>Déterminez la classe médiane.</li>
+                            <li><strong>Cahier des charges :</strong> Le béton est accepté si les deux conditions suivantes sont vérifiées :
+                                <ul class="list-disc pl-4 mt-1 space-y-0.5">
+                                    <li><em>Condition 1 :</em> La résistance moyenne $\bar{R}$ doit être d'au moins $29,0\text{ MPa}$.</li>
+                                    <li><em>Condition 2 :</em> Au moins $85\%$ des éprouvettes doivent présenter une résistance $\ge 25\text{ MPa}$.</li>
+                                </ul>
+                                L'ingénieur structure valide-t-il la coulée de béton ? Détailler chaque critère.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 8 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p8')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p8" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 8 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Moyenne :</strong> Centres : 22,5 ; 27,5 ; 32,5 ; 37,5.
+                            $$\sum n_i x_i = (5 \times 22,5) + (20 \times 27,5) + (20 \times 32,5) + (5 \times 37,5) = 112,5 + 550 + 650 + 187,5 = 1500\text{ MPa}$$
+                            $$\bar{R} = \frac{1500}{50} = 30,0\text{ MPa}$$
+                        </li>
+                        <li><strong>Classe médiane :</strong> La 25e et 26e éprouvette se situent dans la classe <strong>$[25 ; 30[$</strong>.</li>
+                        <li><strong>Validation du lot :</strong>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li><em>Condition 1 :</em> $\bar{R} = 30,0\text{ MPa} \ge 29,0\text{ MPa}$. (OK)</li>
+                                <li><em>Condition 2 :</em> Éprouvettes $\ge 25\text{ MPa}$ : $20 + 20 + 5 = 45$ éprouvettes. Pourcentage = $\frac{45}{50} \times 100 = 90\% \ge 85\%$. (OK)</li>
+                            </ul>
+                            <strong>Conclusion :</strong> Les deux critères étant validés, l'ingénieur valide la coulée du béton.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 4 : SUJET TYPE BREVET DNB -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-red-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">4</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 4 : Sujet d'approfondissement type Brevet (DNB)</h2>
+            </div>
+
+            <!-- PROBLÈME 9 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-red-100 text-red-800 text-xs font-extrabold rounded-md">Problème 9</span>
+                        Sujet type Brevet DNB • Contrôle de vitesse et sécurité routière
+                    </h3>
+                    <span class="text-xs font-semibold text-red-600 font-bold">Évaluation de synthèse</span>
+                </div>
+                <div class="text-sm text-slate-700 space-y-4">
+                    <p>Lors d'une opération de contrôle de la sécurité routière en agglomération (zone limitée à <strong>50 km/h</strong>), la police municipale a relevé la vitesse de <strong>200 véhicules</strong>. Les résultats sont présentés ci-dessous :</p>
+
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-red-50 font-bold text-red-950">
+                                    <th class="border border-slate-300 p-2">Vitesse $v$ (en km/h)</th>
+                                    <th class="border border-slate-300 p-2">[40 ; 45[</th>
+                                    <th class="border border-slate-300 p-2">[45 ; 50[</th>
+                                    <th class="border border-slate-300 p-2">[50 ; 55[</th>
+                                    <th class="border border-slate-300 p-2">[55 ; 60[</th>
+                                    <th class="border border-slate-300 p-2">[60 ; 65[</th>
+                                    <th class="border border-slate-300 p-2 bg-red-100">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Nombre de véhicules ($n_i$)</td>
+                                    <td class="border border-slate-300 p-2">30</td>
+                                    <td class="border border-slate-300 p-2">90</td>
+                                    <td class="border border-slate-300 p-2">50</td>
+                                    <td class="border border-slate-300 p-2">20</td>
+                                    <td class="border border-slate-300 p-2">10</td>
+                                    <td class="border border-slate-300 p-2 font-bold bg-red-100">200</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-3">
+                        <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
+                        
+                        <div class="space-y-1 text-xs">
+                            <p class="font-bold text-slate-800">1. Lecture et vocabulaire :</p>
+                            <ol type="a" class="list-[lower-alpha] pl-5 space-y-1 text-slate-700">
+                                <li>Quelle est la vitesse minimale théorique d'un véhicule comptabilisé dans ce contrôle ?</li>
+                                <li>Combien de véhicules roulaient à une vitesse strictement inférieure à la limite de 50 km/h ?</li>
+                            </ol>
+                        </div>
+
+                        <div class="space-y-1 text-xs">
+                            <p class="font-bold text-slate-800">2. Calcul des indicateurs statistiques :</p>
+                            <ol type="a" class="list-[lower-alpha] pl-5 space-y-1 text-slate-700">
+                                <li>Calculez la vitesse moyenne $\bar{v}$ des véhicules contrôlés (utiliser les centres de classe).</li>
+                                <li>Déterminez la classe médiane. Rédigez une phrase d'interprétation.</li>
+                                <li>Calculez l'étendue maximale théorique de cette série de vitesses.</li>
+                            </ol>
+                        </div>
+
+                        <div class="space-y-1 text-xs">
+                            <p class="font-bold text-slate-800">3. Analyse de sécurité et prise de décision :</p>
+                            <ol type="a" class="list-[lower-alpha] pl-5 space-y-1 text-slate-700">
+                                <li>Tout véhicule roulant à $50\text{ km/h}$ ou plus est en infraction. Quel est le pourcentage de conducteurs en infraction ?</li>
+                                <li>Les véhicules roulant à $60\text{ km/h}$ ou plus commettent un grand excès de vitesse. Quel pourcentage cela représente-t-il ?</li>
+                                <li><strong>Synthèse pour la mairie :</strong> Au vu de ces résultats, le maire hésite à aménager un ralentisseur (dos d'âne). Rédigez un paragraphe de 3 à 4 lignes argumentant la décision à prendre.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 9 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p9')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p9" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                    <p class="font-bold text-red-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-red-600"></i> Corrigé détaillé - Sujet type Brevet :
+                    </p>
+                    <div class="space-y-2">
+                        <p><strong>1. Lecture :</strong> <br>a. Vitesse minimale théorique : $40\text{ km/h}$. <br>b. Véhicules $< 50\text{ km/h}$ : $30 + 90 = 120$ véhicules.</p>
+                        <p><strong>2. Indicateurs :</strong> <br>a. Centres : 42,5 ; 47,5 ; 52,5 ; 57,5 ; 62,5.
+                            $$\sum n_i x_i = (30 \times 42,5) + (90 \times 47,5) + (50 \times 52,5) + (20 \times 57,5) + (10 \times 62,5) = 1275 + 4275 + 2625 + 1150 + 625 = 9950\text{ km/h}$$
+                            $$\bar{v} = \frac{9950}{200} = 49,75\text{ km/h}$$
+                            b. Classe médiane : $N=200$. La 100e et 101e valeur sont dans la classe <strong>$[45 ; 50[$</strong>. <br><em>Interprétation :</em> Au moins 50% des usagers roulent à moins de 50 km/h. <br>c. Étendue max : $65 - 40 = 25\text{ km/h}$.
+                        </p>
+                        <p><strong>3. Analyse & Synthèse :</strong> <br>a. Conducteurs en infraction ($\ge 50\text{ km/h}$) : $50 + 20 + 10 = 80$ véhicules, soit $\frac{80}{200} \times 100 = 40\%$. <br>b. Grands excès ($\ge 60\text{ km/h}$) : 10 véhicules, soit $\frac{10}{200} \times 100 = 5\%$. <br>c. <em>Rapport argumenté :</em> Bien que la vitesse moyenne enregistrée ($49,75\text{ km/h}$) reste de peu sous la limite autorisée, $40\%$ des usagers sont en infraction et $5\%$ commettent des excès très dangereux ($> 60\text{ km/h}$). L'installation d'un ralentisseur est donc vivement préconisée pour ralentir les véhicules en approche de la zone urbaine.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
+    <!-- SCRIPTS JS POUR L'AFFICHAGE DES CORRECTIONS -->
     <script>
-        function showFB(id, isCorrect, msg) {
+        let allShown = false;
+
+        function toggleCorrection(id) {
             const el = document.getElementById(id);
-            el.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-            if (isCorrect) { el.classList.add('correct-bg'); el.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-600 mr-2"></i> ${msg}`; }
-            else { el.classList.add('wrong-bg'); el.innerHTML = `<i class="fa-solid fa-times-circle text-red-600 mr-2"></i> ${msg}`; }
+            if (el) {
+                el.classList.toggle('hidden');
+            }
         }
 
-        function checkEx1() { if(document.getElementById('ex1-tot').value=="24") showFB('fb-ex1', true, "Exact ! 4 + 10 + 7 + 3 = 24 personnes."); else showFB('fb-ex1', false, "Faux. Additionnez tous les effectifs."); }
-        function checkEx2() { if(document.getElementById('ex2-err').value=="1") showFB('fb-ex2', true, "Exact ! Le secteur de 50% devrait être un demi-disque parfait."); else showFB('fb-ex2', false, "Revérifiez le découpage des angles."); }
-        function checkEx3() { if(document.getElementById('ex3-tot').value=="640") showFB('fb-ex3', true, "Exact ! 96+128+272+32+112 = 640 entrées."); else showFB('fb-ex3', false, "Somme = 640."); }
-        function checkEx4() { if(document.getElementById('ex4-tot').value=="215") showFB('fb-ex4', true, "Exact ! 85+105+25 = 215 élèves."); else showFB('fb-ex4', false, "Somme = 215."); }
-        function checkEx6() { if(document.getElementById('ex6-moy1').value=="14") showFB('fb-ex6', true, "Exact ! (12+16+13+17+11+15)/6 = 84/6 = 14."); else showFB('fb-ex6', false, "La somme des notes est 84."); }
-        function checkEx8() { if(document.getElementById('ex8-med').value=="27.5") showFB('fb-ex8', true, "Exact ! La médiane est (27+28)/2 = 27,5 g."); else showFB('fb-ex8', false, "Prenez la moyenne de la 5e et 6e note."); }
-        function checkP11() { if(document.getElementById('p11-m1').value=="13" && document.getElementById('p11-m2').value=="13" && document.getElementById('p11-ans').value=="noah") showFB('fb-p11', true, "Bravo ! Lilou et Noah ont la même moyenne (13), mais Noah est très irrégulier (étendue de 11 points)."); else showFB('fb-p11', false, "Revérifiez les moyennes et l'étendue."); }
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2', 'corr-ex3', 'corr-ex4', 'corr-ex5', 'corr-p6', 'corr-p7', 'corr-p8', 'corr-p9'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) {
+                btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+            }
+        }
     </script>
 </body>
 </html>
