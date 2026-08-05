@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Numérique Tableur - Statistiques 3PM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-16">
+
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une variable</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- ENTÊTE TP -->
+        <div class="bg-purple-50 border-l-4 border-purple-600 p-6 rounded-r-2xl shadow-sm">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="bg-purple-600 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Atelier Numérique</span>
+                <h2 class="text-2xl font-bold font-heading text-purple-950">TP Tableur : Analyse du Temps d'Écran</h2>
+            </div>
+            <p class="text-sm text-purple-800">Apprendre à saisir des données sur Excel ou LibreOffice Calc, utiliser les formules de comptage (`=NB.SI`, `=NB.SI.ENS`) et générer des graphiques professionnels.</p>
+        </div>
+
+        <!-- PARTIE 1: FORMULES DE TABLEUR -->
+        <section class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-3 mb-4 border-b border-slate-100 pb-3">
+                <span class="w-8 h-8 bg-purple-100 text-purple-700 rounded-lg flex items-center justify-center font-bold text-sm">1</span>
+                <h3 class="text-xl font-bold text-slate-900 font-heading">Comptage automatique par formules</h3>
+            </div>
+            <p class="text-xs text-slate-600 mb-4">
+                Les réponses de 20 élèves sur leur temps d'écran quotidien (en heures) ont été saisies dans les cellules **A1 à A20**.
+            </p>
+
+            <!-- SIMULATEUR TABLEUR VISUEL -->
+            <div class="bg-slate-900 text-white p-4 rounded-xl mb-6 text-xs font-mono">
+                <div class="flex items-center gap-2 mb-2 text-slate-400 border-b border-slate-800 pb-2">
+                    <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
+                    <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
+                    <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+                    <span class="ml-2 font-bold text-sky-400">LibreOffice Calc / Microsoft Excel</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1 text-center bg-slate-800 p-2 rounded">
+                    <span class="font-bold text-slate-400">Tranche</span>
+                    <span class="text-emerald-400 font-bold">&lt; 2h</span>
+                    <span class="text-sky-400 font-bold">[2h ; 4h[</span>
+                    <span class="text-indigo-400 font-bold">[4h ; 6h[</span>
+                    <span class="text-amber-400 font-bold">&ge; 6h</span>
+                </div>
+                <div class="grid grid-cols-5 gap-1 text-center bg-slate-950 p-2 rounded mt-1">
+                    <span class="font-bold text-slate-400">Formule</span>
+                    <span class="text-emerald-300">=NB.SI(...)</span>
+                    <span class="text-sky-300">=NB.SI.ENS(...)</span>
+                    <span class="text-indigo-300">=NB.SI.ENS(...)</span>
+                    <span class="text-amber-300">=NB.SI(...)</span>
+                </div>
+            </div>
+
+            <!-- QUESTIONS TP FORMULES -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-4">
+                <div class="p-4 bg-slate-50 rounded-xl border">
+                    <label class="font-bold text-slate-800 block mb-1">a. Formule pour compter les valeurs &lt; 2h (cellule D2) :</label>
+                    <select id="tp-a" class="border rounded p-2 w-full font-mono bg-white"><option value="">Choisir la formule...</option><option value="1">=NB.SI(A$1:A$20; "&lt;02:00:00")</option><option value="2">=SOMME(A$1:A$20)</option></select>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border">
+                    <label class="font-bold text-slate-800 block mb-1">b. Formule pour la tranche entre 2h et 4h (cellule E2) :</label>
+                    <select id="tp-b" class="border rounded p-2 w-full font-mono bg-white"><option value="">Choisir la formule...</option><option value="1">=NB.SI.ENS(A$1:A$20; "&gt;=02:00:00"; A$1:A$20; "&lt;04:00:00")</option><option value="2">=MOYENNE(A$1:A$20)</option></select>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border">
+                    <label class="font-bold text-slate-800 block mb-1">c. Formule pour la somme totale des effectifs :</label>
+                    <select id="tp-c" class="border rounded p-2 w-full font-mono bg-white"><option value="">Choisir la formule...</option><option value="1">=SOMME(D2:G2)</option><option value="2">=NB(D2:G2)</option></select>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border">
+                    <label class="font-bold text-slate-800 block mb-1">d. Formule pour la moyenne du temps d'écran :</label>
+                    <select id="tp-d" class="border rounded p-2 w-full font-mono bg-white"><option value="">Choisir la formule...</option><option value="1">=MOYENNE(A1:A20)</option><option value="2">=MAX(A1:A20)</option></select>
+                </div>
+            </div>
+            <button onclick="checkTP()" class="bg-purple-600 text-white text-xs px-6 py-2.5 rounded-lg font-bold hover:bg-purple-700 transition-colors">Valider le TP Formules</button>
+            <div id="fb-tp" class="mt-3 text-xs hidden p-3 rounded-lg font-medium"></div>
+        </section>
+
+        <!-- PARTIE 2: GRAPHIQUES ET PRESENTATION -->
+        <section class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-3 mb-4 border-b border-slate-100 pb-3">
+                <span class="w-8 h-8 bg-purple-100 text-purple-700 rounded-lg flex items-center justify-center font-bold text-sm">2</span>
+                <h3 class="text-xl font-bold text-slate-900 font-heading">Création du Graphique</h3>
+            </div>
+            <ul class="list-disc list-inside space-y-2 text-xs text-slate-700 mb-6">
+                <li>Sélectionner la plage du tableau résumant les tranches et les effectifs.</li>
+                <li>Menu <code>Insertion $\rightarrow$ Graphiques $\rightarrow$ Diagramme en bâtons</code>.</li>
+                <li>Donner un titre clair : *"Répartition du temps d'écran quotidien chez 20 élèves de 3PM"*.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <script>
+        function showFB(id, isCorrect, msg) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            if (isCorrect) { el.classList.add('correct-bg'); el.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-600 mr-2"></i> ${msg}`; }
+            else { el.classList.add('wrong-bg'); el.innerHTML = `<i class="fa-solid fa-times-circle text-red-600 mr-2"></i> ${msg}`; }
+        }
+
+        function checkTP() {
+            let a = document.getElementById('tp-a').value;
+            let b = document.getElementById('tp-b').value;
+            let c = document.getElementById('tp-c').value;
+            let d = document.getElementById('tp-d').value;
+            if(a=="1" && b=="1" && c=="1" && d=="1") showFB('fb-tp', true, "Félicitations ! Les formules NB.SI, NB.SI.ENS, SOMME et MOYENNE sont 100% exactes.");
+            else showFB('fb-tp', false, "Revérifiez le nom des fonctions du tableur.");
+        }
+    </script>
+</body>
+</html>
