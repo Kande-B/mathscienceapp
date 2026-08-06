@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vers le Brevet & Évaluation - Statistiques 3PM</title>
+    <title>Vers le Brevet - Annales DNB Statistiques (3PM)</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,20 +21,32 @@
             }
         }
     </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Style pour l'impression A4 Éducation Nationale */
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 bg-slate-50 min-h-screen pb-16">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+    <!-- Header & Navigation unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
@@ -56,62 +69,369 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- ENTÊTE EVALUATION BREVET -->
-        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-800">
-            <div class="flex items-center justify-between flex-wrap gap-4 mb-4">
-                <div class="flex items-center gap-3">
-                    <span class="bg-red-600 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Sujet Type Examen</span>
-                    <h2 class="text-2xl font-bold font-heading text-white">Épreuve Brevet (DNB Pro) : Test de VMA</h2>
+        <!-- EN-TÊTE OFFICIEL ANNALES DNB ÉDUCATION NATIONALE -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-red-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-red-600 tracking-wider">
+                        <span>Éducation Nationale</span> • <span>Préparation au Diplôme National du Brevet</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Annales DNB : Statistiques à une variable</h2>
                 </div>
-                <span class="text-xs font-bold text-red-400 bg-red-950/60 px-3 py-1.5 rounded-lg border border-red-800/50">Barème : 20 Points</span>
+                <!-- Commandes rapides (Impression / Corrigé) -->
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer les sujets DNB
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-red-200 transition-colors">
+                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher tous les corrigés DNB</span>
+                    </button>
+                </div>
             </div>
-            
-            <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                Un professeur d'EPS réalise un test de VMA (demi-Cooper de 6 minutes) avec les 24 élèves d'une classe de 3ème Prépa-Métiers.<br>
-                <strong class="text-pink-400">Série Filles (12 élèves) :</strong> 13,5 — 12 — 11 — 9 — 12,5 — 9,5 — 12 — 11,5 — 12 — 11,5 — 12 — 10,5.<br>
-                <strong class="text-sky-400">Série Garçons (12 élèves) :</strong> 12 — 14 — 14 — 11 — 12 — 12 — 11 — 13,5 — 14,5 — 14 — 15 — 14.
-            </p>
 
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 space-y-5 text-xs">
+            <!-- Modalités d'épreuve et grille de compétences DNB -->
+            <div class="bg-slate-50 p-4 rounded-xl text-xs space-y-3 border border-slate-200">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <p class="font-bold text-slate-800 uppercase text-[11px] tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-red-600"></i> Modalités d'épreuve du Brevet (Mathématiques - Durée : 2h00)
+                    </p>
+                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-red-100 text-red-800">Barème officiel : 20 Points par sujet</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-rose-700 block">Chercher</span> (D2-D4)</div>
+                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-orange-700 block">Modéliser</span> (D1-D4)</div>
+                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-purple-700 block">Représenter</span> (D1-D5)</div>
+                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-emerald-700 block">Raisonner</span> (D2-D4)</div>
+                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-sky-700 block">Calculer</span> (D1-D4)</div>
+                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-amber-700 block">Communiquer</span> (D1-D3)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUJET 1 : DNB METROPOLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
                 <div>
-                    <label class="font-bold text-sky-300 block mb-1">Affirmation 1 (6 pts) : "L'étendue des VMA des filles est plus élevée que celle des garçons."</label>
-                    <p class="text-slate-400 mb-2">Filles : Max = 13,5 / Min = 9 $\rightarrow$ Étendue = 4,5. Garçons : Max = 15 / Min = 11 $\rightarrow$ Étendue = 4.</p>
-                    <select id="br-a1" class="bg-slate-900 border border-slate-600 text-white rounded p-2.5 w-full font-bold"><option value="">Choisir la validation...</option><option value="vrai">VRAI (4,5 km/h &gt; 4 km/h)</option><option value="faux">FAUX</option></select>
+                    <span class="px-2.5 py-1 bg-red-100 text-red-800 text-xs font-extrabold rounded-md">Sujet 1 • DNB Métropole</span>
+                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Sécurité Routière & Contrôle de Vitesse en Agglomération</h3>
+                </div>
+                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-4">
+                <p>Lors d'une opération de contrôle de sécurité routière en agglomération (zone limitée à <strong>50 km/h</strong>), la police municipale a mesuré la vitesse de <strong>200 véhicules</strong>. Les résultats sont synthétisés dans le tableau ci-dessous :</p>
+
+                <div class="overflow-x-auto my-3">
+                    <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                        <thead>
+                            <tr class="bg-red-50 font-bold text-red-950">
+                                <th class="border border-slate-300 p-2">Vitesse $v$ (en km/h)</th>
+                                <th class="border border-slate-300 p-2">[40 ; 45[</th>
+                                <th class="border border-slate-300 p-2">[45 ; 50[</th>
+                                <th class="border border-slate-300 p-2">[50 ; 55[</th>
+                                <th class="border border-slate-300 p-2">[55 ; 60[</th>
+                                <th class="border border-slate-300 p-2">[60 ; 65[</th>
+                                <th class="border border-slate-300 p-2 bg-red-100 font-bold">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                <td class="border border-slate-300 p-2 font-bold">30</td>
+                                <td class="border border-slate-300 p-2 font-bold">90</td>
+                                <td class="border border-slate-300 p-2 font-bold">50</td>
+                                <td class="border border-slate-300 p-2 font-bold">20</td>
+                                <td class="border border-slate-300 p-2 font-bold">10</td>
+                                <td class="border border-slate-300 p-2 font-bold bg-red-100">200</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
+                <div class="space-y-3">
+                    <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
+                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Lecture et vocabulaire :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[4 points]</span>
+                            </div>
+                            <p>a. Quelle est la vitesse minimale théorique d'un véhicule comptabilisé dans cette étude ? <br>b. Combien de véhicules roulaient à une vitesse strictement inférieure à la limite autorisée de 50 km/h ?</p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Calcul de la vitesse moyenne :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
+                            </div>
+                            <p>Déterminez le centre de classe de chaque intervalle puis calculez la vitesse moyenne $\bar{v}$ des 200 véhicules contrôlés.</p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Classe médiane et étendue :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
+                            </div>
+                            <p>a. Dans quelle classe se situe la vitesse médiane ? Rédigez une phrase expliquant la signification de ce résultat. <br>b. Calculez l'étendue maximale théorique de cette série de vitesses.</p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Analyse de sécurité & Prise de décision :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
+                            </div>
+                            <p>a. Tout véhicule roulant à $50\text{ km/h}$ ou plus est en infraction. Quel est le pourcentage de conducteurs en infraction ? <br>b. Les véhicules à $60\text{ km/h}$ ou plus commettent un grand excès de vitesse. Quel pourcentage cela représente-t-il ? <br>c. Le maire hésite à implanter un ralentisseur. Rédigez une synthèse de 3 à 4 lignes argumentant la décision à prendre.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- CORRIGÉ SUJET 1 -->
+            <div class="mt-3 no-print">
+                <button onclick="toggleCorrection('corr-s1')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB et le barème (Sujet 1)
+                </button>
+            </div>
+            <div id="corr-s1" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                <p class="font-bold text-red-900 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé - Sujet 1 (20 Points) :
+                </p>
+                <div class="space-y-2">
+                    <p><strong>1. Lecture :</strong> <br>a. Vitesse minimale théorique : $40\text{ km/h}$ (borne inférieure de $[40;45[$). <em>[2 pts]</em> <br>b. Nombre de véhicules $< 50\text{ km/h}$ : $30 + 90 = 120$ véhicules. <em>[2 pts]</em></p>
+                    <p><strong>2. Vitesse moyenne :</strong> <br>Centres : 42,5 ; 47,5 ; 52,5 ; 57,5 ; 62,5. <em>[2 pts]</em>
+                        $$\sum n_i x_i = (30 \times 42,5) + (90 \times 47,5) + (50 \times 52,5) + (20 \times 57,5) + (10 \times 62,5) = 1275 + 4275 + 2625 + 1150 + 625 = 9950\text{ km/h}$$
+                        $$\bar{v} = \frac{9950}{200} = 49,75\text{ km/h} \quad \text{\textit{[3 pts]}}$$
+                    </p>
+                    <p><strong>3. Médiane & Étendue :</strong> <br>a. $N=200$. La 100e et 101e valeur se situent dans la classe <strong>$[45 ; 50[$</strong>. <em>[2 pts]</em> <br><em>Interprétation :</em> Au moins 50% des usagers contrôlés roulaient à moins de 50 km/h. <em>[1 pt]</em> <br>b. Étendue max : $65 - 40 = 25\text{ km/h}$. <em>[2 pts]</em></p>
+                    <p><strong>4. Analyse & Synthèse :</strong> <br>a. Infractions ($\ge 50\text{ km/h}$) : $50 + 20 + 10 = 80$ véhicules, soit $\frac{80}{200} \times 100 = 40\%$. <em>[2 pts]</em> <br>b. Grands excès ($\ge 60\text{ km/h}$) : 10 véhicules, soit $\frac{10}{200} \times 100 = 5\%$. <em>[2 pts]</em> <br>c. <em>Synthèse :</em> Même si la moyenne ($49,75\text{ km/h}$) est sous la limite de 50 km/h, $40\%$ des conducteurs sont en infraction et $5\%$ en grand excès. L'installation d'un ralentisseur est vivement conseillée. <em>[2 pts]</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUJET 2 : DNB CENTRES ÉTRANGERS -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
                 <div>
-                    <label class="font-bold text-sky-300 block mb-1">Affirmation 2 (7 pts) : "Plus de 25% des élèves de la classe ont une VMA &le; 11,5 km/h."</label>
-                    <p class="text-slate-400 mb-2">Il y a 8 élèves sur 24 ayant une VMA &le; 11,5 km/h. $\frac{8}{24} = 33,3\,\%$.</p>
-                    <select id="br-a2" class="bg-slate-900 border border-slate-600 text-white rounded p-2.5 w-full font-bold"><option value="">Choisir la validation...</option><option value="vrai">VRAI (33,3 % &gt; 25 %)</option><option value="faux">FAUX</option></select>
+                    <span class="px-2.5 py-1 bg-red-100 text-red-800 text-xs font-extrabold rounded-md">Sujet 2 • DNB Centres Étrangers</span>
+                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Épreuve d'EPS & Test de VMA</h3>
+                </div>
+                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-4">
+                <p>Un professeur d'EPS réalise un test de Vitesse Maximale Aérobie (VMA en km/h) auprès des <strong>24 élèves</strong> d'une classe de 3ème. Les séries brutes de résultats sont les suivantes :</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="bg-pink-50 p-3.5 rounded-xl border border-pink-200">
+                        <p class="font-bold text-pink-900 mb-1">Série Filles (12 élèves) :</p>
+                        <p class="font-mono text-pink-950 font-bold">13,5 • 12,0 • 11,0 • 9,0 • 12,5 • 9,5 • 12,0 • 11,5 • 12,0 • 11,5 • 12,0 • 10,5</p>
+                    </div>
+                    <div class="bg-sky-50 p-3.5 rounded-xl border border-sky-200">
+                        <p class="font-bold text-sky-900 mb-1">Série Garçons (12 élèves) :</p>
+                        <p class="font-mono text-sky-950 font-bold">12,0 • 14,0 • 14,0 • 11,0 • 12,0 • 12,0 • 11,0 • 13,5 • 14,5 • 14,0 • 15,0 • 14,0</p>
+                    </div>
                 </div>
 
+                <div class="space-y-3">
+                    <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
+                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Calcul de VMA moyenne :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
+                            </div>
+                            <p>Calculez la VMA moyenne des filles ($\bar{x}_F$) et celle des garçons ($\bar{x}_G$). Arrondir au centième.</p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Comparaison des étendues :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
+                            </div>
+                            <p>L'affirmation suivante est-elle vraie ou fausse ? Justifiez par des calculs rédigés : <br><em>"L'étendue des VMA chez les filles est supérieure à celle des garçons."</em></p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Calcul de pourcentage :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
+                            </div>
+                            <p>Quel est le pourcentage d'élèves de l'ensemble de la classe ayant une $\text{VMA} \le 11,5\text{ km/h}$ ? L'affirmation <em>"Plus de 25% de la classe a une VMA $\le 11,5\text{ km/h}$"</em> est-elle exacte ?</p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Classement individuel :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
+                            </div>
+                            <p>Lisa a obtenu une VMA de $12,0\text{ km/h}$. Son camarade affirme : <em>"Lisa fait partie des 12 meilleures VMA de la classe."</em> A-t-il raison ? Justifiez en ordonnant les données nécessaires.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- CORRIGÉ SUJET 2 -->
+            <div class="mt-3 no-print">
+                <button onclick="toggleCorrection('corr-s2')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB et le barème (Sujet 2)
+                </button>
+            </div>
+            <div id="corr-s2" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                <p class="font-bold text-red-900 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé - Sujet 2 (20 Points) :
+                </p>
+                <div class="space-y-2">
+                    <p><strong>1. VMA moyennes :</strong> <br>Filles : $\text{Somme} = 137 \to \bar{x}_F = \frac{137}{12} \approx 11,42\text{ km/h}$. <em>[2,5 pts]</em> <br>Garçons : $\text{Somme} = 157 \to \bar{x}_G = \frac{157}{12} \approx 13,08\text{ km/h}$. <em>[2,5 pts]</em></p>
+                    <p><strong>2. Étendues :</strong> <br>Étendue filles : $e_F = 13,5 - 9,0 = 4,5\text{ km/h}$. <em>[2 pts]</em> <br>Étendue garçons : $e_G = 15,0 - 11,0 = 4,0\text{ km/h}$. <em>[2 pts]</em> <br>Conclusion : <strong>VRAI</strong>, car $4,5 > 4,0\text{ km/h}$. <em>[1 pt]</em></p>
+                    <p><strong>3. Pourcentage VMA $\le 11,5$ :</strong> <br>Élèves avec VMA $\le 11,5$ : Filles (5 élèves : 9; 9.5; 10.5; 11; 11.5; 11.5 -> 6 élèves) + Garçons (2 élèves : 11; 11) = 8 élèves. <em>[2,5 pts]</em> <br>Pourcentage : $\frac{8}{24} \times 100 = 33,33\%$. Comme $33,33\% > 25\%$, l'affirmation est <strong>VRAIE</strong>. <em>[2,5 pts]</em></p>
+                    <p><strong>4. Rang de Lisa (VMA = 12 km/h) :</strong> <br>Élèves ayant une VMA $> 12\text{ km/h}$ : Filles (13.5; 12.5 $\to$ 2 élèves) + Garçons (14; 14; 13.5; 14.5; 14; 15; 14 $\to$ 7 élèves), soit 9 élèves strictement au-dessus de 12. <br>Élèves avec VMA $= 12\text{ km/h}$ : 4 filles + 3 garçons = 7 élèves. <br>Lisa se situe donc entre le 10e et le 16e rang. Elle fait bien partie des 12 meilleures performances (ex-æquo au 10e rang). L'affirmation est <strong>VRAIE</strong>. <em>[5 pts]</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUJET 3 : DNB POLYNÉSIE / ANTILLES -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
                 <div>
-                    <label class="font-bold text-sky-300 block mb-1">Affirmation 3 (7 pts) : "Lisa (VMA de 12 km/h) fait partie des 12 meilleures VMA de la classe."</label>
-                    <select id="br-a3" class="bg-slate-900 border border-slate-600 text-white rounded p-2.5 w-full font-bold"><option value="">Choisir la validation...</option><option value="faux">FAUX (La 12e VMA est de 12,5 km/h ou plus)</option><option value="vrai">VRAI</option></select>
+                    <span class="px-2.5 py-1 bg-red-100 text-red-800 text-xs font-extrabold rounded-md">Sujet 3 • DNB Polynésie</span>
+                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Contrôle Qualité Agricole & Histogramme</h3>
+                </div>
+                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-4">
+                <p>Dans le cadre d'un contrôle de calibrage avant expédition, un arboriculteur pèse <strong>40 sacs de pommes</strong> récoltés. Les résultats sont regroupés par classes d'amplitude 0,5 kg :</p>
+
+                <div class="overflow-x-auto my-3">
+                    <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                        <thead>
+                            <tr class="bg-red-50 font-bold text-red-950">
+                                <th class="border border-slate-300 p-2">Masse du sac $M$ (en kg)</th>
+                                <th class="border border-slate-300 p-2">[1,5 ; 2,0[</th>
+                                <th class="border border-slate-300 p-2">[2,0 ; 2,5[</th>
+                                <th class="border border-slate-300 p-2">[2,5 ; 3,0[</th>
+                                <th class="border border-slate-300 p-2">[3,0 ; 3,5[</th>
+                                <th class="border border-slate-300 p-2 bg-red-100 font-bold">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
+                                <td class="border border-slate-300 p-2 font-bold">5</td>
+                                <td class="border border-slate-300 p-2 font-bold">15</td>
+                                <td class="border border-slate-300 p-2 font-bold">15</td>
+                                <td class="border border-slate-300 p-2 font-bold">5</td>
+                                <td class="border border-slate-300 p-2 font-bold bg-red-100">40</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <button onclick="checkBrevet()" class="mt-4 bg-red-600 hover:bg-red-500 text-white text-xs px-6 py-3 rounded-xl font-bold w-full shadow-lg transition-colors">Soumettre pour correction DNB Pro</button>
-                <div id="fb-brevet" class="mt-3 text-xs hidden p-4 rounded-xl font-medium"></div>
+                <div class="space-y-3">
+                    <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
+                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Calcul de la masse moyenne :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
+                            </div>
+                            <p>Déterminez le centre de classe de chaque intervalle puis calculez la masse moyenne $\bar{M}$ d'un sac de pommes.</p>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Construction graphique (REPRÉSENTER) :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[8 points]</span>
+                            </div>
+                            <p>Sur le repère gradué ci-dessous, <strong>construisez l'histogramme</strong> représentant la répartition des masses des sacs de la récolte.</p>
+
+                            <!-- GRILLE HISTOGRAMME DNB SUJET 3 -->
+                            <div class="bg-slate-50 border border-slate-300 rounded-xl p-4 my-2">
+                                <p class="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Repère gradué pour l'histogramme :</p>
+                                <svg viewBox="0 0 500 200" class="w-full h-auto bg-white border border-slate-200 rounded-lg">
+                                    <line x1="50" y1="160" x2="460" y2="160" stroke="#334155" stroke-width="2"/>
+                                    <line x1="50" y1="160" x2="50" y2="20" stroke="#334155" stroke-width="2"/>
+                                    
+                                    <!-- Axe Y (Effectifs 0 à 20) -->
+                                    <text x="35" y="164" font-size="10" font-weight="bold" fill="#64748b">0</text>
+                                    <line x1="45" y1="125" x2="55" y2="125" stroke="#334155"/><text x="30" y="129" font-size="10" fill="#64748b">5</text>
+                                    <line x1="45" y1="90" x2="55" y2="90" stroke="#334155"/><text x="25" y="94" font-size="10" fill="#64748b">10</text>
+                                    <line x1="45" y1="55" x2="55" y2="55" stroke="#334155"/><text x="25" y="59" font-size="10" fill="#64748b">15</text>
+                                    <line x1="45" y1="20" x2="55" y2="20" stroke="#334155"/><text x="25" y="24" font-size="10" fill="#64748b">20</text>
+                                    
+                                    <!-- Axe X (Classes 1,5 à 3,5 kg) -->
+                                    <line x1="100" y1="155" x2="100" y2="165" stroke="#334155"/><text x="90" y="182" font-size="10" font-weight="bold" fill="#334155">1,5</text>
+                                    <line x1="180" y1="155" x2="180" y2="165" stroke="#334155"/><text x="170" y="182" font-size="10" font-weight="bold" fill="#334155">2,0</text>
+                                    <line x1="260" y1="155" x2="260" y2="165" stroke="#334155"/><text x="250" y="182" font-size="10" font-weight="bold" fill="#334155">2,5</text>
+                                    <line x1="340" y1="155" x2="340" y2="165" stroke="#334155"/><text x="330" y="182" font-size="10" font-weight="bold" fill="#334155">3,0</text>
+                                    <line x1="420" y1="155" x2="420" y2="165" stroke="#334155"/><text x="410" y="182" font-size="10" font-weight="bold" fill="#334155">3,5</text>
+                                </svg>
+                            </div>
+                        </li>
+
+                        <li class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-slate-900">Analyse de la médiane & Conformité :</span>
+                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
+                            </div>
+                            <p>a. Déterminez la classe médiane de cette série. <br>b. Les sacs pesant entre 2,0 kg et 3,0 kg sont vendus au tarif supérieur "Catégorie A". Quel pourcentage des sacs cela représente-t-il ?</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- CORRIGÉ SUJET 3 -->
+            <div class="mt-3 no-print">
+                <button onclick="toggleCorrection('corr-s3')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB et le barème (Sujet 3)
+                </button>
+            </div>
+            <div id="corr-s3" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                <p class="font-bold text-red-900 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé - Sujet 3 (20 Points) :
+                </p>
+                <div class="space-y-2">
+                    <p><strong>1. Masse moyenne :</strong> Centres : 1,75 ; 2,25 ; 2,75 ; 3,25. <em>[2 pts]</em>
+                        $$\sum n_i x_i = (5 \times 1,75) + (15 \times 2,25) + (15 \times 2,75) + (5 \times 3,25) = 8,75 + 33,75 + 41,25 + 16,25 = 100\text{ kg}$$
+                        $$\bar{M} = \frac{100}{40} = 2,5\text{ kg} \quad \text{\textit{[4 pts]}}$$
+                    </p>
+                    <p><strong>2. Histogramme :</strong> 4 rectangles de largeurs 0,5 kg sur $[1,5;2,0[$, $[2,0;2,5[$, $[2,5;3,0[$, $[3,0;3,5[$ et de hauteurs 5, 15, 15, 5. <em>[8 pts]</em></p>
+                    <p><strong>3. Médiane & Conformité :</strong> <br>a. $N=40$. La 20e et 21e valeur sont dans la classe <strong>$[2,0 ; 2,5[$</strong> (ou à la frontière avec $[2,5;3,0[$). <em>[3 pts]</em> <br>b. Sacs en "Catégorie A" ($[2,0 ; 3,0[$) : $15 + 15 = 30$ sacs. Pourcentage = $\frac{30}{40} \times 100 = 75\%$. <em>[3 pts]</em></p>
+                </div>
             </div>
         </div>
 
     </main>
 
+    <!-- SCRIPTS JS POUR L'AFFICHAGE DES CORRECTIONS -->
     <script>
-        function checkBrevet() {
-            let a1 = document.getElementById('br-a1').value;
-            let a2 = document.getElementById('br-a2').value;
-            let a3 = document.getElementById('br-a3').value;
-            const el = document.getElementById('fb-brevet');
-            el.classList.remove('hidden', 'bg-green-900', 'text-green-200', 'bg-red-900', 'text-red-200');
-            if(a1=="vrai" && a2=="vrai" && a3=="faux") {
-                el.classList.add('bg-green-900', 'text-green-200');
-                el.innerHTML = `<i class="fa-solid fa-graduation-cap text-lg mr-2"></i> <strong>20 / 20 ! FÉLICITATIONS !</strong> Vous avez réussi la totalité de l'épreuve type Brevet DNB Pro !`;
-            } else {
-                el.classList.add('bg-red-900', 'text-red-200');
-                el.innerHTML = `<i class="fa-solid fa-circle-exclamation text-lg mr-2"></i> Certaines réponses sont incorrectes. Revérifiez le calcul des étendues et des pourcentages.`;
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.toggle('hidden');
+            }
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-s1', 'corr-s2', 'corr-s3'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) {
+                btnText.textContent = allShown ? "Masquer tous les corrigés DNB" : "Afficher tous les corrigés DNB";
             }
         }
     </script>
