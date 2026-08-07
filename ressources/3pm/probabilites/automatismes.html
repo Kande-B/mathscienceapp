@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes & Calcul Mental - Probabilités 3PM</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Animation des Flashcards 3D */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flipped .transform-style-3d { transform: rotateY(180deg); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités & Événements</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- BANNIÈRE DE PRÉSENTATION DU RITUEL -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Rituel 5-10 min</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white mt-2">Automatismes & Calcul Mental de Probabilités</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl leading-relaxed mt-1">
+                        Maîtrisez les notions d'équiprobabilité, d’événement contraire, d'échelles de probabilités ($0 \le P \le 1$) et les conversions entre fractions, décimaux et pourcentages.
+                    </p>
+                </div>
+                <!-- SCORE GLOBAL EN DIRECT -->
+                <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 text-center min-w-[160px]">
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Score Global</span>
+                    <span id="score-total" class="text-3xl font-black text-yellow-400 font-heading">0 / 20</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 1 : FLASHCARDS DE RÉVISION RAPIÈRE (10 CARTES RÉVERSIBLES) -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 bg-amber-100 text-amber-800 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-layer-group"></i></span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Module 1 • Flashcards Réversibles (Réflexes Mentaux)</h3>
+                </div>
+                <span class="text-xs font-bold text-slate-500">Cliquez sur une carte pour la retourner et vérifier</span>
+            </div>
+
+            <!-- GRILLE DE 10 FLASHCARDS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                <!-- Card 1 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 1</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Probabilité d'obtenir Pile au lancer d'une pièce ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 1</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">1 / 2 = 0,5</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">(soit $50\,\%$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 2</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Probabilité de faire un 6 avec un dé équilibré à 6 faces ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 2</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">1 / 6</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">(1 issue favorable sur 6)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 3</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Quelle est la somme des probabilités de toutes les issues ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 3</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">1</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">(soit $100\,\%$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 4</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Si $P(A) = 0,3$, quelle est la probabilité de $\bar{A}$ ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 4</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">0,7</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">($1 - 0,3 = 0,7$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 5</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Quelle est la probabilité d'un événement impossible ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 5</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">0</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">(Aucune chance)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 6</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Quelle est la probabilité d'un événement certain ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 6</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">1</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">(soit $100\,\%$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 7</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">3 billes rouges et 7 bleues. Probabilité de tirer une rouge ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 7</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">3 / 10 = 0,3</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">($3 / (3+7) = 0,3$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 8</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Dans un jeu de 52 cartes, probabilité de tirer un Roi ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 8</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">4 / 52 = 1 / 13</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">(4 Rois sur 52 cartes)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 9</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Pièce défectueuse : $P = 0,02$. Probabilité d'une pièce conforme ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 9</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">0,98 = 98 %</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">($1 - 0,02 = 0,98$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 10 -->
+                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
+                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 10</span>
+                            <p class="font-bold text-slate-900 text-sm text-center">Lancer de 2 pièces : Probabilité d'avoir (Pile, Pile) ?</p>
+                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
+                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 10</span>
+                            <div class="text-center">
+                                <p class="text-2xl font-black font-heading">1 / 4 = 0,25</p>
+                                <p class="text-[11px] font-bold opacity-90 mt-1">($1/2 \times 1/2 = 1/4$)</p>
+                            </div>
+                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MODULE 2 : CALCUL MENTAL D'APPLICATION (5 QUESTIONS À SAISIE AUTONOME) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <span class="w-8 h-8 bg-sky-100 text-sky-800 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-calculator"></i></span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Module 2 • Application directe (Calcul Mental)</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                
+                <!-- Q1 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Une urne contient 4 jetons verts et 6 jetons jaunes. Quelle est la probabilité décimale de tirer un jeton vert ?</label>
+                    <input type="number" step="0.1" id="m2-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la valeur décimale (ex: 0.4)">
+                </div>
+
+                <!-- Q2 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Si la probabilité qu'il pleuve est de $0,15$, quelle est la probabilité qu'il ne pleuve pas ?</label>
+                    <input type="number" step="0.01" id="m2-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la valeur décimale">
+                </div>
+
+                <!-- Q3 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">3. Dans un dé à 6 faces, quelle est la probabilité d'obtenir un nombre pair (2, 4, 6) sous forme de fraction simplifiée ?</label>
+                    <input type="text" id="m2-q3" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la fraction (ex: 1/2)">
+                </div>
+
+                <!-- Q4 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">4. Sur une roulette de 10 numéros (de 1 à 10), quelle est la probabilité d'obtenir un numéro strictement supérieur à 7 ?</label>
+                    <input type="number" step="0.1" id="m2-q4" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la valeur décimale (ex: 0.3)">
+                </div>
+
+                <!-- Q5 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 md:col-span-2">
+                    <label class="font-bold text-slate-900 block">5. Si la probabilité d'un événement est $P = 3/4$, quel est le pourcentage correspondant ?</label>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m2-q5" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez le pourcentage">
+                        <span class="font-bold">%</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button onclick="checkModule2()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Module 2
+            </button>
+            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- MODULE 3 : DÉFIS DE PROBABILITÉS (5 DÉFIS PROS 3PM) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <span class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-trophy"></i></span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Module 3 • Défis Contextualisés & Problèmes Métiers</h3>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                
+                <!-- Défi 1 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-slate-900">Défi 1 (Contrôle Qualité Usine) :</p>
+                    <p class="text-slate-600">Dans un lot de 500 pièces métalliques usinées, 10 pièces présentent un défaut d'alésage. Quelle est la probabilité (en pourcentage) de tirer une pièce défectueuse ?</p>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m3-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez le pourcentage">
+                        <span class="font-bold">%</span>
+                    </div>
+                </div>
+
+                <!-- Défi 2 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-slate-900">Défi 2 (Restauration & Menu mystère) :</p>
+                    <p class="text-slate-600">Un restaurant propose 3 entrées, 4 plats et 2 desserts. Combien d'itinéraires de menus complets différents (Entrée + Plat + Dessert) peut-on composer ?</p>
+                    <input type="number" id="m3-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez le nombre de menus possibles">
+                </div>
+
+                <!-- Défi 3 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-slate-900">Défi 3 (Sécurité & Équipement) :</p>
+                    <p class="text-slate-600">Dans un magasin de stockage, il y a 8 casques de chantier bleus, 5 jaunes et 7 blancs. Quelle est la probabilité décimale de choisir un casque jaune au hasard ?</p>
+                    <input type="number" step="0.01" id="m3-q3" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la probabilité décimale (ex: 0.25)">
+                </div>
+
+                <!-- Défi 4 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-slate-900">Défi 4 (Loterie de Tombola 3PM) :</p>
+                    <p class="text-slate-600">200 billets de tombola ont été vendus. Un élève possède 5 billets. Quelle est la probabilité (sous forme de fraction simplifiée) qu'il gagne le gros lot ?</p>
+                    <input type="text" id="m3-q4" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la fraction (ex: 1/40)">
+                </div>
+
+                <!-- Défi 5 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-slate-900">Défi 5 (Arbre de choix à 2 épreuves) :</p>
+                    <p class="text-slate-600">On lance 2 fois de suite une pièce équilibrée. Quelle est la probabilité d'obtenir au moins une fois Pile ? (Donner la réponse en pourcentage)</p>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="m3-q5" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez le pourcentage">
+                        <span class="font-bold">%</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button onclick="checkModule3()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Module 3
+            </button>
+            <div id="fb-m3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPTS JS CORRECTIONS & CALCUL DU SCORE -->
+    <script>
+        let scoreM2 = 0;
+        let scoreM3 = 0;
+
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        function updateGlobalScore() {
+            let total = scoreM2 + scoreM3;
+            document.getElementById('score-total').innerText = `${total} / 20`;
+        }
+
+        function checkModule2() {
+            let q1 = document.getElementById('m2-q1').value.trim();
+            let q2 = document.getElementById('m2-q2').value.trim();
+            let q3 = document.getElementById('m2-q3').value.trim();
+            let q4 = document.getElementById('m2-q4').value.trim();
+            let q5 = document.getElementById('m2-q5').value.trim();
+            let fb = document.getElementById('fb-m2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            let pts = 0;
+            if (q1 === "0.4" || q1 === "0,4") pts += 2;
+            if (q2 === "0.85" || q2 === "0,85") pts += 2;
+            if (q3 === "1/2") pts += 2;
+            if (q4 === "0.3" || q4 === "0,3") pts += 2;
+            if (q5 === "75") pts += 2;
+
+            scoreM2 = pts;
+            updateGlobalScore();
+
+            if (pts === 10) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Module 2 entièrement validé (10 / 10 points).`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ${pts} / 10. <br>Explications : 1) $4/10 = 0,4$. 2) $1 - 0,15 = 0,85$. 3) $3/6 = 1/2$. 4) Numéros 8, 9, 10 $\\implies 3/10 = 0,3$. 5) $3/4 = 75\\%$.`;
+            }
+        }
+
+        function checkModule3() {
+            let q1 = document.getElementById('m3-q1').value.trim();
+            let q2 = document.getElementById('m3-q2').value.trim();
+            let q3 = document.getElementById('m3-q3').value.trim();
+            let q4 = document.getElementById('m3-q4').value.trim();
+            let q5 = document.getElementById('m3-q5').value.trim();
+            let fb = document.getElementById('fb-m3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            let pts = 0;
+            if (q1 === "2") pts += 2;
+            if (q2 === "24") pts += 2;
+            if (q3 === "0.25" || q3 === "0,25") pts += 2;
+            if (q4 === "1/40") pts += 2;
+            if (q5 === "75") pts += 2;
+
+            scoreM3 = pts;
+            updateGlobalScore();
+
+            if (pts === 10) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Félicitations ! Module 3 entièrement réussi (10 / 10 points).`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ${pts} / 10. <br>Explications : 1) $10 / 500 = 2\\%$. 2) $3 \\times 4 \\times 2 = 24\\text{ menus}$. 3) $5 / 20 = 0,25$. 4) $5 / 200 = 1 / 40$. 5) Issues : PP, PF, FP, FF $\\implies 3/4 = 75\\%$.`;
+            }
+        }
+    </script>
+</body>
+</html>

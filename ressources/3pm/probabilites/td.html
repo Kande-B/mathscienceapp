@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Probabilités</title>
+    <title>Fiche de TD - Probabilités & Événements (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,369 +24,616 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Style pour l'impression A4 Éducation Nationale */
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
+    <!-- Header & Navigation unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
                 <div>
-                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
-                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Probabilités</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités & Événements</h1>
                 </div>
             </div>
-            <div class="hidden md:block">
-                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        
-        <!-- Section: Acquisition -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE OFFICIEL FICHE D'EXERCICES ÉDUCATION NATIONALE -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Éducation Nationale</span> • <span>3ème Prépa Métiers</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Fiche de Travaux Dirigés : Probabilités & Événements</h2>
+                </div>
+                <!-- Commandes rapides -->
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher toutes les corrections</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 1 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Vocabulaire</h3>
-                    <p class="text-sm text-slate-600 mb-4">Dans une expérience aléatoire, comment appelle-t-on un résultat possible ? (Ex: faire un 3 avec un dé)</p>
-                    
-                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex1-options">
-                        <button onclick="selectRadio('ex1', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Un événement</button>
-                        <button onclick="selectRadio('ex1', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Une issue</button>
-                        <button onclick="selectRadio('ex1', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Une chance</button>
-                    </div>
-                    
-                    <button onclick="checkRadio('ex1', 'Exact ! Un résultat possible s\'appelle une issue. Un événement est composé d\'une ou plusieurs issues.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 2 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Probabilité d'un événement simple</h3>
-                    <p class="text-sm text-slate-600 mb-4">On lance un dé classique à 6 faces (non truqué). <br>Quelle est la probabilité d'obtenir un <strong>nombre pair</strong> ? (Donner la réponse sous forme de fraction simplifiée ou décimal)</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
-                        <span>P(Pair) =</span>
-                        <input type="text" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center" placeholder="ex: 1/2 ou 0.5">
-                    </div>
-                    
-                    <button onclick="checkEx2()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 3 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">L'événement contraire</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        La probabilité qu'il pleuve demain est $P(P) = 0,3$. <br>
-                        Quelle est la probabilité qu'il <strong>ne pleuve pas</strong> (l'événement contraire $\bar{P}$) ?
+            <!-- GRILLE OFFICIELLE DES 6 COMPÉTENCES DU CYCLE 4 (3PM) -->
+            <div class="bg-slate-50 p-4 rounded-xl text-xs space-y-3 border border-slate-200">
+                <div class="flex items-center justify-between">
+                    <p class="font-bold text-slate-800 uppercase text-xs tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Compétences mathématiques du programme officiel (Cycle 4 • 3PM)
                     </p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
-                        <span>$P(\bar{P}) =$</span>
-                        <input type="number" step="0.1" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
+                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Socle Commun</span>
                 </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+                    <!-- Chercher -->
+                    <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-rose-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-magnifying-glass text-[11px]"></i> Chercher
+                        </div>
+                        <p class="text-[10px] text-rose-950 leading-tight font-medium">Extraire les informations d'une expérience.</p>
+                        <span class="text-[9px] font-bold text-rose-600 block mt-1">(D2-D4)</span>
+                    </div>
 
+                    <!-- Modéliser -->
+                    <div class="bg-orange-50 border border-orange-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-orange-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-cubes text-[11px]"></i> Modéliser
+                        </div>
+                        <p class="text-[10px] text-orange-950 leading-tight font-medium">Reconnaître un modèle d'équiprobabilité.</p>
+                        <span class="text-[9px] font-bold text-orange-600 block mt-1">(D1-D2-D4)</span>
+                    </div>
+
+                    <!-- Représenter -->
+                    <div class="bg-purple-50 border border-purple-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-purple-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-chart-line text-[11px]"></i> Représenter
+                        </div>
+                        <p class="text-[10px] text-purple-950 leading-tight font-medium">Construire un arbre des possibles.</p>
+                        <span class="text-[9px] font-bold text-purple-600 block mt-1">(D1-D4-D5)</span>
+                    </div>
+
+                    <!-- Raisonner -->
+                    <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-emerald-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-brain text-[11px]"></i> Raisonner
+                        </div>
+                        <p class="text-[10px] text-emerald-950 leading-tight font-medium">Calculer l'événement contraire $1-P$.</p>
+                        <span class="text-[9px] font-bold text-emerald-600 block mt-1">(D2-D3-D4)</span>
+                    </div>
+
+                    <!-- Calculer -->
+                    <div class="bg-sky-50 border border-sky-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-sky-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-calculator text-[11px]"></i> Calculer
+                        </div>
+                        <p class="text-[10px] text-sky-950 leading-tight font-medium">Exprimer les probabilités en fraction/décimal.</p>
+                        <span class="text-[9px] font-bold text-sky-600 block mt-1">(D1-D4)</span>
+                    </div>
+
+                    <!-- Communiquer -->
+                    <div class="bg-amber-50 border border-amber-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-amber-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-comments text-[11px]"></i> Communiquer
+                        </div>
+                        <p class="text-[10px] text-amber-950 leading-tight font-medium">Rédiger une conclusion professionnelle.</p>
+                        <span class="text-[9px] font-bold text-amber-600 block mt-1">(D1-D3)</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Section: Entraînement -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- PARTIE 1 : AUTOMATISMES & RECONNAISSANCE -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 1 : Application directe et définitions fondamentales</h2>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 4 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Tirage dans une urne</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Une urne contient <strong>3 boules rouges</strong>, <strong>5 boules bleues</strong> et <strong>2 boules vertes</strong>. <br>
-                        On tire une boule au hasard. Quelle est la probabilité qu'elle soit <strong>rouge</strong> ? (Sous forme décimale).
-                    </p>
-                    
-                    <div class="flex flex-col gap-2 mb-4 text-sm">
-                        <div class="flex items-center gap-2 font-mono">
-                            <span class="w-32">Total de boules :</span>
-                            <input type="number" id="ex4-total" class="border border-slate-300 rounded p-1 w-20 text-center">
-                        </div>
-                        <div class="flex items-center gap-2 font-mono">
-                            <span class="w-32">P(Rouge) :</span>
-                            <input type="number" step="0.1" id="ex4-ans" class="border border-slate-300 rounded p-1 w-20 text-center">
-                        </div>
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 1</span>
+                        Vocabulaire des probabilités et dénombrement des issues
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">Chercher</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded">S'approprier</span>
                     </div>
-                    
-                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Dans un sac opaque, on a placé <strong>4 boules rouges</strong>, <strong>6 boules bleues</strong> et <strong>2 boules jaunes</strong>. On tire une boule au hasard.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Combien d'issues cette expérience aléatoire comporte-t-elle au total ?</li>
+                        <li>S'agit-il d'une situation d'équiprobabilité entre les couleurs ? Justifiez.</li>
+                        <li>Quelle est la probabilité de tirer une boule bleue ? Donnez la réponse sous forme de fraction simplifiée puis décimale.</li>
+                    </ol>
                 </div>
 
-                <!-- Ex 5 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Fréquence et Probabilité</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        On lance une pièce de monnaie 100 fois. On obtient 45 "Pile". <br>
-                        Quelle est la <strong>fréquence</strong> d'apparition de "Pile" lors de cette expérience ? (En nombre décimal)
-                    </p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
-                        <span>Fréquence =</span>
-                        <input type="number" step="0.01" id="ex5-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
+                <!-- CORRIGÉ EXERCICE 1 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
                 </div>
-
-                <!-- Ex 6 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Événements incompatibles</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Deux événements sont dits <strong>incompatibles</strong> si...
+                <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 1 :
                     </p>
-                    
-                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex6-options">
-                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Ils ont la même probabilité</button>
-                        <button onclick="selectRadio('ex6', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Ils ne peuvent pas se réaliser en même temps</button>
-                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Leur somme fait 1</button>
-                    </div>
-                    
-                    <button onclick="checkRadio('ex6', 'Exact ! Par exemple au loto, obtenir un numéro pair ET impair en tirant 1 seule boule est impossible.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Nombre total d'issues : $4 + 6 + 2 = 12\text{ boules}$.</li>
+                        <li>Non, il n'y a pas équiprobabilité entre les couleurs car les effectifs par couleur sont différents (6 bleues, 4 rouges, 2 jaunes).</li>
+                        <li>$P(\text{Bleue}) = 6 / 12 = 1 / 2 = 0,5$.</li>
+                    </ol>
                 </div>
-
-            </div>
-        </div>
-
-        <!-- Section: Pro -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
             </div>
 
-            <div class="grid grid-cols-1 gap-6">
-                
-                <!-- Ex 7 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-box-open text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Logistique / Qualité - Pièces défectueuses</h3>
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 2</span>
+                        Probabilité simple & Lancer de dé à 6 faces
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
                     </div>
-                    
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="md:w-2/3">
-                            <p class="text-sm text-slate-600 mb-4">
-                                Dans un lot de <strong>500 pièces</strong> métalliques, le contrôle qualité a détecté <strong>15 pièces défectueuses</strong>. <br>
-                                On choisit une pièce au hasard dans ce lot.
-                            </p>
-                            
-                            <div class="space-y-4 text-sm text-slate-700">
-                                <div>
-                                    <label class="font-bold block mb-1">1. Quelle est la probabilité (en décimal) de tirer une pièce défectueuse ?</label>
-                                    <div class="flex items-center gap-2 font-mono">
-                                        <span>$P(D) =$</span>
-                                        <input type="number" step="0.001" id="ex7-1" class="border border-slate-300 rounded p-1 w-24 text-center">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="font-bold block mb-1">2. Quelle est la probabilité que la pièce soit BONNE ?</label>
-                                    <div class="flex items-center gap-2 font-mono">
-                                        <span>$P(B) =$</span>
-                                        <input type="number" step="0.001" id="ex7-2" class="border border-slate-300 rounded p-1 w-24 text-center">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
-                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>On lance un dé à 6 faces parfait. Calculez les probabilités des événements suivants (sous forme de fraction simplifiée) :</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Événement $A$ : "Obtenir le chiffre 5".</li>
+                        <li>Événement $B$ : "Obtenir un nombre pair (2, 4, 6)".</li>
+                        <li>Événement $C$ : "Obtenir un nombre strictement inférieur à 3".</li>
+                    </ol>
                 </div>
 
-                <!-- Ex 8 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-store text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Commerce - Tombola</h3>
-                    </div>
-                    
-                    <p class="text-sm text-slate-600 mb-4">
-                        Un magasin organise une tombola. <strong>200 tickets</strong> sont vendus au total. <br>
-                        Il y a <strong>1 gros lot</strong> (TV), <strong>4 moyens lots</strong> (Montres), et <strong>15 petits lots</strong> (Bons d'achat). Les autres tickets sont perdants.
+                <!-- CORRIGÉ EXERCICE 2 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 2 :
                     </p>
-                    
-                    <div class="space-y-4 text-sm text-slate-700 mb-4">
-                        <div>
-                            <label class="font-bold block mb-1">1. Quelle est la probabilité de gagner le gros lot ? (En fraction : ex: 1/100)</label>
-                            <input type="text" id="ex8-1" class="border border-slate-300 rounded p-1 w-24 text-center font-mono">
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">2. Quelle est la probabilité de gagner UN lot (n'importe lequel) ? (En décimal)</label>
-                            <input type="number" step="0.1" id="ex8-2" class="border border-slate-300 rounded p-1 w-24 text-center font-mono">
-                        </div>
-                        <p class="text-xs text-slate-500 italic mt-1">Astuce : Additionne tous les lots gagnants pour la question 2.</p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>$P(A) = 1 / 6$.</li>
+                        <li>$P(B) = 3 / 6 = 1 / 2$.</li>
+                        <li>Issues possibles pour $C$ : $\{1, 2\}$, soit 2 issues. $P(C) = 2 / 6 = 1 / 3$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 3</span>
+                        Calcul de l'événement contraire $1 - P(A)$
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
                     </div>
-                    
-                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
-                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>La probabilité qu'un équipement informatique tombe en panne pendant sa première année est de $P(E) = 0,04$.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Exprimez la probabilité de panne sous forme de pourcentage.</li>
+                        <li>Définissez l'événement contraire $\bar{E}$ en une phrase claire.</li>
+                        <li>Calculez la probabilité $P(\bar{E})$ que l'équipement fonctionne sans aucune panne.</li>
+                    </ol>
                 </div>
 
+                <!-- CORRIGÉ EXERCICE 3 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 3 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>$0,04 = 4\,\%$.</li>
+                        <li>$\bar{E}$ est l'événement : "L'équipement informatique fonctionne normalement sans tomber en panne".</li>
+                        <li>$P(\bar{E}) = 1 - 0,04 = 0,96$ (soit $96\,\%$).</li>
+                    </ol>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- PARTIE 2 : APPLICATIONS SECTORIELLES (MÉTIERS 3PM) -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 2 : Problèmes sectoriels & Situations professionnelles</h2>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 4</span>
+                        Industrie & Contrôle Qualité de Pièces Usinées
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">Chercher</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un technicien contrôle un lot de <strong>200 roulements à billes</strong>. Il constate que :</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                        <li><strong>180 roulements</strong> sont parfaitement conformes.</li>
+                        <li><strong>12 roulements</strong> ont un défaut d'ébarbage.</li>
+                        <li><strong>8 roulements</strong> ont un défaut de diamètre.</li>
+                    </ul>
+
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Quelle est la probabilité de prélever un roulement conforme (en décimal et en %) ?</li>
+                        <li>Quelle est la probabilité de prélever un roulement présentant un défaut quelconque ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 4 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 4 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>$P(\text{Conforme}) = 180 / 200 = 0,90 = 90\,\%$.</li>
+                        <li>Roulements défectueux = $12 + 8 = 20$. $P(\text{Défectueux}) = 20 / 200 = 0,10 = 10\,\%$ (ou $1 - 0,90 = 0,10$).</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 5 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 5</span>
+                        BTP & Prévention des Risques de Chantier
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded">Représenter</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Sur un chantier de construction, les ouvriers portent tous un équipement de protection individuel (EPI) :</p>
+                    <div class="overflow-x-auto my-2">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold">
+                                    <th class="border p-2">Couleur du Casque</th>
+                                    <th class="border p-2">Blanc (Conducteur)</th>
+                                    <th class="border p-2">Jaune (Maçon)</th>
+                                    <th class="border p-2">Bleu (Électricien)</th>
+                                    <th class="border p-2">Rouge (Sécurité)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="border p-2 bg-slate-50">Effectif</th>
+                                    <td class="border p-2">5</td>
+                                    <td class="border p-2">15</td>
+                                    <td class="border p-2">8</td>
+                                    <td class="border p-2">2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez l'effectif total d'ouvriers sur le chantier.</li>
+                        <li>On choisit un ouvrier au hasard. Quelle est la probabilité qu'il porte un casque jaune ?</li>
+                        <li>Quelle est la probabilité qu'il ne porte pas de casque rouge ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 5 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 5 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Effectif total = $5 + 15 + 8 + 2 = 30\text{ ouvriers}$.</li>
+                        <li>$P(\text{Jaune}) = 15 / 30 = 1 / 2 = 0,5$.</li>
+                        <li>$P(\text{Non Rouge}) = 1 - (2 / 30) = 28 / 30 = 14 / 15 \approx 0,933$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 6 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 6</span>
+                        Éco-Gestion & Tirage au Sort de Stagiaires
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded">Représenter</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un responsable RH sélectionne 2 stagiaires consécutivement dans un groupe de 3 candidats A, B, C pour effectuer une présentation en entreprise.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Listez tous les couples de stagiaires possibles si l'ordre compte (ex: AB, AC...).</li>
+                        <li>Quelle est la probabilité que le candidat A soit choisi dans le binôme ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 6 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex6')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex6" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 6 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Couples possibles : $(A,B), (A,C), (B,A), (B,C), (C,A), (C,B)$, soit 6 issues.</li>
+                        <li>Couples contenant A : $(A,B), (A,C), (B,A), (C,A)$, soit 4 issues. $P = 4 / 6 = 2 / 3$.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 : TÂCHES COMPLEXES ET ÉVALUATION BREVET (DNB PRO) -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 3 : Tâches complexes et Sujets type Brevet PRO</h2>
+            </div>
+
+            <!-- PROBLÈME 7 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 7</span>
+                        Logistique & Lancer de 2 Dés en Jeu de Hasard
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Modéliser</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>On lance deux dés à 6 faces et on additionne les 2 valeurs obtenues.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Quelle est la somme minimale possible ? Et la somme maximale ?</li>
+                        <li>Quelle est la probabilité d'obtenir une somme égale à 12 ? (Fraction simplifiée).</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 7 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p7')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p7" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 7 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Somme minimale = $1+1 = 2$. Somme maximale = $6+6 = 12$.</li>
+                        <li>Il y a $6 \times 6 = 36$ issues au total. Seul le double $(6,6)$ donne 12. $P(\text{Somme}=12) = 1 / 36$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 8 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 8</span>
+                        Restauration & Tombola du Restaurant d'Application
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Modéliser</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Pour financer un voyage d'étude, la classe de 3PM vend <strong>500 tickets de tombola</strong>. 10 tickets permettent de gagner un lot principal et 40 tickets un lot secondaire.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez la probabilité de gagner un lot (principal ou secondaire) pour 1 ticket acheté.</li>
+                        <li>Un client achète 5 tickets. Quelle est la probabilité qu'il ne gagne aucun lot avec son premier ticket ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 8 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p8')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p8" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 8 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Tickets gagnants = $10 + 40 = 50$. $P(\text{Gagner}) = 50 / 500 = 1 / 10 = 0,10 = 10\,\%$.</li>
+                        <li>$P(\text{Perdre 1er ticket}) = 1 - 0,10 = 0,90 = 90\,\%$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 9 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 9</span>
+                        Automobile & Diagnostic de Panne Électrique
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">Chercher</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                        <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Communiquer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un mécanicien analyse les pannes de batteries sur un parc de 150 véhicules :</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                        <li><strong>90 véhicules</strong> ont une batterie en parfait état.</li>
+                        <li><strong>45 véhicules</strong> ont une batterie à recharger.</li>
+                        <li><strong>15 véhicules</strong> ont une batterie hors d'usage à remplacer.</li>
+                    </ul>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Si on choisit un véhicule au hasard, quelle est la probabilité que sa batterie soit à remplacer ?</li>
+                        <li>Le mécanicien affirme que la probabilité d'avoir une batterie qui fonctionne (parfaite ou à recharger) est de $90\,\%$. A-t-il raison ? Justifiez.</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 9 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p9')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p9" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 9 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>$P(\text{À remplacer}) = 15 / 150 = 1 / 10 = 0,10 = 10\,\%$.</li>
+                        <li>Oui, il a raison ! Véhicules fonctionnels = $90 + 45 = 135$. $P = 135 / 150 = 0,90 = 90\,\%$ (ou $1 - 0,10 = 0,90$).</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 10 (SUJET TYPE DNB PRO COMPLET) -->
+            <div class="bg-white rounded-2xl border border-red-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Problème 10</span>
+                        Sujet type Brevet DNB PRO • Contrôle de Sécurité Industrielle
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Modéliser</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                        <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Communiquer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un responsable QSE (Qualité Sécurité Environnement) étudie 1 000 extincteurs de secours d'une usine :</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                        <li><strong>950 extincteurs</strong> sont prêts à l'emploi.</li>
+                        <li><strong>35 extincteurs</strong> nécessitent une recharge de pression.</li>
+                        <li><strong>15 extincteurs</strong> doivent être immédiatement réformés.</li>
+                    </ul>
+
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez la probabilité de prélever un extincteur prêt à l'emploi (en décimal et en %).</li>
+                        <li>Calculez la probabilité de prélever un extincteur non utilisable immédiatement (recharge ou réforme).</li>
+                        <li>La norme de sécurité exige que la proportion d'extincteurs non prêts soit inférieure à $6\,\%$. L'usine respecte-t-elle cette norme ? Justifiez avec précision.</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 10 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p10')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p10" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-red-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-red-600"></i> Corrigé détaillé - Sujet type Brevet PRO :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>$P(\text{Prêt}) = 950 / 1\,000 = 0,95 = 95\,\%$.</li>
+                        <li>$P(\text{Non prêt}) = (35 + 15) / 1\,000 = 50 / 1\,000 = 0,05 = 5\,\%$.</li>
+                        <li><strong>Conclusion :</strong> Oui, l'usine respecte parfaitement la norme car $5\,\% < 6\,\%$.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <!-- JS Logic -->
+    <!-- SCRIPTS JS POUR L'AFFICHAGE DES CORRECTIONS -->
     <script>
-        function showFeedback(id, isCorrect, message) {
+        let allShown = false;
+
+        function toggleCorrection(id) {
             const el = document.getElementById(id);
-            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
-            
-            if (isCorrect) {
-                el.classList.add('correct-bg', 'text-green-800');
-                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
-            } else {
-                el.classList.add('wrong-bg', 'text-red-800');
-                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
+            if (el) {
+                el.classList.toggle('hidden');
             }
         }
-        
-        function cleanStr(str) {
-            return str.replace(/\s+/g, '').replace(',', '.').toLowerCase();
-        }
 
-        // QCM Logic
-        let radioAnswers = {};
-        function selectRadio(exId, btn, status) {
-            const container = document.getElementById(`${exId}-options`);
-            const buttons = container.querySelectorAll('button');
-            buttons.forEach(b => {
-                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2', 'corr-ex3', 'corr-ex4', 'corr-ex5', 'corr-ex6', 'corr-p7', 'corr-p8', 'corr-p9', 'corr-p10'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
             });
-            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
-            radioAnswers[exId] = status;
-        }
-
-        function checkRadio(exId, explanation) {
-            if (!radioAnswers[exId]) {
-                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
-                return;
-            }
-            if (radioAnswers[exId] === 'correct') {
-                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
-            } else {
-                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
-            }
-        }
-
-        // Ex 2
-        function checkEx2() {
-            const ans = cleanStr(document.getElementById('ex2-ans').value);
-            if (ans === "1/2" || ans === "0.5" || ans === "3/6") {
-                showFeedback('fb-ex2', true, "Parfait ! Il y a 3 nombres pairs (2, 4, 6) sur 6 faces. P = 3/6 = 1/2 = 0,5.");
-            } else {
-                showFeedback('fb-ex2', false, "Incorrect. Combien y a-t-il de nombres pairs sur un dé ? (2, 4, 6). Donc 3 faces sur 6.");
-            }
-        }
-
-        // Ex 3
-        function checkEx3() {
-            const ans = document.getElementById('ex3-ans').value.replace(',', '.');
-            if (parseFloat(ans) === 0.7) {
-                showFeedback('fb-ex3', true, "Excellent ! L'événement contraire s'obtient en faisant 1 - P(A). Donc 1 - 0.3 = 0.7.");
-            } else {
-                showFeedback('fb-ex3', false, "Faux. La somme des probabilités de l'événement et de son contraire doit faire 1.");
-            }
-        }
-
-        // Ex 4
-        function checkEx4() {
-            const total = document.getElementById('ex4-total').value;
-            const ans = document.getElementById('ex4-ans').value.replace(',', '.');
-            
-            if (total === "10" && parseFloat(ans) === 0.3) {
-                showFeedback('fb-ex4', true, "Bravo ! Il y a 10 boules au total. 3 rouges / 10 = 0.3.");
-            } else {
-                showFeedback('fb-ex4', false, "Erreur. Calcule le total (3+5+2). Puis fais le rapport : Rouges / Total.");
-            }
-        }
-
-        // Ex 5
-        function checkEx5() {
-            const ans = document.getElementById('ex5-ans').value.replace(',', '.');
-            if (parseFloat(ans) === 0.45) {
-                showFeedback('fb-ex5', true, "Félicitations ! La fréquence c'est le nombre de succès divisé par le nombre total : 45 / 100 = 0,45.");
-            } else {
-                showFeedback('fb-ex5', false, "Incorrect. Divise 45 par 100.");
-            }
-        }
-
-        // Ex 7
-        function checkEx7() {
-            const q1 = document.getElementById('ex7-1').value.replace(',', '.');
-            const q2 = document.getElementById('ex7-2').value.replace(',', '.');
-            
-            if (parseFloat(q1) === 0.03 && parseFloat(q2) === 0.97) {
-                showFeedback('fb-ex7', true, "Bravo ! 1) P(D) = 15 / 500 = 0.03. 2) C'est l'événement contraire, donc 1 - 0.03 = 0.97 (ou 485/500).");
-            } else {
-                showFeedback('fb-ex7', false, "Erreur. 1) Divise 15 par 500. 2) Soustrais ton premier résultat à 1.");
-            }
-        }
-
-        // Ex 8
-        function checkEx8() {
-            const q1 = cleanStr(document.getElementById('ex8-1').value);
-            const q2 = document.getElementById('ex8-2').value.replace(',', '.');
-            
-            if (q1 === "1/200" && parseFloat(q2) === 0.1) {
-                showFeedback('fb-ex8', true, "Excellent ! 1) 1 ticket sur 200. 2) 1 + 4 + 15 = 20 lots gagnants. 20/200 = 0,10 (10%).");
-            } else {
-                showFeedback('fb-ex8', false, "Faux. 1) Tu n'as qu'une chance sur les 200 de tirer le gros lot. 2) Calcule le nombre total de lots, puis divise par 200.");
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) {
+                btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
             }
         }
     </script>
-
-    <div class="h-24"></div>
 </body>
 </html>
