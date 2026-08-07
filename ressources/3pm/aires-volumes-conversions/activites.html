@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activités d'Investigation EN - Aires, Volumes & Conversions (3PM)</title>
+    <title>Activités de Découverte - Aires, Volumes & Conversions (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -35,6 +35,13 @@
 
         .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
         .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
@@ -47,7 +54,7 @@
                     <i class="fa-solid fa-lightbulb text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 3PM • Mathématiques</span>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 3PM • Démarche d'Investigation</span>
                     <h1 class="text-xl font-bold font-heading">Aires, Volumes & Conversions d'Unités</h1>
                 </div>
             </div>
@@ -57,7 +64,7 @@
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur / GeoGebra</a>
                 <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
             </nav>
         </div>
@@ -65,73 +72,405 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- EN-TÊTE ÉDUCATION NATIONALE -->
+        <!-- BANNIÈRE DÉCOUVERTES & PEDAGOGIE DE L'INVESTIGATION -->
         <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="bg-emerald-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Orientations Officielles EN</span>
-                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
+                        <span class="bg-emerald-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Démarche d'Investigation Pas à Pas</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Aucun prérequis nécessaire</span>
                     </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités d'Investigation : Remplissage d'une Piscine & Volume de Béton</h2>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Découvrir les Surfaçages, Cubages et Conversions</h2>
                     <p class="text-sm text-slate-300 max-w-2xl mt-1">
-                        Calculez la capacité d'une piscine cylindrique en mètres cubes et convertissez le résultat en Litres et en coût d'eau.
+                        Comprenez pourquoi le tableau des aires utilise 2 colonnes par unité, pourquoi le tableau des volumes en utilise 3, et comment relier les $\text{dm}^3$ aux Litres !
                     </p>
                 </div>
-                <button onclick="window.print()" class="no-print bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-md transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-print"></i> Imprimer les Activités
-                </button>
+
+                <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 text-center min-w-[170px]">
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Compétences Découvertes</span>
+                    <span id="score-comp" class="text-3xl font-black text-emerald-400 font-heading">0 / 4</span>
+                </div>
             </div>
         </div>
 
-        <!-- ACTIVITÉ 1 : VOLUME D'UNE PISCINE CYLINDRIQUE -->
+        <!-- MODULE 0 : DIAGNOSTIC DU SOCLE (CONVERSIONS DE LONGUEUR 1D) -->
         <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-100 pb-4">
-                <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
-                    <div>
-                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Activité 1 • Aménagement Paysager & BTP</span>
-                        <h3 class="text-xl font-bold font-heading text-slate-900">Capacité en Litres d'une piscine cylindrique</h3>
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <span class="w-8 h-8 bg-slate-100 text-slate-800 rounded-lg flex items-center justify-center font-bold text-sm">0</span>
+                <div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Étape Préalable</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Module 0 • Réactivation des conversions simples de longueur (1D)</h3>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600">Commençons par vérifier vos repères de base pour les longueurs en 1D :</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <!-- Q1 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Combien de centimètres ($\text{cm}$) y a-t-il dans $1\text{ mètre}$ ($\text{m}$) ?</label>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Ex: 100">
+                        <span class="font-bold">cm</span>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Combien de décimètres ($\text{dm}$) y a-t-il dans $1\text{ mètre}$ ($\text{m}$) ?</label>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Ex: 10">
+                        <span class="font-bold">dm</span>
                     </div>
                 </div>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Une piscine a la forme d'un cylindre de rayon $r = 2\text{ m}$ et de hauteur $h = 1,5\text{ m}$. ($\pi \approx 3,14$).</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                    <!-- Q1 REA -->
-                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                        <div class="flex items-center justify-between">
-                            <label class="font-bold text-slate-900">1. Calculez le volume exact en $\text{m}^3$ ($V = \pi r^2 h$) avec $\pi = 3,14$ :</label>
-                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Calculer (REA)</span>
-                        </div>
-                        <input type="number" step="0.01" id="a1-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="ex: 18.84">
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="checkAct1()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-double mr-2"></i> Soumettre l'Activité 1
+            <button onclick="checkDiag()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-3 rounded-xl transition-colors">
+                <i class="fa-solid fa-check mr-2"></i> Vérifier mes acquis de départ
             </button>
-            <div id="fb-a1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 1 : DÉCOUVERTE DES CONVERSIONS D'AIRES (2D) & TABLEAU À 2 COLONNES -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 bg-emerald-100 text-emerald-800 rounded-lg flex items-center justify-center font-bold text-sm">1</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Activité 1 • Investigation visuelle sur carré de 1m x 1m</span>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Pourquoi $1\text{ m}^2 = 100\text{ dm}^2 = 10\,000\text{ cm}^2$ ?</h3>
+                    </div>
+                </div>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-3 py-1 rounded-full">Chercher (CHER)</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4 leading-relaxed">
+                <p>
+                    <strong>Mise en situation :</strong> Un carreleur prépare un sol de $1\text{ m}^2$. Il utilise des petits carreaux de $1\text{ dm} \times 1\text{ dm}$ ($1\text{ dm}^2$). Il veut savoir combien de carreaux il va poser sur toute la surface.
+                </p>
+
+                <!-- SCHEMA SVG GRILLE 10x10 CARREAUX DM -->
+                <div class="py-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                    <svg width="240" height="240" viewBox="0 0 240 240" class="mx-auto">
+                        <!-- Grille 10x10 de 1dm -->
+                        <g fill="#10b981" fill-opacity="0.15" stroke="#047857" stroke-width="1">
+                            <rect x="20" y="20" width="200" height="200" fill="none" stroke="#064e3b" stroke-width="2.5"/>
+                            <!-- lignes horizontales -->
+                            <line x1="20" y1="40" x2="220" y2="40"/><line x1="20" y1="60" x2="220" y2="60"/>
+                            <line x1="20" y1="80" x2="220" y2="80"/><line x1="20" y1="100" x2="220" y2="100"/>
+                            <line x1="20" y1="120" x2="220" y2="120"/><line x1="20" y1="140" x2="220" y2="140"/>
+                            <line x1="20" y1="160" x2="220" y2="160"/><line x1="20" y1="180" x2="220" y2="180"/>
+                            <line x1="20" y1="200" x2="220" y2="200"/>
+                            <!-- lignes verticales -->
+                            <line x1="40" y1="20" x2="40" y2="220"/><line x1="60" y1="20" x2="60" y2="220"/>
+                            <line x1="80" y1="20" x2="80" y2="220"/><line x1="100" y1="20" x2="100" y2="220"/>
+                            <line x1="120" y1="20" x2="120" y2="220"/><line x1="140" y1="20" x2="140" y2="220"/>
+                            <line x1="160" y1="20" x2="160" y2="220"/><line x1="180" y1="20" x2="180" y2="220"/>
+                            <line x1="200" y1="20" x2="200" y2="220"/>
+                            
+                            <!-- Premier carreau 1dm2 coloré -->
+                            <rect x="20" y="20" width="20" height="20" fill="#047857" fill-opacity="0.8"/>
+                        </g>
+                        <text x="120" y="12" font-size="10" font-weight="bold" fill="#064e3b" text-anchor="middle">1 mètre = 10 dm</text>
+                        <text x="10" y="125" font-size="10" font-weight="bold" fill="#064e3b" text-anchor="middle" transform="rotate(-90 10,125)">1 m = 10 dm</text>
+                        <text x="30" y="34" font-size="6" font-weight="bold" fill="#ffffff" text-anchor="middle">1 dm²</text>
+                    </svg>
+                </div>
+
+                <div class="p-4 bg-emerald-50/60 border border-emerald-200 rounded-2xl space-y-3">
+                    <p class="font-bold text-emerald-900">Questions de comptage :</p>
+                    <ol class="list-decimal pl-5 space-y-2 text-slate-800">
+                        <li>Sur le côté supérieur, il y a 10 rangées de carreaux. Sur le côté gauche, 10 colonnes. Combien y a-t-il de carreaux de $1\text{ dm}^2$ en tout dans la surface de $1\text{ m}^2$ ? ($10 \times 10 =$) <input type="number" id="act1-q1" class="w-20 border rounded p-1 text-center font-bold" placeholder="?"> carreaux.</li>
+                        <li>Dans un tableau de conversion de surfaces (aires), combien de colonnes faut-il placer sous chaque unité ($\text{m}^2, \text{dm}^2, \text{cm}^2$) pour pouvoir faire des paquets de 100 ? <input type="number" id="act1-q2" class="w-16 border rounded p-1 text-center font-bold" placeholder="?"> colonnes.</li>
+                    </ol>
+                </div>
+
+                <div class="p-4 bg-slate-900 text-white rounded-2xl space-y-2">
+                    <p class="font-bold text-emerald-400 text-xs uppercase tracking-wider">Ce que je découvre (Bilan de l'Activité 1) :</p>
+                    <p class="text-xs text-slate-200">
+                        Pour passer d'une unité de surface à l'unité inférieure (ex: de $\text{m}^2$ à $\text{dm}^2$), on multiplie par $100$ ($10^2$). <br>
+                        Le tableau de conversion des aires contient <strong>2 colonnes par unité</strong> !
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="checkAct1()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 rounded-xl transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+            </button>
+            <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 2 : DÉCOUVERTE DES VOLUMES (3D) & LIEN ENTRE dm³ ET LITRES -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 bg-amber-100 text-amber-800 rounded-lg flex items-center justify-center font-bold text-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Activité 2 • Expérience de contenance d'eau</span>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Le Cube de 1 dm³ & la Bouteille de 1 Litre</h3>
+                    </div>
+                </div>
+                <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full">Modéliser (MOD)</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4 leading-relaxed">
+                <p>
+                    <strong>Expérience de laboratoire :</strong> On fabrique un cube creux en plastique transparent mesurant $1\text{ dm} \times 1\text{ dm} \times 1\text{ dm}$ (soit $10\text{ cm} \times 10\text{ cm} \times 10\text{ cm}$). On verse le contenu d'une bouteille d'eau de $1\text{ Litre}$ à l'intérieur.
+                </p>
+
+                <!-- SCHEMA SVG CUBE 1 DM3 & BOUTEILLE D'EAU 1L -->
+                <div class="py-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                    <svg width="320" height="150" viewBox="0 0 320 150" class="mx-auto">
+                        <!-- Cube 1dm3 rempli d'eau bleue -->
+                        <polygon points="30,50 75,20 120,50 75,80" fill="#38bdf8" fill-opacity="0.4" stroke="#0284c7" stroke-width="1.5"/>
+                        <polygon points="30,50 75,80 75,130 30,100" fill="#0284c7" fill-opacity="0.7" stroke="#0284c7" stroke-width="1.5"/>
+                        <polygon points="75,80 120,50 120,100 75,130" fill="#38bdf8" fill-opacity="0.6" stroke="#0284c7" stroke-width="1.5"/>
+                        <text x="75" y="95" font-size="10" font-weight="extrabold" fill="#ffffff" text-anchor="middle">1 dm³</text>
+                        <text x="75" y="110" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">(10cm × 10cm × 10cm)</text>
+
+                        <!-- Égalité -->
+                        <text x="160" y="80" font-size="18" font-weight="extrabold" fill="#0284c7">=</text>
+
+                        <!-- Bouteille de 1L -->
+                        <rect x="210" y="40" width="40" height="80" rx="5" fill="#38bdf8" fill-opacity="0.5" stroke="#0284c7" stroke-width="1.5"/>
+                        <rect x="222" y="25" width="16" height="15" fill="#0284c7" stroke="#0284c7" stroke-width="1"/>
+                        <text x="230" y="85" font-size="11" font-weight="extrabold" fill="#0369a1" text-anchor="middle">1 Litre</text>
+                    </svg>
+                </div>
+
+                <div class="p-4 bg-amber-50/60 border border-amber-200 rounded-2xl space-y-3">
+                    <p class="font-bold text-amber-900">Questions de réflexion :</p>
+                    <ol class="list-decimal pl-5 space-y-2 text-slate-800">
+                        <li>L'eau remplit exactement le cube à bord bord. Quelle équivalence essentielle retient-on entre le volume ($1\text{ dm}^3$) et la capacité ($1\text{ Litre}$) ? <br>
+                            $1\text{ dm}^3 =$ <input type="number" id="act2-q1" class="w-16 border rounded p-1 text-center font-bold" placeholder="?"> Litre(s).
+                        </li>
+                        <li>Dans un cube de $1\text{ m}^3$ ($10\text{ dm} \times 10\text{ dm} \times 10\text{ dm}$), combien de sous-cubes de $1\text{ dm}^3$ y a-t-il ? ($10 \times 10 \times 10 =$) <input type="number" id="act2-q2" class="w-20 border rounded p-1 text-center font-bold" placeholder="?">.</li>
+                        <li>Dans un tableau de conversion de volumes, combien de colonnes faut-il placer sous chaque unité ($\text{m}^3, \text{dm}^3, \text{cm}^3$) ? <input type="number" id="act2-q3" class="w-16 border rounded p-1 text-center font-bold" placeholder="?"> colonnes.</li>
+                    </ol>
+                </div>
+
+                <div class="p-4 bg-slate-900 text-white rounded-2xl space-y-2">
+                    <p class="font-bold text-amber-400 text-xs uppercase tracking-wider">Ce que je découvre (Bilan de l'Activité 2) :</p>
+                    <p class="text-xs text-slate-200">
+                        • <strong>L'équivalence clé :</strong> $1\text{ dm}^3 = 1\text{ Litre}$ (et $1\text{ cm}^3 = 1\text{ mL}$). <br>
+                        • Le tableau des volumes contient <strong>3 colonnes par unité</strong> ($\text{m}^3, \text{dm}^3, \text{cm}^3$) car $10^3 = 1\,000$.
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs py-3 rounded-xl transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 3 : DÉCOUVERTE DES FORMULES D'AIRES USUELLES -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Activité 3 • Décomposition géométrique</span>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Retrouver la formule de l'aire d'un Triangle</h3>
+                    </div>
+                </div>
+                <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-3 py-1 rounded-full">Représenter (REG)</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4 leading-relaxed">
+                <p>
+                    <strong>Découpage géométrique :</strong> On trace un rectangle de base $b = 6\text{ cm}$ et de hauteur $h = 4\text{ cm}$. On le découpe en deux triangles identiques le long de sa diagonale.
+                </p>
+
+                <!-- SCHEMA SVG TRIANGLE DANS RECTANGLE -->
+                <div class="py-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                    <svg width="220" height="120" viewBox="0 0 220 120" class="mx-auto">
+                        <rect x="20" y="20" width="180" height="80" fill="#cbd5e1" fill-opacity="0.3" stroke="#475569" stroke-width="1.5"/>
+                        <polygon points="20,100 200,100 200,20" fill="#a855f7" fill-opacity="0.4" stroke="#7e22ce" stroke-width="2"/>
+                        <line x1="20" y1="100" x2="200" y2="20" stroke="#7e22ce" stroke-dasharray="3" stroke-width="2"/>
+                        <text x="110" y="115" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">Base b = 6 cm</text>
+                        <text x="210" y="65" font-size="9" font-weight="bold" fill="#1e293b">h = 4 cm</text>
+                    </svg>
+                </div>
+
+                <div class="p-4 bg-purple-50/60 border border-purple-200 rounded-2xl space-y-3">
+                    <p class="font-bold text-purple-900">Questions de déduction :</p>
+                    <ol class="list-decimal pl-5 space-y-2 text-slate-800">
+                        <li>L'aire du rectangle complet vaut $b \times h = 6 \times 4 = 24\text{ cm}^2$.</li>
+                        <li>Le triangle occupe exactement la moitié du rectangle. Quelle est l'aire du triangle ? <input type="number" id="act3-q1" class="w-16 border rounded p-1 text-center font-bold" placeholder="?"> $\text{cm}^2$.</li>
+                        <li>Quelle est la formule générale de l'aire d'un triangle ? <br>
+                            <select id="act3-q2" class="border rounded p-1.5 font-bold bg-white mt-1">
+                                <option value="">-- Choisissez --</option>
+                                <option value="bh">Base × Hauteur</option>
+                                <option value="bh2">(Base × Hauteur) / 2</option>
+                            </select>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="p-4 bg-slate-900 text-white rounded-2xl space-y-2">
+                    <p class="font-bold text-purple-400 text-xs uppercase tracking-wider">Ce que je découvre (Bilan de l'Activité 3) :</p>
+                    <p class="text-xs text-slate-200">
+                        $$\text{Aire Triangle} = \frac{\text{Base} \times \text{Hauteur}}{2}$$
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs py-3 rounded-xl transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 4 : DÉCOUVERTE DU VOLUME DU CYLINDRE ET DU CÔNE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 bg-sky-100 text-sky-800 rounded-lg flex items-center justify-center font-bold text-sm">4</span>
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Activité 4 • Solides de Révolution</span>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Du Cylindre au Cône de Révolution</h3>
+                    </div>
+                </div>
+                <span class="bg-cyan-100 text-cyan-800 text-xs font-extrabold px-3 py-1 rounded-full">Valider (VAL)</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4 leading-relaxed">
+                <p>
+                    <strong>Empilement de disques :</strong> Un cylindre de hauteur $h$ est formé par l'empilement vertical de disques identiques de surface $A = \pi \times R^2$.
+                </p>
+
+                <!-- SCHEMA SVG CYLINDRE ET CONE -->
+                <div class="py-4 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                    <svg width="260" height="120" viewBox="0 0 260 120" class="mx-auto">
+                        <!-- Cylindre -->
+                        <ellipse cx="60" cy="30" rx="30" ry="10" fill="#38bdf8" fill-opacity="0.4" stroke="#0284c7" stroke-width="1.5"/>
+                        <rect x="30" y="30" width="60" height="60" fill="#38bdf8" fill-opacity="0.2" stroke="#0284c7" stroke-width="1.5"/>
+                        <ellipse cx="60" cy="90" rx="30" ry="10" fill="#0284c7" fill-opacity="0.5" stroke="#0284c7" stroke-width="1.5"/>
+                        <text x="60" y="65" font-size="8" font-weight="bold" fill="#0369a1" text-anchor="middle">V = Aire base × h</text>
+
+                        <!-- Cône -->
+                        <polygon points="190,30 160,90 220,90" fill="#a855f7" fill-opacity="0.3" stroke="#7e22ce" stroke-width="1.5"/>
+                        <ellipse cx="190" cy="90" rx="30" ry="10" fill="#7e22ce" fill-opacity="0.5" stroke="#7e22ce" stroke-width="1.5"/>
+                        <text x="190" y="75" font-size="8" font-weight="bold" fill="#6b21a8" text-anchor="middle">V' = (Aire base × h) / 3</text>
+                    </svg>
+                </div>
+
+                <div class="p-4 bg-sky-50/60 border border-sky-200 rounded-2xl space-y-3">
+                    <p class="font-bold text-sky-900">Questions de réflexion :</p>
+                    <ol class="list-decimal pl-5 space-y-2 text-slate-800">
+                        <li>Si la base d'un cylindre a une aire $A = 10\text{ cm}^2$ et la hauteur $h = 6\text{ cm}$, quel est le volume du cylindre ? <input type="number" id="act4-q1" class="w-16 border rounded p-1 text-center font-bold" placeholder="?"> $\text{cm}^3$.</li>
+                        <li>Un cône de même base et même hauteur occupe exactement le tiers du volume du cylindre. Quel est le volume du cône ? ($60 / 3 =$) <input type="number" id="act4-q2" class="w-16 border rounded p-1 text-center font-bold" placeholder="?"> $\text{cm}^3$.</li>
+                    </ol>
+                </div>
+
+                <div class="p-4 bg-slate-900 text-white rounded-2xl space-y-2">
+                    <p class="font-bold text-sky-400 text-xs uppercase tracking-wider">Ce que je découvre (Bilan de l'Activité 4) :</p>
+                    <p class="text-xs text-slate-200">
+                        • $\text{Volume Cylindre} = \text{Aire de base} \times h = \pi \times R^2 \times h$ <br>
+                        • $\text{Volume Cône} = \frac{\text{Aire de base} \times h}{3} = \frac{\pi \times R^2 \times h}{3}$
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="checkAct4()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs py-3 rounded-xl transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 4
+            </button>
+            <div id="fb-act4" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
         </section>
 
     </main>
 
     <!-- SCRIPTS JS -->
     <script>
-        function checkAct1() {
-            let q1 = document.getElementById('a1-q1').value.trim();
-            let fb = document.getElementById('fb-a1');
+        let completed = [false, false, false, false];
+
+        function updateScore() {
+            let count = completed.filter(Boolean).length;
+            document.getElementById('score-comp').innerText = `${count} / 4`;
+        }
+
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
             fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
 
-            if (q1 === "18.84" || q1 === "18,84") {
+            if (q1 === "100" && q2 === "10") {
                 fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Activité 1 validée ($V = 3,14 \times 2^2 \times 1,5 = 18,84\text{ m}^3 = 18\,840\text{ Litres}$).`;
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! $1\text{ m} = 10\text{ dm} = 100\text{ cm}$. Vous pouvez démarrer la découverte !`;
             } else {
                 fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Corrigé : $V = 3,14 \times 4 \times 1,5 = 18,84\text{ m}^3$.`;
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Rappel : $1\text{ m} = 10\text{ dm} = 100\text{ cm}$.`;
+            }
+        }
+
+        function checkAct1() {
+            let q1 = document.getElementById('act1-q1').value.trim();
+            let q2 = document.getElementById('act1-q2').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "100" && q2 === "2") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! $10 \\times 10 = 100\\text{ dm}^2$. Chaque unité d'aire possède 2 colonnes dans le tableau de conversion.`;
+                completed[0] = true;
+                updateScore();
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> $10 \\times 10 = 100$ carreaux. Il faut 2 colonnes par unité.`;
+            }
+        }
+
+        function checkAct2() {
+            let q1 = document.getElementById('act2-q1').value.trim();
+            let q2 = document.getElementById('act2-q2').value.trim();
+            let q3 = document.getElementById('act2-q3').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "1" && q2 === "1000" && q3 === "3") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! $1\\text{ dm}^3 = 1\\text{ Litre}$, et il faut 3 colonnes par unité pour les volumes ($10^3 = 1\,000$).`;
+                completed[1] = true;
+                updateScore();
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> $1\\text{ dm}^3 = 1\\text{ L}$, $10 \\times 10 \\times 10 = 1\,000$ sous-cubes, donc 3 colonnes par unité.`;
+            }
+        }
+
+        function checkAct3() {
+            let q1 = document.getElementById('act3-q1').value.trim();
+            let q2 = document.getElementById('act3-q2').value;
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "12" && q2 === "bh2") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! L'aire du triangle vaut $24 / 2 = 12\\text{ cm}^2$, formule : $(\\text{Base} \\times \\text{Hauteur})/2$.`;
+                completed[2] = true;
+                updateScore();
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> $24 / 2 = 12\\text{ cm}^2$. Formule : $(\\text{Base} \\times \\text{Hauteur}) / 2$.`;
+            }
+        }
+
+        function checkAct4() {
+            let q1 = document.getElementById('act4-q1').value.trim();
+            let q2 = document.getElementById('act4-q2').value.trim();
+            let fb = document.getElementById('fb-act4');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "60" && q2 === "20") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! Volume Cylindre $= 10 \\times 6 = 60\\text{ cm}^3$, Volume Cône $= 60 / 3 = 20\\text{ cm}^3$.`;
+                completed[3] = true;
+                updateScore();
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Cylindre : $10 \\times 6 = 60\\text{ cm}^3$. Cône : $60 / 3 = 20\\text{ cm}^3$.`;
             }
         }
     </script>
