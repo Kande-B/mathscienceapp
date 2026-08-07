@@ -77,7 +77,7 @@
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Modélisation Affine $f(x) = ax + b$</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes officielles de calcul d'images, d'antécédents, détermination du coefficient directeur $a$, ordonnée à l'origine $b$ et représentations graphiques.</p>
+                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes officielles de calcul d'images, d'antécédents, détermination du coefficient directeur $a$, ordonnée à l'origine $b$ et représentations graphiques haute précision.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -117,31 +117,61 @@
                     </p>
                 </div>
 
-                <!-- SCHÉMA SVG 1 : MACHINE À CALCULER IMAGE ET ANTÉCÉDENT -->
+                <!-- SCHÉMA SVG HAUTE PRÉCISION 1 : REPÈRE ET LECTURE GRAPHIQUE IMAGE / ANTÉCÉDENT -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-diagram-project text-sky-600"></i> Schéma Visuel 1 : Machine de transformation $x \mapsto f(x)$
+                        <i class="fa-solid fa-chart-line text-sky-600"></i> Représentation Graphique 1 : Lecture d'Image $f(x)$ et d'Antécédent $x$ sur une Courbe
                     </h4>
-                    <div class="py-3 bg-white rounded-xl border border-slate-200 text-center">
-                        <svg width="300" height="90" viewBox="0 0 300 90" class="mx-auto">
-                            <!-- Entrée x -->
-                            <rect x="20" y="30" width="50" height="30" rx="6" fill="#0284c7" fill-opacity="0.2" stroke="#0284c7" stroke-width="1.5"/>
-                            <text x="45" y="48" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">x (départ)</text>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="450" height="260" viewBox="0 0 450 260" class="mx-auto font-sans">
+                            <!-- Grille Orthonormée -->
+                            <defs>
+                                <pattern id="grid1" width="30" height="30" patternUnits="userSpaceOnUse">
+                                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="450" height="260" fill="url(#grid1)"/>
 
-                            <!-- Flèche 1 -->
-                            <line x1="70" y1="45" x2="110" y2="45" stroke="#0284c7" stroke-width="2" marker-end="url(#arrow)"/>
+                            <!-- Axes du Repère -->
+                            <!-- Axe des abscisses X -->
+                            <line x1="30" y1="210" x2="420" y2="210" stroke="#334155" stroke-width="2"/>
+                            <polygon points="420,206 430,210 420,214" fill="#334155"/>
+                            <text x="415" y="230" font-size="11" font-weight="bold" fill="#0f172a">Axe x (Abscisses / Antécédents)</text>
 
-                            <!-- Machine f -->
-                            <rect x="110" y="20" width="80" height="50" rx="10" fill="#0369a1" stroke="#0c4a6e" stroke-width="2"/>
-                            <text x="150" y="42" font-size="12" font-weight="black" fill="#ffffff" text-anchor="middle">Fonction f</text>
-                            <text x="150" y="58" font-size="8" fill="#bae6fd" text-anchor="middle">f(x) = ax + b</text>
+                            <!-- Axe des ordonnées Y -->
+                            <line x1="60" y1="240" x2="60" y2="20" stroke="#334155" stroke-width="2"/>
+                            <polygon points="56,20 60,10 64,20" fill="#334155"/>
+                            <text x="70" y="25" font-size="11" font-weight="bold" fill="#0f172a">Axe y (Ordonnées / Images f(x))</text>
 
-                            <!-- Flèche 2 -->
-                            <line x1="190" y1="45" x2="230" y2="45" stroke="#0284c7" stroke-width="2"/>
+                            <!-- Origine (0,0) -->
+                            <circle cx="60" cy="210" r="3.5" fill="#334155"/>
+                            <text x="45" y="225" font-size="10" font-weight="bold" fill="#475569">O (0,0)</text>
 
-                            <!-- Sortie f(x) -->
-                            <rect x="230" y="30" width="50" height="30" rx="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
-                            <text x="255" y="48" font-size="10" font-weight="bold" fill="#047857" text-anchor="middle">f(x) (image)</text>
+                            <!-- Graduations X -->
+                            <line x1="120" y1="206" x2="120" y2="214" stroke="#334155" stroke-width="2"/>
+                            <text x="120" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">1</text>
+                            <line x1="180" y1="206" x2="180" y2="214" stroke="#334155" stroke-width="2"/>
+                            <text x="180" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">2</text>
+                            <line x1="240" y1="206" x2="240" y2="214" stroke="#334155" stroke-width="2"/>
+                            <text x="240" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">3</text>
+                            <line x1="300" y1="206" x2="300" y2="214" stroke="#334155" stroke-width="2"/>
+                            <text x="300" y="225" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">x = 4</text>
+
+                            <!-- Graduations Y -->
+                            <line x1="56" y1="150" x2="64" y2="150" stroke="#334155" stroke-width="2"/>
+                            <text x="45" y="154" font-size="10" font-weight="bold" fill="#475569" text-anchor="end">1</text>
+                            <line x1="56" y1="90" x2="64" y2="90" stroke="#334155" stroke-width="2"/>
+                            <text x="45" y="94" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="end">f(4) = 2</text>
+
+                            <!-- Tracé de la Droite f(x) = 0.5x -->
+                            <line x1="60" y1="210" x2="360" y2="60" stroke="#0284c7" stroke-width="3"/>
+
+                            <!-- Projection Point A (4, 2) -->
+                            <line x1="300" y1="210" x2="300" y2="90" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,4"/>
+                            <line x1="60" y1="90" x2="300" y2="90" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+                            <circle cx="300" cy="90" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                            <text x="310" y="85" font-size="11" font-weight="extrabold" fill="#1e3a8a">Point A (4 ; 2)</text>
                         </svg>
                     </div>
                 </div>
@@ -229,29 +259,73 @@
                     </p>
                 </div>
 
-                <!-- SCHÉMA SVG 2 : RÔLE DE A ET B SUR LA DROITE -->
+                <!-- SCHÉMA SVG HAUTE PRÉCISION 2 : DÉCOMPOSITION PENTE ET ORDONNÉE A L'ORIGINE -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-purple-600"></i> Schéma Visuel 2 : Rôle Géométrique de $a$ (Pente) et $b$ (Ordonnée à l'origine)
+                        <i class="fa-solid fa-chart-line text-purple-600"></i> Représentation Graphique 2 : Rôle Géométrique de la Pente $a = \Delta y / \Delta x$ et de l'Ordonnée à l'Origine $b$
                     </h4>
-                    <div class="py-3 bg-white rounded-xl border border-slate-200 text-center">
-                        <svg width="280" height="150" viewBox="0 0 280 150" class="mx-auto">
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="450" height="260" viewBox="0 0 450 260" class="mx-auto font-sans">
+                            <rect width="450" height="260" fill="url(#grid1)"/>
+
                             <!-- Axes -->
-                            <line x1="30" y1="120" x2="250" y2="120" stroke="#475569" stroke-width="1.5"/>
-                            <line x1="30" y1="120" x2="30" y2="20" stroke="#475569" stroke-width="1.5"/>
+                            <line x1="40" y1="220" x2="420" y2="220" stroke="#334155" stroke-width="2"/>
+                            <polygon points="420,216 430,220 420,224" fill="#334155"/>
+                            <line x1="70" y1="240" x2="70" y2="20" stroke="#334155" stroke-width="2"/>
+                            <polygon points="66,20 70,10 74,20" fill="#334155"/>
 
                             <!-- Ordonnée à l'origine b -->
-                            <circle cx="30" cy="80" r="4" fill="#dc2626"/>
-                            <text x="40" y="83" font-size="9" font-weight="black" fill="#dc2626">b (0 ; b)</text>
+                            <circle cx="70" cy="140" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+                            <text x="85" y="145" font-size="11" font-weight="black" fill="#dc2626">b = Ordonnée à l'origine (0 ; b)</text>
 
-                            <!-- Droite -->
-                            <line x1="30" y1="80" x2="230" y2="20" stroke="#7e22ce" stroke-width="2.5"/>
+                            <!-- Droite f(x) = a*x + b -->
+                            <line x1="70" y1="140" x2="370" y2="40" stroke="#7e22ce" stroke-width="3"/>
 
-                            <!-- Pente a -->
-                            <line x1="110" y1="56" x2="170" y2="56" stroke="#2563eb" stroke-dasharray="2" stroke-width="1.5"/>
-                            <line x1="170" y1="56" x2="170" y2="38" stroke="#dc2626" stroke-width="1.5"/>
-                            <text x="140" y="66" font-size="8" font-weight="bold" fill="#2563eb">+1 en x</text>
-                            <text x="175" y="48" font-size="8" font-weight="bold" fill="#dc2626">+a en y</text>
+                            <!-- Triangle de Pente a -->
+                            <!-- Avancée de 1 unité -->
+                            <line x1="170" y1="106.6" x2="270" y2="106.6" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,4"/>
+                            <!-- Montée de a unités -->
+                            <line x1="270" y1="106.6" x2="270" y2="73.3" stroke="#dc2626" stroke-width="2.5"/>
+
+                            <text x="220" y="122" font-size="10" font-weight="extrabold" fill="#2563eb" text-anchor="middle">+ Δx = 1 (Avancée)</text>
+                            <text x="280" y="93" font-size="10" font-weight="extrabold" fill="#dc2626">+ Δy = a (Pente)</text>
+
+                            <!-- Point sur la droite -->
+                            <circle cx="270" cy="73.3" r="5" fill="#7e22ce" stroke="#ffffff" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- SCHÉMA SVG HAUTE PRÉCISION 3 : COMPARAISON DES 4 TYPES DE DROITES AFFINES -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-emerald-600"></i> Représentation Graphique 3 : Comparaison des Droites (Croissante $a>0$, Linéaire $b=0$, Décroissante $a<0$, Constante $a=0$)
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="450" height="260" viewBox="0 0 450 260" class="mx-auto font-sans">
+                            <rect width="450" height="260" fill="url(#grid1)"/>
+
+                            <!-- Axes du Repère -->
+                            <line x1="30" y1="140" x2="420" y2="140" stroke="#334155" stroke-width="2"/>
+                            <line x1="210" y1="240" x2="210" y2="20" stroke="#334155" stroke-width="2"/>
+                            <circle cx="210" cy="140" r="4" fill="#334155"/>
+                            <text x="195" y="155" font-size="10" font-weight="bold" fill="#475569">(0,0)</text>
+
+                            <!-- Droite 1 : Affine Croissante (a > 0, b > 0) -> Verte -->
+                            <line x1="50" y1="210" x2="370" y2="50" stroke="#16a34a" stroke-width="2.5"/>
+                            <text x="320" y="45" font-size="10" font-weight="bold" fill="#16a34a">d1: y = 0.5x + 3 (a > 0)</text>
+
+                            <!-- Droite 2 : Linéaire (b = 0) -> Bleue -->
+                            <line x1="70" y1="210" x2="350" y2="70" stroke="#0284c7" stroke-width="2.5"/>
+                            <text x="310" y="85" font-size="10" font-weight="bold" fill="#0284c7">d2: y = x (Linéaire)</text>
+
+                            <!-- Droite 3 : Affine Décroissante (a < 0) -> Rouge -->
+                            <line x1="70" y1="50" x2="350" y2="190" stroke="#dc2626" stroke-width="2.5"/>
+                            <text x="310" y="205" font-size="10" font-weight="bold" fill="#dc2626">d3: y = -0.5x + 1 (a < 0)</text>
+
+                            <!-- Droite 4 : Constante Horizontale (a = 0) -> Violette -->
+                            <line x1="30" y1="90" x2="420" y2="90" stroke="#9333ea" stroke-width="2.5" stroke-dasharray="5,5"/>
+                            <text x="40" y="82" font-size="10" font-weight="bold" fill="#9333ea">d4: y = 2 (Constante a=0)</text>
                         </svg>
                     </div>
                 </div>
@@ -312,50 +386,71 @@
             </div>
         </section>
 
-        <!-- CALCULATEUR / SIMULATEUR INTERACTIF DE FONCTIONS AFFINES -->
+        <!-- SIMULATEUR GRAPHIQUE INTERACTIF EN TEMPS RÉEL (CANVAS SVG) -->
         <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
             <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
                 <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
-                    <i class="fa-solid fa-calculator"></i>
+                    <i class="fa-solid fa-chart-line"></i>
                 </div>
                 <div>
                     <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
-                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Tracé de Droite Affine $f(x) = ax + b$</h3>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Graphique Interactif Dynamique $f(x) = ax + b$</h3>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div class="space-y-3 text-slate-800">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+                <div class="space-y-4 text-slate-800">
                     <div class="p-4 bg-white rounded-2xl space-y-2">
-                        <label class="font-bold text-slate-900 block">Coefficient directeur $a$ :</label>
-                        <input type="number" id="sim-a" value="2" oninput="calcSim()" class="border rounded-xl p-2.5 w-full font-bold bg-slate-50">
+                        <div class="flex justify-between items-center">
+                            <label class="font-bold text-slate-900">Coefficient directeur $a$ :</label>
+                            <span id="val-a" class="font-extrabold text-sky-600 font-mono text-sm">2</span>
+                        </div>
+                        <input type="range" id="sim-a" min="-5" max="5" step="0.5" value="2" oninput="calcSim()" class="w-full accent-sky-600">
                     </div>
                     <div class="p-4 bg-white rounded-2xl space-y-2">
-                        <label class="font-bold text-slate-900 block">Ordonnée à l'origine $b$ :</label>
-                        <input type="number" id="sim-b" value="3" oninput="calcSim()" class="border rounded-xl p-2.5 w-full font-bold bg-slate-50">
+                        <div class="flex justify-between items-center">
+                            <label class="font-bold text-slate-900">Ordonnée à l'origine $b$ :</label>
+                            <span id="val-b" class="font-extrabold text-amber-600 font-mono text-sm">3</span>
+                        </div>
+                        <input type="range" id="sim-b" min="-10" max="10" step="1" value="3" oninput="calcSim()" class="w-full accent-amber-600">
+                    </div>
+
+                    <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                        <span class="text-xs font-bold uppercase text-sky-400 block">Propriétés de la fonction :</span>
+                        <p>• Formule : <span id="sim-formula" class="font-bold text-white">f(x) = 2x + 3</span></p>
+                        <p>• Ordonnée fixe $b$ : <span id="sim-f0" class="font-bold text-yellow-400">3</span></p>
+                        <p>• Antécédent de 0 : <span id="sim-root" class="font-bold text-emerald-400">x = -1.5</span></p>
+                        <p>• Variation : <span id="sim-var" class="font-bold text-sky-300">Croissante</span></p>
                     </div>
                 </div>
 
-                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
-                    <span class="text-xs font-bold uppercase text-sky-400 block">Propriétés de la fonction :</span>
-                    <p>• Formule : <span id="sim-formula" class="font-bold text-white">f(x) = 2x + 3</span></p>
-                    <p>• $f(0)$ (axe vertical) : <span id="sim-f0" class="font-bold text-yellow-400">3</span></p>
-                    <p>• Antécédent de 0 : <span id="sim-root" class="font-bold text-emerald-400">x = -1.5</span></p>
+                <!-- ZONE GRAPHIC DYNAMIQUE SVG -->
+                <div class="md:col-span-2 bg-slate-950 rounded-2xl p-4 border border-slate-800 flex items-center justify-center">
+                    <svg id="dynamic-graph" width="400" height="260" viewBox="0 0 400 260" class="w-full max-w-[440px] font-sans">
+                        <!-- Repère et grille générés en JS -->
+                    </svg>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- JS POUR SIMULATEUR -->
+    <!-- JS POUR SIMULATEUR ET GRAPHIQUE DYNAMIQUE -->
     <script>
         function calcSim() {
-            let a = parseFloat(document.getElementById('sim-a').value) || 0;
-            let b = parseFloat(document.getElementById('sim-b').value) || 0;
+            let a = parseFloat(document.getElementById('sim-a').value);
+            let b = parseFloat(document.getElementById('sim-b').value);
+
+            document.getElementById('val-a').innerText = a;
+            document.getElementById('val-b').innerText = b;
 
             let signB = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
             document.getElementById('sim-formula').innerText = `f(x) = ${a}x ${signB}`;
             document.getElementById('sim-f0').innerText = b;
+
+            if (a > 0) document.getElementById('sim-var').innerText = "Strictement Croissante (a > 0)";
+            else if (a < 0) document.getElementById('sim-var').innerText = "Strictement Décroissante (a < 0)";
+            else document.getElementById('sim-var').innerText = "Constante Horizontale (a = 0)";
 
             if (a !== 0) {
                 let root = -b / a;
@@ -363,7 +458,61 @@
             } else {
                 document.getElementById('sim-root').innerText = `Aucun (droite horizontale)`;
             }
+
+            drawDynamicGraph(a, b);
         }
+
+        function drawDynamicGraph(a, b) {
+            const svg = document.getElementById('dynamic-graph');
+            const w = 400, h = 260;
+            const cx = 200, cy = 130; // Origine (0,0) au centre
+            const scaleX = 25; // 25 px = 1 unité x
+            const scaleY = 12; // 12 px = 1 unité y
+
+            let html = `
+                <!-- Fond et grille -->
+                <rect width="${w}" height="${h}" fill="#090d16" rx="12"/>
+                <defs>
+                    <pattern id="gridDyn" width="25" height="24" patternUnits="userSpaceOnUse">
+                        <path d="M 25 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="${w}" height="${h}" fill="url(#gridDyn)"/>
+
+                <!-- Axe X -->
+                <line x1="20" y1="${cy}" x2="380" y2="${cy}" stroke="#475569" stroke-width="2"/>
+                <polygon points="380,${cy-4} 390,${cy} 380,${cy+4}" fill="#475569"/>
+                <text x="375" y="${cy+18}" font-size="10" fill="#94a3b8" font-weight="bold">x</text>
+
+                <!-- Axe Y -->
+                <line x1="${cx}" y1="240" x2="${cx}" y2="20" stroke="#475569" stroke-width="2"/>
+                <polygon points="${cx-4},20 ${cx},10 ${cx+4},20" fill="#475569"/>
+                <text x="${cx+8}" y="22" font-size="10" fill="#94a3b8" font-weight="bold">y</text>
+                <text x="${cx-15}" y="${cy+15}" font-size="9" fill="#64748b">O</text>
+            `;
+
+            // Calcul de deux points extrêmes de la droite pour x = -7 et x = 7
+            let x1 = -7, y1 = a * x1 + b;
+            let x2 = 7, y2 = a * x2 + b;
+
+            let px1 = cx + x1 * scaleX;
+            let py1 = cy - y1 * scaleY;
+            let px2 = cx + x2 * scaleX;
+            let py2 = cy - y2 * scaleY;
+
+            // Droite
+            html += `<line x1="${px1}" y1="${py1}" x2="${px2}" y2="${py2}" stroke="#38bdf8" stroke-width="3"/>`;
+
+            // Point (0, b)
+            let pyB = cy - b * scaleY;
+            html += `
+                <circle cx="${cx}" cy="${pyB}" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+                <text x="${cx+8}" y="${pyB+4}" font-size="10" font-weight="bold" fill="#fbbf24">b = ${b}</text>
+            `;
+
+            svg.innerHTML = html;
+        }
+
         calcSim();
     </script>
 </body>

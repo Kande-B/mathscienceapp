@@ -74,7 +74,7 @@
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Découverte des Modèles Affines $f(x) = ax + b$</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Explorez la modélisation de situations concrètes (forfait fixes, tarifs horaires, locations de matériel) à travers les notions d'images, d'antécédents et de droites.</p>
+                    <p class="text-sm text-slate-300 max-w-2xl">Explorez la modélisation de situations concrètes (forfaits fixes, tarifs horaires, locations de matériel) à travers les notions d'images, d'antécédents et de graphiques orthonormés.</p>
                 </div>
             </div>
         </div>
@@ -147,20 +147,57 @@
                     </table>
                 </div>
 
-                <!-- SCHÉMA SVG : DROITE PASSANT PAR L'ORIGINE -->
+                <!-- SCHÉMA SVG HAUTE QUALITÉ : DROITE PASSANT PAR L'ORIGINE DANS UN REPÈRE GRADUÉ -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-emerald-600"></i> Représentation Graphique : Droite passant par l'Origine $(0;0)$
+                        <i class="fa-solid fa-chart-line text-emerald-600"></i> Représentation Graphique Haute Précision : Droite passant par l'Origine $(0;0)$
                     </h4>
                     <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
-                        <svg width="280" height="160" viewBox="0 0 280 160" class="mx-auto">
-                            <line x1="30" y1="130" x2="260" y2="130" stroke="#475569" stroke-width="1.5"/>
-                            <line x1="30" y1="130" x2="30" y2="20" stroke="#475569" stroke-width="1.5"/>
-                            <circle cx="30" cy="130" r="4" fill="#047857"/>
-                            <line x1="30" y1="130" x2="230" y2="30" stroke="#10b981" stroke-width="2.5"/>
-                            <text x="30" y="145" font-size="9" font-weight="bold" fill="#047857" text-anchor="middle">O (0;0)</text>
-                            <text x="240" y="140" font-size="9" font-weight="bold" fill="#475569">Litres x</text>
-                            <text x="35" y="15" font-size="9" font-weight="bold" fill="#475569">Prix f(x)</text>
+                        <svg width="420" height="220" viewBox="0 0 420 220" class="mx-auto font-sans">
+                            <defs>
+                                <pattern id="gridAct1" width="30" height="30" patternUnits="userSpaceOnUse">
+                                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="420" height="220" fill="url(#gridAct1)"/>
+
+                            <!-- Axes -->
+                            <line x1="40" y1="180" x2="390" y2="180" stroke="#334155" stroke-width="2"/>
+                            <polygon points="390,176 400,180 390,184" fill="#334155"/>
+                            <line x1="60" y1="200" x2="60" y2="20" stroke="#334155" stroke-width="2"/>
+                            <polygon points="56,20 60,10 64,20" fill="#334155"/>
+
+                            <!-- Titres axes -->
+                            <text x="385" y="198" font-size="10" font-weight="bold" fill="#0f172a">Volume x (L)</text>
+                            <text x="70" y="25" font-size="10" font-weight="bold" fill="#0f172a">Prix f(x) (€)</text>
+
+                            <!-- Origine O -->
+                            <circle cx="60" cy="180" r="4" fill="#047857"/>
+                            <text x="42" y="195" font-size="10" font-weight="extrabold" fill="#047857">O (0,0)</text>
+
+                            <!-- Graduations X (10 L, 20 L, 50 L) -->
+                            <line x1="120" y1="176" x2="120" y2="184" stroke="#334155" stroke-width="2"/>
+                            <text x="120" y="195" font-size="9" fill="#475569" font-weight="bold" text-anchor="middle">10 L</text>
+                            <line x1="180" y1="176" x2="180" y2="184" stroke="#334155" stroke-width="2"/>
+                            <text x="180" y="195" font-size="9" fill="#475569" font-weight="bold" text-anchor="middle">20 L</text>
+                            <line x1="360" y1="176" x2="360" y2="184" stroke="#334155" stroke-width="2"/>
+                            <text x="360" y="195" font-size="9" fill="#047857" font-weight="bold" text-anchor="middle">50 L</text>
+
+                            <!-- Graduations Y (18 €, 36 €, 90 €) -->
+                            <line x1="56" y1="150" x2="64" y2="150" stroke="#334155" stroke-width="2"/>
+                            <text x="50" y="154" font-size="9" fill="#475569" font-weight="bold" text-anchor="end">18 €</text>
+                            <line x1="56" y1="120" x2="64" y2="120" stroke="#334155" stroke-width="2"/>
+                            <text x="50" y="124" font-size="9" fill="#475569" font-weight="bold" text-anchor="end">36 €</text>
+                            <line x1="56" y1="30" x2="64" y2="30" stroke="#334155" stroke-width="2"/>
+                            <text x="50" y="34" font-size="9" fill="#047857" font-weight="bold" text-anchor="end">90 €</text>
+
+                            <!-- Droite f(x) = 1.8x -->
+                            <line x1="60" y1="180" x2="360" y2="30" stroke="#10b981" stroke-width="3"/>
+
+                            <!-- Pointille projection (50L, 90€) -->
+                            <line x1="360" y1="180" x2="360" y2="30" stroke="#047857" stroke-width="1.5" stroke-dasharray="3,3"/>
+                            <line x1="60" y1="30" x2="360" y2="30" stroke="#047857" stroke-width="1.5" stroke-dasharray="3,3"/>
+                            <circle cx="360" cy="30" r="4.5" fill="#047857"/>
                         </svg>
                     </div>
                 </div>
@@ -216,19 +253,33 @@
                     </table>
                 </div>
 
-                <!-- SCHÉMA SVG : DROITE NE PASSANT PAS PAR L'ORIGINE -->
+                <!-- SCHÉMA SVG HAUTE QUALITÉ : DROITE NE PASSANT PAS PAR L'ORIGINE -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-amber-600"></i> Représentation Graphique : Ordonnée à l'origine $b = 50\text{ €}$
+                        <i class="fa-solid fa-chart-line text-amber-600"></i> Représentation Graphique Haute Précision : Ordonnée à l'origine $b = 50\text{ €}$
                     </h4>
                     <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
-                        <svg width="280" height="160" viewBox="0 0 280 160" class="mx-auto">
-                            <line x1="30" y1="130" x2="260" y2="130" stroke="#475569" stroke-width="1.5"/>
-                            <line x1="30" y1="130" x2="30" y2="20" stroke="#475569" stroke-width="1.5"/>
-                            <circle cx="30" cy="90" r="4" fill="#b45309"/>
-                            <line x1="30" y1="90" x2="230" y2="20" stroke="#f59e0b" stroke-width="2.5"/>
-                            <text x="45" y="93" font-size="9" font-weight="bold" fill="#b45309">b = 50 €</text>
-                            <text x="240" y="140" font-size="9" font-weight="bold" fill="#475569">Heures x</text>
+                        <svg width="420" height="220" viewBox="0 0 420 220" class="mx-auto font-sans">
+                            <rect width="420" height="220" fill="url(#gridAct1)"/>
+
+                            <!-- Axes -->
+                            <line x1="40" y1="180" x2="390" y2="180" stroke="#334155" stroke-width="2"/>
+                            <line x1="60" y1="200" x2="60" y2="20" stroke="#334155" stroke-width="2"/>
+
+                            <!-- Ordonnée à l'origine (0, 50€) -->
+                            <circle cx="60" cy="140" r="5" fill="#b45309" stroke="#ffffff" stroke-width="2"/>
+                            <text x="75" y="144" font-size="10" font-weight="extrabold" fill="#b45309">b = Forfait fixe (50 €)</text>
+
+                            <!-- Droite g(x) = 20x + 50 -->
+                            <line x1="60" y1="140" x2="360" y2="20" stroke="#f59e0b" stroke-width="3"/>
+
+                            <!-- Point d'utilisation 10h -> 250€ -->
+                            <line x1="360" y1="180" x2="360" y2="20" stroke="#b45309" stroke-width="1.5" stroke-dasharray="3,3"/>
+                            <line x1="60" y1="20" x2="360" y2="20" stroke="#b45309" stroke-width="1.5" stroke-dasharray="3,3"/>
+                            <circle cx="360" cy="20" r="4.5" fill="#b45309"/>
+
+                            <text x="360" y="195" font-size="9" font-weight="bold" fill="#334155" text-anchor="middle">10 Heures</text>
+                            <text x="50" y="24" font-size="9" font-weight="bold" fill="#b45309" text-anchor="end">250 €</text>
                         </svg>
                     </div>
                 </div>
