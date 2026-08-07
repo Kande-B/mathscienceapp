@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Probabilités</title>
+    <title>Je note l'essentiel (Cours) - Probabilités 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,24 +24,23 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
     <!-- Header & Nav unifiée pour la Séquence -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
@@ -68,215 +66,330 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Expérience aléatoire -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Définition -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le Hasard (L'Aléatoire)</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-question-circle text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">L'Expérience Aléatoire</h3>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Une expérience est aléatoire si elle dépend uniquement du <strong>hasard</strong>. On connaît tous les résultats possibles à l'avance, mais on ne sait pas lequel va se produire.
-                    </p>
-                    
-                    <ul class="space-y-3 mt-4 text-sm">
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
-                            <div>
-                                <span class="font-bold text-slate-900">Une Issue :</span> C'est un des résultats possibles (ex: obtenir le chiffre 4 sur un dé).
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-layer-group text-purple-500 mt-1"></i>
-                            <div>
-                                <span class="font-bold text-slate-900">Un Événement :</span> C'est une condition qui regroupe plusieurs issues (ex: "Obtenir un nombre pair" regroupe les issues 2, 4 et 6).
-                            </div>
-                        </li>
-                    </ul>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Probabilités & Événements</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Formules officielles d'abord, puis exemples d'application contextualisés et rédigés pas à pas.</p>
                 </div>
-                
-                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-xl shadow-sm">
-                    <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                        <i class="fa-solid fa-calculator"></i> Calculer une probabilité
-                    </h3>
-                    <p class="text-amber-900 text-sm mb-2">
-                        Une probabilité est toujours un nombre compris <strong>entre 0 et 1</strong> (ou entre 0% et 100%).
-                    </p>
-                    <div class="bg-white p-3 font-mono font-bold text-center border border-amber-200 rounded text-amber-900 shadow-sm">
-                        P(Événement) = <span class="border-b-2 border-amber-900 pb-1 px-2">Nbre d'issues favorables</span><br>
-                        <span class="pt-1 px-2 block">Nbre total d'issues possibles</span>
-                    </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Vocabulaire & Équiprobabilité</a>
+                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Fréquences & Grand Nombre</a>
+                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Événement Contraire</a>
+                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Arbres des Possibles</a>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 : VOCABULAIRE, ISSUES ET ÉQUIPROBABILITÉ -->
+        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définitions Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Vocabulaire Aléatoire & Notion d'Équiprobabilité</h3>
                 </div>
             </div>
 
-            <!-- Visualization : Simulateur de lancer de dé -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-brand-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Le Simulateur de Hasard
-                </h3>
-                <p class="text-xs text-slate-500 mb-6 text-center">Lancez le dé virtuellement pour observer les fréquences par rapport à la théorie.</p>
-                
-                <div class="bg-slate-800 rounded-xl p-5 shadow-inner text-center relative overflow-hidden mb-4">
-                    <div class="text-6xl text-white mb-4 h-20 flex items-center justify-center" id="diceDisplay">
-                        <i class="fa-solid fa-dice-d6 text-slate-600"></i>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-sky-50/50 rounded-2xl border border-sky-200 space-y-1.5">
+                        <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-dice text-sky-600"></i> Expérience Aléatoire & Issues
+                        </h4>
+                        <p>• <strong>Expérience aléatoire :</strong> Expérience dont les résultats dépendent du hasard. On connaît toutes les issues possibles mais pas celle qui va sortir.</p>
+                        <p>• <strong>Issue :</strong> Un des résultats possibles (ex: obtenir la face 4 avec un dé).</p>
+                        <p>• <strong>Événement :</strong> Ensemble constitué d'une ou plusieurs issues (ex: "Obtenir un chiffre impair").</p>
                     </div>
-                    
-                    <button onclick="rollDice()" id="btnRoll" class="bg-brand-500 hover:bg-brand-600 text-white font-bold py-2 px-6 rounded-lg transition-colors shadow-lg active:scale-95">
-                        Lancer le Dé
-                    </button>
-                    <button onclick="autoRoll(100)" class="mt-2 text-xs text-slate-400 hover:text-white underline block mx-auto">
-                        Lancer 100 fois d'un coup
-                    </button>
+
+                    <div class="p-4 bg-sky-50/50 rounded-2xl border border-sky-200 space-y-1.5">
+                        <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced text-sky-600"></i> Notion d'Équiprobabilité
+                        </h4>
+                        <p>Une expérience est en situation d'<strong>équiprobabilité</strong> lorsque toutes les issues possibles ont exactement la <strong>même chance de se produire</strong> (ex: dé non truqué, pièce équilibrée).</p>
+                        <p>Dans ce cas, la probabilité d'un événement $A$ se calcule par :</p>
+                    </div>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-sm text-slate-800">
-                    <h4 class="font-bold text-slate-700 mb-2">Événement A : "Obtenir un nombre pair"</h4>
-                    
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-600">Théorie :</span>
-                        <span class="font-mono font-bold bg-white px-2 py-1 rounded border border-slate-200">3/6 = 50%</span>
+                <!-- ENCADRE FORMULE ÉQUIPROBABILITÉ -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable"></i> Formule Officielle de la Probabilité (Modèle d'Équiprobabilité)
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        La probabilité $P(A)$ d'un événement $A$ est toujours un nombre compris entre $0$ (impossible) et $1$ (certain) :
+                    </p>
+                    <div class="text-center py-2 text-base font-bold text-sky-300">
+                        $$P(A) = \frac{\text{Nombre d'issues favorables à } A}{\text{Nombre total d'issues possibles}}$$
                     </div>
-                    
-                    <div class="flex justify-between items-center mb-1 border-t border-slate-200 pt-2">
-                        <span class="text-slate-600">Lancers totaux :</span>
-                        <span class="font-mono font-bold" id="totalRolls">0</span>
-                    </div>
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="text-slate-600">Nombres pairs obtenus :</span>
-                        <span class="font-mono font-bold text-emerald-600" id="evenRolls">0</span>
-                    </div>
-                    
-                    <div class="mt-3">
-                        <div class="flex justify-between text-xs mb-1">
-                            <span>Fréquence réelle observée :</span>
-                            <span id="freqPercent" class="font-bold text-brand-600">0%</span>
-                        </div>
-                        <div class="w-full bg-slate-200 rounded-full h-2.5">
-                            <div class="bg-brand-500 h-2.5 rounded-full transition-all duration-300" id="freqBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <p class="text-xs text-slate-500 mt-4 text-center italic">Plus on lance le dé, plus la fréquence réelle se rapproche de la probabilité théorique de 50%.</p>
+                    <p class="text-[11px] text-slate-400 italic">
+                        Une probabilité s'exprime sous trois formes équivalentes : en fraction simplifiée ($\frac{1}{2}$), en nombre décimal ($0,5$) ou en pourcentage ($50\,\%$).
+                    </p>
                 </div>
 
-                <script>
-                    const diceIcons = [
-                        '<i class="fa-solid fa-dice-one"></i>',
-                        '<i class="fa-solid fa-dice-two"></i>',
-                        '<i class="fa-solid fa-dice-three"></i>',
-                        '<i class="fa-solid fa-dice-four"></i>',
-                        '<i class="fa-solid fa-dice-five"></i>',
-                        '<i class="fa-solid fa-dice-six"></i>'
-                    ];
-                    
-                    let total = 0;
-                    let evens = 0;
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-pen-ruler text-sky-600"></i> Exemple d'application rédigé pas à pas : Tirage au sort dans un sac
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Un sac opaque contient <strong>3 billes rouges</strong> et <strong>7 billes bleues</strong>. On tire une bille au hasard.
+                    </p>
 
-                    function doRoll() {
-                        const roll = Math.floor(Math.random() * 6) + 1;
-                        total++;
-                        if (roll % 2 === 0) evens++;
-                        return roll;
-                    }
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">1. Détermination du nombre total d'issues</p>
+                        <p class="text-slate-600">$$\text{Nombre total d'issues} = 3 + 7 = 10\text{ billes}$$</p>
 
-                    function updateStats(lastRoll) {
-                        if (lastRoll) {
-                            document.getElementById('diceDisplay').innerHTML = diceIcons[lastRoll - 1];
-                            // Animation classes
-                            document.getElementById('diceDisplay').classList.remove('animate-bounce');
-                            void document.getElementById('diceDisplay').offsetWidth; // trigger reflow
-                            document.getElementById('diceDisplay').classList.add('animate-bounce');
-                        }
-                        
-                        document.getElementById('totalRolls').innerText = total;
-                        document.getElementById('evenRolls').innerText = evens;
-                        
-                        const freq = total > 0 ? (evens / total * 100).toFixed(1) : 0;
-                        document.getElementById('freqPercent').innerText = `${freq}%`;
-                        document.getElementById('freqBar').style.width = `${freq}%`;
-                    }
+                        <p class="font-bold text-slate-900 pt-1">2. Calcul de la probabilité de tirer une bille rouge $P(R)$</p>
+                        <p class="text-slate-600">$$P(R) = \frac{\text{Billes rouges}}{\text{Total}} = \frac{3}{10} = 0,3 = 30\,\%$$</p>
 
-                    function rollDice() {
-                        const roll = doRoll();
-                        updateStats(roll);
-                    }
-
-                    function autoRoll(times) {
-                        for(let i=0; i<times; i++) {
-                            doRoll();
-                        }
-                        // Just show random dice at end
-                        const fakeRoll = Math.floor(Math.random() * 6) + 1;
-                        updateStats(fakeRoll);
-                    }
-                </script>
+                        <p class="font-bold text-sky-900 pt-1">3. Calcul de la probabilité de tirer une bille bleue $P(B)$</p>
+                        <p class="text-sky-900 font-bold">$$P(B) = \frac{\text{Billes bleues}}{\text{Total}} = \frac{7}{10} = 0,7 = 70\,\%$$</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECTION 2 : Événements particuliers -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Cas Particuliers</h2>
+        <!-- CHAPITRE 2 : FRÉQUENCES ET LOI DES GRANDS NOMBRES -->
+        <section id="chap2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">II</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chapitre 2 • Expérimentation & Fréquences</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Fréquence Observée vs Probabilité Théorique (Loi des grands nombres)</h3>
+                </div>
             </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULE FRÉQUENCE -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-chart-bar"></i> Définition de la Fréquence Observée ($f$)
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Lors d'une série de $N$ essais d'une expérience aléatoire, la **fréquence observée** d'un événement $A$ est :
+                    </p>
+                    <div class="text-center py-2 text-base font-bold text-amber-300">
+                        $$f = \frac{\text{Nombre de fois où } A \text{ s'est produit}}{N \text{ (Nombre total d'essais)}}$$
+                    </div>
+                    <p class="text-[11px] text-slate-400 italic">
+                        <strong>Propriété essentielle (Loi des Grands Nombres) :</strong> Plus le nombre d'essais $N$ est grand (ex: 1 000 lancers), plus la fréquence observée $f$ se rapproche de la probabilité théorique $P(A)$.
+                    </p>
+                </div>
+
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code text-amber-600"></i> Exemple d'application rédigé pas à pas : Simulation sur 1 000 lancers de pièce
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        La probabilité théorique d'obtenir "Pile" au lancer d'une pièce équilibrée est de $P = 0,5 = 50\,\%$. Un élève simule des lancers sur tableur :
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">1. Résultats observés selon le nombre d'essais $N$ :</p>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-600 font-sans">
+                            <li><strong>Sur 10 lancers :</strong> 7 Pile obtenus $\implies f = \frac{7}{10} = 0,70 = 70\,\%$ (écart fort avec la théorie).</li>
+                            <li><strong>Sur 100 lancers :</strong> 53 Pile obtenus $\implies f = \frac{53}{100} = 0,53 = 53\,\%$ (se rapproche).</li>
+                            <li><strong>Sur 1 000 lancers :</strong> 502 Pile obtenus $\implies f = \frac{502}{1\,000} = 0,502 = 50,2\,\%$ (très proche de $50\,\%$).</li>
+                        </ul>
+
+                        <p class="font-bold text-amber-900 pt-2 font-sans">Conclusion : À mesure que le nombre d'essais augmente, la fréquence réelle se stabilise vers la probabilité théorique de 0,5.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 3 : ÉVÉNEMENT CONTRAIRE ET ÉVÉNEMENTS INCOMPATIBLES -->
+        <section id="chap3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">III</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Chapitre 3 • Propriétés et Calculs</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Événement Contraire ($\bar{A}$) & Événements Incompatibles</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULE CONTRAIRE -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-purple-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-yin-yang"></i> Règle de l'Événement Contraire ($\bar{A}$)
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        L'événement contraire de $A$, noté $\bar{A}$, est constitué de toutes les issues qui ne réalisent pas $A$. La somme de leurs probabilités vaut toujours 1 :
+                    </p>
+                    <div class="text-center py-2 text-base font-bold text-purple-300">
+                        $$P(A) + P(\bar{A}) = 1 \implies P(\bar{A}) = 1 - P(A)$$
+                    </div>
+                </div>
+
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 3 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-microscope text-purple-600"></i> Exemple d'application rédigé pas à pas : Contrôle Qualité de Pièces Usinées
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Dans une usine mécanique, la probabilité qu'un roulement prélevé au hasard présente un défaut est de $P(D) = 0,03$ ($3\,\%$).
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">1. Définition de l'événement contraire $\bar{D}$</p>
+                        <p class="text-slate-600">$\bar{D}$ : "Le roulement prélevé est conforme sans aucun défaut".</p>
+
+                        <p class="font-bold text-slate-900 pt-1">2. Calcul de la probabilité $P(\bar{D})$</p>
+                        <p class="text-purple-900 font-bold">$$P(\bar{D}) = 1 - P(D) = 1 - 0,03 = 0,97 = 97\,\%$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 4 : EXPÉRIENCES À 2 ÉPREUVES ET ARBRES DES POSSIBLES -->
+        <section id="chap4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">IV</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Chapitre 4 • Expériences à 2 Épreuves</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Dénombrement par Arbre des Possibles</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 4 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-sitemap text-emerald-600"></i> Exemple d'application rédigé pas à pas : Lancer de 2 pièces consécutives
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        On lance deux fois de suite une pièce équilibrée. On note P pour Pile et F pour Face.
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">1. Dénombrement de toutes les issues (Arbre à 2 épreuves)</p>
+                        <p class="text-slate-600">Chemins de l'arbre : $(P,P), (P,F), (F,P), (F,F) \implies 4\text{ issues au total}$.</p>
+
+                        <p class="font-bold text-slate-900 pt-1">2. Calcul de la probabilité d'obtenir 2 fois Pile $(P,P)$</p>
+                        <p class="text-emerald-900 font-bold">$$P(P,P) = \frac{1}{4} = 0,25 = 25\,\%$$</p>
+
+                        <p class="font-bold text-slate-900 pt-1">3. Calcul de la probabilité d'obtenir au moins une fois Pile</p>
+                        <p class="text-emerald-900 font-bold">Issues favorables : $(P,P), (P,F), (F,P) \implies 3\text{ issues} \implies P = \frac{3}{4} = 0,75 = 75\,\%$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR INTERACTIF DE LANCER DE DÉ ET FRÉQUENCES -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow border-t-4 border-t-sky-500 no-print">
+            <h3 class="font-bold text-slate-800 mb-2 font-heading text-center text-lg">
+                <i class="fa-solid fa-dice text-sky-600 mr-2"></i> Simulateur Interactif de Hasard & Fréquence Observée
+            </h3>
+            <p class="text-xs text-slate-500 mb-6 text-center">Lancez le dé virtuellement et observez la convergence de la fréquence réelle vers la théorie de 50 %.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-800 rounded-2xl p-6 shadow-inner text-center max-w-md mx-auto relative overflow-hidden mb-4">
+                <div class="text-6xl text-white mb-4 h-20 flex items-center justify-center" id="diceDisplay">
+                    <i class="fa-solid fa-dice-d6 text-slate-600"></i>
+                </div>
                 
-                <!-- Impossible -->
-                <div class="bg-white rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-rose-500 p-5 text-center interactive-hover">
-                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fa-solid fa-ban text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-800 mb-2">Événement Impossible</h3>
-                    <p class="text-sm text-slate-600 mb-3">Il ne peut jamais se produire.</p>
-                    <div class="font-mono font-bold text-rose-600 text-xl bg-rose-50 rounded py-2">
-                        P(A) = 0
-                    </div>
-                    <p class="text-xs text-slate-500 mt-2">Ex: Obtenir un 7 avec un dé classique à 6 faces.</p>
+                <div class="flex gap-2 justify-center">
+                    <button onclick="rollDice()" id="btnRoll" class="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl transition-colors shadow-md text-xs">
+                        Lancer le Dé 1 fois
+                    </button>
+                    <button onclick="autoRoll(100)" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-2.5 px-4 rounded-xl transition-colors text-xs">
+                        + 100 Lancers
+                    </button>
                 </div>
-
-                <!-- Certain -->
-                <div class="bg-white rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500 p-5 text-center interactive-hover">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fa-solid fa-check-double text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-800 mb-2">Événement Certain</h3>
-                    <p class="text-sm text-slate-600 mb-3">Il se produira à 100% à chaque fois.</p>
-                    <div class="font-mono font-bold text-emerald-600 text-xl bg-emerald-50 rounded py-2">
-                        P(A) = 1
-                    </div>
-                    <p class="text-xs text-slate-500 mt-2">Ex: Obtenir un nombre inférieur à 10 avec un dé.</p>
-                </div>
-
-                <!-- Contraire -->
-                <div class="bg-white rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500 p-5 text-center interactive-hover">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fa-solid fa-yin-yang text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-800 mb-2">Événement Contraire</h3>
-                    <p class="text-sm text-slate-600 mb-3">C'est "tout le reste", l'inverse de l'événement.</p>
-                    <div class="font-mono font-bold text-purple-600 text-base bg-purple-50 rounded py-2">
-                        P(Non A) = 1 - P(A)
-                    </div>
-                    <p class="text-xs text-slate-500 mt-2">Ex: Si P(Gagner) = 20%, alors P(Perdre) = 100% - 20% = 80%.</p>
-                </div>
-
             </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-xs text-slate-800 max-w-md mx-auto">
+                <h4 class="font-bold text-slate-900 mb-2">Événement : "Obtenir un chiffre pair (2, 4, 6)"</h4>
+                
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-slate-600">Probabilité théorique :</span>
+                    <span class="font-mono font-bold bg-white px-2 py-1 rounded border border-slate-200">3/6 = 50 %</span>
+                </div>
+                
+                <div class="flex justify-between items-center mb-1 border-t border-slate-200 pt-2">
+                    <span class="text-slate-600">Lancers totaux :</span>
+                    <span class="font-mono font-bold" id="totalRolls">0</span>
+                </div>
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-slate-600">Chiffres pairs obtenus :</span>
+                    <span class="font-mono font-bold text-emerald-600" id="evenRolls">0</span>
+                </div>
+                
+                <div class="mt-3">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span>Fréquence réelle observée :</span>
+                        <span id="freqPercent" class="font-bold text-sky-600">0 %</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-3">
+                        <div class="bg-sky-500 h-3 rounded-full transition-all duration-300" id="freqBar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const diceIcons = [
+                    '<i class="fa-solid fa-dice-one"></i>',
+                    '<i class="fa-solid fa-dice-two"></i>',
+                    '<i class="fa-solid fa-dice-three"></i>',
+                    '<i class="fa-solid fa-dice-four"></i>',
+                    '<i class="fa-solid fa-dice-five"></i>',
+                    '<i class="fa-solid fa-dice-six"></i>'
+                ];
+                
+                let total = 0;
+                let evens = 0;
+
+                function doRoll() {
+                    const roll = Math.floor(Math.random() * 6) + 1;
+                    total++;
+                    if (roll % 2 === 0) evens++;
+                    return roll;
+                }
+
+                function updateStats(lastRoll) {
+                    if (lastRoll) {
+                        document.getElementById('diceDisplay').innerHTML = diceIcons[lastRoll - 1];
+                    }
+                    
+                    document.getElementById('totalRolls').innerText = total;
+                    document.getElementById('evenRolls').innerText = evens;
+                    
+                    const freq = total > 0 ? (evens / total * 100).toFixed(1) : 0;
+                    document.getElementById('freqPercent').innerText = `${freq} %`;
+                    document.getElementById('freqBar').style.width = `${freq}%`;
+                }
+
+                function rollDice() {
+                    const roll = doRoll();
+                    updateStats(roll);
+                }
+
+                function autoRoll(times) {
+                    for(let i=0; i<times; i++) {
+                        doRoll();
+                    }
+                    const fakeRoll = Math.floor(Math.random() * 6) + 1;
+                    updateStats(fakeRoll);
+                }
+            </script>
         </section>
 
     </main>
 
-    <div class="h-24"></div>
 </body>
 </html>

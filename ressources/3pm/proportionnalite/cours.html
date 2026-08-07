@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Proportionnalité</title>
+    <title>Je note l'essentiel (Cours) - Proportionnalité 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,25 +24,23 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
     <!-- Header & Nav unifiée pour la Séquence -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
@@ -69,202 +66,290 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Reconnaître -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Définition -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Reconnaître la Proportionnalité</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Deux grandeurs sont proportionnelles si on peut passer de l'une à l'autre en <strong>multipliant ou en divisant toujours par le même nombre</strong>.
-                        Ce nombre s'appelle le <span class="font-bold text-blue-600">Coefficient de proportionnalité</span>.
-                    </p>
-                    <div class="bg-blue-50 p-4 rounded text-sm text-blue-900 font-bold border border-blue-200">
-                        <i class="fa-solid fa-triangle-exclamation text-blue-600 mr-2"></i> Graphiquement, une situation de proportionnalité est représentée par une <strong>droite qui passe par l'origine</strong> (le point zéro).
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Proportionnalité & Pourcentages</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Formules officielles d'abord, puis exemples d'application contextualisés et rédigés pas à pas.</p>
                 </div>
 
-                <!-- La Règle de 3 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-brand-500">
-                    <h3 class="font-bold text-slate-900 text-lg mb-4"><i class="fa-solid fa-table mr-2"></i> Le produit en croix</h3>
-                    
-                    <p class="text-sm text-slate-600 mb-4">C'est la méthode reine pour calculer une 4ème proportionnelle quand on connaît 3 valeurs :</p>
-                    
-                    <ol class="list-decimal list-inside space-y-2 text-slate-700 text-sm font-semibold ml-2">
-                        <li>On multiplie les deux valeurs en diagonale.</li>
-                        <li>On divise par le troisième nombre tout seul.</li>
-                    </ol>
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Tableaux & Coefficient</a>
+                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Produit en croix</a>
+                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Pourcentages & TVA</a>
+                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Échelles & Vitesses</a>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 : RECONNAÎTRE ET COEFFICIENT DE PROPORTIONNALITÉ -->
+        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définitions Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Reconnaître la Proportionnalité et Coefficient $k$</h3>
                 </div>
             </div>
 
-            <!-- Visualization : Le Calculateur de Produit en Croix -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-emerald-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Simulateur de Produit en Croix
-                </h3>
-                <p class="text-xs text-slate-500 mb-6 text-center">Entrez 3 valeurs pour calculer la 4ème (X). Cliquez sur la case X pour choisir sa position.</p>
-                
-                <div class="bg-slate-800 rounded-xl p-5 shadow-inner mb-4">
-                    <div class="grid grid-cols-2 gap-4 max-w-[250px] mx-auto relative">
-                        <!-- Cross SVG -->
-                        <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-16 pointer-events-none" viewBox="0 0 100 60">
-                            <line x1="10" y1="10" x2="90" y2="50" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4"/>
-                            <line x1="10" y1="50" x2="90" y2="10" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4"/>
-                        </svg>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULE COEFFICIENT -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable"></i> Définition du Coefficient de Proportionnalité ($k$)
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Deux grandeurs sont **proportionnelles** si l'on passe de l'une à l'autre en multipliant toujours par un même nombre constant $k$, appelé **coefficient de proportionnalité** :
+                    </p>
+                    <div class="text-center py-2 text-base font-bold text-sky-300">
+                        $$k = \frac{\text{Grandeur 2}}{\text{Grandeur 1}}$$
+                    </div>
+                    <p class="text-[11px] text-slate-400 italic">
+                        <strong>Représentation graphique :</strong> Dans un repère, une situation de proportionnalité est représentée par une <strong>droite qui passe par l'origine</strong> $(0;0)$.
+                    </p>
+                </div>
 
-                        <!-- Cellules -->
-                        <div class="bg-slate-700 p-2 rounded cursor-pointer border-2 border-transparent hover:border-emerald-500 transition-colors" onclick="setX('TL')" id="cellTL">
-                            <input type="number" id="inpTL" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="2">
-                        </div>
-                        <div class="bg-slate-700 p-2 rounded cursor-pointer border-2 border-transparent hover:border-emerald-500 transition-colors" onclick="setX('TR')" id="cellTR">
-                            <input type="number" id="inpTR" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="10">
-                        </div>
-                        <div class="bg-slate-700 p-2 rounded cursor-pointer border-2 border-transparent hover:border-emerald-500 transition-colors" onclick="setX('BL')" id="cellBL">
-                            <input type="number" id="inpBL" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="5">
-                        </div>
-                        <div class="bg-emerald-600 p-2 rounded flex items-center justify-center cursor-pointer" onclick="setX('BR')" id="cellBR">
-                            <span class="text-white font-bold text-xl" id="inpBR">X</span>
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-pen-ruler text-sky-600"></i> Exemple d'application rédigé pas à pas : Recette de boulangerie
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Un artisan boulanger prépare la pâte pour ses brioches. Pour <strong>4 brioches</strong>, il lui faut <strong>500 g de farine</strong>.
+                    </p>
+                    
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">Étape 1 : Calcul du coefficient $k$ (masse unitaire)</p>
+                        <p class="text-slate-600">$$k = \frac{500\text{ g}}{4\text{ brioches}} = 125\text{ g par brioche}$$</p>
+
+                        <p class="font-bold text-slate-900 pt-2">Étape 2 : Tableau de proportionnalité complété</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center border-collapse border border-slate-300 text-xs font-sans">
+                                <tr class="bg-sky-50 font-bold"><td class="border p-2 text-left">Nombre de brioches</td><td class="border p-2">4</td><td class="border p-2">10</td><td class="border p-2">25</td></tr>
+                                <tr><td class="border p-2 font-bold text-left">Farine (g) ($\times 125$)</td><td class="border p-2">500</td><td class="border p-2 font-bold text-sky-700">1 250</td><td class="border p-2 font-bold text-sky-700">3 125</td></tr>
+                            </table>
                         </div>
                     </div>
-                    
-                    <button onclick="calculateCross()" class="w-full mt-6 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 rounded transition-colors shadow">
-                        Calculer X
-                    </button>
                 </div>
-
-                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded text-center">
-                    <p class="text-xs text-emerald-700 uppercase font-bold mb-1">Calcul détaillé</p>
-                    <p id="calcTrace" class="font-mono text-emerald-900 font-bold text-lg">X = (5 × 10) ÷ 2 = 25</p>
-                </div>
-
-                <script>
-                    let xPos = 'BR'; // TL, TR, BL, BR
-
-                    function setX(pos) {
-                        const ids = ['TL', 'TR', 'BL', 'BR'];
-                        const values = {
-                            'TL': document.getElementById('inpTL')?.value || "2",
-                            'TR': document.getElementById('inpTR')?.value || "10",
-                            'BL': document.getElementById('inpBL')?.value || "5",
-                            'BR': document.getElementById('inpBR')?.textContent !== 'X' ? document.getElementById('inpBR').textContent : "25"
-                        };
-
-                        xPos = pos;
-
-                        ids.forEach(id => {
-                            const cell = document.getElementById(`cell${id}`);
-                            if(id === pos) {
-                                cell.className = "bg-emerald-600 p-2 rounded flex items-center justify-center cursor-pointer";
-                                cell.innerHTML = `<span class="text-white font-bold text-xl" id="inp${id}">X</span>`;
-                            } else {
-                                cell.className = "bg-slate-700 p-2 rounded cursor-pointer border-2 border-transparent hover:border-emerald-500 transition-colors";
-                                cell.innerHTML = `<input type="number" id="inp${id}" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="${values[id] === 'X' ? 10 : values[id]}">`;
-                            }
-                        });
-                        
-                        document.getElementById('calcTrace').innerText = "Cliquez sur Calculer";
-                    }
-
-                    function calculateCross() {
-                        let result = 0;
-                        let trace = "";
-                        
-                        const tl = parseFloat(document.getElementById('inpTL')?.value || 0);
-                        const tr = parseFloat(document.getElementById('inpTR')?.value || 0);
-                        const bl = parseFloat(document.getElementById('inpBL')?.value || 0);
-                        const br = parseFloat(document.getElementById('inpBR')?.value || 0);
-
-                        if(xPos === 'BR') {
-                            result = (bl * tr) / tl;
-                            trace = `X = (${bl} × ${tr}) ÷ ${tl} = ${result}`;
-                        } else if(xPos === 'BL') {
-                            result = (tl * br) / tr;
-                            trace = `X = (${tl} × ${br}) ÷ ${tr} = ${result}`;
-                        } else if(xPos === 'TR') {
-                            result = (tl * br) / bl;
-                            trace = `X = (${tl} × ${br}) ÷ ${bl} = ${result}`;
-                        } else if(xPos === 'TL') {
-                            result = (bl * tr) / br;
-                            trace = `X = (${bl} × ${tr}) ÷ ${br} = ${result}`;
-                        }
-
-                        // Just flash the X briefly with the result before reverting, or show it below.
-                        // We will show it below in the trace box.
-                        document.getElementById('calcTrace').innerText = trace;
-                    }
-                </script>
             </div>
         </section>
 
-        <!-- SECTION 2 : Pourcentages et Échelles -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Pourcentages, Ratios et Échelles</h2>
+        <!-- CHAPITRE 2 : MÉTHODE DU PRODUIT EN CROIX (4ème PROPORTIONNELLE) -->
+        <section id="chap2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">II</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chapitre 2 • Méthode Reine</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Calcul de la 4ème Proportionnelle & Produit en Croix</h3>
+                </div>
             </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULE PRODUIT EN CROIX -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-xmark"></i> Règle du Produit en Croix
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Dans un tableau de proportionnalité à 4 cases, si trois valeurs $A, B, C$ sont connues, la quatrième valeur inconnue $x$ s'obtient en multipliant les deux nombres en diagonale et en divisant par le troisième :
+                    </p>
+                    <div class="text-center py-2 text-base font-bold text-amber-300">
+                        $$x = \frac{B \times C}{A}$$
+                    </div>
+                </div>
+
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-paint-roller text-amber-600"></i> Exemple d'application rédigé pas à pas : Chantier de Peinture
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Un peintre en bâtiment sait que <strong>3 Litres de peinture</strong> permettent de recouvrir <strong>24 m²</strong>. Quel volume $x$ faut-il pour <strong>40 m²</strong> ?
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">Étape 1 : Schéma du tableau de proportionnalité</p>
+                        <div class="overflow-x-auto my-1">
+                            <table class="w-full text-center border-collapse border border-slate-300 text-xs font-sans max-w-xs mx-auto">
+                                <tr class="bg-amber-50 font-bold"><td class="border p-2">3 Litres</td><td class="border p-2 font-bold text-amber-700">x Litres</td></tr>
+                                <tr><td class="border p-2">24 m²</td><td class="border p-2">40 m²</td></tr>
+                            </table>
+                        </div>
+
+                        <p class="font-bold text-slate-900 pt-2">Étape 2 : Calcul avec produit en croix</p>
+                        <p class="text-slate-600">$$x = \frac{3 \times 40}{24} = \frac{120}{24} = 5\text{ Litres}$$</p>
+                        <p class="font-bold text-slate-900">Conclusion : Il faut exactement 5 Litres de peinture pour peindre 40 m².</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 3 : POURCENTAGES, REMISES ET TVA -->
+        <section id="chap3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">III</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Chapitre 3 • Commerce & Gestion</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Pourcentages, Remises Commerciales et TVA</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULES POURCENTAGES -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-purple-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-percent"></i> Formules fondamentales des pourcentages
+                    </h4>
+                    <ul class="space-y-1.5 text-xs text-slate-300">
+                        <li>• <strong>Appliquer $p\,\%$ à une valeur $V$ :</strong> $\text{Montant} = V \times \frac{p}{100}$</li>
+                        <li>• <strong>Prix soldé (Réduction de $p\,\%$) :</strong> $\text{Prix soldé} = V - \text{Montant de la réduction}$</li>
+                        <li>• <strong>Prix TTC (avec TVA à $20\,\%$) :</strong> $\text{Prix TTC} = \text{Prix HT} + (\text{Prix HT} \times 0,20) = \text{Prix HT} \times 1,20$</li>
+                    </ul>
+                </div>
+
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 3 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar text-purple-600"></i> Exemple d'application rédigé pas à pas : Facture avec remise & TVA
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Un outillage professionnel est affiché à <strong>200 € HT</strong>. Le magasin offre une <strong>remise de 15 %</strong>. La TVA est de <strong>20 %</strong>.
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">1. Calcul du montant de la remise (15 % sur 200 €)</p>
+                        <p class="text-slate-600">$$\text{Remise} = 200 \times \frac{15}{100} = 30\text{ €}$$</p>
+
+                        <p class="font-bold text-slate-900 pt-1">2. Calcul du nouveau prix HT réduit</p>
+                        <p class="text-slate-600">$$\text{Prix HT réduit} = 200 - 30 = 170\text{ €}$$</p>
+
+                        <p class="font-bold text-slate-900 pt-1">3. Calcul de la TVA (20 % sur le prix réduit)</p>
+                        <p class="text-slate-600">$$\text{Montant TVA} = 170 \times 0,20 = 34\text{ €}$$</p>
+
+                        <p class="font-bold text-purple-900 pt-1">4. Prix final TTC à payer par le client</p>
+                        <p class="text-purple-900 font-bold">$$\text{Prix TTC} = 170 + 34 = 204\text{ €}$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 4 : ÉCHELLES ET GRANDEURS QUOTIENTS (VITESSE MOYENNE) -->
+        <section id="chap4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">IV</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Chapitre 4 • Dessin & Logistique</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Échelles de Plans et Vitesse Moyenne</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULES ÉCHELLE ET VITESSE -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                        <h4 class="font-bold text-emerald-400 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-map"></i> Échelle d'un plan
+                        </h4>
+                        <p class="text-xs text-slate-300">
+                            $$\text{Échelle} = \frac{\text{Dimension sur le plan}}{\text{Dimension réelle}} \quad (\text{même unité !})$$
+                        </p>
+                        <p class="text-[11px] text-slate-400 italic">Exemple : Une échelle $1/50$ signifie $1\text{ cm sur plan} = 50\text{ cm en réalité}$.</p>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                        <h4 class="font-bold text-emerald-400 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high"></i> Vitesse moyenne ($v = d/t$)
+                        </h4>
+                        <p class="text-xs text-slate-300">
+                            $$v = \frac{d}{t} \quad \text{où } d \text{ en km et } t \text{ en heures decimales.}$$
+                        </p>
+                        <p class="text-[11px] text-slate-400 italic">Conversion durée : $2\text{h } 30\text{min} = 2 + \frac{30}{60} = 2,5\text{ heures}$.</p>
+                    </div>
+                </div>
+
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 4 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-truck-fast text-emerald-600"></i> Exemple d'application rédigé pas à pas : Vitesse d'un camion livreur
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Un camion parcourt <strong>180 km</strong> en une durée de <strong>2 heures et 30 minutes</strong> ($2,5\text{ h}$). Quelle est sa vitesse moyenne ?
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">Étape 1 : Conversion de la durée en heures décimales</p>
+                        <p class="text-slate-600">$$t = 2\text{h } 30\text{min} = 2 + \frac{30}{60} = 2,5\text{ h}$$</p>
+
+                        <p class="font-bold text-slate-900 pt-1">Étape 2 : Application de la formule de la vitesse</p>
+                        <p class="text-emerald-900 font-bold">$$v = \frac{d}{t} = \frac{180\text{ km}}{2,5\text{ h}} = 72\text{ km/h}$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR INTERACTIF PRODUIT EN CROIX -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow border-t-4 border-t-emerald-500 no-print">
+            <h3 class="font-bold text-slate-800 mb-2 font-heading text-center text-lg">
+                <i class="fa-solid fa-calculator text-emerald-600 mr-2"></i> Simulateur Interactif de Produit en Croix
+            </h3>
+            <p class="text-xs text-slate-500 mb-6 text-center">Entrez 3 valeurs pour calculer automatiquement la 4ème inconnue $X$.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Pourcentages -->
-                <div class="bg-white rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-rose-500 overflow-hidden interactive-hover">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
-                        <i class="fa-solid fa-percent text-rose-500 text-2xl"></i>
-                        <h3 class="font-bold text-slate-800">Pourcentage</h3>
+            <div class="bg-slate-800 rounded-2xl p-6 shadow-inner max-w-md mx-auto space-y-4">
+                <div class="grid grid-cols-2 gap-4 relative">
+                    <div class="bg-slate-700 p-3 rounded-xl border border-slate-600">
+                        <label class="text-[10px] text-slate-400 font-bold block mb-1">Grandeur A1</label>
+                        <input type="number" id="inpTL" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="3">
                     </div>
-                    <div class="p-5">
-                        <p class="text-sm text-slate-600 mb-3">Un pourcentage est une fraction dont le dénominateur est 100.</p>
-                        <div class="bg-rose-50 p-3 rounded border border-rose-100 text-sm">
-                            <p class="font-bold text-rose-900 mb-1">Prendre $p$ % d'une quantité :</p>
-                            <p class="font-mono text-rose-800 text-center mb-2">Quantité × $\frac{p}{100}$</p>
-                            <p class="text-xs text-rose-700 italic">Ex: 20% de 50€ = $50 \times \frac{20}{100} = 10€$</p>
-                        </div>
+                    <div class="bg-slate-700 p-3 rounded-xl border border-slate-600">
+                        <label class="text-[10px] text-slate-400 font-bold block mb-1">Grandeur A2</label>
+                        <input type="number" id="inpTR" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="24">
                     </div>
-                </div>
-
-                <!-- Echelles -->
-                <div class="bg-white rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500 overflow-hidden interactive-hover">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
-                        <i class="fa-solid fa-map text-purple-500 text-2xl"></i>
-                        <h3 class="font-bold text-slate-800">Échelles</h3>
+                    <div class="bg-slate-700 p-3 rounded-xl border border-slate-600">
+                        <label class="text-[10px] text-slate-400 font-bold block mb-1">Grandeur B1</label>
+                        <input type="number" id="inpBL" class="w-full bg-transparent text-white font-bold text-center text-xl outline-none" value="5">
                     </div>
-                    <div class="p-5">
-                        <p class="text-sm text-slate-600 mb-3">L'échelle d'un plan est le coefficient de proportionnalité entre les dimensions sur le plan et en réalité.</p>
-                        <div class="bg-purple-50 p-3 rounded border border-purple-100 text-sm">
-                            <p class="font-bold text-purple-900 mb-1">Formule (même unité !) :</p>
-                            <p class="font-mono text-purple-800 text-center mb-2">Échelle = $\frac{\text{Distance sur le plan}}{\text{Distance réelle}}$</p>
-                            <p class="text-xs text-purple-700 italic">Ex: 1/50 signifie que 1cm sur le plan = 50cm en réalité.</p>
-                        </div>
+                    <div class="bg-emerald-600 p-3 rounded-xl flex flex-col justify-center items-center">
+                        <label class="text-[10px] text-emerald-100 font-bold block">Inconnue X (B2)</label>
+                        <span class="text-white font-black text-2xl" id="inpBR">?</span>
                     </div>
                 </div>
 
-                <!-- Ratios -->
-                <div class="bg-white rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-amber-500 overflow-hidden interactive-hover">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
-                        <i class="fa-solid fa-mortar-pestle text-amber-500 text-2xl"></i>
-                        <h3 class="font-bold text-slate-800">Ratio</h3>
-                    </div>
-                    <div class="p-5">
-                        <p class="text-sm text-slate-600 mb-3">Partager une quantité selon un ratio, c'est la partager en parts inégales mais proportionnelles.</p>
-                        <div class="bg-amber-50 p-3 rounded border border-amber-100 text-sm">
-                            <p class="font-bold text-amber-900 mb-1">Mélange de béton (Ratio 1:2:3) :</p>
-                            <p class="text-xs text-amber-800">1 volume de ciment + 2 de sable + 3 de gravier = 6 volumes au total.</p>
-                            <p class="text-xs text-amber-800 mt-1">Pour faire 60L : Ciment = 10L, Sable = 20L, Gravier = 30L.</p>
-                        </div>
-                    </div>
-                </div>
-
+                <button onclick="calculateCross()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3 rounded-xl transition-colors shadow-md text-xs uppercase tracking-wider">
+                    Calculer la 4ème proportionnelle
+                </button>
             </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-center max-w-md mx-auto mt-4">
+                <p class="text-xs text-emerald-700 uppercase font-bold mb-1">Détail du calcul</p>
+                <p id="calcTrace" class="font-mono text-emerald-900 font-bold text-base">X = (5 × 24) ÷ 3 = 40</p>
+            </div>
+
+            <script>
+                function calculateCross() {
+                    const tl = parseFloat(document.getElementById('inpTL')?.value || 1);
+                    const tr = parseFloat(document.getElementById('inpTR')?.value || 0);
+                    const bl = parseFloat(document.getElementById('inpBL')?.value || 0);
+
+                    const result = (bl * tr) / tl;
+                    document.getElementById('inpBR').innerText = result;
+                    document.getElementById('calcTrace').innerText = `X = (${bl} × ${tr}) ÷ ${tl} = ${result}`;
+                }
+            </script>
         </section>
 
     </main>
 
-    <div class="h-24"></div>
 </body>
 </html>
