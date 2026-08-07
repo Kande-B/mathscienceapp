@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & Calcul Mental - Fonctions Affines & Linéaires 3PM</title>
+    <title>Automatismes & Calcul Mental - Fonctions Affines 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,16 +32,15 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-
-        /* Animation des Flashcards 3D */
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .flipped .transform-style-3d { transform: rotateY(180deg); }
-
         .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
         .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        /* Flashcard flip styles */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flipped .transform-style-3d { transform: rotateY(180deg); }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
@@ -55,7 +54,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 3PM • Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Fonctions Affines & Linéaires</h1>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Affines et Linéaires</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -70,220 +69,396 @@
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- BANNIÈRE DE PRÉSENTATION DU RITUEL -->
-        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Rituel 5-10 min</span>
-                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
-                    </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white mt-2">Automatismes : Fonctions Affines $f(x) = ax + b$</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl mt-1">
-                        Maîtrisez le calcul d'images, la recherche d'antécédents, l'identification du coefficient directeur et de l'ordonnée à l'origine.
-                    </p>
-                </div>
-                <!-- SCORE GLOBAL EN DIRECT -->
-                <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 text-center min-w-[160px]">
-                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Score Global</span>
-                    <span id="score-total" class="text-3xl font-black text-yellow-400 font-heading">0 / 20</span>
-                </div>
+        <!-- BANNIERE D'ENTÊTE AUTOMATISMES -->
+        <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 text-slate-950 p-6 md:p-8 rounded-3xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2">
+                <span class="bg-slate-950 text-yellow-400 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Module Automatismes & Réflexes</span>
+                <h2 class="text-3xl font-extrabold font-heading text-slate-950">Calcul Mental & QCM Flash : Fonctions Affines</h2>
+                <p class="text-sm text-slate-900 max-w-2xl font-medium">Développez des réflexes instantanés sur les calculs d'images, d'antécédents, de pentes $a$ et d'ordonnées à l'origine $b$ !</p>
+            </div>
+            <!-- SCORE BOARD EN DIRECT -->
+            <div class="bg-slate-950 text-white p-5 rounded-2xl border border-yellow-400/30 text-center min-w-[200px] flex-shrink-0 shadow-inner">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">Score Global</span>
+                <div class="text-3xl font-extrabold text-yellow-400 font-heading" id="global-score">0 / 21</div>
+                <span class="text-[11px] text-slate-400 block mt-1" id="score-status">Commencez les exercices</span>
             </div>
         </div>
 
-        <!-- MODULE 1 : FLASHCARDS DE RÉVISION (10 CARTES RÉVERSIBLES) -->
-        <section class="space-y-6">
-            <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-200 pb-3">
-                <div class="flex items-center gap-3">
-                    <span class="w-8 h-8 bg-amber-100 text-amber-800 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-layer-group"></i></span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Module 1 • Flashcards Réversibles (Réflexes Fonctions)</h3>
+        <!-- SECTION 1: FLASHCARDS INTERACTIVES (10 CARTE REVISION) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 bg-amber-500 text-slate-950 rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-layer-group"></i></span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Module 1 : Flashcards Définitions & Formules (10 cartes)</h3>
                 </div>
-                <span class="text-xs font-bold text-slate-500">Cliquez sur une carte pour la retourner</span>
+                <span class="text-xs font-semibold text-slate-500">Cliquez sur une carte pour révéler la réponse</span>
             </div>
 
-            <!-- GRILLE DE 10 FLASHCARDS -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <!-- Card 1 -->
-                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
-                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
-                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 1</span>
-                            <p class="font-bold text-slate-900 text-sm text-center">Soit $f(x) = 4x + 3$. <br>Calculer $f(2)$.</p>
-                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 1</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la forme générale d'une fonction affine ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
                         </div>
-                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 1</span>
-                            <div class="text-center">
-                                <p class="text-2xl font-black font-heading">f(2) = 11</p>
-                                <p class="text-[11px] font-bold opacity-90 mt-1">($4 \times 2 + 3 = 11$)</p>
-                            </div>
-                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">$$f(x) = a \cdot x + b$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
-                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
-                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 2</span>
-                            <p class="font-bold text-slate-900 text-sm text-center">Soit $g(x) = 5x - 7$. <br>Quel est l'antécédent de 13 ?</p>
-                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 2</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la forme générale d'une fonction linéaire ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
                         </div>
-                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 2</span>
-                            <div class="text-center">
-                                <p class="text-2xl font-black font-heading">x = 4</p>
-                                <p class="text-[11px] font-bold opacity-90 mt-1">($5x - 7 = 13 \implies 5x = 20$)</p>
-                            </div>
-                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">$$f(x) = a \cdot x$$ (avec $b = 0$).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
-                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
-                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 3</span>
-                            <p class="font-bold text-slate-900 text-sm text-center">Soit $h(x) = -3x + 8$. <br>Quel est le coefficient directeur $a$ ?</p>
-                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 3</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Que représente le coefficient $a$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
                         </div>
-                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 3</span>
-                            <div class="text-center">
-                                <p class="text-2xl font-black font-heading">a = -3</p>
-                                <p class="text-[11px] font-bold opacity-90 mt-1">(Pente négative)</p>
-                            </div>
-                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Le <strong>coefficient directeur</strong> (ou la pente de la droite).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 4 -->
-                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
-                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
-                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 4</span>
-                            <p class="font-bold text-slate-900 text-sm text-center">Soit $k(x) = 6x$. <br>Quelle est la nature de cette fonction ?</p>
-                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 4</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Que représente le nombre $b$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
                         </div>
-                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 4</span>
-                            <div class="text-center">
-                                <p class="text-xl font-black font-heading">Fonction Linéaire</p>
-                                <p class="text-[11px] font-bold opacity-90 mt-1">(Passe par l'origine O)</p>
-                            </div>
-                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">L'<strong>ordonnée à l'origine</strong> (point $(0; b)$ sur l'axe vertical).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 5 -->
-                <div class="perspective-1000 h-44 cursor-pointer group" onclick="flipCard(this)">
-                    <div class="transform-style-3d relative w-full h-full rounded-2xl shadow-sm border border-slate-200 bg-white p-4 flex flex-col justify-between">
-                        <div class="backface-hidden absolute inset-0 p-4 flex flex-col justify-between bg-white rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-amber-600 tracking-wider">Flashcard 5</span>
-                            <p class="font-bold text-slate-900 text-sm text-center">Par quel point remarquable passe toute droite linéaire ?</p>
-                            <span class="text-[11px] text-center font-bold text-slate-400 flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Cliquez pour révéler</span>
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 5</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la forme graphique d'une fonction affine ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
                         </div>
-                        <div class="backface-hidden rotate-y-180 absolute inset-0 p-4 flex flex-col justify-between bg-amber-500 text-slate-950 rounded-2xl">
-                            <span class="text-[10px] font-extrabold uppercase text-slate-900 tracking-wider">Réponse 5</span>
-                            <div class="text-center">
-                                <p class="text-xl font-black font-heading">L'Origine (0, 0)</p>
-                                <p class="text-[11px] font-bold opacity-90 mt-1">($f(0) = 0$)</p>
-                            </div>
-                            <span class="text-[10px] text-center font-bold text-slate-900 uppercase">Validé !</span>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">C'est une <strong>droite</strong>.</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- Card 6 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 6</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Par quel point particulier passe toujours une fonction linéaire ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Par l'<strong>origine du repère $(0;0)$</strong>.</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 7</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Comment varie la droite si $a > 0$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Elle est <strong>strictement montante (croissante)</strong>.</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 8</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Comment varie la droite si $a < 0$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Elle est <strong>strictement descendante (décroissante)</strong>.</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 9</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la formule du coefficient $a$ via 2 points $A$ et $B$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">$$a = \frac{y_B - y_A}{x_B - x_A}$$</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 10 -->
+                <div onclick="flipCard(this)" class="perspective-1000 h-44 cursor-pointer group">
+                    <div class="relative w-full h-full transition-transform duration-500 transform-style-3d">
+                        <div class="absolute w-full h-full bg-white border border-slate-200 rounded-2xl p-4 flex flex-col justify-between backface-hidden shadow-sm hover:border-amber-400 transition-colors">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Flashcard 10</span>
+                            <p class="text-xs font-bold text-slate-800 text-center">Quelle est la droite d'une fonction constante $f(x) = b$ ?</p>
+                            <span class="text-[10px] text-slate-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-rotate"></i> Révéler</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between backface-hidden rotate-y-180 shadow-sm">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400">Réponse</span>
+                            <p class="text-xs text-slate-200 text-center">Une <strong>droite horizontale</strong> ($a = 0$).</p>
+                            <span class="text-[10px] text-yellow-400 text-center flex items-center justify-center gap-1"><i class="fa-solid fa-check"></i> Compris</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- MODULE 2 : APPLICATION DIRECTE (5 QUESTIONS À SAISIE AUTONOME) -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
-                <span class="w-8 h-8 bg-sky-100 text-sky-800 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-calculator"></i></span>
-                <h3 class="text-xl font-bold font-heading text-slate-900">Module 2 • Application directe (Calculs d'images et d'antécédents)</h3>
+        <!-- SECTION 2: CALCULS MENTAUX RAPIDES (6 DÉFIS) -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+                <span class="w-8 h-8 bg-sky-500 text-white rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-calculator"></i></span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Module 2 : Calcul Mental Rapide d'Images et Antécédents (6 Défis)</h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                
-                <!-- Q1 -->
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Soit $f(x) = 3x + 5$. Calculez l'image de 4 : $f(4)$ :</label>
-                    <input type="number" id="m2-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la valeur de f(4)">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Défi 1 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 1</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $f(x) = 4x + 3$.</h4>
+                    <p class="text-xs text-slate-600">Quelle est l'image de 2 par $f$ ?</p>
+                    <input type="number" id="m1-q1" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez la valeur">
+                    <button onclick="checkModule1(1)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-1" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
                 </div>
 
-                <!-- Q2 -->
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Soit $g(x) = 2x - 8$. Quel est l'antécédent de 10 ?</label>
-                    <input type="number" id="m2-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez l'antécédent x">
+                <!-- Défi 2 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 2</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $g(x) = 5x - 7$.</h4>
+                    <p class="text-xs text-slate-600">Quelle est l'image de 3 par $g$ ?</p>
+                    <input type="number" id="m1-q2" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez la valeur">
+                    <button onclick="checkModule1(2)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-2" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
                 </div>
 
-                <!-- Q3 -->
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Soit $h(x) = 7x + 12$. Quelle est l'ordonnée à l'origine $b$ ?</label>
-                    <input type="number" id="m2-q3" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la valeur de b">
+                <!-- Défi 3 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 3</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $h(x) = 2x + 10$.</h4>
+                    <p class="text-xs text-slate-600">Quel est l'antécédent de 20 ?</p>
+                    <input type="number" id="m1-q3" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez l'antécédent">
+                    <button onclick="checkModule1(3)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-3" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
                 </div>
 
-                <!-- Q4 -->
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">4. Soit $k(x) = -5x + 3$. Quel est le coefficient directeur $a$ ?</label>
-                    <input type="number" id="m2-q4" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez la valeur de a">
+                <!-- Défi 4 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 4</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $f(x) = -3x + 12$.</h4>
+                    <p class="text-xs text-slate-600">Quelle est l'image de 4 par $f$ ?</p>
+                    <input type="number" id="m1-q4" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez la valeur">
+                    <button onclick="checkModule1(4)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-4" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
                 </div>
 
-                <!-- Q5 -->
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 md:col-span-2">
-                    <label class="font-bold text-slate-900 block">5. Une fonction linéaire $p(x) = ax$ passe par le point $(3, 15)$. Quel est son coefficient $a$ ?</label>
-                    <input type="number" id="m2-q5" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Entrez le coefficient a">
+                <!-- Défi 5 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 5</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $f(x) = 6x$.</h4>
+                    <p class="text-xs text-slate-600">Quel est l'antécédent de 42 ?</p>
+                    <input type="number" id="m1-q5" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez l'antécédent">
+                    <button onclick="checkModule1(5)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-5" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
                 </div>
 
+                <!-- Défi 6 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-sky-100 text-sky-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">Défi 6</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit la droite d'équation $y = 3x - 4$.</h4>
+                    <p class="text-xs text-slate-600">Quelle est l'ordonnée à l'origine $b$ ?</p>
+                    <input type="number" id="m1-q6" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez la valeur">
+                    <button onclick="checkModule1(6)" class="w-full bg-slate-900 text-white text-xs py-2 rounded-lg font-bold hover:bg-slate-800">Valider</button>
+                    <div id="fb-m1-6" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: MINI-CALCULS DE PENTE A ET D'ORDONNEE B (5 DÉFIS) -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+                <span class="w-8 h-8 bg-purple-500 text-white rounded-lg flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-sliders"></i></span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Module 3 : Pente $a$ et Ordonnée $b$ en 30 sec (5 Défis)</h3>
             </div>
 
-            <button onclick="checkModule2()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Module 2
-            </button>
-            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Défi 1 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 1</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Une droite passe par $A(0; 5)$ et $B(2; 11)$.</h4>
+                    <p class="text-xs text-slate-600">Quel est le coefficient directeur $a$ ?</p>
+                    <input type="number" id="m3-q1" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez la pente a">
+                    <button onclick="checkModule3(1)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-1" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 2 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 2</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $f(x) = -2x + 8$.</h4>
+                    <p class="text-xs text-slate-600">La droite est-elle croissante ou décroissante ?</p>
+                    <select id="m3-q2" class="border rounded-lg p-2 w-full text-xs font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="croissante">Croissante</option>
+                        <option value="décroissante">Décroissante</option>
+                    </select>
+                    <button onclick="checkModule3(2)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-2" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 3 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 3</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Une fonction linéaire vérifie $f(4) = 20$.</h4>
+                    <p class="text-xs text-slate-600">Quel est son coefficient $a$ ?</p>
+                    <input type="number" id="m3-q3" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez la valeur a">
+                    <button onclick="checkModule3(3)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-3" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 4 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 4</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Formule de taxi : $g(x) = 1,5x + 3$.</h4>
+                    <p class="text-xs text-slate-600">Quel est le montant du forfait fixe (en €) ?</p>
+                    <input type="number" id="m3-q4" class="border rounded-lg p-2 w-full text-xs font-bold" placeholder="Entrez le fixe b">
+                    <button onclick="checkModule3(4)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-4" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+
+                <!-- Défi 5 -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 card-shadow space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block">M3 • Défi 5</span>
+                    <h4 class="font-bold text-slate-900 text-sm">Soit $f(x) = 0x + 7$.</h4>
+                    <p class="text-xs text-slate-600">Quelle est la forme de la droite ?</p>
+                    <select id="m3-q5" class="border rounded-lg p-2 w-full text-xs font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="horizontale">Horizontale</option>
+                        <option value="verticale">Verticale</option>
+                        <option value="oblique">Oblique</option>
+                    </select>
+                    <button onclick="checkModule3(5)" class="w-full bg-purple-600 text-white text-xs py-2 rounded-lg font-bold hover:bg-purple-700">Valider</button>
+                    <div id="fb-m3-5" class="text-xs hidden p-2 rounded-lg font-semibold"></div>
+                </div>
+            </div>
         </section>
 
     </main>
 
-    <!-- SCRIPTS JS -->
+    <!-- SCRIPTS JS AUTOMATISMES ET SCOREBOARD -->
     <script>
-        function flipCard(card) {
-            card.classList.toggle('flipped');
+        let scores = { flashcards: 0, m1: {}, m3: {} };
+
+        function flipCard(el) {
+            el.classList.toggle('flipped');
+            updateGlobalScore();
         }
 
-        function checkModule2() {
-            let q1 = document.getElementById('m2-q1').value.trim();
-            let q2 = document.getElementById('m2-q2').value.trim();
-            let q3 = document.getElementById('m2-q3').value.trim();
-            let q4 = document.getElementById('m2-q4').value.trim();
-            let q5 = document.getElementById('m2-q5').value.trim();
-            let fb = document.getElementById('fb-m2');
+        function updateGlobalScore() {
+            let flippedCards = document.querySelectorAll('.perspective-1000.flipped').length;
+            let m1Score = Object.values(scores.m1).filter(v => v === true).length;
+            let m3Score = Object.values(scores.m3).filter(v => v === true).length;
+
+            let total = flippedCards + m1Score + m3Score;
+            document.getElementById('global-score').innerText = `${total} / 21`;
+
+            let status = document.getElementById('score-status');
+            if (total >= 18) status.innerText = "🏆 Expert Fonctions Affines !";
+            else if (total >= 10) status.innerText = "👍 Bon travail, continuez !";
+            else status.innerText = "En cours d'entraînement...";
+        }
+
+        function checkModule1(num) {
+            let input = document.getElementById(`m1-q${num}`).value.trim();
+            let fb = document.getElementById(`fb-m1-${num}`);
             fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
 
-            let pts = 0;
-            if (q1 === "17") pts += 4;
-            if (q2 === "9") pts += 4;
-            if (q3 === "12") pts += 4;
-            if (q4 === "-5") pts += 4;
-            if (q5 === "5") pts += 4;
+            let answers = { 1: "11", 2: "8", 3: "5", 4: "0", 5: "7", 6: "-4" };
 
-            document.getElementById('score-total').innerText = `${pts} / 20`;
-
-            if (pts === 20) {
+            if (input === answers[num]) {
                 fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Félicitations ! Module 2 entièrement réussi (20 / 20 points).`;
+                fb.innerText = "Correct ! +1 point";
+                scores.m1[num] = true;
             } else {
                 fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ${pts} / 20. <br>Corrigés : 1) $f(4) = 3(4) + 5 = 17$. 2) $2x - 8 = 10 \\implies x = 9$. 3) $b = 12$. 4) $a = -5$. 5) $a = 15 / 3 = 5$.`;
+                fb.innerText = `Faux. Réponse attendue : ${answers[num]}`;
+                scores.m1[num] = false;
             }
+            updateGlobalScore();
+        }
+
+        function checkModule3(num) {
+            let input = document.getElementById(`m3-q${num}`).value.trim();
+            let fb = document.getElementById(`fb-m3-${num}`);
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            let answers = { 1: "3", 2: "décroissante", 3: "5", 4: "3", 5: "horizontale" };
+
+            if (input.toLowerCase() === answers[num]) {
+                fb.classList.add('correct-bg');
+                fb.innerText = "Correct ! +1 point";
+                scores.m3[num] = true;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerText = `Faux. Réponse attendue : ${answers[num]}`;
+                scores.m3[num] = false;
+            }
+            updateGlobalScore();
         }
     </script>
 </body>
