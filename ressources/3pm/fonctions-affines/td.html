@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Fonctions</title>
+    <title>Fiche de TD - Fonctions Affines & Linéaires (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,436 +24,170 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
                 <div>
-                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
-                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Fonctions (Image, Antécédent, Graphique)</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Affines & Linéaires</h1>
                 </div>
             </div>
-            <div class="hidden md:block">
-                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        
-        <!-- Section: Acquisition -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable</span> • <span>Cycle 4 / 3ème Prépa-Métiers</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices sur les Fonctions Affines & Linéaires</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 1 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Vocabulaire (Image / Antécédent)</h3>
-                    <p class="text-sm text-slate-600 mb-4">On a la relation : $f(3) = 15$. <br>Complétez les phrases avec les mots <strong>image</strong> ou <strong>antécédent</strong>.</p>
-                    
-                    <div class="space-y-4 text-sm font-mono mb-4">
-                        <div class="flex items-center gap-2">
-                            <span>15 est l'</span>
-                            <select id="ex1-1" class="border rounded p-1">
-                                <option value="">---</option>
-                                <option value="image">image</option>
-                                <option value="antecedent">antécédent</option>
-                            </select>
-                            <span>de 3.</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span>3 est un</span>
-                            <select id="ex1-2" class="border rounded p-1">
-                                <option value="">---</option>
-                                <option value="image">image</option>
-                                <option value="antecedent">antécédent</option>
-                            </select>
-                            <span>de 15.</span>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 2 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calcul d'une image</h3>
-                    <p class="text-sm text-slate-600 mb-4">Soit la fonction $f(x) = 2x + 5$. <br>Calculez l'image de <strong>4</strong>. (C'est-à-dire, calculez $f(4)$).</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
-                        <span>$f(4) =$</span>
-                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx2()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 3 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calcul d'un antécédent</h3>
-                    <p class="text-sm text-slate-600 mb-4">Soit la fonction $g(x) = 3x - 1$. <br>Trouvez l'antécédent de <strong>14</strong>. (Trouvez $x$ tel que $3x - 1 = 14$).</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
-                        <span>$x =$</span>
-                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
+            <!-- GRILLE DES COMPETENCES DU CYCLE 4 -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-amber-600 block">CHER</span> Chercher</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">MOD</span> Modéliser</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-purple-600 block">REG</span> Représenter</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-emerald-600 block">REA</span> Calculer</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-rose-600 block">COM</span> Communiquer</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-cyan-600 block">VAL</span> Valider</div>
             </div>
         </div>
 
-        <!-- Section: Entraînement -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement (Graphique)</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    Calcul d'images par une fonction affine
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
             </div>
 
-            <div class="grid grid-cols-1 gap-6">
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative flex flex-col md:flex-row gap-8">
-                    <!-- Graphique commun aux ex 4 et 5 -->
-                    <div class="w-full md:w-1/2 flex justify-center items-center">
-                        <svg viewBox="-20 -20 240 240" class="w-full max-w-sm">
-                            <!-- Grille -->
-                            <g stroke="#e2e8f0" stroke-width="1">
-                                <line x1="0" y1="0" x2="200" y2="0"/>
-                                <line x1="0" y1="40" x2="200" y2="40"/>
-                                <line x1="0" y1="80" x2="200" y2="80"/>
-                                <line x1="0" y1="120" x2="200" y2="120"/>
-                                <line x1="0" y1="160" x2="200" y2="160"/>
-                                <line x1="0" y1="200" x2="200" y2="200"/>
-                                
-                                <line x1="0" y1="0" x2="0" y2="200"/>
-                                <line x1="40" y1="0" x2="40" y2="200"/>
-                                <line x1="80" y1="0" x2="80" y2="200"/>
-                                <line x1="120" y1="0" x2="120" y2="200"/>
-                                <line x1="160" y1="0" x2="160" y2="200"/>
-                                <line x1="200" y1="0" x2="200" y2="200"/>
-                            </g>
-                            <!-- Axes -->
-                            <g stroke="#1e293b" stroke-width="2">
-                                <line x1="100" y1="0" x2="100" y2="200"/> <!-- Axe Y -->
-                                <line x1="0" y1="100" x2="200" y2="100"/> <!-- Axe X -->
-                            </g>
-                            <!-- Labels Axes (Origin 100,100, scale 40px = 1 unit) -->
-                            <text x="90" y="115" font-size="10" font-family="monospace">0</text>
-                            <text x="135" y="115" font-size="10" font-family="monospace">1</text>
-                            <text x="175" y="115" font-size="10" font-family="monospace">2</text>
-                            <text x="85" y="65" font-size="10" font-family="monospace">1</text>
-                            <text x="85" y="25" font-size="10" font-family="monospace">2</text>
-                            <text x="80" y="145" font-size="10" font-family="monospace">-1</text>
-                            <!-- Droite f(x) = 0.5x + 1 -->
-                            <!-- Pour x=0, y=1 (px: x=100, y=60) -->
-                            <!-- Pour x=2, y=2 (px: x=180, y=20) -->
-                            <!-- Pour x=-2, y=0 (px: x=20, y=100) -->
-                            <!-- Point x=1 => y=1.5 => px: 140, 40 -->
-                            <line x1="0" y1="110" x2="200" y2="10" stroke="#0ea5e9" stroke-width="3"/>
-                            <text x="180" y="15" font-size="12" fill="#0ea5e9" font-weight="bold">C_f</text>
-                        </svg>
-                    </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>On donne la fonction affine $f(x) = 5x - 4$.</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>Calculez $f(3)$.</li>
+                    <li>Calculez $f(-2)$.</li>
+                </ol>
+            </div>
 
-                    <div class="w-full md:w-1/2 space-y-6">
-                        <!-- Ex 4 -->
-                        <div class="relative">
-                            <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md z-10">4</div>
-                            <h3 class="font-bold text-slate-800 mb-2 pl-6">Lecture d'image</h3>
-                            <p class="text-sm text-slate-600 mb-2 pl-6">En lisant sur le graphique (droite bleue), déterminez l'image de <strong>2</strong>.</p>
-                            
-                            <div class="flex items-center gap-2 mb-2 pl-6 font-mono text-sm">
-                                <span>$f(2) =$</span>
-                                <input type="number" id="ex4-ans" class="border border-slate-300 rounded p-1 w-20 text-center">
-                            </div>
-                            <button onclick="checkEx4()" class="ml-6 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-1 rounded transition-colors">Vérifier</button>
-                            <div id="fb-ex4" class="mt-2 ml-6 text-sm hidden p-2 rounded"></div>
-                        </div>
-
-                        <hr class="border-slate-100">
-
-                        <!-- Ex 5 -->
-                        <div class="relative">
-                            <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md z-10">5</div>
-                            <h3 class="font-bold text-slate-800 mb-2 pl-6">Lecture d'antécédent</h3>
-                            <p class="text-sm text-slate-600 mb-2 pl-6">En lisant sur le graphique, déterminez l'antécédent de <strong>0</strong>. (Quelle valeur sur l'axe horizontal correspond à 0 sur l'axe vertical ?)</p>
-                            
-                            <div class="flex items-center gap-2 mb-2 pl-6 font-mono text-sm">
-                                <span>$f($</span>
-                                <input type="number" id="ex5-ans" class="border border-slate-300 rounded p-1 w-16 text-center">
-                                <span>$) = 0$</span>
-                            </div>
-                            <button onclick="checkEx5()" class="ml-6 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-1 rounded transition-colors">Vérifier</button>
-                            <div id="fb-ex5" class="mt-2 ml-6 text-sm hidden p-2 rounded"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ex 6 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Nature de la fonction</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        La fonction du graphique ci-dessus a pour droite représentative une ligne droite qui <strong>ne passe pas</strong> par l'origine du repère. <br>
-                        Comment appelle-t-on ce type de fonction ?
-                    </p>
-                    
-                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex6-options">
-                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Fonction linéaire</button>
-                        <button onclick="selectRadio('ex6', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Fonction affine</button>
-                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-bold">Fonction constante</button>
-                    </div>
-                    
-                    <button onclick="checkRadio('ex6', 'Exact ! Une droite qui ne passe pas par l\'origine (0,0) représente une fonction affine ($f(x) = ax + b$). Si elle passe par l\'origine, c\'est une fonction linéaire.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$f(3) = 5(3) - 4 = 15 - 4 = 11$.</li>
+                    <li>$f(-2) = 5(-2) - 4 = -10 - 4 = -14$.</li>
+                </ol>
             </div>
         </div>
 
-        <!-- Section: Pro -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    Recherche d'antécédent par une fonction affine
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
             </div>
 
-            <div class="grid grid-cols-1 gap-6">
-                
-                <!-- Ex 7 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-mobile-screen text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Télécom - Facturation d'un forfait</h3>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="md:w-2/3">
-                            <p class="text-sm text-slate-600 mb-4">
-                                Un forfait de téléphone coûte <strong>15 € d'abonnement fixe par mois</strong>, plus <strong>0,10 € par minute</strong> de communication. <br>
-                                Soit $x$ le nombre de minutes de communication. La fonction $P(x)$ donne le prix total à payer.
-                            </p>
-                            
-                            <div class="space-y-4 text-sm text-slate-700">
-                                <div>
-                                    <label class="font-bold block mb-1">1. Quelle est l'expression de la fonction affine $P(x)$ ?</label>
-                                    <div class="flex items-center gap-2 font-mono">
-                                        <span>$P(x) =$</span>
-                                        <input type="text" id="ex7-expr" class="border border-slate-300 rounded p-1 w-32 text-center" placeholder="ex: 0.10x + 15">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="font-bold block mb-1">2. Calculez la facture pour 100 minutes de communication :</label>
-                                    <div class="flex items-center gap-2 font-mono">
-                                        <span>$P(100) =$</span>
-                                        <input type="number" id="ex7-ans" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>€</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
-                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>On donne la fonction $g(x) = 3x + 12$.</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>Trouvez l'antécédent de 27 par la fonction $g$.</li>
+                    <li>Trouvez le nombre $x$ tel que $g(x) = 0$.</li>
+                </ol>
+            </div>
 
-                <!-- Ex 8 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-briefcase text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Commerce - Salaire et Prime</h3>
-                    </div>
-                    
-                    <p class="text-sm text-slate-600 mb-4">
-                        Un vendeur gagne un <strong>salaire fixe de 1200 €</strong> par mois. Il touche en plus une <strong>prime de 5 € par article vendu</strong>. <br>
-                        Soit $x$ le nombre d'articles vendus. Son salaire est $S(x) = 5x + 1200$. <br>
-                        Le vendeur souhaite gagner <strong>au moins 1500 €</strong> ce mois-ci.
-                    </p>
-                    
-                    <div class="space-y-4 text-sm text-slate-700 mb-4">
-                        <div>
-                            <label class="font-bold block mb-1">Chercher le nombre d'articles à vendre revient à calculer :</label>
-                            <div class="flex gap-2 mb-2" id="ex8-options">
-                                <button onclick="selectRadio('ex8', this, 'wrong')" class="border border-slate-200 rounded px-2 py-1 hover:bg-slate-50">L'image de 1500</button>
-                                <button onclick="selectRadio('ex8', this, 'correct')" class="border border-slate-200 rounded px-2 py-1 hover:bg-slate-50">L'antécédent de 1500</button>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">Combien d'articles (minimum) doit-il vendre ?</label>
-                            <div class="flex items-center gap-2 font-mono">
-                                <input type="number" id="ex8-ans" class="border border-slate-300 rounded p-1 w-20 text-center"> <span>articles</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
-                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
-
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$3x + 12 = 27 \implies 3x = 15 \implies x = 5$. L'antécédent est 5.</li>
+                    <li>$3x + 12 = 0 \implies 3x = -12 \implies x = -4$.</li>
+                </ol>
             </div>
         </div>
 
     </main>
 
-    <!-- JS Logic -->
+    <!-- SCRIPTS JS -->
     <script>
-        function showFeedback(id, isCorrect, message) {
+        let allShown = false;
+
+        function toggleCorrection(id) {
             const el = document.getElementById(id);
-            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
-            
-            if (isCorrect) {
-                el.classList.add('correct-bg', 'text-green-800');
-                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
-            } else {
-                el.classList.add('wrong-bg', 'text-red-800');
-                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
-            }
-        }
-        
-        function cleanStr(str) {
-            return str.replace(/\s+/g, '').replace(',', '.').toLowerCase();
+            if (el) el.classList.toggle('hidden');
         }
 
-        // QCM Logic
-        let radioAnswers = {};
-        function selectRadio(exId, btn, status) {
-            const container = document.getElementById(`${exId}-options`);
-            const buttons = container.querySelectorAll('button');
-            buttons.forEach(b => {
-                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
             });
-            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
-            radioAnswers[exId] = status;
-        }
-
-        function checkRadio(exId, explanation) {
-            if (!radioAnswers[exId]) {
-                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
-                return;
-            }
-            if (radioAnswers[exId] === 'correct') {
-                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
-            } else {
-                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
-            }
-        }
-
-        // Ex 1
-        function checkEx1() {
-            const v1 = document.getElementById('ex1-1').value;
-            const v2 = document.getElementById('ex1-2').value;
-            
-            if (v1 === "image" && v2 === "antecedent") {
-                showFeedback('fb-ex1', true, "Parfait ! Le résultat (15) est l'image. Le nombre de départ (3) est l'antécédent.");
-            } else {
-                showFeedback('fb-ex1', false, "Incorrect. f(Antécédent) = Image. 3 entre dans la machine, 15 en sort.");
-            }
-        }
-
-        // Ex 2
-        function checkEx2() {
-            const ans = document.getElementById('ex2-ans').value;
-            if (ans === "13") {
-                showFeedback('fb-ex2', true, "Excellent ! f(4) = 2 × 4 + 5 = 8 + 5 = 13.");
-            } else {
-                showFeedback('fb-ex2', false, "Faux. Remplace x par 4 dans la formule : calcule d'abord la multiplication, puis l'addition.");
-            }
-        }
-
-        // Ex 3
-        function checkEx3() {
-            const ans = document.getElementById('ex3-ans').value;
-            if (ans === "5") {
-                showFeedback('fb-ex3', true, "Exact ! 3x - 1 = 14 => 3x = 15 => x = 15 / 3 = 5.");
-            } else {
-                showFeedback('fb-ex3', false, "Faux. Résous l'équation : 3x - 1 = 14.");
-            }
-        }
-
-        // Ex 4
-        function checkEx4() {
-            const ans = document.getElementById('ex4-ans').value;
-            if (ans === "2") {
-                showFeedback('fb-ex4', true, "Bravo ! On se place sur 2 sur l'axe horizontal (X), on monte jusqu'à la droite, et on lit 2 sur l'axe vertical (Y).");
-            } else {
-                showFeedback('fb-ex4', false, "Erreur. L'image de 2 se lit sur l'axe vertical (Y). Place-toi à 2 sur l'axe horizontal (X) et rejoins la droite.");
-            }
-        }
-
-        // Ex 5
-        function checkEx5() {
-            const ans = document.getElementById('ex5-ans').value;
-            if (ans === "-2") {
-                showFeedback('fb-ex5', true, "Félicitations ! On se place sur 0 sur l'axe vertical (Y), on rejoint la droite, et on lit -2 sur l'axe horizontal (X).");
-            } else {
-                showFeedback('fb-ex5', false, "Incorrect. L'antécédent se lit sur l'axe horizontal (X). Place-toi à 0 sur l'axe vertical (Y).");
-            }
-        }
-
-        // Ex 7
-        function checkEx7() {
-            const expr = cleanStr(document.getElementById('ex7-expr').value);
-            const ans = document.getElementById('ex7-ans').value;
-            
-            const isExprCorrect = (expr === "0.10x+15" || expr === "15+0.10x" || expr === "0.1x+15" || expr === "15+0.1x");
-            
-            if (isExprCorrect && ans === "25") {
-                showFeedback('fb-ex7', true, "Bravo ! 1) P(x) = 0.10x + 15. 2) P(100) = 0.10 × 100 + 15 = 10 + 15 = 25 €.");
-            } else {
-                showFeedback('fb-ex7', false, "Erreur. 1) Multiplie le prix de la minute (0.10) par x, puis ajoute le fixe (15). 2) Calcule P(100).");
-            }
-        }
-
-        // Ex 8
-        function checkEx8() {
-            if (radioAnswers['ex8'] !== 'correct') {
-                showFeedback('fb-ex8', false, "Question 1 : Mauvaise réponse. On connaît le salaire final (1500), on cherche le nombre d'articles de départ. On cherche donc l'antécédent.");
-                return;
-            }
-            
-            const ans = document.getElementById('ex8-ans').value;
-            if (ans === "60") {
-                showFeedback('fb-ex8', true, "Excellent ! 1) Antécédent. 2) 5x + 1200 = 1500 => 5x = 300 => x = 300 / 5 = 60 articles.");
-            } else {
-                showFeedback('fb-ex8', false, "Erreur à la question 2. Résous l'équation : 5x + 1200 = 1500.");
-            }
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Tout masquer" : "Tout afficher / masquer";
         }
     </script>
-
-    <div class="h-24"></div>
 </body>
 </html>
