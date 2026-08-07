@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP Tableur - Statistiques à une variable (3PM)</title>
+    <title>TP Numérique - Statistiques à 1 Variable (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,19 +33,20 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
-        /* Style pour l'impression A4 Éducation Nationale */
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
         @media print {
             header, nav, .no-print { display: none !important; }
             body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
             main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
             .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
-            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
         }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Navigation unifiée pour la Séquence -->
+    <!-- Header & Nav unifiée pour la Séquence -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -53,8 +54,8 @@
                     <i class="fa-solid fa-laptop-code text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 3PM • Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Statistiques à une variable</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 3PM • Mathématiques & Numérique</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -63,7 +64,7 @@
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Tableur</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Tableur / GeoGebra</a>
                 <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
             </nav>
         </div>
@@ -71,317 +72,101 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- EN-TÊTE OFFICIEL FICHE TP TABLEUR ÉDUCATION NATIONALE -->
+        <!-- EN-TÊTE DU TP NUMÉRIQUE -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-purple-600 print-card">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
-                        <span>Éducation Nationale</span> • <span>3ème Prépa Métiers</span> • <span>Atelier Numérique</span>
+                        <span>TP sur Tableur (Excel / Calc) (50 min)</span>
                     </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Tableur : Audit Énergétique d'un Atelier Industriel</h2>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Numérique : Automatisation du Calcul de la Moyenne & Graphiques Statistique</h2>
                 </div>
-                <!-- Commandes rapides (Impression / Corrigé) -->
                 <div class="flex items-center gap-2 no-print">
                     <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
                         <i class="fa-solid fa-print"></i> Imprimer le TP
                     </button>
-                    <button onclick="toggleCorrection('corr-tp')" class="px-3.5 py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-purple-200 transition-colors">
-                        <i class="fa-solid fa-key"></i> <span id="toggle-text">Afficher le corrigé tableur</span>
-                    </button>
                 </div>
             </div>
 
-            <!-- Grille de compétences CRCN et Mathématiques -->
-            <div class="bg-slate-50 p-4 rounded-xl text-xs space-y-2 border border-slate-200">
-                <div class="flex items-center justify-between">
-                    <p class="font-bold text-slate-700 uppercase text-[11px] tracking-wider">Logiciels support : LibreOffice Calc / Microsoft Excel</p>
-                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">CRCN Domaine 1</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-slate-600 text-xs">
-                    <div class="flex items-start gap-2">
-                        <i class="fa-solid fa-check text-purple-600 mt-0.5"></i>
-                        <span><strong>Saisie & Organisation :</strong> Structurer des séries de données brutes dans une feuille de calcul.</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <i class="fa-solid fa-check text-purple-600 mt-0.5"></i>
-                        <span><strong>Formules automatiques :</strong> Manipuler `=SOMME`, `=MOYENNE`, `=MIN`, `=MAX`, `=MEDIANE` et `=NB.SI`.</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <i class="fa-solid fa-check text-purple-600 mt-0.5"></i>
-                        <span><strong>Graphiques & Synthèse :</strong> Générer des diagrammes et commenter les résultats.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CONTEXTE METIER 3PM -->
-        <div class="bg-purple-950 text-white rounded-2xl p-6 shadow-md border border-purple-900 space-y-3">
-            <div class="flex items-center gap-3 border-b border-purple-800 pb-3">
-                <div class="w-10 h-10 bg-purple-800 text-purple-300 rounded-xl flex items-center justify-center font-bold text-lg">
-                    <i class="fa-solid fa-industry"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Mise en situation professionnelle (3PM)</span>
-                    <h3 class="text-lg font-bold font-heading">Gestion de la Performance Énergétique en Atelier</h3>
-                </div>
-            </div>
-            <p class="text-xs text-purple-200 leading-relaxed">
-                Dans le cadre d'un audit de transition écologique, le responsable d'un atelier de mécanique industrielle mesure la consommation électrique quotidienne (en kWh) d'un parc de <strong>25 machines d'usinage</strong>. L'objectif est d'utiliser le tableur pour automatiser les calculs statistiques, repérer les machines énergivores et éditer un rapport pour la direction.
+            <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>Objectif de la séance :</strong> Construire une feuille de calcul sur tableur pour analyser les ventes mensuelles d'une concession automobile et générer automatiquement un diagramme en bâtons.
             </p>
         </div>
 
-        <!-- GUIDE PAS-À-PAS DU TP (4 ÉTAPES) -->
-        <div class="space-y-6">
-
-            <!-- ÉTAPE 1 -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
-                    <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                    <h3 class="font-bold text-slate-900 text-base font-heading">Étape 1 : Saisie et mise en forme de la feuille de calcul</h3>
-                </div>
-                <div class="text-sm text-slate-700 space-y-3">
-                    <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
-                        <li>Ouvrez votre logiciel de tableur (<strong>LibreOffice Calc</strong> ou <strong>Excel</strong>).</li>
-                        <li>Dans la cellule <strong>A1</strong>, saisissez le titre : <code class="bg-slate-100 text-slate-900 px-2 py-0.5 rounded font-mono font-bold">N° Machine</code>.</li>
-                        <li>Dans la cellule <strong>B1</strong>, saisissez le titre : <code class="bg-slate-100 text-slate-900 px-2 py-0.5 rounded font-mono font-bold">Consommation (kWh)</code>.</li>
-                        <li>Saisissez les 25 mesures de consommation ci-dessous dans la plage <code class="font-mono font-bold">B2 à B26</code> :</li>
-                    </ol>
-
-                    <!-- RELEVÉ DE DONNÉES BRUTES -->
-                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-xs font-mono">
-                        <p class="font-bold text-slate-700 mb-2 font-sans">Consommations mesurées (en kWh) :</p>
-                        <p class="text-slate-800 leading-relaxed font-bold">
-                            12,5 • 28,0 • 14,2 • 33,5 • 48,0 • 22,0 • 19,5 • 31,0 • 42,5 • 11,0 • 27,5 • 35,0 • 52,0 • 18,0 • 24,5 • 38,0 • 15,5 • 29,0 • 47,5 • 13,0 • 21,5 • 36,0 • 26,0 • 41,0 • 17,5
-                        </p>
-                    </div>
-
-                    <ol start="5" class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
-                        <li><strong>Mise en forme :</strong> Centrez le texte des cellules, appliquez une couleur de fond bleue aux entêtes (cellules A1 et B1) et formatez la plage <code class="font-mono font-bold">B2:B26</code> au format <em>Nombre à 1 décimale</em>.</li>
-                    </ol>
-                </div>
+        <!-- PROTOCOLE TABLEUR -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="font-bold text-slate-900 text-base">Consignes de Réalisation sur Tableur</h3>
             </div>
 
-            <!-- ÉTAPE 2 -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
-                    <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
-                    <h3 class="font-bold text-slate-900 text-base font-heading">Étape 2 : Automatisation des indicateurs statistiques par formules</h3>
-                </div>
-                <div class="text-sm text-slate-700 space-y-3">
-                    <p class="text-xs text-slate-600">Dans la colonne <strong>D</strong> (intitulés) et la colonne <strong>E</strong> (formules), construisez le tableau d'indicateurs automatiques suivant :</p>
-
-                    <div class="overflow-x-auto my-3">
-                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
-                            <thead>
-                                <tr class="bg-purple-100 font-bold text-purple-950">
-                                    <th class="border border-slate-300 p-2">Cellule</th>
-                                    <th class="border border-slate-300 p-2">Intitulé de l'indicateur (Colonne D)</th>
-                                    <th class="border border-slate-300 p-2">Formule à saisir (Colonne E)</th>
-                                    <th class="border border-slate-300 p-2 bg-purple-200">Rôle de la formule</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E2</td>
-                                    <td class="border border-slate-300 p-2 text-left font-semibold">Consommation Totale (kWh)</td>
-                                    <td class="border border-slate-300 p-2 font-mono bg-purple-50 font-bold text-purple-900">=SOMME(B2:B26)</td>
-                                    <td class="border border-slate-300 p-2 text-slate-600">Additionne toutes les valeurs</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E3</td>
-                                    <td class="border border-slate-300 p-2 text-left font-semibold">Consommation Moyenne (kWh)</td>
-                                    <td class="border border-slate-300 p-2 font-mono bg-purple-50 font-bold text-purple-900">=MOYENNE(B2:B26)</td>
-                                    <td class="border border-slate-300 p-2 text-slate-600">Calcule la moyenne arithmétique</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E4</td>
-                                    <td class="border border-slate-300 p-2 text-left font-semibold">Consommation Minimale (kWh)</td>
-                                    <td class="border border-slate-300 p-2 font-mono bg-purple-50 font-bold text-purple-900">=MIN(B2:B26)</td>
-                                    <td class="border border-slate-300 p-2 text-slate-600">Recherche la valeur la plus basse</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E5</td>
-                                    <td class="border border-slate-300 p-2 text-left font-semibold">Consommation Maximale (kWh)</td>
-                                    <td class="border border-slate-300 p-2 font-mono bg-purple-50 font-bold text-purple-900">=MAX(B2:B26)</td>
-                                    <td class="border border-slate-300 p-2 text-slate-600">Recherche la valeur la plus haute</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E6</td>
-                                    <td class="border border-slate-300 p-2 text-left font-semibold">Étendue (kWh)</td>
-                                    <td class="border border-slate-300 p-2 font-mono bg-purple-50 font-bold text-purple-900">=E5-E4</td>
-                                    <td class="border border-slate-300 p-2 text-slate-600">Calcule la différence (Max - Min)</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E7</td>
-                                    <td class="border border-slate-300 p-2 text-left font-semibold">Médiane (kWh)</td>
-                                    <td class="border border-slate-300 p-2 font-mono bg-purple-50 font-bold text-purple-900">=MEDIANE(B2:B26)</td>
-                                    <td class="border border-slate-300 p-2 text-slate-600">Détermine la valeur centrale (50%)</td>
-                                </tr>
-                            </tbody>
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Saisie des Données</p>
+                    <p class="text-slate-700">Dans un tableur (LibreOffice Calc ou Excel), saisissez la grille de données suivantes :</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border font-mono text-[11px]">
+                            <tr class="bg-slate-200 font-bold"><td></td><td>A</td><td>B</td><td>C</td><td>D</td></tr>
+                            <tr><td class="font-bold bg-slate-200">1</td><td>Nombre de véhicules vendus par jour (xi)</td><td>Nombre de jours (ni)</td><td>Produit (ni * xi)</td><td>Fréquence (fi)</td></tr>
+                            <tr><td class="font-bold bg-slate-200">2</td><td>0</td><td>4</td><td><code>=A2*B2</code></td><td><code>=B2/B7</code></td></tr>
+                            <tr><td class="font-bold bg-slate-200">3</td><td>1</td><td>8</td><td><code>=A3*B3</code></td><td><code>=B3/B7</code></td></tr>
+                            <tr><td class="font-bold bg-slate-200">4</td><td>2</td><td>5</td><td><code>=A4*B4</code></td><td><code>=B4/B7</code></td></tr>
+                            <tr><td class="font-bold bg-slate-200">5</td><td>3</td><td>3</td><td><code>=A5*B5</code></td><td><code>=B5/B7</code></td></tr>
+                            <tr><td class="font-bold bg-slate-200">6</td><td>TOTAL</td><td><code>=SOMME(B2:B5)</code></td><td><code>=SOMME(C2:C5)</code></td><td><code>=SOMME(D2:D5)</code></td></tr>
                         </table>
                     </div>
                 </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Formule de la Moyenne</p>
+                    <p class="text-slate-700">Dans la cellule <code>B8</code>, tapez <code>=C6/B6</code> pour calculer la moyenne pondérée.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Compte-rendu d'Expérimentation & Validation</h3>
             </div>
 
-            <!-- ÉTAPE 3 -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
-                    <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
-                    <h3 class="font-bold text-slate-900 text-base font-heading">Étape 3 : Comptage par tranches avec la fonction <code class="font-mono font-bold text-purple-600">=NB.SI</code></h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <!-- Q1 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quel est l'effectif total $N$ affiché en cellule <code>B6</code> ?</label>
+                    <input type="number" id="tp-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Total jours">
                 </div>
-                <div class="text-sm text-slate-700 space-y-3">
-                    <p class="text-xs text-slate-600">Pour analyser la répartition du parc machine par niveaux d'énergie, créez le tableau d'effectifs et de fréquences dans les cellules <strong>D10 à F14</strong> :</p>
 
-                    <div class="overflow-x-auto my-3">
-                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
-                            <thead>
-                                <tr class="bg-purple-100 font-bold text-purple-950">
-                                    <th class="border border-slate-300 p-2">Tranche de Consommation</th>
-                                    <th class="border border-slate-300 p-2">Effectif (Nombre de machines)</th>
-                                    <th class="border border-slate-300 p-2">Formule d'effectif `=NB.SI`</th>
-                                    <th class="border border-slate-300 p-2 font-bold bg-purple-200">Fréquence (%)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">[10 ; 20[ kWh (Faible)</td>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E10</td>
-                                    <td class="border border-slate-300 p-2 font-mono text-purple-900 font-bold bg-purple-50">=NB.SI(B2:B26; "&lt;20")</td>
-                                    <td class="border border-slate-300 p-2 font-mono">=E10 / 25</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">[20 ; 30[ kWh (Modérée)</td>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E11</td>
-                                    <td class="border border-slate-300 p-2 font-mono text-purple-900 font-bold bg-purple-50">=NB.SI.ENS(B2:B26; "&gt;=20"; B2:B26; "&lt;30")</td>
-                                    <td class="border border-slate-300 p-2 font-mono">=E11 / 25</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">[30 ; 40[ kWh (Élevée)</td>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E12</td>
-                                    <td class="border border-slate-300 p-2 font-mono text-purple-900 font-bold bg-purple-50">=NB.SI.ENS(B2:B26; "&gt;=30"; B2:B26; "&lt;40")</td>
-                                    <td class="border border-slate-300 p-2 font-mono">=E12 / 25</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 font-semibold bg-slate-50">&ge; 40 kWh (Très élevée)</td>
-                                    <td class="border border-slate-300 p-2 font-mono font-bold">E13</td>
-                                    <td class="border border-slate-300 p-2 font-mono text-purple-900 font-bold bg-purple-50">=NB.SI(B2:B26; "&gt;=40")</td>
-                                    <td class="border border-slate-300 p-2 font-mono">=E13 / 25</td>
-                                </tr>
-                                <tr class="bg-purple-100 font-bold">
-                                    <td class="border border-slate-300 p-2">Total Parc Machines</td>
-                                    <td class="border border-slate-300 p-2 font-mono">=SOMME(E10:E13)</td>
-                                    <td class="border border-slate-300 p-2">-</td>
-                                    <td class="border border-slate-300 p-2 font-mono">=SOMME(F10:F13)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <p class="text-xs text-slate-600"><em>Astuce :</em> Pour la colonne des fréquences, appliquez le format <strong>Pourcentage (%)</strong> aux cellules <code class="font-mono font-bold">F10:F14</code>.</p>
+                <!-- Q2 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle est la moyenne de véhicules vendus par jour calculée en cellule <code>B8</code> ?</label>
+                    <input type="number" step="0.05" id="tp-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Moyenne">
                 </div>
             </div>
 
-            <!-- ÉTAPE 4 -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
-                    <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">4</div>
-                    <h3 class="font-bold text-slate-900 text-base font-heading">Étape 4 : Création du graphique et rédaction du rapport d'analyse</h3>
-                </div>
-                <div class="text-sm text-slate-700 space-y-4">
-                    <div class="space-y-2">
-                        <p class="font-semibold text-slate-800 text-xs">1. Insertion du graphique :</p>
-                        <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
-                            <li>Sélectionnez la plage des tranches et des effectifs (<code class="font-mono font-bold">D10:E13</code>).</li>
-                            <li>Allez dans le menu : <code class="bg-slate-100 px-2 py-0.5 rounded font-bold text-slate-800">Insertion $\rightarrow$ Graphique $\rightarrow$ Colonnes / Bâtons</code>.</li>
-                            <li>Ajoutez le titre principal : <strong>"Répartition des 25 machines par tranche de consommation (kWh)"</strong>.</li>
-                            <li>Nommez l'axe vertical (Y) : <strong>"Nombre de machines"</strong> et l'axe horizontal (X) : <strong>"Tranches de consommation"</strong>.</li>
-                        </ul>
-                    </div>
-
-                    <div class="space-y-2">
-                        <p class="font-semibold text-slate-800 text-xs">2. Rédaction du compte-rendu décisionnel (à répondre sur votre copie / fichier) :</p>
-                        <ol type="a" class="list-[lower-alpha] pl-5 space-y-2 text-xs text-slate-700">
-                            <li>Quelle est la consommation électrique moyenne d'une machine dans cet atelier ?</li>
-                            <li>Quelle valeur sépare le parc machine en deux groupes égaux (50% consommant moins, 50% consommant plus) ? De quel indicateur s'agit-il ?</li>
-                            <li>Les machines consommant <strong>40 kWh ou plus</strong> sont considérées comme très énergivores et doivent subir une maintenance prioritaire. Combien de machines cela concerne-t-il ? Quel pourcentage du parc représentent-elles ?</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- CORRIGÉ ENSEIGNANT DÉPLIABLE & SIMULATION FEUILLE DE CALCUL COMPLÉTÉE -->
-        <div class="mt-6 no-print">
-            <button onclick="toggleCorrection('corr-tp')" class="px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold text-xs flex items-center gap-2 transition-colors shadow-md w-full justify-center">
-                <i class="fa-solid fa-key"></i> <span id="toggle-text">Afficher la feuille de calcul résolue & le corrigé du TP</span>
+            <button onclick="checkTP()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Compte-rendu TP
             </button>
-        </div>
-
-        <div id="corr-tp" class="hidden mt-6 pt-6 border-t-2 border-dashed border-purple-300 bg-purple-50/50 p-6 rounded-2xl text-xs space-y-4 text-slate-800 print-correction">
-            <div class="flex items-center justify-between border-b border-purple-200 pb-3">
-                <h3 class="font-bold text-purple-900 text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-purple-600 text-base"></i> Corrigé Enseignant - Feuille de Calcul LibreOffice Calc / Excel complétée
-                </h3>
-                <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-purple-200 text-purple-900">Résultats exacts</span>
-            </div>
-
-            <!-- SIMULATION INTERFACE TABLEUR RÉSOLUE -->
-            <div class="bg-slate-900 text-white p-4 rounded-xl font-mono overflow-x-auto shadow-inner">
-                <div class="flex items-center gap-2 mb-3 text-slate-400 border-b border-slate-800 pb-2 text-[11px]">
-                    <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
-                    <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
-                    <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
-                    <span class="ml-2 font-bold text-purple-400">LibreOffice Calc • Feuille_1_Audit_Energie.ods</span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- Résultat Indicateurs -->
-                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1">
-                        <p class="text-xs font-bold text-purple-400 font-sans border-b border-slate-800 pb-1">Statistiques automatiques :</p>
-                        <p><span class="text-slate-400">Consommation Totale :</span> <span class="text-emerald-400 font-bold">711,2 kWh</span></p>
-                        <p><span class="text-slate-400">Consommation Moyenne :</span> <span class="text-emerald-400 font-bold">28,4 kWh</span></p>
-                        <p><span class="text-slate-400">Consommation Minimale :</span> <span class="text-emerald-400 font-bold">11,0 kWh</span></p>
-                        <p><span class="text-slate-400">Consommation Maximale :</span> <span class="text-emerald-400 font-bold">52,0 kWh</span></p>
-                        <p><span class="text-slate-400">Étendue :</span> <span class="text-emerald-400 font-bold">41,0 kWh</span></p>
-                        <p><span class="text-slate-400">Médiane :</span> <span class="text-emerald-400 font-bold">27,5 kWh</span></p>
-                    </div>
-
-                    <!-- Résultat Tableau Tranches -->
-                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1">
-                        <p class="text-xs font-bold text-purple-400 font-sans border-b border-slate-800 pb-1">Tableau de décompte par tranches :</p>
-                        <p><span class="text-slate-400">[10 ; 20[ kWh (Faible) :</span> <span class="text-sky-400 font-bold">7 machines</span> (28 %)</p>
-                        <p><span class="text-slate-400">[20 ; 30[ kWh (Modérée) :</span> <span class="text-sky-400 font-bold">7 machines</span> (28 %)</p>
-                        <p><span class="text-slate-400">[30 ; 40[ kWh (Élevée) :</span> <span class="text-sky-400 font-bold">6 machines</span> (24 %)</p>
-                        <p><span class="text-slate-400">&ge; 40 kWh (Très élevée) :</span> <span class="text-rose-400 font-bold">5 machines</span> (20 %)</p>
-                        <p class="border-t border-slate-800 pt-1 font-bold"><span class="text-slate-300">Total :</span> <span class="text-white">25 machines</span> (100 %)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RÉPONSES RÉDIGÉES -->
-            <div class="bg-white p-4 rounded-xl border border-purple-200 space-y-2">
-                <p class="font-bold text-purple-900 font-sans">Réponses rédigées du compte-rendu (Étape 4) :</p>
-                <ol type="a" class="list-[lower-alpha] pl-5 space-y-1.5 text-slate-700">
-                    <li><strong>Moyenne :</strong> La consommation électrique moyenne est de <strong>28,44 kWh</strong> par machine.</li>
-                    <li><strong>Médiane :</strong> La médiane est de <strong>27,5 kWh</strong>. Cela signifie que 50% des machines consomment moins de 27,5 kWh et 50% consomment plus.</li>
-                    <li><strong>Machines très énergivores ($\ge 40\text{ kWh}$) :</strong> Il y a <strong>5 machines</strong> dans cette tranche (machines avec 48,0 kWh, 42,5 kWh, 52,0 kWh, 47,5 kWh et 41,0 kWh), ce qui représente <strong>20 % du parc</strong>. Une maintenance prioritaire est préconisée sur ces 5 unités.</li>
-                </ol>
-            </div>
-        </div>
+            <div id="fb-tp" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
 
     </main>
 
-    <!-- SCRIPTS JS POUR L'AFFICHAGE DU CORRIGÉ -->
+    <!-- JS POUR LE TP -->
     <script>
-        function toggleCorrection(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.classList.toggle('hidden');
-                const btnText = document.getElementById('toggle-text');
-                if (btnText) {
-                    btnText.textContent = el.classList.contains('hidden') ? "Afficher le corrigé tableur" : "Masquer le corrigé tableur";
-                }
+        function checkTP() {
+            let q1 = document.getElementById('tp-q1').value.trim();
+            let q2 = parseFloat(document.getElementById('tp-q2').value.trim());
+            let fb = document.getElementById('fb-tp');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "20" && Math.abs(q2 - 1.35) < 0.05) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Compte-rendu TP validé ! (Total $= 20\text{ jours}$, Moyenne $= \\frac{27}{20} = 1,35\text{ véhicules/jour}$).`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Erreur : Total $N = 4+8+5+3 = 20$, Somme $= 0+8+10+9 = 27 \implies \\bar{x} = 1,35$.`;
             }
         }
     </script>

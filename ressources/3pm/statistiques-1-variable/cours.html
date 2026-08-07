@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Je note l'essentiel (Cours) - Statistiques 3PM</title>
+    <title>Je note l'essentiel (Cours) - Statistiques à 1 Variable 3PM</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,17 +21,21 @@
             }
         }
     </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
         @media print {
             header, nav, .no-print { display: none !important; }
-            body { background-color: white; color: black; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
             .card-shadow { box-shadow: none; border: 1px solid #ccc; }
         }
     </style>
@@ -46,7 +51,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3PM • Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Statistiques à une variable</h1>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -55,7 +60,7 @@
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur / GeoGebra</a>
                 <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
             </nav>
         </div>
@@ -71,8 +76,8 @@
                         <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Statistiques à une variable</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Formules officielles d'abord, puis exemples d'application contextualisés et rédigés pas à pas.</p>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Traitement & Indicateurs Statistiques</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes officielles de calcul des effectifs, fréquences, moyenne pondérée, médiane et étendue avec représentations graphiques et exemples métiers.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -82,561 +87,282 @@
 
             <!-- SOMMAIRE COURS INTERACTIF -->
             <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
-                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Vocabulaire & Fréquences</a>
-                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Figures Graphiques</a>
-                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Moyenne & Médiane</a>
-                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Étendue & Dispersion</a>
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Vocabulaire & Tableaux</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Moyenne Pondérée</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Médiane & Étendue</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Représentations Graphiques</a>
             </div>
         </div>
 
-        <!-- CHAPITRE 1 : VOCABULAIRE ET FREQUENCES -->
-        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+        <!-- PARTIE 1 : VOCABULAIRE ET TABLEAUX STATISTIQUES -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
                 <div>
-                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définitions Officiel EN</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Vocabulaire, Effectifs et Fréquences</h3>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Méthode Officielle EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Vocabulaire de Base & Tableaux d'Effectifs</h3>
                 </div>
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-sky-50/50 rounded-2xl border border-sky-200 space-y-1.5">
-                        <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-users text-sky-600"></i> Population & Caractère
-                        </h4>
-                        <p>• <strong>Population :</strong> Ensemble des individus ou objets étudiés (ex: les 40 élèves d'un niveau 3ème).</p>
-                        <p>• <strong>Caractère :</strong> Propriété observée sur chaque individu (ex: mode de transport, note, âge).</p>
-                        <p>• <strong>Type de caractère :</strong> <em>Qualitatif</em> (non numérique, ex: mode de transport) ou <em>Quantitatif</em> (numérique, ex: note, taille).</p>
-                    </div>
-
-                    <div class="p-4 bg-sky-50/50 rounded-2xl border border-sky-200 space-y-1.5">
-                        <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-calculator text-sky-600"></i> Effectif & Effectif Total
-                        </h4>
-                        <p>• <strong>Effectif d'une valeur ($n_i$) :</strong> Nombre de fois où cette valeur apparaît dans la population.</p>
-                        <p>• <strong>Effectif total ($N$) :</strong> Nombre total d'individus observés :
-                            $$N = n_1 + n_2 + ... + n_k$$
-                        </p>
-                    </div>
-                </div>
-
-                <!-- ENCADRE FORMULE FREQUENCE -->
-                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
-                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-square-root-variable"></i> Formule officielle de la Fréquence ($f_i$)
+                <!-- ENCADRÉ DÉFINITION 1 -->
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-list-check"></i> Vocabulaire Essentiel
                     </h4>
-                    <p class="text-xs text-slate-300">
-                        La <strong>fréquence</strong> d'une valeur est le quotient de son effectif $n_i$ par l'effectif total $N$ :
-                    </p>
-                    <div class="text-center py-2 text-base font-bold text-sky-300">
-                        $$f_i = \frac{n_i}{N} \quad \text{et en pourcentage : } f_i\,\% = \frac{n_i}{N} \times 100$$
-                    </div>
-                    <p class="text-[11px] text-slate-400 italic">
-                        <strong>Propriété fondamentale :</strong> La somme de toutes les fréquences décimales vaut toujours $1$. La somme des fréquences en pourcentage vaut toujours $100\,\%$.
+                    <p class="text-slate-800">
+                        • <strong>Population :</strong> Ensemble étudié (ex : les ouvriers d'un chantier, les produits fabriqués). <br>
+                        • <strong>Caractère :</strong> La propriété étudiée (ex : la taille des vêtement, le salaire, la couleur). <br>
+                        • <strong>Effectif total ($N$) :</strong> Le nombre total d'individus de la population ($N = \sum n_i$). <br>
+                        • <strong>Fréquence ($f_i$) :</strong> Quotient de l'effectif partiel par l'effectif total :
+                        $$f_i = \frac{n_i}{N} \qquad (\text{Pourcentage} = f_i \times 100)$$
                     </p>
                 </div>
 
-                <!-- EXEMPLE COMPLET DE TABLEAU -->
+                <!-- SCHÉMA SVG 1 : STRUCTURE D'UN TABLEAU STATISTIQUE -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-table text-sky-600"></i> Exemple d'application : Mode de déplacement de 40 élèves
+                        <i class="fa-solid fa-table text-sky-600"></i> Schéma Visuel 1 : Organisation d'un Tableau Statistique
                     </h4>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-center border-collapse text-xs bg-white">
-                            <thead>
-                                <tr class="bg-sky-100 text-sky-950 font-bold">
-                                    <th class="border p-2 text-left">Mode de transport</th>
-                                    <th class="border p-2">Bus</th>
-                                    <th class="border p-2">À pied</th>
-                                    <th class="border p-2">Vélo / Trot.</th>
-                                    <th class="border p-2">Voiture</th>
-                                    <th class="border p-2 bg-sky-200">Total ($N$)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border p-2 font-bold bg-slate-50 text-left">Effectif ($n_i$)</td>
-                                    <td class="border p-2 font-bold text-sky-700">20</td>
-                                    <td class="border p-2">10</td>
-                                    <td class="border p-2">6</td>
-                                    <td class="border p-2">4</td>
-                                    <td class="border p-2 font-bold bg-slate-100">40</td>
-                                </tr>
-                                <tr>
-                                    <td class="border p-2 font-bold bg-slate-50 text-left">Fréquence décimale ($f_i$)</td>
-                                    <td class="border p-2">$\frac{20}{40} = 0,50$</td>
-                                    <td class="border p-2">$\frac{10}{40} = 0,25$</td>
-                                    <td class="border p-2">$\frac{6}{40} = 0,15$</td>
-                                    <td class="border p-2">$\frac{4}{40} = 0,10$</td>
-                                    <td class="border p-2 font-bold bg-slate-100">1,00</td>
-                                </tr>
-                                <tr>
-                                    <td class="border p-2 font-bold bg-slate-50 text-left">Fréquence en %</td>
-                                    <td class="border p-2 font-bold text-sky-700">50 %</td>
-                                    <td class="border p-2">25 %</td>
-                                    <td class="border p-2">15 %</td>
-                                    <td class="border p-2">10 %</td>
-                                    <td class="border p-2 font-bold bg-slate-100">100 %</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="py-3 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="280" height="90" viewBox="0 0 280 90" class="mx-auto">
+                            <rect x="20" y="15" width="240" height="60" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+                            <line x1="20" y1="45" x2="260" y2="45" stroke="#0284c7" stroke-width="1.5"/>
+                            <line x1="100" y1="15" x2="100" y2="75" stroke="#0284c7" stroke-width="1.5"/>
+                            <line x1="180" y1="15" x2="180" y2="75" stroke="#0284c7" stroke-width="1.5"/>
+
+                            <text x="60" y="33" font-size="9" font-weight="bold" fill="#0369a1" text-anchor="middle">Valeur (xi)</text>
+                            <text x="140" y="33" font-size="9" font-weight="bold" fill="#0369a1" text-anchor="middle">Effectif (ni)</text>
+                            <text x="220" y="33" font-size="9" font-weight="bold" fill="#0369a1" text-anchor="middle">Fréquence (fi)</text>
+
+                            <text x="60" y="63" font-size="8" fill="#334155" text-anchor="middle">Donnée x1</text>
+                            <text x="140" y="63" font-size="8" fill="#334155" text-anchor="middle">Nombre n1</text>
+                            <text x="220" y="63" font-size="8" fill="#334155" text-anchor="middle">f1 = n1 / N</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- EXEMPLE MÉTIER 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-industry text-sky-600"></i> Exemple Métier Rédigé Pas à Pas (Contrôle Qualité Usine)
+                    </h4>
+                    <p class="text-slate-700">
+                        <strong>Énoncé :</strong> Un technicien contrôle les défauts de fabrication sur 50 pièces usinées : <br>
+                        • 35 pièces sont conformes (0 défaut). <br>
+                        • 10 pièces ont 1 défaut mineur. <br>
+                        • 5 pièces ont 2 défauts majeurs. <br>
+                        Calculez la fréquence et le pourcentage de pièces conformes.
+                    </p>
+                    <div class="p-4 bg-white rounded-xl border font-mono text-slate-800 space-y-2">
+                        <p class="font-bold text-sky-900">Corrigé rédigé :</p>
+                        <p>1. Effectif total $N = 50\text{ pièces}$.</p>
+                        <p>2. $\text{Fréquence (0 défaut)} = \frac{35}{50} = 0,70$.</p>
+                        <p>3. $\text{Pourcentage} = 0,70 \times 100 = 70\%\text{ de pièces conformes}$.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAPITRE 2 : REPRESENTATIONS GRAPHIQUES ET FIGURES SVG -->
-        <section id="chap2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-8">
+        <!-- PARTIE 2 : MOYENNE PONDÉRÉE -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">II</span>
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
                 <div>
-                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chapitre 2 • Figures & Représentations Visuelles</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Diagrammes et Histogrammes Illustrés</h3>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Méthode Officielle EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Calcul de la Moyenne Pondérée</h3>
                 </div>
             </div>
 
-            <div class="space-y-8 text-xs text-slate-700">
-
-                <!-- 1. DIAGRAMME EN BÂTONS -->
-                <div class="p-6 bg-amber-50/40 rounded-3xl border border-amber-200 space-y-4">
-                    <div class="flex items-center justify-between flex-wrap gap-2">
-                        <h4 class="font-bold text-amber-950 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-chart-column text-amber-600 text-base"></i> 1. Le Diagramme en Bâtons (Caractères discrets)
-                        </h4>
-                        <span class="bg-amber-200 text-amber-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">Bâtons isolés & séparés</span>
-                    </div>
-
-                    <p class="leading-relaxed">
-                        Chaque valeur de la série est représentée par un bâton vertical dont la <strong>hauteur est exactement proportionnelle à son effectif $n_i$</strong>.
-                        <br><strong class="text-amber-950">Règle de tracé :</strong> Les bâtons sont strictement séparés par des espaces réguliers (ils ne se touchent jamais !).
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 2 -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> Formule Officielle de la Moyenne Pondérée
+                    </h4>
+                    <p class="text-slate-800">
+                        La <strong>moyenne pondérée ($\bar{x}$)</strong> d'une série statistique s'obtient en faisant la somme de tous les produits (valeur $\times$ effectif) divisée par l'effectif total $N$ :
+                        $$\bar{x} = \frac{n_1 x_1 + n_2 x_2 + \dots + n_p x_p}{N} = \frac{\sum (n_i \times x_i)}{N}$$
                     </p>
-
-                    <!-- ILLUSTRATION VISUELLE DU DIAGRAMME EN BÂTONS -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-white p-5 rounded-2xl border border-amber-200">
-                        <div class="space-y-2">
-                            <span class="text-xs font-bold text-slate-800 block">Exemple visuel : Mode de transport de la classe ($N = 40$)</span>
-                            <p class="text-slate-600 leading-relaxed">
-                                • Bus ($n = 20$) : hauteur de 20 unités.<br>
-                                • À pied ($n = 10$) : hauteur de 10 unités.<br>
-                                • Vélo ($n = 6$) : hauteur de 6 unités.<br>
-                                • Voiture ($n = 4$) : hauteur de 4 unités.
-                            </p>
-                        </div>
-
-                        <!-- FIGURE GRAPHIQUE BÂTONS SVG -->
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
-                            <div class="w-full h-44 border-l-2 border-b-2 border-slate-600 flex items-end justify-around px-4 pb-1 pt-4 relative bg-white rounded-lg">
-                                <span class="absolute top-1 left-1 text-[9px] font-bold text-slate-500">Effectif ($n_i$)</span>
-                                <div class="w-6 bg-sky-600 rounded-t flex items-center justify-center relative" style="height: 85%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-sky-900">20</span>
-                                </div>
-                                <div class="w-6 bg-emerald-500 rounded-t flex items-center justify-center relative" style="height: 45%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-emerald-900">10</span>
-                                </div>
-                                <div class="w-6 bg-amber-500 rounded-t flex items-center justify-center relative" style="height: 28%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-amber-900">6</span>
-                                </div>
-                                <div class="w-6 bg-rose-500 rounded-t flex items-center justify-center relative" style="height: 20%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-rose-900">4</span>
-                                </div>
-                            </div>
-                            <div class="w-full flex justify-around text-[10px] font-bold text-slate-700 pt-1">
-                                <span>Bus</span><span>À pied</span><span>Vélo</span><span>Voiture</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- 2. DIAGRAMME CIRCULAIRE -->
-                <div class="p-6 bg-amber-50/40 rounded-3xl border border-amber-200 space-y-4">
-                    <div class="flex items-center justify-between flex-wrap gap-2">
-                        <h4 class="font-bold text-amber-950 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-chart-pie text-amber-600 text-base"></i> 2. Le Diagramme Circulaire & Calcul d'Angles
-                        </h4>
-                        <span class="bg-amber-200 text-amber-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">Secteurs angulaires en degrés</span>
-                    </div>
-
-                    <p class="leading-relaxed">
-                        Chaque catégorie est représentée par une "part de gâteau" dont l'<strong>angle en degrés $\alpha_i$ est proportionnel à l'effectif ou au pourcentage</strong>.
+                <!-- EXEMPLE MÉTIER 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-euro-sign text-amber-600"></i> Exemple Métier Rédigé Pas à Pas (Salaire Moyen d'une Équipe)
+                    </h4>
+                    <p class="text-slate-700">
+                        <strong>Énoncé :</strong> Dans une entreprise d'électricité, 6 ouvriers gagnent $1\,800\text{ €}$, 3 techniciens gagnent $2\,200\text{ €}$ et 1 chef de chantier gagne $3\,500\text{ €}$. Calculez le salaire moyen pondéré.
                     </p>
-
-                    <!-- FORMULE DE CONVERSION D'ANGLE -->
-                    <div class="bg-amber-100/60 p-4 rounded-2xl border border-amber-300 text-center font-bold text-amber-950 text-sm">
-                        $$\text{Angle en degrés } \alpha_i = \text{Fréquence } f_i \times 360^\circ = \frac{\text{Effectif } n_i}{\text{Effectif Total } N} \times 360^\circ$$
-                    </div>
-
-                    <!-- ILLUSTRATION VISUELLE DU DIAGRAMME CIRCULAIRE -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-white p-5 rounded-2xl border border-amber-200">
-                        <div class="space-y-2">
-                            <span class="text-xs font-bold text-slate-800 block">Exemple de calcul des angles ($N = 40$) :</span>
-                            <p class="text-slate-600 leading-relaxed">
-                                • <strong>Bus ($50\,\%$) :</strong> $\alpha = 0,50 \times 360^\circ = \mathbf{180^\circ}$ (Demi-disque).<br>
-                                • <strong>À pied ($25\,\%$) :</strong> $\alpha = 0,25 \times 360^\circ = \mathbf{90^\circ}$ (Angle droit).<br>
-                                • <strong>Vélo ($15\,\%$) :</strong> $\alpha = 0,15 \times 360^\circ = \mathbf{54^\circ}$.<br>
-                                • <strong>Voiture ($10\,\%$) :</strong> $\alpha = 0,10 \times 360^\circ = \mathbf{36^\circ}$.
-                            </p>
-                        </div>
-
-                        <!-- FIGURE GRAPHIQUE CIRCULAIRE SVG -->
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center justify-center space-y-2">
-                            <svg viewBox="0 0 200 200" class="w-48 h-48 shadow-sm rounded-full">
-                                <path d="M 100 100 L 100 0 A 100 100 0 1 1 100 200 Z" fill="#0284c7" />
-                                <path d="M 100 100 L 100 200 A 100 100 0 0 1 0 100 Z" fill="#10b981" />
-                                <path d="M 100 100 L 0 100 A 100 100 0 0 1 41.2 19.1 Z" fill="#f59e0b" />
-                                <path d="M 100 100 L 41.2 19.1 A 100 100 0 0 1 100 0 Z" fill="#f43f5e" />
-                                <circle cx="100" cy="100" r="8" fill="#ffffff" />
-                            </svg>
-                            <div class="flex flex-wrap justify-center gap-2 text-[10px] font-bold">
-                                <span class="text-sky-700">Bus 180°</span>
-                                <span class="text-emerald-700">À pied 90°</span>
-                                <span class="text-amber-700">Vélo 54°</span>
-                                <span class="text-rose-700">Voiture 36°</span>
-                            </div>
-                        </div>
+                    <div class="p-4 bg-white rounded-xl border font-mono text-slate-800 space-y-2">
+                        <p class="font-bold text-amber-900">Corrigé rédigé :</p>
+                        <p>1. Effectif total $N = 6 + 3 + 1 = 10\text{ salariés}$.</p>
+                        <p>2. Somme des salaires $= (6 \times 1800) + (3 \times 2200) + (1 \times 3500) = 10\,800 + 6\,600 + 3\,500 = 20\,900\text{ €}$.</p>
+                        <p>3. $\bar{x} = \frac{20\,900}{10} = 2\,090\text{ €}$.</p>
                     </div>
                 </div>
-
-                <!-- 3. HISTOGRAMME DE CLASSES -->
-                <div class="p-6 bg-amber-50/40 rounded-3xl border border-amber-200 space-y-4">
-                    <div class="flex items-center justify-between flex-wrap gap-2">
-                        <h4 class="font-bold text-amber-950 text-sm flex items-center gap-2">
-                            <i class="fa-solid fa-chart-simple text-amber-600 text-base"></i> 3. L'Histogramme (Caractères continuë par classes)
-                        </h4>
-                        <span class="bg-amber-200 text-amber-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">Rectangles ACCOLÉS par tranches</span>
-                    </div>
-
-                    <p class="leading-relaxed">
-                        Lorsque les données sont regroupées dans des intervalles continuës $[a ; b[$, on utilise un <strong>histogramme constitué de rectangles strictly accolés</strong> (sans espace séparateur !).
-                    </p>
-
-                    <!-- ILLUSTRATION VISUELLE DE L'HISTOGRAMME -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-white p-5 rounded-2xl border border-amber-200">
-                        <div class="space-y-2">
-                            <span class="text-xs font-bold text-slate-800 block">Exemple : Vitesse de 30 véhicules contrôlés</span>
-                            <p class="text-slate-600 leading-relaxed">
-                                • Classe $[70 ; 80[$ ($8$ véh.) : amplitude $= 10\text{ km/h}$.<br>
-                                • Classe $[80 ; 90[$ ($16$ véh.) : amplitude $= 10\text{ km/h}$.<br>
-                                • Classe $[90 ; 100[$ ($6$ véh.) : amplitude $= 10\text{ km/h}$.<br>
-                                <em class="text-amber-900 font-semibold">*Remarque : Les rectangles se touchent en 80 et 90 km/h car la vitesse est continue.*</em>
-                            </p>
-                        </div>
-
-                        <!-- FIGURE GRAPHIQUE HISTOGRAMME SVG -->
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col items-center">
-                            <div class="w-full h-44 border-l-2 border-b-2 border-slate-600 flex items-end gap-0 px-0 pb-0 pt-4 relative bg-white rounded-lg overflow-hidden">
-                                <span class="absolute top-1 left-1 text-[9px] font-bold text-slate-500">Effectif ($n_i$)</span>
-                                <div class="w-1/3 bg-amber-400 border border-amber-500 flex flex-col justify-end items-center relative" style="height: 45%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-amber-900">8</span>
-                                </div>
-                                <div class="w-1/3 bg-amber-500 border border-amber-600 flex flex-col justify-end items-center relative" style="height: 85%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-amber-900">16</span>
-                                </div>
-                                <div class="w-1/3 bg-rose-400 border border-rose-500 flex flex-col justify-end items-center relative" style="height: 35%;">
-                                    <span class="absolute -top-4 font-bold text-[10px] text-rose-900">6</span>
-                                </div>
-                            </div>
-                            <div class="w-full flex justify-between text-[10px] font-bold text-slate-700 pt-1 px-1">
-                                <span>70 km/h</span><span>80 km/h</span><span>90 km/h</span><span>100 km/h</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- CHAPITRE 3 : INDICATEURS DE POSITION (FORMULES D'ABORD, EXEMPLES ENSUITE) -->
-        <section id="chap3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-8">
+        <!-- PARTIE 3 : MÉDIANE ET ÉTENDUE -->
+        <section id="partie3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">III</span>
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">3</span>
                 <div>
-                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Chapitre 3 • Indicateurs de Position</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">La Moyenne et la Médiane</h3>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 3 • Formulaire Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Médiane ($Me$) et Étendue</h3>
                 </div>
             </div>
 
-            <!-- SECTION A : LA MOYENNE (FORMULES D'ABORD) -->
-            <div class="space-y-6 text-xs text-slate-700">
-                <div class="border-l-4 border-purple-600 pl-4 space-y-1">
-                    <h4 class="font-bold text-purple-950 text-base font-heading">A. La Moyenne ($\bar{x}$) : Définition & Formules Officielles</h4>
-                    <p class="text-slate-600">La moyenne est le centre de gravité d'une série. Elle correspond au partage équitable de la somme totale entre tous les individus.</p>
-                </div>
-
-                <!-- BLOC FORMULES OFFICIELLES EN PREMIER -->
-                <div class="bg-slate-900 text-white p-6 rounded-3xl space-y-4 border border-slate-800">
-                    <span class="bg-purple-500 text-slate-950 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Formules Mathématiques Officielles</span>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                        <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
-                            <span class="font-bold text-purple-400 block">1. Moyenne Pondérée par Effectifs ($n_i$) :</span>
-                            <div class="text-center font-bold text-purple-200 text-sm py-1">
-                                $$\bar{x} = \frac{n_1 x_1 + n_2 x_2 + ... + n_k x_k}{N} = \frac{\sum (n_i \cdot x_i)}{N}$$
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
-                            <span class="font-bold text-purple-400 block">2. Moyenne par Classes $[a ; b[$ :</span>
-                            <div class="text-center font-bold text-purple-200 text-sm py-1">
-                                $$\bar{x} = \frac{\sum (n_i \cdot c_i)}{N} \quad \text{avec le centre } c_i = \frac{a+b}{2}$$
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EXEMPLES D'APPLICATION APRES LES FORMULES -->
-                <div class="space-y-4">
-                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-pen-to-square text-purple-600"></i> Exemples d'application rédigés pas à pas :
-                    </h5>
-
-                    <!-- EXEMPLE 1 : MOYENNE PONDÉRÉE DEVOIR -->
-                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-purple-600 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full">Exemple Rédigé 1</span>
-                            <span class="font-bold text-purple-900 text-xs">Moyenne pondérée d'un devoir de classe</span>
-                        </div>
-                        <p>Résultats de 20 élèves à un contrôle de mathématiques : 3 élèves ont eu 8/20, 5 ont eu 10/20, 8 ont eu 12/20 et 4 ont eu 15/20.</p>
-                        
-                        <div class="bg-white p-4 rounded-xl border border-purple-200 space-y-1.5 font-mono text-[11px]">
-                            <p>• Effectif total : $N = 3 + 5 + 8 + 4 = \mathbf{20}$.</p>
-                            <p>• Somme pondérée : $(3 \times 8) + (5 \times 10) + (8 \times 12) + (4 \times 15) = 24 + 50 + 96 + 60 = \mathbf{230}$.</p>
-                            <p>• Moyenne : $$\bar{x} = \frac{230}{20} = \mathbf{11,5 \text{ / 20}}$$</p>
-                        </div>
-                    </div>
-
-                    <!-- EXEMPLE 2 : MOYENNE PAR CLASSES CONTEXTUALISÉE ET CLAIRE -->
-                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-purple-600 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full">Exemple Rédigé 2</span>
-                            <span class="font-bold text-purple-900 text-xs">Moyenne d'âges par classes dans un club de sport</span>
-                        </div>
-                        <p class="leading-relaxed">
-                            <strong>Sujet :</strong> Un club de judo compte 30 adhérents répartis en 2 tranches d'âge :<br>
-                            • Tranche 1 : 10 jeunes âgés de $[10 ; 20[$ ans.<br>
-                            • Tranche 2 : 20 adultes âgés de $[20 ; 30[$ ans.
-                        </p>
-
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-center border-collapse text-xs bg-white">
-                                <thead>
-                                    <tr class="bg-purple-100 text-purple-950 font-bold">
-                                        <th class="border p-2 text-left">Tranche d'âge $[a ; b[$</th>
-                                        <th class="border p-2">Centre de classe ($c_i$)</th>
-                                        <th class="border p-2">Effectif ($n_i$)</th>
-                                        <th class="border p-2 bg-purple-200">Produit ($n_i \cdot c_i$)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="border p-2 font-bold text-left">$[10 ; 20[$ ans</td>
-                                        <td class="border p-2 font-mono font-bold">$c_1 = \frac{10+20}{2} = \mathbf{15}$ ans</td>
-                                        <td class="border p-2 font-bold">10 pers.</td>
-                                        <td class="border p-2 font-mono">$10 \times 15 = 150$</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border p-2 font-bold text-left">$[20 ; 30[$ ans</td>
-                                        <td class="border p-2 font-mono font-bold">$c_2 = \frac{20+30}{2} = \mathbf{25}$ ans</td>
-                                        <td class="border p-2 font-bold">20 pers.</td>
-                                        <td class="border p-2 font-mono">$20 \times 25 = 500$</td>
-                                    </tr>
-                                    <tr class="bg-slate-100 font-bold">
-                                        <td class="border p-2 text-left">Total</td>
-                                        <td class="border p-2">—</td>
-                                        <td class="border p-2 text-purple-900">$N = 30$</td>
-                                        <td class="border p-2 text-purple-900 font-mono">$\sum = 650$</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="bg-white p-4 rounded-xl border border-purple-200 font-mono text-[11px] space-y-1">
-                            <p>Calcul rédigé de l'âge moyen :</p>
-                            $$\bar{x} = \frac{\sum (n_i \cdot c_i)}{N} = \frac{650}{30} \approx \mathbf{21,7 \text{ ans}}$$
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION B : LA MÉDIANE (FORMULES D'ABORD) -->
-            <div class="space-y-6 text-xs text-slate-700 pt-6 border-t border-slate-100">
-                <div class="border-l-4 border-purple-600 pl-4 space-y-1">
-                    <h4 class="font-bold text-purple-950 text-base font-heading">B. La Médiane ($Me$) : Règle & Méthode Officielle</h4>
-                    <p class="text-slate-600">La médiane est la valeur centrale qui partage une série <strong>impérativement rangée par ordre croissant</strong> en deux groupes d'effectifs égaux.</p>
-                </div>
-
-                <!-- RÈGLE OFFICIELLE EN PREMIER -->
-                <div class="bg-slate-900 text-white p-6 rounded-3xl space-y-4 border border-slate-800">
-                    <span class="bg-purple-500 text-slate-950 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Méthode de détermination de la Médiane</span>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 text-xs">
-                        <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
-                            <span class="font-bold text-purple-400 block">Si $N$ est IMPAIR ($N = 2p + 1$) :</span>
-                            <p class="text-slate-300">La médiane est exactement la <strong>valeur de rang $p + 1$</strong> (valeur située au milieu exact de la liste rangée).</p>
-                        </div>
-
-                        <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
-                            <span class="font-bold text-purple-400 block">Si $N$ est PAIR ($N = 2p$) :</span>
-                            <p class="text-slate-300">La médiane est la <strong>demi-somme des valeurs de rang $p$ et $p + 1$</strong> (moyenne des deux valeurs centrales).</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EXEMPLES D'APPLICATION APRES LA REGLE -->
-                <div class="space-y-4">
-                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-pen-to-square text-purple-600"></i> Exemples d'application rédigés pas à pas :
-                    </h5>
-
-                    <!-- EXEMPLE 3 : CAS IMPAIR N = 7 -->
-                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-purple-600 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full">Exemple Rédigé 3</span>
-                            <span class="font-bold text-purple-900 text-xs">Effectif $N$ impair ($N = 7$)</span>
-                        </div>
-                        <p>Considérons 7 notes brutes : <code>14, 8, 11, 15, 9, 12, 10</code>.</p>
-                        
-                        <div class="bg-white p-4 rounded-xl border space-y-1.5 leading-relaxed">
-                            <p>1. Rangement croissant : <code>8 — 9 — 10 — </code><span class="bg-purple-600 text-white font-bold px-2 py-0.5 rounded">11</span><code> — 12 — 14 — 15</code>.</p>
-                            <p>2. Détermination du rang : $N = 7 = 3 + 1 + 3$. La médiane est au $4^{\text{ème}}$ rang.</p>
-                            <p>3. Conclusion : $$Me = \mathbf{11 \text{ / 20}}$$</p>
-                        </div>
-                    </div>
-
-                    <!-- EXEMPLE 4 : CAS PAIR N = 8 -->
-                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-purple-600 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full">Exemple Rédigé 4</span>
-                            <span class="font-bold text-purple-900 text-xs">Effectif $N$ pair ($N = 8$)</span>
-                        </div>
-                        <p>8 temps de course (en secondes) rangés : <code>12 — 14 — 15 — 16 — 18 — 19 — 20 — 22</code>.</p>
-                        
-                        <div class="bg-white p-4 rounded-xl border space-y-1.5 leading-relaxed font-mono">
-                            <p>• Rangs centraux : $N = 8 = 2 \times 4$. Rangs 4ème (16s) et 5ème (18s).</p>
-                            <p>• Demi-somme : $$Me = \frac{16 + 18}{2} = \frac{34}{2} = \mathbf{17 \text{ s}}$$</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- COMPARAIOSON ET VALEURS ABERRANTES -->
-            <div class="bg-slate-900 text-white p-5 rounded-2xl border border-slate-800 space-y-2 text-xs">
-                <h4 class="font-bold text-purple-400 text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Conseil d'Inspecteur : Moyenne vs Médiane
-                </h4>
-                <p class="text-slate-300 leading-relaxed">
-                    La <strong>moyenne est très sensible aux valeurs extrêmes</strong> (valeurs très fortes ou très faibles). À l'inverse, la <strong>médiane est un indicateur robuste</strong> qui résiste aux valeurs aberrantes (ex: salaire moyen faussé par un très haut salaire).
-                </p>
-            </div>
-        </section>
-
-        <!-- CHAPITRE 4 : INDICATEUR DE DISPERSION (ÉTENDUE AVEC FORMULE D'ABORD & EXEMPLES) -->
-        <section id="chap4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">IV</span>
-                <div>
-                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Chapitre 4 • Dispersion & Homogénéité</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">L'Étendue et la Dispersion</h3>
-                </div>
-            </div>
-
-            <div class="space-y-6 text-xs text-slate-700">
-                <!-- FORMULE OFFICIELLE EN PREMIER -->
-                <div class="bg-emerald-950 text-white p-6 rounded-3xl space-y-3 border border-emerald-800 shadow-md">
-                    <span class="bg-emerald-400 text-slate-950 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Formule Officielle de l'Étendue</span>
-                    <p class="text-emerald-100">
-                        L'<strong>étendue</strong> mesure l'écart maximal ou la dispersion globale d'une série statistique :
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 3 -->
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-purple-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-left-right"></i> Définitions Médiane & Étendue
+                    </h4>
+                    <p class="text-slate-800">
+                        • <strong>Médiane ($Me$) :</strong> Nombre qui partage une série statistique <u>ordonnée</u> en deux groupes d'effectifs égaux (50 % des valeurs sont inférieures ou égales à $Me$, et 50 % supérieures ou égales). <br>
+                        • <strong>Étendue :</strong> Différence entre la plus grande et la plus petite valeur :
+                        $$\text{Étendue} = x_{\text{max}} - x_{\text{min}}$$
                     </p>
-                    <div class="text-center font-bold text-emerald-300 text-base py-1">
-                        $$\text{Étendue} = \text{Valeur Maximale } x_{max} - \text{Valeur Minimale } x_{min}$$
+                </div>
+
+                <!-- SCHÉMA SVG 2 : SCHÉMA MÉDIANE PARTAGE 50-50 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-purple-600"></i> Schéma Visuel 2 : Séparation à 50% par la Médiane
+                    </h4>
+                    <div class="py-3 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="300" height="80" viewBox="0 0 300 80" class="mx-auto">
+                            <rect x="20" y="25" width="120" height="30" fill="#a855f7" fill-opacity="0.2" rx="4" stroke="#7e22ce" stroke-width="1"/>
+                            <text x="80" y="43" font-size="9" font-weight="bold" fill="#6b21a8" text-anchor="middle">50 % des données</text>
+
+                            <line x1="150" y1="15" x2="150" y2="65" stroke="#dc2626" stroke-width="3"/>
+                            <text x="150" y="75" font-size="10" font-weight="black" fill="#dc2626" text-anchor="middle">Médiane (Me)</text>
+
+                            <rect x="160" y="25" width="120" height="30" fill="#38bdf8" fill-opacity="0.2" rx="4" stroke="#0284c7" stroke-width="1"/>
+                            <text x="220" y="43" font-size="9" font-weight="bold" fill="#0369a1" text-anchor="middle">50 % des données</text>
+                        </svg>
                     </div>
                 </div>
 
-                <!-- EXEMPLES R替えGES DE L'ETENDUE EN SECOND -->
-                <div class="space-y-4">
-                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-pen-to-square text-emerald-600"></i> Exemples d'application rédigés pas à pas :
-                    </h5>
-
-                    <!-- EXEMPLE 1 ETENDUE METEO -->
-                    <div class="bg-emerald-50/50 p-5 rounded-2xl border border-emerald-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-emerald-600 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full">Exemple Rédigé 1</span>
-                            <span class="font-bold text-emerald-900 text-xs">Étendue d'un relevé de températures</span>
-                        </div>
-
-                        <p>Voici les températures (°C) mesurées à midi pendant une semaine : <code>12, 15, 8, 22, 18, 14, 11</code>.</p>
-
-                        <div class="bg-white p-4 rounded-xl border border-emerald-200 space-y-1.5 font-mono text-[11px]">
-                            <p>• Température maximale ($x_{max}$) : $\mathbf{22\,^\circ\text{C}}$.</p>
-                            <p>• Température minimale ($x_{min}$) : $\mathbf{8\,^\circ\text{C}}$.</p>
-                            <p>• Calcul de l'étendue : $$\text{Étendue} = 22 - 8 = \mathbf{14\,^\circ\text{C}}$$</p>
-                        </div>
-                    </div>
-
-                    <!-- EXEMPLE 2 ETENDUE COMPAREE ATELIERS -->
-                    <div class="bg-emerald-50/50 p-5 rounded-2xl border border-emerald-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-emerald-600 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full">Exemple Rédigé 2</span>
-                            <span class="font-bold text-emerald-900 text-xs">Comparaison de régularité entre deux machines d'usinage</span>
-                        </div>
-
-                        <p class="leading-relaxed">
-                            Un chef d'atelier compte les pièces défectueuses sur 5 jours :<br>
-                            • <strong>Machine A :</strong> 4, 5, 4, 6, 4 $\rightarrow \text{Étendue}_A = 6 - 4 = \mathbf{2 \text{ pièces}}$.<br>
-                            • <strong>Machine B :</strong> 1, 12, 3, 15, 2 $\rightarrow \text{Étendue}_B = 15 - 1 = \mathbf{14 \text{ pièces}}$.
-                        </p>
-
-                        <div class="bg-white p-4 rounded-xl border border-emerald-200 text-slate-700 leading-relaxed">
-                            <strong class="text-emerald-900 block mb-1">Interprétation Pédagogique :</strong>
-                            La Machine A a une <strong>étendue très faible (2)</strong>, ce qui démontre une grande régularité et stabilité de fabrication. À l'inverse, la Machine B a une forte étendue (14), révélant des dysfonctionnements très instables.
-                        </div>
+                <!-- EXEMPLE MÉTIER 3 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-truck text-purple-600"></i> Exemple Métier Rédigé Pas à Pas (Délais de Livraison Amazon)
+                    </h4>
+                    <p class="text-slate-700">
+                        <strong>Énoncé :</strong> Voici les délais de livraison (en jours) de 7 colis : $1, 2, 2, 3, 5, 6, 9$. Trouvez la médiane et l'étendue.
+                    </p>
+                    <div class="p-4 bg-white rounded-xl border font-mono text-slate-800 space-y-2">
+                        <p class="font-bold text-purple-900">Corrigé rédigé :</p>
+                        <p>1. La série est ordonnée. $N = 7$ (impair). La position de la médiane est $\frac{7+1}{2} = 4^{\text{ème}}\text{ valeur}$.</p>
+                        <p>2. $\text{Médiane } Me = 3\text{ jours}$ (il y a 3 valeurs avant et 3 après).</p>
+                        <p>3. $\text{Étendue} = 9 - 1 = 8\text{ jours}$.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAPITRE 5 : CONSEILS METHODOLOGIQUES BREVET EN -->
-        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-6">
+        <!-- PARTIE 4 : REPRÉSENTATIONS GRAPHIQUES -->
+        <section id="partie4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">4</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Partie 4 • Formulaire Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Représentations Graphiques (Bâtons, Circulaire)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <!-- DIAGRAMME EN BÂTONS -->
+                <div class="p-5 bg-slate-50 border rounded-2xl space-y-3">
+                    <h4 class="font-bold text-emerald-900 text-sm border-b pb-2">1. Diagramme en Bâtons</h4>
+                    <p class="text-slate-600">La hauteur de chaque bâton est proportionnelle à l'effectif.</p>
+                    <svg width="200" height="100" viewBox="0 0 200 100" class="mx-auto bg-white p-2 border rounded-xl">
+                        <line x1="20" y1="80" x2="180" y2="80" stroke="#475569" stroke-width="1.5"/>
+                        <line x1="20" y1="80" x2="20" y2="10" stroke="#475569" stroke-width="1.5"/>
+                        <rect x="40" y="40" width="15" height="40" fill="#10b981"/>
+                        <rect x="80" y="20" width="15" height="60" fill="#10b981"/>
+                        <rect x="120" y="50" width="15" height="30" fill="#10b981"/>
+                    </svg>
+                </div>
+
+                <!-- DIAGRAMME CIRCULAIRE -->
+                <div class="p-5 bg-slate-50 border rounded-2xl space-y-3">
+                    <h4 class="font-bold text-emerald-900 text-sm border-b pb-2">2. Diagramme Circulaire (Angles)</h4>
+                    <p class="text-slate-600">L'angle de chaque secteur est proportionnel à la fréquence :</p>
+                    <div class="p-2 bg-white rounded-xl border text-center font-mono font-bold text-emerald-900">
+                        $$\text{Angle } \alpha_i = f_i \times 360^\circ$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALCULATEUR / SIMULATEUR STATISTIQUE INTERACTIF -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
             <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
-                <span class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-graduation-cap"></i></span>
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
                 <div>
-                    <span class="text-xs font-bold text-red-400 uppercase tracking-wider">Évaluation DNB Pro</span>
-                    <h3 class="text-xl font-bold font-heading text-white">Les 5 Règles d'Or pour Réussir son Épreuve de Brevet</h3>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Calculateur Statistique Automatique</h3>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 space-y-1">
-                    <span class="font-bold text-red-400">Règle 1 : Rédiger avec les unités</span>
-                    <p class="text-slate-300">Toujours préciser l'unité physique ou monétaire dans sa phrase de conclusion (€, km/h, min, mm).</p>
-                </div>
-                <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 space-y-1">
-                    <span class="font-bold text-red-400">Règle 2 : Ranger par ordre croissant</span>
-                    <p class="text-slate-300">Avant de chercher la médiane, réécrivez IMPÉRATIVEMENT la liste dans l'ordre croissant sur votre copie !</p>
-                </div>
-                <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 space-y-1">
-                    <span class="font-bold text-red-400">Règle 3 : Vérifier la somme des pourcentages</span>
-                    <p class="text-slate-300">Contrôlez que la somme de vos fréquences calculées fait exactement 100%.</p>
-                </div>
-                <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 space-y-1">
-                    <span class="font-bold text-red-400">Règle 4 : Calculatrice en Mode Examen</span>
-                    <p class="text-slate-300">Utilisez le menu STAT de votre calculatrice (NumWorks, Casio, TI) pour vérifier vos calculs de moyenne et médiane.</p>
+            <div class="space-y-4 text-xs">
+                <label class="block text-slate-300 font-bold">Entrez les notes ou valeurs séparées par des virgules (ex: 10, 12, 12, 14, 15, 18) :</label>
+                <input type="text" id="stat-input" value="10, 12, 12, 14, 15, 18" oninput="calcStat()" class="w-full p-3 rounded-xl border border-slate-700 bg-slate-800 text-white font-mono font-bold">
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-slate-800">
+                    <div class="p-3 bg-white rounded-xl text-center">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase block">Effectif Total (N)</span>
+                        <span id="res-n" class="text-xl font-black text-sky-600">6</span>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl text-center">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase block">Moyenne (x bar)</span>
+                        <span id="res-moy" class="text-xl font-black text-amber-600">13.50</span>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl text-center">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase block">Médiane (Me)</span>
+                        <span id="res-med" class="text-xl font-black text-purple-600">13.00</span>
+                    </div>
+                    <div class="p-3 bg-white rounded-xl text-center">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase block">Étendue</span>
+                        <span id="res-etendue" class="text-xl font-black text-emerald-600">8</span>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- FOOTER ACTIONS -->
-        <div class="flex justify-center gap-4 no-print">
-            <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
-                <i class="fa-solid fa-print"></i> Imprimer cette fiche de cours
-            </button>
-            <a href="td.html" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
-                Passer aux Exercices de TD <i class="fa-solid fa-arrow-right"></i>
-            </a>
-        </div>
 
     </main>
 
+    <!-- JS POUR SIMULATEUR -->
+    <script>
+        function calcStat() {
+            let str = document.getElementById('stat-input').value;
+            let arr = str.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x)).sort((a,b) => a-b);
+            if (arr.length === 0) return;
+
+            let n = arr.length;
+            let sum = arr.reduce((a,b) => a+b, 0);
+            let moy = sum / n;
+            let etendue = arr[n-1] - arr[0];
+
+            let med = 0;
+            if (n % 2 === 1) {
+                med = arr[Math.floor(n/2)];
+            } else {
+                med = (arr[n/2 - 1] + arr[n/2]) / 2;
+            }
+
+            document.getElementById('res-n').innerText = n;
+            document.getElementById('res-moy').innerText = moy.toFixed(2);
+            document.getElementById('res-med').innerText = med.toFixed(2);
+            document.getElementById('res-etendue').innerText = etendue;
+        }
+        calcStat();
+    </script>
 </body>
 </html>

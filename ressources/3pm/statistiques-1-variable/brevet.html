@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vers le Brevet PRO - Annales DNB Statistiques (3PM)</title>
+    <title>Vers le Brevet DNB PRO - Statistiques à 1 Variable (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,7 +33,6 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
-        /* Style pour l'impression A4 Éducation Nationale */
         @media print {
             header, nav, .no-print { display: none !important; }
             body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
@@ -53,8 +52,8 @@
                     <i class="fa-solid fa-graduation-cap text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence 3PM • Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Statistiques à une variable</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence 3PM • Préparation Examen</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -63,612 +62,312 @@
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
-                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-red-600 text-white shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Vers le Brevet PRO</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur / GeoGebra</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Vers le Brevet</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- EN-TÊTE OFFICIEL ANNALES DNB PRO ÉDUCATION NATIONALE -->
+        <!-- EN-TÊTE OFFICIEL ANNALES DNB PRO -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-red-600 print-card">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-red-600 tracking-wider">
-                        <span>Éducation Nationale</span> • <span>DNB PRO (Série Professionnelle • 3ème Prépa Métiers)</span>
+                        <span>Éducation Nationale</span> • <span>DNB PRO (Série Professionnelle 3PM)</span>
                     </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Banque de 6 Sujets d'Annales DNB PRO : Statistiques à une variable</h2>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Annales Officieuses & 6 Sujets Brevet : Statistiques à 1 Variable</h2>
                 </div>
-                <!-- Commandes rapides (Impression / Corrigé) -->
                 <div class="flex items-center gap-2 no-print">
                     <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
-                        <i class="fa-solid fa-print"></i> Imprimer les sujets DNB PRO
+                        <i class="fa-solid fa-print"></i> Imprimer les sujets
                     </button>
                     <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-red-200 transition-colors">
-                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher tous les corrigés DNB PRO</span>
+                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher toutes les corrections</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Modalités d'épreuve et grille de compétences DNB PRO -->
-            <div class="bg-slate-50 p-4 rounded-xl text-xs space-y-3 border border-slate-200">
-                <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-                    <p class="font-bold text-slate-800 uppercase text-[11px] tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-clock text-red-600"></i> Modalités d'épreuve du Brevet PRO (Mathématiques - Durée : 2h00)
-                    </p>
-                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-red-100 text-red-800">Spécial 3ème Prépa Métiers (20 Pts par sujet)</span>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
-                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-rose-700 block">Chercher</span> (D2-D4)</div>
-                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-orange-700 block">Modéliser</span> (D1-D4)</div>
-                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-purple-700 block">Représenter</span> (D1-D5)</div>
-                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-emerald-700 block">Raisonner</span> (D2-D4)</div>
-                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-sky-700 block">Calculer</span> (D1-D4)</div>
-                    <div class="bg-white p-2 rounded-lg border text-center"><span class="font-bold text-amber-700 block">Communiquer</span> (D1-D3)</div>
-                </div>
-            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Chaque sujet est modélisé sur le format officiel du **Diplôme National du Brevet - Série Professionnelle (DNB PRO)** sur <strong>20 Points</strong> avec schémas géométriques vectoriels sans réponse affichée.
+            </p>
         </div>
 
-        <!-- SUJET 1 : DNB PRO METROPOLE -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
-                <div>
-                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">DNB PRO • Métropole</span>
-                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Sécurité Routière & Contrôle de Vitesse en Agglomération</h3>
-                </div>
-                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+        <!-- SUJET 1 : DNB PRO MÉTROPOLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Sujet 1 • DNB PRO Métropole</span>
+                    Agro-alimentaire & Contrôle du Poids de Sachets de Graines
+                </h3>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3 py-1 rounded-full">20 Points</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Lors d'une opération de contrôle de sécurité routière en agglomération (zone limitée à <strong>50 km/h</strong>), la police municipale a mesuré la vitesse de <strong>200 véhicules</strong>. Les résultats sont synthétisés dans le tableau ci-dessous :</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un technicien de contrôle pèse un échantillon de 50 sachets de graines d'un grammage théorique de $250\text{ g}$ : <br>
+                    • 240g (5) | 245g (15) | 250g (20) | 255g (8) | 260g (2).</p>
 
-                <div class="overflow-x-auto my-3">
-                    <table class="w-full text-center border-collapse border border-slate-300 text-xs">
-                        <thead>
-                            <tr class="bg-red-50 font-bold text-red-950">
-                                <th class="border border-slate-300 p-2">Vitesse $v$ (en km/h)</th>
-                                <th class="border border-slate-300 p-2">[40 ; 45[</th>
-                                <th class="border border-slate-300 p-2">[45 ; 50[</th>
-                                <th class="border border-slate-300 p-2">[50 ; 55[</th>
-                                <th class="border border-slate-300 p-2">[55 ; 60[</th>
-                                <th class="border border-slate-300 p-2">[60 ; 65[</th>
-                                <th class="border border-slate-300 p-2 bg-red-100 font-bold">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
-                                <td class="border border-slate-300 p-2 font-bold">30</td>
-                                <td class="border border-slate-300 p-2 font-bold">90</td>
-                                <td class="border border-slate-300 p-2 font-bold">50</td>
-                                <td class="border border-slate-300 p-2 font-bold">20</td>
-                                <td class="border border-slate-300 p-2 font-bold">10</td>
-                                <td class="border border-slate-300 p-2 font-bold bg-red-100">200</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="space-y-2">
+                        <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li><strong>(6 points)</strong> Calculez la masse moyenne d'un sachet de cet échantillon.</li>
+                            <li><strong>(7 points)</strong> Déterminez la masse médiane et l'étendue de la série.</li>
+                            <li><strong>(7 points)</strong> Le lot est accepté si au moins 85% des sachets pèsent au moins $245\text{ g}$. Le lot est-il accepté ?</li>
+                        </ol>
+                    </div>
                 </div>
-
-                <div class="space-y-3">
-                    <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
-                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Lecture et vocabulaire :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[4 points]</span>
-                            </div>
-                            <p>a. Quelle est la vitesse minimale théorique d'un véhicule comptabilisé dans cette étude ? <br>b. Combien de véhicules roulaient à une vitesse strictement inférieure à la limite autorisée de 50 km/h ?</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Calcul de la vitesse moyenne :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Déterminez le centre de classe de chaque intervalle puis calculez la vitesse moyenne $\bar{v}$ des 200 véhicules contrôlés.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Classe médiane et étendue :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>a. Dans quelle classe se situe la vitesse médiane ? Rédigez une phrase expliquant la signification de ce résultat. <br>b. Calculez l'étendue maximale théorique de cette série de vitesses.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Analyse de sécurité & Prise de décision :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
-                            </div>
-                            <p>a. Tout véhicule roulant à $50\text{ km/h}$ ou plus est en infraction. Quel est le pourcentage de conducteurs en infraction ? <br>b. Les véhicules à $60\text{ km/h}$ ou plus commettent un grand excès de vitesse. Quel pourcentage cela représente-t-il ? <br>c. Le maire hésite à implanter un ralentisseur. Rédigez une synthèse de 3 à 4 lignes argumentant la décision à prendre.</p>
-                        </li>
-                    </ol>
+                <!-- SVG SUJET 1 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                    <svg width="130" height="90" viewBox="0 0 130 90" class="mx-auto">
+                        <line x1="20" y1="75" x2="110" y2="75" stroke="#475569" stroke-width="1.5"/>
+                        <rect x="30" y="55" width="10" height="20" fill="#dc2626"/>
+                        <rect x="45" y="25" width="10" height="50" fill="#dc2626"/>
+                        <rect x="60" y="15" width="10" height="60" fill="#dc2626"/>
+                        <rect x="75" y="45" width="10" height="30" fill="#dc2626"/>
+                        <rect x="90" y="65" width="10" height="10" fill="#dc2626"/>
+                        <text x="65" y="85" font-size="7" font-weight="bold" fill="#991b1b" text-anchor="middle">Accepté = ?</text>
+                    </svg>
                 </div>
             </div>
 
             <!-- CORRIGÉ SUJET 1 -->
-            <div class="mt-3 no-print">
+            <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-s1')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB PRO et le barème (Sujet 1)
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction détaillée du DNB PRO
                 </button>
             </div>
-            <div id="corr-s1" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+            <div id="corr-s1" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
                 <p class="font-bold text-red-900 flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé DNB PRO - Sujet 1 (20 Points) :
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé - Sujet 1 (20 Points) :
                 </p>
-                <div class="space-y-2">
-                    <p><strong>1. Lecture :</strong> <br>a. Vitesse minimale théorique : $40\text{ km/h}$ (borne inférieure de $[40;45[$). <em>[2 pts]</em> <br>b. Nombre de véhicules $< 50\text{ km/h}$ : $30 + 90 = 120$ véhicules. <em>[2 pts]</em></p>
-                    <p><strong>2. Vitesse moyenne :</strong> <br>Centres : 42,5 ; 47,5 ; 52,5 ; 57,5 ; 62,5. <em>[2 pts]</em>
-                        $$\sum n_i x_i = (30 \times 42,5) + (90 \times 47,5) + (50 \times 52,5) + (20 \times 57,5) + (10 \times 62,5) = 9950\text{ km/h}$$
-                        $$\bar{v} = \frac{9950}{200} = 49,75\text{ km/h} \quad \text{\textit{[3 pts]}}$$
-                    </p>
-                    <p><strong>3. Médiane & Étendue :</strong> <br>a. $N=200$. La 100e et 101e valeur se situent dans la classe <strong>$[45 ; 50[$</strong>. <em>[2 pts]</em> <br><em>Interprétation :</em> Au moins 50% des usagers contrôlés roulaient à moins de 50 km/h. <em>[1 pt]</em> <br>b. Étendue max : $65 - 40 = 25\text{ km/h}$. <em>[2 pts]</em></p>
-                    <p><strong>4. Analyse & Synthèse :</strong> <br>a. Infractions ($\ge 50\text{ km/h}$) : $50 + 20 + 10 = 80$ véhicules, soit $\frac{80}{200} \times 100 = 40\%$. <em>[2 pts]</em> <br>b. Grands excès ($\ge 60\text{ km/h}$) : 10 véhicules, soit $\frac{10}{200} \times 100 = 5\%$. <em>[2 pts]</em> <br>c. <em>Synthèse :</em> Même si la moyenne ($49,75\text{ km/h}$) est sous la limite de 50 km/h, $40\%$ des conducteurs sont en infraction et $5\%$ en grand excès. L'installation d'un ralentisseur est vivement conseillée. <em>[2 pts]</em></p>
-                </div>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$\bar{x} = \frac{1200 + 3675 + 5000 + 2040 + 520}{50} = \frac{12435}{50} = 248,7\text{ g}$. <em>(6 pts)</em></li>
+                    <li>Médiane $= 250\text{ g}$. Étendue $= 260 - 240 = 20\text{ g}$. <em>(7 pts)</em></li>
+                    <li>Sachets $\ge 245\text{g} = 15 + 20 + 8 + 2 = 45$. Pourcentage $= \frac{45}{50} \times 100 = 90\% \ge 85\% \implies$ <strong>Lot ACCEPTÉ</strong>. <em>(7 pts)</em></li>
+                </ol>
             </div>
         </div>
 
-        <!-- SUJET 2 : DNB PRO CENTRES ÉTRANGERS -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
-                <div>
-                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">DNB PRO • Centres Étrangers</span>
-                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Épreuve d'EPS & Test de VMA en 3ème</h3>
-                </div>
-                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+        <!-- SUJET 2 : DNB PRO CENTRE ÉTRANGER -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Sujet 2 • DNB PRO Centre Étranger</span>
+                    Tourisme & Fréquentation d'un Parc d'Attraction
+                </h3>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3 py-1 rounded-full">20 Points</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Un professeur d'EPS réalise un test de Vitesse Maximale Aérobie (VMA en km/h) auprès des <strong>24 élèves</strong> d'une classe de 3ème Prépa Métiers. Les séries brutes de résultats sont les suivantes :</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>La fréquentation quotidienne (en milliers de visiteurs) d'un parc sur 10 jours est : <br>
+                    $4, 5, 5, 6, 6, 7, 8, 8, 9, 12$.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                    <div class="bg-pink-50 p-3.5 rounded-xl border border-pink-200">
-                        <p class="font-bold text-pink-900 mb-1">Série Filles (12 élèves) :</p>
-                        <p class="font-mono text-pink-950 font-bold">13,5 • 12,0 • 11,0 • 9,0 • 12,5 • 9,5 • 12,0 • 11,5 • 12,0 • 11,5 • 12,0 • 10,5</p>
-                    </div>
-                    <div class="bg-sky-50 p-3.5 rounded-xl border border-sky-200">
-                        <p class="font-bold text-sky-900 mb-1">Série Garçons (12 élèves) :</p>
-                        <p class="font-mono text-sky-950 font-bold">12,0 • 14,0 • 14,0 • 11,0 • 12,0 • 12,0 • 11,0 • 13,5 • 14,5 • 14,0 • 15,0 • 14,0</p>
+                    <div class="space-y-2">
+                        <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
+                        <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                            <li><strong>(6 points)</strong> Calculez le nombre moyen de visiteurs par jour.</li>
+                            <li><strong>(7 points)</strong> Déterminez la médiane et l'étendue de la fréquentation.</li>
+                            <li><strong>(7 points)</strong> Quel est le pourcentage de jours où la fréquentation dépasse 6 000 visiteurs ?</li>
+                        </ol>
                     </div>
                 </div>
-
-                <div class="space-y-3">
-                    <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
-                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Calcul de VMA moyenne :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Calculez la VMA moyenne des filles ($\bar{x}_F$) et celle des garçons ($\bar{x}_G$). Arrondir au centième.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Comparaison des étendues :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>L'affirmation suivante est-elle vraie ou fausse ? Justifiez par des calculs rédigés : <br><em>"L'étendue des VMA chez les filles est supérieure à celle des garçons."</em></p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Calcul de pourcentage :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Quel est le pourcentage d'élèves de l'ensemble de la classe ayant une $\text{VMA} \le 11,5\text{ km/h}$ ? L'affirmation <em>"Plus de 25% de la classe a une VMA $\le 11,5\text{ km/h}$"</em> est-elle exacte ?</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Classement individuel :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Lisa a obtenu une VMA de $12,0\text{ km/h}$. Son camarade affirme : <em>"Lisa fait partie des 12 meilleures VMA de la classe."</em> A-t-il raison ? Justifiez en ordonnant les données nécessaires.</p>
-                        </li>
-                    </ol>
+                <!-- SVG SUJET 2 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                    <svg width="130" height="90" viewBox="0 0 130 90" class="mx-auto">
+                        <line x1="20" y1="75" x2="110" y2="75" stroke="#475569" stroke-width="1.5"/>
+                        <rect x="30" y="55" width="10" height="20" fill="#38bdf8"/>
+                        <rect x="45" y="45" width="10" height="30" fill="#38bdf8"/>
+                        <rect x="60" y="35" width="10" height="40" fill="#38bdf8"/>
+                        <rect x="75" y="25" width="10" height="50" fill="#38bdf8"/>
+                        <rect x="90" y="15" width="10" height="60" fill="#38bdf8"/>
+                        <text x="65" y="85" font-size="7" font-weight="bold" fill="#0369a1" text-anchor="middle">Médiane = ?</text>
+                    </svg>
                 </div>
             </div>
 
             <!-- CORRIGÉ SUJET 2 -->
-            <div class="mt-3 no-print">
+            <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-s2')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB PRO et le barème (Sujet 2)
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction détaillée du DNB PRO
                 </button>
             </div>
-            <div id="corr-s2" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+            <div id="corr-s2" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
                 <p class="font-bold text-red-900 flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé DNB PRO - Sujet 2 (20 Points) :
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé - Sujet 2 (20 Points) :
                 </p>
-                <div class="space-y-2">
-                    <p><strong>1. VMA moyennes :</strong> <br>Filles : $\text{Somme} = 137 \to \bar{x}_F = \frac{137}{12} \approx 11,42\text{ km/h}$. <em>[2,5 pts]</em> <br>Garçons : $\text{Somme} = 157 \to \bar{x}_G = \frac{157}{12} \approx 13,08\text{ km/h}$. <em>[2,5 pts]</em></p>
-                    <p><strong>2. Étendues :</strong> <br>Étendue filles : $e_F = 13,5 - 9,0 = 4,5\text{ km/h}$. <em>[2 pts]</em> <br>Étendue garçons : $e_G = 15,0 - 11,0 = 4,0\text{ km/h}$. <em>[2 pts]</em> <br>Conclusion : <strong>VRAI</strong>, car $4,5 > 4,0\text{ km/h}$. <em>[1 pt]</em></p>
-                    <p><strong>3. Pourcentage VMA $\le 11,5$ :</strong> <br>Élèves avec VMA $\le 11,5$ : Filles (6 élèves) + Garçons (2 élèves) = 8 élèves. <em>[2,5 pts]</em> <br>Pourcentage : $\frac{8}{24} \times 100 = 33,33\%$. Comme $33,33\% > 25\%$, l'affirmation est <strong>VRAIE</strong>. <em>[2,5 pts]</em></p>
-                    <p><strong>4. Rang de Lisa (VMA = 12 km/h) :</strong> <br>Élèves avec VMA $> 12\text{ km/h}$ : 9 élèves. Élèves avec VMA $= 12\text{ km/h}$ : 7 élèves (dont Lisa). Lisa est ex-æquo au 10e rang, elle fait bien partie des 12 meilleurs. L'affirmation est <strong>VRAIE</strong>. <em>[5 pts]</em></p>
-                </div>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Somme $= 70 \implies \bar{x} = \frac{70}{10} = 7\text{ milliers (7 000 visiteurs)}$. <em>(6 pts)</em></li>
+                    <li>Médiane $= \frac{6 + 7}{2} = 6,5\text{ milliers}$. Étendue $= 12 - 4 = 8\text{ milliers}$. <em>(7 pts)</em></li>
+                    <li>Jours $> 6\text{k} = 7, 8, 8, 9, 12 \implies 5\text{ jours}$. Pourcentage $= \frac{5}{10} \times 100 = 50\%$. <em>(7 pts)</em></li>
+                </ol>
             </div>
         </div>
 
         <!-- SUJET 3 : DNB PRO POLYNÉSIE -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
-                <div>
-                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">DNB PRO • Polynésie</span>
-                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Contrôle Qualité Agricole & Histogramme</h3>
-                </div>
-                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Sujet 3 • DNB PRO Polynésie</span>
+                    Agriculture & Récolte de Gousses de Vanille
+                </h3>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3 py-1 rounded-full">20 Points</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Dans le cadre d'un contrôle de calibrage agricole avant commercialisation, un exploitant pèse <strong>40 sacs de pommes</strong>. Les résultats sont regroupés par classes d'amplitude 0,5 kg :</p>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Masse de 20 gousses de vanille (en g) : $10, 12, 12, 14, 15, 15, 16, 16, 17, 18, 18, 19, 20, 20, 21, 22, 22, 23, 24, 25$.</p>
 
-                <div class="overflow-x-auto my-3">
-                    <table class="w-full text-center border-collapse border border-slate-300 text-xs">
-                        <thead>
-                            <tr class="bg-red-50 font-bold text-red-950">
-                                <th class="border border-slate-300 p-2">Masse du sac $M$ (en kg)</th>
-                                <th class="border border-slate-300 p-2">[1,5 ; 2,0[</th>
-                                <th class="border border-slate-300 p-2">[2,0 ; 2,5[</th>
-                                <th class="border border-slate-300 p-2">[2,5 ; 3,0[</th>
-                                <th class="border border-slate-300 p-2">[3,0 ; 3,5[</th>
-                                <th class="border border-slate-300 p-2 bg-red-100 font-bold">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
-                                <td class="border border-slate-300 p-2 font-bold">5</td>
-                                <td class="border border-slate-300 p-2 font-bold">15</td>
-                                <td class="border border-slate-300 p-2 font-bold">15</td>
-                                <td class="border border-slate-300 p-2 font-bold">5</td>
-                                <td class="border border-slate-300 p-2 font-bold bg-red-100">40</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="space-y-3">
+                <div class="space-y-2">
                     <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
-                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Calcul de la masse moyenne :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
-                            </div>
-                            <p>Déterminez le centre de classe de chaque intervalle puis calculez la masse moyenne $\bar{M}$ d'un sac de pommes.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Construction graphique (REPRÉSENTER) :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[8 points]</span>
-                            </div>
-                            <p>Sur le repère gradué ci-dessous, <strong>construisez l'histogramme</strong> représentant la répartition des masses des sacs de la récolte.</p>
-
-                            <!-- GRILLE HISTOGRAMME DNB PRO SUJET 3 -->
-                            <div class="bg-slate-50 border border-slate-300 rounded-xl p-4 my-2">
-                                <p class="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Repère gradué pour l'histogramme DNB PRO :</p>
-                                <svg viewBox="0 0 500 200" class="w-full h-auto bg-white border border-slate-200 rounded-lg">
-                                    <line x1="50" y1="160" x2="460" y2="160" stroke="#334155" stroke-width="2"/>
-                                    <line x1="50" y1="160" x2="50" y2="20" stroke="#334155" stroke-width="2"/>
-                                    
-                                    <!-- Axe Y (Effectifs 0 à 20) -->
-                                    <text x="35" y="164" font-size="10" font-weight="bold" fill="#64748b">0</text>
-                                    <line x1="45" y1="125" x2="55" y2="125" stroke="#334155"/><text x="30" y="129" font-size="10" fill="#64748b">5</text>
-                                    <line x1="45" y1="90" x2="55" y2="90" stroke="#334155"/><text x="25" y="94" font-size="10" fill="#64748b">10</text>
-                                    <line x1="45" y1="55" x2="55" y2="55" stroke="#334155"/><text x="25" y="59" font-size="10" fill="#64748b">15</text>
-                                    <line x1="45" y1="20" x2="55" y2="20" stroke="#334155"/><text x="25" y="24" font-size="10" fill="#64748b">20</text>
-                                    
-                                    <!-- Axe X (Classes 1,5 à 3,5 kg) -->
-                                    <line x1="100" y1="155" x2="100" y2="165" stroke="#334155"/><text x="90" y="182" font-size="10" font-weight="bold" fill="#334155">1,5</text>
-                                    <line x1="180" y1="155" x2="180" y2="165" stroke="#334155"/><text x="170" y="182" font-size="10" font-weight="bold" fill="#334155">2,0</text>
-                                    <line x1="260" y1="155" x2="260" y2="165" stroke="#334155"/><text x="250" y="182" font-size="10" font-weight="bold" fill="#334155">2,5</text>
-                                    <line x1="340" y1="155" x2="340" y2="165" stroke="#334155"/><text x="330" y="182" font-size="10" font-weight="bold" fill="#334155">3,0</text>
-                                    <line x1="420" y1="155" x2="420" y2="165" stroke="#334155"/><text x="410" y="182" font-size="10" font-weight="bold" fill="#334155">3,5</text>
-                                </svg>
-                            </div>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Analyse de la médiane & Conformité :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
-                            </div>
-                            <p>a. Déterminez la classe médiane de cette série. <br>b. Les sacs pesant entre 2,0 kg et 3,0 kg sont vendus au tarif supérieur "Catégorie A". Quel pourcentage des sacs cela représente-t-il ?</p>
-                        </li>
+                    <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                        <li><strong>(6 points)</strong> Calculez la masse moyenne d'une gousse de vanille.</li>
+                        <li><strong>(7 points)</strong> Déterminez la masse médiane et l'étendue.</li>
+                        <li><strong>(7 points)</strong> Calculez la proportion de gousses pesant au moins $18\text{ g}$.</li>
                     </ol>
                 </div>
             </div>
 
             <!-- CORRIGÉ SUJET 3 -->
-            <div class="mt-3 no-print">
+            <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-s3')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB PRO et le barème (Sujet 3)
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction détaillée du DNB PRO
                 </button>
             </div>
-            <div id="corr-s3" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+            <div id="corr-s3" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
                 <p class="font-bold text-red-900 flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé DNB PRO - Sujet 3 (20 Points) :
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé - Sujet 3 (20 Points) :
                 </p>
-                <div class="space-y-2">
-                    <p><strong>1. Masse moyenne :</strong> Centres : 1,75 ; 2,25 ; 2,75 ; 3,25. <em>[2 pts]</em>
-                        $$\sum n_i x_i = (5 \times 1,75) + (15 \times 2,25) + (15 \times 2,75) + (5 \times 3,25) = 100\text{ kg} \to \bar{M} = \frac{100}{40} = 2,5\text{ kg} \quad \text{\textit{[4 pts]}}$$
-                    </p>
-                    <p><strong>2. Histogramme :</strong> 4 rectangles de largeurs 0,5 kg sur $[1,5;2,0[$, $[2,0;2,5[$, $[2,5;3,0[$, $[3,0;3,5[$ et de hauteurs 5, 15, 15, 5. <em>[8 pts]</em></p>
-                    <p><strong>3. Médiane & Conformité :</strong> <br>a. $N=40$. La 20e et 21e valeur sont dans la classe <strong>$[2,0 ; 2,5[$</strong>. <em>[3 pts]</em> <br>b. Sacs en "Catégorie A" ($[2,0 ; 3,0[$) : $15 + 15 = 30$ sacs. Pourcentage = $\frac{30}{40} \times 100 = 75\%$. <em>[3 pts]</em></p>
-                </div>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Somme $= 362 \implies \bar{x} = 18,1\text{ g}$. <em>(6 pts)</em></li>
+                    <li>Médiane $= \frac{18 + 18}{2} = 18\text{ g}$. Étendue $= 25 - 10 = 15\text{ g}$. <em>(7 pts)</em></li>
+                    <li>Gousses $\ge 18\text{g} = 11\text{ gousses} \implies \frac{11}{20} \times 100 = 55\%$. <em>(7 pts)</em></li>
+                </ol>
             </div>
         </div>
 
-        <!-- SUJET 4 : DNB PRO METROPOLE (REMPLACEMENT) -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
-                <div>
-                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">DNB PRO • Métropole (Remplacement)</span>
-                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Bâtiment BTP & Contrôle de Résistance du Béton</h3>
-                </div>
-                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+        <!-- SUJET 4 : DNB PRO ANTILLES-GUYANE -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Sujet 4 • DNB PRO Antilles-Guyane</span>
+                    Énergie & Puissance des Climatiseurs
+                </h3>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3 py-1 rounded-full">20 Points</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Pour la construction d'un bâtiment industriel, le bureau d'études contrôle la résistance à la compression de <strong>50 éprouvettes cylindriques de béton</strong> prélevées lors du coulage :</p>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Un technicien mesure la puissance (en W) de 40 climatiseurs : <br>
+                • 1 000 W (10) | 1 200 W (20) | 1 500 W (10).</p>
 
-                <div class="overflow-x-auto my-3">
-                    <table class="w-full text-center border-collapse border border-slate-300 text-xs">
-                        <thead>
-                            <tr class="bg-red-50 font-bold text-red-950">
-                                <th class="border border-slate-300 p-2">Résistance $R$ (en MPa)</th>
-                                <th class="border border-slate-300 p-2">[20 ; 25[</th>
-                                <th class="border border-slate-300 p-2">[25 ; 30[</th>
-                                <th class="border border-slate-300 p-2">[30 ; 35[</th>
-                                <th class="border border-slate-300 p-2">[35 ; 40[</th>
-                                <th class="border border-slate-300 p-2 bg-red-100 font-bold">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border border-slate-300 p-2 font-semibold bg-slate-50">Effectif ($n_i$)</td>
-                                <td class="border border-slate-300 p-2 font-bold">5</td>
-                                <td class="border border-slate-300 p-2 font-bold">20</td>
-                                <td class="border border-slate-300 p-2 font-bold">20</td>
-                                <td class="border border-slate-300 p-2 font-bold">5</td>
-                                <td class="border border-slate-300 p-2 font-bold bg-red-100">50</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="space-y-3">
+                <div class="space-y-2">
                     <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
-                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Calcul de la résistance moyenne :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
-                            </div>
-                            <p>Déterminez le centre de classe de chaque intervalle et calculez la résistance moyenne $\bar{R}$ des éprouvettes en MPa.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Classe médiane et étendue :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>a. Dans quelle classe se situe la résistance médiane ? <br>b. Calculez l'étendue maximale de cette série.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Construction graphique (REPRÉSENTER) :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Sur le repère gradué fourni ci-dessous, <strong>construisez l'histogramme</strong> représentant cette série statistique.</p>
-
-                            <!-- GRILLE HISTOGRAMME DNB PRO SUJET 4 -->
-                            <div class="bg-slate-50 border border-slate-300 rounded-xl p-4 my-2">
-                                <p class="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Repère gradué pour l'histogramme BTP (DNB PRO) :</p>
-                                <svg viewBox="0 0 500 200" class="w-full h-auto bg-white border border-slate-200 rounded-lg">
-                                    <line x1="50" y1="160" x2="460" y2="160" stroke="#334155" stroke-width="2"/>
-                                    <line x1="50" y1="160" x2="50" y2="20" stroke="#334155" stroke-width="2"/>
-                                    
-                                    <!-- Axe Y (Effectifs 0 à 25) -->
-                                    <text x="35" y="164" font-size="10" font-weight="bold" fill="#64748b">0</text>
-                                    <line x1="45" y1="125" x2="55" y2="125" stroke="#334155"/><text x="30" y="129" font-size="10" fill="#64748b">5</text>
-                                    <line x1="45" y1="90" x2="55" y2="90" stroke="#334155"/><text x="25" y="94" font-size="10" fill="#64748b">10</text>
-                                    <line x1="45" y1="55" x2="55" y2="55" stroke="#334155"/><text x="25" y="59" font-size="10" fill="#64748b">15</text>
-                                    <line x1="45" y1="20" x2="55" y2="20" stroke="#334155"/><text x="25" y="24" font-size="10" fill="#64748b">20</text>
-                                    
-                                    <!-- Axe X (Classes 20 à 40 MPa) -->
-                                    <line x1="100" y1="155" x2="100" y2="165" stroke="#334155"/><text x="92" y="182" font-size="10" font-weight="bold" fill="#334155">20</text>
-                                    <line x1="180" y1="155" x2="180" y2="165" stroke="#334155"/><text x="172" y="182" font-size="10" font-weight="bold" fill="#334155">25</text>
-                                    <line x1="260" y1="155" x2="260" y2="165" stroke="#334155"/><text x="252" y="182" font-size="10" font-weight="bold" fill="#334155">30</text>
-                                    <line x1="340" y1="155" x2="340" y2="165" stroke="#334155"/><text x="332" y="182" font-size="10" font-weight="bold" fill="#334155">35</text>
-                                    <line x1="420" y1="155" x2="420" y2="165" stroke="#334155"/><text x="412" y="182" font-size="10" font-weight="bold" fill="#334155">40</text>
-                                </svg>
-                            </div>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Validation du lot :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[4 points]</span>
-                            </div>
-                            <p>Le lot est conforme si $\bar{R} \ge 29,0\text{ MPa}$ et si au moins $85\%$ des éprouvettes dépassent $25,0\text{ MPa}$. Validez-vous la qualité du béton ? Justifiez.</p>
-                        </li>
+                    <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                        <li><strong>(6 points)</strong> Calculez la puissance moyenne des climatiseurs.</li>
+                        <li><strong>(7 points)</strong> Déterminez la puissance médiane.</li>
+                        <li><strong>(7 points)</strong> Dessinez le diagramme en bâtons correspondant.</li>
                     </ol>
                 </div>
             </div>
 
             <!-- CORRIGÉ SUJET 4 -->
-            <div class="mt-3 no-print">
+            <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-s4')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB PRO et le barème (Sujet 4)
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction détaillée du DNB PRO
                 </button>
             </div>
-            <div id="corr-s4" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+            <div id="corr-s4" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
                 <p class="font-bold text-red-900 flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé DNB PRO - Sujet 4 (20 Points) :
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé - Sujet 4 (20 Points) :
                 </p>
-                <div class="space-y-2">
-                    <p><strong>1. Moyenne :</strong> Centres : 22,5 ; 27,5 ; 32,5 ; 37,5. <em>[2 pts]</em> <br>$\sum n_i x_i = (5 \times 22,5) + (20 \times 27,5) + (20 \times 32,5) + (5 \times 37,5) = 1500\text{ MPa} \to \bar{R} = \frac{1500}{50} = 30,0\text{ MPa}$. <em>[4 pts]</em></p>
-                    <p><strong>2. Médiane & Étendue :</strong> Classe médiane : <strong>$[25 ; 30[$</strong> (25e/26e éprouvette). <em>[3 pts]</em> <br>Étendue max : $40 - 20 = 20\text{ MPa}$. <em>[2 pts]</em></p>
-                    <p><strong>3. Histogramme :</strong> 4 rectangles de hauteurs respectives 5, 20, 20, 5. <em>[5 pts]</em></p>
-                    <p><strong>4. Validation :</strong> $\bar{R} = 30,0\text{ MPa} \ge 29,0\text{ MPa}$ (OK). Éprouvettes $\ge 25\text{ MPa}$ : $20 + 20 + 5 = 45$, soit $\frac{45}{50} \times 100 = 90\% \ge 85\%$ (OK). Le lot est validé. <em>[4 pts]</em></p>
-                </div>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$\bar{x} = \frac{10000 + 24000 + 15000}{40} = \frac{49000}{40} = 1\,225\text{ W}$. <em>(6 pts)</em></li>
+                    <li>Médiane $= 1\,200\text{ W}$. <em>(7 pts)</em></li>
+                    <li>Diagramme avec bâtons à 10, 20 et 10. <em>(7 pts)</em></li>
+                </ol>
             </div>
         </div>
 
-        <!-- SUJET 5 : DNB PRO ANTILLES-GUYANE -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
-                <div>
-                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">DNB PRO • Antilles-Guyane</span>
-                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Restauration Collective & Sécurité Sanitaire</h3>
-                </div>
-                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+        <!-- SUJET 5 : DNB PRO NOUVELLE-CALÉDONIE -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Sujet 5 • DNB PRO Nouvelle-Calédonie</span>
+                    Sécurité Routière & Contrôle de Vitesse par Radar
+                </h3>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3 py-1 rounded-full">20 Points</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Dans une cuisine centrale, un contrôleur sanitaire relève la température (en °C) de <strong>30 plats cuisinés</strong> stockés en chambre froide :</p>
-                <div class="bg-slate-50 p-3 rounded-xl border font-mono text-xs text-slate-800 font-bold leading-relaxed">
-                    2,5 • 3,0 • 4,2 • 1,8 • 5,0 • 3,5 • 2,0 • 4,0 • 3,2 • 2,8 • 6,5 • 3,0 • 4,5 • 2,2 • 3,8 • 1,5 • 4,0 • 3,0 • 5,5 • 2,5 • 3,2 • 4,0 • 2,8 • 3,5 • 7,0 • 3,0 • 2,2 • 4,2 • 3,8 • 2,0
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Vitesses enregistrées (limitée à $80\text{ km/h}$) sur 10 véhicules : $72, 75, 78, 79, 80, 82, 85, 88, 90, 95$.</p>
 
-                <div class="space-y-3">
+                <div class="space-y-2">
                     <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
-                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Tableau de regroupement par tranches :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Regroupez ces 30 températures dans le tableau ci-dessous :</p>
-                            <table class="w-full text-center border-collapse border border-slate-300 text-xs my-1">
-                                <tr class="bg-slate-100 font-bold"><th class="border p-1">Tranche (°C)</th><td class="border p-1">[1 ; 3[</td><td class="border p-1">[3 ; 5[</td><td class="border p-1">[5 ; 7[</td><td class="border p-1">[7 ; 9[</td><th class="border p-1 bg-red-100">Total</th></tr>
-                                <tr><th class="border p-1 bg-slate-50">Effectif ($n_i$)</th><td class="border p-1">...</td><td class="border p-1">...</td><td class="border p-1">...</td><td class="border p-1">...</td><td class="border p-1 font-bold bg-red-100">30</td></tr>
-                            </table>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Moyenne et Étendue :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Calculez la température moyenne $\bar{T}$ de la chambre froide et l'étendue de la série brute.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Détermination de la Médiane :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[4 points]</span>
-                            </div>
-                            <p>Déterminez la température médiane $Me$ et rédigez une phrase expliquant ce résultat.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Contrôle sanitaire et décision :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[6 points]</span>
-                            </div>
-                            <p>La norme sanitaire impose une température strictement $\le 5,0\text{ }^\circ\text{C}$. Quel est le pourcentage de plats hors-normes ? Quelle décision doit prendre le chef gérant ?</p>
-                        </li>
+                    <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                        <li><strong>(6 points)</strong> Calculez la vitesse moyenne enregistrée.</li>
+                        <li><strong>(7 points)</strong> Déterminez la vitesse médiane et l'étendue.</li>
+                        <li><strong>(7 points)</strong> Quel est le pourcentage de véhicules en excès de vitesse ($>80\text{ km/h}$) ?</li>
                     </ol>
                 </div>
             </div>
 
             <!-- CORRIGÉ SUJET 5 -->
-            <div class="mt-3 no-print">
+            <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-s5')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB PRO et le barème (Sujet 5)
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction détaillée du DNB PRO
                 </button>
             </div>
-            <div id="corr-s5" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+            <div id="corr-s5" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
                 <p class="font-bold text-red-900 flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé DNB PRO - Sujet 5 (20 Points) :
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé - Sujet 5 (20 Points) :
                 </p>
-                <div class="space-y-2">
-                    <p><strong>1. Tableau :</strong> $[1; 3[$ : 10 plats • $[3; 5[$ : 16 plats • $[5; 7[$ : 3 plats • $[7; 9[$ : 1 plat. Total = 30. <em>[5 pts]</em></p>
-                    <p><strong>2. Moyenne & Étendue :</strong> $\text{Somme} = 102,0 \to \bar{T} = \frac{102,0}{30} = 3,4\text{ }^\circ\text{C}$. <em>[3 pts]</em> <br>Étendue : $7,0 - 1,5 = 5,5\text{ }^\circ\text{C}$. <em>[2 pts]</em></p>
-                    <p><strong>3. Médiane :</strong> $N=30$. Moyenne entre la 15e ($3,2$) et 16e ($3,2$) valeur : $Me = 3,2\text{ }^\circ\text{C}$. 50% des plats sont conservés à moins de $3,2\text{ }^\circ\text{C}$. <em>[4 pts]</em></p>
-                    <p><strong>4. Sanitaire :</strong> Plats $> 5,0\text{ }^\circ\text{C}$ : 2 plats ($6,5$ et $7,0$). Pourcentage : $\frac{2}{30} \times 100 \approx 6,67\%$. Les 2 plats doivent être isolés/jetés et le groupe froid contrôlé. <em>[6 pts]</em></p>
-                </div>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Somme $= 824 \implies \bar{x} = 82,4\text{ km/h}$. <em>(6 pts)</em></li>
+                    <li>Médiane $= \frac{80 + 82}{2} = 81\text{ km/h}$. Étendue $= 95 - 72 = 23\text{ km/h}$. <em>(7 pts)</em></li>
+                    <li>Véhicules $>80 = 5 \implies \frac{5}{10} \times 100 = 50\%$ d'excès. <em>(7 pts)</em></li>
+                </ol>
             </div>
         </div>
 
-        <!-- SUJET 6 : DNB PRO NOUVELLE-CALÉDONIE -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
-                <div>
-                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">DNB PRO • Nouvelle-Calédonie</span>
-                    <h3 class="font-bold text-slate-900 text-lg font-heading inline-block ml-2">Logistique, Transport & Éco-conduite</h3>
-                </div>
-                <span class="text-xs font-extrabold text-red-700 bg-red-50 px-3 py-1 rounded-full border border-red-200">Barème : 20 Points</span>
+        <!-- SUJET 6 : DNB PRO SESSION DE REMPLACEMENT -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card border-l-4 border-l-red-600 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Sujet 6 • DNB PRO Session de Remplacement</span>
+                    Environnement & Tri des Déchets Électroniques
+                </h3>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3 py-1 rounded-full">20 Points</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-4">
-                <p>Le directeur d'une société de livraison étudie l'impact d'un stage d'éco-conduite sur les consommations de carburant (en L/100 km) de ses <strong>20 véhicules utilitaires</strong> :</p>
-                <div class="bg-slate-50 p-3 rounded-xl border text-xs space-y-1">
-                    <p><strong>Avant la formation :</strong> Moyenne $\bar{x}_1 = 9,44\text{ L/100 km}$, Médiane $Me_1 = 9,35\text{ L/100 km}$, Étendue $e_1 = 2,50\text{ L/100 km}$.</p>
-                    <p><strong>Après la formation (données brutes) :</strong></p>
-                    <p class="font-mono font-bold text-slate-800">7,6 • 8,0 • 8,8 • 7,9 • 8,2 • 9,4 • 8,1 • 7,7 • 8,5 • 9,0 • 8,0 • 7,8 • 8,4 • 8,9 • 7,8 • 8,3 • 9,2 • 8,0 • 8,1 • 8,6</p>
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Masse d'appareils recyclés (en kg) par jour sur 5 jours : $120, 150, 180, 200, 250$.</p>
 
-                <div class="space-y-3">
+                <div class="space-y-2">
                     <p class="font-bold text-slate-900 border-b pb-1">Questions :</p>
-                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-700">
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Consommation moyenne après formation :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Calculez la consommation moyenne $\bar{x}_2$ de la flotte après le stage d'éco-conduite. Quel est le gain moyen en L/100 km ?</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Médiane et Étendue après formation :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Rangez les données après stage et déterminez la médiane $Me_2$ ainsi que l'étendue $e_2$.</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Calcul des économies annuelles :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Si la flotte parcourt au total $100\text{ }000\text{ km}$ par an, combien de litres de carburant sont économisés grâce au stage ?</p>
-                        </li>
-
-                        <li class="space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="font-semibold text-slate-900">Rapport de synthèse pour la direction :</span>
-                                <span class="font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded text-[11px]">[5 points]</span>
-                            </div>
-                            <p>Rédigez un paragraphe de 3 à 4 lignes analysant l'efficacité écologique et financière de la formation.</p>
-                        </li>
+                    <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-700">
+                        <li><strong>(6 points)</strong> Calculez la masse moyenne de déchets collectés par jour.</li>
+                        <li><strong>(7 points)</strong> Déterminez la médiane et l'étendue de la collecte.</li>
+                        <li><strong>(7 points)</strong> Si l'objectif hebdomadaire était de $850\text{ kg}$, l'objectif a-t-il été atteint ?</li>
                     </ol>
                 </div>
             </div>
 
             <!-- CORRIGÉ SUJET 6 -->
-            <div class="mt-3 no-print">
+            <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-s6')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé officiel DNB PRO et le barème (Sujet 6)
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction détaillée du DNB PRO
                 </button>
             </div>
-            <div id="corr-s6" class="hidden mt-3 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+            <div id="corr-s6" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
                 <p class="font-bold text-red-900 flex items-center gap-2">
-                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé & Barème détaillé DNB PRO - Sujet 6 (20 Points) :
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé rédigé - Sujet 6 (20 Points) :
                 </p>
-                <div class="space-y-2">
-                    <p><strong>1. Moyenne après stage :</strong> $\text{Somme} = 166,6 \to \bar{x}_2 = \frac{166,6}{20} = 8,33\text{ L/100 km}$. Gain = $9,44 - 8,33 = 1,11\text{ L/100 km}$. <em>[5 pts]</em></p>
-                    <p><strong>2. Médiane & Étendue :</strong> Série ordonnée $\to$ 10e (8,1) et 11e (8,2) valeur $\to Me_2 = 8,15\text{ L/100 km}$. <em>[3 pts]</em> <br>Étendue : $e_2 = 9,4 - 7,6 = 1,80\text{ L/100 km}$. <em>[2 pts]</em></p>
-                    <p><strong>3. Économie annuelle :</strong> Pour $100\text{ }000\text{ km}$, l'économie est de $1,11 \times 1\text{ }000 = 1\text{ }110\text{ Litres}$ de carburant par an. <em>[5 pts]</em></p>
-                    <p><strong>4. Synthèse :</strong> La formation est très rentable : diminution de la consommation moyenne de près de $12\%$ ($1\text{ }110\text{ L}$ économisés) et resserrement des conduites (étendue réduite de $2,5$ à $1,8$). <em>[5 pts]</em></p>
-                </div>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Somme $= 900\text{ kg} \implies \bar{x} = \frac{900}{5} = 180\text{ kg/jour}$. <em>(6 pts)</em></li>
+                    <li>Médiane $= 180\text{ kg}$. Étendue $= 250 - 120 = 130\text{ kg}$. <em>(7 pts)</em></li>
+                    <li>Comme $900\text{ kg} \ge 850\text{ kg}$, l'objectif est <strong>ATTEINT</strong>. <em>(7 pts)</em></li>
+                </ol>
             </div>
         </div>
 
@@ -680,9 +379,7 @@
 
         function toggleCorrection(id) {
             const el = document.getElementById(id);
-            if (el) {
-                el.classList.toggle('hidden');
-            }
+            if (el) el.classList.toggle('hidden');
         }
 
         function toggleAllCorrections() {
@@ -691,17 +388,12 @@
             ids.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
-                    if (allShown) {
-                        el.classList.remove('hidden');
-                    } else {
-                        el.classList.add('hidden');
-                    }
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
                 }
             });
             const btnText = document.getElementById('toggle-all-text');
-            if (btnText) {
-                btnText.textContent = allShown ? "Masquer tous les corrigés DNB PRO" : "Afficher tous les corrigés DNB PRO";
-            }
+            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
         }
     </script>
 </body>
