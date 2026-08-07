@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Repérage</title>
+    <title>Je note l'essentiel (Cours) - Repérage Plan & Espace 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,229 +24,102 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-map-location-dot text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Mathématiques</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Repérage</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Repérage dans le Plan et dans l'Espace</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP GeoGebra 3D</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Le repérage dans le plan -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Axe et Abscisse -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Sur une droite (1D)</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-arrows-left-right text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">L'abscisse</h3>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Sur une droite graduée, chaque point est repéré par un seul nombre appelé son <strong>abscisse</strong>. On l'écrit entre parenthèses à côté du point.
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Repérage 2D, 3D & Terrestre</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Définitions officielles, repère cartésien du plan, pavé droit 3D et sphère terrestre (latitude/longitude).</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Repérage 2D dans le Plan</a>
+                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Repérage 3D (Pavé droit)</a>
+                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Repérage sur la Sphère</a>
+                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Exemples Métiers</a>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 : REPÉRAGE DANS LE PLAN -->
+        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définition Officielle EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Le Repère Orthogonal du Plan</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot"></i> Coordonnées $(x; y)$ et Milieu d'un Segment
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Chaque point $A$ du plan est repéré par un couple de nombres $(x_A; y_A)$.
                     </p>
-                    <div class="bg-blue-50 p-3 rounded text-sm text-blue-900 font-mono border border-blue-200">
-                        A(3) signifie que l'abscisse de A est 3.
+                    <div class="text-center py-2 text-base font-bold text-sky-300">
+                        $$M = \text{milieu de } [AB] \implies M\left(\frac{x_A + x_B}{2} \;;\; \frac{y_A + y_B}{2}\right)$$
                     </div>
-                </div>
-
-                <!-- Le Plan (2D) -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mt-8">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Dans un plan (2D)</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-border-all text-amber-500 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Coordonnées (x; y)</h3>
-                    </div>
-                    
-                    <p class="text-slate-700 text-sm mb-4">
-                        Un plan utilise deux axes perpendiculaires pour se repérer :
-                    </p>
-                    <ul class="text-sm text-slate-700 space-y-3 mb-4">
-                        <li>L'axe <strong>horizontal</strong> : L'axe des <strong>abscisses</strong> (les $x$).</li>
-                        <li>L'axe <strong>vertical</strong> : L'axe des <strong>ordonnées</strong> (les $y$).</li>
-                    </ul>
-                    <div class="bg-amber-50 p-4 rounded text-sm font-bold font-mono text-center border border-amber-200 shadow-inner">
-                        <p class="text-amber-800">Point A ( Abscisse ; Ordonnée )</p>
-                        <p class="text-amber-600 mt-1">A ( x ; y )</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visualization : Repère interactif 2D -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-emerald-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Le Repère Interactif
-                </h3>
-                <p class="text-xs text-slate-500 mb-4 text-center">Cliquez n'importe où sur la grille pour placer le point et lire ses coordonnées.</p>
-                
-                <div class="relative w-full aspect-square bg-white border-2 border-slate-300 rounded-xl overflow-hidden cursor-crosshair shadow-inner" id="gridContainer" onclick="placePoint(event)">
-                    <svg viewBox="0 0 400 400" class="w-full h-full pointer-events-none">
-                        <!-- Définition Grille -->
-                        <defs>
-                            <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <!-- Affichage Grille -->
-                        <rect width="400" height="400" fill="url(#gridPattern)" />
-                        
-                        <!-- Axe X (Abscisses) -->
-                        <line x1="0" y1="200" x2="400" y2="200" stroke="#334155" stroke-width="2"/>
-                        <polygon points="390,195 400,200 390,205" fill="#334155"/>
-                        <text x="380" y="190" fill="#334155" font-family="monospace" font-size="14" font-weight="bold">x</text>
-                        
-                        <!-- Axe Y (Ordonnées) -->
-                        <line x1="200" y1="0" x2="200" y2="400" stroke="#334155" stroke-width="2"/>
-                        <polygon points="195,10 200,0 205,10" fill="#334155"/>
-                        <text x="210" y="15" fill="#334155" font-family="monospace" font-size="14" font-weight="bold">y</text>
-                        
-                        <!-- Point O (Origine) -->
-                        <text x="205" y="215" fill="#334155" font-family="monospace" font-size="12" font-weight="bold">O</text>
-
-                        <!-- Lignes de projection -->
-                        <g id="projections">
-                            <line id="projX" x1="280" y1="120" x2="280" y2="200" stroke="#64748b" stroke-dasharray="4" stroke-width="2"/>
-                            <line id="projY" x1="280" y1="120" x2="200" y2="120" stroke="#64748b" stroke-dasharray="4" stroke-width="2"/>
-                        </g>
-
-                        <!-- Le Point Interactif -->
-                        <circle id="targetPoint" cx="280" cy="120" r="6" fill="#10b981" />
-                        <text id="targetLabel" x="290" y="115" fill="#10b981" font-family="monospace" font-size="16" font-weight="bold">A(2; 2)</text>
-                    </svg>
-                </div>
-                
-                <div class="mt-4 p-4 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-center gap-4">
-                    <div class="text-center bg-white p-2 rounded shadow-sm w-24">
-                        <p class="text-[10px] uppercase font-bold text-slate-400">Abscisse (x)</p>
-                        <p id="dispX" class="text-xl font-mono font-bold text-slate-700">2</p>
-                    </div>
-                    <div class="text-center bg-white p-2 rounded shadow-sm w-24">
-                        <p class="text-[10px] uppercase font-bold text-slate-400">Ordonnée (y)</p>
-                        <p id="dispY" class="text-xl font-mono font-bold text-slate-700">2</p>
-                    </div>
-                </div>
-
-                <script>
-                    function placePoint(e) {
-                        const rect = document.getElementById('gridContainer').getBoundingClientRect();
-                        // Get coordinates relative to the SVG 400x400 viewbox
-                        const scaleX = 400 / rect.width;
-                        const scaleY = 400 / rect.height;
-                        
-                        let px = (e.clientX - rect.left) * scaleX;
-                        let py = (e.clientY - rect.top) * scaleY;
-                        
-                        // Snap to grid (grid size = 40)
-                        px = Math.round(px / 40) * 40;
-                        py = Math.round(py / 40) * 40;
-                        
-                        // Prevent placing out of bounds
-                        if(px < 0) px = 0; if(px > 400) px = 400;
-                        if(py < 0) py = 0; if(py > 400) py = 400;
-
-                        // Calculate Math coordinates (-5 to +5)
-                        const mathX = (px - 200) / 40;
-                        const mathY = (200 - py) / 40; // inverted Y
-
-                        // Update DOM
-                        document.getElementById('targetPoint').setAttribute('cx', px);
-                        document.getElementById('targetPoint').setAttribute('cy', py);
-                        
-                        document.getElementById('projX').setAttribute('x1', px);
-                        document.getElementById('projX').setAttribute('y1', py);
-                        document.getElementById('projX').setAttribute('x2', px);
-                        document.getElementById('projX').setAttribute('y2', 200);
-                        
-                        document.getElementById('projY').setAttribute('x1', px);
-                        document.getElementById('projY').setAttribute('y1', py);
-                        document.getElementById('projY').setAttribute('x2', 200);
-                        document.getElementById('projY').setAttribute('y2', py);
-                        
-                        document.getElementById('targetLabel').setAttribute('x', px + 10);
-                        document.getElementById('targetLabel').setAttribute('y', py - 5);
-                        document.getElementById('targetLabel').textContent = `A(${mathX}; ${mathY})`;
-                        
-                        document.getElementById('dispX').textContent = mathX;
-                        document.getElementById('dispY').textContent = mathY;
-                    }
-                </script>
-            </div>
-        </section>
-
-        <!-- SECTION 3 : Dans l'espace (3D) -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">3</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Dans l'espace (3D)</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
-                    <h3 class="font-bold text-purple-800 mb-4 text-lg"><i class="fa-solid fa-cube mr-2"></i> Les Trois Dimensions</h3>
-                    <p class="text-slate-700 mb-4 text-sm">Pour se repérer dans un volume (une pièce, l'espace 3D), on ajoute un 3ème axe vertical pour la hauteur : l'axe des <strong>cotes</strong> (ou altitudes).</p>
-                    
-                    <ul class="text-sm text-slate-700 space-y-3 mb-6 bg-purple-50 p-4 rounded-xl border border-purple-100">
-                        <li class="flex items-center gap-3"><span class="w-6 h-6 bg-purple-200 text-purple-700 rounded flex items-center justify-center font-bold font-mono">x</span> L'abscisse (largeur)</li>
-                        <li class="flex items-center gap-3"><span class="w-6 h-6 bg-purple-200 text-purple-700 rounded flex items-center justify-center font-bold font-mono">y</span> L'ordonnée (profondeur)</li>
-                        <li class="flex items-center gap-3"><span class="w-6 h-6 bg-purple-200 text-purple-700 rounded flex items-center justify-center font-bold font-mono">z</span> La cote / altitude (hauteur)</li>
-                    </ul>
-                    
-                    <div class="text-center font-mono font-bold bg-slate-100 p-3 rounded-lg border border-slate-200">
-                        Point M ( x ; y ; z )
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 opacity-10"><i class="fa-solid fa-cube text-[150px] text-white"></i></div>
-                    <i class="fa-solid fa-drone text-4xl text-purple-400 mb-4"></i>
-                    <h4 class="text-white font-bold mb-2">Exemple concret</h4>
-                    <p class="text-slate-300 text-sm">Un drone en vol est repéré par un GPS en 3D :<br><br>Il a parcouru 10m vers l'Est (x=10), 5m vers le Nord (y=5), et vole à une hauteur de 20m (z=20).<br><br>Ses coordonnées : <strong class="text-purple-300 bg-purple-900/50 px-2 py-1 rounded">D(10; 5; 20)</strong></p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <div class="h-24"></div>
 </body>
 </html>
