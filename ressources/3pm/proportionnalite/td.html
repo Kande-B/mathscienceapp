@@ -1,223 +1,678 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD Complet - Proportionnalité</title>
+    <title>Fiche de TD - Proportionnalité & Pourcentages (3PM)</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-    </style>
-    <script>
-        MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-        };
-    </script>
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head>
-<body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-tasks text-2xl"></i>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Style pour l'impression A4 Éducation Nationale */
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Proportionnalité & Pourcentages</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • Exercices</p>
-                <h1 class="text-2xl font-bold text-slate-800">Fiche de TD : Proportionnalité et Pourcentages</h1>
-            </div>
-            <div class="ml-auto flex gap-2">
-                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-print"></i> Imprimer
-                </button>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-8 print:mt-0 print:space-y-6">
-        
-        <!-- NIVEAU 1 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-emerald-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-emerald-500 mr-2">Niveau 1</span> 
-                    Acquisition des automatismes
-                </h2>
-                <i class="fa-solid fa-seedling text-emerald-500 text-2xl"></i>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE OFFICIEL FICHE D'EXERCICES ÉDUCATION NATIONALE -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Éducation Nationale</span> • <span>3ème Prépa Métiers</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Fiche de Travaux Dirigés : Proportionnalité & Pourcentages</h2>
+                </div>
+                <!-- Commandes rapides (Impression / Corrigé) -->
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher toutes les corrections</span>
+                    </button>
+                </div>
             </div>
-            
-            <!-- Ex 1 -->
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 1 : Reconnaître la proportionnalité</h3>
-                <p class="text-sm text-slate-600 mb-3">Parmi ces deux tableaux, lequel est un tableau de proportionnalité ? Justifiez par le calcul pour chacun.</p>
+
+            <!-- GRILLE OFFICIELLE DES 6 COMPÉTENCES DU CYCLE 4 (3PM) -->
+            <div class="bg-slate-50 p-4 rounded-xl text-xs space-y-3 border border-slate-200">
+                <div class="flex items-center justify-between">
+                    <p class="font-bold text-slate-800 uppercase text-xs tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Compétences mathématiques du programme officiel (Cycle 4 • 3PM)
+                    </p>
+                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800">Socle Commun</span>
+                </div>
                 
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <p class="font-semibold text-sm mb-1 text-center">Tableau A</p>
-                        <table class="w-full text-center border-collapse text-sm">
-                            <tr><td class="border p-2 bg-slate-50">Grandeur 1</td><td class="border p-2">3</td><td class="border p-2">5</td><td class="border p-2">7</td></tr>
-                            <tr><td class="border p-2 bg-slate-50">Grandeur 2</td><td class="border p-2">12</td><td class="border p-2">20</td><td class="border p-2">28</td></tr>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+                    <!-- Chercher -->
+                    <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-rose-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-magnifying-glass text-[11px]"></i> Chercher
+                        </div>
+                        <p class="text-[10px] text-rose-950 leading-tight font-medium">Extraire les informations d'un tableau ou texte.</p>
+                        <span class="text-[9px] font-bold text-rose-600 block mt-1">(D2-D4)</span>
+                    </div>
+
+                    <!-- Modéliser -->
+                    <div class="bg-orange-50 border border-orange-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-orange-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-cubes text-[11px]"></i> Modéliser
+                        </div>
+                        <p class="text-[10px] text-orange-950 leading-tight font-medium">Reconnaître un modèle de proportionnalité.</p>
+                        <span class="text-[9px] font-bold text-orange-600 block mt-1">(D1-D2-D4)</span>
+                    </div>
+
+                    <!-- Représenter -->
+                    <div class="bg-purple-50 border border-purple-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-purple-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-chart-line text-[11px]"></i> Représenter
+                        </div>
+                        <p class="text-[10px] text-purple-950 leading-tight font-medium">Lire et construire des échelles de plan.</p>
+                        <span class="text-[9px] font-bold text-purple-600 block mt-1">(D1-D4-D5)</span>
+                    </div>
+
+                    <!-- Raisonner -->
+                    <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-emerald-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-brain text-[11px]"></i> Raisonner
+                        </div>
+                        <p class="text-[10px] text-emerald-950 leading-tight font-medium">Comparer des offres et justifier ses choix.</p>
+                        <span class="text-[9px] font-bold text-emerald-600 block mt-1">(D2-D3-D4)</span>
+                    </div>
+
+                    <!-- Calculer -->
+                    <div class="bg-sky-50 border border-sky-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-sky-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-calculator text-[11px]"></i> Calculer
+                        </div>
+                        <p class="text-[10px] text-sky-950 leading-tight font-medium">Appliquer le produit en croix et pourcentages.</p>
+                        <span class="text-[9px] font-bold text-sky-600 block mt-1">(D1-D4)</span>
+                    </div>
+
+                    <!-- Communiquer -->
+                    <div class="bg-amber-50 border border-amber-200 p-2.5 rounded-xl">
+                        <div class="font-bold text-amber-700 text-xs flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-comments text-[11px]"></i> Communiquer
+                        </div>
+                        <p class="text-[10px] text-amber-950 leading-tight font-medium">Rédiger une conclusion professionnelle claire.</p>
+                        <span class="text-[9px] font-bold text-amber-600 block mt-1">(D1-D3)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : AUTOMATISMES & RECONNAISSANCE -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 1 : Application directe et méthodes fondamentales</h2>
+            </div>
+
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 1</span>
+                        Reconnaître un tableau de proportionnalité & Coefficient
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">Chercher</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un responsable de magasin compare deux séries de données :</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 my-2 text-xs">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-bold text-slate-800 text-center">Tableau A : Achat de visserie</p>
+                            <table class="w-full text-center border-collapse border border-slate-300">
+                                <tr><th class="border p-2 bg-slate-100">Nombre de vis</th><td class="border p-2">50</td><td class="border p-2">100</td><td class="border p-2">150</td></tr>
+                                <tr><th class="border p-2 bg-slate-100">Prix (€)</th><td class="border p-2">4</td><td class="border p-2">8</td><td class="border p-2">12</td></tr>
+                            </table>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
+                            <p class="font-bold text-slate-800 text-center">Tableau B : Croissance d'un arbre</p>
+                            <table class="w-full text-center border-collapse border border-slate-300">
+                                <tr><th class="border p-2 bg-slate-100">Âge (années)</th><td class="border p-2">2</td><td class="border p-2">4</td><td class="border p-2">6</td></tr>
+                                <tr><th class="border p-2 bg-slate-100">Hauteur (m)</th><td class="border p-2">1,5</td><td class="border p-2">2,5</td><td class="border p-2">3,2</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Lequel de ces deux tableaux est un tableau de proportionnalité ? Justifiez par les calculs des quotients.</li>
+                        <li>Pour le tableau proportionnel, déterminez la valeur exacte du coefficient de proportionnalité $k$.</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 1 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 1 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Tableau A :</strong> $4 / 50 = 0,08$ ; $8 / 100 = 0,08$ ; $12 / 150 = 0,08$. Les rapports sont tous égaux à $0,08$. C'est donc un tableau de proportionnalité. <br>
+                            <strong>Tableau B :</strong> $1,5 / 2 = 0,75$ alors que $2,5 / 4 = 0,625 \neq 0,75$. Ce n'est pas un tableau de proportionnalité.</li>
+                        <li><strong>Coefficient $k$ :</strong> $k = 0,08\text{ € / vis}$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-extrabold rounded-md">Exercice 2</span>
+                        Pratique du Produit en Croix
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>En utilisant la méthode du produit en croix, déterminez la valeur inconnue $x$ dans chaque cas :</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-50 p-3 rounded-xl border text-center">
+                            <p class="font-bold mb-2">Cas A :</p>
+                            <table class="w-full text-center border-collapse border border-slate-300 bg-white">
+                                <tr><td class="border p-2">5</td><td class="border p-2">8</td></tr>
+                                <tr><td class="border p-2">15</td><td class="border p-2 font-bold text-indigo-600">x</td></tr>
+                            </table>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border text-center">
+                            <p class="font-bold mb-2">Cas B :</p>
+                            <table class="w-full text-center border-collapse border border-slate-300 bg-white">
+                                <tr><td class="border p-2 font-bold text-indigo-600">x</td><td class="border p-2">12</td></tr>
+                                <tr><td class="border p-2">7</td><td class="border p-2">21</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 2 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 2 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Cas A :</strong> $x = \frac{15 \times 8}{5} = \frac{120}{5} = 24$.</li>
+                        <li><strong>Cas B :</strong> $x = \frac{7 \times 12}{21} = \frac{84}{21} = 4$.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : APPLICATIONS SECTORIELLES (MÉTIES 3PM) -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 2 : Problèmes sectoriels & Situations professionnelles</h2>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 3</span>
+                        Restauration Collective • Adaptation des quantités d'une recette
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">Chercher</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un chef cuisinier dispose de la fiche technique suivante pour confectionner une tarte pour <strong>6 personnes</strong> :</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                        <li><strong>Farine :</strong> 250 g</li>
+                        <li><strong>Beurre :</strong> 125 g</li>
+                        <li><strong>Sucre :</strong> 100 g</li>
+                        <li><strong>Œufs :</strong> 2 unités</li>
+                    </ul>
+
+                    <p class="font-semibold text-slate-800 mt-2">Questions :</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Recopiez et complétez le tableau d'ingrédients ci-dessous pour préparer ce dessert pour <strong>15 personnes</strong> :</li>
+                    </ol>
+
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-center border-collapse border border-slate-300 text-xs">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold text-slate-800">
+                                    <th class="border p-2">Nombre de personnes</th>
+                                    <th class="border p-2">Farine (g)</th>
+                                    <th class="border p-2">Beurre (g)</th>
+                                    <th class="border p-2">Sucre (g)</th>
+                                    <th class="border p-2">Œufs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-2 font-bold bg-slate-50">6 personnes</td>
+                                    <td class="border p-2">250</td>
+                                    <td class="border p-2">125</td>
+                                    <td class="border p-2">100</td>
+                                    <td class="border p-2">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 font-bold bg-emerald-50">15 personnes</td>
+                                    <td class="border p-2">...</td>
+                                    <td class="border p-2">...</td>
+                                    <td class="border p-2">...</td>
+                                    <td class="border p-2">...</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
-                    <div>
-                        <p class="font-semibold text-sm mb-1 text-center">Tableau B</p>
-                        <table class="w-full text-center border-collapse text-sm">
-                            <tr><td class="border p-2 bg-slate-50">Âge (années)</td><td class="border p-2">10</td><td class="border p-2">12</td><td class="border p-2">15</td></tr>
-                            <tr><td class="border p-2 bg-slate-50">Taille (cm)</td><td class="border p-2">140</td><td class="border p-2">150</td><td class="border p-2">165</td></tr>
-                        </table>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 3 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 3 :
+                    </p>
+                    <p>Coefficient d'agrandissement de recette : $k = 15 / 6 = 2,5$.</p>
+                    <ul class="list-disc pl-5 space-y-0.5">
+                        <li>Farine : $250 \times 2,5 = 625\text{ g}$.</li>
+                        <li>Beurre : $125 \times 2,5 = 312,5\text{ g}$.</li>
+                        <li>Sucre : $100 \times 2,5 = 250\text{ g}$.</li>
+                        <li>Œufs : $2 \times 2,5 = 5\text{ œufs}$.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 4</span>
+                        Commerce & Vente • Remise de Solde en Magasin
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                        <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Communiquer</span>
                     </div>
                 </div>
-                <div class="mt-4 space-y-4 print:block hidden">
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un magasin de vêtements professionnels applique une réduction de <strong>20 %</strong> sur un pantalon de travail étiqueté à <strong>65 € HT</strong>.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez le montant en euros de la remise.</li>
+                        <li>Calculez le prix final du pantalon après réduction.</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 4 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 4 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Montant de la remise : $65 \times \frac{20}{100} = 13\text{ €}$.</li>
+                        <li>Prix réduit : $65 - 13 = 52\text{ €}$.</li>
+                    </ol>
                 </div>
             </div>
 
-            <!-- Ex 2 -->
-            <div>
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 2 : Règle de trois</h3>
-                <p class="text-sm text-slate-600 mb-3">En utilisant le produit en croix, trouvez la valeur de <em>x</em> dans les tableaux de proportionnalité suivants :</p>
-                <div class="grid grid-cols-2 gap-4 max-w-lg">
-                    <table class="w-full text-center border-collapse text-sm">
-                        <tr><td class="border p-2">4</td><td class="border p-2">7</td></tr>
-                        <tr><td class="border p-2">12</td><td class="border p-2 font-bold text-indigo-600">x</td></tr>
-                    </table>
-                    <table class="w-full text-center border-collapse text-sm">
-                        <tr><td class="border p-2 font-bold text-indigo-600">x</td><td class="border p-2">15</td></tr>
-                        <tr><td class="border p-2">8</td><td class="border p-2">20</td></tr>
-                    </table>
+            <!-- EXERCICE 5 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 5</span>
+                        Mécanique & Facturation • Calcul du montant TTC et de la TVA
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                    </div>
                 </div>
-                <div class="mt-4 space-y-4 print:block hidden">
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un mécanicien automobile établit une devis de réparation d'un montant de <strong>180 € Hors Taxes (HT)</strong>. La TVA applicable est de <strong>20 %</strong>.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez la valeur en euros de la TVA.</li>
+                        <li>Calculez le montant total TTC (Toutes Taxes Comprises) payable par le client.</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 5 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 5 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Montant TVA : $180 \times 0,20 = 36\text{ €}$.</li>
+                        <li>Montant TTC : $180 + 36 = 216\text{ €}$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- EXERCICE 6 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Exercice 6</span>
+                        Bâtiment & Plan d'Architecte • Échelle 1/50
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-extrabold">REPRÉSENTER</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un plan d'atelier d'ébénisterie est dessiné à l'échelle <strong>1 / 50</strong> ($1\text{ cm sur plan} = 50\text{ cm réels}$).</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Un établi mesure $4\text{ cm}$ sur le plan. Quelle est sa longueur réelle en cm puis en mètres ?</li>
+                        <li>Une baie vitrée mesure en réalité $2,50\text{ m}$ ($250\text{ cm}$). Quelle taille mesure-t-elle sur le plan ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ EXERCICE 6 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-ex6')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-ex6" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Exercice 6 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Longueur réelle : $4 \times 50 = 200\text{ cm} = 2,00\text{ m}$.</li>
+                        <li>Longueur sur le plan : $250 / 50 = 5\text{ cm}$.</li>
+                    </ol>
                 </div>
             </div>
         </section>
 
-        <!-- NIVEAU 2 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-blue-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-blue-500 mr-2">Niveau 2</span> 
-                    Application du quotidien
-                </h2>
-                <i class="fa-solid fa-utensils text-blue-500 text-2xl"></i>
+        <!-- PARTIE 3 : TÂCHES COMPLEXES ET ÉVALUATION BREVET (DNB PRO) -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-2">
+                <div class="w-8 h-8 bg-purple-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+                <h2 class="text-xl font-bold font-heading text-slate-900">Partie 3 : Tâches complexes et Sujets type Brevet PRO</h2>
             </div>
-            
-            <!-- Ex 3 -->
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 3 : La recette de cuisine (Métiers de bouche)</h3>
-                <p class="text-sm text-slate-600 mb-3">Pour réaliser des crêpes pour 4 personnes, un cuisinier utilise 250g de farine, 3 œufs et 50 cl de lait.</p>
-                <ol class="list-decimal list-inside space-y-2 text-sm text-slate-700">
-                    <li>Quelle quantité de farine faut-il pour 10 personnes ?</li>
-                    <li>Avec 1,5 L (soit 150 cl) de lait, pour combien de personnes peut-il cuisiner ?</li>
-                </ol>
-                <div class="mt-4 space-y-4 print:block hidden">
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
+
+            <!-- PROBLÈME 7 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 7</span>
+                        Logistique • Vitesse moyenne et gestion des temps de livraison
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Modéliser</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un chauffeur livreur doit effectuer un trajet de <strong>210 km</strong> sur autoroute à la vitesse moyenne constante de <strong>70 km/h</strong>.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez la durée du trajet en heures.</li>
+                        <li>S'il part du dépôt à 08h30, à quelle heure arrivera-t-il chez le client ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 7 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p7')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p7" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 7 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Durée : $t = 210 / 70 = 3\text{ heures}$.</li>
+                        <li>Heure d'arrivée : $08\text{h}30 + 3\text{h} = 11\text{h}30$.</li>
+                    </ol>
                 </div>
             </div>
 
-            <!-- Ex 4 -->
-            <div>
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 4 : Les Soldes</h3>
-                <p class="text-sm text-slate-600 mb-3">Pendant les soldes, un magasin de vêtements propose une réduction de 30% sur tout le magasin. Vous achetez un jean affiché à 45 €.</p>
-                <ol class="list-decimal list-inside space-y-2 text-sm text-slate-700">
-                    <li>Calculez le montant de la réduction en euros.</li>
-                    <li>Quel est le nouveau prix de ce jean à la caisse ?</li>
-                </ol>
-                <div class="mt-4 space-y-4 print:block hidden">
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
+            <!-- PROBLÈME 8 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 8</span>
+                        BTP & Maçonnerie • Mélange de mortier en Ratio 1:3
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Modéliser</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un maçon prépare du mortier selon le ratio : <strong>1 volume de ciment pour 3 volumes de sable</strong>.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Combien de sacs de sable doit-il mélanger s'il utilise 4 sacs de ciment ?</li>
+                        <li>Pour préparer $40\text{ kg}$ de mélange total, quelle masse de ciment et quelle masse de sable faut-il doser ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 8 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p8')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p8" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 8 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Sacs de sable : $4 \times 3 = 12\text{ sacs de sable}$.</li>
+                        <li>Ratio $1:3 \implies 1 + 3 = 4\text{ parts}$. <br>Masse d'une part = $40 / 4 = 10\text{ kg}$. <br>Ciment = $10\text{ kg}$, Sable = $30\text{ kg}$.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 9 -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-extrabold rounded-md">Problème 9</span>
+                        Éco-conduite • Économie de Carburant
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded">Chercher</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                        <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Communiquer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Un véhicule consomme <strong>8 L/100 km</strong> avant une formation d'éco-conduite. Après la formation, sa consommation baisse de <strong>15 %</strong>.</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Calculez la nouvelle consommation en Litres aux 100 km.</li>
+                        <li>Sur un trajet annuel de $20\,000\text{ km}$, combien de Litres de carburant sont économisés ?</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 9 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p9')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p9" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-indigo-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-indigo-600"></i> Corrigé détaillé - Problème 9 :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Réduction : $8 \times 0,15 = 1,2\text{ L}$. Nouvelle consommation = $6,8\text{ L/100 km}$.</li>
+                        <li>Économie sur 20 000 km : $(20\,000 / 100) \times 1,2 = 200 \times 1,2 = 240\text{ Litres}$ d'essence économisés.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PROBLÈME 10 (SUJET TYPE DNB PRO COMPLET) -->
+            <div class="bg-white rounded-2xl border border-red-200 p-6 card-shadow print-card border-l-4 border-l-red-600">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="px-2.5 py-1 bg-red-600 text-white text-xs font-extrabold rounded-md">Problème 10</span>
+                        Sujet type Brevet DNB PRO • Comparaison de Devis Équipement Atelier
+                    </h3>
+                    <div class="flex gap-1 text-[10px] font-bold">
+                        <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Modéliser</span>
+                        <span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded">Calculer</span>
+                        <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Raisonner</span>
+                        <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Communiquer</span>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-700 space-y-3">
+                    <p>Le chef d'entreprise d'un atelier d'usinage souhaite acheter une perceuse à colonne. Deux fournisseurs proposent leurs offres :</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 text-xs my-2">
+                        <div class="bg-slate-50 p-4 border border-slate-200 rounded-xl">
+                            <h4 class="font-bold text-slate-800">Fournisseur A ("Brico-Pro")</h4>
+                            <p class="mt-1">Prix affiché : <strong>250 € HT</strong>.</p>
+                            <p class="text-emerald-600 font-bold mt-1">Remise commerciale : - 15 % immédiate</p>
+                            <p class="text-slate-500 mt-1">TVA applicable : 20 %</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 border border-slate-200 rounded-xl">
+                            <h4 class="font-bold text-slate-800">Fournisseur B ("Outillage Expert")</h4>
+                            <p class="mt-1">Prix affiché : <strong>255 € TTC</strong>.</p>
+                            <p class="text-slate-500 mt-1">Aucune remise applicable.</p>
+                        </div>
+                    </div>
+
+                    <ol class="list-decimal pl-5 space-y-1 text-xs text-slate-700">
+                        <li>Pour le **Fournisseur A** : Calculez le prix HT après remise de 15 %.</li>
+                        <li>Pour le **Fournisseur A** : Calculez le montant TTC final (avec TVA 20 %).</li>
+                        <li>Chez quel fournisseur le chef d'entreprise doit-il passer commande pour payer le moins cher au final ? Justifiez par une phrase rédigée.</li>
+                    </ol>
+                </div>
+
+                <!-- CORRIGÉ PROBLÈME 10 -->
+                <div class="mt-4 no-print">
+                    <button onclick="toggleCorrection('corr-p10')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                    </button>
+                </div>
+                <div id="corr-p10" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                    <p class="font-bold text-red-900 flex items-center gap-2">
+                        <i class="fa-solid fa-check-double text-red-600"></i> Corrigé détaillé - Sujet type Brevet PRO :
+                    </p>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li><strong>Fournisseur A (Prix HT réduit) :</strong> Remise $= 250 \times 0,15 = 37,50\text{ €}$. Nouveau prix HT $= 250 - 37,50 = 212,50\text{ €}$.</li>
+                        <li><strong>Fournisseur A (Prix TTC) :</strong> TVA $= 212,50 \times 0,20 = 42,50\text{ €}$. Prix TTC final $= 212,50 + 42,50 = 255,00\text{ €}$.</li>
+                        <li><strong>Conclusion :</strong> Les deux fournisseurs proposent **exactement le même prix final de 255,00 € TTC**. Le chef d'entreprise peut choisir indifféremment l'un ou l'autre en fonction des conditions de livraison ou de garantie.</li>
+                    </ol>
                 </div>
             </div>
         </section>
 
-        <!-- NIVEAU 3 -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:shadow-none print:border-b print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-amber-500 pb-2">
-                <h2 class="text-xl font-bold text-slate-800">
-                    <span class="text-amber-500 mr-2">Niveau 3</span> 
-                    Contextualisation Professionnelle
-                </h2>
-                <i class="fa-solid fa-helmet-safety text-amber-500 text-2xl"></i>
-            </div>
-            
-            <!-- Ex 5 -->
-            <div class="mb-6">
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 5 : La facture du garagiste</h3>
-                <p class="text-sm text-slate-600 mb-3">Un mécanicien a remplacé les plaquettes de frein d'une voiture. La facture indique un montant <strong>Hors Taxes (HT) de 145 €</strong>. La TVA applicable sur la réparation automobile est de <strong>20%</strong>.</p>
-                <ol class="list-decimal list-inside space-y-2 text-sm text-slate-700">
-                    <li>Calculez le montant de la TVA en euros.</li>
-                    <li>Calculez le montant <strong>TTC (Toutes Taxes Comprises)</strong> que le client devra payer.</li>
-                </ol>
-                <div class="mt-4 space-y-4 print:block hidden">
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                </div>
-            </div>
-
-            <!-- Ex 6 -->
-            <div>
-                <h3 class="font-bold text-slate-700 mb-2">Exercice 6 : Lecture de plan (Échelle)</h3>
-                <p class="text-sm text-slate-600 mb-3">Sur le plan de construction d'un atelier, l'échelle indiquée est <strong>1/50</strong> (ce qui signifie que 1 cm sur le plan représente 50 cm dans la réalité).</p>
-                <ol class="list-decimal list-inside space-y-2 text-sm text-slate-700">
-                    <li>La longueur de l'atelier sur le plan mesure 14 cm. Quelle est sa longueur réelle en cm ? Puis en mètres ?</li>
-                    <li>Dans la réalité, la largeur de la porte est de 2 mètres (soit 200 cm). Quelle taille mesure cette porte sur le plan d'architecte ?</li>
-                </ol>
-                <div class="mt-4 space-y-4 print:block hidden">
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NIVEAU 4 -->
-        <section class="bg-indigo-50 rounded-3xl p-8 border border-indigo-200 shadow-sm print:bg-white print:border-black print:border print:rounded-none">
-            <div class="flex items-center justify-between mb-4 border-b-2 border-indigo-600 pb-2">
-                <h2 class="text-xl font-bold text-indigo-900">
-                    <span class="text-indigo-600 mr-2">Niveau 4</span> 
-                    Tâche Complexe (Type Brevet Pro)
-                </h2>
-                <i class="fa-solid fa-trophy text-indigo-500 text-2xl"></i>
-            </div>
-            
-            <p class="text-sm text-indigo-900 mb-3 text-justify">
-                <strong>Situation :</strong> Vous devez acheter une perceuse professionnelle pour équiper votre atelier. Vous hésitez entre deux fournisseurs professionnels :
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-4 mb-4">
-                <div class="bg-white p-4 border border-indigo-200 rounded-lg">
-                    <h4 class="font-bold text-slate-800">Fournisseur A "Brico-Pro"</h4>
-                    <p class="text-sm mt-2">Prix affiché : <strong>250 € HT</strong>.</p>
-                    <p class="text-sm text-emerald-600 font-semibold mt-1">Offre spéciale : - 15 % de remise immédiate !</p>
-                    <p class="text-xs text-slate-500 mt-2">TVA applicable : 20%</p>
-                </div>
-                <div class="bg-white p-4 border border-indigo-200 rounded-lg">
-                    <h4 class="font-bold text-slate-800">Fournisseur B "Outillage Expert"</h4>
-                    <p class="text-sm mt-2">Prix affiché : <strong>270 € TTC</strong>.</p>
-                    <p class="text-sm mt-1"><em>Aucune remise en cours.</em></p>
-                </div>
-            </div>
-
-            <p class="font-bold text-indigo-900">Chez quel fournisseur devez-vous acheter la perceuse pour payer le moins cher possible au final (TTC) ?</p>
-            <p class="text-sm text-indigo-800 italic mt-1">Attention, vous devez détailler tous vos calculs pour justifier votre réponse.</p>
-
-            <div class="mt-6 space-y-4 print:block hidden">
-                <div class="border-b border-dashed border-slate-400 w-full h-8"></div>
-                <div class="border-b border-dashed border-slate-400 w-full h-8"></div>
-                <div class="border-b border-dashed border-slate-400 w-full h-8"></div>
-                <div class="border-b border-dashed border-slate-400 w-full h-8"></div>
-                <div class="border-b border-dashed border-slate-400 w-full h-8"></div>
-            </div>
-        </section>
-        
     </main>
 
+    <!-- SCRIPTS JS POUR L'AFFICHAGE DES CORRECTIONS -->
+    <script>
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.toggle('hidden');
+            }
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2', 'corr-ex3', 'corr-ex4', 'corr-ex5', 'corr-ex6', 'corr-p7', 'corr-p8', 'corr-p9', 'corr-p10'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) {
+                btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+            }
+        }
+    </script>
 </body>
 </html>

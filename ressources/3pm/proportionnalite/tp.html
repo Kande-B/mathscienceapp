@@ -1,129 +1,292 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP - Proportionnalité</title>
+    <title>TP Tableur - Proportionnalité & Pourcentages (3PM)</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shadow-inner">
-                <i class="fa-solid fa-cogs text-2xl"></i>
+    <!-- Header & Navigation unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 3PM • Mathématiques & Numérique</span>
+                    <h1 class="text-xl font-bold font-heading">Proportionnalité & Pourcentages</h1>
+                </div>
             </div>
-            <div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">3ème Prépa Métiers • TP</p>
-                <h1 class="text-2xl font-bold text-slate-800">TP : Préparation d'un chantier</h1>
-            </div>
-            <div class="ml-auto flex gap-2">
-                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-print"></i> Imprimer
-                </button>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6 print:mt-0 print:space-y-6">
-        
-        <!-- Mise en situation -->
-        <section class="bg-slate-800 rounded-3xl p-8 text-white shadow-lg relative overflow-hidden print:bg-white print:text-black print:border print:border-slate-300 print:shadow-none print:rounded-xl">
-            <div class="absolute right-0 top-0 opacity-10 text-[120px] -mt-4 -mr-4 print:hidden">
-                <i class="fa-solid fa-hard-hat"></i>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DU TP TABLEUR LIBREOFFICE / EXCEL -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-purple-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
+                        <span>TP Informatique Guidé</span> • <span>LibreOffice Calc / Microsoft Excel</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Tableur : Facture Automatisée & Dosage de Matériaux</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer le TP
+                    </button>
+                </div>
             </div>
-            <h2 class="text-xl font-bold mb-4 flex items-center gap-3 relative z-10">
-                <i class="fa-solid fa-map-location-dot text-emerald-400 print:text-slate-800"></i> Mise en situation
-            </h2>
-            <p class="text-slate-300 text-lg leading-relaxed relative z-10 print:text-slate-700">
-                Vous intervenez sur un chantier de rénovation pour couler une dalle en béton. Pour réaliser le béton, il faut mélanger du ciment, du sable, du gravier et de l'eau dans des proportions bien précises.<br><br>
-                Votre objectif aujourd'hui est de calculer les quantités exactes de matériaux nécessaires pour que la toupie puisse préparer le mélange.
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>Objectif de la séance :</strong> Utiliser le tableur pour automatiser le calcul d'un dosage proportionnel (matériaux BTP) et concevoir une feuille de facturation professionnelle intégrant remises (%) et TVA (20 %).
             </p>
-        </section>
+        </div>
 
-        <!-- Document Ressource -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:rounded-xl">
-            <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-3 border-b pb-3">
-                <i class="fa-solid fa-file-invoice text-indigo-500"></i> Document de référence : "La recette du béton"
-            </h2>
-            <div class="bg-orange-50 border border-orange-100 p-5 rounded-2xl flex gap-6 items-center">
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm flex-shrink-0 text-orange-500 text-2xl">
-                    <i class="fa-solid fa-scale-balanced"></i>
+        <!-- CONTEXTE PROFESSIONNEL & LOGICIEL -->
+        <div class="bg-slate-900 text-white p-6 rounded-2xl border border-slate-800 space-y-3">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-purple-500/20 text-purple-400 rounded-lg flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop text-sm"></i>
                 </div>
-                <div>
-                    <p class="text-slate-700">Pour fabriquer exactement <strong>1 m³ (mètre cube)</strong> de béton standard, les proportions sont les suivantes :</p>
-                    <ul class="mt-3 grid grid-cols-2 gap-2 text-sm font-bold text-slate-800">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-cube text-slate-400"></i> Ciment : 350 kg</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-mountain text-amber-600"></i> Sable : 680 kg</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-cubes text-slate-600"></i> Gravier : 1170 kg</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-droplet text-blue-500"></i> Eau : 175 Litres</li>
-                    </ul>
-                </div>
+                <h3 class="font-bold text-base font-heading">Logiciel utilisé : LibreOffice Calc ou Microsoft Excel</h3>
             </div>
-        </section>
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Toutes les formules du tableur commencent impérativement par le signe égal <strong><code>=</code></strong>. <br>
+                Exemples de formules : <code>=B4*C4</code> (multiplication), <code>=B4*(1-D4)</code> (réduction en %), <code>=SOMME(B4:B8)</code> (somme).
+            </p>
+        </div>
 
-        <!-- Travail demandé -->
-        <section class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm print:rounded-xl">
-            <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                <i class="fa-solid fa-clipboard-list text-rose-500"></i> Travail à réaliser
-            </h2>
-            
-            <div class="space-y-8">
-                <!-- Mission 1 -->
-                <div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">Mission 1 : Le petit muret</h3>
-                    <p class="text-slate-600 mb-4">Pour commencer la journée, vous devez couler les fondations d'un petit muret qui nécessite seulement <strong>2,5 m³</strong> de béton.</p>
-                    <p class="text-sm font-semibold text-slate-700 mb-2">Complétez le bon de commande des matériaux :</p>
-                    
-                    <table class="w-full text-center border-collapse">
+        <!-- PARTIE 1 : AUTOMATISATION DU DOSAGE DE MATÉRIAUX (BTP) -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="font-bold text-slate-900 text-base">Partie 1 : Dosage automatique du béton de chantier (BTP)</h3>
+            </div>
+
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Pour couler une dalle en béton, la recette pour <strong>1 m³</strong> nécessite : <strong>350 kg de ciment</strong>, <strong>680 kg de sable</strong>, <strong>1 170 kg de gravier</strong> et <strong>175 Litres d'eau</strong>.
+            </p>
+
+            <div class="space-y-3 text-xs text-slate-800">
+                <p class="font-bold text-slate-900">Consignes pas à pas sur le tableur :</p>
+                <ol class="list-decimal pl-5 space-y-2 text-slate-700">
+                    <li>Ouvrez une feuille vierge sur le tableur et reproduisez la grille ci-dessous :</li>
+                </ol>
+
+                <!-- APERÇU GRILLE TABLEUR PARTIE 1 -->
+                <div class="overflow-x-auto my-2 border border-slate-300 rounded-xl">
+                    <table class="w-full text-center border-collapse text-xs font-mono">
                         <thead>
-                            <tr class="bg-slate-50 border border-slate-200">
-                                <th class="p-3 text-slate-700 border border-slate-200">Volume de béton</th>
-                                <td class="p-3 font-bold border border-slate-200 bg-white">1 m³</td>
-                                <td class="p-3 font-bold border border-slate-200 bg-white text-indigo-600">2,5 m³</td>
+                            <tr class="bg-slate-200 font-bold text-slate-800">
+                                <th class="border border-slate-300 p-1.5 w-10"></th>
+                                <th class="border border-slate-300 p-1.5">A</th>
+                                <th class="border border-slate-300 p-1.5">B</th>
+                                <th class="border border-slate-300 p-1.5 bg-yellow-100 text-slate-900">C</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border border-slate-200">
-                                <th class="p-3 text-slate-700 bg-slate-50 border border-slate-200">Ciment (kg)</th>
-                                <td class="p-3 border border-slate-200">350</td>
-                                <td class="p-3 border border-slate-200 text-slate-400 border-dashed print:border-solid h-12"></td>
+                            <tr>
+                                <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">1</th>
+                                <td class="border border-slate-300 p-1.5 font-bold text-left bg-slate-50">Volume voulu (m³) :</td>
+                                <td class="border border-slate-300 p-1.5 font-bold text-purple-700 bg-purple-50">3,5</td>
+                                <td class="border border-slate-300 p-1.5 bg-slate-50"></td>
                             </tr>
-                            <tr class="border border-slate-200">
-                                <th class="p-3 text-slate-700 bg-slate-50 border border-slate-200">Sable (kg)</th>
-                                <td class="p-3 border border-slate-200">680</td>
-                                <td class="p-3 border border-slate-200 text-slate-400 border-dashed print:border-solid h-12"></td>
+                            <tr>
+                                <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">2</th>
+                                <td class="border border-slate-300 p-1.5 font-bold bg-slate-200">Matériau</td>
+                                <td class="border border-slate-300 p-1.5 font-bold bg-slate-200">Dosage 1 m³</td>
+                                <td class="border border-slate-300 p-1.5 font-bold bg-yellow-200">Quantité Totale Nécessaire</td>
+                            </tr>
+                            <tr>
+                                <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">3</th>
+                                <td class="border border-slate-300 p-1.5 text-left">Ciment (kg)</td>
+                                <td class="border border-slate-300 p-1.5">350</td>
+                                <td class="border border-slate-300 p-1.5 font-bold text-red-600">[ Formule 1 ]</td>
+                            </tr>
+                            <tr>
+                                <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">4</th>
+                                <td class="border border-slate-300 p-1.5 text-left">Sable (kg)</td>
+                                <td class="border border-slate-300 p-1.5">680</td>
+                                <td class="border border-slate-300 p-1.5 font-bold text-red-600">[ Formule 2 ]</td>
+                            </tr>
+                            <tr>
+                                <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">5</th>
+                                <td class="border border-slate-300 p-1.5 text-left">Gravier (kg)</td>
+                                <td class="border border-slate-300 p-1.5">1170</td>
+                                <td class="border border-slate-300 p-1.5 font-bold text-red-600">[ Formule 3 ]</td>
+                            </tr>
+                            <tr>
+                                <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">6</th>
+                                <td class="border border-slate-300 p-1.5 text-left">Eau (Litres)</td>
+                                <td class="border border-slate-300 p-1.5">175</td>
+                                <td class="border border-slate-300 p-1.5 font-bold text-red-600">[ Formule 4 ]</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <hr class="border-slate-100">
-
-                <!-- Mission 2 -->
-                <div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">Mission 2 : Gestion de l'eau</h3>
-                    <p class="text-slate-600 mb-4">Sur le chantier, la cuve d'eau contient exactement <strong>700 Litres</strong> d'eau.</p>
-                    <p class="text-slate-700 mb-2 font-medium">Quel volume de béton maximum (en m³) allez-vous pouvoir fabriquer avec cette réserve d'eau ?</p>
-                    <div class="text-sm text-slate-500 mb-4 italic">Posez votre calcul (produit en croix conseillé) :</div>
-                    
-                    <!-- Lignes pour répondre -->
-                    <div class="space-y-4 print:block hidden">
-                        <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                        <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                        <div class="border-b border-dashed border-slate-300 w-full h-6"></div>
-                    </div>
-                </div>
+                <ol start="2" class="list-decimal pl-5 space-y-2 text-slate-700">
+                    <li>Quelle formule devez-vous saisir en cellule <strong>C3</strong> pour calculer la masse de ciment pour $3,5\text{ m}^3$ ? <br>
+                        <code>=B3*B1</code> ou avec cellule figée <code>=B3*$B$1</code>.
+                    </li>
+                    <li>Étirez cette formule vers le bas (de C3 à C6) pour compléter automatiquement tout le bon de commande.</li>
+                    <li>Modifiez le volume en cellule B1 et passez à <strong>5 m³</strong>. Observez la mise à jour instantanée de tous les matériaux.</li>
+                </ol>
             </div>
         </section>
-        
-    </main>
 
+        <!-- PARTIE 2 : CONCEPTION D'UNE FACTURE AVEC REMISE % ET TVA -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Partie 2 : Générateur automatique de devis et factures (Commerce)</h3>
+            </div>
+
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un artisan électricien prépare la facture d'un chantier d'installation. Il applique une **remise de 10 %** sur le matériel et ajoute la **TVA de 20 %**.
+            </p>
+
+            <!-- APERÇU GRILLE TABLEUR PARTIE 2 -->
+            <div class="overflow-x-auto my-2 border border-slate-300 rounded-xl">
+                <table class="w-full text-center border-collapse text-xs font-mono">
+                    <thead>
+                        <tr class="bg-slate-200 font-bold text-slate-800">
+                            <th class="border border-slate-300 p-1.5 w-10"></th>
+                            <th class="border border-slate-300 p-1.5">A</th>
+                            <th class="border border-slate-300 p-1.5">B</th>
+                            <th class="border border-slate-300 p-1.5">C</th>
+                            <th class="border border-slate-300 p-1.5">D</th>
+                            <th class="border border-slate-300 p-1.5">E</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">1</th>
+                            <td class="border border-slate-300 p-1.5 font-bold bg-slate-200" colspan="5">FACTURE D'ÉQUIPEMENT ÉLECTRIQUE</td>
+                        </tr>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">2</th>
+                            <td class="border border-slate-300 p-1.5 font-bold bg-slate-100">Désignation</td>
+                            <td class="border border-slate-300 p-1.5 font-bold bg-slate-100">Prix HT unitaire (€)</td>
+                            <td class="border border-slate-300 p-1.5 font-bold bg-slate-100">Quantité</td>
+                            <td class="border border-slate-300 p-1.5 font-bold bg-slate-100">Total HT Brut (€)</td>
+                            <td class="border border-slate-300 p-1.5 font-bold bg-purple-100">Net HT (-10%) (€)</td>
+                        </tr>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">3</th>
+                            <td class="border border-slate-300 p-1.5 text-left">Tableau électrique 3 rangées</td>
+                            <td class="border border-slate-300 p-1.5">150,00</td>
+                            <td class="border border-slate-300 p-1.5">2</td>
+                            <td class="border border-slate-300 p-1.5 text-red-600 font-bold">=B3*C3</td>
+                            <td class="border border-slate-300 p-1.5 text-red-600 font-bold">=D3*0,90</td>
+                        </tr>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">4</th>
+                            <td class="border border-slate-300 p-1.5 text-left">Disjoncteurs 16A</td>
+                            <td class="border border-slate-300 p-1.5">8,50</td>
+                            <td class="border border-slate-300 p-1.5">10</td>
+                            <td class="border border-slate-300 p-1.5 text-red-600 font-bold">=B4*C4</td>
+                            <td class="border border-slate-300 p-1.5 text-red-600 font-bold">=D4*0,90</td>
+                        </tr>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">5</th>
+                            <td class="border border-slate-300 p-1.5 text-left bg-slate-100 font-bold" colspan="4">TOTAL NET HT</td>
+                            <td class="border border-slate-300 p-1.5 text-purple-900 font-bold bg-purple-100">=SOMME(E3:E4)</td>
+                        </tr>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">6</th>
+                            <td class="border border-slate-300 p-1.5 text-left bg-slate-100 font-bold" colspan="4">TVA (20 %)</td>
+                            <td class="border border-slate-300 p-1.5 text-purple-900 font-bold bg-purple-100">=E5*0,20</td>
+                        </tr>
+                        <tr>
+                            <th class="border border-slate-300 p-1.5 bg-slate-100 font-bold">7</th>
+                            <td class="border border-slate-300 p-1.5 text-left bg-emerald-200 font-bold text-emerald-950" colspan="4">TOTAL TTC À PAYER (€)</td>
+                            <td class="border border-slate-300 p-1.5 text-emerald-950 font-bold bg-emerald-200">=E5+E6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="space-y-2 text-xs text-slate-800">
+                <p class="font-bold text-slate-900">Formules à compléter sur votre feuille tableur :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-slate-700">
+                    <li>Indiquez la formule à saisir en **D3** pour calculer le total brut HT du tableau électrique : <code>=B3*C3</code>.</li>
+                    <li>Indiquez la formule à saisir en **E3** pour appliquer la remise de 10 % : <code>=D3*0,90</code> ou <code>=D3*(1-0,10)</code>.</li>
+                    <li>Indiquez la formule à saisir en **E5** pour faire la somme du matériel : <code>=SOMME(E3:E4)</code>.</li>
+                    <li>Indiquez la formule à saisir en **E7** pour obtenir le prix final TTC : <code>=E5+E6</code>.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- FEUILLE DE COMPTE-RENDU ÉLÈVE (A4 IMPRIMABLE) -->
+        <section class="bg-white rounded-2xl border border-slate-300 p-6 card-shadow print-card space-y-4">
+            <h3 class="font-bold text-slate-900 text-sm border-b pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-purple-600"></i> Compte-rendu d'évaluation du TP Tableur
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-4 text-xs">
+                <div><strong>Nom de l'élève :</strong> ....................................</div>
+                <div><strong>Prénom :</strong> ....................................</div>
+                <div><strong>Classe :</strong> 3ème Prépa-Métiers</div>
+                <div><strong>Poste de travail n° :</strong> .........</div>
+            </div>
+
+            <div class="space-y-3 text-xs border-t pt-3">
+                <p class="font-bold text-slate-900">Réponses aux questions du TP :</p>
+                <p>1. Formule saisie en C3 pour le dosage du ciment : ________________________________________</p>
+                <p>2. Masse totale de gravier calculée par le tableur pour 3,5 m³ : ______________________________</p>
+                <p>3. Montant final TTC de la facture d'électricité (cellule E7) : _________________________________</p>
+            </div>
+        </section>
+
+    </main>
 </body>
 </html>
