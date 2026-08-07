@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Divisibilité et Nombres Premiers</title>
+    <title>Je note l'essentiel (Cours) - Arithmétique & Nombres Premiers 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,209 +24,126 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-star-half-stroke text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Mathématiques</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Divisibilité et Premiers</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Arithmétique & Nombres Premiers</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Division euclidienne et Nombres premiers -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Définition -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Nombres Premiers</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-star text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Définition</h3>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Un nombre premier est un nombre entier positif qui possède <strong>exactement deux diviseurs</strong> : 1 et lui-même.
-                    </p>
-                    <div class="bg-blue-50 p-3 rounded text-sm text-blue-900 border border-blue-200">
-                        Liste : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29...
-                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Arithmétique & Nombres Premiers</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Critères de divisibilité, décomposition en facteurs premiers et simplifications de fractions.</p>
                 </div>
 
-                <!-- Division Euclidienne -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-divide text-amber-500 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Division Euclidienne</h3>
-                    </div>
-                    
-                    <p class="text-sm text-slate-700 mb-3">
-                        C'est la division avec un reste. On cherche combien de fois le diviseur rentre entièrement dans le dividende.
-                    </p>
-                    <div class="bg-amber-50 p-4 rounded text-sm font-mono text-center border border-amber-200 overflow-x-auto">
-                        <p class="mb-2"><strong>Dividende = (Diviseur × Quotient) + Reste</strong></p>
-                        <p class="text-amber-800">17 = (5 × 3) + 2</p>
-                    </div>
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Critères de Divisibilité</a>
+                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Nombres Premiers</a>
+                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Décomposition</a>
+                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Fractions Irréductibles</a>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 : CRITÈRES DE DIVISIBILITÉ -->
+        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définitions Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Rappels : Critères usuels de divisibilité</h3>
                 </div>
             </div>
 
-            <!-- Visualization : Décomposeur de nombres -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-purple-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Le Décomposeur (Facteurs Premiers)
-                </h3>
-                <p class="text-xs text-slate-500 mb-6 text-center">Entrez un nombre pour le décomposer en briques élémentaires (nombres premiers).</p>
-                
-                <div class="flex flex-col gap-4">
-                    <div class="flex gap-2">
-                        <input type="number" id="numberInput" value="60" min="2" max="9999" class="w-full bg-slate-50 border-2 border-slate-300 p-3 rounded-lg font-mono text-xl text-center focus:border-purple-500 focus:outline-none">
-                        <button onclick="decompose()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 rounded-lg transition-colors"><i class="fa-solid fa-play"></i></button>
-                    </div>
-                    
-                    <div id="decompositionResult" class="mt-4 p-4 bg-slate-800 text-purple-300 rounded-xl font-mono text-center min-h-[80px] shadow-inner flex items-center justify-center text-lg font-bold flex-wrap gap-2">
-                        <!-- Result injected here -->
-                    </div>
-                    
-                    <div class="text-xs text-slate-500 mt-2 text-center">Tout nombre entier est une combinaison unique de briques premières !</div>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-list-check"></i> Les 5 règles indispensables
+                    </h4>
+                    <ul class="space-y-1 text-slate-300 text-xs">
+                        <li>• **Par 2 :** le chiffre des unités est pair ($0, 2, 4, 6, 8$).</li>
+                        <li>• **Par 3 :** la somme des chiffres est divisible par 3.</li>
+                        <li>• **Par 5 :** le chiffre des unités est $0$ ou $5$.</li>
+                        <li>• **Par 9 :** la somme des chiffres est divisible par 9.</li>
+                        <li>• **Par 10 :** le chiffre des unités est $0$.</li>
+                    </ul>
                 </div>
-
-                <script>
-                    function decompose() {
-                        let n = parseInt(document.getElementById('numberInput').value);
-                        if (isNaN(n) || n < 2) {
-                            document.getElementById('decompositionResult').innerHTML = '<span class="text-rose-400">Entrez un nombre ≥ 2</span>';
-                            return;
-                        }
-                        
-                        let factors = [];
-                        let original = n;
-                        let d = 2;
-                        
-                        while (n > 1) {
-                            while (n % d === 0) {
-                                factors.push(d);
-                                n /= d;
-                            }
-                            d++;
-                            if (d * d > n && n > 1) {
-                                factors.push(n);
-                                break;
-                            }
-                        }
-                        
-                        // Count frequencies for powers
-                        let counts = {};
-                        factors.forEach(f => {
-                            counts[f] = (counts[f] || 0) + 1;
-                        });
-                        
-                        let resultHTML = [];
-                        for (let prime in counts) {
-                            if (counts[prime] > 1) {
-                                resultHTML.push(`${prime}<sup class="text-xs">${counts[prime]}</sup>`);
-                            } else {
-                                resultHTML.push(prime);
-                            }
-                        }
-                        
-                        document.getElementById('decompositionResult').innerHTML = 
-                            `<span class="text-white">${original} =</span> ` + resultHTML.join(' <span class="text-slate-400">×</span> ');
-                    }
-                    
-                    // Init
-                    decompose();
-                </script>
             </div>
         </section>
 
-        <!-- SECTION 2 : Critères de divisibilité -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les critères de divisibilité</h2>
+        <!-- CHAPITRE 2 : NOMBRES PREMIERS ET DÉCOMPOSITION -->
+        <section id="chap2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">II</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chapitre 2 • Décomposition</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Décomposition en produit de facteurs premiers</h3>
+                </div>
             </div>
-            
-            <p class="text-slate-700 mb-6">Pour simplifier une fraction ou décomposer un nombre, il faut savoir rapidement par quoi il est divisible.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Par 2 -->
-                <div class="bg-white rounded-xl p-5 border-t-4 border-rose-400 card-shadow interactive-hover">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-lg text-slate-800">Divisible par 2</h4>
-                        <span class="w-8 h-8 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center font-bold">2</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-3">Le nombre est pair (finit par 0, 2, 4, 6, 8).</p>
-                    <p class="text-xs text-rose-500 font-bold bg-rose-50 inline-block px-2 py-1 rounded">Ex: 148, 56, 30</p>
-                </div>
-                <!-- Par 3 -->
-                <div class="bg-white rounded-xl p-5 border-t-4 border-amber-400 card-shadow interactive-hover">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-lg text-slate-800">Divisible par 3</h4>
-                        <span class="w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center font-bold">3</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-3">La somme de ses chiffres est dans la table de 3.</p>
-                    <p class="text-xs text-amber-600 font-bold bg-amber-50 inline-block px-2 py-1 rounded">Ex: 123 (1+2+3=6)</p>
-                </div>
-                <!-- Par 5 -->
-                <div class="bg-white rounded-xl p-5 border-t-4 border-emerald-400 card-shadow interactive-hover">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-lg text-slate-800">Divisible par 5</h4>
-                        <span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center font-bold">5</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-3">Il se termine par 0 ou par 5.</p>
-                    <p class="text-xs text-emerald-600 font-bold bg-emerald-50 inline-block px-2 py-1 rounded">Ex: 65, 100, 25</p>
-                </div>
-                <!-- Par 9 -->
-                <div class="bg-white rounded-xl p-5 border-t-4 border-indigo-400 card-shadow interactive-hover">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-lg text-slate-800">Divisible par 9</h4>
-                        <span class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold">9</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-3">La somme de ses chiffres est dans la table de 9.</p>
-                    <p class="text-xs text-indigo-600 font-bold bg-indigo-50 inline-block px-2 py-1 rounded">Ex: 81 (8+1=9)</p>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable"></i> Théorème fondamental
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Tout nombre entier supérieur ou égal à 2 s'écrit de façon unique sous la forme d'un produit de nombres premiers. <br>
+                        <strong>Liste des premiers nombres premiers :</strong> $2, 3, 5, 7, 11, 13, 17, 19, 23, 29...$
+                    </p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <div class="h-24"></div>
 </body>
 </html>
