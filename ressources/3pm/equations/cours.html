@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Équations du 1er degré</title>
+    <title>Je note l'essentiel (Cours) - Équations du 1er Degré 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,251 +24,229 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-scale-balanced text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Algèbre</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Équations du 1er degré</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Équations du 1er Degré</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Le principe de la balance -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Définition -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Le principe de l'équation</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-question-circle text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Qu'est-ce que c'est ?</h3>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Une équation est une <strong>égalité</strong> (avec un signe "=") qui contient une ou plusieurs lettres appelées <strong>inconnues</strong> (souvent $x$).
-                    </p>
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Résoudre l'équation, c'est trouver la valeur mystère de $x$ pour que l'égalité soit vraie. C'est comme l'équilibre d'une balance à plateaux !
-                    </p>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Équations du 1er Degré</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Formules officielles d'abord, puis exemples d'application contextualisés et rédigés pas à pas.</p>
                 </div>
-                
-                <!-- Règle d'or -->
-                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-xl shadow-sm">
-                    <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-2">
-                        <i class="fa-solid fa-gavel"></i> La règle d'or
-                    </h3>
-                    <p class="text-amber-900 text-sm">
-                        Tout ce que je fais d'un côté du signe "=", je <strong>dois absolument</strong> le faire de l'autre côté pour maintenir l'équilibre (ajouter, soustraire, multiplier, diviser).
-                    </p>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Équations Simples</a>
+                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Forme $ax+b=c$</a>
+                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Forme $ax+b=cx+d$</a>
+                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Équation-Produit Nul</a>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 : ÉQUATIONS SIMPLES -->
+        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définitions Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Équations de base ($x + a = b$ et $ax = b$)</h3>
                 </div>
             </div>
 
-            <!-- Visualization : La Balance Interactive -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-brand-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Simulateur : La Balance de l'Équation
-                </h3>
-                <p class="text-xs text-slate-500 mb-6 text-center">Équation : $x + 2 = 5$<br>Trouvez la valeur de $x$ en retirant des poids identiques de chaque côté.</p>
-                
-                <div class="relative w-full h-48 bg-slate-50 border-2 border-slate-200 rounded-xl overflow-hidden flex flex-col items-center justify-end pb-4">
-                    <!-- Balance Base -->
-                    <div class="w-4 h-24 bg-slate-400 rounded-t-lg absolute bottom-4"></div>
-                    <div class="w-24 h-2 bg-slate-500 absolute bottom-4 rounded-full"></div>
-                    
-                    <!-- Bras de la balance (pivote) -->
-                    <div id="balanceArm" class="w-64 h-2 bg-brand-500 absolute bottom-24 rounded-full transition-transform duration-500 origin-center flex justify-between" style="transform: rotate(0deg);">
-                        <!-- Plateau Gauche -->
-                        <div class="relative w-20 h-1 bg-brand-600 -left-10 top-2 flex justify-center items-end pb-1 gap-1" id="plateauGauche">
-                            <!-- Boîte X (Inconnue) -->
-                            <div class="w-8 h-8 bg-purple-500 rounded border-2 border-purple-700 flex items-center justify-center text-white font-bold text-xs shadow-md">X</div>
-                            <!-- Poids 1 unité -->
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit left-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit left-w">1</div>
-                        </div>
-                        
-                        <!-- Plateau Droit -->
-                        <div class="relative w-20 h-1 bg-brand-600 -right-10 top-2 flex justify-center items-end pb-1 gap-1 flex-wrap" id="plateauDroit">
-                            <!-- Poids 1 unité (5 au total) -->
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                        </div>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRE FORMULES -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced"></i> Définition d'une équation
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Une **équation** est une égalité comportant une valeur inconnue désignée par une lettre (généralement $x$). Résoudre une équation, c'est trouver la valeur de $x$ qui rend l'égalité vraie.
+                    </p>
+                    <div class="grid grid-cols-2 gap-2 text-center pt-2 font-bold text-sky-300">
+                        <div>$$x + a = b \implies x = b - a$$</div>
+                        <div>$$ax = b \implies x = \frac{b}{a}$$</div>
                     </div>
                 </div>
-                
-                <div class="flex justify-center gap-4 mt-4">
-                    <button onclick="removeWeight('left')" class="px-3 py-1.5 bg-rose-500 text-white text-xs font-bold rounded shadow hover:bg-rose-600">-1 (Gauche)</button>
-                    <button onclick="removeWeight('right')" class="px-3 py-1.5 bg-rose-500 text-white text-xs font-bold rounded shadow hover:bg-rose-600">-1 (Droite)</button>
-                    <button onclick="resetBalance()" class="px-3 py-1.5 bg-slate-500 text-white text-xs font-bold rounded shadow hover:bg-slate-600"><i class="fa-solid fa-rotate-right"></i></button>
+
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-pen-ruler text-sky-600"></i> Exemple d'application rédigé pas à pas : Facturation d'outillage
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Résoudre l'équation $4x = 32$ (prix de 4 paquets d'outils égal à 32 €).
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">1. Isolation de l'inconnue par division par 4</p>
+                        <p class="text-slate-600">$$x = \frac{32}{4} = 8\text{ €}$$</p>
+                        <p class="font-bold text-sky-900">La solution est $x = 8$.</p>
+                    </div>
                 </div>
-                
-                <div id="equationDisplay" class="mt-4 text-center font-mono font-bold text-xl text-slate-800 bg-slate-100 py-2 rounded">
-                    x + 2 = 5
-                </div>
-
-                <script>
-                    let leftWeights = 2;
-                    let rightWeights = 5;
-                    const trueXValue = 3;
-
-                    function updateBalance() {
-                        // Calculate total weight on each side
-                        const leftTotal = trueXValue + leftWeights;
-                        const rightTotal = rightWeights;
-                        
-                        // Calculate angle based on weight difference
-                        const diff = rightTotal - leftTotal;
-                        const angle = Math.max(-20, Math.min(20, diff * 5)); // Cap tilt at 20 degrees
-                        
-                        document.getElementById('balanceArm').style.transform = `rotate(${angle}deg)`;
-                        
-                        // Update text
-                        let leftText = `x${leftWeights > 0 ? ' + ' + leftWeights : ''}`;
-                        let rightText = rightWeights;
-                        document.getElementById('equationDisplay').innerText = `${leftText} ${diff === 0 ? '=' : (diff > 0 ? '<' : '>')} ${rightText}`;
-                        
-                        if (leftWeights === 0 && diff === 0) {
-                            document.getElementById('equationDisplay').innerHTML = `<span class="text-emerald-500">x = ${rightWeights} (Gagné !)</span>`;
-                        }
-                    }
-
-                    function removeWeight(side) {
-                        if (side === 'left' && leftWeights > 0) {
-                            leftWeights--;
-                            const elements = document.querySelectorAll('.left-w');
-                            if(elements.length > 0) elements[elements.length - 1].remove();
-                        } else if (side === 'right' && rightWeights > 0) {
-                            rightWeights--;
-                            const elements = document.querySelectorAll('.right-w');
-                            if(elements.length > 0) elements[elements.length - 1].remove();
-                        }
-                        updateBalance();
-                    }
-
-                    function resetBalance() {
-                        leftWeights = 2;
-                        rightWeights = 5;
-                        
-                        // Reset HTML
-                        document.getElementById('plateauGauche').innerHTML = `
-                            <div class="w-8 h-8 bg-purple-500 rounded border-2 border-purple-700 flex items-center justify-center text-white font-bold text-xs shadow-md">X</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit left-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit left-w">1</div>
-                        `;
-                        
-                        document.getElementById('plateauDroit').innerHTML = `
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                            <div class="w-4 h-4 bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-[8px] weight-unit right-w">1</div>
-                        `;
-                        
-                        updateBalance();
-                    }
-                </script>
             </div>
         </section>
 
-        <!-- SECTION 2 : La méthode pas à pas -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">La méthode de résolution pas à pas</h2>
-            </div>
-            
-            <p class="text-slate-700 mb-6">Pour résoudre une équation complexe comme $5x - 3 = 2x + 9$, il y a toujours les mêmes étapes à suivre.</p>
-
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow">
-                <div class="space-y-6">
-                    
-                    <!-- Etape 1 -->
-                    <div class="flex flex-col md:flex-row gap-4 items-center md:items-start p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl flex-shrink-0">1</div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-slate-800 mb-1">Regrouper les "x"</h4>
-                            <p class="text-sm text-slate-600 mb-2">On veut tous les "x" du même côté (généralement à gauche). On annule les "x" de droite en faisant l'opération inverse.</p>
-                            <div class="bg-white p-3 rounded font-mono text-sm border border-slate-200">
-                                $5x - 3 = 2x + 9$<br>
-                                $5x \mathbf{- 2x} - 3 = 2x \mathbf{- 2x} + 9$ <span class="text-rose-500 text-xs ml-2">(-2x de chaque côté)</span><br>
-                                $\mathbf{3x} - 3 = 9$
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Etape 2 -->
-                    <div class="flex flex-col md:flex-row gap-4 items-center md:items-start p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xl flex-shrink-0">2</div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-slate-800 mb-1">Isoler les "x" (chasser les nombres seuls)</h4>
-                            <p class="text-sm text-slate-600 mb-2">On "chasse" le nombre qui est avec les "x" en faisant l'opération inverse.</p>
-                            <div class="bg-white p-3 rounded font-mono text-sm border border-slate-200">
-                                $3x - 3 = 9$<br>
-                                $3x - 3 \mathbf{+ 3} = 9 \mathbf{+ 3}$ <span class="text-rose-500 text-xs ml-2">(+3 de chaque côté)</span><br>
-                                $3x = \mathbf{12}$
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Etape 3 -->
-                    <div class="flex flex-col md:flex-row gap-4 items-center md:items-start p-4 bg-indigo-50 rounded-xl border border-indigo-200">
-                        <div class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xl flex-shrink-0">3</div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-indigo-900 mb-1">Diviser pour trouver 1 seul "x"</h4>
-                            <p class="text-sm text-indigo-700 mb-2">Si on a 3x (3 fois x), on divise par 3 pour avoir la valeur de un seul "x".</p>
-                            <div class="bg-white p-3 rounded font-mono text-sm border border-indigo-200 font-bold text-indigo-900">
-                                $3x = 12$<br>
-                                $\frac{3x}{\mathbf{3}} = \frac{12}{\mathbf{3}}$<br>
-                                $x = 4$
-                            </div>
-                        </div>
-                    </div>
-
+        <!-- CHAPITRE 2 : FORMULES ET ÉQUATIONS AX + B = C -->
+        <section id="chap2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">II</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chapitre 2 • Méthode de Résolution</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Résoudre les équations du type $ax + b = c$</h3>
                 </div>
             </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-wrench text-amber-600"></i> Exemple d'application rédigé pas à pas : Devis de l'artisan
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Résoudre $3x + 15 = 45$ (forfait fixe de 15 € + 3 heures d'intervention).
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">Étape 1 : Soustraire 15 des deux côtés</p>
+                        <p class="text-slate-600">$$3x = 45 - 15 \implies 3x = 30$$</p>
+
+                        <p class="font-bold text-slate-900 pt-1">Étape 2 : Diviser par 3</p>
+                        <p class="text-amber-900 font-bold">$$x = \frac{30}{3} = 10$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 3 : ÉQUATIONS AVEC INCONNUE DANS LES DEUX MEMBRES -->
+        <section id="chap3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">III</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Chapitre 3 • Deux Membres</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Résoudre les équations du type $ax + b = cx + d$</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- EXEMPLE DÉTAILLÉ PAS À PAS 3 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-balance-scale text-purple-600"></i> Exemple d'application rédigé pas à pas : Comparaison de tarifs
+                    </h4>
+                    <p class="text-xs text-slate-700">
+                        Résoudre $6x + 10 = 2x + 30$.
+                    </p>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2 font-mono text-xs">
+                        <p class="font-bold text-slate-900">Étape 1 : Regrouper les $x$ à gauche (soustraire $2x$)</p>
+                        <p class="text-slate-600">$$6x - 2x + 10 = 30 \implies 4x + 10 = 30$$</p>
+
+                        <p class="font-bold text-slate-900 pt-1">Étape 2 : Regrouper les nombres à droite (soustraire 10)</p>
+                        <p class="text-slate-600">$$4x = 30 - 10 \implies 4x = 20$$</p>
+
+                        <p class="font-bold text-purple-900 pt-1">Étape 3 : Diviser par 4</p>
+                        <p class="text-purple-900 font-bold">$$x = \frac{20}{4} = 5$$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR INTERACTIF DE RÉSOLUTION -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow border-t-4 border-t-sky-500 no-print">
+            <h3 class="font-bold text-slate-800 mb-2 font-heading text-center text-lg">
+                <i class="fa-solid fa-calculator text-sky-600 mr-2"></i> Solveur Pas à Pas d'Équations du 1er Degré ($ax + b = c$)
+            </h3>
+            <p class="text-xs text-slate-500 mb-6 text-center">Entrez les coefficients $a$, $b$ et $c$ pour voir la résolution automatique pas à pas.</p>
+            
+            <div class="bg-slate-800 rounded-2xl p-6 shadow-inner max-w-md mx-auto space-y-4">
+                <div class="flex items-center justify-center gap-2 font-mono text-white text-lg font-bold">
+                    <input type="number" id="coeffA" class="w-16 bg-slate-700 border border-slate-600 rounded-xl p-2 text-center text-sky-300 font-bold" value="5">
+                    <span>x +</span>
+                    <input type="number" id="coeffB" class="w-16 bg-slate-700 border border-slate-600 rounded-xl p-2 text-center text-amber-300 font-bold" value="12">
+                    <span>=</span>
+                    <input type="number" id="coeffC" class="w-16 bg-slate-700 border border-slate-600 rounded-xl p-2 text-center text-emerald-300 font-bold" value="42">
+                </div>
+
+                <button onclick="solveEquation()" class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold py-3 rounded-xl transition-colors shadow-md text-xs uppercase tracking-wider">
+                    Résoudre Pas à Pas
+                </button>
+            </div>
+
+            <div class="bg-sky-50 border border-sky-200 p-4 rounded-xl text-center max-w-md mx-auto mt-4 space-y-1 font-mono text-xs">
+                <p class="text-xs text-sky-700 uppercase font-bold mb-1">Étapes de Résolution :</p>
+                <div id="step1Trace" class="text-slate-700 font-bold">5x = 42 - 12</div>
+                <div id="step2Trace" class="text-slate-700 font-bold">5x = 30</div>
+                <div id="step3Trace" class="text-sky-900 font-black text-sm pt-1">x = 30 / 5 = 6</div>
+            </div>
+
+            <script>
+                function solveEquation() {
+                    const a = parseFloat(document.getElementById('coeffA')?.value || 1);
+                    const b = parseFloat(document.getElementById('coeffB')?.value || 0);
+                    const c = parseFloat(document.getElementById('coeffC')?.value || 0);
+
+                    const step1 = c - b;
+                    const result = a !== 0 ? (step1 / a) : "Impossible";
+
+                    document.getElementById('step1Trace').innerText = `${a}x = ${c} - (${b})`;
+                    document.getElementById('step2Trace').innerText = `${a}x = ${step1}`;
+                    document.getElementById('step3Trace').innerText = `x = ${step1} / ${a} = ${result}`;
+                }
+            </script>
         </section>
 
     </main>
 
-    <div class="h-24"></div>
 </body>
 </html>

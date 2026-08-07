@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Équations du 1er degré</title>
+    <title>Fiche de TD - Équations du 1er Degré (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,375 +24,264 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
                 <div>
-                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
-                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Équations du 1er degré</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Équations du 1er Degré</h1>
                 </div>
             </div>
-            <div class="hidden md:block">
-                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        
-        <!-- Section: Acquisition -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable</span> • <span>Cycle 4 / 3ème Prépa-Métiers</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices de Résolution d'Équations du 1er Degré</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 1 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Tester une solution</h3>
-                    <p class="text-sm text-slate-600 mb-4">Le nombre <strong>$x = 4$</strong> est-il solution de l'équation $3x - 2 = 10$ ?</p>
-                    
-                    <div class="flex gap-2 mb-4">
-                        <button onclick="setBtnGroup('ex1', 'oui', this)" class="btn-group-ex1 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1 font-bold">Oui</button>
-                        <button onclick="setBtnGroup('ex1', 'non', this)" class="btn-group-ex1 px-4 py-2 border border-slate-200 rounded hover:bg-slate-50 flex-1 font-bold">Non</button>
-                    </div>
-                    
-                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 2 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Résolution additive ($x + a = b$)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $x + 15 = 42$</p>
-                    
-                    <div class="flex items-center gap-3 mb-4 font-mono text-sm">
-                        <span class="text-right">$x = $</span>
-                        <input type="number" id="ex2-ans" class="border border-slate-300 rounded px-2 py-1 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx2()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 3 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Résolution multiplicative ($ax = b$)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $6x = 48$</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono text-sm">
-                        <span>$x = $</span>
-                        <input type="number" id="ex3-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
+            <!-- GRILLE DES COMPETENCES DU CYCLE 4 -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-amber-600 block">CHER</span> Chercher</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">MOD</span> Modéliser</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-purple-600 block">REG</span> Représenter</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-emerald-600 block">REA</span> Calculer</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-rose-600 block">COM</span> Communiquer</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-cyan-600 block">VAL</span> Valider</div>
             </div>
         </div>
 
-        <!-- Section: Entraînement -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    Équations Simples ($x + a = b$ et $ax = b$)
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 4 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Équation à deux étapes ($ax + b = c$)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $2x + 5 = 17$</p>
-                    
-                    <div class="flex flex-col gap-2 mb-4 font-mono text-sm">
-                        <div class="flex items-center gap-2">
-                            <span class="w-12 text-right">$2x = $</span>
-                            <input type="number" id="ex4-step1" class="border border-slate-300 rounded p-1 w-20 text-center" placeholder="17 - 5">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-12 text-right">$x = $</span>
-                            <input type="number" id="ex4-step2" class="border border-slate-300 rounded p-1 w-20 text-center">
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Résolvez les équations suivantes :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$x + 12 = 27$</li>
+                    <li>$4x = 36$</li>
+                    <li>$x - 7 = 15$</li>
+                </ol>
+            </div>
 
-                <!-- Ex 5 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Les x des deux côtés ($ax + b = cx + d$)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Résolvez l'équation : $5x - 3 = 2x + 12$</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono">
-                        <span>$x = $</span>
-                        <input type="number" id="ex5-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
-
-                <!-- Ex 6 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Mise en équation</h3>
-                    <p class="text-sm text-slate-600 mb-4">"Le double d'un nombre augmenté de 4 est égal à 20". <br>Si ce nombre est $x$, quelle équation traduit cette phrase ?</p>
-                    
-                    <div class="grid grid-cols-1 gap-2 mb-4" id="ex6-options">
-                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-mono">2(x + 4) = 20</button>
-                        <button onclick="selectRadio('ex6', this, 'correct')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-mono">2x + 4 = 20</button>
-                        <button onclick="selectRadio('ex6', this, 'wrong')" class="border border-slate-200 rounded p-2 text-left hover:bg-slate-50 font-mono">x/2 + 4 = 20</button>
-                    </div>
-                    
-                    <button onclick="checkRadio('ex6', 'Le double d\'un nombre, c\'est 2x. Augmenté de 4, c\'est + 4.')" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$x = 27 - 12 = 15$.</li>
+                    <li>$x = 36 / 4 = 9$.</li>
+                    <li>$x = 15 + 7 = 22$.</li>
+                </ol>
             </div>
         </div>
 
-        <!-- Section: Pro -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    Équations du type $ax + b = c$
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
             </div>
 
-            <div class="grid grid-cols-1 gap-6">
-                
-                <!-- Ex 7 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-ruler-combined text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Menuiserie - Coupe de plinthes</h3>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="md:w-2/3">
-                            <p class="text-sm text-slate-600 mb-4">
-                                Un menuisier a coupé un tasseau de <strong>240 cm</strong> en 3 morceaux. <br>
-                                Les deux premiers morceaux ont la même longueur $x$. Le 3ème morceau est plus long de 30 cm par rapport aux autres (il mesure $x + 30$).
-                            </p>
-                            
-                            <div class="space-y-4 text-sm text-slate-700">
-                                <div>
-                                    <label class="font-bold block mb-1">1. L'équation de la somme des morceaux est : $x + x + (x + 30) = 240$. Réduisez cette équation :</label>
-                                    <div class="flex items-center gap-2 font-mono">
-                                        <input type="text" id="ex7-eq" class="border border-slate-300 rounded p-1 w-24 text-center" placeholder="ex: 3x+30"> $= 240$
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="font-bold block mb-1">2. Résolvez l'équation pour trouver la longueur $x$ (en cm) :</label>
-                                    <div class="flex items-center gap-2 font-mono">
-                                        $x = $ <input type="number" id="ex7-x" class="border border-slate-300 rounded p-1 w-20 text-center"> cm
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
-                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Résolvez les équations suivantes :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$3x + 5 = 26$</li>
+                    <li>$5x - 4 = 36$</li>
+                    <li>$2x + 10 = 34$</li>
+                </ol>
+            </div>
 
-                <!-- Ex 8 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-truck-fast text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Logistique - Commande de matériel</h3>
-                    </div>
-                    
-                    <p class="text-sm text-slate-600 mb-4">
-                        Une entreprise commande des casques de chantier. Les frais de livraison sont fixes : <strong>25 €</strong>. <br>
-                        Chaque casque coûte <strong>12 €</strong>. L'entreprise a un budget total (facture) de <strong>169 €</strong>.
-                    </p>
-                    
-                    <div class="space-y-4 text-sm text-slate-700 mb-4">
-                        <div>
-                            <label class="font-bold block mb-1">Soit $n$ le nombre de casques. Quelle est l'équation correspondante ?</label>
-                            <input type="text" id="ex8-q1" class="border border-slate-300 rounded p-1 w-40 text-center font-mono" placeholder="ex: 12n + 25 = 169">
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">Combien de casques ont été commandés ?</label>
-                            <div class="flex items-center gap-2 font-mono">
-                                $n = $ <input type="number" id="ex8-q2" class="border border-slate-300 rounded p-1 w-20 text-center">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
-                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$3x = 21 \implies x = 7$.</li>
+                    <li>$5x = 40 \implies x = 8$.</li>
+                    <li>$2x = 24 \implies x = 12$.</li>
+                </ol>
+            </div>
+        </div>
 
+        <!-- EXERCICE 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 3</span>
+                    Équations à Deux Membres ($ax + b = cx + d$)
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Résolvez les équations suivantes :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$6x + 4 = 2x + 28$</li>
+                    <li>$8x - 10 = 3x + 15$</li>
+                </ol>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$4x = 24 \implies x = 6$.</li>
+                    <li>$5x = 25 \implies x = 5$.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- EXERCICE 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
+                    Équations-Produits Nuls
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Résolvez les équations-produits nuls :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$(x - 5)(x + 2) = 0$</li>
+                    <li>$(3x - 12)(2x + 6) = 0$</li>
+                </ol>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$x - 5 = 0 \implies x = 5$ ou $x + 2 = 0 \implies x = -2$.</li>
+                    <li>$3x - 12 = 0 \implies x = 4$ ou $2x + 6 = 0 \implies x = -3$.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- EXERCICE 5 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 5</span>
+                    Problème Métier : Devis d'Installation Télécom
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Modéliser (MOD)</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Un installateur télécom facture un forfait fixe de <strong>60 €</strong> puis <strong>40 € par heure $h$</strong>. La facture s'élève à <strong>260 €</strong>.</p>
+                <p class="text-xs">Écrivez et résolvez l'équation pour déterminer le nombre d'heures $h$.</p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>Équation : $40h + 60 = 260 \implies 40h = 200 \implies h = 5\text{ heures}$.</p>
             </div>
         </div>
 
     </main>
 
-    <!-- JS Logic -->
+    <!-- SCRIPTS JS -->
     <script>
-        function showFeedback(id, isCorrect, message) {
+        let allShown = false;
+
+        function toggleCorrection(id) {
             const el = document.getElementById(id);
-            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
-            
-            if (isCorrect) {
-                el.classList.add('correct-bg', 'text-green-800');
-                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
-            } else {
-                el.classList.add('wrong-bg', 'text-red-800');
-                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
-            }
-        }
-        
-        function cleanStr(str) {
-            return str.replace(/\s+/g, '').toLowerCase();
+            if (el) el.classList.toggle('hidden');
         }
 
-        let groupAns = {};
-        function setBtnGroup(groupId, val, btn) {
-            groupAns[groupId] = val;
-            const buttons = document.querySelectorAll(`.btn-group-${groupId}`);
-            buttons.forEach(b => b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50'));
-            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
-        }
-
-        // QCM Logic
-        let radioAnswers = {};
-        function selectRadio(exId, btn, status) {
-            const container = document.getElementById(`${exId}-options`);
-            const buttons = container.querySelectorAll('button');
-            buttons.forEach(b => {
-                b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50');
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2', 'corr-ex3', 'corr-ex4', 'corr-ex5'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
             });
-            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
-            radioAnswers[exId] = status;
-        }
-
-        function checkRadio(exId, explanation) {
-            if (!radioAnswers[exId]) {
-                showFeedback(`fb-${exId}`, false, "Veuillez sélectionner une réponse.");
-                return;
-            }
-            if (radioAnswers[exId] === 'correct') {
-                showFeedback(`fb-${exId}`, true, "Bonne réponse ! " + explanation);
-            } else {
-                showFeedback(`fb-${exId}`, false, "Mauvaise réponse. " + explanation);
-            }
-        }
-
-        // Ex 1
-        function checkEx1() {
-            if (groupAns['ex1'] === 'oui') {
-                showFeedback('fb-ex1', true, "Parfait ! Si on remplace x par 4, on a : 3 × 4 - 2 = 12 - 2 = 10. L'égalité est vraie.");
-            } else if (groupAns['ex1'] === 'non') {
-                showFeedback('fb-ex1', false, "Incorrect. Essaie de calculer 3 × 4 - 2 et regarde si ça fait bien 10.");
-            } else {
-                showFeedback('fb-ex1', false, "Veuillez choisir Oui ou Non.");
-            }
-        }
-
-        // Ex 2
-        function checkEx2() {
-            const ans = document.getElementById('ex2-ans').value;
-            if (ans === "27") {
-                showFeedback('fb-ex2', true, "Excellent ! x = 42 - 15 = 27.");
-            } else {
-                showFeedback('fb-ex2', false, "Erreur. Pour isoler x, il faut soustraire 15 de chaque côté.");
-            }
-        }
-
-        // Ex 3
-        function checkEx3() {
-            const ans = document.getElementById('ex3-ans').value;
-            if (ans === "8") {
-                showFeedback('fb-ex3', true, "Exact ! x = 48 ÷ 6 = 8.");
-            } else {
-                showFeedback('fb-ex3', false, "Faux. Pour enlever le ×6, il faut diviser par 6 de l'autre côté.");
-            }
-        }
-
-        // Ex 4
-        function checkEx4() {
-            const step1 = document.getElementById('ex4-step1').value;
-            const step2 = document.getElementById('ex4-step2').value;
-            
-            if (step1 === "12" && step2 === "6") {
-                showFeedback('fb-ex4', true, "Bravo ! Étape 1 : on fait 17 - 5 = 12. Étape 2 : on divise par 2 (12 ÷ 2 = 6).");
-            } else {
-                showFeedback('fb-ex4', false, "Erreur. 1) Passe le +5 de l'autre côté (-5). 2) Divise le résultat par 2.");
-            }
-        }
-
-        // Ex 5
-        function checkEx5() {
-            const ans = document.getElementById('ex5-ans').value;
-            if (ans === "5") {
-                showFeedback('fb-ex5', true, "Félicitations ! On regroupe les x : 5x - 2x = 3x. Les nombres : 12 + 3 = 15. On a 3x = 15, donc x = 5.");
-            } else {
-                showFeedback('fb-ex5', false, "Incorrect. Passe les x à gauche (5x - 2x) et les nombres à droite (12 + 3).");
-            }
-        }
-
-        // Ex 7
-        function checkEx7() {
-            const eq = cleanStr(document.getElementById('ex7-eq').value);
-            const x = document.getElementById('ex7-x').value;
-            
-            if ((eq === "3x+30" || eq === "30+3x") && x === "70") {
-                showFeedback('fb-ex7', true, "Bravo ! 1) x+x+x+30 = 3x+30. 2) 3x = 240 - 30 = 210, donc x = 210/3 = 70 cm.");
-            } else {
-                showFeedback('fb-ex7', false, "Erreur. 1) Additionne les 'x'. 2) Résous l'équation 3x + 30 = 240.");
-            }
-        }
-
-        // Ex 8
-        function checkEx8() {
-            const q1 = cleanStr(document.getElementById('ex8-q1').value);
-            const q2 = document.getElementById('ex8-q2').value;
-            
-            if ((q1 === "12n+25=169" || q1 === "25+12n=169") && q2 === "12") {
-                showFeedback('fb-ex8', true, "Excellent ! 1) L'équation est bien 12n + 25 = 169. 2) 12n = 169 - 25 = 144, donc n = 144/12 = 12 casques.");
-            } else {
-                showFeedback('fb-ex8', false, "Faux. 1) Prix d'un casque multiplié par n, plus la livraison fixe. Égal au total. 2) Résous l'équation.");
-            }
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Tout masquer" : "Tout afficher / masquer";
         }
     </script>
-
-    <div class="h-24"></div>
 </body>
 </html>
