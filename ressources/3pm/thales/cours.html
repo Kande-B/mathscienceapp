@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Théorème de Thalès</title>
+    <title>Je note l'essentiel (Cours) - Théorème de Thalès 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,226 +24,102 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-shapes text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">3ème Prépa-Métiers • Géométrie</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Théorème de Thalès</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Théorème de Thalès</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP GeoGebra</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Le Théorème -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Définition -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Triangles Emboîtés</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-grip-lines text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">La règle d'or (Conditions)</h3>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Pour utiliser le théorème de Thalès, il faut deux droites sécantes coupées par deux <strong>droites parallèles</strong>. Cela crée deux triangles (un petit dans un grand) qui sont <strong>proportionnels</strong> !
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Théorème de Thalès & Réciproque</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Configuration imbriquée et configuration papillon pour calculer des longueurs et prouver le parallélisme.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Énoncé Direct</a>
+                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Configuration Papillon</a>
+                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Réciproque</a>
+                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Exemples Métiers</a>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 : THÉORÈME DIRECT -->
+        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Énoncé Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Le Théorème Direct de Thalès</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
+                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-bars-staggered"></i> Formule officielle des rapports
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Si deux droites $(BM)$ et $(CN)$ sont sécantes en $A$, et si $(MN) \parallel (BC)$, alors :
                     </p>
-                    <div class="bg-blue-50 p-4 rounded text-sm text-blue-900 font-bold border border-blue-200">
-                        Attention : Contrairement à Pythagore, on n'a pas besoin d'un angle droit, mais il faut OBLIGATOIREMENT des lignes parallèles !
+                    <div class="text-center py-2 text-base font-bold text-sky-300">
+                        $$\frac{AM}{AB} = \frac{AN}{AC} = \frac{MN}{BC}$$
                     </div>
                 </div>
-
-                <!-- La Formule -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-brand-500">
-                    <h3 class="font-bold text-slate-900 text-lg mb-4">L'égalité de Thalès</h3>
-                    
-                    <p class="text-sm text-slate-600 mb-4">Si les points A, B, M et A, C, N sont alignés, et si les droites (BC) et (MN) sont parallèles, alors les côtés sont proportionnels :</p>
-                    
-                    <div class="bg-slate-800 text-white p-4 rounded-xl font-mono text-center font-bold text-lg mb-4 shadow-inner">
-                        <span class="text-emerald-400 border-b border-emerald-400 pb-1 px-2 mb-1 inline-block">Petit Côté 1</span><br>
-                        <span class="text-indigo-400 pt-1 px-2 inline-block">Grand Côté 1</span>
-                        &nbsp;=&nbsp;
-                        <span class="text-emerald-400 border-b border-emerald-400 pb-1 px-2 mb-1 inline-block">Petit Côté 2</span><br>
-                        <span class="text-indigo-400 pt-1 px-2 inline-block">Grand Côté 2</span>
-                        &nbsp;=&nbsp;
-                        <span class="text-emerald-400 border-b border-emerald-400 pb-1 px-2 mb-1 inline-block">Petit Parallèle</span><br>
-                        <span class="text-indigo-400 pt-1 px-2 inline-block">Grande Parallèle</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visualization : Calculateur interactif (Triangles semblables) -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-emerald-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Le Simulateur d'Agrandissement
-                </h3>
-                <p class="text-xs text-slate-500 mb-6 text-center">Glissez le curseur pour agrandir ou réduire le petit triangle (AMN) dans le grand (ABC).</p>
-                
-                <div class="flex flex-col items-center">
-                    <!-- SVG Triangle -->
-                    <div class="relative w-full aspect-video bg-slate-900 border border-slate-700 rounded-xl mb-4 flex justify-center items-center overflow-hidden shadow-inner">
-                        <svg id="thalesSvg" width="100%" height="100%" viewBox="0 0 200 150">
-                            <!-- Grand Triangle ABC -->
-                            <polygon points="100,20 40,130 160,130" fill="none" stroke="#6366f1" stroke-width="2" stroke-linejoin="round"/>
-                            
-                            <!-- Petit Triangle AMN (Dynamic) -->
-                            <polygon id="polySmall" points="100,20 70,75 130,75" fill="#10b981" opacity="0.3" stroke="#10b981" stroke-width="2"/>
-                            
-                            <!-- Labels Fixes (Grand Triangle) -->
-                            <text x="100" y="15" font-weight="bold" font-size="12" fill="#f8fafc" text-anchor="middle">A</text>
-                            <text x="30" y="140" font-weight="bold" font-size="12" fill="#818cf8" text-anchor="middle">B</text>
-                            <text x="170" y="140" font-weight="bold" font-size="12" fill="#818cf8" text-anchor="middle">C</text>
-                            
-                            <text x="100" y="145" font-size="10" fill="#818cf8" text-anchor="middle">BC = 12</text>
-                            <text x="60" y="70" font-size="10" fill="#818cf8" text-anchor="middle" transform="rotate(-61, 60, 70)">AB = 10</text>
-                            <text x="140" y="70" font-size="10" fill="#818cf8" text-anchor="middle" transform="rotate(61, 140, 70)">AC = 14</text>
-                            
-                            <!-- Labels Dynamiques (Petit Triangle) -->
-                            <text id="lblM" x="65" y="75" font-weight="bold" font-size="12" fill="#34d399" text-anchor="middle">M</text>
-                            <text id="lblN" x="135" y="75" font-weight="bold" font-size="12" fill="#34d399" text-anchor="middle">N</text>
-                            
-                            <!-- Valeurs dynamiques -->
-                            <text id="valMN" x="100" y="70" font-size="10" font-weight="bold" fill="#34d399" text-anchor="middle">MN = 6</text>
-                            <text id="valAM" x="80" y="45" font-size="10" font-weight="bold" fill="#34d399" text-anchor="middle" transform="rotate(-61, 80, 45)">AM = 5</text>
-                        </svg>
-                    </div>
-                    
-                    <div class="w-full mt-2">
-                        <label class="block text-xs font-bold text-slate-700 mb-1 text-center">Taille du petit triangle (Coefficient $k$)</label>
-                        <input type="range" id="rangeScale" min="1" max="9" value="5" class="w-full accent-emerald-500" oninput="updateThales()">
-                        <div class="text-center font-mono text-sm font-bold text-emerald-700 mt-1">k = 0.<span id="valK">5</span></div>
-                    </div>
-                </div>
-
-                <div class="mt-6 bg-slate-50 border border-slate-200 p-4 rounded text-sm font-mono text-slate-800 shadow-sm text-center">
-                    <p class="font-bold border-b border-slate-200 pb-2 mb-2 text-indigo-700">Proportions conservées :</p>
-                    <p>$\frac{AM}{AB} = \frac{AN}{AC} = \frac{MN}{BC} = k$</p>
-                    <p class="mt-2 text-emerald-700 font-bold" id="calcEquality">$\frac{5}{10} = \frac{7}{14} = \frac{6}{12} = 0.5$</p>
-                </div>
-
-                <script>
-                    function updateThales() {
-                        const kVal = parseInt(document.getElementById('rangeScale').value);
-                        const k = kVal / 10;
-                        document.getElementById('valK').innerText = kVal;
-                        
-                        // Grand triangle coord : A(100,20), B(40,130), C(160,130)
-                        // Longeurs réelles (fictives pour l'affichage) : AB=10, AC=14, BC=12
-                        
-                        // Calculer les points M et N
-                        // M est sur [AB] : Mx = 100 + (40-100)*k = 100 - 60k
-                        // My = 20 + (130-20)*k = 20 + 110k
-                        const mx = 100 - 60 * k;
-                        const my = 20 + 110 * k;
-                        
-                        // N est sur [AC] : Nx = 100 + (160-100)*k = 100 + 60k
-                        // Ny = 20 + (130-20)*k = 20 + 110k
-                        const nx = 100 + 60 * k;
-                        const ny = 20 + 110 * k;
-                        
-                        // Update Polygon
-                        document.getElementById('polySmall').setAttribute('points', `100,20 ${mx},${my} ${nx},${ny}`);
-                        
-                        // Update Labels Position
-                        document.getElementById('lblM').setAttribute('x', mx - 5);
-                        document.getElementById('lblM').setAttribute('y', my);
-                        
-                        document.getElementById('lblN').setAttribute('x', nx + 5);
-                        document.getElementById('lblN').setAttribute('y', ny);
-                        
-                        document.getElementById('valMN').setAttribute('x', 100);
-                        document.getElementById('valMN').setAttribute('y', my - 5);
-                        document.getElementById('valMN').textContent = `MN = ${(12 * k).toFixed(1)}`;
-                        
-                        const textAMx = 100 - 30 * k;
-                        const textAMy = 20 + 55 * k;
-                        const txtAmElem = document.getElementById('valAM');
-                        txtAmElem.setAttribute('x', textAMx);
-                        txtAmElem.setAttribute('y', textAMy - 5);
-                        txtAmElem.setAttribute('transform', `rotate(-61, ${textAMx}, ${textAMy-5})`);
-                        txtAmElem.textContent = `AM = ${(10 * k).toFixed(1)}`;
-                        
-                        // Update equation text
-                        document.getElementById('calcEquality').innerText = `\\(\\frac{${(10*k).toFixed(1)}}{10} = \\frac{${(14*k).toFixed(1)}}{14} = \\frac{${(12*k).toFixed(1)}}{12} = ${k.toFixed(1)}\\)`;
-                        // Reprocess MathJax dynamically if needed, but for simplicity here we just show plain text if MathJax doesn't re-render automatically.
-                        document.getElementById('calcEquality').innerHTML = `<span class="text-emerald-500">${(10*k).toFixed(1)}</span> / 10 = <span class="text-emerald-500">${(14*k).toFixed(1)}</span> / 14 = <span class="text-emerald-500">${(12*k).toFixed(1)}</span> / 12 = <strong>${k.toFixed(1)}</strong>`;
-                    }
-                </script>
-            </div>
-        </section>
-
-        <!-- SECTION 2 : A quoi ça sert ? -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Dans la vie professionnelle</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- Utilisation 1 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-purple-500">
-                    <h3 class="font-bold text-purple-800 mb-3 text-lg"><i class="fa-solid fa-tree mr-2"></i> 1. Mesurer des hauteurs inaccessibles</h3>
-                    <p class="text-sm text-slate-600 mb-4">L'histoire raconte que Thalès a calculé la hauteur de la grande pyramide d'Égypte grâce à son ombre ! On s'en sert pour calculer la hauteur d'un arbre, d'un bâtiment, etc.</p>
-                    
-                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-sm">
-                        <p class="font-bold text-purple-900 mb-2">Méthode de la Croix :</p>
-                        <p class="text-purple-800 mb-2">Une fois l'égalité écrite avec les lettres, on remplace par les chiffres et on utilise un <strong>Produit en Croix</strong> pour trouver la longueur manquante.</p>
-                    </div>
-                </div>
-
-                <!-- Utilisation 2 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-rose-500">
-                    <h3 class="font-bold text-rose-800 mb-3 text-lg"><i class="fa-solid fa-ruler-combined mr-2"></i> 2. Vérifier le parallélisme (La Réciproque)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Dans la construction, si on veut vérifier que deux étagères ou deux murs sont bien <strong>parallèles</strong>, on peut mesurer les longueurs et vérifier si l'égalité des proportions est respectée.</p>
-                    
-                    <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm">
-                        <p class="font-bold text-rose-900 mb-2">La règle :</p>
-                        <p class="text-rose-800 mb-2">Si $\frac{Petit Côté 1}{Grand Côté 1} = \frac{Petit Côté 2}{Grand Côté 2}$, ALORS les droites sont parallèles !</p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
     </main>
 
-    <div class="h-24"></div>
 </body>
 </html>
