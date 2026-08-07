@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TD - Calcul Littéral</title>
+    <title>Fiche de TD - Calcul Littéral & Expressions (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,358 +24,238 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a href="cours.html" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
+    <!-- Header & Nav unifiée pour la Séquence -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
                 <div>
-                    <p class="text-xs font-bold text-brand-600 uppercase tracking-widest">Entraînement TD</p>
-                    <h1 class="text-xl md:text-2xl font-extrabold text-slate-900 font-heading">Calcul Littéral</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3PM • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Calcul Littéral & Expressions</h1>
                 </div>
             </div>
-            <div class="hidden md:block">
-                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">8 Exercices</span>
-            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        
-        <!-- Section: Acquisition -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 1 : Acquisition</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable</span> • <span>Cycle 4 / 3ème Prépa-Métiers</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : Calcul Littéral & Expressions Algébriques</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 1 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">1</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Simplification d'écriture</h3>
-                    <p class="text-sm text-slate-600 mb-4">Écrivez ces expressions le plus simplement possible (sans le signe $\times$ si possible) :</p>
-                    
-                    <div class="space-y-3 font-mono text-sm">
-                        <div class="flex items-center gap-3">
-                            <span class="w-20 text-right">$3 \times x =$</span>
-                            <input type="text" id="ex1-1" class="border border-slate-300 rounded px-2 py-1 w-24 text-center">
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="w-20 text-right">$x \times x =$</span>
-                            <input type="text" id="ex1-2" class="border border-slate-300 rounded px-2 py-1 w-24 text-center" placeholder="ex: x^2">
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx1()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex1" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 2 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">2</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Réduire une expression</h3>
-                    <p class="text-sm text-slate-600 mb-4">Réduisez l'expression suivante en regroupant les termes de même nature :<br> $A = 4x + 3 + 2x - 1$</p>
-                    
-                    <div class="flex items-center gap-3 mb-4 font-mono text-sm">
-                        <span class="text-right">A =</span>
-                        <input type="text" id="ex2-ans" class="border border-slate-300 rounded px-2 py-1 w-32 text-center" placeholder="ex: 3x + 2">
-                    </div>
-                    
-                    <button onclick="checkEx2()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex2" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
-                <!-- Ex 3 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">3</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Développement simple</h3>
-                    <p class="text-sm text-slate-600 mb-4">Développez l'expression : $B = 3(x + 5)$</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono">
-                        <span>B =</span>
-                        <input type="text" id="ex3-ans" class="border border-slate-300 rounded p-2 w-32 text-center" placeholder="... x + ...">
-                    </div>
-                    
-                    <button onclick="checkEx3()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex3" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
+            <!-- GRILLE DES COMPETENCES DU CYCLE 4 -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-amber-600 block">CHER</span> Chercher</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">MOD</span> Modéliser</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-purple-600 block">REG</span> Représenter</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-emerald-600 block">REA</span> Calculer</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-rose-600 block">COM</span> Communiquer</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-cyan-600 block">VAL</span> Valider</div>
             </div>
         </div>
 
-        <!-- Section: Entraînement -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 2 : Entraînement</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    Simplification et Réduction de sommes littérales
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                
-                <!-- Ex 4 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">4</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Double Développement</h3>
-                    <p class="text-sm text-slate-600 mb-4">Développez et réduisez : $C = (x + 2)(x + 3)$</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono">
-                        <span>C =</span>
-                        <input type="text" id="ex4-ans" class="border border-slate-300 rounded p-2 w-48 text-center" placeholder="ex: x^2 + 5x + 6">
-                    </div>
-                    
-                    <button onclick="checkEx4()" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex4" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Réduisez les expressions suivantes :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$A = 7x + 4x - 3x$</li>
+                    <li>$B = 8x + 5 + 3x + 9$</li>
+                    <li>$C = 5x^2 + 4x - 2x^2 + 6x$</li>
+                </ol>
+            </div>
 
-                <!-- Ex 5 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">5</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Factorisation (Facteur commun)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Factorisez l'expression : $D = 5x + 15$<br><span class="text-xs italic text-slate-500">Astuce : Cherchez un nombre qui divise 5 et 15.</span></p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono">
-                        <span>D =</span>
-                        <input type="text" id="ex5-ans" class="border border-slate-300 rounded p-2 w-32 text-center" placeholder="ex: 5(x+3)">
-                    </div>
-                    
-                    <button onclick="checkEx5()" class="block text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex5" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
-
-                <!-- Ex 6 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">6</div>
-                    <h3 class="font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Calculer la valeur d'une expression</h3>
-                    <p class="text-sm text-slate-600 mb-4">Soit l'expression $E = 2x^2 - 3x + 4$. <br>Calculez la valeur de E pour <strong>x = 3</strong>.</p>
-                    
-                    <div class="flex items-center gap-2 mb-4 font-mono">
-                        <span>E =</span>
-                        <input type="number" id="ex6-ans" class="border border-slate-300 rounded p-2 w-24 text-center">
-                    </div>
-                    
-                    <button onclick="checkEx6()" class="mt-4 text-xs bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded transition-colors w-full">Vérifier</button>
-                    <div id="fb-ex6" class="mt-3 text-sm hidden p-2 rounded"></div>
-                </div>
-
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$A = 8x$.</li>
+                    <li>$B = 11x + 14$.</li>
+                    <li>$C = 3x^2 + 10x$.</li>
+                </ol>
             </div>
         </div>
 
-        <!-- Section: Pro -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px bg-slate-300 flex-grow"></div>
-                <h2 class="text-lg font-bold text-slate-500 uppercase tracking-widest">Niveau 3 : Problèmes Métiers</h2>
-                <div class="h-px bg-slate-300 flex-grow"></div>
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    Développement par Distributivité Simple
+                </h3>
+                <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Représenter (REG)</span>
             </div>
 
-            <div class="grid grid-cols-1 gap-6">
-                
-                <!-- Ex 7 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">7</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-ruler-combined text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Bâtiment - Périmètre à la carte</h3>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="md:w-2/3">
-                            <p class="text-sm text-slate-600 mb-4">
-                                Un menuisier conçoit un cadre rectangulaire. La largeur mesure <strong>$x$ cm</strong>. La longueur est toujours <strong>10 cm plus grande</strong> que la largeur.
-                            </p>
-                            
-                            <div class="space-y-4 text-sm text-slate-700">
-                                <div>
-                                    <label class="font-bold block mb-1">1. Quelle expression correspond à la Longueur ?</label>
-                                    <div class="flex gap-2">
-                                        <button onclick="setBtnGroup('ex7-1', 'x+10', this)" class="btn-group-ex7-1 px-3 py-1 border rounded">x + 10</button>
-                                        <button onclick="setBtnGroup('ex7-1', '10x', this)" class="btn-group-ex7-1 px-3 py-1 border rounded">10x</button>
-                                        <button onclick="setBtnGroup('ex7-1', 'x-10', this)" class="btn-group-ex7-1 px-3 py-1 border rounded">x - 10</button>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="font-bold block mb-1">2. Le périmètre d'un rectangle est $P = 2 \times (\text{Largeur} + \text{Longueur})$. <br>Quelle expression RÉDUITE donne le périmètre du cadre ?</label>
-                                    <input type="text" id="ex7-2" class="border border-slate-300 rounded p-1 w-32 text-center" placeholder="ex: 4x + 20">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx7()" class="mt-6 text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier le problème</button>
-                    <div id="fb-ex7" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Développez et réduisez les expressions suivantes :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$D = 5(x + 6)$</li>
+                    <li>$E = 4(3x - 2)$</li>
+                    <li>$F = 2x(x + 5)$</li>
+                </ol>
+            </div>
 
-                <!-- Ex 8 -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative">
-                    <div class="absolute -top-3 -left-3 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold shadow-md">8</div>
-                    <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-file-invoice-dollar text-purple-600"></i>
-                        <h3 class="font-bold text-slate-800">Commerce - Facturation</h3>
-                    </div>
-                    
-                    <p class="text-sm text-slate-600 mb-4">
-                        Un électricien facture son intervention avec une <strong>part fixe de 40 €</strong> (déplacement) et une <strong>part variable de 35 € par heure</strong> de travail.
-                    </p>
-                    
-                    <div class="space-y-4 text-sm text-slate-700 mb-4">
-                        <div>
-                            <label class="font-bold block mb-1">1. Soit $h$ le nombre d'heures de travail. Quelle expression donne le prix total $P$ ?</label>
-                            <input type="text" id="ex8-q1" class="border border-slate-300 rounded p-1 w-32 text-center font-mono" placeholder="ex: 35h + 40">
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">2. Calculez la facture pour une intervention de 3 heures :</label>
-                            <div class="flex items-center gap-2">
-                                <input type="number" id="ex8-q2" class="border border-slate-300 rounded p-1 w-24 text-center"> <span>€</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button onclick="checkEx8()" class="block text-xs bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors w-full md:w-auto font-bold shadow-md">Vérifier</button>
-                    <div id="fb-ex8" class="mt-3 text-sm hidden p-3 rounded"></div>
-                </div>
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$D = 5x + 30$.</li>
+                    <li>$E = 12x - 8$.</li>
+                    <li>$F = 2x^2 + 10x$.</li>
+                </ol>
+            </div>
+        </div>
 
+        <!-- EXERCICE 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 3</span>
+                    Développement par Double Distributivité
+                </h3>
+                <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Représenter (REG)</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Développez et réduisez les expressions suivantes :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$G = (x + 3)(x + 4)$</li>
+                    <li>$H = (2x + 1)(x + 5)$</li>
+                </ol>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$G = x^2 + 4x + 3x + 12 = x^2 + 7x + 12$.</li>
+                    <li>$H = 2x^2 + 10x + x + 5 = 2x^2 + 11x + 5$.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- EXERCICE 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
+                    Factorisation et Identité Remarquable $a^2 - b^2$
+                </h3>
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
+            </div>
+
+            <div class="text-sm text-slate-700 space-y-3">
+                <p>Factorisez les expressions sous la forme d'un produit de facteurs :</p>
+                <ol class="list-decimal pl-5 space-y-1 text-xs">
+                    <li>$I = 5x + 15$ (facteur commun 5)</li>
+                    <li>$J = x^2 - 16$ (forme $a^2 - b^2$)</li>
+                </ol>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>$I = 5(x + 3)$.</li>
+                    <li>$J = (x - 4)(x + 4)$.</li>
+                </ol>
             </div>
         </div>
 
     </main>
 
-    <!-- JS Logic -->
+    <!-- SCRIPTS JS -->
     <script>
-        function showFeedback(id, isCorrect, message) {
+        let allShown = false;
+
+        function toggleCorrection(id) {
             const el = document.getElementById(id);
-            el.classList.remove('hidden', 'correct-bg', 'wrong-bg', 'text-green-800', 'text-red-800');
-            
-            if (isCorrect) {
-                el.classList.add('correct-bg', 'text-green-800');
-                el.innerHTML = `<i class="fa-solid fa-check-circle mr-2"></i> ${message}`;
-            } else {
-                el.classList.add('wrong-bg', 'text-red-800');
-                el.innerHTML = `<i class="fa-solid fa-times-circle mr-2"></i> ${message}`;
-            }
-        }
-        
-        function cleanStr(str) {
-            return str.replace(/\s+/g, '').toLowerCase();
+            if (el) el.classList.toggle('hidden');
         }
 
-        let groupAns = {};
-        function setBtnGroup(groupId, val, btn) {
-            groupAns[groupId] = val;
-            const buttons = document.querySelectorAll(`.btn-group-${groupId}`);
-            buttons.forEach(b => b.classList.remove('ring-2', 'ring-brand-500', 'bg-brand-50'));
-            btn.classList.add('ring-2', 'ring-brand-500', 'bg-brand-50');
-        }
-
-        // Ex 1
-        function checkEx1() {
-            const v1 = cleanStr(document.getElementById('ex1-1').value);
-            const v2 = cleanStr(document.getElementById('ex1-2').value);
-            
-            if (v1 === "3x" && (v2 === "x^2" || v2 === "x²")) {
-                showFeedback('fb-ex1', true, "Parfait ! On peut enlever le signe multiplié devant une lettre, et x fois x s'écrit x².");
-            } else {
-                showFeedback('fb-ex1', false, "Incorrect. Rappel : 3 fois x = 3x, et un nombre multiplié par lui-même donne ce nombre au carré (² ou ^2).");
-            }
-        }
-
-        // Ex 2
-        function checkEx2() {
-            const ans = cleanStr(document.getElementById('ex2-ans').value);
-            if (ans === "6x+2" || ans === "2+6x") {
-                showFeedback('fb-ex2', true, "Excellent ! 4x + 2x = 6x, et 3 - 1 = 2.");
-            } else {
-                showFeedback('fb-ex2', false, "Erreur. Ajoute les termes avec 'x' ensemble, et les nombres seuls ensemble.");
-            }
-        }
-
-        // Ex 3
-        function checkEx3() {
-            const ans = cleanStr(document.getElementById('ex3-ans').value);
-            if (ans === "3x+15" || ans === "15+3x") {
-                showFeedback('fb-ex3', true, "Exact ! 3 multiplie le x ET le 5. Donc 3×x + 3×5 = 3x + 15.");
-            } else {
-                showFeedback('fb-ex3', false, "Faux. N'oublie pas de distribuer le 3 au 'x' ET au '5'.");
-            }
-        }
-
-        // Ex 4
-        function checkEx4() {
-            const ans = cleanStr(document.getElementById('ex4-ans').value);
-            if (ans === "x^2+5x+6" || ans === "x²+5x+6" || ans === "6+5x+x^2" || ans === "6+5x+x²") {
-                showFeedback('fb-ex4', true, "Bravo ! (x)(x) + (x)(3) + (2)(x) + (2)(3) = x² + 3x + 2x + 6 = x² + 5x + 6.");
-            } else {
-                showFeedback('fb-ex4', false, "Erreur. Fais la double distributivité, puis regroupe les termes en x (3x + 2x).");
-            }
-        }
-
-        // Ex 5
-        function checkEx5() {
-            const ans = cleanStr(document.getElementById('ex5-ans').value);
-            if (ans === "5(x+3)") {
-                showFeedback('fb-ex5', true, "Félicitations ! Le facteur commun est 5 car 5x = 5×x et 15 = 5×3. On met 5 en facteur.");
-            } else {
-                showFeedback('fb-ex5', false, "Incorrect. Trouve le plus grand nombre qui divise 5 et 15, place-le devant la parenthèse.");
-            }
-        }
-        
-        // Ex 6
-        function checkEx6() {
-            const ans = document.getElementById('ex6-ans').value;
-            // 2(3^2) - 3(3) + 4 = 2(9) - 9 + 4 = 18 - 9 + 4 = 13
-            if (ans === "13") {
-                showFeedback('fb-ex6', true, "Exact ! 2×(3²) - 3×3 + 4 = 2×9 - 9 + 4 = 18 - 9 + 4 = 13.");
-            } else {
-                showFeedback('fb-ex6', false, "Faux. Remplace x par 3 : 2 × 3² - 3 × 3 + 4. Priorité à la puissance, puis aux multiplications.");
-            }
-        }
-
-        // Ex 7
-        function checkEx7() {
-            const q1 = groupAns['ex7-1'];
-            const q2 = cleanStr(document.getElementById('ex7-2').value);
-            
-            if (q1 === "x+10" && (q2 === "4x+20" || q2 === "20+4x")) {
-                showFeedback('fb-ex7', true, "Bravo ! 1) La longueur est x+10. 2) P = 2(x + (x+10)) = 2(2x+10) = 4x + 20.");
-            } else {
-                showFeedback('fb-ex7', false, "Erreur. 1) '10 cm plus grande' = on ajoute 10. 2) P = 2 × (x + x + 10). Développe !");
-            }
-        }
-
-        // Ex 8
-        function checkEx8() {
-            const q1 = cleanStr(document.getElementById('ex8-q1').value);
-            const q2 = document.getElementById('ex8-q2').value;
-            
-            if ((q1 === "35h+40" || q1 === "40+35h") && q2 === "145") {
-                showFeedback('fb-ex8', true, "Excellent ! 1) 35h (variable) + 40 (fixe). 2) 35 × 3 + 40 = 105 + 40 = 145 €.");
-            } else {
-                showFeedback('fb-ex8', false, "Faux. 1) On paie 35 POUR CHAQUE heure h, donc 35×h. Le 40 est ajouté une seule fois. 2) Remplace h par 3.");
-            }
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2', 'corr-ex3', 'corr-ex4'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            });
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Tout masquer" : "Tout afficher / masquer";
         }
     </script>
-
-    <div class="h-24"></div>
 </body>
 </html>
