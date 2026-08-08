@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Je note l'essentiel (Cours) - Arithmétique & Nombres Premiers 3PM</title>
+    <title>Je note l'essentiel (Cours) - Divisibilité et Nombres Premiers 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3PM • Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Arithmétique & Nombres Premiers</h1>
+                    <h1 class="text-xl font-bold font-heading">Divisibilité & Nombres Premiers</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -76,8 +76,8 @@
                         <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National Cycle 4</span>
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Arithmétique & Nombres Premiers</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Critères de divisibilité, décomposition en facteurs premiers et simplifications de fractions.</p>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Arithmétique, Divisibilité & Facteurs Premiers</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Définitions officielles, critères de divisibilité, crible des nombres premiers, décomposition en facteurs premiers et simplification irréductible de fractions.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -87,63 +87,340 @@
 
             <!-- SOMMAIRE COURS INTERACTIF -->
             <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
-                <a href="#chap1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">I. Critères de Divisibilité</a>
-                <a href="#chap2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">II. Nombres Premiers</a>
-                <a href="#chap3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">III. Décomposition</a>
-                <a href="#chap4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">IV. Fractions Irréductibles</a>
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Division Euclidienne</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Critères Officiels</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Nombres Premiers</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Décomposition & Fractions</a>
             </div>
         </div>
 
-        <!-- CHAPITRE 1 : CRITÈRES DE DIVISIBILITÉ -->
-        <section id="chap1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+        <!-- PARTIE 1 : DIVISION EUCLIDIENNE ET DIVISIBILITÉ -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">I</span>
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
                 <div>
-                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chapitre 1 • Définitions Officiel EN</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Rappels : Critères usuels de divisibilité</h3>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Méthode Officielle EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Division Euclidienne & Notions de Diviseur / Multiple</h3>
                 </div>
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
-                    <h4 class="font-bold text-sky-400 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-list-check"></i> Les 5 règles indispensables
+                <!-- ENCADRÉ DÉFINITION 1 -->
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-divide"></i> Définitions & Égalité Euclidienne
                     </h4>
-                    <ul class="space-y-1 text-slate-300 text-xs">
-                        <li>• **Par 2 :** le chiffre des unités est pair ($0, 2, 4, 6, 8$).</li>
-                        <li>• **Par 3 :** la somme des chiffres est divisible par 3.</li>
-                        <li>• **Par 5 :** le chiffre des unités est $0$ ou $5$.</li>
-                        <li>• **Par 9 :** la somme des chiffres est divisible par 9.</li>
-                        <li>• **Par 10 :** le chiffre des unités est $0$.</li>
-                    </ul>
+                    <p class="text-slate-800">
+                        Effectuer la <strong>division euclidienne</strong> d'un nombre entier $a$ (dividende) par un entier non nul $b$ (diviseur), c'est trouver deux entiers $q$ (quotient) et $r$ (reste) tels que :
+                        $$a = b \times q + r \quad \text{avec } 0 \le r < b$$
+                        • Si le reste est **nul ($r = 0$)**, on dit que $a$ est **divisible** par $b$. <br>
+                        • $b$ est un **diviseur** de $a$, et $a$ est un **multiple** de $b$.
+                    </p>
+                </div>
+
+                <!-- SCHÉMA SVG 1 : STRUCTURE DE LA DIVISION EUCLIDIENNE -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable text-sky-600"></i> Schéma Visuel 1 : Anatomie de la Division Euclidienne
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="400" height="150" viewBox="0 0 400 150" class="mx-auto font-sans">
+                            <!-- Barre de poser la division -->
+                            <line x1="160" y1="20" x2="160" y2="130" stroke="#334155" stroke-width="2.5"/>
+                            <line x1="160" y1="65" x2="280" y2="65" stroke="#334155" stroke-width="2.5"/>
+
+                            <!-- Dividende a -->
+                            <text x="110" y="50" font-size="18" font-weight="extrabold" fill="#0284c7">a = 158</text>
+                            <text x="110" y="30" font-size="9" font-weight="bold" fill="#0369a1">Dividende</text>
+
+                            <!-- Diviseur b -->
+                            <text x="210" y="50" font-size="18" font-weight="extrabold" fill="#047857">b = 12</text>
+                            <text x="210" y="30" font-size="9" font-weight="bold" fill="#047857">Diviseur</text>
+
+                            <!-- Quotient q -->
+                            <text x="210" y="100" font-size="18" font-weight="extrabold" fill="#7e22ce">q = 13</text>
+                            <text x="210" y="120" font-size="9" font-weight="bold" fill="#7e22ce">Quotient</text>
+
+                            <!-- Reste r -->
+                            <text x="110" y="110" font-size="18" font-weight="extrabold" fill="#dc2626">r = 2</text>
+                            <text x="110" y="130" font-size="9" font-weight="bold" fill="#dc2626">Reste (r < b)</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- EXEMPLE MÉTIER 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-boxes-stacked text-sky-600"></i> Exemple Métier Rédigé Pas à Pas (Conditionnement de Pièces en Carton)
+                    </h4>
+                    <p class="text-slate-700">
+                        <strong>Énoncé :</strong> Un préparateur de commande en entrepôt doit emballer $250$ roulements à billes dans des cartons de $24$ pièces. <br>
+                        1. Combien de cartons complets peut-il remplir ? <br>
+                        2. Combien de pièces restent en surplus ?
+                    </p>
+                    <div class="p-4 bg-white rounded-xl border font-mono text-slate-800 space-y-2">
+                        <p class="font-bold text-sky-900">Corrigé rédigé :</p>
+                        <p>$250 = 24 \times 10 + 10$. <br>
+                        1. Il remplit **10 cartons complets**. <br>
+                        2. Il reste **10 pièces non emballées** (car le reste $r=10$).</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAPITRE 2 : NOMBRES PREMIERS ET DÉCOMPOSITION -->
-        <section id="chap2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+        <!-- PARTIE 2 : CRITÈRES DE DIVISIBILITÉ OFFICIELS -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">II</span>
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
                 <div>
-                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chapitre 2 • Décomposition</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Décomposition en produit de facteurs premiers</h3>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Méthode Officielle EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Les 5 Critères de Divisibilité à Connaître</h3>
                 </div>
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-2 border border-slate-800">
-                    <h4 class="font-bold text-amber-400 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-square-root-variable"></i> Théorème fondamental
+                <!-- TABLEAU DES CRITÈRES OFFICIELS -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse bg-white rounded-2xl border text-xs">
+                        <thead>
+                            <tr class="bg-amber-900 text-white font-bold">
+                                <th class="p-3 border">Divisible par...</th>
+                                <th class="p-3 border">Règle officielle de divisibilité</th>
+                                <th class="p-3 border">Exemple concret</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 border font-extrabold text-amber-900 bg-amber-50">Par 2</td>
+                                <td class="p-3 border">Le nombre se termine par un chiffre pair : <strong>0, 2, 4, 6, 8</strong>.</td>
+                                <td class="p-3 border font-mono">1 458 est divisible par 2 (finit par 8).</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 border font-extrabold text-amber-900 bg-amber-50">Par 5</td>
+                                <td class="p-3 border">Le nombre se termine par <strong>0 ou 5</strong>.</td>
+                                <td class="p-3 border font-mono">3 745 est divisible par 5 (finit par 5).</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 border font-extrabold text-amber-900 bg-amber-50">Par 10</td>
+                                <td class="p-3 border">Le nombre se termine par <strong>0</strong>.</td>
+                                <td class="p-3 border font-mono">9 230 est divisible par 10 (finit par 0).</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 border font-extrabold text-amber-900 bg-amber-50">Par 3</td>
+                                <td class="p-3 border">La <strong>somme de ses chiffres</strong> est un multiple de 3.</td>
+                                <td class="p-3 border font-mono">423 : 4+2+3 = 9 (multiple de 3).</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 border font-extrabold text-amber-900 bg-amber-50">Par 9</td>
+                                <td class="p-3 border">La <strong>somme de ses chiffres</strong> est un multiple de 9.</td>
+                                <td class="p-3 border font-mono">2 835 : 2+8+3+5 = 18 (multiple de 9).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- EXEMPLE MÉTIER 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-industry text-amber-600"></i> Exemple Métier Rédigé Pas à Pas (Contrôle Qualité Lot de Fabrication)
                     </h4>
-                    <p class="text-xs text-slate-300">
-                        Tout nombre entier supérieur ou égal à 2 s'écrit de façon unique sous la forme d'un produit de nombres premiers. <br>
-                        <strong>Liste des premiers nombres premiers :</strong> $2, 3, 5, 7, 11, 13, 17, 19, 23, 29...$
+                    <p class="text-slate-700">
+                        <strong>Énoncé :</strong> Un lot comporte $1\,365$ pièces. Peut-on le partager en 3 séries ou 5 séries exactement sans reste ?
                     </p>
+                    <div class="p-4 bg-white rounded-xl border font-mono text-slate-800 space-y-2">
+                        <p class="font-bold text-amber-900">Corrigé rédigé :</p>
+                        <p>• Somme des chiffres : $1 + 3 + 6 + 5 = 15$ (divisible par 3) $\implies$ **Partage en 3 possible**. <br>
+                        • Le chiffre des unités est 5 $\implies$ **Partage en 5 possible**.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 : NOMBRES PREMIERS ET CRIBLE D'ÉRATOSTHÈNE -->
+        <section id="partie3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">3</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 3 • Formulaire Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Nombres Premiers & Liste Officielle $< 30$</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 3 -->
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-purple-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-key"></i> Définition d'un Nombre Premier
+                    </h4>
+                    <p class="text-slate-800">
+                        Un <strong>nombre premier</strong> est un nombre entier naturel qui admet **exactement 2 diviseurs distincts : 1 et lui-même**. <br>
+                        • **Remarque importante :** 1 n'est pas un nombre premier (il n'a qu'un seul diviseur). <br>
+                        • **Remarque importante :** 2 est le seul nombre premier pair.
+                    </p>
+                </div>
+
+                <!-- SCHÉMA SVG 2 : CRIBLE DES NOMBRES PREMIERS MOINS DE 30 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol text-purple-600"></i> Schéma Visuel 2 : La Liste des 10 Nombres Premiers $< 30$
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <div class="flex flex-wrap items-center justify-center gap-2 font-mono font-extrabold text-sm">
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">2</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">3</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">5</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">7</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">11</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">13</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">17</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">19</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">23</span>
+                            <span class="px-3 py-1.5 bg-amber-500 text-white rounded-xl shadow-sm">29</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 4 : DÉCOMPOSITION EN FACTEURS PREMIERS ET FRACTIONS -->
+        <section id="partie4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">4</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Partie 4 • Formulaire Officiel EN</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Décomposition en Facteurs Premiers & Fractions Irréductibles</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 4 -->
+                <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-tree"></i> Théorème de Décomposition Unique
+                    </h4>
+                    <p class="text-slate-800">
+                        Tout nombre entier supérieur ou égal à 2 non premier se décompose de manière **unique** en un **produit de facteurs premiers**. <br>
+                        Exemple : $180 = 2 \times 2 \times 3 \times 3 \times 5 = 2^2 \times 3^2 \times 5$.
+                    </p>
+                </div>
+
+                <!-- SCHÉMA SVG 3 : ARBRE DE DÉCOMPOSITION DE 360 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-next text-emerald-600"></i> Schéma Visuel 3 : Arbre de Décomposition de $360 = 2^3 \times 3^2 \times 5$
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="400" height="170" viewBox="0 0 400 170" class="mx-auto font-sans">
+                            <!-- 360 -->
+                            <rect x="175" y="10" width="50" height="30" rx="6" fill="#047857"/>
+                            <text x="200" y="30" font-size="12" font-weight="extrabold" fill="#ffffff" text-anchor="middle">360</text>
+
+                            <!-- Décomposition 2 x 180 -->
+                            <line x1="185" y1="40" x2="110" y2="75" stroke="#047857" stroke-width="2"/>
+                            <line x1="215" y1="40" x2="290" y2="75" stroke="#047857" stroke-width="2"/>
+
+                            <circle cx="110" cy="85" r="14" fill="#f59e0b"/>
+                            <text x="110" y="89" font-size="11" font-weight="extrabold" fill="#ffffff" text-anchor="middle">2</text>
+
+                            <rect x="265" y="70" width="50" height="30" rx="6" fill="#ecfdf5" stroke="#047857" stroke-width="1.5"/>
+                            <text x="290" y="90" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">180</text>
+
+                            <!-- Décomposition 180 -> 2 x 90 -->
+                            <line x1="275" y1="100" x2="220" y2="135" stroke="#047857" stroke-width="2"/>
+                            <line x1="305" y1="100" x2="350" y2="135" stroke="#047857" stroke-width="2"/>
+
+                            <circle cx="220" cy="145" r="14" fill="#f59e0b"/>
+                            <text x="220" y="149" font-size="11" font-weight="extrabold" fill="#ffffff" text-anchor="middle">2</text>
+
+                            <text x="350" y="145" font-size="10" font-weight="bold" fill="#047857" text-anchor="middle">... (2×3²×5)</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- EXEMPLE MÉTIER 4 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-vial text-emerald-600"></i> Exemple Métier Rédigé Pas à Pas (Simplification de Ratio de Peinture)
+                    </h4>
+                    <p class="text-slate-700">
+                        <strong>Énoncé :</strong> En carrosserie, on prépare un mélange de $\frac{84}{126}$ de diluant. Simplifiez cette fraction pour la rendre irréductible.
+                    </p>
+                    <div class="p-4 bg-white rounded-xl border font-mono text-slate-800 space-y-2">
+                        <p class="font-bold text-emerald-900">Corrigé rédigé :</p>
+                        <p>1. Décompositions : $84 = 2^2 \times 3 \times 7$ et $126 = 2 \times 3^2 \times 7$. <br>
+                        2. Simplification : $\frac{84}{126} = \frac{2 \times 2 \times 3 \times 7}{2 \times 3 \times 3 \times 7} = \mathbf{\frac{2}{3}}$.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR INTERACTIF DE DÉCOMPOSITION EN FACTEURS PREMIERS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Calculateur de Décomposition Arithmétique</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div class="p-4 bg-white rounded-2xl space-y-2">
+                        <label class="font-bold text-slate-900 block">Saisissez un nombre entier positif $N$ :</label>
+                        <input type="number" id="sim-n" value="360" min="2" max="10000" oninput="calcDecomp()" class="border rounded-xl p-2.5 w-full font-bold bg-slate-50 text-base text-slate-900">
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Résultats de l'analyse :</span>
+                    <p>• Statut : <span id="sim-status" class="font-bold text-yellow-400">Composé</span></p>
+                    <p>• Décomposition : <span id="sim-decomp" class="font-extrabold text-emerald-400 text-sm">2³ × 3² × 5</span></p>
+                    <p>• Liste des diviseurs : <span id="sim-divs" class="font-bold text-slate-300">1, 2, 3, 4, 5...</span></p>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- JS POUR SIMULATEUR ARITHMÉTIQUE -->
+    <script>
+        function calcDecomp() {
+            let n = parseInt(document.getElementById('sim-n').value) || 0;
+            if (n < 2) {
+                document.getElementById('sim-status').innerText = "Invalide (≥ 2)";
+                document.getElementById('sim-decomp').innerText = "-";
+                document.getElementById('sim-divs').innerText = "-";
+                return;
+            }
+
+            // Calcul de la décomposition
+            let temp = n;
+            let factors = {};
+            for (let d = 2; d * d <= temp; d++) {
+                while (temp % d === 0) {
+                    factors[d] = (factors[d] || 0) + 1;
+                    temp /= d;
+                }
+            }
+            if (temp > 1) factors[temp] = (factors[temp] || 0) + 1;
+
+            let isPrime = Object.keys(factors).length === 1 && Object.values(factors)[0] === 1;
+            document.getElementById('sim-status').innerText = isPrime ? "Nombre Premier 🟢" : "Nombre Composé 🔵";
+
+            let decompStr = Object.entries(factors).map(([p, exp]) => exp > 1 ? `${p}^${exp}` : `${p}`).join(" × ");
+            document.getElementById('sim-decomp').innerText = `${n} = ${decompStr}`;
+
+            // Diviseurs
+            let divs = [];
+            for (let i = 1; i <= n; i++) {
+                if (n % i === 0) divs.push(i);
+            }
+            document.getElementById('sim-divs').innerText = divs.join(", ");
+        }
+        calcDecomp();
+    </script>
 </body>
 </html>

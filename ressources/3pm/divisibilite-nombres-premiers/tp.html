@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP Tableur - Arithmétique & Divisibilité (3PM)</title>
+    <title>TP Numérique - Divisibilité et Nombres Premiers (3PM)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,6 +33,9 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
         @media print {
             header, nav, .no-print { display: none !important; }
             body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
@@ -52,7 +55,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 3PM • Mathématiques & Numérique</span>
-                    <h1 class="text-xl font-bold font-heading">Arithmétique & Nombres Premiers</h1>
+                    <h1 class="text-xl font-bold font-heading">Divisibilité & Nombres Premiers</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -69,14 +72,14 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- EN-TÊTE DU TP TABLEUR LIBREOFFICE / EXCEL -->
+        <!-- EN-TÊTE DU TP NUMÉRIQUE -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-purple-600 print-card">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
-                        <span>TP Informatique Guidé</span> • <span>LibreOffice Calc / Microsoft Excel</span>
+                        <span>TP Tableur (Excel / Calc) • 50 min</span>
                     </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Tableur : Recherche des Diviseurs et du PGCD par la méthode d'Euclide</h2>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Numérique : Automatisation du Reste de Division avec `=MOD()`</h2>
                 </div>
                 <div class="flex items-center gap-2 no-print">
                     <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
@@ -86,27 +89,90 @@
             </div>
 
             <p class="text-xs text-slate-600 leading-relaxed">
-                <strong>Objectif de la séance :</strong> Programmer l'algorithme des soustractions successives / d'Euclide sur tableur avec la formule <code>=MOD(A2;B2)</code> pour calculer automatiquement le PGCD de deux grands nombres.
+                <strong>Objectif de la séance :</strong> Utiliser la fonction tableur <code>=MOD(nombre; diviseur)</code> pour tester automatiquement si le reste $r=0$ et automatiser la recherche de diviseurs.
             </p>
         </div>
 
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+        <!-- PROTOCOLE TABLEUR -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
                 <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                <h3 class="font-bold text-slate-900 text-base">Partie 1 : Programmation du reste de la division euclidienne</h3>
+                <h3 class="font-bold text-slate-900 text-base">Consignes de Réalisation sur Tableur</h3>
             </div>
 
-            <div class="space-y-2 text-xs text-slate-800">
-                <p class="font-bold text-slate-900">Consignes pas à pas :</p>
-                <ol class="list-decimal pl-5 space-y-1 text-slate-700">
-                    <li>En A2, saisissez 84. En B2, saisissez 60.</li>
-                    <li>En C2, saisissez la formule du reste : <code>=MOD(A2; B2)</code>.</li>
-                    <li>Sur la ligne 3, reportez le nombre B2 en A3 et le reste C2 en B3.</li>
-                    <li>Étirez la formule jusqu'à obtenir un reste égal à 0 ! Le dernier reste non nul est le PGCD.</li>
-                </ol>
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Saisie de la feuille de calcul</p>
+                    <p class="text-slate-700">Dans une feuille Excel ou Calc, reproduisez le tableau suivant : <br>
+                    • Cellule <code>A2</code> : Nombre à tester (ex: 360). <br>
+                    • Colonne <code>B</code> (B2 à B10) : Les diviseurs 2, 3, 4, 5, 6, 7, 8, 9, 10.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Formule de calcul du reste</p>
+                    <p class="text-slate-700">En cellule <code>C2</code>, tapez la formule : <code>=MOD($A$2; B2)</code> puis étirez vers le bas.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 3 : Formule conditionnelle `=SI()`</p>
+                    <p class="text-slate-700">En cellule <code>D2</code>, tapez : <code>=SI(C2=0; "Divisible"; "Non divisible")</code>.</p>
+                </div>
             </div>
         </section>
 
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Compte-rendu d'Expérimentation & Validation</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <!-- Q1 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle formule permet de calculer le reste de la division de A2 par 3 ?</label>
+                    <select id="tp-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="mod">=MOD(A2; 3)</option>
+                        <option value="div">=DIV(A2; 3)</option>
+                    </select>
+                </div>
+
+                <!-- Q2 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Si le résultat de `=MOD(360; 9)` affiche `0`, que concluez-vous ?</label>
+                    <select id="tp-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="divisible">360 est divisible par 9 (reste r = 0)</option>
+                        <option value="non">360 n'est pas divisible</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkTP()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Compte-rendu TP
+            </button>
+            <div id="fb-tp" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
     </main>
+
+    <!-- JS POUR LE TP -->
+    <script>
+        function checkTP() {
+            let q1 = document.getElementById('tp-q1').value;
+            let q2 = document.getElementById('tp-q2').value;
+            let fb = document.getElementById('fb-tp');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "mod" && q2 === "divisible") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Compte-rendu TP validé ! (La fonction <code>=MOD()</code> renvoie le reste euclidien ; si MOD = 0, le nombre est divisible).`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Erreur : La formule est <code>=MOD(A2; 3)</code> et un reste 0 signifie que la division est exacte.`;
+            }
+        }
+    </script>
 </body>
 </html>
