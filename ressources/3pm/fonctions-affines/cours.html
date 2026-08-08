@@ -77,7 +77,7 @@
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">3ème Prépa-Métiers</span>
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Modélisation Affine $f(x) = ax + b$</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes officielles de calcul d'images, d'antécédents, détermination du coefficient directeur $a$, ordonnée à l'origine $b$ et représentations graphiques alignées sur la grille.</p>
+                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes officielles de calcul d'images, d'antécédents, détermination du coefficient directeur $a$, ordonnée à l'origine $b$ et représentations graphiques (1 carreau = $1 \times 1$).</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -117,61 +117,63 @@
                     </p>
                 </div>
 
-                <!-- SCHÉMA SVG HAUTE PRÉCISION 1 : REPÈRE SUR LA GRILLE -->
+                <!-- SCHÉMA SVG HAUTE PRÉCISION 1 : REPÈRE 1 CARREAU = 1 UNITÉ -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-sky-600"></i> Représentation Graphique 1 : Lecture d'Image $f(x)$ et d'Antécédent $x$ (Axes alignés sur le quadrillage)
+                        <i class="fa-solid fa-chart-line text-sky-600"></i> Représentation Graphique 1 : Lecture d'Image $f(x)$ et d'Antécédent $x$ (1 carreau = $1 \times 1$)
                     </h4>
                     <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
                         <svg width="450" height="270" viewBox="0 0 450 270" class="mx-auto font-sans">
-                            <!-- Grille Orthonormée pas de 30px -->
+                            <!-- Grille Orthonormée pas de 30px = 1 unité -->
                             <defs>
                                 <pattern id="grid1" width="30" height="30" patternUnits="userSpaceOnUse">
-                                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#e2e8f0" stroke-width="1"/>
                                 </pattern>
                             </defs>
                             <rect width="450" height="270" fill="url(#grid1)"/>
 
-                            <!-- Axes Alignés Parfaitement sur le Quadrillage -->
-                            <!-- Axe X à y = 210 (7 * 30px) -->
+                            <!-- Axes Alignés sur le Quadrillage (1 carreau = 1 unité = 30px) -->
+                            <!-- Axe X à y = 210px (7 carreaux) -->
                             <line x1="30" y1="210" x2="420" y2="210" stroke="#334155" stroke-width="2"/>
                             <polygon points="420,206 430,210 420,214" fill="#334155"/>
-                            <text x="415" y="230" font-size="11" font-weight="bold" fill="#0f172a">Axe x (Abscisses)</text>
+                            <text x="415" y="230" font-size="11" font-weight="bold" fill="#0f172a">Axe x</text>
 
-                            <!-- Axe Y à x = 60 (2 * 30px) -->
+                            <!-- Axe Y à x = 60px (2 carreaux) -->
                             <line x1="60" y1="250" x2="60" y2="20" stroke="#334155" stroke-width="2"/>
                             <polygon points="56,20 60,10 64,20" fill="#334155"/>
-                            <text x="70" y="25" font-size="11" font-weight="bold" fill="#0f172a">Axe y (Images f(x))</text>
+                            <text x="70" y="25" font-size="11" font-weight="bold" fill="#0f172a">Axe y</text>
 
                             <!-- Origine O (60, 210) -->
                             <circle cx="60" cy="210" r="4" fill="#334155"/>
                             <text x="45" y="225" font-size="10" font-weight="bold" fill="#475569">O (0,0)</text>
 
-                            <!-- Graduations X -->
+                            <!-- Graduations X (1 carreau = +1) -->
+                            <line x1="90" y1="206" x2="90" y2="214" stroke="#334155" stroke-width="2"/>
+                            <text x="90" y="225" font-size="9" font-weight="bold" fill="#475569" text-anchor="middle">1</text>
                             <line x1="120" y1="206" x2="120" y2="214" stroke="#334155" stroke-width="2"/>
-                            <text x="120" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">1</text>
+                            <text x="120" y="225" font-size="9" font-weight="bold" fill="#475569" text-anchor="middle">2</text>
+                            <line x1="150" y1="206" x2="150" y2="214" stroke="#334155" stroke-width="2"/>
+                            <text x="150" y="225" font-size="9" font-weight="bold" fill="#475569" text-anchor="middle">3</text>
                             <line x1="180" y1="206" x2="180" y2="214" stroke="#334155" stroke-width="2"/>
-                            <text x="180" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">2</text>
-                            <line x1="240" y1="206" x2="240" y2="214" stroke="#334155" stroke-width="2"/>
-                            <text x="240" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">3</text>
-                            <line x1="300" y1="206" x2="300" y2="214" stroke="#334155" stroke-width="2"/>
-                            <text x="300" y="225" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">x = 4</text>
+                            <text x="180" y="225" font-size="9" font-weight="bold" fill="#0284c7" text-anchor="middle">x = 4</text>
 
-                            <!-- Graduations Y -->
+                            <!-- Graduations Y (1 carreau = +1) -->
+                            <line x1="56" y1="180" x2="64" y2="180" stroke="#334155" stroke-width="2"/>
+                            <text x="48" y="184" font-size="9" font-weight="bold" fill="#475569" text-anchor="end">1</text>
                             <line x1="56" y1="150" x2="64" y2="150" stroke="#334155" stroke-width="2"/>
-                            <text x="45" y="154" font-size="10" font-weight="bold" fill="#475569" text-anchor="end">1</text>
-                            <line x1="56" y1="90" x2="64" y2="90" stroke="#334155" stroke-width="2"/>
-                            <text x="45" y="94" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="end">f(4) = 2</text>
+                            <text x="48" y="154" font-size="9" font-weight="bold" fill="#16a34a" text-anchor="end">f(4) = 2</text>
+                            <line x1="56" y1="120" x2="64" y2="120" stroke="#334155" stroke-width="2"/>
+                            <text x="48" y="124" font-size="9" font-weight="bold" fill="#475569" text-anchor="end">3</text>
 
                             <!-- Droite f(x) = 0.5x -->
-                            <line x1="60" y1="210" x2="360" y2="60" stroke="#0284c7" stroke-width="3"/>
+                            <line x1="60" y1="210" x2="300" y2="90" stroke="#0284c7" stroke-width="3"/>
 
                             <!-- Projection Point A (4, 2) -->
-                            <line x1="300" y1="210" x2="300" y2="90" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,4"/>
-                            <line x1="60" y1="90" x2="300" y2="90" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,4"/>
+                            <line x1="180" y1="210" x2="180" y2="150" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,4"/>
+                            <line x1="60" y1="150" x2="180" y2="150" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,4"/>
 
-                            <circle cx="300" cy="90" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-                            <text x="310" y="85" font-size="11" font-weight="extrabold" fill="#1e3a8a">Point A (4 ; 2)</text>
+                            <circle cx="180" cy="150" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                            <text x="190" y="145" font-size="10" font-weight="extrabold" fill="#1e3a8a">Point A (4 ; 2)</text>
                         </svg>
                     </div>
                 </div>
@@ -259,10 +261,10 @@
                     </p>
                 </div>
 
-                <!-- SCHÉMA SVG HAUTE PRÉCISION 2 : DÉCOMPOSITION PENTE ET ORDONNÉE A L'ORIGINE -->
+                <!-- SCHÉMA SVG HAUTE PRÉCISION 2 : 1 CARREAU = 1 UNITÉ -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-purple-600"></i> Représentation Graphique 2 : Rôle Géométrique de la Pente $a = \Delta y / \Delta x$ et de l'Ordonnée à l'Origine $b$
+                        <i class="fa-solid fa-chart-line text-purple-600"></i> Représentation Graphique 2 : Pente $a = \Delta y / \Delta x$ et Ordonnée à l'Origine $b$ (1 carreau = $1 \times 1$)
                     </h4>
                     <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
                         <svg width="450" height="270" viewBox="0 0 450 270" class="mx-auto font-sans">
@@ -274,21 +276,21 @@
                             <line x1="60" y1="250" x2="60" y2="20" stroke="#334155" stroke-width="2"/>
                             <polygon points="56,20 60,10 64,20" fill="#334155"/>
 
-                            <!-- Ordonnée à l'origine b à y = 150px (5*30px) -->
+                            <!-- Ordonnée à l'origine b = 2 à y = 150px (2 carreaux au-dessus de y=210) -->
                             <circle cx="60" cy="150" r="5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-                            <text x="75" y="155" font-size="11" font-weight="black" fill="#dc2626">b = Ordonnée à l'origine (0 ; b)</text>
+                            <text x="75" y="155" font-size="11" font-weight="black" fill="#dc2626">b = 2 (Ordonnée à l'origine)</text>
 
-                            <!-- Droite f(x) = a*x + b -->
-                            <line x1="60" y1="150" x2="360" y2="50" stroke="#7e22ce" stroke-width="3"/>
+                            <!-- Droite f(x) = 1.5x + 2 -->
+                            <line x1="60" y1="150" x2="360" y2="15" stroke="#7e22ce" stroke-width="3"/>
 
-                            <!-- Triangle de Pente a -->
-                            <line x1="180" y1="110" x2="270" y2="110" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,4"/>
-                            <line x1="270" y1="110" x2="270" y2="80" stroke="#dc2626" stroke-width="2.5"/>
+                            <!-- Triangle de Pente a : +1 carreau en X (30px) -> +1.5 carreau en Y (45px) -->
+                            <line x1="120" y1="120" x2="150" y2="120" stroke="#2563eb" stroke-width="2" stroke-dasharray="4,4"/>
+                            <line x1="150" y1="120" x2="150" y2="75" stroke="#dc2626" stroke-width="2.5"/>
 
-                            <text x="225" y="125" font-size="10" font-weight="extrabold" fill="#2563eb" text-anchor="middle">+ Δx = 1 (Avancée)</text>
-                            <text x="280" y="98" font-size="10" font-weight="extrabold" fill="#dc2626">+ Δy = a (Pente)</text>
+                            <text x="135" y="133" font-size="9" font-weight="extrabold" fill="#2563eb" text-anchor="middle">+1 carreau (+1 en x)</text>
+                            <text x="160" y="98" font-size="9" font-weight="extrabold" fill="#dc2626">+a en y</text>
 
-                            <circle cx="270" cy="80" r="5" fill="#7e22ce" stroke="#ffffff" stroke-width="2"/>
+                            <circle cx="150" cy="75" r="5" fill="#7e22ce" stroke="#ffffff" stroke-width="2"/>
                         </svg>
                     </div>
                 </div>
@@ -349,7 +351,7 @@
             </div>
         </section>
 
-        <!-- SIMULATEUR GRAPHIQUE INTERACTIF EN TEMPS RÉEL (CANVAS SVG) AVEC AXE X ALIGNÉ SUR LE QUADRILLAGE -->
+        <!-- SIMULATEUR GRAPHIQUE INTERACTIF EN TEMPS RÉEL (1 CARREAU = 1 UNITE x 1 UNITE) -->
         <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
             <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
                 <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
@@ -357,7 +359,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
-                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Graphique Interactif Dynamique $f(x) = ax + b$</h3>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Graphique Orthonormé (1 carreau = $1 \times 1$)</h3>
                 </div>
             </div>
 
@@ -368,26 +370,26 @@
                             <label class="font-bold text-slate-900">Coefficient directeur $a$ :</label>
                             <span id="val-a" class="font-extrabold text-sky-600 font-mono text-sm">2</span>
                         </div>
-                        <input type="range" id="sim-a" min="-5" max="5" step="0.5" value="2" oninput="calcSim()" class="w-full accent-sky-600">
+                        <input type="range" id="sim-a" min="-4" max="4" step="0.5" value="2" oninput="calcSim()" class="w-full accent-sky-600">
                     </div>
                     <div class="p-4 bg-white rounded-2xl space-y-2">
                         <div class="flex justify-between items-center">
                             <label class="font-bold text-slate-900">Ordonnée à l'origine $b$ :</label>
                             <span id="val-b" class="font-extrabold text-amber-600 font-mono text-sm">3</span>
                         </div>
-                        <input type="range" id="sim-b" min="-10" max="10" step="1" value="3" oninput="calcSim()" class="w-full accent-amber-600">
+                        <input type="range" id="sim-b" min="-4" max="4" step="1" value="3" oninput="calcSim()" class="w-full accent-amber-600">
                     </div>
 
                     <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
                         <span class="text-xs font-bold uppercase text-sky-400 block">Propriétés de la fonction :</span>
                         <p>• Formule : <span id="sim-formula" class="font-bold text-white">f(x) = 2x + 3</span></p>
-                        <p>• Ordonnée fixe $b$ : <span id="sim-f0" class="font-bold text-yellow-400">3</span></p>
+                        <p>• Echelle : <span class="text-yellow-400 font-bold">1 carreau = 1 unité × 1 unité</span></p>
+                        <p>• Ordonnée $b$ : <span id="sim-f0" class="font-bold text-yellow-400">3</span></p>
                         <p>• Antécédent de 0 : <span id="sim-root" class="font-bold text-emerald-400">x = -1.5</span></p>
-                        <p>• Variation : <span id="sim-var" class="font-bold text-sky-300">Croissante</span></p>
                     </div>
                 </div>
 
-                <!-- ZONE GRAPHIC DYNAMIQUE SVG - AXES 100% SUR LA GRILLE -->
+                <!-- ZONE GRAPHIC DYNAMIQUE SVG - 1 CARREAU = 1x1 (25px) -->
                 <div class="md:col-span-2 bg-slate-950 rounded-2xl p-4 border border-slate-800 flex items-center justify-center">
                     <svg id="dynamic-graph" width="400" height="250" viewBox="0 0 400 250" class="w-full max-w-[440px] font-sans">
                         <!-- Repère et grille générés en JS -->
@@ -398,7 +400,7 @@
 
     </main>
 
-    <!-- JS POUR SIMULATEUR ET GRAPHIQUE DYNAMIQUE -->
+    <!-- JS POUR SIMULATEUR ET GRAPHIQUE DYNAMIQUE 1x1 -->
     <script>
         function calcSim() {
             let a = parseFloat(document.getElementById('sim-a').value);
@@ -410,10 +412,6 @@
             let signB = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
             document.getElementById('sim-formula').innerText = `f(x) = ${a}x ${signB}`;
             document.getElementById('sim-f0').innerText = b;
-
-            if (a > 0) document.getElementById('sim-var').innerText = "Strictement Croissante (a > 0)";
-            else if (a < 0) document.getElementById('sim-var').innerText = "Strictement Décroissante (a < 0)";
-            else document.getElementById('sim-var').innerText = "Constante Horizontale (a = 0)";
 
             if (a !== 0) {
                 let root = -b / a;
@@ -428,47 +426,69 @@
         function drawDynamicGraph(a, b) {
             const svg = document.getElementById('dynamic-graph');
             const w = 400, h = 250;
-            // Grille avec un pas exact de 25px (200 = 8 * 25px, 125 = 5 * 25px)
-            const cx = 200, cy = 125; 
-            const scaleX = 25; // 25 px = 1 unité x
-            const scaleY = 12.5; // 12.5 px = 1 unité y
+            // ECHELLE PARFAITE : 1 CARREAU = 25px = 1 UNITE EN X ET 1 UNITE EN Y (1x1)
+            const step = 25; 
+            const cx = 200; // 8 carreaux * 25px = 200px (axe Y sur la ligne 8)
+            const cy = 125; // 5 carreaux * 25px = 125px (axe X sur la ligne 5)
 
             let html = `
-                <!-- Fond et grille alignée -->
+                <!-- Fond et grille alignée 1x1 (25px x 25px) -->
                 <rect width="${w}" height="${h}" fill="#090d16" rx="12"/>
                 <defs>
-                    <pattern id="gridDyn" width="25" height="25" patternUnits="userSpaceOnUse">
-                        <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#1e293b" stroke-width="1"/>
+                    <pattern id="gridDyn" width="${step}" height="${step}" patternUnits="userSpaceOnUse">
+                        <path d="M ${step} 0 L 0 0 0 ${step}" fill="none" stroke="#1e293b" stroke-width="1"/>
                     </pattern>
                 </defs>
                 <rect width="${w}" height="${h}" fill="url(#gridDyn)"/>
 
-                <!-- Axe X aligné exactement sur le trait y = 125 (5 * 25px) -->
-                <line x1="15" y1="${cy}" x2="385" y2="${cy}" stroke="#475569" stroke-width="2"/>
-                <polygon points="385,${cy-4} 395,${cy} 385,${cy+4}" fill="#475569"/>
-                <text x="380" y="${cy+18}" font-size="10" fill="#94a3b8" font-weight="bold">x</text>
+                <!-- Axe X aligné exactement sur le trait y = 125 -->
+                <line x1="10" y1="${cy}" x2="390" y2="${cy}" stroke="#475569" stroke-width="2"/>
+                <polygon points="388,${cy-4} 396,${cy} 388,${cy+4}" fill="#475569"/>
+                <text x="382" y="${cy+18}" font-size="10" fill="#94a3b8" font-weight="bold">x</text>
 
-                <!-- Axe Y aligné exactement sur le trait x = 200 (8 * 25px) -->
-                <line x1="${cx}" y1="235" x2="${cx}" y2="15" stroke="#475569" stroke-width="2"/>
-                <polygon points="${cx-4},15 ${cx},5 ${cx+4},15" fill="#475569"/>
+                <!-- Axe Y aligné exactement sur le trait x = 200 -->
+                <line x1="${cx}" y1="240" x2="${cx}" y2="10" stroke="#475569" stroke-width="2"/>
+                <polygon points="${cx-4},12 ${cx},4 ${cx+4},12" fill="#475569"/>
                 <text x="${cx+8}" y="18" font-size="10" fill="#94a3b8" font-weight="bold">y</text>
                 <text x="${cx-15}" y="${cy+15}" font-size="9" fill="#64748b">O</text>
             `;
 
-            // Calcul des points de la droite
+            // Graduations numériques 1, 2, 3... sur chaque carreau en X
+            for (let i = -7; i <= 7; i++) {
+                if (i !== 0) {
+                    let gx = cx + i * step;
+                    html += `
+                        <line x1="${gx}" y1="${cy-3}" x2="${gx}" y2="${cy+3}" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="${gx}" y="${cy+14}" font-size="8" fill="#64748b" text-anchor="middle">${i}</text>
+                    `;
+                }
+            }
+
+            // Graduations numériques 1, 2, 3... sur chaque carreau en Y
+            for (let j = -4; j <= 4; j++) {
+                if (j !== 0) {
+                    let gy = cy - j * step;
+                    html += `
+                        <line x1="${cx-3}" y1="${gy}" x2="${cx+3}" y2="${gy}" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="${cx-8}" y="${gy+3}" font-size="8" fill="#64748b" text-anchor="end">${j}</text>
+                    `;
+                }
+            }
+
+            // Calcul des points de la droite f(x) = a*x + b avec l'échelle 1 carreau = 25px
             let x1 = -7, y1 = a * x1 + b;
             let x2 = 7, y2 = a * x2 + b;
 
-            let px1 = cx + x1 * scaleX;
-            let py1 = cy - y1 * scaleY;
-            let px2 = cx + x2 * scaleX;
-            let py2 = cy - y2 * scaleY;
+            let px1 = cx + x1 * step;
+            let py1 = cy - y1 * step;
+            let px2 = cx + x2 * step;
+            let py2 = cy - y2 * step;
 
             // Tracer la droite f(x)
             html += `<line x1="${px1}" y1="${py1}" x2="${px2}" y2="${py2}" stroke="#38bdf8" stroke-width="3"/>`;
 
             // Point (0, b)
-            let pyB = cy - b * scaleY;
+            let pyB = cy - b * step;
             html += `
                 <circle cx="${cx}" cy="${pyB}" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
                 <text x="${cx+8}" y="${pyB+4}" font-size="10" font-weight="bold" fill="#fbbf24">b = ${b}</text>
