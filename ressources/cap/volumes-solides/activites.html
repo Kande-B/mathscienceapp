@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités d'Investigation - Solides & Volumes CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence 8 CAP • Géométrie dans l'Espace</span>
+                    <h1 class="text-xl font-bold font-heading">Solides Usuels, Volumes et Contenances</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- PRESENTATION DE LA SÉQUENCE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-amber-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Calculs de Volumes et Contenances Métiers</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Découvrez comment calculer le volume de béton d'une dalle rectangulaire ou la contenance en Litres d'une citerne d'eau cylindrique !</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
+                <div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Solides et Conversions $1\text{ L} = 1\text{ dm}^3$</h3>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600">Le volume mesure l'espace occupé par un solide en $m^3$ ou $cm^3$. La contenance mesure le liquide en Litres ($1\text{ L} = 1\text{ dm}^3 = 1000\text{ cm}^3$).</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Combien de Litres contient $1\text{ m}^3$ d'eau ?</label>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="1 m³ = ? L">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quel est le volume d'un pavé droit de $2\text{ m} \times 3\text{ m} \times 4\text{ m}$ ?</label>
+                    <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Volume = ? m³">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 1 : MAÇONNERIE / BÂTIMENT (VOLUME DE BÉTON D'UNE DALLE) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Activité 1 • Domaine Bâtiment / Maçonnerie</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Volume de Béton pour une Dalle de Terrasse</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Un maçon doit couler une dalle de terrasse en béton de forme parallélépipédique (pavé droit). <br>
+                Ses dimensions sont : Longueur $L = 6\text{ m}$, Largeur $l = 4\text{ m}$ et Épaisseur $h = 0,15\text{ m}$.</p>
+
+                <!-- SCHÉMA SVG 3D SUR QUADRILLAGE NET -->
+                <div class="p-4 bg-slate-50 border rounded-2xl text-center overflow-x-auto">
+                    <svg width="300" height="180" viewBox="0 0 300 180" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-act1-vol" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="300" height="180" fill="url(#grid-act1-vol)" />
+
+                        <!-- Pavé droit en perspective 3D -->
+                        <polygon points="50,90 200,90 240,60 90,60" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+                        <polygon points="50,90 200,90 200,120 50,120" fill="#94a3b8" stroke="#0f172a" stroke-width="2"/>
+                        <polygon points="200,90 240,60 240,90 200,120" fill="#64748b" stroke="#0f172a" stroke-width="2"/>
+
+                        <!-- Cotes -->
+                        <text x="125" y="135" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">L = 6 m</text>
+                        <text x="230" y="110" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">l = 4 m</text>
+                        <text x="35" y="110" font-size="9" font-weight="bold" fill="#dc2626" text-anchor="middle">h = 0,15 m</text>
+                    </svg>
+                </div>
+
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-amber-900 text-sm block">Étape 1 : Calculez le volume de béton $V = L \times l \times h$</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Volume $V = 6 \times 4 \times 0,15$ (en $m^3$) :</label>
+                            <input type="number" step="0.1" id="act1-vol" class="w-full p-2 border rounded-xl font-bold" placeholder="Volume = ? m³">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Si $1\text{ m}^3$ de béton coûte $100\text{ €}$, quel est le coût total ?</label>
+                            <input type="number" id="act1-cost" class="w-full p-2 border rounded-xl font-bold" placeholder="Coût total = ? €">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider mon calcul
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 : CITERNE CYLINDRIQUE ET CONTENANCE EN LITRES -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Activité 2 • Domaine Maintenance / Jardins</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Contenance d'une Citerne Récupératrice d'Eau</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Un jardinier possède une citerne d'eau cylindrique de rayon $R = 1\text{ m}$ et de hauteur $h = 2\text{ m}$. <br>
+                Rappel : $V = \pi \times R^2 \times h$.</p>
+
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">Étape 1 : Calculez le volume en $m^3$ puis la contenance en Litres</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Volume en $m^3$ (avec $\pi \approx 3,14$) :</label>
+                            <input type="number" step="0.01" id="act2-vol" class="w-full p-2 border rounded-xl font-bold" placeholder="Volume = ? m³">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Contenance en Litres ($1\text{ m}^3 = 1000\text{ L}$) :</label>
+                            <input type="number" id="act2-litres" class="w-full p-2 border rounded-xl font-bold" placeholder="Contenance = ? L">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct2()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider la contenance
+                </button>
+                <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
+    <script>
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "1000" && q2 === "24") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! $1\\text{ m}^3 = 1000\\text{ Litres}$ et Volume = $2 \\times 3 \\times 4 = 24\\text{ m}^3$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> 1 m³ = 1000 L et Volume = 24 m³.`;
+            }
+        }
+
+        function checkAct1() {
+            let vol = document.getElementById('act1-vol').value.trim();
+            let cost = document.getElementById('act1-cost').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if ((vol === "3.6" || vol === "3,6") && cost === "360") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Volume = $6 \\times 4 \\times 0,15 = 3,6\\text{ m}^3$ et Coût total = $3,6 \\times 100 = 360\\text{ €}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Volume = 3,6 m³ et Coût = 360 €.`;
+            }
+        }
+
+        function checkAct2() {
+            let vol = document.getElementById('act2-vol').value.trim();
+            let litres = document.getElementById('act2-litres').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if ((vol === "6.28" || vol === "6,28") && (litres === "6280" || litres === "6283")) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! Volume $V = 3,14 \\times 1^2 \\times 2 = 6,28\\text{ m}^3$, soit une contenance de $6280\\text{ Litres}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Volume = 6,28 m³ et Contenance = 6280 L.`;
+            }
+        }
+    </script>
+</body>
+</html>
