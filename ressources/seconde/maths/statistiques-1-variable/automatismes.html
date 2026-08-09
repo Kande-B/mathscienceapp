@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes & Ritualisation - Statistiques 1 Variable 2nde Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 1 • Seconde Professionnelle Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable (Moyenne, Médiane, Étendue)</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence 2nde Pro Maths -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Excel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- SCOREBOARD EN DIRECT -->
+        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
+                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Statistiques Flash</h2>
+            </div>
+            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
+                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
+                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Statistiques)
+                </h3>
+                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- FC 1 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
+                            <p class="text-xs font-bold text-center">Définition de la moyenne x̄ ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">x̄ = (Σ ni·xi) / N !</p>
+                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 2 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
+                            <p class="text-xs font-bold text-center">Définition de l'étendue E ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">E = xmax - xmin !</p>
+                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 3 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
+                            <p class="text-xs font-bold text-center">Définition de la médiane Me ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Partage la série à 50% !</p>
+                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 4 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
+                            <p class="text-xs font-bold text-center">Moyenne de 10, 20, 30 ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">60 / 3 = 20 !</p>
+                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 5 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
+                            <p class="text-xs font-bold text-center">Médiane de 5, 8, 12, 15, 20 ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">La 3e valeur = 12 !</p>
+                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 6 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
+                            <p class="text-xs font-bold text-center">Formule de la fréquence fi ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">fi = ni / N !</p>
+                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 7 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
+                            <p class="text-xs font-bold text-center">Somme de toutes les fréquences fi ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">100% ou 1 !</p>
+                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 8 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
+                            <p class="text-xs font-bold text-center">Étendue de 15, 20, 40 ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">40 - 15 = 25 !</p>
+                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 9 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
+                            <p class="text-xs font-bold text-center">Formule Excel de la moyenne ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">=MOYENNE(...) !</p>
+                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 10 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
+                            <p class="text-xs font-bold text-center">Un caractère quantitatif continu ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Taille, masse, temps (intervalle)</p>
+                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-emerald-500"></i> Module 2 : Quiz Statistiques 2nde Pro
+                </h3>
+                <span class="text-xs font-bold text-slate-500">6 Défis</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Calculez la moyenne de 10 (coef 2) et 20 (coef 3) :</label>
+                    <input type="number" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="(20+60)/5 = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle est la médiane de : 4, 7, 9, 12, 18 ?</label>
+                    <input type="number" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="Médiane = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">3. Calculez l'étendue de la série : 11, 24, 39, 45</label>
+                    <input type="number" id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="45 - 11 = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">4. Si ni = 15 et N = 60, quelle est la fréquence fi en % ?</label>
+                    <input type="number" id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="15/60 x 100 = ? %">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">5. La médiane est-elle sensible aux valeurs extrêmement grandes ?</label>
+                    <select id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="NON">Non, contrairement à la moyenne !</option>
+                        <option value="OUI">Oui</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">6. Quelle est la somme des effectifs ni ?</label>
+                    <select id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="EFFECTIF">L'effectif total N</option>
+                        <option value="MOYENNE">La moyenne</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
+            </button>
+            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <script>
+        let fcScores = new Set();
+        let m2Score = 0;
+
+        function flipCard(el) {
+            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
+        }
+
+        function markFC(num) {
+            fcScores.add(num);
+            updateScore();
+        }
+
+        function checkM2() {
+            let q1 = document.getElementById('m2-q1').value.trim();
+            let q2 = document.getElementById('m2-q2').value.trim();
+            let q3 = document.getElementById('m2-q3').value.trim();
+            let q4 = document.getElementById('m2-q4').value.trim();
+            let q5 = document.getElementById('m2-q5').value;
+            let q6 = document.getElementById('m2-q6').value;
+
+            let score = 0;
+            if (q1 === "16") score++;
+            if (q2 === "9") score++;
+            if (q3 === "34") score++;
+            if (q4 === "25") score++;
+            if (q5 === "NON") score++;
+            if (q6 === "EFFECTIF") score++;
+
+            m2Score = score;
+            updateScore();
+
+            let fb = document.getElementById('fb-m2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (score === 6) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le quiz Statistiques 2nde Pro !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+            }
+        }
+
+        function updateScore() {
+            let total = fcScores.size + m2Score;
+            document.getElementById('global-score').innerText = `${total} / 16`;
+        }
+    </script>
+</body>
+</html>

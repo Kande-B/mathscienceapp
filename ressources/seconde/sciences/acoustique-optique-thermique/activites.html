@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités d'Investigation - Acoustique, Optique & Thermique 2nde Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Sciences -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-wave-square text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 8 • Seconde Professionnelle Sciences Physiques</span>
+                    <h1 class="text-xl font-bold font-heading">Acoustique, Optique & Transferts Thermiques</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence 2nde Pro Sciences -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-purple-400"></i> TP Expérimental</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- PRESENTATION DE LA SÉQUENCE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-emerald-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier 2nde Pro</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Sciences Physiques & Chimiques</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Ondes Sonores, Réflexion Lumineuse & Chaleur</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Fréquence du son $f = 1/T$, décibels dB, réflexion de la lumière $\theta_1 = \theta_2$, et les 3 modes de transfert thermique (conduction, convection, rayonnement).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
+                <div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Vitesse du Son et du Lumière</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle est la vitesse approximative du son dans l'air ?</label>
+                    <select id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="340">340 m/s</option>
+                        <option value="300000">300 000 km/s</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. À partir de quel niveau sonore en dB y a-t-il danger immédiat pour l'audition ?</label>
+                    <select id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="85">85 dB (Seuil de danger)</option>
+                        <option value="40">40 dB</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 1 : ISOLATION ACOUSTIQUE D'UN CHANTIER -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Activité 1 • Domaine BTP / Isolation</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Mesure de Période T & Fréquence f d'une Nappe Sonore</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Sur un oscilloscope, le signal d'un marteau piqueur présente un motif de période $T = 0,002\text{ s}$ ($2\text{ ms}$).</p>
+
+                <!-- SCHÉMA SVG ONDES SONORES ON GRID -->
+                <div class="p-4 bg-slate-50 border rounded-2xl text-center overflow-x-auto">
+                    <svg width="340" height="100" viewBox="0 0 340 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-act1-acou" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="340" height="100" fill="url(#grid-act1-acou)" />
+                        <!-- Sinus sound wave -->
+                        <path d="M 20 50 Q 50 10 80 50 T 140 50 T 200 50 T 260 50 T 320 50" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+                        <line x1="20" y1="50" x2="320" y2="50" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4"/>
+                        <text x="80" y="20" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">T = 0,002 s</text>
+                    </svg>
+                </div>
+
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-emerald-900 text-sm block">Étape 1 : Calculez la fréquence f = 1 / T</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Fréquence f en Hertz (Hz) (f = 1 / 0,002) :</label>
+                            <input type="number" id="act1-acou-f" class="w-full p-2 border rounded-xl font-bold" placeholder="f = ? Hz">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Ce son est-il grave, médium ou aigu ?</label>
+                            <select id="act1-acou-hauteur" class="w-full p-2 border rounded-xl font-bold">
+                                <option value="">Sélectionnez...</option>
+                                <option value="GRAVE">Son grave (500 Hz)</option>
+                                <option value="AIGU">Son aigu</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider les calculs d'ondes
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
+    <script>
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value;
+            let q2 = document.getElementById('diag-q2').value;
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "340" && q2 === "85") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! La vitesse du son est 340 m/s et le seuil de danger commence à 85 dB.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> 340 m/s et 85 dB.`;
+            }
+        }
+
+        function checkAct1() {
+            let f = document.getElementById('act1-acou-f').value.trim();
+            let haut = document.getElementById('act1-acou-hauteur').value;
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (f === "500" && haut === "GRAVE") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! $f = \\frac{1}{0,002\\text{ s}} = \\mathbf{500\\text{ Hz}}$ (Son grave-médium) !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> 500 Hz et Son grave.`;
+            }
+        }
+    </script>
+</body>
+</html>
