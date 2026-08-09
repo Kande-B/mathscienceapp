@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes & Ritualisation - Théorème de Pythagore CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 4 CAP • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Théorème de Pythagore & Équerrage</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- SCOREBOARD EN DIRECT -->
+        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
+                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Pythagore Instantané</h2>
+            </div>
+            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
+                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
+                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Définitions et Règle 3-4-5)
+                </h3>
+                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- FC 1 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
+                            <p class="text-xs font-bold text-center">Côté en face de l'angle droit ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">L'HYPOTÉNUSE !</p>
+                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 2 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
+                            <p class="text-xs font-bold text-center">Égalité de Pythagore ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Hypoténuse² = Côté₁² + Côté₂²</p>
+                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 3 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
+                            <p class="text-xs font-bold text-center">Règle de l'équerre du maçon ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Règle des 3, 4 et 5 mètres !</p>
+                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 4 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
+                            <p class="text-xs font-bold text-center">Que vaut 3² + 4² ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">9 + 16 = 25 !</p>
+                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 5 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
+                            <p class="text-xs font-bold text-center">Que vaut √25 ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">5 !</p>
+                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 6 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
+                            <p class="text-xs font-bold text-center">Que vaut 6² + 8² ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">36 + 64 = 100 !</p>
+                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 7 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
+                            <p class="text-xs font-bold text-center">Que vaut √100 ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">10 !</p>
+                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 8 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
+                            <p class="text-xs font-bold text-center">Si c=5 et a=3, b = ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">b = √(25 - 9) = 4 !</p>
+                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 9 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
+                            <p class="text-xs font-bold text-center">Si c=10 et a=6, b = ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">b = √(100 - 36) = 8 !</p>
+                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 10 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
+                            <p class="text-xs font-bold text-center">Domaine d'application exclusif ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Triangle RECTANGLE uniquement !</p>
+                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-emerald-500"></i> Module 2 : Calcul Mental Rapide CAP
+                </h3>
+                <span class="text-xs font-bold text-slate-500">6 Défis</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Si les deux côtés de l'angle droit sont $3$ et $4$, l'hypoténuse vaut :</label>
+                    <input type="number" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="c = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Si les deux côtés de l'angle droit sont $6$ et $8$, l'hypoténuse vaut :</label>
+                    <input type="number" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="c = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">3. Si l'hypoténuse vaut $5$ et un côté $3$, le second côté vaut :</label>
+                    <input type="number" id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="b = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">4. Si l'hypoténuse vaut $10$ et un côté $8$, le second côté vaut :</label>
+                    <input type="number" id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="a = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">5. Que vaut $\sqrt{36 + 64}$ ?</label>
+                    <input type="number" id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="Résultat = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">6. Que vaut $5^2 - 4^2$ ?</label>
+                    <input type="number" id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="Résultat = ?">
+                </div>
+            </div>
+
+            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes calculs
+            </button>
+            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <script>
+        let fcScores = new Set();
+        let m2Score = 0;
+
+        function flipCard(el) {
+            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
+        }
+
+        function markFC(num) {
+            fcScores.add(num);
+            updateScore();
+        }
+
+        function checkM2() {
+            let q1 = document.getElementById('m2-q1').value.trim();
+            let q2 = document.getElementById('m2-q2').value.trim();
+            let q3 = document.getElementById('m2-q3').value.trim();
+            let q4 = document.getElementById('m2-q4').value.trim();
+            let q5 = document.getElementById('m2-q5').value.trim();
+            let q6 = document.getElementById('m2-q6').value.trim();
+
+            let score = 0;
+            if (q1 === "5") score++;
+            if (q2 === "10") score++;
+            if (q3 === "4") score++;
+            if (q4 === "6") score++;
+            if (q5 === "10") score++;
+            if (q6 === "9") score++;
+
+            m2Score = score;
+            updateScore();
+
+            let fb = document.getElementById('fb-m2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (score === 6) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le module de calcul mental !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+            }
+        }
+
+        function updateScore() {
+            let total = fcScores.size + m2Score;
+            document.getElementById('global-score').innerText = `${total} / 16`;
+        }
+    </script>
+</body>
+</html>
