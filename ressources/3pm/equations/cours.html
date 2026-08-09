@@ -33,6 +33,10 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
+        .balance-beam { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: 200px 100px; }
+        .pan-left { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: 70px 100px; }
+        .pan-right { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: 330px 100px; }
+
         @media print {
             header, nav, .no-print { display: none !important; }
             body { background-color: white; color: black; padding-bottom: 0 !important; }
@@ -179,9 +183,9 @@
                     </h4>
                     <p class="text-slate-800">
                         Pour résoudre $ax + b = cx + d$ : <br>
-                        1. **Regrouper les termes en $x$** du même côté de l'égalité en changeant leur signe ($+cx \to -cx$). <br>
-                        2. **Regrouper les nombres connus** de l'autre côté ($+b \to -b$). <br>
-                        3. **Diviser** par le coefficient de $x$.
+                        1. <strong>Regrouper les termes en $x$</strong> du même côté de l'égalité en changeant leur signe ($+cx \to -cx$). <br>
+                        2. <strong>Regrouper les nombres connus</strong> de l'autre côté ($+b \to -b$). <br>
+                        3. <strong>Diviser</strong> par le coefficient de $x$.
                     </p>
                 </div>
 
@@ -242,9 +246,9 @@
                         <i class="fa-solid fa-puzzle-piece"></i> Propriété du Produit Nul
                     </h4>
                     <p class="text-slate-800">
-                        Un produit de facteurs est nul si et seulement si **au moins un des facteurs est nul** :
+                        Un produit de facteurs est nul si et seulement si <strong>au moins un des facteurs est nul</strong> :
                         $$(ax + b)(cx + d) = 0 \iff ax + b = 0 \quad \text{ou} \quad cx + d = 0$$
-                        Cette équation admet toujours **deux solutions**.
+                        Cette équation admet toujours <strong>deux solutions</strong>.
                     </p>
                 </div>
 
@@ -311,82 +315,168 @@
             </div>
         </section>
 
-        <!-- SIMULATEUR & SOLVEUR D'ÉQUATIONS INTERACTIF EN TEMPS RÉEL JS -->
+        <!-- SIMULATEUR & BALANCE DYNAMIQUE INTERACTIVE $ax + b = cx + d$ -->
         <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
             <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
                 <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
-                    <i class="fa-solid fa-calculator"></i>
+                    <i class="fa-solid fa-scale-balanced"></i>
                 </div>
                 <div>
                     <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
-                    <h3 class="text-xl font-bold font-heading text-white">Solveur Dynamique Pas à Pas $ax + b = cx + d$</h3>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Balance Dynamique Interactive $ax + b = cx + d$</h3>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div class="space-y-3 text-slate-800">
-                    <p class="text-slate-300 font-bold">Modifiez les coefficients de l'équation $ax + b = cx + d$ :</p>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="p-3 bg-white rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">Coefficient a :</label>
-                            <input type="number" id="sim-a" value="5" oninput="calcEq()" class="border rounded-lg p-2 w-full font-bold">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs">
+                <!-- CONTROLES DU SIMULATEUR -->
+                <div class="space-y-4 text-slate-800">
+                    <div class="p-4 bg-white rounded-2xl space-y-3">
+                        <span class="font-bold text-slate-900 text-xs block uppercase border-b pb-1">1. Réglez les coefficients de l'équation :</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-600">Masse a (x) :</label>
+                                <input type="number" id="sim-a" value="3" min="1" max="10" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-600">Poids b :</label>
+                                <input type="number" id="sim-b" value="15" min="0" max="100" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-600">Masse c (x) :</label>
+                                <input type="number" id="sim-c" value="1" min="0" max="10" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-600">Poids d :</label>
+                                <input type="number" id="sim-d" value="45" min="0" max="100" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
+                            </div>
                         </div>
-                        <div class="p-3 bg-white rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">Constante b :</label>
-                            <input type="number" id="sim-b" value="20" oninput="calcEq()" class="border rounded-lg p-2 w-full font-bold">
+                    </div>
+
+                    <div class="p-4 bg-white rounded-2xl space-y-2">
+                        <div class="flex justify-between items-center">
+                            <label class="font-bold text-slate-900">2. Testez une valeur pour $x$ :</label>
+                            <span id="sim-test-val" class="font-extrabold text-sky-600 font-mono text-sm">15</span>
                         </div>
-                        <div class="p-3 bg-white rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">Coefficient c :</label>
-                            <input type="number" id="sim-c" value="2" oninput="calcEq()" class="border rounded-lg p-2 w-full font-bold">
-                        </div>
-                        <div class="p-3 bg-white rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">Constante d :</label>
-                            <input type="number" id="sim-d" value="50" oninput="calcEq()" class="border rounded-lg p-2 w-full font-bold">
-                        </div>
+                        <input type="range" id="sim-test-x" min="0" max="30" step="1" value="15" oninput="updateBalance()" class="w-full accent-sky-600">
+                    </div>
+
+                    <div id="sim-status-card" class="p-4 rounded-2xl font-mono text-xs border space-y-1">
+                        <!-- Statut mis à jour dynamiquement en JS -->
                     </div>
                 </div>
 
-                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
-                    <span class="text-xs font-bold uppercase text-sky-400 block">Résolution étape par étape :</span>
-                    <p>• Équation : <span id="sim-eq" class="font-bold text-white">5x + 20 = 2x + 50</span></p>
-                    <p>• Regroupement des x : <span id="sim-step1" class="font-bold text-yellow-400">3x = 30</span></p>
-                    <p>• Solution finale : <span id="sim-sol" class="font-extrabold text-emerald-400 text-sm">x = 10</span></p>
+                <!-- ZONE SVG BALANCE DYNAMIQUE QUI BASCULE EN TEMPS REEL -->
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 border border-slate-800 flex flex-col items-center justify-center space-y-2">
+                    <svg id="balance-svg" width="400" height="220" viewBox="0 0 400 220" class="w-full max-w-[460px] font-sans">
+                        <!-- Socle fixe -->
+                        <polygon points="200,160 175,200 225,200" fill="#334155" stroke="#475569" stroke-width="2"/>
+                        <circle cx="200" cy="160" r="6" fill="#f59e0b"/>
+
+                        <!-- Fléau tournant selon l'angle de bascule -->
+                        <g id="balance-beam-group" class="balance-beam">
+                            <!-- Barre transversale -->
+                            <line x1="50" y1="100" x2="350" y2="100" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+                            <circle cx="200" cy="100" r="8" fill="#38bdf8"/>
+
+                            <!-- Attaches des plateaux -->
+                            <line x1="70" y1="100" x2="70" y2="130" stroke="#94a3b8" stroke-width="2"/>
+                            <line x1="330" y1="100" x2="330" y2="130" stroke="#94a3b8" stroke-width="2"/>
+
+                            <!-- Plateau Gauche -->
+                            <g id="pan-left-group" class="pan-left">
+                                <rect x="20" y="130" width="100" height="8" rx="3" fill="#38bdf8"/>
+                                <text id="svg-text-left" x="70" y="122" font-size="11" font-weight="extrabold" fill="#38bdf8" text-anchor="middle">Gauche : 60 kg</text>
+                            </g>
+
+                            <!-- Plateau Droit -->
+                            <g id="pan-right-group" class="pan-right">
+                                <rect x="280" y="130" width="100" height="8" rx="3" fill="#38bdf8"/>
+                                <text id="svg-text-right" x="330" y="122" font-size="11" font-weight="extrabold" fill="#38bdf8" text-anchor="middle">Droite : 60 kg</text>
+                            </g>
+                        </g>
+
+                        <!-- Indicateur d'Équilibre au centre -->
+                        <text id="svg-balance-badge" x="200" y="30" font-size="12" font-weight="extrabold" fill="#10b981" text-anchor="middle">⚖️ ÉQUILIBRE PARFAIT (0°)</text>
+                    </svg>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- JS POUR SIMULATEUR D'ÉQUATIONS -->
+    <!-- JS POUR SIMULATEUR ET BALANCE DYNAMIQUE -->
     <script>
-        function calcEq() {
+        function updateBalance() {
             let a = parseFloat(document.getElementById('sim-a').value) || 0;
             let b = parseFloat(document.getElementById('sim-b').value) || 0;
             let c = parseFloat(document.getElementById('sim-c').value) || 0;
             let d = parseFloat(document.getElementById('sim-d').value) || 0;
+            let testX = parseFloat(document.getElementById('sim-test-x').value);
 
-            let signB = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
-            let signD = d >= 0 ? `+ ${d}` : `- ${Math.abs(d)}`;
-            document.getElementById('sim-eq').innerText = `${a}x ${signB} = ${c}x ${signD}`;
+            document.getElementById('sim-test-val').innerText = testX;
 
-            let diffA = a - c;
-            let diffD = d - b;
+            let wLeft = a * testX + b;
+            let wRight = c * testX + d;
 
-            if (diffA === 0) {
-                if (diffD === 0) {
-                    document.getElementById('sim-step1').innerText = "Tout x est solution (Infinité de solutions)";
-                    document.getElementById('sim-sol').innerText = "S = ℝ";
-                } else {
-                    document.getElementById('sim-step1').innerText = "Impossible (0x = non nul)";
-                    document.getElementById('sim-sol').innerText = "Aucune solution (S = ∅)";
-                }
+            document.getElementById('svg-text-left').textContent = `G : ${wLeft} kg`;
+            document.getElementById('svg-text-right').textContent = `D : ${wRight} kg`;
+
+            // Calcul de l'angle de bascule (max 15 deg)
+            let diff = wRight - wLeft; // Si droite > gauche, penche à droite (+ deg)
+            let maxDiff = 50;
+            let angle = Math.max(-14, Math.min(14, (diff / maxDiff) * 14));
+
+            if (wLeft === wRight) {
+                angle = 0;
+            }
+
+            // Appliquer la rotation SVG au fléau
+            let beamGroup = document.getElementById('balance-beam-group');
+            let panLeft = document.getElementById('pan-left-group');
+            let panRight = document.getElementById('pan-right-group');
+
+            beamGroup.setAttribute('transform', `rotate(${angle}, 200, 100)`);
+            panLeft.setAttribute('transform', `rotate(${-angle}, 70, 100)`);
+            panRight.setAttribute('transform', `rotate(${-angle}, 330, 100)`);
+
+            // Mise à jour de la carte de statut
+            let statusCard = document.getElementById('sim-status-card');
+            let badge = document.getElementById('svg-balance-badge');
+
+            if (wLeft === wRight) {
+                badge.textContent = `⚖️ ÉQUILIBRE PARFAIT (0°)`;
+                badge.setAttribute('fill', '#10b981');
+                statusCard.className = "p-4 rounded-2xl font-mono text-xs border bg-emerald-950 border-emerald-800 text-emerald-200 space-y-1";
+                statusCard.innerHTML = `
+                    <span class="text-xs font-extrabold uppercase text-emerald-400 block"><i class="fa-solid fa-circle-check"></i> Équilibre Parfait !</span>
+                    <p>• Poids gauche : <b>${wLeft} kg</b></p>
+                    <p>• Poids droit : <b>${wRight} kg</b></p>
+                    <p class="text-emerald-300 font-bold">⟹ La solution exacte est x = ${testX} !</p>
+                `;
+            } else if (wLeft > wRight) {
+                badge.textContent = `⬅️ PENCHE À GAUCHE (${angle.toFixed(1)}°)`;
+                badge.setAttribute('fill', '#f59e0b');
+                statusCard.className = "p-4 rounded-2xl font-mono text-xs border bg-amber-950 border-amber-800 text-amber-200 space-y-1";
+                statusCard.innerHTML = `
+                    <span class="text-xs font-extrabold uppercase text-amber-400 block"><i class="fa-solid fa-triangle-exclamation"></i> Déséquilibre : Côté Gauche plus lourd</span>
+                    <p>• Poids gauche : <b>${wLeft} kg</b></p>
+                    <p>• Poids droit : <b>${wRight} kg</b></p>
+                    <p class="text-amber-300">Ajustez la valeur de x pour équilibrer la balance !</p>
+                `;
             } else {
-                document.getElementById('sim-step1').innerText = `${diffA}x = ${diffD}`;
-                let sol = diffD / diffA;
-                document.getElementById('sim-sol').innerText = `x = ${sol.toFixed(2)}`;
+                badge.textContent = `➡️ PENCHE À DROITE (+${angle.toFixed(1)}°)`;
+                badge.setAttribute('fill', '#f59e0b');
+                statusCard.className = "p-4 rounded-2xl font-mono text-xs border bg-amber-950 border-amber-800 text-amber-200 space-y-1";
+                statusCard.innerHTML = `
+                    <span class="text-xs font-extrabold uppercase text-amber-400 block"><i class="fa-solid fa-triangle-exclamation"></i> Déséquilibre : Côté Droit plus lourd</span>
+                    <p>• Poids gauche : <b>${wLeft} kg</b></p>
+                    <p>• Poids droit : <b>${wRight} kg</b></p>
+                    <p class="text-amber-300">Ajustez la valeur de x pour équilibrer la balance !</p>
+                `;
             }
         }
-        calcEq();
+
+        updateBalance();
     </script>
 </body>
 </html>
