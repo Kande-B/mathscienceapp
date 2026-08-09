@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP GeoGebra - Trigonométrie (3PM)</title>
+    <title>TP Numérique - Trigonométrie 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,6 +33,9 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
         @media print {
             header, nav, .no-print { display: none !important; }
             body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
@@ -61,7 +64,7 @@
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP GeoGebra</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Tableur</a>
                 <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet</a>
             </nav>
         </div>
@@ -69,14 +72,14 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- EN-TÊTE DU TP GEOGEBRA -->
+        <!-- EN-TÊTE DU TP NUMÉRIQUE -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-purple-600 print-card">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
-                        <span>TP Géométrie Dynamique</span> • <span>GeoGebra</span>
+                        <span>TP Tableur (Excel / Calc) • 50 min</span>
                     </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP GeoGebra : Évolution des Rapports Sinus, Cosinus et Tangente</h2>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Numérique : Calculs Trigonométriques sur Tableur</h2>
                 </div>
                 <div class="flex items-center gap-2 no-print">
                     <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
@@ -86,26 +89,82 @@
             </div>
 
             <p class="text-xs text-slate-600 leading-relaxed">
-                <strong>Objectif de la séance :</strong> Faire varier un angle $\theta$ de $0^\circ$ à $90^\circ$ et visualiser l'évolution des quotients trigonométriques.
+                <strong>Objectif de la séance :</strong> Utiliser les formules trigonométriques du tableur avec la conversion obligatoire des degrés en radians : <code>=COS(RADIANS(A2))</code>, <code>=SIN(RADIANS(A2))</code> et <code>=DEGRES(ACOS(B2/C2))</code>.
             </p>
         </div>
 
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+        <!-- PROTOCOLE TABLEUR -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
                 <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                <h3 class="font-bold text-slate-900 text-base">Partie 1 : Manipulation du curseur d'angle</h3>
+                <h3 class="font-bold text-slate-900 text-base">Consignes de Saisie et Formules Tableur</h3>
             </div>
 
-            <div class="space-y-2 text-xs text-slate-800">
-                <p class="font-bold text-slate-900">Consignes pas à pas :</p>
-                <ol class="list-decimal pl-5 space-y-1 text-slate-700">
-                    <li>Créez un curseur d'angle $\alpha$ de $0^\circ$ à $90^\circ$.</li>
-                    <li>Construisez un triangle rectangle dont un angle aigu vaut $\alpha$.</li>
-                    <li>Faites afficher le quotient opposé / hypoténuse. Vérifiez qu'il s'agit bien de $\sin(\alpha)$.</li>
-                </ol>
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Calcul du Côté Adjacent AB par Cosinus</p>
+                    <p class="text-slate-700">Si $AC=10$ et $\widehat{A}=60^\circ$, tapez en cellule <code>B2</code> : <code>=C2*COS(RADIANS(A2))</code>.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Calcul du Côté Opposé BC par Sinus</p>
+                    <p class="text-slate-700">En cellule <code>D2</code>, tapez : <code>=C2*SIN(RADIANS(A2))</code>.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 3 : Calcul d'un Angle en Degrés par Arccos</p>
+                    <p class="text-slate-700">Si $AB=4$ et $AC=5$, tapez en cellule <code>E2</code> : <code>=DEGRES(ACOS(B2/C2))</code>.</p>
+                </div>
             </div>
         </section>
 
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Compte-rendu d'Expérimentation & Validation</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle formule permet de convertir les degrés en radians dans Excel ?</label>
+                    <select id="tp-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="FORMULE">=RADIANS(A2)</option>
+                        <option value="FAUX">=DEGRES(A2)</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quel angle en degrés obtenez-vous pour $AB=4$ et $AC=5$ avec ACOS ?</label>
+                    <input type="number" step="0.1" id="tp-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Angle = ? °">
+                </div>
+            </div>
+
+            <button onclick="checkTP()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Compte-rendu TP
+            </button>
+            <div id="fb-tp" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
     </main>
+
+    <!-- JS POUR LE TP -->
+    <script>
+        function checkTP() {
+            let q1 = document.getElementById('tp-q1').value;
+            let q2 = document.getElementById('tp-q2').value.trim();
+            let fb = document.getElementById('fb-tp');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "FORMULE" && (q2 === "36.9" || q2 === "36,9" || q2 === "36.87" || q2 === "36,87")) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Compte-rendu TP validé ! Angle $\\widehat{A} \\approx 36,9^\\circ$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> N'oubliez pas <code>=RADIANS(A2)</code> ! Angle $\\widehat{A} \\approx 36,9^\\circ$.`;
+            }
+        }
+    </script>
 </body>
 </html>
