@@ -115,13 +115,26 @@
                     <p>Lisez les abscisses des points $A$, $B$ et $C$ sur l'axe ci-contre.</p>
                     <p class="text-xs font-mono">a) Abscisse $xA = ?$ &nbsp;&nbsp;&nbsp;&nbsp; b) Abscisse $xB = ?$ &nbsp;&nbsp;&nbsp;&nbsp; c) Abscisse $xC = ?$</p>
                 </div>
-                <!-- SVG EX 1 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center">
-                    <svg width="130" height="70" viewBox="0 0 130 70" class="mx-auto font-sans">
-                        <line x1="10" y1="35" x2="120" y2="35" stroke="#334155" stroke-width="2"/>
-                        <circle cx="20" cy="35" r="3" fill="#dc2626"/> <text x="20" y="20" font-size="8" font-weight="bold" fill="#dc2626">A(-4)</text>
-                        <circle cx="65" cy="35" r="3" fill="#0f172a"/> <text x="65" y="20" font-size="8" font-weight="bold" fill="#0f172a">O(0)</text>
-                        <circle cx="100" cy="35" r="3" fill="#0284c7"/> <text x="100" y="20" font-size="8" font-weight="bold" fill="#0284c7">C(+3)</text>
+                <!-- SVG EX 1 AVEC GRILLE -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="240" height="70" viewBox="0 0 240 70" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td1" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="240" height="70" fill="url(#grid-td1)" />
+                        <!-- Axe y=35 (pile sur le trait !) -->
+                        <line x1="10" y1="35" x2="230" y2="35" stroke="#1e293b" stroke-width="2.5"/>
+                        <!-- O à x=120 -->
+                        <line x1="120" y1="28" x2="120" y2="42" stroke="#0f172a" stroke-width="2.5"/>
+                        <text x="120" y="22" font-size="9" font-weight="extrabold" fill="#0f172a" text-anchor="middle">O(0)</text>
+                        <!-- A à x = 120 - 4*20 = 40 -->
+                        <circle cx="40" cy="35" r="4" fill="#dc2626"/>
+                        <text x="40" y="22" font-size="9" font-weight="extrabold" fill="#dc2626" text-anchor="middle">A(?)</text>
+                        <!-- C à x = 120 + 3*20 = 180 -->
+                        <circle cx="180" cy="35" r="4" fill="#0284c7"/>
+                        <text x="180" y="22" font-size="9" font-weight="extrabold" fill="#0284c7" text-anchor="middle">C(?)</text>
                     </svg>
                 </div>
             </div>
@@ -149,9 +162,39 @@
                 <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer (REA)</span>
             </div>
 
-            <div class="text-sm text-slate-700 space-y-3">
-                <p>Donnez les coordonnées $(x; y)$ des points $M(3; 5)$, $N(-2; 4)$ et $P(4; -1)$.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Donnez les coordonnées $(x; y)$ des points $M(3; 5)$, $N(-2; 4)$ et $P(4; -1)$ placés sur la grille.</p>
+                </div>
+                <!-- SVG EX 2 REPÈRE 2D COMPLET SUR GRILLE -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="220" height="180" viewBox="0 0 220 180" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td2" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="220" height="180" fill="url(#grid-td2)" />
+                        <!-- Origine à x=80 (4*20), y=120 (6*20) -->
+                        <line x1="10" y1="120" x2="210" y2="120" stroke="#1e293b" stroke-width="2"/>
+                        <line x1="80" y1="10" x2="80" y2="170" stroke="#1e293b" stroke-width="2"/>
+                        <text x="68" y="132" font-size="8" font-weight="extrabold" fill="#0f172a">O</text>
+
+                        <!-- Point M(3; 5) -> x = 80 + 3*20 = 140, y = 120 - 5*20 = 20 -->
+                        <circle cx="140" cy="20" r="4" fill="#4f46e5"/>
+                        <text x="148" y="24" font-size="9" font-weight="extrabold" fill="#4f46e5">M(?)</text>
+
+                        <!-- Point N(-2; 4) -> x = 80 - 2*20 = 40, y = 120 - 4*20 = 40 -->
+                        <circle cx="40" cy="40" r="4" fill="#059669"/>
+                        <text x="25" y="44" font-size="9" font-weight="extrabold" fill="#059669">N(?)</text>
+
+                        <!-- Point P(4; -1) -> x = 80 + 4*20 = 160, y = 120 + 1*20 = 140 -->
+                        <circle cx="160" cy="140" r="4" fill="#dc2626"/>
+                        <text x="168" y="144" font-size="9" font-weight="extrabold" fill="#dc2626">P(?)</text>
+                    </svg>
+                </div>
             </div>
+
             <div class="mt-4 no-print">
                 <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
                     <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
@@ -365,14 +408,27 @@
                         2. Vérifiez si la centrale est dans le premier quadrant où $x > 0$ et $y > 0$.
                     </p>
                 </div>
-                <!-- SVG EX 10 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center">
-                    <svg width="120" height="90" viewBox="0 0 120 90" class="mx-auto font-sans">
-                        <line x1="20" y1="70" x2="100" y2="20" stroke="#4f46e5" stroke-width="2"/>
-                        <circle cx="20" cy="70" r="4" fill="#dc2626"/>
-                        <circle cx="60" cy="45" r="5" fill="#10b981"/>
-                        <circle cx="100" cy="20" r="4" fill="#dc2626"/>
-                        <text x="60" y="32" font-size="9" font-weight="extrabold" fill="#047857" text-anchor="middle">I = ?</text>
+                <!-- SVG EX 10 AVEC GRILLE COMPLÈTE -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="140" height="110" viewBox="0 0 140 110" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td10" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="140" height="110" fill="url(#grid-td10)" />
+                        <!-- Origine x=45 (3*15), y=90 (6*15) -->
+                        <line x1="5" y1="90" x2="135" y2="90" stroke="#1e293b" stroke-width="1.5"/>
+                        <line x1="45" y1="5" x2="45" y2="105" stroke="#1e293b" stroke-width="1.5"/>
+
+                        <!-- Segment AB -->
+                        <!-- A(-2;1) -> x = 45 - 2*15 = 15, y = 90 - 1*15 = 75 -->
+                        <!-- B(6;7) -> x = 45 + 6*15 = 135, y = 90 - 7*15 = 15 -->
+                        <line x1="15" y1="75" x2="135" y2="15" stroke="#4f46e5" stroke-width="2"/>
+                        <circle cx="15" cy="75" r="3" fill="#dc2626"/>
+                        <circle cx="75" cy="45" r="4" fill="#10b981"/>
+                        <circle cx="135" cy="15" r="3" fill="#dc2626"/>
+                        <text x="75" y="35" font-size="8" font-weight="extrabold" fill="#047857" text-anchor="middle">I = ?</text>
                     </svg>
                 </div>
             </div>
