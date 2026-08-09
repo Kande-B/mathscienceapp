@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je note l'essentiel (Cours) - Statistiques à 1 Variable CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 5 CAP • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Une Variable</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE CAP -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Statistiques à Une Variable</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Effectifs, Fréquences, Moyenne Pondérée et Représentations Graphiques.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Vocabulaire</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Fréquences</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Moyenne Pondérée</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Graphiques</a>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : VOCABULAIRE STATISTIQUE -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Définitions</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Vocabulaire Statistique</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol"></i> Mots-Clés Officiels
+                    </h4>
+                    <p class="text-slate-800">
+                        • <strong>Population</strong> : L'ensemble des individus ou objets étudiés. <br>
+                        • <strong>Caractère ($x_i$)</strong> : La propriété étudiée (taille, prix, nombre d'heures...). <br>
+                        • <strong>Effectif ($n_i$)</strong> : Le nombre d'individus ayant une valeur donnée $x_i$. <br>
+                        • <strong>Effectif Total ($N$)</strong> : La somme de tous les effectifs $N = n_1 + n_2 + ... + n_p$.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : FRÉQUENCES ET MOYENNE PONDÉRÉE -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Formules Clés</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Fréquences et Moyenne Pondérée</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> Formules à Ratenir
+                    </h4>
+                    <p class="text-slate-800">
+                        • <strong>Fréquence</strong> : $f_i = \frac{n_i}{N}$ (toujours comprise entre $0$ et $1$). <br>
+                        • <strong>Fréquence en %</strong> : $f_i\% = f_i \times 100$. <br>
+                        • <strong>Moyenne Pondérée ($\bar{x}$)</strong> :
+                        $$\bar{x} = \frac{n_1 x_1 + n_2 x_2 + ... + n_p x_p}{N}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR & CALCULATEUR DYNAMIQUE DE MOYENNE JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Calculateur Dynamique de Moyenne Statistique (CAP)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div class="grid grid-cols-2 gap-3 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Valeur x₁ = 10, Effectif n₁ =</label>
+                            <input type="number" id="stat-n1" value="4" oninput="calcStat()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Valeur x₂ = 20, Effectif n₂ =</label>
+                            <input type="number" id="stat-n2" value="6" oninput="calcStat()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration Rédigée en Direct :</span>
+                    <p id="stat-res-total">• Effectif total $N = 4 + 6 = \mathbf{10}$</p>
+                    <p id="stat-res-moy">• Moyenne $\bar{x} = \frac{(4 \times 10) + (6 \times 20)}{10} = \frac{160}{10} = \mathbf{16,00}$</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR CALCULATEUR STATISTIQUE -->
+    <script>
+        function calcStat() {
+            let n1 = parseFloat(document.getElementById('stat-n1').value);
+            let n2 = parseFloat(document.getElementById('stat-n2').value);
+
+            if (isNaN(n1) || isNaN(n2)) return;
+
+            let N = n1 + n2;
+            let sum = (n1 * 10) + (n2 * 20);
+            let moy = sum / N;
+
+            document.getElementById('stat-res-total').innerHTML = `• Effectif total $N = ${n1} + ${n2} = \\mathbf{${N}}$`;
+            document.getElementById('stat-res-moy').innerHTML = `• Moyenne $\\bar{x} = \\frac{(${n1} \\times 10) + (${n2} \\times 20)}{${N}} = \\mathbf{${moy.toFixed(2)}}$`;
+            if (window.MathJax) MathJax.typeset();
+        }
+        calcStat();
+    </script>
+</body>
+</html>
