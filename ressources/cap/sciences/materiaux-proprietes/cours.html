@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je note l'essentiel (Cours) - Matériaux & Propriétés CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 10 CAP • Sciences Physiques & Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Propriétés et Caractérisation des Matériaux</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP Sciences -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-cubes-stacked text-purple-400"></i> TP Matériaux</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE CAP -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Propriétés des Matériaux</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Familles de matériaux, tests d'identification (aimant, couleur, flottabilité) et masse volumique $\rho = \frac{m}{V}$.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Familles Matériaux</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Masse Volumique rho</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Tests Métaux/Plastiques</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Recyclage</a>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : MASSE VOLUMIQUE ET TESTS -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Formule & Identification</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Masse Volumique $\rho = \frac{m}{V}$ & Tests Physiques</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-cubes"></i> Formule de la Masse Volumique
+                    </h4>
+                    <p class="text-slate-800">
+                        • **$\rho = \frac{m}{V}$** : $m$ en grammes ($\text{g}$), $V$ en $\text{cm}^3$ (ou $\text{mL}$), $\rho$ en $\text{g/cm}^3$. <br>
+                        • **Valeurs de référence** : Eau ($\rho = 1,0\text{ g/cm}^3$), Aluminium ($\rho = 2,7\text{ g/cm}^3$), Fer ($\rho = 7,8\text{ g/cm}^3$), Cuivre ($\rho = 8,9\text{ g/cm}^3$).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR DYNAMIQUE DE MASSE VOLUMIQUE JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Calculateur Dynamique & Identification de Matériaux (CAP)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div class="grid grid-cols-2 gap-2 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Masse m (g) :</label>
+                            <input type="number" id="rho-m" value="78" oninput="calcRho()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Volume V (cm³) :</label>
+                            <input type="number" id="rho-v" value="10" oninput="calcRho()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration en Direct :</span>
+                    <p id="rho-res-val">• Masse volumique $\rho = \frac{78}{10} = \mathbf{7,80\text{ g/cm}^3}$</p>
+                    <p id="rho-res-mat">• Matériau identifié : <span class="text-yellow-400 font-bold">Fer (ou Acier)</span></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR CALCULATEUR MASSE VOLUMIQUE -->
+    <script>
+        function calcRho() {
+            let m = parseFloat(document.getElementById('rho-m').value);
+            let v = parseFloat(document.getElementById('rho-v').value);
+
+            if (isNaN(m) || isNaN(v) || v === 0) return;
+
+            let rho = m / v;
+            let mat = "Inconnu";
+
+            if (Math.abs(rho - 2.7) < 0.3) mat = "Aluminium (2,7 g/cm³)";
+            else if (Math.abs(rho - 7.8) < 0.4) mat = "Fer / Acier (7,8 g/cm³)";
+            else if (Math.abs(rho - 8.9) < 0.4) mat = "Cuivre (8,9 g/cm³)";
+            else if (Math.abs(rho - 0.95) < 0.1) mat = "Plastique PE (Flotte sur l'eau)";
+            else if (Math.abs(rho - 1.4) < 0.15) mat = "Plastique PVC (Coule dans l'eau)";
+
+            document.getElementById('rho-res-val').innerHTML = `• Masse volumique $\\rho = \\frac{${m}}{${v}} = \\mathbf{${rho.toFixed(2)}\\text{ g/cm}^3}$`;
+            document.getElementById('rho-res-mat').innerHTML = `• Matériau identifié : <span class="text-yellow-400 font-bold">${mat}</span>`;
+            if (window.MathJax) MathJax.typeset();
+        }
+        calcRho();
+    </script>
+</body>
+</html>
