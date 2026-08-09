@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je note l'essentiel (Cours) - Géométrie Plane & Aires CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 3 CAP • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Figures Planes, Périmètres et Aires</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE CAP -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Périmètres et Aires de Surfaces</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Formules usuelles (Rectangle, Triangle, Disque), conversions de métrique $m^2$ et surfaces métriques de chantiers.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Périmètres Usuels</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Formules d'Aires</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Conversions $m^2$</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Surfaces Composées</a>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : PÉRIMÈTRES DES FIGURES USUELLES -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Mesure du Contour</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Formules de Périmètres (Contour)</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-ruler-combined"></i> Périmètres Usuels
+                    </h4>
+                    <p class="text-slate-800">
+                        • <strong>Rectangle</strong> : $P = 2 \times (L + l)$ <br>
+                        • <strong>Carré</strong> : $P = 4 \times a$ <br>
+                        • <strong>Cercle (Périmètre / Circonférence)</strong> : $P = 2 \times \pi \times R = \pi \times D$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : AIRES DES FIGURES USUELLES -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Mesure de la Surface</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Formules d'Aires (Surfaces)</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-vector-square"></i> Formules des Surfaces
+                    </h4>
+                    <p class="text-slate-800">
+                        • <strong>Rectangle</strong> : $A = L \times l$ <br>
+                        • <strong>Carré</strong> : $A = a \times a = a^2$ <br>
+                        • <strong>Triangle</strong> : $A = \frac{b \times h}{2}$ <br>
+                        • <strong>Disque</strong> : $A = \pi \times R^2$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR & CALCULATEUR DYNAMIQUE DE GÉOMÉTRIE JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-shapes"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Calculateur Dynamique de Périmètres & Aires (CAP)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div>
+                        <label class="font-bold block text-xs text-slate-200 mb-1">Choix de la Figure Plane :</label>
+                        <select id="geo-shape" onchange="updateGeoCalc()" class="border rounded-xl p-2.5 w-full font-bold bg-white text-slate-900">
+                            <option value="rect">Rectangle (L x l)</option>
+                            <option value="tri">Triangle (base x hauteur)</option>
+                            <option value="circle">Disque / Cercle (Rayon R)</option>
+                        </select>
+                    </div>
+
+                    <div id="inputs-rect" class="grid grid-cols-2 gap-3 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Longueur L (m) :</label>
+                            <input type="number" id="geo-L" value="6" oninput="calcGeo()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Largeur l (m) :</label>
+                            <input type="number" id="geo-l" value="4" oninput="calcGeo()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Résultats Rédigés en Direct :</span>
+                    <p id="res-perim">• Périmètre P = 2 x (6 + 4) = <strong>20,00 m</strong></p>
+                    <p id="res-area">• Aire A = 6 x 4 = <strong>24,00 m²</strong></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR CALCULATEUR GÉOMÉTRIE -->
+    <script>
+        function updateGeoCalc() {
+            calcGeo();
+        }
+
+        function calcGeo() {
+            let shape = document.getElementById('geo-shape').value;
+            let L = parseFloat(document.getElementById('geo-L').value);
+            let l = parseFloat(document.getElementById('geo-l').value);
+
+            if (isNaN(L) || isNaN(l)) return;
+
+            let perim = 2 * (L + l);
+            let area = L * l;
+
+            document.getElementById('res-perim').innerHTML = `• Périmètre P = 2 x (${L} + ${l}) = <strong>${perim.toFixed(2)} m</strong>`;
+            document.getElementById('res-area').innerHTML = `• Aire A = ${L} x ${l} = <strong>${area.toFixed(2)} m²</strong>`;
+        }
+        calcGeo();
+    </script>
+</body>
+</html>
