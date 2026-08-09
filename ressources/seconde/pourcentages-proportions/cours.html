@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Pourcentages et Proportions</title>
+    <title>Je note l'essentiel (Cours) - Pourcentages 2nde Pro</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,218 +24,141 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-percent text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Seconde Pro • Mathématiques</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Pourcentages & Proportions</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 2 • Seconde Professionnelle Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Pourcentages, Proportions & Taux d'Évolution</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence 2nde Pro Maths -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Excel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Proportionnalité -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <!-- Définition -->
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">La Proportionnalité</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-book text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Définition</h3>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National 2nde Pro</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Baccalauréat Professionnel</span>
                     </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm">
-                        Deux grandeurs sont proportionnelles si l'on peut passer de l'une à l'autre en multipliant toujours par un <strong>même nombre</strong>. (Exemple: Si 1kg de pommes coûte 2€, 3kg coûteront 6€).
-                    </p>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Pourcentages & Évolutions</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Proportions $p = \frac{n}{N}$, coefficient multiplicateur $CM = 1 \pm \frac{t}{100}$ et taux d'évolution $t = \frac{V_1 - V_0}{V_0}$.</p>
                 </div>
 
-                <!-- Produit en Croix -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-xmark text-amber-500 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Le Produit en Croix</h3>
-                    </div>
-                    
-                    <p class="text-slate-700 text-sm mb-4">
-                        C'est la méthode reine pour trouver une 4ème valeur manquante. 
-                    </p>
-                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm font-mono text-center shadow-inner text-amber-900">
-                        <p class="mb-2">On multiplie la diagonale connue, et on divise par le nombre restant.</p>
-                        <p class="font-bold">X = (A × B) ÷ C</p>
-                    </div>
-                </div>
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : FORMULES OFFICIELLES -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <h3 class="text-xl font-bold font-heading text-slate-900">Propriétés et Formules Clés des Évolutions</h3>
             </div>
 
-            <!-- Visualization : Simulateur Produit en croix -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-amber-500">
-                <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                    Simulateur Produit en Croix
-                </h3>
-                <p class="text-xs text-slate-500 mb-6 text-center">Remplissez 3 cases pour calculer automatiquement la 4ème.</p>
-                
-                <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto relative">
-                    <!-- Cross arrows -->
-                    <div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-20">
-                        <i class="fa-solid fa-xmark text-6xl text-amber-500"></i>
-                    </div>
-                    
-                    <input type="number" id="box1" class="border-2 border-slate-300 rounded-xl p-4 text-center text-xl font-bold focus:border-amber-500 focus:outline-none bg-slate-50" placeholder="A" oninput="calcCross()">
-                    <input type="number" id="box2" class="border-2 border-slate-300 rounded-xl p-4 text-center text-xl font-bold focus:border-amber-500 focus:outline-none bg-slate-50" placeholder="B" oninput="calcCross()">
-                    <input type="number" id="box3" class="border-2 border-slate-300 rounded-xl p-4 text-center text-xl font-bold focus:border-amber-500 focus:outline-none bg-slate-50" placeholder="C" oninput="calcCross()">
-                    <input type="number" id="box4" class="border-2 border-amber-300 rounded-xl p-4 text-center text-xl font-bold text-amber-600 bg-amber-50 focus:outline-none" placeholder="X" readonly>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-percent"></i> Formules du Référentiel
+                    </h4>
+                    <p class="text-slate-800">
+                        • **Augmentation de $t\%$** : $V_1 = V_0 \times \left(1 + \frac{t}{100}\right) = V_0 \times CM$. <br>
+                        • **Diminution de $t\%$** : $V_1 = V_0 \times \left(1 - \frac{t}{100}\right) = V_0 \times CM$. <br>
+                        • **Taux d'Évolution** : $t = \frac{V_1 - V_0}{V_0} \times 100$.
+                    </p>
                 </div>
-                
-                <div class="mt-6 p-3 bg-slate-50 rounded border border-slate-200 text-center text-sm font-mono text-slate-600 min-h-[48px]" id="calcSteps">
-                    En attente de valeurs...
-                </div>
-
-                <script>
-                    function calcCross() {
-                        let b1 = parseFloat(document.getElementById('box1').value);
-                        let b2 = parseFloat(document.getElementById('box2').value);
-                        let b3 = parseFloat(document.getElementById('box3').value);
-                        let b4 = document.getElementById('box4');
-                        let steps = document.getElementById('calcSteps');
-                        
-                        if(!isNaN(b1) && !isNaN(b2) && !isNaN(b3)) {
-                            let res = (b2 * b3) / b1;
-                            b4.value = res.toFixed(2);
-                            steps.innerHTML = `<span class="text-amber-600 font-bold">Calcul :</span> (${b2} × ${b3}) ÷ ${b1} = <strong>${res.toFixed(2)}</strong>`;
-                        } else {
-                            b4.value = "";
-                            steps.innerHTML = "Remplissez les 3 cases blanches.";
-                        }
-                    }
-                </script>
             </div>
         </section>
 
-        <!-- SECTION 2 : Pourcentages -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Les Pourcentages (%)</h2>
+        <!-- SIMULATEUR DYNAMIQUE CM JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Calculateur Dynamique de Coefficient Multiplicateur CM (2nde Pro)</h3>
+                </div>
             </div>
-            
-            <p class="text-slate-700 mb-6">Un pourcentage est simplement une fraction sur 100 (ex: 20% = 20/100). Très utile pour les remises ou les taxes (TVA).</p>
 
-            <div class="course-layout items-start">
-                <div class="space-y-6">
-                    <!-- Remise -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-l-4 border-l-emerald-500">
-                        <h3 class="font-bold text-emerald-800 mb-3 text-lg flex items-center gap-2">
-                            <i class="fa-solid fa-arrow-down"></i> Appliquer une Remise
-                        </h3>
-                        <div class="text-sm text-slate-700 space-y-2">
-                            <p>Exemple : Un article à 80€ avec 15% de remise.</p>
-                            <div class="bg-emerald-50 p-3 rounded font-mono border border-emerald-200">
-                                1) Montant remise = 80 × (15/100) = 12€<br>
-                                2) Prix final = 80 - 12 = <span class="font-bold text-emerald-600">68€</span>
-                            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div class="grid grid-cols-2 gap-2 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Valeur Initiale V₀ (€) :</label>
+                            <input type="number" id="po-v0" value="100" oninput="calcPourc()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
                         </div>
-                    </div>
-
-                    <!-- Majoration -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-l-4 border-l-rose-500">
-                        <h3 class="font-bold text-rose-800 mb-3 text-lg flex items-center gap-2">
-                            <i class="fa-solid fa-arrow-up"></i> Appliquer une Majoration (ex: TVA)
-                        </h3>
-                        <div class="text-sm text-slate-700 space-y-2">
-                            <p>Exemple : Un service à 150€ HT avec 20% de TVA.</p>
-                            <div class="bg-rose-50 p-3 rounded font-mono border border-rose-200">
-                                1) Montant TVA = 150 × (20/100) = 30€<br>
-                                2) Prix TTC = 150 + 30 = <span class="font-bold text-rose-600">180€</span>
-                            </div>
+                        <div>
+                            <label class="font-bold block text-xs">Taux t (%) :</label>
+                            <input type="number" id="po-t" value="-20" oninput="calcPourc()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
                         </div>
                     </div>
                 </div>
-                
-                <!-- Visualization : Caisse Enregistreuse -->
-                <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 interactive-hover border-t-4 border-t-indigo-500 relative">
-                    <h3 class="font-bold text-slate-800 mb-2 font-heading text-center">
-                        Caisse Enregistreuse (TVA)
-                    </h3>
-                    <p class="text-xs text-slate-500 mb-6 text-center">Testez différents prix et taux de TVA.</p>
-                    
-                    <div class="space-y-4">
-                        <div>
-                            <label class="text-xs font-bold text-slate-500 uppercase">Prix HT (€)</label>
-                            <input type="number" id="prixHT" value="100" class="w-full bg-slate-100 border-none p-3 rounded-lg font-mono text-lg mt-1" oninput="calcTicket()">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-500 uppercase">Taux TVA (%)</label>
-                            <select id="tauxTVA" class="w-full bg-slate-100 border-none p-3 rounded-lg font-mono text-lg mt-1" onchange="calcTicket()">
-                                <option value="20">20 % (Standard)</option>
-                                <option value="10">10 % (Restauration)</option>
-                                <option value="5.5">5.5 % (Alimentaire)</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Ticket Receipt -->
-                        <div class="mt-6 bg-slate-800 text-green-400 p-5 rounded-xl font-mono shadow-inner relative overflow-hidden">
-                            <div class="text-center border-b border-green-400/30 pb-2 mb-3">TICKET DE CAISSE</div>
-                            <div class="flex justify-between mb-1"><span>TOTAL HT</span><span id="t_ht">100.00 €</span></div>
-                            <div class="flex justify-between mb-3 text-green-400/70"><span>TVA</span><span id="t_tva">20.00 €</span></div>
-                            <div class="border-t border-dashed border-green-400/50 pt-2 mt-2"></div>
-                            <div class="flex justify-between text-xl font-bold text-white mt-1"><span>A PAYER (TTC)</span><span id="t_ttc">120.00 €</span></div>
-                        </div>
-                    </div>
-                    
-                    <script>
-                        function calcTicket() {
-                            let ht = parseFloat(document.getElementById('prixHT').value) || 0;
-                            let tva = parseFloat(document.getElementById('tauxTVA').value) || 0;
-                            
-                            let montantTva = ht * (tva / 100);
-                            let ttc = ht + montantTva;
-                            
-                            document.getElementById('t_ht').innerText = ht.toFixed(2) + " €";
-                            document.getElementById('t_tva').innerText = montantTva.toFixed(2) + " €";
-                            document.getElementById('t_ttc').innerText = ttc.toFixed(2) + " €";
-                        }
-                        calcTicket();
-                    </script>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration en Direct :</span>
+                    <p id="po-res-cm">• CM = $1 - \frac{20}{100} = \mathbf{0,80}$</p>
+                    <p id="po-res-v1">• Valeur finale V₁ = $100 \times 0,80 = \mathbf{80,00\text{ €}}$</p>
                 </div>
             </div>
         </section>
-        
+
     </main>
 
-    <div class="h-24"></div>
+    <!-- JS POUR CALCULATEUR -->
+    <script>
+        function calcPourc() {
+            let v0 = parseFloat(document.getElementById('po-v0').value);
+            let t = parseFloat(document.getElementById('po-t').value);
+
+            if (isNaN(v0) || isNaN(t)) return;
+
+            let cm = 1 + (t / 100);
+            let v1 = v0 * cm;
+
+            document.getElementById('po-res-cm').innerHTML = `• CM = $1 ${t >= 0 ? '+' : '-'} \\frac{${Math.abs(t)}}{100} = \\mathbf{${cm.toFixed(2)}}$`;
+            document.getElementById('po-res-v1').innerHTML = `• Valeur finale V₁ = $${v0} \\times ${cm.toFixed(2)} = \\mathbf{${v1.toFixed(2)}\\text{ €}}$`;
+            if (window.MathJax) MathJax.typeset();
+        }
+        calcPourc();
+    </script>
 </body>
 </html>
