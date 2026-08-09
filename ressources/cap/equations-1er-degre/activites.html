@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités d'Investigation - Équations du 1er Degré CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence 7 CAP • Algèbre</span>
+                    <h1 class="text-xl font-bold font-heading">Équations du Premier Degré</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- PRESENTATION DE LA SÉQUENCE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-amber-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Recherche d'Inconnue et Devis Professionnels</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Découvrez comment mettre en équation un problème de facturation pour trouver le nombre d'heures ou la quantité d'articles !</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
+                <div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Résolution Mentale d'Équations Simples</h3>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600">Résoudre une équation consiste à trouver la valeur de l'inconnue $x$ qui vérifie l'égalité.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Trouvez $x$ si $x + 5 = 12$ :</label>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="x = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Trouvez $x$ si $3 x = 15$ :</label>
+                    <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="x = ?">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 1 : BÂTIMENT / DEVIS (CALCUL DES HEURES DE MAIN D'ŒUVRE) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Activité 1 • Domaine Bâtiment / Artisans</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Mise en Équation d'une Facture d'Intervention</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Un électricien facture $50\text{ €}$ de forfait déplacement, plus $30\text{ €}$ par heure de travail. <br>
+                Le montant total de la facture s'élève à $170\text{ €}$. On note $x$ le nombre d'heures travaillées.</p>
+
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-amber-900 text-sm block">Étape 1 : Écrivez l'équation $30 x + 50 = 170$ puis calculez $x$</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Soustraire le déplacement : $30 x = 170 - 50$ :</label>
+                            <input type="number" id="act1-sub" class="w-full p-2 border rounded-xl font-bold" placeholder="30x = ?">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Diviser par 30 (Nombre d'heures $x$) :</label>
+                            <input type="number" id="act1-x" class="w-full p-2 border rounded-xl font-bold" placeholder="x = ? heures">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider la résolution
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
+    <script>
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "7" && q2 === "5") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! $x = 12 - 5 = 7$ et $x = 15 / 3 = 5$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Question 1 : x = 7 et Question 2 : x = 5.`;
+            }
+        }
+
+        function checkAct1() {
+            let sub = document.getElementById('act1-sub').value.trim();
+            let x = document.getElementById('act1-x').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (sub === "120" && x === "4") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! $30 x = 120$, donc $x = 120 / 30 = 4\\text{ heures}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> 30x = 120 et x = 4 heures.`;
+            }
+        }
+    </script>
+</body>
+</html>
