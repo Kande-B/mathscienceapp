@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP Tableur - Puissances de 10 (3PM)</title>
+    <title>TP Numérique - Puissances 3PM</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,6 +33,9 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
         @media print {
             header, nav, .no-print { display: none !important; }
             body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
@@ -52,7 +55,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 3PM • Mathématiques & Numérique</span>
-                    <h1 class="text-xl font-bold font-heading">Puissances de 10 & Écriture Scientifique</h1>
+                    <h1 class="text-xl font-bold font-heading">Puissances & Écriture Scientifique</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -69,14 +72,14 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- EN-TÊTE DU TP TABLEUR LIBREOFFICE / EXCEL -->
+        <!-- EN-TÊTE DU TP NUMÉRIQUE -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-purple-600 print-card">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
-                        <span>TP Informatique Guidé</span> • <span>LibreOffice Calc / Microsoft Excel</span>
+                        <span>TP Tableur (Excel / Calc) • 50 min</span>
                     </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Tableur : Formatage Scientifique et Formules d'Exposants</h2>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP Numérique : Format Scientifique et Puissances sur Tableur</h2>
                 </div>
                 <div class="flex items-center gap-2 no-print">
                     <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
@@ -86,26 +89,82 @@
             </div>
 
             <p class="text-xs text-slate-600 leading-relaxed">
-                <strong>Objectif de la séance :</strong> Saisir de très grands nombres et formater automatiquement les cellules du tableur au format <code>0,00E+00</code>.
+                <strong>Objectif de la séance :</strong> Automatiser la conversion en écriture scientifique sur Excel/Calc (format <code>Scientifique</code> ex: <code>3,00E+08</code>) et utiliser la fonction <code>=PUISSANCE(10; n)</code>.
             </p>
         </div>
 
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+        <!-- PROTOCOLE TABLEUR -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
                 <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                <h3 class="font-bold text-slate-900 text-base">Partie 1 : Formatage Scientifique</h3>
+                <h3 class="font-bold text-slate-900 text-base">Consignes de Saisie et Formules Tableur</h3>
             </div>
 
-            <div class="space-y-2 text-xs text-slate-800">
-                <p class="font-bold text-slate-900">Consignes pas à pas :</p>
-                <ol class="list-decimal pl-5 space-y-1 text-slate-700">
-                    <li>Saisissez $150\,000\,000$ en cellule A1.</li>
-                    <li>Faites un clic droit > Format de cellule > Nombre > <strong>Scientifique</strong>.</li>
-                    <li>Vérifiez l'affichage sous la forme <code>1,50E+08</code>.</li>
-                </ol>
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Saisie de la colonne d'exposants $n$</p>
+                    <p class="text-slate-700">Dans la colonne <code>A</code> (de A2 à A8), tapez les exposants : <code>-3, -2, -1, 0, 3, 6, 9</code>.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Formule de la puissance de 10</p>
+                    <p class="text-slate-700">En cellule <code>B2</code>, tapez la formule : <code>=PUISSANCE(10; A2)</code> ou <code>=10^A2</code> et étirez vers le bas.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 3 : Format Scientifique</p>
+                    <p class="text-slate-700">Sélectionnez la colonne <code>C</code>, faites un clic droit > Format de cellule > **Scientifique** (2 décimales). Tapez 300000000 et observez l'affichage <code>3,00E+08</code>.</p>
+                </div>
             </div>
         </section>
 
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Compte-rendu d'Expérimentation & Validation</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Que signifie la lettre 'E' dans le format <code>3,00E+08</code> sur tableur ?</label>
+                    <select id="tp-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="10">Multiplié par 10 puissance...</option>
+                        <option value="erreur">Erreur de calcul</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quel affichage obtenez-vous pour $0,000045$ au format Scientifique ?</label>
+                    <input type="text" id="tp-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Ex: 4,50E-05">
+                </div>
+            </div>
+
+            <button onclick="checkTP()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre le Compte-rendu TP
+            </button>
+            <div id="fb-tp" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
     </main>
+
+    <!-- JS POUR LE TP -->
+    <script>
+        function checkTP() {
+            let q1 = document.getElementById('tp-q1').value;
+            let q2 = document.getElementById('tp-q2').value.trim().toUpperCase();
+            let fb = document.getElementById('fb-tp');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "10" && (q2 === "4,50E-05" || q2 === "4.50E-05" || q2 === "4,5E-5" || q2 === "4.5E-5")) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Compte-rendu TP validé ! Sur tableur, E-05 signifie $\\times 10^{-5}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Erreur : 'E' représente la puissance de 10. Pour $0,000045$, l'affichage est <code>4,50E-05</code>.`;
+            }
+        }
+    </script>
 </body>
 </html>
