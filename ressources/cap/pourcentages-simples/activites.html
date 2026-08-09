@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités d'Investigation - Pourcentages Simples CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence CAP • Calculs Commerciaux</span>
+                    <h1 class="text-xl font-bold font-heading">Pourcentages Simples (Remises & TVA)</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- PRESENTATION DE LA SÉQUENCE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-amber-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Appliquer et Calculer un Pourcentage</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Découvrez comment calculer une réduction de solde, ajouter une taxe (TVA) et déterminer le pourcentage d'une quantité !</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
+                <div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Conversion des Pourcentages en Décimaux</h3>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600">Un pourcentage $t\%$ équivaut à la fraction $\frac{t}{100}$ ou au nombre décimal $t \div 100$.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Exprimez $20\%$ sous forme décimale :</label>
+                    <input type="number" step="0.01" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="20% = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Exprimez $5\%$ sous forme décimale :</label>
+                    <input type="number" step="0.01" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="5% = ?">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 1 : COMMERCE / SOLDES (REMISE) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Activité 1 • Domaine Vente / Commerce</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Calcul d'une Remise de Soldes ($20\%$)</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Pendant la période des soldes, un magasin de vêtements applique une réduction de $20\%$ sur un blouson dont le prix initial est $80\text{ €}$.</p>
+
+                <!-- CONIGNE DE CALCUL POUR L'ÉLÈVE -->
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-amber-900 text-sm block">Étape 1 : Calculez le montant de la remise et le nouveau prix soldé</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Montant de la remise = $80 \times \frac{20}{100}$ :</label>
+                            <input type="number" id="act1-remise" class="w-full p-2 border rounded-xl font-bold" placeholder="Remise = ? €">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Nouveau prix soldé = $80 - \text{Remise}$ :</label>
+                            <input type="number" id="act1-solde" class="w-full p-2 border rounded-xl font-bold" placeholder="Prix soldé = ? €">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider mon calcul
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+
+                <!-- CE QU'ON A DÉCOUVERT (BILAN ACTIVITÉ 1) -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-2xl text-amber-900 space-y-1">
+                    <h5 class="font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i> Ce qu'on a découvert (Montant d'une Réduction)
+                    </h5>
+                    <p class="text-xs">
+                        Pour calculer le montant d'un pourcentage $t\%$ d'une valeur $V$ :
+                        $$\text{Montant} = V \times \frac{t}{100}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 : BÂTIMENT / COMMERCE (CALCUL DE TVA ET PRIX TTC) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Activité 2 • Facturation & TVA</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Calcul du Prix Toutes Taxes Comprises (Prix TTC)</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Une facture d'outillage affiche un montant Hors Taxe $\text{HT} = 150\text{ €}$. La TVA applicable est de $20\%$.</p>
+
+                <!-- CONIGNE DE CALCUL POUR L'ÉLÈVE -->
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">Étape 1 : Calculez le montant de la TVA et le prix final TTC</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Montant TVA = $150 \times 0,20$ :</label>
+                            <input type="number" id="act2-tva" class="w-full p-2 border rounded-xl font-bold" placeholder="TVA = ? €">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Prix TTC = $\text{HT} + \text{TVA}$ :</label>
+                            <input type="number" id="act2-ttc" class="w-full p-2 border rounded-xl font-bold" placeholder="Prix TTC = ? €">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct2()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider ma facture
+                </button>
+                <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+
+                <!-- CE QU'ON A DÉCOUVERT (BILAN ACTIVITÉ 2) -->
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-2xl text-indigo-900 space-y-1">
+                    <h5 class="font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-indigo-600"></i> Ce qu'on a découvert (Passage HT -> TTC)
+                    </h5>
+                    <p class="text-xs">
+                        Le prix **TTC** s'obtient en ajoutant le montant de la TVA au prix **HT** :
+                        $$\text{Prix TTC} = \text{Prix HT} + \text{TVA} = \text{Prix HT} \times \left(1 + \frac{\text{TVA}}{100}\right)$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
+    <script>
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if ((q1 === "0.2" || q1 === "0.20" || q1 === "0,2" || q1 === "0,20") && (q2 === "0.05" || q2 === "0,05")) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! $20\\% = 0,20$ et $5\\% = 0,05$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> $20\\% = 0,20$ et $5\\% = 0,05$.`;
+            }
+        }
+
+        function checkAct1() {
+            let remise = document.getElementById('act1-remise').value.trim();
+            let solde = document.getElementById('act1-solde').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (remise === "16" && solde === "64") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Remise = $80 \\times 0,20 = 16\\text{ €}$ et Prix soldé = $80 - 16 = 64\\text{ €}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Remise = 16 € et Prix soldé = 64 €.`;
+            }
+        }
+
+        function checkAct2() {
+            let tva = document.getElementById('act2-tva').value.trim();
+            let ttc = document.getElementById('act2-ttc').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (tva === "30" && ttc === "180") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! TVA = $150 \\times 0,20 = 30\\text{ €}$ et Prix TTC = $150 + 30 = 180\\text{ €}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> TVA = 30 € et Prix TTC = 180 €.`;
+            }
+        }
+    </script>
+</body>
+</html>

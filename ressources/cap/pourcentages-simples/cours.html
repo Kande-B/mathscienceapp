@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Pourcentages simples</title>
+    <title>Je note l'essentiel (Cours) - Pourcentages Simples CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,274 +24,238 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .badge-pro { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
-        
-        .receipt-paper {
-            background-color: #fffdf5;
-            background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
-            background-size: 100% 1.5rem;
-            border-left: 2px dashed #cbd5e1;
-            border-right: 2px dashed #cbd5e1;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
         }
-        .receipt-edge {
-            background-image: radial-gradient(#fffdf5 40%, transparent 42%);
-            background-size: 16px 16px;
-            background-position: 0 0;
-            height: 16px;
-            width: 100%;
-        }
-        .receipt-edge-top { background-position: 0 8px; }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-percent text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">CAP • Mathématiques</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Séquence 2 : Pourcentages simples</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence CAP • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Pourcentages Simples (Remises & TVA)</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Base -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Appliquer un pourcentage</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-pizza-slice text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Le principe de base</h3>
-                    </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Un pourcentage (symbole <strong>%</strong>) est simplement <strong>une fraction sur 100</strong>. Il permet d'exprimer une proportion par rapport à un total de 100.
-                    </p>
-                    
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 text-center font-bold font-mono text-lg text-blue-900 shadow-inner mb-6">
-                        Calculer $20\%$ revient à multiplier par $\frac{20}{100}$ (ou $0,20$)
-                    </div>
-                    
-                    <h4 class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-user-group text-slate-500 mr-2"></i>Exemple :</h3>
-                    <p class="text-sm text-slate-600 mb-2">
-                        Dans un lycée de <strong>150 élèves</strong>, <strong>40%</strong> portent des lunettes.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded font-mono text-sm border border-slate-200">
-                        <p class="text-slate-500 mb-1">Calcul :</p>
-                        <p class="text-slate-800 font-bold">$150 \times \frac{40}{100} = 150 \times 0,40 = \mathbf{60}$</p>
-                        <p class="text-emerald-700 font-sans font-bold mt-2">➔ Il y a 60 élèves avec des lunettes.</p>
-                    </div>
-                </div>
-            </div>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-            <!-- Visualization : Simulateur de Caisse -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
-                <h3 class="font-bold text-slate-800 mb-4 font-heading text-center">
-                    Caisse Enregistreuse
-                </h3>
-                
-                <p class="text-xs text-slate-500 mb-4 text-center">Testez des réductions (Soldes) ou des augmentations (TVA) et observez le ticket de caisse.</p>
-                
-                <!-- Controls -->
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6 space-y-4">
-                    <div>
-                        <label class="text-xs font-bold text-slate-700 mb-1 block">Prix de départ (€)</label>
-                        <input type="number" id="basePrice" value="50" min="1" class="w-full p-2 border rounded font-mono font-bold focus:border-brand-500 outline-none" oninput="updateReceipt()">
-                    </div>
-                    
-                    <div class="flex gap-4">
-                        <div class="flex-1">
-                            <label class="text-xs font-bold text-slate-700 mb-1 block">Type</label>
-                            <select id="calcType" class="w-full p-2 border rounded font-bold text-sm bg-white" onchange="updateReceipt()">
-                                <option value="remise" class="text-emerald-600">📉 Remise (Soldes)</option>
-                                <option value="majoration" class="text-rose-600">📈 Majoration (TVA)</option>
-                            </select>
-                        </div>
-                        <div class="flex-1">
-                            <label class="text-xs font-bold text-slate-700 mb-1 block">Pourcentage (%)</label>
-                            <input type="number" id="percentVal" value="30" min="0" max="100" class="w-full p-2 border rounded font-mono font-bold focus:border-brand-500 outline-none" oninput="updateReceipt()">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ticket de Caisse -->
-                <div class="flex justify-center">
-                    <div class="w-64 flex flex-col drop-shadow-md">
-                        <!-- Top jagged edge -->
-                        <div class="receipt-edge receipt-edge-top opacity-50 bg-slate-300 relative top-1 z-0"></div>
-                        
-                        <div class="receipt-paper z-10 px-6 py-8 font-mono text-xs text-slate-700">
-                            <div class="text-center font-bold text-sm mb-6 border-b border-dashed border-slate-300 pb-2">
-                                MAGASIN CAP<br>
-                                <span class="text-[10px] font-normal text-slate-500">Merci de votre visite</span>
-                            </div>
-                            
-                            <div class="flex justify-between mb-4">
-                                <span>PRIX INITIAL</span>
-                                <span id="rBase" class="font-bold">50.00 €</span>
-                            </div>
-                            
-                            <div class="flex justify-between mb-4">
-                                <span id="rTypeLabel">REMISE (-30%)</span>
-                                <span id="rAmount" class="font-bold text-emerald-600">- 15.00 €</span>
-                            </div>
-                            
-                            <div class="border-t-2 border-slate-800 pt-2 flex justify-between items-end mt-4">
-                                <span class="font-bold text-sm">TOTAL</span>
-                                <span id="rTotal" class="font-bold text-lg text-slate-900">35.00 €</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Bottom jagged edge -->
-                        <div class="receipt-edge opacity-50 bg-slate-300 relative -top-1 z-0 rotate-180"></div>
-                    </div>
-                </div>
-
-                <script>
-                    function updateReceipt() {
-                        const base = parseFloat(document.getElementById('basePrice').value) || 0;
-                        const p = parseFloat(document.getElementById('percentVal').value) || 0;
-                        const type = document.getElementById('calcType').value;
-                        
-                        const calcAmount = base * (p / 100);
-                        
-                        document.getElementById('rBase').innerText = base.toFixed(2) + " €";
-                        
-                        if(type === 'remise') {
-                            document.getElementById('rTypeLabel').innerText = `REMISE (-${p}%)`;
-                            document.getElementById('rAmount').innerText = `- ${calcAmount.toFixed(2)} €`;
-                            document.getElementById('rAmount').className = "font-bold text-emerald-600";
-                            document.getElementById('rTotal').innerText = (base - calcAmount).toFixed(2) + " €";
-                        } else {
-                            document.getElementById('rTypeLabel').innerText = `TAXE (+${p}%)`;
-                            document.getElementById('rAmount').innerText = `+ ${calcAmount.toFixed(2)} €`;
-                            document.getElementById('rAmount').className = "font-bold text-rose-600";
-                            document.getElementById('rTotal').innerText = (base + calcAmount).toFixed(2) + " €";
-                        }
-                    }
-                    updateReceipt();
-                </script>
-            </div>
-        </section>
-
-        <!-- SECTION 2 : Évolutions -->
-        <section class="mt-12">
-            <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2 mb-6">
-                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-2xl font-bold text-slate-800 font-heading">Calculer une évolution (Soldes, Taxes)</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Soldes -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-emerald-500">
-                    <h3 class="font-bold text-emerald-800 mb-2 text-lg flex items-center gap-2">
-                        <i class="fa-solid fa-tag"></i> La Remise (Réduction)
-                    </h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        C'est quand le prix <strong>baisse</strong> (soldes, promotion). On calcule la remise, puis on la <strong>soustrait</strong> au prix de départ.
-                    </p>
-                    
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm font-mono">
-                        <p class="font-bold text-slate-800 mb-2">Ex: Pantalon à 50€ soldé à -30%</p>
-                        
-                        <div class="flex items-start gap-2 mb-2">
-                            <span class="bg-emerald-200 text-emerald-800 font-bold px-2 rounded-full text-xs py-1">1</span>
-                            <div>
-                                <p class="text-slate-500 text-xs">Je calcule le montant de la remise :</p>
-                                <p>$50 \times 0,30 = 15€$ (Montant remisé)</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start gap-2">
-                            <span class="bg-emerald-200 text-emerald-800 font-bold px-2 rounded-full text-xs py-1">2</span>
-                            <div>
-                                <p class="text-slate-500 text-xs">Je soustrais pour trouver le prix final :</p>
-                                <p class="font-bold bg-white p-1 border border-slate-200 rounded text-emerald-700">$50 - 15 = 35€$</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TVA -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow border-t-4 border-t-rose-500">
-                    <h3 class="font-bold text-rose-800 mb-2 text-lg flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-trend-up"></i> La Majoration (Augmentation)
-                    </h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        C'est quand le prix <strong>augmente</strong> (TVA, taxe). On calcule l'augmentation, puis on l'<strong>ajoute</strong> au prix de départ.
-                    </p>
-                    
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm font-mono">
-                        <p class="font-bold text-slate-800 mb-2">Ex: Matériel à 200€ HT (TVA 20%)</p>
-                        
-                        <div class="flex items-start gap-2 mb-2">
-                            <span class="bg-rose-200 text-rose-800 font-bold px-2 rounded-full text-xs py-1">1</span>
-                            <div>
-                                <p class="text-slate-500 text-xs">Je calcule le montant de la taxe :</p>
-                                <p>$200 \times 0,20 = 40€$ (Montant TVA)</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start gap-2">
-                            <span class="bg-rose-200 text-rose-800 font-bold px-2 rounded-full text-xs py-1">2</span>
-                            <div>
-                                <p class="text-slate-500 text-xs">J'ajoute pour trouver le prix TTC :</p>
-                                <p class="font-bold bg-white p-1 border border-slate-200 rounded text-rose-700">$200 + 40 = 240€$</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-8 bg-purple-50 p-5 rounded-2xl border border-purple-200 shadow-sm flex items-start gap-4">
-                <i class="fa-solid fa-lightbulb text-3xl text-purple-400 mt-1"></i>
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE CAP -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
-                    <h4 class="font-bold text-purple-900 mb-1 font-heading">L'astuce Pro (Coefficient multiplicateur)</h4>
-                    <p class="text-sm text-purple-800">
-                        Pour aller plus vite (une seule opération) :<br>
-                        - Pour <strong>réduire</strong> de 30%, on multiplie directement par <strong>0,70</strong> (car $1 - 0,30 = 0,70$).<br>
-                        - Pour <strong>augmenter</strong> de 20%, on multiplie directement par <strong>1,20</strong> (car $1 + 0,20 = 1,20$).
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Pourcentages & Calculs Commerciaux</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Application de pourcentages, calcul de remises, majorations, factures HT/TTC et facteurs multiplicatifs.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Définition & Décimaux</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Appliquer un Pourcentage</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Remises & Soldes</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Facturation HT / TVA / TTC</a>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : DÉFINITION ET DÉCIMAUX -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Définition Fondamentale</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Qu'est-ce qu'un Pourcentage ?</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 1 -->
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-percent"></i> Écriture d'un Pourcentage
+                    </h4>
+                    <p class="text-slate-800">
+                        Un pourcentage $t\%$ est une fraction de dénominateur 100. <br>
+                        • Exemples usuels : <br>
+                        - $10\% = \frac{10}{100} = 0,10$ <br>
+                        - $20\% = \frac{20}{100} = 0,20$ <br>
+                        - $50\% = \frac{50}{100} = 0,50$ (la moitié).
                     </p>
                 </div>
             </div>
         </section>
-        
+
+        <!-- PARTIE 2 : APPLIQUER UN POURCENTAGE -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Méthode de Calcul</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Appliquer un Pourcentage à une Valeur</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 2 -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> Calcul du Montant
+                    </h4>
+                    <p class="text-slate-800">
+                        Pour calculer le montant correspondant à $t\%$ d'une valeur $V$ :
+                        $$\text{Montant} = V \times \frac{t}{100}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 : REMISES ET SOLDES -->
+        <section id="partie3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">3</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 3 • Calculs Commerciaux</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Remises, Réductions et Facteur Multiplicatif</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 3 -->
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-purple-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-tags"></i> Calcul du Prix Réduit
+                    </h4>
+                    <p class="text-slate-800">
+                        • <strong>Remise en euros</strong> : $\text{Remise} = \text{Prix Initial} \times \frac{t}{100}$ <br>
+                        • <strong>Nouveau Prix</strong> : $\text{Nouveau Prix} = \text{Prix Initial} - \text{Remise} = \text{Prix Initial} \times \left(1 - \frac{t}{100}\right)$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 4 : FACTURATION HT, TVA ET TTC -->
+        <section id="partie4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">4</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Partie 4 • Domaine Professionnel</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Facturation : Hors Taxe (HT), TVA et Toutes Taxes Comprises (TTC)</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 4 -->
+                <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice-dollar"></i> Relation HT / TVA / TTC
+                    </h4>
+                    <p class="text-slate-800">
+                        $$\text{Prix TTC} = \text{Prix HT} + \text{Montant TVA}$$
+                        $$\text{Montant TVA} = \text{Prix HT} \times \frac{\text{Taux TVA}}{100}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR & CALCULATEUR DYNAMIQUE DE POURCENTAGES JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Calculateur Commercial (TVA & Remises)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div class="grid grid-cols-2 gap-3 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Prix Hors Taxe (HT €) :</label>
+                            <input type="number" id="p-ht" value="150" oninput="calcPercent()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Taux de TVA (%) :</label>
+                            <input type="number" id="p-tva" value="20" oninput="calcPercent()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Montant de la TVA (€) :</label>
+                            <input type="text" id="p-tva-res" readonly class="border rounded-xl p-2.5 w-full font-bold bg-slate-100 text-emerald-700" value="30.00 €">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Prix Total TTC (€) :</label>
+                            <input type="text" id="p-ttc-res" readonly class="border rounded-xl p-2.5 w-full font-bold bg-slate-100 text-sky-700" value="180.00 €">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration Rédigée en Direct :</span>
+                    <p>• Montant TVA = $150 \times \frac{20}{100} = \mathbf{30,00\text{ €}}$</p>
+                    <p>• Prix TTC = $150 + 30 = \mathbf{180,00\text{ €}}$</p>
+                    <p>• Coef. Multiplicateur = $1 + 0,20 = \mathbf{1,20}$</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <div class="h-24"></div>
+    <!-- JS POUR SIMULATEUR POURCENTAGES -->
+    <script>
+        function calcPercent() {
+            let ht = parseFloat(document.getElementById('p-ht').value);
+            let tvaRate = parseFloat(document.getElementById('p-tva').value);
+
+            if (isNaN(ht) || isNaN(tvaRate)) return;
+
+            let tvaVal = ht * (tvaRate / 100);
+            let ttcVal = ht + tvaVal;
+
+            document.getElementById('p-tva-res').value = tvaVal.toFixed(2) + " €";
+            document.getElementById('p-ttc-res').value = ttcVal.toFixed(2) + " €";
+        }
+        calcPercent();
+    </script>
 </body>
 </html>
