@@ -331,22 +331,25 @@
                 <!-- CONTROLES DU SIMULATEUR -->
                 <div class="space-y-4 text-slate-800">
                     <div class="p-4 bg-white rounded-2xl space-y-3">
-                        <span class="font-bold text-slate-900 text-xs block uppercase border-b pb-1">1. Réglez les coefficients de l'équation :</span>
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <span class="font-bold text-slate-900 text-xs block uppercase">1. Réglez les coefficients :</span>
+                            <span id="sim-equation-display" class="font-extrabold text-sky-600 font-mono text-sm">3x + 15 = 1x + 45</span>
+                        </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
-                                <label class="text-[10px] font-bold text-slate-600">Masse a (x) :</label>
+                                <label class="text-[10px] font-bold text-slate-600">a :</label>
                                 <input type="number" id="sim-a" value="3" min="1" max="10" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
                             </div>
                             <div>
-                                <label class="text-[10px] font-bold text-slate-600">Poids b :</label>
+                                <label class="text-[10px] font-bold text-slate-600">b :</label>
                                 <input type="number" id="sim-b" value="15" min="0" max="100" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
                             </div>
                             <div>
-                                <label class="text-[10px] font-bold text-slate-600">Masse c (x) :</label>
+                                <label class="text-[10px] font-bold text-slate-600">c :</label>
                                 <input type="number" id="sim-c" value="1" min="0" max="10" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
                             </div>
                             <div>
-                                <label class="text-[10px] font-bold text-slate-600">Poids d :</label>
+                                <label class="text-[10px] font-bold text-slate-600">d :</label>
                                 <input type="number" id="sim-d" value="45" min="0" max="100" oninput="updateBalance()" class="border rounded-lg p-2 w-full font-bold">
                             </div>
                         </div>
@@ -412,6 +415,10 @@
             let c = parseFloat(document.getElementById('sim-c').value) || 0;
             let d = parseFloat(document.getElementById('sim-d').value) || 0;
             let testX = parseFloat(document.getElementById('sim-test-x').value);
+
+            let signB = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+            let signD = d >= 0 ? `+ ${d}` : `- ${Math.abs(d)}`;
+            document.getElementById('sim-equation-display').innerText = `${a}x ${signB} = ${c}x ${signD}`;
 
             document.getElementById('sim-test-val').innerText = testX;
 
