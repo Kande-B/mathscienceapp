@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je note l'essentiel (Cours) - Équilibre d'un Solide CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 5 CAP • Sciences Physiques & Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Équilibre d'un Solide Soumis à Deux Forces</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP Sciences -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Équilibre</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE CAP -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Équilibre d'un Solide (2 Forces)</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Conditions d'équilibre d'un solide soumis à deux forces : même droite d'action, sens opposés et même intensité ($F_1 = F_2$).</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : LES 3 CONDITIONS D'ÉQUILIBRE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Théorème de la Statique</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Les 3 Conditions d'Équilibre à Deux Forces</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced"></i> Conditions d'Équilibre ($\vec{F}_1 + \vec{F}_2 = \vec{0}$)
+                    </h4>
+                    <p class="text-slate-800">
+                        Lorsqu'un solide soumis à deux forces $\vec{F}_1$ et $\vec{F}_2$ est en équilibre immobile : <br>
+                        1. Les deux forces ont la **même droite d'action** (même ligne d'effet). <br>
+                        2. Les deux forces ont des **sens opposés**. <br>
+                        3. Les deux forces ont la **même intensité** : $F_1 = F_2$.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULATEUR DYNAMIQUE D'ÉQUILIBRE JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur Dynamique d'Équilibre à 2 Forces (CAP)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div>
+                        <label class="font-bold block text-xs text-slate-200 mb-1">Intensité de la force F1 (Newtons) :</label>
+                        <input type="number" id="eq-f1" value="150" oninput="simuEq()" class="border rounded-xl p-2.5 w-full font-bold bg-white text-slate-900">
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Condition d'Équilibre en Direct :</span>
+                    <p id="eq-res-f2">• Force opposée $F_2 = \mathbf{150,00\text{ N}}$</p>
+                    <p id="eq-res-vec">• Équation : $\vec{F}_1 + \vec{F}_2 = \vec{0}$ ($\mathbf{\text{Objet immobile}}$).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR SIMULATEUR ÉQUILIBRE -->
+    <script>
+        function simuEq() {
+            let f1 = parseFloat(document.getElementById('eq-f1').value);
+            if (isNaN(f1)) return;
+
+            document.getElementById('eq-res-f2').innerHTML = `• Force opposée $F_2 = \\mathbf{${f1.toFixed(2)}\\text{ N}}$`;
+            if (window.MathJax) MathJax.typeset();
+        }
+        simuEq();
+    </script>
+</body>
+</html>
