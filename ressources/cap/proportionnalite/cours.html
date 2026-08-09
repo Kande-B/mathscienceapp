@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cours - Proportionnalité</title>
+    <title>Je note l'essentiel (Cours) - Proportionnalité CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,8 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
-                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -25,251 +24,256 @@
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax -->
+    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
-        .interactive-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .interactive-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        
-        .badge-def { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .badge-methode { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        
-        .course-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media (min-width: 1024px) { .course-layout { grid-template-columns: 3fr 2fr; } }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased pb-20">
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fa-solid fa-chart-line text-2xl"></i>
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">CAP • Mathématiques</p>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 font-heading">Séquence 1 : Proportionnalité</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence CAP • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Proportionnalité & Tableaux de Valeurs</h1>
                 </div>
             </div>
-            <div class="hidden md:flex gap-3">
-                <a href="td.html" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
-                    <i class="fa-solid fa-dumbbell"></i> S'entraîner
-                </a>
-            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
-        
-        <!-- SECTION 1 : Reconnaître -->
-        <section class="course-layout items-start">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">1</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Reconnaître la Proportionnalité</h2>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE CAP -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : La Proportionnalité</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Coefficient de proportionnalité, règle de trois, produit en croix, échelles et représentation graphique.</p>
                 </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-def"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-apple-whole text-blue-600 text-xl"></i>
-                        <h3 class="font-bold text-slate-900 text-lg">Qu'est-ce que c'est ?</h3>
-                    </div>
-                    
-                    <p class="text-slate-700 leading-relaxed text-sm mb-4">
-                        Deux grandeurs sont proportionnelles si on passe de l'une à l'autre <strong>en multipliant toujours par le même nombre</strong>. Ce nombre s'appelle le <em>coefficient de proportionnalité</em>.
-                    </p>
-                    
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 text-sm font-mono text-blue-900">
-                        <p class="font-bold text-lg mb-2">Exemple : Le marché</p>
-                        <ul class="space-y-2">
-                            <li>1 kg de pommes coûte <strong>2 €</strong>.</li>
-                            <li>3 kg coûtent $3 \times 2 =$ <strong>6 €</strong>.</li>
-                        </ul>
-                        <p class="mt-3 text-blue-700 font-sans italic">Le prix est proportionnel à la masse. Le coefficient est 2.</p>
-                    </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Coefficient k</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Produit en Croix</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Échelles & Plans</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Représentation Graphique</a>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : RECONNAÎTRE ET COEFFICIENT DE PROPORTIONNALITÉ -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Définition Fondamentale</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Tableau et Coefficient de Proportionnalité</h3>
                 </div>
             </div>
 
-            <!-- Visualization : Le Tableau -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover border-t-4 border-t-amber-500">
-                <h3 class="font-bold text-amber-800 flex items-center gap-2 mb-4 font-heading text-lg">
-                    <i class="fa-solid fa-table"></i> Le Tableau
-                </h3>
-                
-                <p class="text-sm text-slate-600 mb-4">
-                    On range souvent les nombres dans un tableau. On trouve le bas en multipliant le haut par le coefficient (et inversement en divisant).
-                </p>
-                
-                <div class="flex items-center justify-center relative my-6">
-                    <table class="text-center border-collapse bg-white shadow-sm border border-slate-300">
-                        <thead>
-                            <tr class="bg-slate-100 text-slate-700 font-bold">
-                                <td class="border border-slate-300 p-3">Masse (kg)</td>
-                                <td class="border border-slate-300 p-3 w-12 text-blue-600">1</td>
-                                <td class="border border-slate-300 p-3 w-12 text-blue-600">3</td>
-                                <td class="border border-slate-300 p-3 w-12 text-blue-600">5</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-slate-800">
-                                <td class="border border-slate-300 p-3 bg-slate-50 font-bold">Prix (€)</td>
-                                <td class="border border-slate-300 p-3 font-mono">2</td>
-                                <td class="border border-slate-300 p-3 font-mono">6</td>
-                                <td class="border border-slate-300 p-3 font-mono">10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <!-- Fleches SVG Decoratives -->
-                    <div class="absolute -right-8 top-1/2 -translate-y-1/2 flex flex-col items-center">
-                        <div class="text-xs font-bold text-amber-600 bg-amber-50 px-1 rounded-full border border-amber-200 shadow-sm mb-1">x 2</div>
-                        <i class="fa-solid fa-arrow-down text-amber-500"></i>
-                    </div>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 1 -->
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> Définition du Coefficient $k$
+                    </h4>
+                    <p class="text-slate-800">
+                        Deux grandeurs sont **proportionnelles** si l'on peut passer des valeurs de la première ligne aux valeurs de la seconde ligne en multipliant toujours par un même nombre non nul $k$, appelé **coefficient de proportionnalité** :
+                        $$k = \frac{\text{Valeur Ligne 2}}{\text{Valeur Ligne 1}}$$
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2 : Produit en croix -->
-        <section class="course-layout items-start mt-12">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-2">
-                    <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">2</div>
-                    <h2 class="text-2xl font-bold text-slate-800 font-heading">Calculer la valeur manquante</h2>
-                </div>
-                
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 card-shadow relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-2 h-full badge-methode"></div>
-                    
-                    <h3 class="font-bold text-purple-800 mb-3 text-lg flex items-center gap-2">
-                        <i class="fa-solid fa-xmark"></i> La Règle de 3 (Produit en croix)
-                    </h3>
-                    <p class="text-slate-700 mb-4 text-sm leading-relaxed">
-                        C'est la méthode la plus sûre pour trouver une case vide (la "quatrième proportionnelle"). <br>
-                        <strong>Méthode :</strong> On multiplie les deux nombres en diagonale, et on divise par le nombre tout seul.
-                    </p>
-                    
-                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-center font-mono text-purple-900 shadow-inner">
-                        <div class="flex justify-center mb-2">
-                            <table class="border-collapse bg-white">
-                                <tr>
-                                    <td class="border border-slate-300 p-2 w-12 font-bold text-slate-800">3</td>
-                                    <td class="border border-slate-300 p-2 w-12 font-bold text-rose-600">?</td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-slate-300 p-2 w-12 font-bold text-slate-800">6</td>
-                                    <td class="border border-slate-300 p-2 w-12 font-bold text-slate-800">10</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <p class="font-bold text-lg">
-                            $? = \frac{3 \times 10}{6} = 5$
-                        </p>
-                    </div>
+        <!-- PARTIE 2 : PRODUIT EN CROIX & RÈGLE DE TROIS -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Méthode Pratique CAP</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Le Produit en Croix (Quatrième Proportionnelle)</h3>
                 </div>
             </div>
 
-            <!-- Visualization: Interactive Cross Product -->
-            <div class="bg-white p-6 rounded-2xl card-shadow border border-slate-100 sticky top-28 interactive-hover">
-                <h3 class="font-bold text-slate-800 mb-4 font-heading text-center">
-                    Le Produit en Croix Interactif
-                </h3>
-                <p class="text-xs text-slate-500 mb-4 text-center">Entrez 3 valeurs, le calcul se fera automatiquement.</p>
-                
-                <div class="flex flex-col items-center gap-4">
-                    <!-- Tableau -->
-                    <div class="relative bg-white p-4 rounded-xl border border-slate-300 shadow-sm">
-                        <table class="border-collapse">
-                            <tr>
-                                <td class="border border-slate-300 p-2"><input type="number" id="c11" class="w-16 p-1 text-center font-mono focus:border-brand-500 outline-none" value="3" onkeyup="calcCross()"></td>
-                                <td class="border border-slate-300 p-2"><input type="number" id="c12" class="w-16 p-1 text-center font-mono focus:border-brand-500 outline-none bg-emerald-50 text-emerald-700 font-bold" value="" placeholder="?" onkeyup="calcCross()"></td>
-                            </tr>
-                            <tr>
-                                <td class="border border-slate-300 p-2"><input type="number" id="c21" class="w-16 p-1 text-center font-mono focus:border-brand-500 outline-none" value="6" onkeyup="calcCross()"></td>
-                                <td class="border border-slate-300 p-2"><input type="number" id="c22" class="w-16 p-1 text-center font-mono focus:border-brand-500 outline-none" value="10" onkeyup="calcCross()"></td>
-                            </tr>
-                        </table>
-                        
-                        <!-- Lignes de diagonale -->
-                        <svg class="absolute top-0 left-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <line x1="20" y1="20" x2="80" y2="80" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4" opacity="0.5"/>
-                            <line x1="80" y1="20" x2="20" y2="80" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4" opacity="0.5"/>
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 2 -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-times"></i> Règle du Produit en Croix
+                    </h4>
+                    <p class="text-slate-800">
+                        Dans un tableau de proportionnalité à 4 cases, pour trouver la valeur inconnue $x$ :
+                        $$x = \frac{b \times c}{a}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 : ÉCHELLES DE PLANS ET CARTE -->
+        <section id="partie3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">3</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 3 • Application Plan & Bâtiment</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Échelles sur Plan ($1:100$, $1:50$)</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- ENCADRÉ DÉFINITION 3 -->
+                <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-purple-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-ruler"></i> Formule de l'Échelle
+                    </h4>
+                    <p class="text-slate-800">
+                        L'**échelle** d'un plan est le rapport entre la distance sur le plan et la distance réelle (exprimées dans la même unité) :
+                        $$\text{Échelle} = \frac{\text{Distance sur le Plan}}{\text{Distance Réelle}}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 4 : REPRÉSENTATION GRAPHIQUE -->
+        <section id="partie4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">4</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Partie 4 • Propriété Graphique</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Représentation Graphique de la Proportionnalité</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- SCHÉMA SVG REPRÉSENTATION GRAPHIQUE SUR QUADRILLAGE NET -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-emerald-600"></i> Schéma Visuel : Droite Passant par l'Origine $O(0;0)$ sur Quadrillage
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center overflow-x-auto">
+                        <svg width="360" height="200" viewBox="0 0 360 200" class="mx-auto font-sans">
+                            <defs>
+                                <pattern id="grid-cours4" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="360" height="200" fill="url(#grid-cours4)" />
+
+                            <!-- Axes Ox et Oy -->
+                            <line x1="40" y1="160" x2="340" y2="160" stroke="#0f172a" stroke-width="2.5"/>
+                            <line x1="40" y1="20" x2="40" y2="160" stroke="#0f172a" stroke-width="2.5"/>
+
+                            <!-- Flèches -->
+                            <polygon points="340,160 330,155 330,165" fill="#0f172a"/>
+                            <polygon points="40,20 35,30 45,30" fill="#0f172a"/>
+
+                            <!-- Droite k*x -->
+                            <line x1="40" y1="160" x2="310" y2="40" stroke="#059669" stroke-width="3"/>
+
+                            <circle cx="40" cy="160" r="4" fill="#0f172a"/>
+                            <text x="25" y="175" font-size="11" font-weight="extrabold" fill="#0f172a">O(0;0)</text>
+
+                            <text x="280" y="180" font-size="11" font-weight="extrabold" fill="#0f172a">Grandeur X</text>
+                            <text x="50" y="35" font-size="11" font-weight="extrabold" fill="#059669">Grandeur Y</text>
                         </svg>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Result -->
-                    <div class="bg-emerald-50 text-emerald-800 p-3 rounded-lg border border-emerald-200 w-full text-center font-mono font-bold" id="crossResult">
-                        (3 × 10) ÷ 6 = 5
+        <!-- SIMULATEUR & CALCULATEUR DYNAMIQUE DE PROPORTIONNALITÉ JS -->
+        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
+                    <h3 class="text-xl font-bold font-heading text-white">Simulateur & Calculateur du Produit en Croix (CAP)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="space-y-3 text-slate-800">
+                    <div class="grid grid-cols-2 gap-3 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Valeur a (Ligne 1, Col 1) :</label>
+                            <input type="number" id="prop-a" value="4" oninput="calcProp()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Valeur b (Ligne 1, Col 2) :</label>
+                            <input type="number" id="prop-b" value="10" oninput="calcProp()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 text-slate-200">
+                        <div>
+                            <label class="font-bold block text-xs">Valeur c (Ligne 2, Col 1) :</label>
+                            <input type="number" id="prop-c" value="200" oninput="calcProp()" class="border rounded-xl p-2.5 w-full font-bold text-slate-900">
+                        </div>
+                        <div>
+                            <label class="font-bold block text-xs">Valeur Inconnue x = ?</label>
+                            <input type="text" id="prop-x-res" readonly class="border rounded-xl p-2.5 w-full font-bold bg-slate-100 text-sky-700" value="500">
+                        </div>
                     </div>
                 </div>
 
-                <script>
-                    function calcCross() {
-                        const inputs = [
-                            document.getElementById('c11'), document.getElementById('c12'),
-                            document.getElementById('c21'), document.getElementById('c22')
-                        ];
-                        
-                        let emptyCount = 0;
-                        let emptyIndex = -1;
-                        const vals = [];
-                        
-                        inputs.forEach((inp, idx) => {
-                            if(inp.value.trim() === '') {
-                                emptyCount++;
-                                emptyIndex = idx;
-                                vals.push(null);
-                            } else {
-                                vals.push(parseFloat(inp.value));
-                            }
-                        });
-                        
-                        const resDiv = document.getElementById('crossResult');
-                        
-                        if(emptyCount === 1) {
-                            let result = 0;
-                            let calcStr = "";
-                            if(emptyIndex === 0) {
-                                result = (vals[1] * vals[2]) / vals[3];
-                                calcStr = `(${vals[1]} × ${vals[2]}) ÷ ${vals[3]}`;
-                            } else if(emptyIndex === 1) {
-                                result = (vals[0] * vals[3]) / vals[2];
-                                calcStr = `(${vals[0]} × ${vals[3]}) ÷ ${vals[2]}`;
-                            } else if(emptyIndex === 2) {
-                                result = (vals[0] * vals[3]) / vals[1];
-                                calcStr = `(${vals[0]} × ${vals[3]}) ÷ ${vals[1]}`;
-                            } else if(emptyIndex === 3) {
-                                result = (vals[1] * vals[2]) / vals[0];
-                                calcStr = `(${vals[1]} × ${vals[2]}) ÷ ${vals[0]}`;
-                            }
-                            
-                            if(isNaN(result) || !isFinite(result)) {
-                                resDiv.innerText = "Erreur (division par zéro ?)";
-                            } else {
-                                let dispRes = Number.isInteger(result) ? result : result.toFixed(2);
-                                resDiv.innerText = `? = ${calcStr} = ${dispRes}`;
-                                inputs[emptyIndex].placeholder = dispRes;
-                            }
-                        } else if(emptyCount === 0) {
-                            resDiv.innerText = "Effacez une case pour calculer.";
-                        } else {
-                            resDiv.innerText = "Il faut remplir 3 cases sur 4.";
-                        }
-                    }
-                    calcCross();
-                    document.getElementById('c12').value = ""; // init
-                    calcCross();
-                </script>
+                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
+                    <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration Rédigée en Direct :</span>
+                    <p>• Produit en croix : $x = \frac{b \times c}{a}$</p>
+                    <p>• Calcul : $x = \frac{10 \times 200}{4} = \frac{2000}{4} = \mathbf{500}$</p>
+                    <p>• Coefficient de proportionnalité : $k = \frac{200}{4} = \mathbf{50}$</p>
+                </div>
             </div>
         </section>
-        
+
     </main>
 
-    <div class="h-24"></div>
+    <!-- JS POUR SIMULATEUR PROPORTIONNALITÉ -->
+    <script>
+        function calcProp() {
+            let a = parseFloat(document.getElementById('prop-a').value);
+            let b = parseFloat(document.getElementById('prop-b').value);
+            let c = parseFloat(document.getElementById('prop-c').value);
+
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) return;
+
+            let x = (b * c) / a;
+            document.getElementById('prop-x-res').value = x.toFixed(2);
+        }
+        calcProp();
+    </script>
 </body>
 </html>

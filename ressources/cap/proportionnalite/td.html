@@ -1,163 +1,594 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - Proportionnalité</title>
+    <title>Fiche de TD - Proportionnalité CAP</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
-    </style>
-    <script>
-        MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
-    </script>
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head>
-<body class="text-slate-800 antialiased pb-20">
 
-    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">CAP • TD</p>
-                    <h1 class="text-2xl font-bold text-slate-800">Exercices : Proportionnalité</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence CAP • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Proportionnalité & Tableaux de Valeurs</h1>
                 </div>
             </div>
-            <button onclick="window.print()" class="hidden md:flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <i class="fa-solid fa-print"></i> Imprimer
-            </button>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 mt-8 space-y-6">
-        
-        <!-- Exercice 1 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">1</span>
-                Est-ce proportionnel ?
-            </h3>
-            <p class="mb-4">Indiquez si les situations suivantes sont proportionnelles (répondre par Oui ou Non) :</p>
-            <ol class="list-decimal list-inside space-y-2 ml-4">
-                <li>Le prix des pommes selon le poids acheté. (Oui / Non)</li>
-                <li>La taille d'une personne selon son âge. (Oui / Non)</li>
-                <li>Le prix d'un plein d'essence selon le nombre de litres. (Oui / Non)</li>
-                <li>Le tarif d'un taxi (prise en charge 5€ + 1,20€ le km) selon la distance. (Oui / Non)</li>
-            </ol>
-        </div>
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
 
-        <!-- Exercice 2 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">2</span>
-                Compléter un tableau avec le coefficient
-            </h3>
-            <p class="mb-4">Un menuisier vend des planches au mètre. 1 mètre de planche coûte 4,50 €. Complétez le tableau de proportionnalité :</p>
-            <table class="w-full text-center border-collapse mb-2 max-w-sm ml-4">
-                <tr>
-                    <td class="border border-slate-300 p-2 bg-slate-50 font-semibold">Longueur (m)</td>
-                    <td class="border border-slate-300 p-2">1</td>
-                    <td class="border border-slate-300 p-2">3</td>
-                    <td class="border border-slate-300 p-2">5</td>
-                    <td class="border border-slate-300 p-2">10</td>
-                </tr>
-                <tr>
-                    <td class="border border-slate-300 p-2 bg-slate-50 font-semibold">Prix (€)</td>
-                    <td class="border border-slate-300 p-2">4,50</td>
-                    <td class="border border-slate-300 p-2">...</td>
-                    <td class="border border-slate-300 p-2">...</td>
-                    <td class="border border-slate-300 p-2">...</td>
-                </tr>
-            </table>
-            <p class="text-sm italic ml-4">Quel est le coefficient de proportionnalité ? ...</p>
-        </div>
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable Avec Figures</span> • <span>Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur la Proportionnalité</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
+            </div>
 
-        <!-- Exercice 3 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">3</span>
-                Le produit en croix
-            </h3>
-            <p class="mb-4">Utilisez la méthode du produit en croix pour trouver la valeur manquante ($x$) dans les tableaux suivants :</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-4">
-                <div>
-                    <table class="text-center border-collapse">
-                        <tr><td class="border border-slate-300 p-2 w-16">2</td><td class="border border-slate-300 p-2 w-16 font-bold text-teal-600">x</td></tr>
-                        <tr><td class="border border-slate-300 p-2">8</td><td class="border border-slate-300 p-2">20</td></tr>
-                    </table>
-                    <p class="mt-2 text-sm">$x =$ ...</p>
-                </div>
-                <div>
-                    <table class="text-center border-collapse">
-                        <tr><td class="border border-slate-300 p-2 w-16">5</td><td class="border border-slate-300 p-2 w-16">15</td></tr>
-                        <tr><td class="border border-slate-300 p-2 font-bold text-teal-600">x</td><td class="border border-slate-300 p-2">30</td></tr>
-                    </table>
-                    <p class="mt-2 text-sm">$x =$ ...</p>
-                </div>
+            <!-- GRILLE DES COMPETENCES DU CAP -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Relever les données</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Proposer une méthode</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Effectuer les calculs</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Contrôler le résultat</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Rédiger la réponse</div>
             </div>
         </div>
 
-        <!-- Exercice 4 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">4</span>
-                Recette de cuisine
-            </h3>
-            <p class="mb-2">Pour faire des crêpes pour 4 personnes, il faut 250 g de farine, 3 œufs et 50 cl de lait.</p>
-            <p class="mb-2">1. Calculez les quantités nécessaires pour 8 personnes.</p>
-            <p>2. Calculez les quantités nécessaires pour 10 personnes.</p>
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    CAP Pâtisserie / Boulangerie : Dosage de Farine
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un boulanger utilise $200\text{ g}$ de farine pour fabriquer 4 baguettes.</p>
+                    <p class="font-bold">Calculez la masse de farine nécessaire pour fabriquer 15 baguettes.</p>
+                </div>
+                <!-- SVG EX 1 AVEC QUADRILLAGE -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td1" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td1)" />
+                        <!-- Tableau 2x2 -->
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#4f46e5" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#4f46e5" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">4 bag.</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">15 bag.</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#4f46e5" text-anchor="middle">200 g</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">x = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$x = \frac{200 \times 15}{4} = \frac{3000}{4} = \mathbf{750\text{ g}}$ de farine.</p>
+            </div>
         </div>
 
-        <!-- Exercice 5 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">5</span>
-                Conversion de devises
-            </h3>
-            <p class="mb-2">Un touriste américain échange ses dollars en euros. Au taux de change actuel, 1 Dollar (USD) vaut 0,92 Euro (EUR).</p>
-            <p class="mb-2">1. Combien d'euros obtiendra-t-il pour 50 Dollars ?</p>
-            <p>2. Le lendemain, il achète un souvenir à 23 Euros. Combien cela représente-t-il en Dollars (arrondir au centime près) ?</p>
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    CAP Peinture / Bâtiment : Volume de Peinture
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un peintre consomme $3\text{ L}$ de peinture pour peindre $15\text{ m}^2$ de mur.</p>
+                    <p class="font-bold">Calculez le volume de peinture nécessaire pour peindre un chantier de $60\text{ m}^2$.</p>
+                </div>
+                <!-- SVG EX 2 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td2" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td2)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#0284c7" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#0284c7" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#0284c7" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">15 m²</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">60 m²</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#0284c7" text-anchor="middle">3 L</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">x = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$x = \frac{3 \times 60}{15} = \frac{180}{15} = \mathbf{12\text{ Litres}}$ de peinture.</p>
+            </div>
         </div>
 
-        <!-- Exercice 6 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">6</span>
-                Consommation de carburant
-            </h3>
-            <p class="mb-2">Une voiture de livraison consomme en moyenne 6 litres d'essence pour parcourir 100 km.</p>
-            <p class="mb-2">1. Combien de litres consommera-t-elle pour un trajet de 250 km ?</p>
-            <p>2. Avec un plein de 45 litres, quelle distance maximale peut-elle parcourir ?</p>
+        <!-- EXERCICE 3 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 3</span>
+                    CAP Logistique / Transport : Temps de Trajet
+                </h3>
+                <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Analyser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un camion de livraison roule à une vitesse moyenne constante de $80\text{ km/h}$.</p>
+                    <p class="font-bold">Calculez le temps nécessaire pour effectuer un trajet de $240\text{ km}$.</p>
+                </div>
+                <!-- SVG EX 3 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td3" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td3)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#d97706" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#d97706" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">80 km</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">240 km</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#d97706" text-anchor="middle">1 h</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">t = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$t = \frac{240}{80} = \mathbf{3\text{ heures}}$.</p>
+            </div>
         </div>
 
-        <!-- Exercice 7 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">7</span>
-                Vitesse et Temps
-            </h3>
-            <p class="mb-2">Un artisan roule sur l'autoroute à une vitesse constante de 120 km/h (il parcourt 120 km en 60 minutes).</p>
-            <p class="mb-2">1. Quelle distance va-t-il parcourir en 15 minutes ?</p>
-            <p>2. Combien de temps mettra-t-il pour parcourir 300 km (en heures et minutes) ?</p>
+        <!-- EXERCICE 4 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
+                    CAP Menuiserie / Bâtiment : Lecture d'Échelle 1:50
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Sur un plan à l'échelle $1:50$, une cloison mesure $8\text{ cm}$.</p>
+                    <p class="font-bold">Calculez la longueur réelle de la cloison en mètres.</p>
+                </div>
+                <!-- SVG EX 4 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td4" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td4)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#059669" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#059669" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#059669" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">1 cm (plan)</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">8 cm (plan)</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#059669" text-anchor="middle">50 cm (réel)</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">L = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$\text{Longueur réelle} = 8 \times 50 = 400\text{ cm} = \mathbf{4\text{ mètres}}$.</p>
+            </div>
         </div>
 
-        <!-- Exercice 8 -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center gap-2">
-                <span class="bg-teal-100 text-teal-700 w-8 h-8 rounded-lg flex items-center justify-center font-bold">8</span>
-                Problème : Chantier Peinture
-            </h3>
-            <p class="mb-2">Un peintre en bâtiment sait qu'il a besoin de 3 pots de peinture pour recouvrir un mur de 25 m².</p>
-            <p class="mb-2">1. Combien de pots doit-il acheter pour peindre un mur de 75 m² ?</p>
-            <p>2. Avec 10 pots de peinture, quelle surface maximale peut-il recouvrir (arrondir au m² près) ?</p>
+        <!-- EXERCICE 5 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 5</span>
+                    CAP Commerce / Vente : Test de Proportionnalité d'un Tarif
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un magasin propose 2 t-shirts pour 18 € et 5 t-shirts pour 45 €.</p>
+                    <p class="font-bold">Le tarif est-il proportionnel au nombre de t-shirts ? Justifiez en calculant les prix unitaires.</p>
+                </div>
+                <!-- SVG EX 5 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td5" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td5)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#16a34a" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#16a34a" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#16a34a" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">2 t-shirts</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">5 t-shirts</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#16a34a" text-anchor="middle">18 €</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#16a34a" text-anchor="middle">45 €</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$\frac{18}{2} = 9\text{ €/unité}$ et $\frac{45}{5} = 9\text{ €/unité}$. <br>
+                Les prix unitaires sont égaux ($k = 9$). **Le tarif est rigoureusement proportionnel** !</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 6 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 6</span>
+                    CAP Coiffure / Esthétique : Dosage de Produit
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>En salon de coiffure, un soin nécessite $15\text{ mL}$ de concentré pour $100\text{ mL}$ d'eau.</p>
+                    <p class="font-bold">Calculez le volume de concentré nécessaire pour un flacon de $250\text{ mL}$ d'eau.</p>
+                </div>
+                <!-- SVG EX 6 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td6" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td6)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#0284c7" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#0284c7" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#0284c7" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">100 mL</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">250 mL</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#0284c7" text-anchor="middle">15 mL</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">v = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex6')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex6" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$v = \frac{15 \times 250}{100} = \frac{3750}{100} = \mathbf{37,5\text{ mL}}$ de concentré.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 7 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 7</span>
+                    CAP Cuisine / Service : Bon de Commande Boissons
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Communiquer</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Dans un restaurant, un carton de 6 bouteilles de jus coûte $14,40\text{ €}$.</p>
+                    <p class="font-bold">Rédigez la réponse indiquant le coût total d'une commande de 15 bouteilles.</p>
+                </div>
+                <!-- SVG EX 7 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td7" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td7)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#ca8a04" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#ca8a04" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#ca8a04" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">6 bout.</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">15 bout.</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#ca8a04" text-anchor="middle">14,40 €</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">P = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex7')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex7" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$P = \frac{14,40 \times 15}{6} = \frac{216}{6} = \mathbf{36,00\text{ €}}$. Le montant de la commande s'élève à 36,00 €.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 8 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 8</span>
+                    CAP Mécanique Automobile : Consommation de Carburant
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un utilitaire consomme $6,5\text{ L}$ de gazole aux $100\text{ km}$.</p>
+                    <p class="font-bold">Calculez le volume de carburant nécessaire pour parcourir $400\text{ km}$.</p>
+                </div>
+                <!-- SVG EX 8 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td8" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td8)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#2563eb" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#2563eb" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">100 km</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">400 km</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#2563eb" text-anchor="middle">6,5 L</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">V = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex8')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex8" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$V = 6,5 \times 4 = \mathbf{26,0\text{ Litres}}$ de gazole.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 9 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 9</span>
+                    CAP Usinage / Métallerie : Masse Volumique d'une Pièce
+                </h3>
+                <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Analyser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>L'acier a une masse volumique de $7,8\text{ g/cm}^3$. Une pièce cylindrique usinée a un volume de $50\text{ cm}^3$.</p>
+                    <p class="font-bold">Calculez la masse de cette pièce en grammes.</p>
+                </div>
+                <!-- SVG EX 9 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td9" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td9)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#d97706" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#d97706" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#d97706" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">1 cm³</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">50 cm³</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#d97706" text-anchor="middle">7,8 g</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">m = ?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex9')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex9" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>$m = 7,8 \times 50 = \mathbf{390\text{ grammes}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 10 -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4 border-l-4 border-l-indigo-600">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-xs">Ex 10</span>
+                    Problème Complexe Évaluation CAP : Devis de Carrelage
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider & Synthétiser</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
+                    <p>Un artisan carreleur prépare un devis pour une pièce de $30\text{ m}^2$. Un sac de colle de $25\text{ kg}$ permet d'encoller $5\text{ m}^2$.</p>
+                    <p class="text-xs">
+                        1. Calculez la masse totale de colle nécessaire. <br>
+                        2. Déduisez-en le nombre de sacs de $25\text{ kg}$ à commander.
+                    </p>
+                </div>
+                <!-- SVG EX 10 -->
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
+                        <defs>
+                            <pattern id="grid-td10" width="15" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="150" height="100" fill="url(#grid-td10)" />
+                        <rect x="25" y="20" width="100" height="60" fill="none" stroke="#4f46e5" stroke-width="2"/>
+                        <line x1="25" y1="50" x2="125" y2="50" stroke="#4f46e5" stroke-width="1.5"/>
+                        <line x1="75" y1="20" x2="75" y2="80" stroke="#4f46e5" stroke-width="1.5"/>
+                        <text x="50" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">5 m²</text>
+                        <text x="100" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">30 m²</text>
+                        <text x="50" y="70" font-size="8" font-weight="bold" fill="#4f46e5" text-anchor="middle">25 kg</text>
+                        <text x="100" y="70" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">Masse=?</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex10')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex10" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\text{Masse} = \frac{25 \times 30}{5} = \mathbf{150\text{ kg}}$ de colle. <br>
+                2. $\text{Nombre de sacs} = \frac{150}{25} = \mathbf{6\text{ sacs}}$.</p>
+            </div>
         </div>
 
     </main>
+
+    <!-- SCRIPTS JS -->
+    <script>
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-ex1', 'corr-ex2', 'corr-ex3', 'corr-ex4', 'corr-ex5', 'corr-ex6', 'corr-ex7', 'corr-ex8', 'corr-ex9', 'corr-ex10'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            });
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+        }
+    </script>
 </body>
 </html>

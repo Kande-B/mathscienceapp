@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités d'Investigation - Proportionnalité CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence CAP -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence CAP • Calculs Numériques</span>
+                    <h1 class="text-xl font-bold font-heading">Proportionnalité & Tableaux de Valeurs</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence CAP -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Tableur</a>
+                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- PRESENTATION DE LA SÉQUENCE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-amber-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier CAP</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Certificat d'Aptitude Professionnelle</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Reconnaitre et Calculer une Situation de Proportionnalité</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Découvrez comment utiliser le coefficient de proportionnalité et la règle de trois dans vos domaines professionnels (Restauration, Bâtiment, Commerce) !</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
+                <div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Calcul de Prix Unitaire et Règle de Trois</h3>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600">Pour trouver la valeur d'une unité, on divise la quantité totale par le nombre d'unités : $\text{Prix Unitaire} = \frac{\text{Prix Total}}{\text{Quantité}}$.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Si 5 kg de pommes coûtent 10 €, combien coûte 1 kg ?</label>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Prix unitaire = ? €">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Si 3 baguettes coûtent 2,70 €, combien coûtent 5 baguettes ?</label>
+                    <input type="number" step="0.1" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Prix total = ? €">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ACTIVITÉ 1 : RESTAURATION / PÂTISSERIE (ADAPTATION DE RECETTE) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Activité 1 • Domaine Restauration / Pâtisserie</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Adaptation des Ingrédients d'une Recette de Cuisine</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Un chef cuisinier dispose d'une recette pour 4 personnes nécessitant $200\text{ g}$ de farine et $300\text{ mL}$ de lait. <br>
+                Il doit préparer un banquet pour **10 personnes**.</p>
+
+                <!-- CONIGNE DE CALCUL POUR L'ÉLÈVE -->
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-amber-900 text-sm block">Étape 1 : Calculez le coefficient de proportionnalité $k = \frac{10}{4}$ et la masse de farine pour 10 personnes</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Coefficient multiplicateur $k = \frac{10}{4}$ :</label>
+                            <input type="number" step="0.1" id="act1-k" class="w-full p-2 border rounded-xl font-bold" placeholder="k = ?">
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Masse de farine = $200 \times k$ :</label>
+                            <input type="number" id="act1-farine" class="w-full p-2 border rounded-xl font-bold" placeholder="Farine = ? g">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider mon calcul
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+
+                <!-- CE QU'ON A DÉCOUVERT (BILAN ACTIVITÉ 1) -->
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-2xl text-amber-900 space-y-1">
+                    <h5 class="font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i> Ce qu'on a découvert (Coefficient de Proportionnalité)
+                    </h5>
+                    <p class="text-xs">
+                        Dans un tableau de proportionnalité, on passe d'une ligne à l'autre en multipliant par le même nombre appelé **coefficient de proportionnalité** :
+                        $$k = \frac{\text{Valeur de la 2ème ligne}}{\text{Valeur de la 1ère ligne}}$$
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 : BÂTIMENT / PEINTURE (SURFACAGE ET RENDEMENT) -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Activité 2 • Domaine Bâtiment / Peinture</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Quantité de Peinture et Représentation Graphique</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <p class="font-medium">Un artisan peintre sait qu'un pot de $3\text{ L}$ permet de peindre une surface de $15\text{ m}^2$. <br>
+                Il doit peindre un mur de $45\text{ m}^2$.</p>
+
+                <!-- CONIGNE DE CALCUL POUR L'ÉLÈVE -->
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">Étape 1 : Calculez le volume de peinture par le produit en croix</span>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">1. Formule du produit en croix :</label>
+                            <span class="text-indigo-800 font-mono block">$x = \frac{3 \times 45}{15}$</span>
+                        </div>
+
+                        <div class="p-3 bg-white border rounded-xl space-y-1">
+                            <label class="font-bold text-slate-900 block">2. Volume de peinture nécessaire :</label>
+                            <input type="number" id="act2-vol" class="w-full p-2 border rounded-xl font-bold" placeholder="Volume = ? L">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct2()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider mon calcul
+                </button>
+                <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+
+                <!-- SCHÉMA SVG REPRÉSENTATION GRAPHIQUE SUR QUADRILLAGE NET -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-indigo-600"></i> Représentation Graphique de la Proportionnalité sur Quadrillage (Droite passant par l'Origine)
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center overflow-x-auto">
+                        <svg width="360" height="200" viewBox="0 0 360 200" class="mx-auto font-sans">
+                            <defs>
+                                <pattern id="grid-act2" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="360" height="200" fill="url(#grid-act2)" />
+
+                            <!-- Axes Ox et Oy sur quadrillage -->
+                            <line x1="40" y1="160" x2="340" y2="160" stroke="#0f172a" stroke-width="2.5"/> <!-- Ox -->
+                            <line x1="40" y1="20" x2="40" y2="160" stroke="#0f172a" stroke-width="2.5"/> <!-- Oy -->
+
+                            <!-- Flèches d'axes -->
+                            <polygon points="340,160 330,155 330,165" fill="#0f172a"/>
+                            <polygon points="40,20 35,30 45,30" fill="#0f172a"/>
+
+                            <!-- Droite de proportionnalité passant par O(40,160) -->
+                            <line x1="40" y1="160" x2="310" y2="40" stroke="#4f46e5" stroke-width="3"/>
+
+                            <!-- Points clés : (15m², 3L) -> (100, 133), (45m², 9L) -> (280, 53) -->
+                            <circle cx="40" cy="160" r="4" fill="#0f172a"/> <text x="25" y="175" font-size="11" font-weight="extrabold" fill="#0f172a">O(0;0)</text>
+
+                            <!-- Labels des axes -->
+                            <text x="260" y="180" font-size="11" font-weight="extrabold" fill="#0f172a">Surface (m²)</text>
+                            <text x="50" y="35" font-size="11" font-weight="extrabold" fill="#4f46e5">Volume (L)</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- CE QU'ON A DÉCOUVERT (BILAN ACTIVITÉ 2) -->
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-2xl text-indigo-900 space-y-1">
+                    <h5 class="font-bold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-indigo-600"></i> Ce qu'on a découvert (Caractéristique Graphique)
+                    </h5>
+                    <p class="text-xs">
+                        Une situation de proportionnalité est représentée graphiquement par une **droite qui passe par l'origine $(0 ; 0)$**.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
+    <script>
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "2" && (q2 === "4.5" || q2 === "4,5")) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 1 kg coûte $10/5 = 2\\text{ €}$ et 5 baguettes coûtent $5 \\times 0,90 = 4,50\\text{ €}$.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Prix unitaire = 2 € et Prix des 5 baguettes = 4,50 €.`;
+            }
+        }
+
+        function checkAct1() {
+            let k = document.getElementById('act1-k').value.trim();
+            let farine = document.getElementById('act1-farine').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if ((k === "2.5" || k === "2,5") && farine === "500") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! $k = 10/4 = 2,5$ et il faut $200 \\times 2,5 = 500\\text{ g}$ de farine.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> $k = 2,5$ et farine = 500 g.`;
+            }
+        }
+
+        function checkAct2() {
+            let vol = document.getElementById('act2-vol').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (vol === "9") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! $x = (3 \\times 45)/15 = 9\\text{ Litres}$ de peinture.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Volume = 9 Litres.`;
+            }
+        }
+    </script>
+</body>
+</html>
