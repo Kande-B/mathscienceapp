@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maths-sciences-v1';
+const CACHE_NAME = 'maths-sciences-v2';
 const urlsToCache = [
   './',
   './index.html',
