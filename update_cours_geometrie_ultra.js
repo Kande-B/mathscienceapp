@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetFile = 'ressources/seconde/maths/geometrie-espace-volumes/cours.html';
+
+const htmlContent = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -114,7 +119,7 @@
                     <p class="text-slate-800">
                         La <strong>perspective cavalière</strong> est une technique de dessin permettant de représenter un solide tridimensionnel sur une feuille de papier en 2D. <br>
                         • <strong>La face avant :</strong> Dessinée en vraie grandeur sans aucune déformation. <br>
-                        • <strong>Les arêtes fuyantes :</strong> Obliques (angle $\alpha \approx 30^\circ$ à $45^\circ$), réduites d'un rapport $k \approx 0,5$, et <strong>parallèles entre elles</strong>. <br>
+                        • <strong>Les arêtes fuyantes :</strong> Obliques (angle $\\alpha \\approx 30^\\circ$ à $45^\\circ$), réduites d'un rapport $k \\approx 0,5$, et <strong>parallèles entre elles</strong>. <br>
                         • <strong>Arêtes cachées :</strong> Tracées obligatoirement en <strong>traits pointillés</strong>.
                     </p>
                 </div>
@@ -168,8 +173,8 @@
                     <span class="bg-sky-600 text-white font-extrabold text-[10px] uppercase px-2 py-0.5 rounded">1. Pavé & Cube</span>
                     <h4 class="font-bold text-slate-900 text-sm">Surfaces Rectangulaires</h4>
                     <ul class="space-y-1.5 text-slate-700 text-[11px]">
-                        <li>• <strong>Cube :</strong> $A_{\text{totale}} = 6 \cdot a^2$</li>
-                        <li>• <strong>Pavé droit :</strong> $A_{\text{totale}} = 2(L \cdot l + L \cdot h + l \cdot h)$</li>
+                        <li>• <strong>Cube :</strong> $A_{\\text{totale}} = 6 \\cdot a^2$</li>
+                        <li>• <strong>Pavé droit :</strong> $A_{\\text{totale}} = 2(L \\cdot l + L \\cdot h + l \\cdot h)$</li>
                     </ul>
                 </div>
 
@@ -178,9 +183,9 @@
                     <span class="bg-amber-600 text-white font-extrabold text-[10px] uppercase px-2 py-0.5 rounded">2. Cylindre & Prisme</span>
                     <h4 class="font-bold text-slate-900 text-sm">Solides à Bases Égales</h4>
                     <ul class="space-y-1.5 text-slate-700 text-[11px]">
-                        <li>• <strong>Aire latérale Cylindre :</strong> $A_{\text{lat}} = 2 \pi R \cdot h$</li>
-                        <li>• <strong>Aire totale Cylindre :</strong> $A_{\text{tot}} = 2 \pi R h + 2 \pi R^2$</li>
-                        <li>• <strong>Aire latérale Prisme :</strong> $A_{\text{lat}} = P_{\text{base}} \cdot h$</li>
+                        <li>• <strong>Aire latérale Cylindre :</strong> $A_{\\text{lat}} = 2 \\pi R \\cdot h$</li>
+                        <li>• <strong>Aire totale Cylindre :</strong> $A_{\\text{tot}} = 2 \\pi R h + 2 \\pi R^2$</li>
+                        <li>• <strong>Aire latérale Prisme :</strong> $A_{\\text{lat}} = P_{\\text{base}} \\cdot h$</li>
                     </ul>
                 </div>
 
@@ -189,8 +194,8 @@
                     <span class="bg-purple-600 text-white font-extrabold text-[10px] uppercase px-2 py-0.5 rounded">3. Cône & Sphère</span>
                     <h4 class="font-bold text-slate-900 text-sm">Solides Ronds</h4>
                     <ul class="space-y-1.5 text-slate-700 text-[11px]">
-                        <li>• <strong>Aire latérale Cône :</strong> $A_{\text{lat}} = \pi R a$ <br> (où génératrice $a = \sqrt{R^2 + h^2}$)</li>
-                        <li>• <strong>Aire Sphère :</strong> $A = 4 \pi R^2$</li>
+                        <li>• <strong>Aire latérale Cône :</strong> $A_{\\text{lat}} = \\pi R a$ <br> (où génératrice $a = \\sqrt{R^2 + h^2}$)</li>
+                        <li>• <strong>Aire Sphère :</strong> $A = 4 \\pi R^2$</li>
                     </ul>
                 </div>
 
@@ -214,12 +219,12 @@
                         <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
                             <i class="fa-solid fa-shapes"></i> 1. Solides Dégagés (Bases Parallèles Égales)
                         </h4>
-                        <p class="text-slate-800 font-mono text-sm">$\mathbf{V = B \times h}$</p>
+                        <p class="text-slate-800 font-mono text-sm">$\\mathbf{V = B \\times h}$</p>
                         <p class="text-slate-700 text-[11px]">
                             • <strong>Cube :</strong> $V = a^3$ <br>
-                            • <strong>Pavé droit :</strong> $V = L \times l \times h$ <br>
-                            • <strong>Cylindre de révolution :</strong> $V = \pi R^2 h$ <br>
-                            • <strong>Prisme droit :</strong> $V = A_{\text{base}} \times h$
+                            • <strong>Pavé droit :</strong> $V = L \\times l \\times h$ <br>
+                            • <strong>Cylindre de révolution :</strong> $V = \\pi R^2 h$ <br>
+                            • <strong>Prisme droit :</strong> $V = A_{\\text{base}} \\times h$
                         </p>
                     </div>
 
@@ -227,10 +232,10 @@
                         <h4 class="font-bold text-rose-900 text-sm flex items-center gap-2">
                             <i class="fa-solid fa-caret-up"></i> 2. Solides à Pointe (Apex)
                         </h4>
-                        <p class="text-slate-800 font-mono text-sm">$\mathbf{V = \frac{1}{3} \times B \times h}$</p>
+                        <p class="text-slate-800 font-mono text-sm">$\\mathbf{V = \\frac{1}{3} \\times B \\times h}$</p>
                         <p class="text-slate-700 text-[11px]">
-                            • <strong>Pyramide :</strong> $V = \frac{1}{3} A_{\text{base}} \times h$ <br>
-                            • <strong>Cône de révolution :</strong> $V = \frac{1}{3} \pi R^2 h$
+                            • <strong>Pyramide :</strong> $V = \\frac{1}{3} A_{\\text{base}} \\times h$ <br>
+                            • <strong>Cône de révolution :</strong> $V = \\frac{1}{3} \\pi R^2 h$
                         </p>
                     </div>
                 </div>
@@ -240,8 +245,8 @@
                     <h4 class="font-bold text-indigo-950 text-sm flex items-center gap-2">
                         <i class="fa-solid fa-globe"></i> 3. Boule / Sphère
                     </h4>
-                    <p class="text-indigo-900 font-mono text-sm">$\mathbf{V = \frac{4}{3} \pi R^3}$</p>
-                    <p class="text-slate-700 text-[11px]">Remarque : La moitié d'une boule (demi-sphère) a un volume $V = \frac{2}{3} \pi R^3$.</p>
+                    <p class="text-indigo-900 font-mono text-sm">$\\mathbf{V = \\frac{4}{3} \\pi R^3}$</p>
+                    <p class="text-slate-700 text-[11px]">Remarque : La moitié d'une boule (demi-sphère) a un volume $V = \\frac{2}{3} \\pi R^3$.</p>
                 </div>
             </div>
         </section>
@@ -264,13 +269,13 @@
                     </h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center font-mono font-bold text-slate-900">
                         <div class="p-3 bg-white rounded-xl border border-emerald-200">
-                            $1 \text{ dm}^3 = 1 \text{ Litre (L)}$
+                            $1 \\text{ dm}^3 = 1 \\text{ Litre (L)}$
                         </div>
                         <div class="p-3 bg-white rounded-xl border border-emerald-200">
-                            $1 \text{ m}^3 = 1\,000 \text{ L} = 1 \text{ kL}$
+                            $1 \\text{ m}^3 = 1\\,000 \\text{ L} = 1 \\text{ kL}$
                         </div>
                         <div class="p-3 bg-white rounded-xl border border-emerald-200">
-                            $1 \text{ cm}^3 = 1 \text{ mL}$
+                            $1 \\text{ cm}^3 = 1 \\text{ mL}$
                         </div>
                     </div>
                 </div>
@@ -278,12 +283,12 @@
                 <!-- MASSE VOLUMIQUE -->
                 <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-weight-hanging text-sky-600"></i> Relation entre Volume et Masse : $m = \rho \times V$
+                        <i class="fa-solid fa-weight-hanging text-sky-600"></i> Relation entre Volume et Masse : $m = \\rho \\times V$
                     </h4>
                     <p class="text-slate-700">
-                        La <strong>masse volumique</strong> $\rho$ (en $\text{kg/dm}^3$ ou $\text{g/cm}^3$) permet de calculer la masse $m$ d'un corps à partir de son volume $V$ : <br>
-                        $\mathbf{m = \rho \times V} \qquad \text{et} \qquad \mathbf{V = \frac{m}{\rho}}$ <br>
-                        <em>Exemple : L'acier a une masse volumique $\rho = 7,85 \text{ kg/dm}^3$. Un volume de $10 \text{ dm}^3$ d'acier a donc une masse $m = 7,85 \times 10 = \mathbf{78,5 \text{ kg}}$.</em>
+                        La <strong>masse volumique</strong> $\\rho$ (en $\\text{kg/dm}^3$ ou $\\text{g/cm}^3$) permet de calculer la masse $m$ d'un corps à partir de son volume $V$ : <br>
+                        $\\mathbf{m = \\rho \\times V} \\qquad \\text{et} \\qquad \\mathbf{V = \\frac{m}{\\rho}}$ <br>
+                        <em>Exemple : L'acier a une masse volumique $\\rho = 7,85 \\text{ kg/dm}^3$. Un volume de $10 \\text{ dm}^3$ d'acier a donc une masse $m = 7,85 \\times 10 = \\mathbf{78,5 \\text{ kg}}$.</em>
                     </p>
                 </div>
             </div>
@@ -307,15 +312,15 @@
 
                 <h4 class="text-base font-bold font-heading text-emerald-400">Calcul du Volume d'un Réservoir Sous Pression (Cylindre + 2 Demi-Sphères)</h4>
                 <p class="text-slate-300 leading-relaxed">
-                    Un réservoir industriel est composé d'une partie centrale cylindrique de rayon $R = 0,5 \text{ m}$ et de longueur $h = 2 \text{ m}$, fermée à chaque extrémité par une demi-sphère de rayon $R = 0,5 \text{ m}$. <br>
+                    Un réservoir industriel est composé d'une partie centrale cylindrique de rayon $R = 0,5 \\text{ m}$ et de longueur $h = 2 \\text{ m}$, fermée à chaque extrémité par une demi-sphère de rayon $R = 0,5 \\text{ m}$. <br>
                     <em>1. Déterminer le volume total du réservoir. <br>
                     2. Exprimer sa capacité en Litres.</em>
                 </p>
 
                 <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 space-y-2 font-mono text-slate-200">
-                    <p><strong class="text-sky-400">Étape 1 : Volume du Cylindre :</strong> $V_{\text{cyl}} = \pi \times 0,5^2 \times 2 = 0,5 \pi \approx \mathbf{1,5708 \text{ m}^3}$.</p>
-                    <p><strong class="text-sky-400">Étape 2 : Volume des 2 Demi-sphères (= 1 Sphère entière) :</strong> $V_{\text{sph}} = \frac{4}{3} \pi \times 0,5^3 \approx \mathbf{0,5236 \text{ m}^3}$.</p>
-                    <p><strong class="text-emerald-400">Étape 3 : Volume Total & Capacité :</strong> $V_{\text{tot}} = 1,5708 + 0,5236 = \mathbf{2,0944 \text{ m}^3} = \mathbf{2\,094,4 \text{ Litres}}$.</p>
+                    <p><strong class="text-sky-400">Étape 1 : Volume du Cylindre :</strong> $V_{\\text{cyl}} = \\pi \\times 0,5^2 \\times 2 = 0,5 \\pi \\approx \\mathbf{1,5708 \\text{ m}^3}$.</p>
+                    <p><strong class="text-sky-400">Étape 2 : Volume des 2 Demi-sphères (= 1 Sphère entière) :</strong> $V_{\\text{sph}} = \\frac{4}{3} \\pi \\times 0,5^3 \\approx \\mathbf{0,5236 \\text{ m}^3}$.</p>
+                    <p><strong class="text-emerald-400">Étape 3 : Volume Total & Capacité :</strong> $V_{\\text{tot}} = 1,5708 + 0,5236 = \\mathbf{2,0944 \\text{ m}^3} = \\mathbf{2\\,094,4 \\text{ Litres}}$.</p>
                 </div>
             </div>
         </section>
@@ -335,7 +340,7 @@
             <div class="space-y-4 text-xs">
                 <!-- Q1 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-bold text-slate-900">Question 1 : Combien de Litres contient un volume de $2,5 \text{ m}^3$ ?</p>
+                    <p class="font-bold text-slate-900">Question 1 : Combien de Litres contient un volume de $2,5 \\text{ m}^3$ ?</p>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="alert('✅ Bravo ! 1 m^3 = 1000 L donc 2.5 m^3 = 2500 L.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">A) 2 500 Litres</button>
                         <button onclick="alert('❌ Faux. 1 m^3 vaut 1000 dm^3 (Litres).')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) 250 Litres</button>
@@ -347,7 +352,7 @@
                     <p class="font-bold text-slate-900">Question 2 : Quelle est la formule du volume d'un cône de révolution ?</p>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="alert('✅ Bravo ! V = (1/3) * pi * R^2 * h.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">A) V = (1/3) * π * R² * h</button>
-                        <button onclick="alert('❌ Faux. Ça c'est le volume du cylindre !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) V = π * R² * h</button>
+                        <button onclick="alert('❌ Faux. Ça c\'est le volume du cylindre !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) V = π * R² * h</button>
                     </div>
                 </div>
             </div>
@@ -356,4 +361,7 @@
     </main>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(targetFile, htmlContent, 'utf8');
+console.log('Successfully updated cours.html in geometrie-espace-volumes with ultra-rich content!');
