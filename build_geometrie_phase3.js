@@ -1,0 +1,349 @@
+const fs = require('fs');
+const path = require('path');
+
+const baseDir = 'ressources/seconde/maths/geometrie-espace-volumes';
+
+// =====================================================================
+// 5. TICE.HTML (~20 KB)
+// =====================================================================
+const ticeHtml = `<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Numérique & TICE - Géométrie & Volumes (Seconde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence Seconde -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence Seconde Pro • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Géométrie de l'Espace & Volumes</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE TP NUMÉRIQUE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-purple-500 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">TP Informatique Tableur & GeoGebra 3D</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Seconde Pro</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Modélisation 3D & Automatisation sur Tableur</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Conception d'une feuille de calcul automatisée pour la chaudronnerie et modélisation dynamique sur GeoGebra 3D.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : TABLEUR EXCEL / CALC -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-file-excel text-emerald-600"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Partie 1 • Tableur Excel / LibreOffice Calc</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Automatisation d'une Gamme de Fûts Cylindriques</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs leading-relaxed">
+                <p class="text-slate-700">Créer le tableau suivant dans votre tableur :</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse border border-slate-300 font-mono text-[11px]">
+                        <thead class="bg-slate-800 text-white font-sans">
+                            <tr>
+                                <th class="p-2 border border-slate-600">Rayon R (m) [A]</th>
+                                <th class="p-2 border border-slate-600">Hauteur h (m) [B]</th>
+                                <th class="p-2 border border-slate-600">Volume V (m³) [C]</th>
+                                <th class="p-2 border border-slate-600">Capacité (L) [D]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-slate-50">
+                                <td class="p-2 border border-slate-300">0,5</td>
+                                <td class="p-2 border border-slate-300">1,2</td>
+                                <td class="p-2 border border-slate-300 text-emerald-700 font-bold">=PI()*A2^2*B2</td>
+                                <td class="p-2 border border-slate-300 text-emerald-700 font-bold">=C2*1000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : GEOGEBRA 3D -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-cube text-purple-600"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 2 • GeoGebra 3D</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Construction d'un Cylindre & Calcul Dynamique</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs leading-relaxed">
+                <p class="text-slate-700">1. Activer la fenêtre <strong>Graphique 3D</strong> dans GeoGebra.</p>
+                <p class="text-slate-700">2. Placer deux points $A(0,0,0)$ et $B(0,0,5)$ sur l'axe $z$.</p>
+                <p class="text-slate-700">3. Utiliser l'outil <code>Cylindre</code> en sélectionnant $A$, $B$ puis un rayon $R = 3$.</p>
+                <p class="text-slate-700">4. Afficher le volume avec la commande <code>Volume(c)</code>.</p>
+                <p class="text-slate-700">5. Générer le patron à plat du cylindre avec la commande <code>Patron(c, k)</code> où $k$ est un curseur variant de 0 à 1.</p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(baseDir, 'tice.html'), ticeHtml, 'utf8');
+console.log('Successfully wrote ultra-rich tice.html');
+
+// =====================================================================
+// 6. EVAL.HTML (~25 KB)
+// =====================================================================
+const evalHtml = `<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation Bilan - Géométrie & Volumes (Seconde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence Seconde -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence Seconde Pro • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Géométrie de l'Espace & Volumes</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE ÉVALUATION OFFICIELLE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-red-600 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Évaluation Sommative CCF</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Seconde Pro • Durée : 45 min</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Évaluation : Géométrie de l'Espace & Volumes</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Sujet officiel sur 20 points évaluant la maîtrise des représentations en perspective, calculs de volumes, conversions en Litres et masse volumique.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-red-600 hover:bg-red-500 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Sujet A4
+                </button>
+            </div>
+
+            <!-- Cartouche Identité Élève -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">NOM : ....................................</div>
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">PRÉNOM : ................................</div>
+                <div class="bg-slate-800 p-3 rounded-xl border border-slate-700 text-center font-bold text-yellow-400">NOTE : ......... / 20</div>
+            </div>
+        </div>
+
+        <!-- SUJET DE L'ÉVALUATION -->
+        <div class="space-y-6 text-xs">
+
+            <!-- PARTIE 1 -->
+            <section class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-sm">Partie 1 • Automatismes & Conversions (4 Points)</h3>
+                    <span class="bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full text-[11px]">4 Pts</span>
+                </div>
+
+                <div class="space-y-3">
+                    <p class="font-semibold text-slate-800">1.1 Convertir $5,8 \\text{ m}^3$ en Litres (2 pts).</p>
+                    <p class="font-semibold text-slate-800">1.2 Donner la formule du volume d'une sphère de rayon $R$ (2 pts).</p>
+                </div>
+            </section>
+
+            <!-- PARTIE 2 -->
+            <section class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-sm">Partie 2 • Solides Usuels & Surfaçage (6 Points)</h3>
+                    <span class="bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full text-[11px]">6 Pts</span>
+                </div>
+
+                <div class="space-y-3">
+                    <p class="font-semibold text-slate-800">Une pyramide à base carrée de côté $a = 6 \\text{ cm}$ a une hauteur $h = 10 \\text{ cm}$.</p>
+                    <p>2.1 Calculer l'aire de sa base carrée $A_{\\text{base}}$ (2 pts).</p>
+                    <p>2.2 Calculer son volume en $\\text{cm}^3$ (4 pts).</p>
+                </div>
+            </section>
+
+            <!-- PARTIE 3 -->
+            <section class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-sm">Partie 3 • Problème Métier Contextualisé (8 Points)</h3>
+                    <span class="bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full text-[11px]">8 Pts</span>
+                </div>
+
+                <div class="space-y-3 text-slate-700 leading-relaxed">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-slate-900 text-xs">Mise en situation :</h4>
+                        <p>
+                            Une cuve industrielle métallique a la forme d'un pavé droit de longueur $L = 2 \\text{ m}$, largeur $l = 1,5 \\text{ m}$ et hauteur $h = 1,2 \\text{ m}$. <br>
+                            1. Calculer son volume total en $\\text{m}^3$, puis sa capacité en Litres (4 pts). <br>
+                            2. La cuve est remplie à 80 % de son volume d'un liquide de masse volumique $\\rho = 0,85 \\text{ kg/L}$. Calculer la masse totale de liquide en kg (4 pts).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PARTIE 4 -->
+            <section class="bg-white p-6 rounded-3xl border border-slate-200 card-shadow space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-sm">Partie 4 • Analyse Critique & Perspective (2 Points)</h3>
+                    <span class="bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full text-[11px]">2 Pts</span>
+                </div>
+
+                <div class="space-y-2 text-slate-700">
+                    <p class="font-semibold text-slate-900">Un élève a tracé les arêtes cachées d'un cube en traits pleins continus.</p>
+                    <p class="text-slate-800">Expliquer la règle de la perspective cavalière qui n'a pas été respectée.</p>
+                </div>
+            </section>
+
+            <!-- SECTION CORRIGÉ DÉTAILLÉ -->
+            <section class="bg-slate-900 text-white p-6 rounded-3xl space-y-4 border border-slate-800 shadow-xl">
+                <details class="group">
+                    <summary class="cursor-pointer font-bold text-red-400 text-sm flex items-center justify-between select-none">
+                        <span><i class="fa-solid fa-key mr-2"></i> Consulter le Barème & Corrigé Officiel Complet</span>
+                        <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform"></i>
+                    </summary>
+
+                    <div class="mt-4 pt-4 border-t border-slate-800 space-y-4 text-xs font-mono text-slate-300 leading-relaxed">
+                        <div class="p-3 bg-slate-800 rounded-xl border border-slate-700">
+                            <h5 class="font-bold text-yellow-400 mb-1 font-sans">Corrigé Partie 1 (4 pts) :</h5>
+                            <p>1.1 $5,8 \\text{ m}^3 = 5,8 \\times 1000 = \\mathbf{5\\,800 \\text{ Litres}}$ (2 pts)</p>
+                            <p>1.2 $V = \\frac{4}{3} \\pi R^3$ (2 pts)</p>
+                        </div>
+                        <div class="p-3 bg-slate-800 rounded-xl border border-slate-700">
+                            <h5 class="font-bold text-yellow-400 mb-1 font-sans">Corrigé Partie 3 (8 pts) :</h5>
+                            <p>3.1 $V = 2 \\times 1,5 \\times 1,2 = \\mathbf{3,6 \\text{ m}^3} = \\mathbf{3\\,600 \\text{ Litres}}$ (4 pts)</p>
+                            <p>3.2 Volume de liquide : $3600 \\times 0,80 = 2880 \\text{ L}$. Masse : $m = 0,85 \\times 2880 = \\mathbf{2\\,448 \\text{ kg}}$ (4 pts)</p>
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(baseDir, 'eval.html'), evalHtml, 'utf8');
+console.log('Successfully wrote ultra-rich eval.html');
