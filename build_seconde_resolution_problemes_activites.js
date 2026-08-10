@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activités d'Investigation Pro - Équations 1er Degré (Seconde Pro)</title>
+    <title>Activités d'Investigation Pro - Résolution de Problèmes du 1er Degré (Seconde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence Seconde Pro • Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Équations du 1er Degré</h1>
+                    <h1 class="text-xl font-bold font-heading">Résolution de Problèmes du 1er Degré</h1>
                 </div>
             </div>
             <!-- Navigation de la Séquence -->
@@ -76,8 +76,8 @@
                         <span class="bg-emerald-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Démarche d'Investigation</span>
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Seconde Pro</span>
                     </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Scénarios Professionnels : Modéliser & Résoudre</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Mises en situation concrètes sur les chantiers, en atelier de maintenance et en gestion d'entreprise. Apprendre à traduire un problème réel en équation algébrique $ax + b = cx + d$.</p>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Scénarios Professionnels : Équations & Inéquations</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Situations réelles de chantier et d'atelier exigeant de poser une équation ou une inéquation pour modéliser des contraintes de débit, de tolérance et de seuil de rentabilité.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -86,14 +86,14 @@
             </div>
         </div>
 
-        <!-- ACTIVITÉ 1 : MAINTENANCE VÉHICULES ET ENGIONS (MVM / REMI) -->
+        <!-- ACTIVITÉ 1 : MAINTENANCE VÉHICULES ET ENGINS (MVM / REMI) -->
         <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center font-bold text-lg">1</div>
                     <div>
                         <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Activité 1 • Maintenance & Diagnostic (MVM / REMI)</span>
-                        <h3 class="text-xl font-bold font-heading text-slate-900">Mise au Point d'un Système de Refroidissement Moteur</h3>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Régulation sous Contrainte Maximale de Débit</h3>
                     </div>
                 </div>
                 <div class="flex items-center gap-1">
@@ -110,10 +110,9 @@
                     <div>
                         <h4 class="font-bold text-slate-900 text-sm">Mise en Situation :</h4>
                         <p class="text-slate-700 mt-1">
-                            Sur un banc d'essai de maintenance industrielle, un technicien analyse le circuit hydraulique de refroidissement d'un moteur de forte puissance. <br>
-                            Pour garantir un fonctionnement optimal sans surchauffe, le débit total d'eau nécessaire est fixé à <strong>2 250 Litres par heure (L/h)</strong>. <br>
-                            Le système est alimenté par une pompe principale à débit fixe de <strong>450 L/h</strong> et par 3 pompes auxiliaires modulables identiques. Chaque pompe auxiliaire apporte un débit supplémentaire proportionnel au régime $x$ (exprimé en % de commande). <br>
-                            La relation globale s'écrit : $\mathbf{120x + 450 = 2250}$.
+                            Sur un banc d'essai de maintenance, le débit hydraulique maximal toléré par une conduite de sécurité ne doit pas dépasser <strong>2 250 L/h</strong>. <br>
+                            Le débit total est alimenté par une pompe fixe de 450 L/h et 3 pompes modulables apportant un débit proportionnel au réglage $x$ (%) : $D(x) = 120x + 450$. <br>
+                            On traduit la contrainte de sécurité par l'inéquation : $mathbf{120x + 450 \leqslant 2250}$.
                         </p>
                     </div>
                 </div>
@@ -124,28 +123,20 @@
                 <h4 class="font-bold text-slate-900 text-sm">Questions d'Investigation :</h4>
 
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">1. Que représente précisément la variable $x$ et le nombre 450 dans cette équation ?</p>
-                    <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
-                        <summary class="cursor-pointer font-bold text-emerald-700">Afficher l'indice & la réponse</summary>
-                        <p class="mt-2 text-slate-800">$x$ représente le pourcentage de commande des pompes auxiliaires. 450 représente le débit fixe en L/h assuré par la pompe principale.</p>
-                    </details>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">2. Isoler le terme en $x$ en retranchant 450 de chaque côté de l'égalité.</p>
+                    <p class="font-semibold text-slate-900">1. Isoler le terme $120x$ en soustrayant 450 des deux membres de l'inéquation.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-emerald-700">Afficher la résolution étape 1</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$120x = 2250 - 450 \implies 120x = 1800$.</p>
+                        <p class="mt-2 text-slate-800 font-mono">$120x \leqslant 2250 - 450 \implies 120x \leqslant 1800$.</p>
                     </details>
                 </div>
 
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">3. Calculer la valeur exacte de $x$ et interpréter le résultat pour le technicien.</p>
+                    <p class="font-semibold text-slate-900">2. Résoudre l'inéquation et donner la plage de réglage maximale pour le technicien.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-emerald-700">Afficher la réponse complète</summary>
                         <div class="mt-2 space-y-1 text-slate-800">
-                            <p class="font-mono">$x = \f\frac{1800}{120} = 15$.</p>
-                            <p class="text-emerald-800 font-semibold">Conclusion : Le technicien doit régler les pompes auxiliaires à un régime de <strong>15 %</strong>.</p>
+                            <p class="font-mono">$x \leqslant \frac{1800}{120} \implies \mathbf{x \leqslant 15 \%}$.</p>
+                            <p class="text-emerald-800 font-semibold">Conclusion : Le réglage des pompes ne doit pas dépasser <strong>15 %</strong> ($S = [0 \;;\; 15]$).</p>
                         </div>
                     </details>
                 </div>
@@ -159,13 +150,12 @@
                     <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center font-bold text-lg">2</div>
                     <div>
                         <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Activité 2 • Chaudronnerie & Conception (MP3D / TCI / BTP)</span>
-                        <h3 class="text-xl font-bold font-heading text-slate-900">Découpe et Assemblage Optimisé de Profiles Acier</h3>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Découpe et Égalité de Périmètres</h3>
                     </div>
                 </div>
                 <div class="flex items-center gap-1">
                     <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-[11px] font-bold rounded-full">C2 Analyser</span>
                     <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-full">C3 Réaliser</span>
-                    <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-[11px] font-bold rounded-full">C4 Valider</span>
                 </div>
             </div>
 
@@ -176,9 +166,8 @@
                     <div>
                         <h4 class="font-bold text-slate-900 text-sm">Mise en Situation :</h4>
                         <p class="text-slate-700 mt-1">
-                            Dans un atelier de sous-traitance industrielle, un chaudronnier doit fabriquer un cadre rectangulaire de structure en tube acier de longueur totale développée <strong>320 cm</strong>. <br>
-                            Le cahier des charges impose que la longueur $L$ du cadre dépasse sa largeur $x$ de exactement <strong>40 cm</strong> ($L = x + 40$). <br>
-                            Le périmètre de la structure s'exprime par la formule : $P = 2 	imes (L + x) = 320$.
+                            Un chaudronnier conçoit une structure métallique rectangulaire de périmètre total développé 320 cm. <br>
+                            La longueur $L$ vaut $x + 40$ cm. L'équation du périmètre s'écrit : $4x + 80 = 320$.
                         </p>
                     </div>
                 </div>
@@ -189,44 +178,28 @@
                 <h4 class="font-bold text-slate-900 text-sm">Questions d'Investigation :</h4>
 
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">1. Remplacer $L$ par $(x + 40)$ dans la formule du périmètre et montrer que cela donne l'équation $4x + 80 = 320$.</p>
-                    <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
-                        <summary class="cursor-pointer font-bold text-amber-700">Afficher la démonstration</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$P = 2(x + 40 + x) = 2(2x + 40) = 4x + 80$. Comme $P = 320$, on a bien $4x + 80 = 320$.</p>
-                    </details>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">2. Résoudre l'équation $4x + 80 = 320$ pour déterminer la largeur $x$.</p>
+                    <p class="font-semibold text-slate-900">1. Résoudre $4x + 80 = 320$ pour déterminer la largeur $x$ et la longueur $L$.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-amber-700">Afficher la résolution</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$4x = 320 - 80 = 240 \implies x = \f\frac{240}{4} = 60$ cm.</p>
-                    </details>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">3. En déduire la longueur $L$ et vérifier le périmètre total.</p>
-                    <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
-                        <summary class="cursor-pointer font-bold text-amber-700">Afficher le contrôle final</summary>
-                        <p class="mt-2 text-slate-800">$L = 60 + 40 = 100$ cm. Vérification : $2 	imes (100 + 60) = 2 	imes 160 = 320$ cm. $\quad checkmark$</p>
+                        <p class="mt-2 text-slate-800 font-mono">$4x = 240 \implies x = 60$ cm et $L = 100$ cm.</p>
                     </details>
                 </div>
             </div>
         </section>
 
-        <!-- ACTIVITÉ 3 : ÉLECTRICITÉ ET TERTIAIRE (MELEC / MTNE / LOGISTIQUE) -->
+        <!-- ACTIVITÉ 3 : TERTIAIRE / ÉLECTROTECHNIQUE (MELEC / MTNE / LOGISTIQUE) -->
         <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center font-bold text-lg">3</div>
+                    <div class="w-10 h-10 bg-rose-100 text-rose-700 rounded-xl flex items-center justify-center font-bold text-lg">3</div>
                     <div>
-                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Activité 3 • Tarification & Rentabilité (MELEC / MTNE / Logistique)</span>
-                        <h3 class="text-xl font-bold font-heading text-slate-900">Comparatif Financier de Deux Prestataires Industriels</h3>
+                        <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">Activité 3 • Seuil de Rentabilité par Inéquation (MELEC / MTNE)</span>
+                        <h3 class="text-xl font-bold font-heading text-slate-900">Inéquation de Rentabilité de Location de Materiel</h3>
                     </div>
                 </div>
                 <div class="flex items-center gap-1">
                     <span class="px-2.5 py-1 bg-sky-100 text-sky-800 text-[11px] font-bold rounded-full">C1 S'approprier</span>
-                    <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-[11px] font-bold rounded-full">C4 Valider</span>
+                    <span class="px-2.5 py-1 bg-rose-100 text-rose-800 text-[11px] font-bold rounded-full">C4 Valider</span>
                     <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-full">C5 Communiquer</span>
                 </div>
             </div>
@@ -234,14 +207,14 @@
             <!-- Contextualisation Pro -->
             <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3 text-xs leading-relaxed">
                 <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-chart-line text-2xl text-purple-600 mt-1"></i>
+                    <i class="fa-solid fa-chart-line text-2xl text-rose-600 mt-1"></i>
                     <div>
                         <h4 class="font-bold text-slate-900 text-sm">Mise en Situation :</h4>
                         <p class="text-slate-700 mt-1">
-                            Un responsable d'atelier doit louer une nacelle élévatrice pour des travaux de câblage en hauteur. Il consulte deux entreprises de location : <br>
-                            • <strong>Entreprise ALPHA :</strong> Forfait fixe de 180 € + 40 € par jour d'utilisation. <br>
-                            • <strong>Entreprise BÊTA :</strong> Sans forfait fixe, mais 65 € par jour d'utilisation. <br>
-                            On note $x$ le nombre de jours de location.
+                            Une entreprise étudie la location d'une nacelle pour des chantiers. <br>
+                            • <strong>Prestataire A :</strong> $C_A(x) = 40x + 180$ € ($x$ est le nombre de jours). <br>
+                            • <strong>Prestataire B :</strong> $C_B(x) = 65x$ €. <br>
+                            <em>Pour combien de jours $x$ la formule A est-elle strictement plus avantageuse que la formule B ($C_A(x) < C_B(x)$) ?</em>
                         </p>
                     </div>
                 </div>
@@ -252,32 +225,21 @@
                 <h4 class="font-bold text-slate-900 text-sm">Questions d'Investigation :</h4>
 
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">1. Exprimer en fonction de $x$ le coût total $C_A(x)$ pour l'entreprise ALPHA et $C_B(x)$ pour l'entreprise BÊTA.</p>
+                    <p class="font-semibold text-slate-900">1. Poser et résoudre l'inéquation $40x + 180 < 65x$.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
-                        <summary class="cursor-pointer font-bold text-purple-700">Afficher les expressions</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$C_A(x) = 40x + 180 \quad 	ext{et} \quad C_B(x) = 65x$.</p>
-                    </details>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">2. Écrire et résoudre l'équation $C_A(x) = C_B(x)$ permettant de trouver la durée pour laquelle les deux tarifs sont identiques.</p>
-                    <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
-                        <summary class="cursor-pointer font-bold text-purple-700">Afficher la résolution complète</summary>
+                        <summary class="cursor-pointer font-bold text-rose-700">Afficher la résolution complète</summary>
                         <div class="mt-2 space-y-1 text-slate-800 font-mono">
-                            <p>$40x + 180 = 65x$</p>
-                            <p>$180 = 65x - 40x \implies 25x = 180 \implies x = \f\frac{180}{25} = \mathbf{7,2 	ext{ jours}}$.</p>
+                            <p>$180 < 65x - 40x \implies 25x > 180$</p>
+                            <p>$x > \frac{180}{25} \implies \mathbf{x > 7,2 \text{ jours}}$.</p>
                         </div>
                     </details>
                 </div>
 
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-semibold text-slate-900">3. Conseil au chef d'atelier : Quelle entreprise choisir si le chantier dure 5 jours ? Et s'il dure 10 jours ?</p>
+                    <p class="font-semibold text-slate-900">2. Conclure sous forme de conseil au responsable de chantier.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
-                        <summary class="cursor-pointer font-bold text-purple-700">Afficher l'analyse d'aide à la décision</summary>
-                        <div class="mt-2 space-y-1 text-slate-800">
-                            <p>• Pour 5 jours ($x < 7,2$) : $C_A(5) = 40(5)+180 = 380$ € et $C_B(5) = 65(5) = 325$ €. <strong>Choisir BÊTA.</strong></p>
-                            <p>• Pour 10 jours ($x > 7,2$) : $C_A(10) = 400+180 = 580$ € et $C_B(10) = 650$ €. <strong>Choisir ALPHA.</strong></p>
-                        </div>
+                        <summary class="cursor-pointer font-bold text-rose-700">Afficher la conclusion</summary>
+                        <p class="mt-2 text-slate-800 font-semibold text-emerald-800">Le prestataire A est plus avantageux à partir de <strong>8 jours d'utilisation</strong> ($x \geqslant 8$).</p>
                     </details>
                 </div>
             </div>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je note l'essentiel (Cours) - Résolution de Problèmes du 1er Degré (Équations & Inéquations)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour la Séquence Seconde -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-calculator text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence Seconde Pro • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Résolution de Problèmes du 1er Degré</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Programme Officiel Seconde Pro</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Module A2 : Équations & Inéquations</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Résolution de Problèmes du 1er Degré</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes rigoureuses d'isolation de l'inconnue, résolution d'équations $ax + b = cx + d$, inéquations du 1er degré $ax + b \leqslant c$, règles de changement de sens, et résolution de problèmes professionnels avec contraintes de seuil.</p>
+                </div>
+
+                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
+                </button>
+            </div>
+
+            <!-- SOMMAIRE COURS INTERACTIF -->
+            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-5 gap-2 text-xs font-semibold">
+                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">1. Équations</a>
+                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">2. Méthode $ax+b=cx+d$</a>
+                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-rose-300 rounded-lg text-center transition-colors">3. Inéquations du 1er Degré</a>
+                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">4. Formules Techniques</a>
+                <a href="#partie5" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">5. Problèmes Métier</a>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : ÉQUATIONS ET DÉFINITIONS DE BASE -->
+        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div>
+                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Définitions & Principes d'Équivalence</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Vocabulaire & Modèle de la Balance Algébrique</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- DÉFINITION ÉQUATION -->
+                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-equals"></i> Définition d'une Équation du 1er Degré
+                    </h4>
+                    <p class="text-slate-800">
+                        Une <strong>équation du premier degré à une inconnue</strong> est une égalité de la forme $ax + b = 0$ (ou s'y ramenant), où $x$ représente la variable inconnue, et $a$ et $b$ sont des nombres réels donnés ($a \neq 0$). <br>
+                        • <strong>Le degré (1)</strong> signifie que la variable $x$ est élevée à la puissance 1 ($x^1$). <br>
+                        • <strong>Résoudre l'équation</strong> consiste à trouver la valeur numérique de $x$ qui rend l'égalité exacte. Cette valeur est appelée la <strong>solution</strong>.
+                    </p>
+                </div>
+
+                <!-- SCHÉMA SVG : BALANCE ALGÉBRIQUE -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-sky-600"></i> Schéma Visuel : Modèle de la Balance Algébrique ($2x + 5 = 17$)
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="420" height="140" viewBox="0 0 420 140" class="mx-auto font-sans">
+                            <polygon points="210,110 195,135 225,135" fill="#1e293b"/>
+                            <line x1="60" y1="110" x2="360" y2="110" stroke="#1e293b" stroke-width="4"/>
+
+                            <line x1="110" y1="110" x2="110" y2="70" stroke="#64748b" stroke-width="2"/>
+                            <rect x="50" y="70" width="120" height="6" fill="#334155" rx="2"/>
+                            <rect x="60" y="42" width="28" height="26" rx="4" fill="#0284c7"/>
+                            <text x="74" y="59" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">x</text>
+                            <rect x="92" y="42" width="28" height="26" rx="4" fill="#0284c7"/>
+                            <text x="106" y="59" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">x</text>
+                            <circle cx="142" cy="55" r="12" fill="#f59e0b"/>
+                            <text x="142" y="59" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">+5</text>
+
+                            <line x1="310" y1="110" x2="310" y2="70" stroke="#64748b" stroke-width="2"/>
+                            <rect x="250" y="70" width="120" height="6" fill="#334155" rx="2"/>
+                            <rect x="285" y="38" width="50" height="30" rx="6" fill="#10b981"/>
+                            <text x="310" y="58" font-size="13" font-weight="extrabold" fill="#ffffff" text-anchor="middle">17</text>
+
+                            <text x="210" y="30" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="middle">Égalité conservée : 2x + 5 = 17 ⟹ 2x = 12 ⟹ x = 6</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 2 RÈGLES DE CONSERVATION -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2">
+                        <h5 class="font-bold text-emerald-900 text-xs flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus-minus text-emerald-600"></i> RÈGLE 1 : Addition & Soustraction
+                        </h5>
+                        <p class="text-emerald-950 text-xs">
+                            On ne change pas les solutions d'une égalité en <strong>ajoutant ou en retranchant un même nombre</strong> aux deux membres. <br>
+                            $A = B \iff A + c = B + c$
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2">
+                        <h5 class="font-bold text-indigo-900 text-xs flex items-center gap-1.5">
+                            <i class="fa-solid fa-xmark text-indigo-600"></i> RÈGLE 2 : Multiplication & Division
+                        </h5>
+                        <p class="text-indigo-950 text-xs">
+                            On ne change pas les solutions d'une égalité en <strong>multipliant ou en divisant par un même nombre non nul</strong> les deux membres. <br>
+                            $A = B \iff \frac{A}{k} = \frac{B}{k} \quad (k \neq 0)$
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : RÉSOLUTION D'ÉQUATIONS DU 1ER DEGRÉ -->
+        <section id="partie2" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
+                <div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Partie 2 • Technique Algébrique</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Méthodes de Résolution des Équations $ax + b = cx + d$</h3>
+                </div>
+            </div>
+
+            <!-- ALGORITHME UNIVERSEL -->
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-2xl space-y-4">
+                <h4 class="font-bold text-indigo-950 text-base">Algorithme Général de Résolution en 4 Étapes</h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-3.5 rounded-xl border border-indigo-200 space-y-1">
+                        <span class="font-bold text-indigo-700 text-xs">Étape 1</span>
+                        <p class="text-slate-800 font-semibold">Développer</p>
+                        <p class="text-slate-500 text-[11px]">Supprimer les parenthèses si nécessaire.</p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded-xl border border-indigo-200 space-y-1">
+                        <span class="font-bold text-indigo-700 text-xs">Étape 2</span>
+                        <p class="text-slate-800 font-semibold">Regrouper $x$ à gauche</p>
+                        <p class="text-slate-500 text-[11px]">Transposer les termes en $x$.</p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded-xl border border-indigo-200 space-y-1">
+                        <span class="font-bold text-indigo-700 text-xs">Étape 3</span>
+                        <p class="text-slate-800 font-semibold">Regrouper les nombres</p>
+                        <p class="text-slate-500 text-[11px]">Transposer les constantes à droite.</p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded-xl border border-indigo-200 space-y-1">
+                        <span class="font-bold text-indigo-700 text-xs">Étape 4</span>
+                        <p class="text-slate-800 font-semibold">Isoler $x$</p>
+                        <p class="text-slate-500 text-[11px]">Diviser par le coefficient final de $x$.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-indigo-200 space-y-3 text-xs">
+                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider">Exemple Type : $7x - 9 = 2x + 16$</h5>
+                    <div class="space-y-2 font-mono text-slate-700 leading-relaxed">
+                        <p>🔹 Soustraire $2x$ : $\quad 7x - 2x - 9 = 16 \implies 5x - 9 = 16$</p>
+                        <p>🔹 Ajouter $9$ : $\quad 5x = 16 + 9 \implies 5x = 25$</p>
+                        <p>🔹 Diviser par $5$ : $\quad x = \frac{25}{5} \implies \mathbf{x = 5}$</p>
+                    </div>
+                    <div class="p-3 bg-emerald-50 text-emerald-900 rounded-lg text-[11px] font-medium border border-emerald-200">
+                        ✅ <strong>Vérification :</strong> $7(5) - 9 = 26$ et $2(5) + 16 = 26$. La solution est $\mathbf{S = \{5\}}$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÉQUATIONS PRODUITS NULS -->
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-xs">
+                <h4 class="font-bold text-purple-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-square-root-variable"></i> Équations Produits Nuls : $(ax + b)(cx + d) = 0$
+                </h4>
+                <p class="text-slate-800">
+                    Un produit de facteurs est nul si et seulement si <strong>au moins l'un de ses facteurs est nul</strong>. <br>
+                    $A \times B = 0 \iff A = 0 \quad \text{ou} \quad B = 0$
+                </p>
+                <div class="bg-white p-4 rounded-xl border border-purple-200 font-mono text-slate-800">
+                    Exemple : $(2x - 8)(3x + 15) = 0 \iff 2x - 8 = 0 \text{ ou } 3x + 15 = 0 \implies x = 4 \text{ ou } x = -5$. <br>
+                    Solution : $\mathbf{S = \{-5 \;;\; 4\}}$.
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 : RÉSOLUTION D'INÉQUATIONS DU 1ER DEGRÉ -->
+        <section id="partie3" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-rose-100 text-rose-800 rounded-xl flex items-center justify-center font-bold text-lg">3</span>
+                <div>
+                    <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">Partie 3 • Nouveau en Seconde Pro</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Inéquations du 1er Degré & Représentation des Solutions</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <!-- DÉFINITION ET SYMBOLES -->
+                <div class="bg-rose-50 border-l-4 border-rose-500 p-5 rounded-r-2xl space-y-2">
+                    <h4 class="font-bold text-rose-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-less-than-equal"></i> Définition d'une Inéquation
+                    </h4>
+                    <p class="text-slate-800">
+                        Une <strong>inéquation du 1er degré</strong> est une inégalité comportant une inconnue $x$, utilisant l'un des 4 symboles d'inégalité : <br>
+                        • $<$ (strictement inférieur) $\qquad$ • $\leqslant$ (inférieur ou égal) <br>
+                        • $>$ (strictement supérieur) $\qquad$ • $\geqslant$ (supérieur ou égal) <br>
+                        Résoudre une inéquation consiste à trouver un **ensemble d'intervalles de valeurs** de $x$ qui satisfont l'inégalité.
+                    </p>
+                </div>
+
+                <!-- RÈGLE CRUCIALE D'INVERSION DE L'INÉGALITÉ -->
+                <div class="bg-amber-50 border-2 border-amber-300 p-5 rounded-2xl space-y-3">
+                    <h4 class="font-bold text-amber-950 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg"></i> RÈGLE D'OR CRUCIALE : Changement de Sens de l'Inégalité !
+                    </h4>
+                    <div class="p-4 bg-white rounded-xl border border-amber-300 space-y-2 text-slate-900">
+                        <p class="font-extrabold text-rose-700 text-xs">
+                            ⚠️ Quand on multiplie ou divises les deux membres d'une inéquation par un NOMBRE NÉGATIF, LE SENS DE L'INÉGALITÉ CHANGE OBLIGATOIREMENT !
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 font-mono text-slate-800 text-[11px]">
+                            <li>Si $a < b$ et $k < 0$, alors $mathbf{k \times a > k \times b}$ (Le symbole $<$ devient $>$).</li>
+                            <li>Si $-3x \leqslant 15$, alors $x \geqslant \frac{15}{-3} \implies mathbf{x \geqslant -5}$ (Le symbole $\leqslant$ devient $\geqslant$).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- EXEMPLES RÉDIGÉS ET DROITE GRADUÉE -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <!-- Exemple 1 Inéquation avec k > 0 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <span class="bg-emerald-600 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">Exemple 1 • k positif (Pas de changement)</span>
+                        <h5 class="font-bold text-slate-900">Résoudre $4x - 7 \leqslant 13$</h5>
+                        <div class="space-y-1 font-mono text-slate-800 text-xs">
+                            <p>$4x \leqslant 13 + 7 \implies 4x \leqslant 20$</p>
+                            <p>$x \leqslant \frac{20}{4} \implies \mathbf{x \leqslant 5}$</p>
+                            <p class="text-emerald-700 font-sans font-bold pt-1">Intervalle de solutions : $mathbf{S = ]-\infty \;;\; 5]}$</p>
+                        </div>
+                    </div>
+
+                    <!-- Exemple 2 Inéquation avec k < 0 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <span class="bg-rose-600 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">Exemple 2 • k négatif (Changement de sens !)</span>
+                        <h5 class="font-bold text-slate-900">Résoudre $-2x + 9 < 19$</h5>
+                        <div class="space-y-1 font-mono text-slate-800 text-xs">
+                            <p>$-2x < 19 - 9 \implies -2x < 10$</p>
+                            <p class="text-rose-700 font-bold">$x > \frac{10}{-2} \implies \mathbf{x > -5}$ (Changement de $<$ en $>$ !)</p>
+                            <p class="text-emerald-700 font-sans font-bold pt-1">Intervalle de solutions : $mathbf{S = ]-5 \;;\; +\infty[}$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCHÉMA SVG : DROITE GRADUÉE REPRÉSENTATION -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-rose-600"></i> Représentation Graphique des Solutions sur Droite Graduée ($x \geqslant -5$)
+                    </h4>
+                    <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
+                        <svg width="420" height="70" viewBox="0 0 420 70" class="mx-auto font-sans">
+                            <!-- Axe gradué -->
+                            <line x1="30" y1="35" x2="390" y2="35" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
+                            
+                            <!-- Graduations -->
+                            <line x1="70" y1="30" x2="70" y2="40" stroke="#94a3b8" stroke-width="2"/>
+                            <text x="70" y="55" font-size="10" fill="#64748b" text-anchor="middle">-10</text>
+
+                            <line x1="170" y1="25" x2="170" y2="45" stroke="#ef4444" stroke-width="3"/>
+                            <text x="170" y="60" font-size="11" font-weight="bold" fill="#ef4444" text-anchor="middle">-5</text>
+
+                            <line x1="270" y1="30" x2="270" y2="40" stroke="#94a3b8" stroke-width="2"/>
+                            <text x="270" y="55" font-size="10" fill="#64748b" text-anchor="middle">0</text>
+
+                            <!-- Zone hachurée / colorée des solutions -->
+                            <line x1="170" y1="35" x2="380" y2="35" stroke="#10b981" stroke-width="6"/>
+                            <!-- Crochet inclus [ -->
+                            <path d="M 165 25 L 170 25 L 170 45 L 165 45" fill="none" stroke="#10b981" stroke-width="3"/>
+                            <text x="280" y="22" font-size="11" font-weight="bold" fill="#10b981" text-anchor="middle">Solutions (x ≥ -5)</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 4 : FORMULES TECHNIQUES & INVERSION -->
+        <section id="partie4" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">4</span>
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 4 • Application Technique</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Inversion de Formules Techniques (Sciences & Génie Industriel)</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <span class="bg-yellow-100 text-yellow-800 font-bold text-[10px] px-2 py-0.5 rounded">Électricité</span>
+                    <h5 class="font-bold text-slate-900">Loi d'Ohm : $U = R \times I$</h5>
+                    <ul class="space-y-1 text-slate-600 text-[11px]">
+                        <li>• Calcul de $R$ : $\mathbf{R = \frac{U}{I}}$</li>
+                        <li>• Calcul de $I$ : $\mathbf{I = \frac{U}{R}}$</li>
+                    </ul>
+                </div>
+
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-2 py-0.5 rounded">Cinématique</span>
+                    <h5 class="font-bold text-slate-900">Vitesse : $v = \frac{d}{t}$</h5>
+                    <ul class="space-y-1 text-slate-600 text-[11px]">
+                        <li>• Distance : $\mathbf{d = v \times t}$</li>
+                        <li>• Temps : $\mathbf{t = \frac{d}{v}}$</li>
+                    </ul>
+                </div>
+
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded">Hydraulique</span>
+                    <h5 class="font-bold text-slate-900">Pression : $P = \frac{F}{S}$</h5>
+                    <ul class="space-y-1 text-slate-600 text-[11px]">
+                        <li>• Force : $\mathbf{F = P \times S}$</li>
+                        <li>• Surface : $\mathbf{S = \frac{F}{P}}$</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 5 : PROBLÈMES MÉTIER (ÉQUATIONS & INÉQUATIONS / SEUILS) -->
+        <section id="partie5" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">5</span>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Partie 5 • Contextualisation Professionnelle</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Résolution de Problèmes Métier en 4 Étapes</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                    <span class="font-extrabold text-emerald-700 text-xs">Étape 1</span>
+                    <h5 class="font-bold text-emerald-950">Choix de l'inconnue</h5>
+                    <p class="text-slate-700 text-[11px]">Identifier la grandeur $x$.</p>
+                </div>
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                    <span class="font-extrabold text-emerald-700 text-xs">Étape 2</span>
+                    <h5 class="font-bold text-emerald-950">Mise en équation / inéquation</h5>
+                    <p class="text-slate-700 text-[11px]">Traduire l'énoncé algébriquement.</p>
+                </div>
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                    <span class="font-extrabold text-emerald-700 text-xs">Étape 3</span>
+                    <h5 class="font-bold text-emerald-950">Résolution</h5>
+                    <p class="text-slate-700 text-[11px]">Isoler $x$ en appliquant les règles.</p>
+                </div>
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1">
+                    <span class="font-extrabold text-emerald-700 text-xs">Étape 4</span>
+                    <h5 class="font-bold text-emerald-950">Conclusion & Seuil</h5>
+                    <p class="text-slate-700 text-[11px]">Vérifier et répondre avec unités.</p>
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET SEUIL DE RENTABILITÉ (INÉQUATION) -->
+            <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4 text-xs shadow-lg border border-slate-800">
+                <div class="flex items-center justify-between">
+                    <span class="bg-emerald-500 text-slate-950 font-extrabold text-[10px] uppercase px-3 py-1 rounded-full">Cas Concret Seuil de Rentabilité</span>
+                    <span class="text-slate-400 text-xs font-medium">BTP / Maintenance / Industrie</span>
+                </div>
+
+                <h4 class="text-base font-bold font-heading text-emerald-400">Problématique : Déterminer la Seuil de Rentabilité d'un Service de Maintenance</h4>
+                <p class="text-slate-300 leading-relaxed">
+                    Une entreprise fabrique des composants électroniques. Le coût de fabrication hebdomadaire est $C(x) = 25x + 1200$ € (où $x$ est le nombre de pièces). Chaque composant est vendu 65 € (recette $R(x) = 65x$). <br>
+                    <em>À partir de combien de pièces vendues $x$ l'entreprise réalise-t-elle un bénéfice (c'est-à-dire $R(x) \geqslant C(x)$) ?</em>
+                </p>
+
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 space-y-2 font-mono text-slate-200">
+                    <p><strong class="text-sky-400">Étape 1 :</strong> Soit $x$ le nombre de pièces produites et vendues.</p>
+                    <p><strong class="text-sky-400">Étape 2 :</strong> $65x \geqslant 25x + 1200$.</p>
+                    <p><strong class="text-sky-400">Étape 3 :</strong> $65x - 25x \geqslant 1200 \implies 40x \geqslant 1200 \implies x \geqslant \frac{1200}{40} \implies \mathbf{x \geqslant 30}$.</p>
+                    <p><strong class="text-emerald-400">Étape 4 :</strong> L'entreprise devient rentable à partir de <strong>30 pièces produites et vendues par semaine</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTO-ÉVALUATION INTERACTIVE EN FIN DE COURS -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-check-double text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Auto-Évaluation Express (Testez vos réflexes)</h3>
+                    <p class="text-xs text-slate-500 font-medium">Vérification immédiate des connaissances Équations & Inéquations</p>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                <!-- Q1 -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <p class="font-bold text-slate-900">Question 1 : Si on divise les deux membres de $-4x \leqslant 20$ par $-4$, quel est l'ensemble solution ?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="alert('✅ Bravo ! On divise par un nombre négatif donc le sens change : x >= -5.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">A) x ≥ -5</button>
+                        <button onclick="alert('❌ Faux. N'oubliez pas de changer le sens de l'inégalité !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) x ≤ -5</button>
+                        <button onclick="alert('❌ Faux. 20 / (-4) = -5.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">C) x ≥ 5</button>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <p class="font-bold text-slate-900">Question 2 : Quelle est la solution de l'équation $(x - 4)(2x + 10) = 0$ ?</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="alert('✅ Bravo ! x = 4 ou x = -5.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">A) S = {-5 ; 4}</button>
+                        <button onclick="alert('❌ Faux. 2x + 10 = 0 donne x = -5.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) S = {4 ; 5}</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
