@@ -1,6 +1,4 @@
-const fs = require('fs');
-
-const content = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +25,7 @@ const content = `<!DOCTYPE html>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -162,8 +160,8 @@ const content = `<!DOCTYPE html>
                             <i class="fa-solid fa-plus-minus text-emerald-600"></i> RÈGLE 1 : Addition & Soustraction
                         </h5>
                         <p class="text-emerald-950 text-xs">
-                            On ne change pas les solutions d'une équation en <strong>ajoutant ou en retranchant un même nombre</strong> aux deux membres. <br>
-                            $\mathbf{A = B \iff A + c = B + c}$
+                            On ne change pas les solutions d'une équation en <strong>adding ou en retranchant un même nombre</strong> aux deux membres. <br>
+                            $A = B \iff A + c = B + c$
                         </p>
                     </div>
 
@@ -173,7 +171,7 @@ const content = `<!DOCTYPE html>
                         </h5>
                         <p class="text-indigo-950 text-xs">
                             On ne change pas les solutions d'une équation en <strong>multipliant ou en divisant par un même nombre non nul</strong> les deux membres. <br>
-                            $\mathbf{A = B \iff \frac{A}{k} = \frac{B}{k}} \quad (k \neq 0)$
+                            $A = B \iff \frac{A}{k} = \frac{B}{k} \quad (k \neq 0)$
                         </p>
                     </div>
                 </div>
@@ -286,7 +284,7 @@ const content = `<!DOCTYPE html>
                 <ul class="list-disc list-inside space-y-1 text-slate-800">
                     <li><strong>Erreur de signe lors d'un transfert :</strong> Quand un terme change de membre par addition ou soustraction, son signe CHANGE. Exemple : $+8$ devient $-8$.</li>
                     <li><strong>Confusion entre addition et multiplication :</strong> Pour l'équation $-3x = 12$, la solution est $x = \frac{12}{-3} = -4$ et NON PAS $x = 12 + 3$. Le signe moins du coefficient $-3$ ne change pas lors de la division !</li>
-                    <li><strong>Division par zéro :</strong> On ne peut jamais diviser par 0. Si on obtient $0x = 5$, l'équation n'a aucune solution ($\mathbf{S = \emptyset}$). Si on obtient $0x = 0$, tout nombre est solution ($\mathbf{S = \mathbb{R}}$).</li>
+                    <li><strong>Division par zéro :</strong> On ne peut jamais diviser par 0. Si on obtient $0x = 5$, l'équation n'a aucune solution ($mathbf{S = \emptyset}$). Si on obtient $0x = 0$, tout nombre est solution ($mathbf{S = \mathbb{R}}$).</li>
                 </ul>
             </div>
         </section>
@@ -309,7 +307,7 @@ const content = `<!DOCTYPE html>
                     </h4>
                     <p class="text-slate-800">
                         Un produit de facteurs est nul si et seulement si <strong>au moins l'un de ses facteurs est nul</strong>. <br>
-                        $\mathbf{A \times B = 0 \iff A = 0 \quad \text{ou} \quad B = 0}$
+                        $A \times B = 0 \iff A = 0 \quad \text{ou} \quad B = 0$
                     </p>
                 </div>
 
@@ -446,7 +444,7 @@ const content = `<!DOCTYPE html>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="alert('❌ Faux. Réfléchissez au signe lors de la division !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">A) x = -30</button>
                         <button onclick="alert('✅ Bravo ! x = 35 / (-5) = -7.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) x = -7</button>
-                        <button onclick="alert('❌ Faux. 35 / 5 = 7 mais l\'un des termes est négatif !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">C) x = 7</button>
+                        <button onclick="alert('❌ Faux. 35 / 5 = 7 mais l'un des termes est négatif !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">C) x = 7</button>
                     </div>
                 </div>
 
@@ -465,7 +463,4 @@ const content = `<!DOCTYPE html>
     </main>
 
 </body>
-</html>`;
-
-fs.writeFileSync('ressources/seconde/maths/equations-1er-degre/cours.html', content, 'utf8');
-console.log('Successfully updated cours.html for Seconde equations-1er-degre!');
+</html>
