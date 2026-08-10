@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = 'ressources/seconde/maths/equations-1er-degre';
+
+// Helper to escape backslashes for LaTeX in raw JS strings
+function raw(str) {
+    return str;
+}
+
+// ---------------------------------------------------------------------
+// 1. COURS.HTML
+// ---------------------------------------------------------------------
+const coursHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +38,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -77,7 +90,7 @@
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Module A2 : Équations & Inéquations</span>
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Résolution de Problèmes du 1er Degré</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes rigoureuses d'isolation de l'inconnue, résolution d'équations $ax + b = cx + d$, inéquations du 1er degré $ax + b \leqslant c$, règles de changement de sens, et résolution de problèmes professionnels avec contraintes de seuil.</p>
+                    <p class="text-sm text-slate-300 max-w-2xl">Méthodes rigoureuses d'isolation de l'inconnue, résolution d'équations $ax + b = cx + d$, inéquations du 1er degré $ax + b \\leqslant c$, règles de changement de sens, et résolution de problèmes professionnels avec contraintes de seuil.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -112,7 +125,7 @@
                         <i class="fa-solid fa-equals"></i> Définition d'une Équation du 1er Degré
                     </h4>
                     <p class="text-slate-800">
-                        Une <strong>équation du premier degré à une inconnue</strong> est une égalité de la forme $ax + b = 0$ (ou s'y ramenant), où $x$ représente la variable inconnue, et $a$ et $b$ sont des nombres réels donnés ($a \neq 0$). <br>
+                        Une <strong>équation du premier degré à une inconnue</strong> est une égalité de la forme $ax + b = 0$ (ou s'y ramenant), où $x$ représente la variable inconnue, et $a$ et $b$ sont des nombres réels donnés ($a \\neq 0$). <br>
                         • <strong>Le degré (1)</strong> signifie que la variable $x$ est élevée à la puissance 1 ($x^1$). <br>
                         • <strong>Résoudre l'équation</strong> consiste à trouver la valeur numérique de $x$ qui rend l'égalité exacte. Cette valeur est appelée la <strong>solution</strong>.
                     </p>
@@ -155,7 +168,7 @@
                         </h5>
                         <p class="text-emerald-950 text-xs">
                             On ne change pas les solutions d'une égalité en <strong>ajoutant ou en retranchant un même nombre</strong> aux deux membres. <br>
-                            $A = B \iff A + c = B + c$
+                            $A = B \\iff A + c = B + c$
                         </p>
                     </div>
 
@@ -165,7 +178,7 @@
                         </h5>
                         <p class="text-indigo-950 text-xs">
                             On ne change pas les solutions d'une égalité en <strong>multipliant ou en divisant par un même nombre non nul</strong> les deux membres. <br>
-                            $A = B \iff \f\frac{A}{k} = \f\frac{B}{k} \quad (k \neq 0)$
+                            $A = B \\iff \\frac{A}{k} = \\frac{B}{k} \\quad (k \\neq 0)$
                         </p>
                     </div>
                 </div>
@@ -212,12 +225,12 @@
                 <div class="bg-white p-5 rounded-xl border border-indigo-200 space-y-3 text-xs">
                     <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider">Exemple Type : $7x - 9 = 2x + 16$</h5>
                     <div class="space-y-2 font-mono text-slate-700 leading-relaxed">
-                        <p>🔹 Soustraire $2x$ : $\quad 7x - 2x - 9 = 16 \implies 5x - 9 = 16$</p>
-                        <p>🔹 Ajouter $9$ : $\quad 5x = 16 + 9 \implies 5x = 25$</p>
-                        <p>🔹 Diviser par $5$ : $\quad x = \f\frac{25}{5} \implies \mathbf{x = 5}$</p>
+                        <p>🔹 Soustraire $2x$ : $\\quad 7x - 2x - 9 = 16 \\implies 5x - 9 = 16$</p>
+                        <p>🔹 Ajouter $9$ : $\\quad 5x = 16 + 9 \\implies 5x = 25$</p>
+                        <p>🔹 Diviser par $5$ : $\\quad x = \\frac{25}{5} \\implies \\mathbf{x = 5}$</p>
                     </div>
                     <div class="p-3 bg-emerald-50 text-emerald-900 rounded-lg text-[11px] font-medium border border-emerald-200">
-                        ✅ <strong>Vérification :</strong> $7(5) - 9 = 26$ et $2(5) + 16 = 26$. La solution est $\mathbf{S} = \{5\}$.
+                        ✅ <strong>Vérification :</strong> $7(5) - 9 = 26$ et $2(5) + 16 = 26$. La solution est $\\mathbf{S = \\{5\\}}$.
                     </div>
                 </div>
             </div>
@@ -229,11 +242,11 @@
                 </h4>
                 <p class="text-slate-800">
                     Un produit de facteurs est nul si et seulement si <strong>au moins l'un de ses facteurs est nul</strong>. <br>
-                    $A \times B = 0 \iff A = 0 \quad \text{ou} \quad B = 0$
+                    $A \\times B = 0 \\iff A = 0 \\quad \\text{ou} \\quad B = 0$
                 </p>
                 <div class="bg-white p-4 rounded-xl border border-purple-200 font-mono text-slate-800">
-                    Exemple : $(2x - 8)(3x + 15) = 0 \iff 2x - 8 = 0 \text{ ou } 3x + 15 = 0 \implies x = 4 \text{ ou } x = -5$. <br>
-                    Solution : $\mathbf{S} = \{-5 \;;\; 4\}$.
+                    Exemple : $(2x - 8)(3x + 15) = 0 \\iff 2x - 8 = 0 \\text{ ou } 3x + 15 = 0 \\implies x = 4 \\text{ ou } x = -5$. <br>
+                    Solution : $\\mathbf{S = \\{-5 \\;;\\; 4\\}}$.
                 </div>
             </div>
         </section>
@@ -256,8 +269,8 @@
                     </h4>
                     <p class="text-slate-800">
                         Une <strong>inéquation du 1er degré</strong> est une inégalité comportant une inconnue $x$, utilisant l'un des 4 symboles d'inégalité : <br>
-                        • $<$ (strictement inférieur) $\q\quad$ • $\leqslant$ (inférieur ou égal) <br>
-                        • $>$ (strictement supérieur) $\q\quad$ • $\geqslant$ (supérieur ou égal) <br>
+                        • $<$ (strictement inférieur) $\\qquad$ • $\\leqslant$ (inférieur ou égal) <br>
+                        • $>$ (strictement supérieur) $\\qquad$ • $\\geqslant$ (supérieur ou égal) <br>
                         Résoudre une inéquation consiste à trouver un **ensemble d'intervalles de valeurs** de $x$ qui satisfont l'inégalité.
                     </p>
                 </div>
@@ -272,8 +285,8 @@
                             ⚠️ Quand on multiplie ou divise les deux membres d'une inéquation par un NOMBRE NÉGATIF, LE SENS DE L'INÉGALITÉ CHANGE OBLIGATOIREMENT !
                         </p>
                         <ul class="list-disc list-inside space-y-1 font-mono text-slate-800 text-[11px]">
-                            <li>Si $a < b$ et $k < 0$, alors $\mathbf{k \times a > k \times b}$ (Le symbole $<$ devient $>$).</li>
-                            <li>Si $-3x \leqslant 15$, alors $x \geqslant \f\frac{15}{-3} \implies \mathbf{x \geqslant -5}$ (Le symbole $\leqslant$ devient $\geqslant$).</li>
+                            <li>Si $a < b$ et $k < 0$, alors $\mathbf{k \\times a > k \\times b}$ (Le symbole $<$ devient $>$).</li>
+                            <li>Si $-3x \\leqslant 15$, alors $x \\geqslant \\frac{15}{-3} \\implies \mathbf{x \\geqslant -5}$ (Le symbole $\\leqslant$ devient $\\geqslant$).</li>
                         </ul>
                     </div>
                 </div>
@@ -283,11 +296,11 @@
                     <!-- Exemple 1 Inéquation avec k > 0 -->
                     <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                         <span class="bg-emerald-600 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">Exemple 1 • k positif (Pas de changement)</span>
-                        <h5 class="font-bold text-slate-900">Résoudre $4x - 7 \leqslant 13$</h5>
+                        <h5 class="font-bold text-slate-900">Résoudre $4x - 7 \\leqslant 13$</h5>
                         <div class="space-y-1 font-mono text-slate-800 text-xs">
-                            <p>$4x \leqslant 13 + 7 \implies 4x \leqslant 20$</p>
-                            <p>$x \leqslant \f\frac{20}{4} \implies \mathbf{x \leqslant 5}$</p>
-                            <p class="text-emerald-700 font-sans font-bold pt-1">Intervalle de solutions : $\mathbf{S} = ]-\infty \;;\; 5]$</p>
+                            <p>$4x \\leqslant 13 + 7 \\implies 4x \\leqslant 20$</p>
+                            <p>$x \\leqslant \\frac{20}{4} \\implies \\mathbf{x \\leqslant 5}$</p>
+                            <p class="text-emerald-700 font-sans font-bold pt-1">Intervalle de solutions : $\mathbf{S = ]-\\infty \\;;\\; 5]}$</p>
                         </div>
                     </div>
 
@@ -296,9 +309,9 @@
                         <span class="bg-rose-600 text-white font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">Exemple 2 • k négatif (Changement de sens !)</span>
                         <h5 class="font-bold text-slate-900">Résoudre $-2x + 9 < 19$</h5>
                         <div class="space-y-1 font-mono text-slate-800 text-xs">
-                            <p>$-2x < 19 - 9 \implies -2x < 10$</p>
-                            <p class="text-rose-700 font-bold">$x > \f\frac{10}{-2} \implies \mathbf{x > -5}$ (Changement de $<$ en $>$ !)</p>
-                            <p class="text-emerald-700 font-sans font-bold pt-1">Intervalle de solutions : $\mathbf{S} = ]-5 \;;\; +\infty[$</p>
+                            <p>$-2x < 19 - 9 \\implies -2x < 10$</p>
+                            <p class="text-rose-700 font-bold">$x > \\frac{10}{-2} \\implies \\mathbf{x > -5}$ (Changement de $<$ en $>$ !)</p>
+                            <p class="text-emerald-700 font-sans font-bold pt-1">Intervalle de solutions : $\mathbf{S = ]-5 \\;;\\; +\\infty[}$</p>
                         </div>
                     </div>
                 </div>
@@ -306,7 +319,7 @@
                 <!-- SCHÉMA SVG : DROITE GRADUÉE REPRÉSENTATION -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
                     <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-rose-600"></i> Représentation Graphique des Solutions sur Droite Graduée ($x \geqslant -5$)
+                        <i class="fa-solid fa-chart-line text-rose-600"></i> Représentation Graphique des Solutions sur Droite Graduée ($x \\geqslant -5$)
                     </h4>
                     <div class="py-4 bg-white rounded-xl border border-slate-200 text-center">
                         <svg width="420" height="70" viewBox="0 0 420 70" class="mx-auto font-sans">
@@ -344,28 +357,28 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
                     <span class="bg-yellow-100 text-yellow-800 font-bold text-[10px] px-2 py-0.5 rounded">Électricité</span>
-                    <h5 class="font-bold text-slate-900">Loi d'Ohm : $U = R \times I$</h5>
+                    <h5 class="font-bold text-slate-900">Loi d'Ohm : $U = R \\times I$</h5>
                     <ul class="space-y-1 text-slate-600 text-[11px]">
-                        <li>• Calcul de $R$ : $\mathbf{R = \f\frac{U}{I}}$</li>
-                        <li>• Calcul de $I$ : $\mathbf{I = \f\frac{U}{R}}$</li>
+                        <li>• Calcul de $R$ : $\\mathbf{R = \\frac{U}{I}}$</li>
+                        <li>• Calcul de $I$ : $\\mathbf{I = \\frac{U}{R}}$</li>
                     </ul>
                 </div>
 
                 <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
                     <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-2 py-0.5 rounded">Cinématique</span>
-                    <h5 class="font-bold text-slate-900">Vitesse : $v = \f\frac{d}{t}$</h5>
+                    <h5 class="font-bold text-slate-900">Vitesse : $v = \\frac{d}{t}$</h5>
                     <ul class="space-y-1 text-slate-600 text-[11px]">
-                        <li>• Distance : $\mathbf{d = v \times t}$</li>
-                        <li>• Temps : $\mathbf{t = \f\frac{d}{v}}$</li>
+                        <li>• Distance : $\\mathbf{d = v \\times t}$</li>
+                        <li>• Temps : $\\mathbf{t = \\frac{d}{v}}$</li>
                     </ul>
                 </div>
 
                 <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
                     <span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded">Hydraulique</span>
-                    <h5 class="font-bold text-slate-900">Pression : $P = \f\frac{F}{S}$</h5>
+                    <h5 class="font-bold text-slate-900">Pression : $P = \\frac{F}{S}$</h5>
                     <ul class="space-y-1 text-slate-600 text-[11px]">
-                        <li>• Force : $\mathbf{F = P \times S}$</li>
-                        <li>• Surface : $\mathbf{S} = \f\frac{F{P}}$</li>
+                        <li>• Force : $\\mathbf{F = P \\times S}$</li>
+                        <li>• Surface : $\\mathbf{S = \\frac{F}{P}}$</li>
                     </ul>
                 </div>
             </div>
@@ -414,13 +427,13 @@
                 <h4 class="text-base font-bold font-heading text-emerald-400">Problématique : Déterminer le Seuil de Rentabilité d'une Production</h4>
                 <p class="text-slate-300 leading-relaxed">
                     Une entreprise fabrique des composants électroniques. Le coût de fabrication hebdomadaire est $C(x) = 25x + 1200$ € (où $x$ est le nombre de pièces). Chaque composant est vendu 65 € (recette $R(x) = 65x$). <br>
-                    <em>À partir de combien de pièces vendues $x$ l'entreprise réalise-t-elle un bénéfice ($R(x) \geqslant C(x)$) ?</em>
+                    <em>À partir de combien de pièces vendues $x$ l'entreprise réalise-t-elle un bénéfice ($R(x) \\geqslant C(x)$) ?</em>
                 </p>
 
                 <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 space-y-2 font-mono text-slate-200">
                     <p><strong class="text-sky-400">Étape 1 :</strong> Soit $x$ le nombre de pièces produites et vendues.</p>
-                    <p><strong class="text-sky-400">Étape 2 :</strong> $65x \geqslant 25x + 1200$.</p>
-                    <p><strong class="text-sky-400">Étape 3 :</strong> $65x - 25x \geqslant 1200 \implies 40x \geqslant 1200 \implies x \geqslant \f\frac{1200}{40} \implies \mathbf{x \geqslant 30}$.</p>
+                    <p><strong class="text-sky-400">Étape 2 :</strong> $65x \\geqslant 25x + 1200$.</p>
+                    <p><strong class="text-sky-400">Étape 3 :</strong> $65x - 25x \\geqslant 1200 \\implies 40x \\geqslant 1200 \\implies x \\geqslant \\frac{1200}{40} \\implies \\mathbf{x \\geqslant 30}$.</p>
                     <p><strong class="text-emerald-400">Étape 4 :</strong> L'entreprise devient rentable à partir de <strong>30 pièces produites et vendues par semaine</strong>.</p>
                 </div>
             </div>
@@ -441,10 +454,10 @@
             <div class="space-y-4 text-xs">
                 <!-- Q1 -->
                 <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <p class="font-bold text-slate-900">Question 1 : Si on divise les deux membres de $-4x \leqslant 20$ par $-4$, quel est l'ensemble solution ?</p>
+                    <p class="font-bold text-slate-900">Question 1 : Si on divise les deux membres de $-4x \\leqslant 20$ par $-4$, quel est l'ensemble solution ?</p>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="alert('✅ Bravo ! On divise par un nombre négatif donc le sens change : x >= -5.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">A) x ≥ -5</button>
-                        <button onclick="alert('❌ Faux. N'oubliez pas de changer le sens de l'inégalité !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) x ≤ -5</button>
+                        <button onclick="alert('❌ Faux. N\'oubliez pas de changer le sens de l\'inégalité !')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">B) x ≤ -5</button>
                         <button onclick="alert('❌ Faux. 20 / (-4) = -5.')" class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg hover:bg-slate-100">C) x ≥ 5</button>
                     </div>
                 </div>
@@ -463,4 +476,7 @@
     </main>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'cours.html'), coursHtml, 'utf8');
+console.log('Rebuilt cours.html');
