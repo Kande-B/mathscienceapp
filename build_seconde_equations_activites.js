@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const content = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -113,7 +115,7 @@
                             Sur un banc d'essai de maintenance industrielle, un technicien analyse le circuit hydraulique de refroidissement d'un moteur de forte puissance. <br>
                             Pour garantir un fonctionnement optimal sans surchauffe, le débit total d'eau nécessaire est fixé à <strong>2 250 Litres par heure (L/h)</strong>. <br>
                             Le système est alimenté par une pompe principale à débit fixe de <strong>450 L/h</strong> et par 3 pompes auxiliaires modulables identiques. Chaque pompe auxiliaire apporte un débit supplémentaire proportionnel au régime $x$ (exprimé en % de commande). <br>
-                            La relation globale s'écrit : $mathbf{120x + 450 = 2250}$.
+                            La relation globale s'écrit : $\mathbf{120x + 450 = 2250}$.
                         </p>
                     </div>
                 </div>
@@ -135,7 +137,7 @@
                     <p class="font-semibold text-slate-900">2. Isoler le terme en $x$ en retranchant 450 de chaque côté de l'égalité.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-emerald-700">Afficher la résolution étape 1</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$120x = 2250 - 450 implies 120x = 1800$.</p>
+                        <p class="mt-2 text-slate-800 font-mono">$120x = 2250 - 450 \implies 120x = 1800$.</p>
                     </details>
                 </div>
 
@@ -144,7 +146,7 @@
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-emerald-700">Afficher la réponse complète</summary>
                         <div class="mt-2 space-y-1 text-slate-800">
-                            <p class="font-mono">$x = rac{1800}{120} = 15$.</p>
+                            <p class="font-mono">$x = \frac{1800}{120} = 15$.</p>
                             <p class="text-emerald-800 font-semibold">Conclusion : Le technicien doit régler les pompes auxiliaires à un régime de <strong>15 %</strong>.</p>
                         </div>
                     </details>
@@ -178,7 +180,7 @@
                         <p class="text-slate-700 mt-1">
                             Dans un atelier de sous-traitance industrielle, un chaudronnier doit fabriquer un cadre rectangulaire de structure en tube acier de longueur totale développée <strong>320 cm</strong>. <br>
                             Le cahier des charges impose que la longueur $L$ du cadre dépasse sa largeur $x$ de exactement <strong>40 cm</strong> ($L = x + 40$). <br>
-                            Le périmètre de la structure s'exprime par la formule : $P = 2 	imes (L + x) = 320$.
+                            Le périmètre de la structure s'exprime par la formule : $P = 2 \times (L + x) = 320$.
                         </p>
                     </div>
                 </div>
@@ -200,7 +202,7 @@
                     <p class="font-semibold text-slate-900">2. Résoudre l'équation $4x + 80 = 320$ pour déterminer la largeur $x$.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-amber-700">Afficher la résolution</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$4x = 320 - 80 = 240 implies x = rac{240}{4} = 60$ cm.</p>
+                        <p class="mt-2 text-slate-800 font-mono">$4x = 320 - 80 = 240 \implies x = \frac{240}{4} = 60$ cm.</p>
                     </details>
                 </div>
 
@@ -208,7 +210,7 @@
                     <p class="font-semibold text-slate-900">3. En déduire la longueur $L$ et vérifier le périmètre total.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-amber-700">Afficher le contrôle final</summary>
-                        <p class="mt-2 text-slate-800">$L = 60 + 40 = 100$ cm. Vérification : $2 	imes (100 + 60) = 2 	imes 160 = 320$ cm. $quad checkmark$</p>
+                        <p class="mt-2 text-slate-800">$L = 60 + 40 = 100$ cm. Vérification : $2 \times (100 + 60) = 2 \times 160 = 320$ cm. $\quad \checkmark$</p>
                     </details>
                 </div>
             </div>
@@ -255,7 +257,7 @@
                     <p class="font-semibold text-slate-900">1. Exprimer en fonction de $x$ le coût total $C_A(x)$ pour l'entreprise ALPHA et $C_B(x)$ pour l'entreprise BÊTA.</p>
                     <details class="text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
                         <summary class="cursor-pointer font-bold text-purple-700">Afficher les expressions</summary>
-                        <p class="mt-2 text-slate-800 font-mono">$C_A(x) = 40x + 180 quad 	ext{et} quad C_B(x) = 65x$.</p>
+                        <p class="mt-2 text-slate-800 font-mono">$C_A(x) = 40x + 180 \quad \text{et} \quad C_B(x) = 65x$.</p>
                     </details>
                 </div>
 
@@ -265,7 +267,7 @@
                         <summary class="cursor-pointer font-bold text-purple-700">Afficher la résolution complète</summary>
                         <div class="mt-2 space-y-1 text-slate-800 font-mono">
                             <p>$40x + 180 = 65x$</p>
-                            <p>$180 = 65x - 40x implies 25x = 180 implies x = rac{180}{25} = mathbf{7,2 	ext{ jours}}$.</p>
+                            <p>$180 = 65x - 40x \implies 25x = 180 \implies x = \frac{180}{25} = \mathbf{7,2 \text{ jours}}$.</p>
                         </div>
                     </details>
                 </div>
@@ -286,4 +288,7 @@
     </main>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('ressources/seconde/maths/equations-1er-degre/activites.html', content, 'utf8');
+console.log('Successfully updated activites.html for Seconde equations-1er-degre!');

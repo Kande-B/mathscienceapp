@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const content = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -97,21 +99,21 @@
                     <span class="font-bold text-indigo-700 uppercase tracking-wider text-xs bg-indigo-50 px-3 py-1 rounded-full">Exercice 1 • Équations élémentaires à 1 étape</span>
                     <span class="text-slate-400 font-medium">Capacité C3 • 4 points</span>
                 </div>
-                <p class="font-bold text-slate-900">Résoudre dans $mathbb{R}$ les 4 équations suivantes :</p>
+                <p class="font-bold text-slate-900">Résoudre dans $\mathbb{R}$ les 4 équations suivantes :</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-slate-800">
                     <p>a) $x + 18 = 45$</p>
                     <p>b) $x - 27 = -12$</p>
                     <p>c) $-7x = 56$</p>
-                    <p>d) $rac{x}{6} = -9$</p>
+                    <p>d) $\frac{x}{6} = -9$</p>
                 </div>
 
                 <details class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <summary class="cursor-pointer font-bold text-indigo-700 hover:text-indigo-900">Consulter les corrigés étape par étape</summary>
                     <div class="mt-3 space-y-2 font-mono text-slate-700 leading-relaxed border-t border-slate-200 pt-3">
-                        <p>a) $x = 45 - 18 implies mathbf{x = 27}$</p>
-                        <p>b) $x = -12 + 27 implies mathbf{x = 15}$</p>
-                        <p>c) $x = rac{56}{-7} implies mathbf{x = -8}$</p>
-                        <p>d) $x = -9 	imes 6 implies mathbf{x = -54}$</p>
+                        <p>a) $x = 45 - 18 \implies \mathbf{x = 27}$</p>
+                        <p>b) $x = -12 + 27 \implies \mathbf{x = 15}$</p>
+                        <p>c) $x = \frac{56}{-7} \implies \mathbf{x = -8}$</p>
+                        <p>d) $x = -9 \times 6 \implies \mathbf{x = -54}$</p>
                     </div>
                 </details>
             </section>
@@ -133,10 +135,10 @@
                 <details class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <summary class="cursor-pointer font-bold text-indigo-700 hover:text-indigo-900">Consulter les corrigés étape par étape</summary>
                     <div class="mt-3 space-y-2 font-mono text-slate-700 leading-relaxed border-t border-slate-200 pt-3">
-                        <p>a) $5x = 36 + 14 = 50 implies x = rac{50}{5} implies mathbf{x = 10}$</p>
-                        <p>b) $-3x = 9 - 21 = -12 implies x = rac{-12}{-3} implies mathbf{x = 4}$</p>
-                        <p>c) $8x = 13 - 45 = -32 implies x = rac{-32}{8} implies mathbf{x = -4}$</p>
-                        <p>d) $-2x = -41 + 17 = -24 implies x = rac{-24}{-2} implies mathbf{x = 12}$</p>
+                        <p>a) $5x = 36 + 14 = 50 \implies x = \frac{50}{5} \implies \mathbf{x = 10}$</p>
+                        <p>b) $-3x = 9 - 21 = -12 \implies x = \frac{-12}{-3} \implies \mathbf{x = 4}$</p>
+                        <p>c) $8x = 13 - 45 = -32 \implies x = \frac{-32}{8} \implies \mathbf{x = -4}$</p>
+                        <p>d) $-2x = -41 + 17 = -24 \implies x = \frac{-24}{-2} \implies \mathbf{x = 12}$</p>
                     </div>
                 </details>
             </section>
@@ -158,10 +160,10 @@
                 <details class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <summary class="cursor-pointer font-bold text-indigo-700 hover:text-indigo-900">Consulter les corrigés étape par étape</summary>
                     <div class="mt-3 space-y-2 font-mono text-slate-700 leading-relaxed border-t border-slate-200 pt-3">
-                        <p>a) $9x - 4x = 24 + 11 implies 5x = 35 implies mathbf{x = 7}$</p>
-                        <p>b) $3x - 7x = -10 - 18 implies -4x = -28 implies mathbf{x = 7}$</p>
-                        <p>c) $-5x - 2x = -13 - 8 implies -7x = -21 implies mathbf{x = 3}$</p>
-                        <p>d) $-4x - 6x = 42 - 12 implies -10x = 30 implies mathbf{x = -3}$</p>
+                        <p>a) $9x - 4x = 24 + 11 \implies 5x = 35 \implies \mathbf{x = 7}$</p>
+                        <p>b) $3x - 7x = -10 - 18 \implies -4x = -28 \implies \mathbf{x = 7}$</p>
+                        <p>c) $-5x - 2x = -13 - 8 \implies -7x = -21 \implies \mathbf{x = 3}$</p>
+                        <p>d) $-4x - 6x = 42 - 12 \implies -10x = 30 \implies \mathbf{x = -3}$</p>
                     </div>
                 </details>
             </section>
@@ -181,8 +183,8 @@
                 <details class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <summary class="cursor-pointer font-bold text-indigo-700 hover:text-indigo-900">Consulter les corrigés étape par étape</summary>
                     <div class="mt-3 space-y-2 font-mono text-slate-700 leading-relaxed border-t border-slate-200 pt-3">
-                        <p>a) $4x - 12 = 28 implies 4x = 40 implies mathbf{x = 10}$</p>
-                        <p>b) $6x + 15 = 5x + 35 implies 6x - 5x = 35 - 15 implies mathbf{x = 20}$</p>
+                        <p>a) $4x - 12 = 28 \implies 4x = 40 \implies \mathbf{x = 10}$</p>
+                        <p>b) $6x + 15 = 5x + 35 \implies 6x - 5x = 35 - 15 \implies \mathbf{x = 20}$</p>
                     </div>
                 </details>
             </section>
@@ -193,7 +195,7 @@
                     <span class="font-bold text-indigo-700 uppercase tracking-wider text-xs bg-indigo-50 px-3 py-1 rounded-full">Exercice 5 • Équations Produit Nul</span>
                     <span class="text-slate-400 font-medium">Capacité C3 • 3 points</span>
                 </div>
-                <p class="font-bold text-slate-900">Résoudre dans $mathbb{R}$ :</p>
+                <p class="font-bold text-slate-900">Résoudre dans $\mathbb{R}$ :</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-slate-800">
                     <p>a) $(x - 8)(2x + 14) = 0$</p>
                     <p>b) $(5x - 20)(3 - x) = 0$</p>
@@ -202,8 +204,8 @@
                 <details class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <summary class="cursor-pointer font-bold text-indigo-700 hover:text-indigo-900">Consulter les corrigés étape par étape</summary>
                     <div class="mt-3 space-y-2 font-mono text-slate-700 leading-relaxed border-t border-slate-200 pt-3">
-                        <p>a) $x - 8 = 0 implies x = 8$ ou $2x + 14 = 0 implies x = -7$. $quad mathbf{S = {-7 ;;; 8}}$</p>
-                        <p>b) $5x - 20 = 0 implies x = 4$ ou $3 - x = 0 implies x = 3$. $quad mathbf{S = {3 ;;; 4}}$</p>
+                        <p>a) $x - 8 = 0 \implies x = 8$ ou $2x + 14 = 0 \implies x = -7$. $\quad \mathbf{S = \{-7 \;;\; 8\}}$</p>
+                        <p>b) $5x - 20 = 0 \implies x = 4$ ou $3 - x = 0 \implies x = 3$. $\quad \mathbf{S = \{3 \;;\; 4\}}$</p>
                     </div>
                 </details>
             </section>
@@ -216,15 +218,15 @@
                 </div>
                 <p class="font-bold text-slate-900">Exprimer la grandeur demandée en fonction des autres :</p>
                 <div class="space-y-2 text-slate-800">
-                    <p>a) Électricité : $P = U 	imes I$. Exprimer l'intensité $I$. Calculer $I$ pour $P = 2300$ W et $U = 230$ V.</p>
-                    <p>b) Pression : $P = rac{F}{S}$. Exprimer la force $F$. Calculer $F$ si $P = 500,000$ Pa et $S = 0,02 	ext{ m}^2$.</p>
+                    <p>a) Électricité : $P = U \times I$. Exprimer l'intensité $I$. Calculer $I$ pour $P = 2300$ W et $U = 230$ V.</p>
+                    <p>b) Pression : $P = \frac{F}{S}$. Exprimer la force $F$. Calculer $F$ si $P = 500\,000$ Pa et $S = 0,02 \text{ m}^2$.</p>
                 </div>
 
                 <details class="bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <summary class="cursor-pointer font-bold text-indigo-700 hover:text-indigo-900">Consulter les corrigés étape par étape</summary>
                     <div class="mt-3 space-y-2 font-mono text-slate-700 leading-relaxed border-t border-slate-200 pt-3">
-                        <p>a) $I = rac{P}{U}$. Application numérique : $I = rac{2300}{230} = mathbf{10 	ext{ A}}$.</p>
-                        <p>b) $F = P 	imes S$. Application numérique : $F = 500,000 	imes 0,02 = mathbf{10,000 	ext{ N}}$.</p>
+                        <p>a) $I = \frac{P}{U}$. Application numérique : $I = \frac{2300}{230} = \mathbf{10 \text{ A}}$.</p>
+                        <p>b) $F = P \times S$. Application numérique : $F = 500\,000 \times 0,02 = \mathbf{10\,000 \text{ N}}$.</p>
                     </div>
                 </details>
             </section>
@@ -245,7 +247,7 @@
                     <summary class="cursor-pointer font-bold text-emerald-700 hover:text-emerald-900">Consulter la correction détaillée</summary>
                     <div class="mt-3 space-y-2 text-slate-700 border-t border-slate-200 pt-3">
                         <p class="font-mono">1. Équation : $18x + 75 = 255$.</p>
-                        <p class="font-mono">2. Résolution : $18x = 255 - 75 = 180 implies x = rac{180}{18} = 10$.</p>
+                        <p class="font-mono">2. Résolution : $18x = 255 - 75 = 180 \implies x = \frac{180}{18} = 10$.</p>
                         <p class="font-bold text-emerald-800">Conclusion : Le technicien a acheté <strong>10 bidons d'huile</strong>.</p>
                     </div>
                 </details>
@@ -266,8 +268,8 @@
                     <summary class="cursor-pointer font-bold text-amber-700 hover:text-amber-900">Consulter la correction détaillée</summary>
                     <div class="mt-3 space-y-2 text-slate-700 border-t border-slate-200 pt-3">
                         <p>• Soit $x$ la longueur du 1er morceau. Le 2ème morceau mesure $3x + 30$.</p>
-                        <p class="font-mono">• Équation : $x + (3x + 30) = 210 implies 4x + 30 = 210 implies 4x = 180 implies x = 45$ cm.</p>
-                        <p class="font-bold text-amber-800">• Conclusion : Le 1er morceau mesure <strong>45 cm</strong> et le 2ème mesure $3(45)+30 = mathbf{165 	ext{ cm}}$. (Total $45+165 = 210$ cm $checkmark$).</p>
+                        <p class="font-mono">• Équation : $x + (3x + 30) = 210 \implies 4x + 30 = 210 \implies 4x = 180 \implies x = 45$ cm.</p>
+                        <p class="font-bold text-amber-800">• Conclusion : Le 1er morceau mesure <strong>45 cm</strong> et le 2ème mesure $3(45)+30 = \mathbf{165 \text{ cm}}$. (Total $45+165 = 210$ cm $\checkmark$).</p>
                     </div>
                 </details>
             </section>
@@ -276,4 +278,7 @@
     </main>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('ressources/seconde/maths/equations-1er-degre/td.html', content, 'utf8');
+console.log('Successfully updated td.html for Seconde equations-1er-degre!');

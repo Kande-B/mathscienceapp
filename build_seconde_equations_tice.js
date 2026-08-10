@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const content = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -166,7 +168,7 @@
 
                 <div class="p-5 bg-purple-50 border border-purple-200 rounded-2xl space-y-2 text-purple-950">
                     <h5 class="font-bold text-xs flex items-center gap-1.5"><i class="fa-solid fa-crosshairs"></i> Étape 3 : Outil Intersection</h5>
-                    <p class="text-xs">Sélectionner l'outil <strong>Intersection</strong> et cliquer sur les deux droites. GeoGebra place le point $A(10 ;;; 45)$. <br>
+                    <p class="text-xs">Sélectionner l'outil <strong>Intersection</strong> et cliquer sur les deux droites. GeoGebra place le point $A(10 \;;\; 45)$. <br>
                     <strong>Conclusion :</strong> L'abscisse $x = 10$ du point d'intersection $A$ est la solution exacte de l'équation !</p>
                 </div>
             </div>
@@ -175,4 +177,7 @@
     </main>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('ressources/seconde/maths/equations-1er-degre/tice.html', content, 'utf8');
+console.log('Successfully updated tice.html for Seconde equations-1er-degre!');

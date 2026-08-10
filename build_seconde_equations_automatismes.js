@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const content = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -137,7 +139,7 @@
                         <div class="backface-hidden rotate-y-180 absolute inset-0 bg-emerald-600 text-white rounded-2xl p-5 flex flex-col justify-between shadow-md">
                             <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-200">Réponse 2</span>
                             <div class="text-center font-bold text-sm leading-relaxed">
-                                $x = rac{28}{-4}$ <br>
+                                $x = \frac{28}{-4}$ <br>
                                 <span class="text-xl text-yellow-300 font-mono">$x = -7$</span>
                             </div>
                             <span class="text-[10px] text-emerald-200 text-center">Division par un nombre négatif</span>
@@ -169,14 +171,14 @@
                     <div class="transform-style-3d relative w-full h-full">
                         <div class="backface-hidden absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-5 flex flex-col justify-between border border-slate-700 shadow-md">
                             <span class="text-[10px] font-extrabold uppercase tracking-widest text-yellow-400">Flashcard 4</span>
-                            <div class="text-center font-bold text-base">Inverser la formule : <br><span class="text-sky-300">$U = R 	imes I implies R = ?$</span></div>
+                            <div class="text-center font-bold text-base">Inverser la formule : <br><span class="text-sky-300">$U = R \times I \implies R = ?$</span></div>
                             <span class="text-[10px] text-slate-400 text-center">Cliquez pour voir le verso <i class="fa-solid fa-rotate mr-1"></i></span>
                         </div>
                         <div class="backface-hidden rotate-y-180 absolute inset-0 bg-emerald-600 text-white rounded-2xl p-5 flex flex-col justify-between shadow-md">
                             <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-200">Réponse 4</span>
                             <div class="text-center font-bold text-sm leading-relaxed">
                                 On divise par $I$ : <br>
-                                <span class="text-xl text-yellow-300 font-mono">$R = rac{U}{I}$</span>
+                                <span class="text-xl text-yellow-300 font-mono">$R = \frac{U}{I}$</span>
                             </div>
                             <span class="text-[10px] text-emerald-200 text-center">Formule Électricité (Loi d'Ohm)</span>
                         </div>
@@ -194,7 +196,7 @@
                         <div class="backface-hidden rotate-y-180 absolute inset-0 bg-emerald-600 text-white rounded-2xl p-5 flex flex-col justify-between shadow-md">
                             <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-200">Réponse 5</span>
                             <div class="text-center font-bold text-sm leading-relaxed">
-                                $5x - 2x = 18 implies 3x = 18$ <br>
+                                $5x - 2x = 18 \implies 3x = 18$ <br>
                                 <span class="text-xl text-yellow-300 font-mono">$x = 6$</span>
                             </div>
                             <span class="text-[10px] text-emerald-200 text-center">Regroupement des termes en $x$</span>
@@ -213,8 +215,8 @@
                         <div class="backface-hidden rotate-y-180 absolute inset-0 bg-emerald-600 text-white rounded-2xl p-5 flex flex-col justify-between shadow-md">
                             <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-200">Réponse 6</span>
                             <div class="text-center font-bold text-sm leading-relaxed">
-                                $x - 9 = 0 	ext{ ou } x + 4 = 0$ <br>
-                                <span class="text-xl text-yellow-300 font-mono">$S = {9 ;;; -4}$</span>
+                                $x - 9 = 0 \text{ ou } x + 4 = 0$ <br>
+                                <span class="text-xl text-yellow-300 font-mono">$S = \{9 \;;\; -4\}$</span>
                             </div>
                             <span class="text-[10px] text-emerald-200 text-center">Équation Produit Nul</span>
                         </div>
@@ -282,7 +284,7 @@
 
                 <!-- Q5 -->
                 <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 space-y-2">
-                    <p class="font-bold text-white">Q5 (2 pts) : Si $v = rac{d}{t}$, que vaut $d$ ?</p>
+                    <p class="font-bold text-white">Q5 (2 pts) : Si $v = \frac{d}{t}$, que vaut $d$ ?</p>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="checkAnswer(this, 5, true, 2)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors">A) d = v x t</button>
                         <button onclick="checkAnswer(this, 5, false, 2)" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors">B) d = v / t</button>
@@ -321,4 +323,7 @@
     </script>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('ressources/seconde/maths/equations-1er-degre/automatismes.html', content, 'utf8');
+console.log('Successfully updated automatismes.html for Seconde equations-1er-degre!');
