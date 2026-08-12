@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'geometrie-plane-trigonometrie');
+
+const tdHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -119,7 +124,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un camion de livraison possède une rampe arrière inclinée d'un angle $\alpha = 25^\circ$ par rapport au sol. La longueur de la rampe aluminium est $L = 3{,}50\text{ m}$ (hypoténuse).</p>
+                        <p>Un camion de livraison possède une rampe arrière inclinée d'un angle $\\alpha = 25^\\circ$ par rapport au sol. La longueur de la rampe aluminium est $L = 3{,}50\\text{ m}$ (hypoténuse).</p>
                         <p class="font-bold text-slate-900">1. Calculer la hauteur $h$ du plateau de chargement au centimètre près.<br>2. Écrire la formule trigonométrique utilisée (SOH).</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
@@ -142,9 +147,9 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 1
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>• <strong>Formule du Sinus (SOH) :</strong> $\sin(\alpha) = \frac{\text{Côté Opposé}}{\text{Hypoténuse}} = \frac{h}{L}$.</p>
-                        <p>• <strong>Application numérique :</strong> $\sin(25^\circ) = \frac{h}{3{,}50} \implies h = 3{,}50 \times \sin(25^\circ)$.</p>
-                        <p>• <strong>Calcul calculatrice (DEG) :</strong> $h = 3{,}50 \times 0{,}4226 \approx \mathbf{1{,}48\text{ m}}$ (soit $148\text{ cm}$).</p>
+                        <p>• <strong>Formule du Sinus (SOH) :</strong> $\\sin(\\alpha) = \\frac{\\text{Côté Opposé}}{\\text{Hypoténuse}} = \\frac{h}{L}$.</p>
+                        <p>• <strong>Application numérique :</strong> $\\sin(25^\\circ) = \\frac{h}{3{,}50} \\implies h = 3{,}50 \\times \\sin(25^\\circ)$.</p>
+                        <p>• <strong>Calcul calculatrice (DEG) :</strong> $h = 3{,}50 \\times 0{,}4226 \\approx \\mathbf{1{,}48\\text{ m}}$ (soit $148\\text{ cm}$).</p>
                     </div>
                 </details>
             </div>
@@ -161,8 +166,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Une ferme de charpente symétrique comporte deux pans inclinés à $\alpha = 32^\circ$. La largeur au sol du bâtiment est $B = 10{,}00\text{ m}$, soit une demi-largeur $b = 5{,}00\text{ m}$ (côté adjacents).</p>
-                        <p class="font-bold text-slate-900">1. Calculer la longueur exacte de l'arbalétrier $R$ (hypoténuse).<br>2. Le bâtiment mesure $12{,}00\text{ m}$ de long. Calculer la surface totale de toiture des 2 pans.</p>
+                        <p>Une ferme de charpente symétrique comporte deux pans inclinés à $\\alpha = 32^\\circ$. La largeur au sol du bâtiment est $B = 10{,}00\\text{ m}$, soit une demi-largeur $b = 5{,}00\\text{ m}$ (côté adjacents).</p>
+                        <p class="font-bold text-slate-900">1. Calculer la longueur exacte de l'arbalétrier $R$ (hypoténuse).<br>2. Le bâtiment mesure $12{,}00\\text{ m}$ de long. Calculer la surface totale de toiture des 2 pans.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -182,9 +187,9 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 2
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Formule du Cosinus (CAH) :</strong> $\cos(32^\circ) = \frac{b}{R} \implies R = \frac{5{,}00}{\cos(32^\circ)} = \frac{5{,}00}{0{,}8480} = \mathbf{5{,}90\text{ m}}$.</p>
-                        <p>2. <strong>Surface de 1 pan :</strong> $S_1 = 5{,}90 \times 12{,}00 = 70{,}80\text{ m}^2$.</p>
-                        <p>3. <strong>Surface totale (2 pans) :</strong> $S_{\text{tot}} = 2 \times 70{,}80 = \mathbf{141{,}60\text{ m}^2}$.</p>
+                        <p>1. <strong>Formule du Cosinus (CAH) :</strong> $\\cos(32^\\circ) = \\frac{b}{R} \\implies R = \\frac{5{,}00}{\\cos(32^\\circ)} = \\frac{5{,}00}{0{,}8480} = \\mathbf{5{,}90\\text{ m}}$.</p>
+                        <p>2. <strong>Surface de 1 pan :</strong> $S_1 = 5{,}90 \\times 12{,}00 = 70{,}80\\text{ m}^2$.</p>
+                        <p>3. <strong>Surface totale (2 pans) :</strong> $S_{\\text{tot}} = 2 \\times 70{,}80 = \\mathbf{141{,}60\\text{ m}^2}$.</p>
                     </div>
                 </details>
             </div>
@@ -201,8 +206,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Une rampe d'accès handicapé franchit une hauteur $h = 0{,}48\text{ m}$ sur une longueur horizontale $d = 8{,}00\text{ m}$.</p>
-                        <p class="font-bold text-slate-900">1. Calculer la pente en percentage ($\text{Pente} = \frac{h}{d} \times 100$).<br>2. Calculer l'angle d'inclinaison $\alpha$ au dixième de degré près.<br>3. La norme exige $\text{Pente} \le 5\%$. La rampe est-elle conforme ?</p>
+                        <p>Une rampe d'accès handicapé franchit une hauteur $h = 0{,}48\\text{ m}$ sur une longueur horizontale $d = 8{,}00\\text{ m}$.</p>
+                        <p class="font-bold text-slate-900">1. Calculer la pente en percentage ($\\text{Pente} = \\frac{h}{d} \\times 100$).<br>2. Calculer l'angle d'inclinaison $\\alpha$ au dixième de degré près.<br>3. La norme exige $\\text{Pente} \\le 5\\%$. La rampe est-elle conforme ?</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -222,9 +227,9 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 3
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Pente en % :</strong> $\text{Pente} = \frac{0{,}48}{8{,}00} \times 100 = \mathbf{6{,}0\%}$.</p>
-                        <p>2. <strong>Calcul de l'angle (TOA) :</strong> $\tan(\alpha) = \frac{0{,}48}{8{,}00} = 0{,}06 \implies \alpha = \arctan(0{,}06) \approx \mathbf{3{,}4^\circ}$.</p>
-                        <p>3. <strong>Conformité :</strong> Comme $6{,}0\% > 5\%$, la rampe est **non conforme** sans palier intermédiaire.</p>
+                        <p>1. <strong>Pente en % :</strong> $\\text{Pente} = \\frac{0{,}48}{8{,}00} \\times 100 = \\mathbf{6{,}0\\%}$.</p>
+                        <p>2. <strong>Calcul de l'angle (TOA) :</strong> $\\tan(\\alpha) = \\frac{0{,}48}{8{,}00} = 0{,}06 \\implies \\alpha = \\arctan(0{,}06) \\approx \\mathbf{3{,}4^\\circ}$.</p>
+                        <p>3. <strong>Conformité :</strong> Comme $6{,}0\\% > 5\\%$, la rampe est **non conforme** sans palier intermédiaire.</p>
                     </div>
                 </details>
             </div>
@@ -241,8 +246,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un technicien s'éloigne de $D = 45{,}00\text{ m}$ du pied d'un pylône télécom. À l'aide d'un viseur laser placé à une hauteur d'œil $h_{\text{œil}} = 1{,}75\text{ m}$, il mesure un angle d'élévation $\alpha = 38^\circ$.</p>
-                        <p class="font-bold text-slate-900">Calculer la hauteur totale $H = h_1 + h_{\text{œil}}$ du pylône au cm près.</p>
+                        <p>Un technicien s'éloigne de $D = 45{,}00\\text{ m}$ du pied d'un pylône télécom. À l'aide d'un viseur laser placé à une hauteur d'œil $h_{\\text{œil}} = 1{,}75\\text{ m}$, il mesure un angle d'élévation $\\alpha = 38^\\circ$.</p>
+                        <p class="font-bold text-slate-900">Calculer la hauteur totale $H = h_1 + h_{\\text{œil}}$ du pylône au cm près.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -263,8 +268,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 4
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>• <strong>Hauteur supérieure $h_1$ (TOA) :</strong> $\tan(38^\circ) = \frac{h_1}{45} \implies h_1 = 45 \times \tan(38^\circ) = 45 \times 0{,}7813 = \mathbf{35{,}16\text{ m}}$.</p>
-                        <p>• <strong>Hauteur totale $H$ :</strong> $H = 35{,}16 + 1{,}75 = \mathbf{36{,}91\text{ m}}$.</p>
+                        <p>• <strong>Hauteur supérieure $h_1$ (TOA) :</strong> $\\tan(38^\\circ) = \\frac{h_1}{45} \\implies h_1 = 45 \\times \\tan(38^\\circ) = 45 \\times 0{,}7813 = \\mathbf{35{,}16\\text{ m}}$.</p>
+                        <p>• <strong>Hauteur totale $H$ :</strong> $H = 35{,}16 + 1{,}75 = \\mathbf{36{,}91\\text{ m}}$.</p>
                     </div>
                 </details>
             </div>
@@ -281,7 +286,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un maçon vérifie l'angle droit d'une dalle de terrasse $ABC$. Il mesure $AB = 3{,}60\text{ m}$, $BC = 4{,}80\text{ m}$ et la diagonale $AC = 6{,}00\text{ m}$.</p>
+                        <p>Un maçon vérifie l'angle droit d'une dalle de terrasse $ABC$. Il mesure $AB = 3{,}60\\text{ m}$, $BC = 4{,}80\\text{ m}$ et la diagonale $AC = 6{,}00\\text{ m}$.</p>
                         <p class="font-bold text-slate-900">Utiliser la réciproque du théorème de Pythagore pour démontrer si le coin $B$ est parfaitement d'équerre.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
@@ -302,9 +307,9 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 5
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>• <strong>Calcul de $AC^2$ :</strong> $6{,}00^2 = \mathbf{36{,}00}$.</p>
-                        <p>• <strong>Calcul de $AB^2 + BC^2$ :</strong> $3{,}60^2 + 4{,}80^2 = 12{,}96 + 23{,}04 = \mathbf{36{,}00}$.</p>
-                        <p>• <strong>Conclusion :</strong> Comme $AC^2 = AB^2 + BC^2$, d'après la réciproque de Pythagore, l'angle $\hat{B}$ est **parfaitement droit ($90^\circ$)**.</p>
+                        <p>• <strong>Calcul de $AC^2$ :</strong> $6{,}00^2 = \\mathbf{36{,}00}$.</p>
+                        <p>• <strong>Calcul de $AB^2 + BC^2$ :</strong> $3{,}60^2 + 4{,}80^2 = 12{,}96 + 23{,}04 = \\mathbf{36{,}00}$.</p>
+                        <p>• <strong>Conclusion :</strong> Comme $AC^2 = AB^2 + BC^2$, d'après la réciproque de Pythagore, l'angle $\\hat{B}$ est **parfaitement droit ($90^\\circ$)**.</p>
                     </div>
                 </details>
             </div>
@@ -321,7 +326,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Une échelle de chantier de $L = 5{,}20\text{ m}$ est posée contre un mur avec l'angle de sécurité réglementaire $\alpha = 75^\circ$ par rapport au sol.</p>
+                        <p>Une échelle de chantier de $L = 5{,}20\\text{ m}$ est posée contre un mur avec l'angle de sécurité réglementaire $\\alpha = 75^\\circ$ par rapport au sol.</p>
                         <p class="font-bold text-slate-900">1. Calculer la hauteur $H$ atteinte sur le mur.<br>2. Calculer la distance d'écartement au sol $d$.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
@@ -343,8 +348,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 6
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Hauteur $H$ (Sinus) :</strong> $H = 5{,}20 \times \sin(75^\circ) = 5{,}20 \times 0{,}9659 = \mathbf{5{,}02\text{ m}}$.</p>
-                        <p>2. <strong>Distance $d$ (Cosinus) :</strong> $d = 5{,}20 \times \cos(75^\circ) = 5{,}20 \times 0{,}2588 = \mathbf{1{,}35\text{ m}}$.</p>
+                        <p>1. <strong>Hauteur $H$ (Sinus) :</strong> $H = 5{,}20 \\times \\sin(75^\\circ) = 5{,}20 \\times 0{,}9659 = \\mathbf{5{,}02\\text{ m}}$.</p>
+                        <p>2. <strong>Distance $d$ (Cosinus) :</strong> $d = 5{,}20 \\times \\cos(75^\\circ) = 5{,}20 \\times 0{,}2588 = \\mathbf{1{,}35\\text{ m}}$.</p>
                     </div>
                 </details>
             </div>
@@ -361,8 +366,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un régleur réalise une portée tronconique sur un arbre de transmission. Le grand diamètre est $D = 40\text{ mm}$, le petit diamètre $d = 28\text{ mm}$ et la longueur usinée $L = 12\text{ mm}$.</p>
-                        <p class="font-bold text-slate-900">Calculer le demi-angle de cône $\alpha = \arctan\left(\frac{D-d}{2L}\right)$ en degrés au centième près.</p>
+                        <p>Un régleur réalise une portée tronconique sur un arbre de transmission. Le grand diamètre est $D = 40\\text{ mm}$, le petit diamètre $d = 28\\text{ mm}$ et la longueur usinée $L = 12\\text{ mm}$.</p>
+                        <p class="font-bold text-slate-900">Calculer le demi-angle de cône $\\alpha = \\arctan\\left(\\frac{D-d}{2L}\\right)$ en degrés au centième près.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -381,9 +386,9 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 7
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>• <strong>Demi-différence des diamètres :</strong> $\Delta r = \frac{40 - 28}{2} = \frac{12}{2} = 6\text{ mm}$.</p>
-                        <p>• <strong>Calcul de $\tan(\alpha)$ :</strong> $\tan(\alpha) = \frac{6}{12} = 0{,}5000$.</p>
-                        <p>• <strong>Demi-angle $\alpha$ :</strong> $\alpha = \arctan(0{,}5000) = \mathbf{26{,}57^\circ}$ (soit $26^\circ 34'$).</p>
+                        <p>• <strong>Demi-différence des diamètres :</strong> $\\Delta r = \\frac{40 - 28}{2} = \\frac{12}{2} = 6\\text{ mm}$.</p>
+                        <p>• <strong>Calcul de $\\tan(\\alpha)$ :</strong> $\\tan(\\alpha) = \\frac{6}{12} = 0{,}5000$.</p>
+                        <p>• <strong>Demi-angle $\\alpha$ :</strong> $\\alpha = \\arctan(0{,}5000) = \\mathbf{26{,}57^\\circ}$ (soit $26^\\circ 34'$).</p>
                     </div>
                 </details>
             </div>
@@ -400,8 +405,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un installateur photovoltaïque pose des panneaux de longueur $P = 1{,}80\text{ m}$ inclinés à $\alpha = 35^\circ$ sur un toit terrasse.</p>
-                        <p class="font-bold text-slate-900">1. Calculer la surélévation verticale $h = P \cdot \sin(35^\circ)$.<br>2. Calculer l'emprise horizontale au sol $e = P \cdot \cos(35^\circ)$.</p>
+                        <p>Un installateur photovoltaïque pose des panneaux de longueur $P = 1{,}80\\text{ m}$ inclinés à $\\alpha = 35^\\circ$ sur un toit terrasse.</p>
+                        <p class="font-bold text-slate-900">1. Calculer la surélévation verticale $h = P \\cdot \\sin(35^\\circ)$.<br>2. Calculer l'emprise horizontale au sol $e = P \\cdot \\cos(35^\\circ)$.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -420,8 +425,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 8
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Hauteur $h$ :</strong> $h = 1{,}80 \times \sin(35^\circ) = 1{,}80 \times 0{,}5736 = \mathbf{1{,}03\text{ m}}$.</p>
-                        <p>2. <strong>Emprise au sol $e$ :</strong> $e = 1{,}80 \times \cos(35^\circ) = 1{,}80 \times 0{,}8192 = \mathbf{1{,}47\text{ m}}$.</p>
+                        <p>1. <strong>Hauteur $h$ :</strong> $h = 1{,}80 \\times \\sin(35^\\circ) = 1{,}80 \\times 0{,}5736 = \\mathbf{1{,}03\\text{ m}}$.</p>
+                        <p>2. <strong>Emprise au sol $e$ :</strong> $e = 1{,}80 \\times \\cos(35^\\circ) = 1{,}80 \\times 0{,}8192 = \\mathbf{1{,}47\\text{ m}}$.</p>
                     </div>
                 </details>
             </div>
@@ -438,8 +443,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un piquet vertical de $h = 2{,}00\text{ m}$ projette une ombre au sol de $s = 1{,}50\text{ m}$. Au même instant, les rayons du soleil étant parallèles, un immeuble projette une ombre de $S = 18{,}00\text{ m}$.</p>
-                        <p class="font-bold text-slate-900">Appliquer l'égalité de Thalès $\frac{H}{h} = \frac{S}{s}$ pour calculer la hauteur $H$ de l'immeuble.</p>
+                        <p>Un piquet vertical de $h = 2{,}00\\text{ m}$ projette une ombre au sol de $s = 1{,}50\\text{ m}$. Au même instant, les rayons du soleil étant parallèles, un immeuble projette une ombre de $S = 18{,}00\\text{ m}$.</p>
+                        <p class="font-bold text-slate-900">Appliquer l'égalité de Thalès $\\frac{H}{h} = \\frac{S}{s}$ pour calculer la hauteur $H$ de l'immeuble.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -457,8 +462,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 9
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>• <strong>Égalité de Thalès :</strong> $\frac{H}{2{,}00} = \frac{18{,}00}{1{,}50}$.</p>
-                        <p>• <strong>Produit en croix :</strong> $H = \frac{2{,}00 \times 18{,}00}{1{,}50} = \frac{36{,}00}{1{,}50} = \mathbf{24{,}00\text{ m}}$.</p>
+                        <p>• <strong>Égalité de Thalès :</strong> $\\frac{H}{2{,}00} = \\frac{18{,}00}{1{,}50}$.</p>
+                        <p>• <strong>Produit en croix :</strong> $H = \\frac{2{,}00 \\times 18{,}00}{1{,}50} = \\frac{36{,}00}{1{,}50} = \\mathbf{24{,}00\\text{ m}}$.</p>
                     </div>
                 </details>
             </div>
@@ -475,8 +480,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Une grue mobile possède une flèche télescopique $F = 24{,}00\text{ m}$ dressée à $\alpha = 55^\circ$ par rapport au sol.</p>
-                        <p class="font-bold text-slate-900">1. Calculer la hauteur sous crochet $H = F \cdot \sin(55^\circ)$.<br>2. Calculer la portée horizontale $P = F \cdot \cos(55^\circ)$.</p>
+                        <p>Une grue mobile possède une flèche télescopique $F = 24{,}00\\text{ m}$ dressée à $\\alpha = 55^\\circ$ par rapport au sol.</p>
+                        <p class="font-bold text-slate-900">1. Calculer la hauteur sous crochet $H = F \\cdot \\sin(55^\\circ)$.<br>2. Calculer la portée horizontale $P = F \\cdot \\cos(55^\\circ)$.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="130" viewBox="0 0 220 130" class="mx-auto">
@@ -494,8 +499,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 10
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Hauteur sous crochet $H$ :</strong> $H = 24{,}00 \times \sin(55^\circ) = 24{,}00 \times 0{,}8192 = \mathbf{19{,}66\text{ m}}$.</p>
-                        <p>2. <strong>Portée horizontale $P$ :</strong> $P = 24{,}00 \times \cos(55^\circ) = 24{,}00 \times 0{,}5736 = \mathbf{13{,}77\text{ m}}$.</p>
+                        <p>1. <strong>Hauteur sous crochet $H$ :</strong> $H = 24{,}00 \\times \\sin(55^\\circ) = 24{,}00 \\times 0{,}8192 = \\mathbf{19{,}66\\text{ m}}$.</p>
+                        <p>2. <strong>Portée horizontale $P$ :</strong> $P = 24{,}00 \\times \\cos(55^\\circ) = 24{,}00 \\times 0{,}5736 = \\mathbf{13{,}77\\text{ m}}$.</p>
                     </div>
                 </details>
             </div>
@@ -537,11 +542,11 @@
                         <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
                             <h5 class="font-bold text-amber-400">📋 Données du Cahier des Charges (C1) :</h5>
                             <ul class="list-disc list-inside space-y-1 text-slate-200">
-                                <li>Largeur totale au sol du bâtiment : $B = 14{,}00\text{ m}$ (ferme symétrique à 2 pans).</li>
-                                <li>Pente d'inclinaison minimale pour tuiles acier : $\alpha = 28^\circ$.</li>
-                                <li>Longueur totale du hangar : $L = 20{,}00\text{ m}$.</li>
-                                <li>Hauteur maximale autorisée au faîtage par le PLU local : $H_{\text{max}} = 5{,}50\text{ m}$.</li>
-                                <li>Prix de fourniture de la couverture acier : $42{,}00\text{ € / m}^2$.</li>
+                                <li>Largeur totale au sol du bâtiment : $B = 14{,}00\\text{ m}$ (ferme symétrique à 2 pans).</li>
+                                <li>Pente d'inclinaison minimale pour tuiles acier : $\\alpha = 28^\\circ$.</li>
+                                <li>Longueur totale du hangar : $L = 20{,}00\\text{ m}$.</li>
+                                <li>Hauteur maximale autorisée au faîtage par le PLU local : $H_{\\text{max}} = 5{,}50\\text{ m}$.</li>
+                                <li>Prix de fourniture de la couverture acier : $42{,}00\\text{ € / m}^2$.</li>
                             </ul>
                         </div>
 
@@ -549,7 +554,7 @@
                             <h5 class="font-bold text-amber-300">Travail à Réaliser par l'Élève :</h5>
                             <p><strong>1. (C1/C2) Modélisation :</strong> Réaliser le schéma géométrique annoté d'un pan de ferme (triangle rectangle).</p>
                             <p><strong>2. (C3) Calculs :</strong> Calculer la hauteur au faîtage $h$, la longueur du rampant d'arbalétrier $R$, la surface totale des 2 pans et le coût HT de la couverture.</p>
-                            <p><strong>3. (C4) Validation :</strong> Vérifier la conformité de la hauteur totale $h$ par rapport à la règle PLU $H_{\text{max}} = 5{,}50\text{ m}$.</p>
+                            <p><strong>3. (C4) Validation :</strong> Vérifier la conformité de la hauteur totale $h$ par rapport à la règle PLU $H_{\\text{max}} = 5{,}50\\text{ m}$.</p>
                             <p><strong>4. (C5) Communication :</strong> Rédiger la conclusion technique et le devis estimatif pour le client.</p>
                         </div>
                     </div>
@@ -574,14 +579,14 @@
                         <i class="fa-solid fa-graduation-cap text-amber-400"></i> Corrigé Intégral & Barème par Compétences (Problème A)
                     </summary>
                     <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
-                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> Demi-largeur $b = 14 / 2 = 7{,}00\text{ m}$. Angle $\alpha = 28^\circ$. Longueur $L = 20{,}00\text{ m}$.</p>
-                        <p><strong class="text-blue-300">C2 (Analyser/Modéliser) :</strong> Le pan de toit forme un triangle rectangle de base $b=7\text{ m}$, d'angle $\alpha=28^circ$, de hauteur $h$ (opposé) et d'arbalétrier $R$ (hypoténuse).</p>
+                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> Demi-largeur $b = 14 / 2 = 7{,}00\\text{ m}$. Angle $\\alpha = 28^\\circ$. Longueur $L = 20{,}00\\text{ m}$.</p>
+                        <p><strong class="text-blue-300">C2 (Analyser/Modéliser) :</strong> Le pan de toit forme un triangle rectangle de base $b=7\\text{ m}$, d'angle $\\alpha=28^\circ$, de hauteur $h$ (opposé) et d'arbalétrier $R$ (hypoténuse).</p>
                         <p><strong class="text-emerald-300">C3 (Réaliser) :</strong><br>
-                        • Hauteur $h = 7{,}00 \times \tan(28^\circ) = 7{,}00 \times 0{,}5317 = \mathbf{3{,}72\text{ m}}$.<br>
-                        • Rampant $R = \frac{7{,}00}{\cos(28^\circ)} = \frac{7{,}00}{0{,}8829} = \mathbf{7{,}93\text{ m}}$.<br>
-                        • Surface totale (2 pans) : $S = 2 \times (7{,}93 \times 20{,}00) = 2 \times 158{,}60 = \mathbf{317{,}20\text{ m}^2}$.<br>
-                        • Coût fourniture : $C = 317{,}20 \times 42{,}00 = \mathbf{13\,322{,}40\text{ € HT}}$.</p>
-                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Comme $h = 3{,}72\text{ m} < 5{,}50\text{ m}$, le bâtiment est conforme à la réglementation PLU.</p>
+                        • Hauteur $h = 7{,}00 \\times \\tan(28^\\circ) = 7{,}00 \\times 0{,}5317 = \\mathbf{3{,}72\\text{ m}}$.<br>
+                        • Rampant $R = \\frac{7{,}00}{\\cos(28^\\circ)} = \\frac{7{,}00}{0{,}8829} = \\mathbf{7{,}93\\text{ m}}$.<br>
+                        • Surface totale (2 pans) : $S = 2 \\times (7{,}93 \\times 20{,}00) = 2 \\times 158{,}60 = \\mathbf{317{,}20\\text{ m}^2}$.<br>
+                        • Coût fourniture : $C = 317{,}20 \\times 42{,}00 = \\mathbf{13\\,322{,}40\\text{ € HT}}$.</p>
+                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Comme $h = 3{,}72\\text{ m} < 5{,}50\\text{ m}$, le bâtiment est conforme à la réglementation PLU.</p>
                         <p><strong class="text-rose-300">C5 (Communiquer) :</strong> "Le hangar présente une hauteur sous faîtage de 3,72 m, parfaitement conforme aux contraintes PLU. La surface de toiture est de 317,20 m² pour un budget de couverture de 13 322,40 € HT."</p>
                     </div>
                 </details>
@@ -605,21 +610,21 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
                     <div class="md:col-span-2 space-y-4">
-                        <p>La mairie d'une commune souhaite aménager une rampe d'accès PMR pour un gymnase municipal. La marche à franchir est de hauteur $H = 0{,}80\text{ m}$. La réglementation impose :</p>
+                        <p>La mairie d'une commune souhaite aménager une rampe d'accès PMR pour un gymnase municipal. La marche à franchir est de hauteur $H = 0{,}80\\text{ m}$. La réglementation impose :</p>
                         
                         <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
                             <h5 class="font-bold text-purple-400">📋 Normes PMR Réglementaires (C1) :</h5>
                             <ul class="list-disc list-inside space-y-1">
-                                <li>Pente maximale autorisée : $5{,}0\%$.</li>
-                                <li>Si la longueur inclinée dépasse $10{,}00\text{ m}$, un palier de repos horizontal de $1{,}40\text{ m}$ est obligatoire.</li>
+                                <li>Pente maximale autorisée : $5{,}0\\%$.</li>
+                                <li>Si la longueur inclinée dépasse $10{,}00\\text{ m}$, un palier de repos horizontal de $1{,}40\\text{ m}$ est obligatoire.</li>
                             </ul>
                         </div>
 
                         <div class="space-y-2 text-slate-200">
                             <h5 class="font-bold text-purple-300">Travail à Réaliser par l'Élève :</h5>
-                            <p><strong>1. (C1/C2) :</strong> Calculer la longueur minimale au sol $d$ d'une rampe continue à $5%$.</p>
-                            <p><strong>2. (C3) :</strong> Calculer la longueur réelle de la rampe aluminium $L_{	ext{rampe}} = \sqrt{d^2 + H^2}$.</p>
-                            <p><strong>3. (C4) :</strong> Vérifier si la présence d'un palier de repos est obligatoire ($L_{	ext{rampe}} > 10\text{ m}$).</p>
+                            <p><strong>1. (C1/C2) :</strong> Calculer la longueur minimale au sol $d$ d'une rampe continue à $5\%$.</p>
+                            <p><strong>2. (C3) :</strong> Calculer la longueur réelle de la rampe aluminium $L_{\text{rampe}} = \\sqrt{d^2 + H^2}$.</p>
+                            <p><strong>3. (C4) :</strong> Vérifier si la présence d'un palier de repos est obligatoire ($L_{\text{rampe}} > 10\\text{ m}$).</p>
                             <p><strong>4. (C5) :</strong> Rédiger la note de contrôle de conformité pour le maître d'ouvrage.</p>
                         </div>
                     </div>
@@ -641,12 +646,12 @@
                         <i class="fa-solid fa-graduation-cap text-purple-400"></i> Corrigé Intégral & Barème par Compétences (Problème B)
                     </summary>
                     <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
-                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> Hauteur $H = 0{,}80\text{ m}$. Pente $p = 5\% = 0{,}05$.</p>
-                        <p><strong class="text-blue-300">C2 (Analyser) :</strong> $\text{Pente} = \frac{H}{d} \implies d = \frac{H}{0{,}05}$.</p>
+                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> Hauteur $H = 0{,}80\\text{ m}$. Pente $p = 5\\% = 0{,}05$.</p>
+                        <p><strong class="text-blue-300">C2 (Analyser) :</strong> $\\text{Pente} = \\frac{H}{d} \\implies d = \\frac{H}{0{,}05}$.</p>
                         <p><strong class="text-emerald-300">C3 (Réaliser) :</strong><br>
-                        • Longueur au sol $d = \frac{0{,}80}{0{,}05} = \mathbf{16{,}00\text{ m}}$.<br>
-                        • Longueur rampe $L_{\text{rampe}} = \sqrt{16^2 + 0{,}8^2} = \sqrt{256 + 0{,}64} = \mathbf{16{,}02\text{ m}}$.</p>
-                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Comme $L_{\text{rampe}} = 16{,}02\text{ m} > 10{,}00\text{ m}$, un palier horizontal de repos de $1{,}40\text{ m}$ est **obligatoire** à mi-parcours.</p>
+                        • Longueur au sol $d = \\frac{0{,}80}{0{,}05} = \\mathbf{16{,}00\\text{ m}}$.<br>
+                        • Longueur rampe $L_{\\text{rampe}} = \\sqrt{16^2 + 0{,}8^2} = \\sqrt{256 + 0{,}64} = \\mathbf{16{,}02\\text{ m}}$.</p>
+                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Comme $L_{\\text{rampe}} = 16{,}02\\text{ m} > 10{,}00\\text{ m}$, un palier horizontal de repos de $1{,}40\\text{ m}$ est **obligatoire** à mi-parcours.</p>
                         <p><strong class="text-rose-300">C5 (Communiquer) :</strong> "La rampe nécessite une emprise au sol de 16,00 m. Sa longueur de 16,02 m exige l'insertion d'un palier de repos de 1,40 m à 8,00 m pour garantir la conformité aux normes PMR."</p>
                     </div>
                 </details>
@@ -670,14 +675,14 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
                     <div class="md:col-span-2 space-y-4">
-                        <p>Sur le toit terrasse d'un bâtiment industriel, un ingénieur installe des rangées de panneaux solaires de longueur $P = 2{,}00\text{ m}$ inclinés à $\alpha = 35^\circ$. Au solstice d'hiver, l'angle d'élévation du soleil le plus bas est $\beta = 20^\circ$.</p>
+                        <p>Sur le toit terrasse d'un bâtiment industriel, un ingénieur installe des rangées de panneaux solaires de longueur $P = 2{,}00\\text{ m}$ inclinés à $\\alpha = 35^\\circ$. Au solstice d'hiver, l'angle d'élévation du soleil le plus bas est $\\beta = 20^\\circ$.</p>
                         
                         <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
                             <h5 class="font-bold text-emerald-400">📋 Contraintes Énergétiques (C1) :</h5>
                             <ul class="list-disc list-inside space-y-1">
-                                <li>Surélévation du panneau : $h = P \cdot \sin(35^\circ)$.</li>
-                                <li>Ombre portée au sol par la rangée : $S = \frac{h}{\tan(20^\circ)}$.</li>
-                                <li>Espacement minimal entre rangées : $E = P \cdot \cos(35^\circ) + S$.</li>
+                                <li>Surélévation du panneau : $h = P \\cdot \\sin(35^\\circ)$.</li>
+                                <li>Ombre portée au sol par la rangée : $S = \\frac{h}{\\tan(20^\\circ)}$.</li>
+                                <li>Espacement minimal entre rangées : $E = P \\cdot \\cos(35^\\circ) + S$.</li>
                             </ul>
                         </div>
 
@@ -685,7 +690,7 @@
                             <h5 class="font-bold text-emerald-300">Travail à Réaliser par l'Élève :</h5>
                             <p><strong>1. (C1/C2) :</strong> Calculer la hauteur $h$ au sommet du panneau.</p>
                             <p><strong>2. (C3) :</strong> Calculer la longueur de l'ombre au sol $S$ et l'écartement total nécessaire $E$.</p>
-                            <p><strong>3. (C4/C5) :</strong> Sur une terrasse de $30{,}00\text{ m}$ de long, déterminer le nombre maximal de rangées implantables sans ombrage.</p>
+                            <p><strong>3. (C4/C5) :</strong> Sur une terrasse de $30{,}00\\text{ m}$ de long, déterminer le nombre maximal de rangées implantables sans ombrage.</p>
                         </div>
                     </div>
 
@@ -707,13 +712,13 @@
                         <i class="fa-solid fa-graduation-cap text-emerald-400"></i> Corrigé Intégral & Barème par Compétences (Problème C)
                     </summary>
                     <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
-                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $P = 2{,}00\text{ m}$, $\alpha = 35^\circ$, $\beta = 20^\circ$.</p>
+                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $P = 2{,}00\\text{ m}$, $\\alpha = 35^\\circ$, $\\beta = 20^\\circ$.</p>
                         <p><strong class="text-emerald-300">C3 (Réaliser) :</strong><br>
-                        • Hauteur $h = 2{,}00 \times \sin(35^\circ) = 2{,}00 \times 0{,}5736 = \mathbf{1{,}15\text{ m}}$.<br>
-                        • Ombre $S = \frac{1{,}15}{\tan(20^\circ)} = \frac{1{,}15}{0{,}3640} = \mathbf{3{,}16\text{ m}}$.<br>
-                        • Emprise au sol $e = 2{,}00 \times \cos(35^\circ) = \mathbf{1{,}64\text{ m}}$.<br>
-                        • Espacement total par rangée $E = 1{,}64 + 3{,}16 = \mathbf{4{,}80\text{ m}}$.</p>
-                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Nombre de rangées : $\frac{30{,}00}{4{,}80} = 6{,}25 \implies \mathbf{6\text{ rangées complets}}$.</p>
+                        • Hauteur $h = 2{,}00 \\times \\sin(35^\\circ) = 2{,}00 \\times 0{,}5736 = \\mathbf{1{,}15\\text{ m}}$.<br>
+                        • Ombre $S = \\frac{1{,}15}{\\tan(20^\\circ)} = \\frac{1{,}15}{0{,}3640} = \\mathbf{3{,}16\\text{ m}}$.<br>
+                        • Emprise au sol $e = 2{,}00 \\times \\cos(35^\\circ) = \\mathbf{1{,}64\\text{ m}}$.<br>
+                        • Espacement total par rangée $E = 1{,}64 + 3{,}16 = \\mathbf{4{,}80\\text{ m}}$.</p>
+                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Nombre de rangées : $\\frac{30{,}00}{4{,}80} = 6{,}25 \\implies \\mathbf{6\\text{ rangées complets}}$.</p>
                         <p><strong class="text-rose-300">C5 (Communiquer) :</strong> "L'implantation optimale sur la toiture terrasse de 30 m permet d'installer 6 rangées de panneaux solaires avec un espacement de 4,80 m, garantissant 0% d'ombrage même au solstice d'hiver."</p>
                     </div>
                 </details>
@@ -741,4 +746,7 @@
         }
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'td.html'), tdHtml, 'utf-8');
+console.log('Successfully restored ALL 10 FULL EXERCISES with SVG diagrams + appended Partie B (3 Multi-Competency Problems)!');
