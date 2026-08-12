@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'probabilites-fluctuation');
+
+const coursHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -78,7 +83,7 @@
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Probabilités & Fluctuation</h2>
                     <p class="text-sm text-slate-300 max-w-2xl">
-                        Vocabulaire du hasard, équiprobabilité $P(A) = \frac{\text{cas favorables}}{\text{cas possibles}}$, événement contraire $P(\bar{A}) = 1 - P(A)$, réunion $P(A \cup B) = P(A) + P(B) - P(A \cap B)$, dénombrement par arbre/tableau et fluctuation d'échantillonnage.
+                        Vocabulaire du hasard, équiprobabilité $P(A) = \\frac{\\text{cas favorables}}{\\text{cas possibles}}$, événement contraire $P(\\bar{A}) = 1 - P(A)$, réunion $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$, dénombrement par arbre/tableau et fluctuation d'échantillonnage.
                     </p>
                 </div>
 
@@ -114,7 +119,7 @@
                         <span class="font-bold text-slate-900 text-sm block">1. Définitions de base</span>
                         <ul class="space-y-1.5 text-slate-700">
                             <li>• <strong>Expérience aléatoire</strong> : Expérience dont on connaît tous les résultats possibles sans pouvoir prédire lequel se produira.</li>
-                            <li>• <strong>Univers $\Omega$</strong> : Ensemble de tous les résultats (issues) possibles.</li>
+                            <li>• <strong>Univers $\\Omega$</strong> : Ensemble de tous les résultats (issues) possibles.</li>
                             <li>• <strong>Événement $A$</strong> : Sous-ensemble de l'univers formé par une ou plusieurs issues.</li>
                             <li>• <strong>Événement élémentaire</strong> : Événement contenant une seule issue.</li>
                         </ul>
@@ -126,7 +131,7 @@
                             Lorsque toutes les issues ont la <strong>même chance</strong> de se produire (dés équilibrés, tirage au sort non truqué), on dit qu'on est en situation d'<strong>équiprobabilité</strong> :
                         </p>
                         <div class="p-3 bg-white rounded-xl border border-sky-200 text-center font-bold text-sky-900 text-sm">
-                            $P(A) = \frac{\text{Nombre d'issues favorables à } A}{\text{Nombre total d'issues possibles dans } \Omega}$
+                            $P(A) = \\frac{\\text{Nombre d'issues favorables à } A}{\\text{Nombre total d'issues possibles dans } \\Omega}$
                         </div>
                     </div>
                 </div>
@@ -134,13 +139,13 @@
                 <!-- Propriétés fondamentales -->
                 <div class="p-4 bg-slate-100 rounded-2xl border border-slate-200 text-slate-800 space-y-1">
                     <span class="font-bold block text-slate-900">Propriétés fondamentales d'une probabilité :</span>
-                    <p>• La probabilité d'un événement est toujours un nombre compris entre $0$ et $1$ (soit entre $0\%$ et $100\%$) : $\mathbf{0 \le P(A) \le 1}$.</p>
-                    <p>• Probabilité d'un événement impossible : $\mathbf{P(\emptyset) = 0}$. Probabilité d'un événement certain : $\mathbf{P(\Omega) = 1}$.</p>
+                    <p>• La probabilité d'un événement est toujours un nombre compris entre $0$ et $1$ (soit entre $0\\%$ et $100\\%$) : $\\mathbf{0 \\le P(A) \\le 1}$.</p>
+                    <p>• Probabilité d'un événement impossible : $\\mathbf{P(\\emptyset) = 0}$. Probabilité d'un événement certain : $\\mathbf{P(\\Omega) = 1}$.</p>
                 </div>
 
                 <!-- SCHÉMA SVG UNIVERSET ÉVÉNEMENT -->
                 <div class="p-4 bg-slate-50 border rounded-2xl text-center overflow-x-auto space-y-2">
-                    <span class="text-[11px] font-bold text-slate-500 block uppercase tracking-wider">Schéma vectoriel : Représentation de l'Univers $\Omega$ et de l'Événement $A$</span>
+                    <span class="text-[11px] font-bold text-slate-500 block uppercase tracking-wider">Schéma vectoriel : Représentation de l'Univers $\\Omega$ et de l'Événement $A$</span>
                     <svg width="400" height="140" viewBox="0 0 400 140" class="mx-auto font-sans">
                         <defs>
                             <pattern id="grid-cours1" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -172,7 +177,7 @@
                         </p>
                         <div class="p-3 bg-white rounded-xl border space-y-1 font-mono text-[11px]">
                             <p class="text-sky-700 font-bold">Calcul pas à pas :</p>
-                            <p>$P(\text{Conforme}) = \frac{42}{50} = \mathbf{0{,}84} = \mathbf{84\%}$.</p>
+                            <p>$P(\\text{Conforme}) = \\frac{42}{50} = \\mathbf{0{,}84} = \\mathbf{84\\%}$.</p>
                         </div>
                     </div>
 
@@ -188,7 +193,7 @@
                         <div class="p-3 bg-white rounded-xl border space-y-1 font-mono text-[11px]">
                             <p class="text-sky-700 font-bold">Calcul pas à pas :</p>
                             <p>Issues favorables : $2$ ($3$ et $6$). Total : $6$.</p>
-                            <p>$P(A) = \frac{2}{6} = \frac{1}{3} \approx \mathbf{0{,}333} = \mathbf{33{,}3\%}$.</p>
+                            <p>$P(A) = \\frac{2}{6} = \\frac{1}{3} \\approx \\mathbf{0{,}333} = \\mathbf{33{,}3\\%}$.</p>
                         </div>
                     </div>
                 </div>
@@ -201,7 +206,7 @@
                 <span class="w-10 h-10 bg-amber-100 text-amber-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
                 <div>
                     <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Notion 2 • Opérations sur les Événements</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Événement Contraire $\bar{A}$, Intersection $A \cap B$ & Réunion $A \cup B$</h3>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Événement Contraire $\\bar{A}$, Intersection $A \\cap B$ & Réunion $A \\cup B$</h3>
                 </div>
             </div>
 
@@ -210,28 +215,28 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <!-- Contraire -->
                     <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-2xl space-y-2">
-                        <span class="font-bold text-amber-900 text-sm block">1. Événement Contraire $\bar{A}$</span>
+                        <span class="font-bold text-amber-900 text-sm block">1. Événement Contraire $\\bar{A}$</span>
                         <p class="text-slate-800">
-                            L'événement contraire de $A$, noté $\bar{A}$ (ou non A), est composé de toutes les issues qui n'appartiennent pas à $A$.
+                            L'événement contraire de $A$, noté $\\bar{A}$ (ou non A), est composé de toutes les issues qui n'appartiennent pas à $A$.
                         </p>
                         <div class="p-2 bg-white rounded-xl border border-amber-200 text-center font-bold text-amber-900">
-                            $\mathbf{P(\bar{A}) = 1 - P(A)}$
+                            $\\mathbf{P(\\bar{A}) = 1 - P(A)}$
                         </div>
                     </div>
 
                     <!-- Intersection -->
                     <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-2xl space-y-2">
-                        <span class="font-bold text-blue-900 text-sm block">2. Intersection $A \cap B$ (ET)</span>
+                        <span class="font-bold text-blue-900 text-sm block">2. Intersection $A \\cap B$ (ET)</span>
                         <p class="text-slate-800">
-                            L'événement "$A$ inter $B$", noté $A \cap B$, est réalisé lorsque les deux événements $A$ <strong>ET</strong> $B$ se réalisent en même temps.
+                            L'événement "$A$ inter $B$", noté $A \\cap B$, est réalisé lorsque les deux événements $A$ <strong>ET</strong> $B$ se réalisent en même temps.
                         </p>
                     </div>
 
                     <!-- Réunion -->
                     <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-2xl space-y-2">
-                        <span class="font-bold text-emerald-900 text-sm block">3. Réunion $A \cup B$ (OU)</span>
+                        <span class="font-bold text-emerald-900 text-sm block">3. Réunion $A \\cup B$ (OU)</span>
                         <p class="text-slate-800">
-                            L'événement "$A$ union $B$", noté $A \cup B$, est réalisé lorsqu'au moins l'un des deux événements $A$ <strong>OU</strong> $B$ se réalise.
+                            L'événement "$A$ union $B$", noté $A \\cup B$, est réalisé lorsqu'au moins l'un des deux événements $A$ <strong>OU</strong> $B$ se réalise.
                         </p>
                     </div>
                 </div>
@@ -240,10 +245,10 @@
                 <div class="p-4 bg-slate-900 text-white rounded-2xl border border-slate-800 space-y-2">
                     <span class="font-bold text-amber-400 text-sm block"><i class="fa-solid fa-star mr-1"></i> Formule Générale de la Réunion :</span>
                     <div class="p-3 bg-slate-800 rounded-xl text-center font-bold text-base text-emerald-400 font-mono">
-                        $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+                        $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$
                     </div>
                     <p class="text-[11px] text-slate-300">
-                        *Remarque : Si $A$ et $B$ sont <strong>incompatibles</strong> (ne peuvent pas se produire ensemble, $A \cap B = \emptyset$), alors $P(A \cap B) = 0$ et $P(A \cup B) = P(A) + P(B)$.
+                        *Remarque : Si $A$ et $B$ sont <strong>incompatibles</strong> (ne peuvent pas se produire ensemble, $A \\cap B = \\emptyset$), alors $P(A \\cap B) = 0$ et $P(A \\cup B) = P(A) + P(B)$.
                     </p>
                 </div>
 
@@ -284,11 +289,11 @@
                             <span class="font-bold text-slate-900">Calcul d'Événement Contraire</span>
                         </div>
                         <p class="text-slate-600">
-                            <strong>Énoncé :</strong> La probabilité qu'un colis soit livré en retard est $P(R) = 0{,}06$. Quelle est la probabilité $P(\bar{R})$ qu'il soit livré à temps ?
+                            <strong>Énoncé :</strong> La probabilité qu'un colis soit livré en retard est $P(R) = 0{,}06$. Quelle est la probabilité $P(\\bar{R})$ qu'il soit livré à temps ?
                         </p>
                         <div class="p-3 bg-white rounded-xl border space-y-1 font-mono text-[11px]">
                             <p class="text-amber-800 font-bold">Calcul pas à pas :</p>
-                            <p>$P(\bar{R}) = 1 - P(R) = 1 - 0{,}06 = \mathbf{0{,}94} = \mathbf{94\%}$.</p>
+                            <p>$P(\\bar{R}) = 1 - P(R) = 1 - 0{,}06 = \\mathbf{0{,}94} = \\mathbf{94\\%}$.</p>
                         </div>
                     </div>
 
@@ -296,14 +301,14 @@
                     <div class="bg-amber-50/50 border border-amber-200 rounded-2xl p-4 space-y-2">
                         <div class="flex items-center gap-2">
                             <span class="bg-amber-600 text-white font-bold px-2 py-0.5 rounded-md text-[10px]">EXEMPLE 2</span>
-                            <span class="font-bold text-slate-900">Calcul de la Réunion $P(A \cup B)$</span>
+                            <span class="font-bold text-slate-900">Calcul de la Réunion $P(A \\cup B)$</span>
                         </div>
                         <p class="text-slate-600">
-                            <strong>Énoncé :</strong> Dans un atelier, $P(A) = 0{,}15$ (défaut peinture), $P(B) = 0{,}10$ (défaut taille) et $P(A \cap B) = 0{,}03$ (les deux).
+                            <strong>Énoncé :</strong> Dans un atelier, $P(A) = 0{,}15$ (défaut peinture), $P(B) = 0{,}10$ (défaut taille) et $P(A \\cap B) = 0{,}03$ (les deux).
                         </p>
                         <div class="p-3 bg-white rounded-xl border space-y-1 font-mono text-[11px]">
                             <p class="text-amber-800 font-bold">Calcul pas à pas :</p>
-                            <p>$P(A \cup B) = 0{,}15 + 0{,}10 - 0{,}03 = \mathbf{0{,}22} = \mathbf{22\%}$.</p>
+                            <p>$P(A \\cup B) = 0{,}15 + 0{,}10 - 0{,}03 = \\mathbf{0{,}22} = \\mathbf{22\\%}$.</p>
                         </div>
                     </div>
                 </div>
@@ -390,7 +395,7 @@
                         </p>
                         <div class="p-3 bg-white rounded-xl border space-y-1 font-mono text-[11px]">
                             <p class="text-indigo-800 font-bold">Calcul pas à pas :</p>
-                            <p>$P(\text{Défectueux}) = \frac{10}{100} = \mathbf{0{,}10} = \mathbf{10\%}$.</p>
+                            <p>$P(\\text{Défectueux}) = \\frac{10}{100} = \\mathbf{0{,}10} = \\mathbf{10\\%}$.</p>
                         </div>
                     </div>
 
@@ -401,11 +406,11 @@
                             <span class="font-bold text-slate-900">Calcul sur les branches d'un arbre</span>
                         </div>
                         <p class="text-slate-600">
-                            Une machine A fabrique $60\%$ des pièces ($P(A) = 0{,}60$). Sur A, $5\%$ sont défectueuses ($P(D) = 0{,}05$).
+                            Une machine A fabrique $60\\%$ des pièces ($P(A) = 0{,}60$). Sur A, $5\\%$ sont défectueuses ($P(D) = 0{,}05$).
                         </p>
                         <div class="p-3 bg-white rounded-xl border space-y-1 font-mono text-[11px]">
                             <p class="text-indigo-800 font-bold">Calcul du chemin :</p>
-                            <p>$P(A \cap D) = 0{,}60 \times 0{,}05 = \mathbf{0{,}03} = \mathbf{3\%}$.</p>
+                            <p>$P(A \\cap D) = 0{,}60 \\times 0{,}05 = \\mathbf{0{,}03} = \\mathbf{3\\%}$.</p>
                         </div>
                     </div>
                 </div>
@@ -439,7 +444,7 @@
                             Lorsque la taille $N$ de l'échantillon devient <strong>très grande</strong>, la fréquence observée $f$ <strong>se stabilise</strong> et se rapproche de la probabilité théorique $p$ :
                         </p>
                         <div class="p-2 bg-white rounded-xl border border-purple-200 text-center font-bold text-purple-900">
-                            $\mathbf{f \xrightarrow[N \to \infty]{} p}$
+                            $\\mathbf{f \\xrightarrow[N \\to \\infty]{} p}$
                         </div>
                     </div>
                 </div>
@@ -476,9 +481,9 @@
                         <span class="font-bold text-slate-900">Lancement d'une pièce équilibrée ($p = 0{,}50$)</span>
                     </div>
                     <p class="text-slate-600">
-                        • Pour $N = 10$ lancers : on obtient 3 "Pile" $\implies f = \frac{3}{10} = \mathbf{0{,}30}$ (écart fort de $0{,}20$).<br>
-                        • Pour $N = 100$ lancers : on obtient 47 "Pile" $\implies f = \frac{47}{100} = \mathbf{0{,}47}$ (écart faible de $0{,}03$).<br>
-                        • Pour $N = 1\,000$ lancers : on obtient 502 "Pile" $\implies f = \frac{502}{1000} = \mathbf{0{,}502}$ (très proche de $p = 0{,}50$).
+                        • Pour $N = 10$ lancers : on obtient 3 "Pile" $\\implies f = \\frac{3}{10} = \\mathbf{0{,}30}$ (écart fort de $0{,}20$).<br>
+                        • Pour $N = 100$ lancers : on obtient 47 "Pile" $\\implies f = \\frac{47}{100} = \\mathbf{0{,}47}$ (écart faible de $0{,}03$).<br>
+                        • Pour $N = 1\\,000$ lancers : on obtient 502 "Pile" $\\implies f = \\frac{502}{1000} = \\mathbf{0{,}502}$ (très proche de $p = 0{,}50$).
                     </p>
                 </div>
             </div>
@@ -511,14 +516,14 @@
 
                     <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
                         <span class="text-xs font-bold text-sky-400 block uppercase">Test d'événement contraire :</span>
-                        <p class="text-[11px] text-slate-300">Si $P(A)$ est la probabilité ci-contre, alors la probabilité contraire $P(\bar{A})$ s'affiche instantanément ci-contre.</p>
+                        <p class="text-[11px] text-slate-300">Si $P(A)$ est la probabilité ci-contre, alors la probabilité contraire $P(\\bar{A})$ s'affiche instantanément ci-contre.</p>
                     </div>
                 </div>
 
                 <div class="p-5 bg-slate-800 border border-slate-700 rounded-2xl space-y-3 text-slate-200 font-mono flex flex-col justify-center">
                     <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration & Rendu LaTeX en Direct :</span>
-                    <div id="prob-res-p" class="text-sm font-bold text-sky-300">• Probabilité $P(A) = 15 / 60 = \mathbf{0{,}25}$ ($25\%$)</div>
-                    <div id="prob-res-bar" class="text-sm font-bold text-amber-400">• Contraire $P(\bar{A}) = 1 - 0{,}25 = \mathbf{0{,}75}$ ($75\%$)</div>
+                    <div id="prob-res-p" class="text-sm font-bold text-sky-300">• Probabilité $P(A) = 15 / 60 = \\mathbf{0{,}25}$ ($25\\%$)</div>
+                    <div id="prob-res-bar" class="text-sm font-bold text-amber-400">• Contraire $P(\\bar{A}) = 1 - 0{,}25 = \\mathbf{0{,}75}$ ($75\\%$)</div>
                 </div>
             </div>
         </section>
@@ -536,11 +541,15 @@
             let p = n / N;
             let pBar = 1 - p;
 
-            document.getElementById('prob-res-p').innerHTML = '• Probabilité $P(A) = \\frac{' + n + '}{' + N + '} = \\mathbf{' + p.toFixed(3) + '} = \\mathbf{' + (p*100).toFixed(1) + '\\%}$';
-            document.getElementById('prob-res-bar').innerHTML = '• Contraire $P(\\bar{A}) = 1 - ' + p.toFixed(3) + ' = \\mathbf{' + pBar.toFixed(3) + '} = \\mathbf{' + (pBar*100).toFixed(1) + '\\%}$';
+            document.getElementById('prob-res-p').innerHTML = '• Probabilité $P(A) = \\\\frac{' + n + '}{' + N + '} = \\\\mathbf{' + p.toFixed(3) + '} = \\\\mathbf{' + (p*100).toFixed(1) + '\\\\%}$';
+            document.getElementById('prob-res-bar').innerHTML = '• Contraire $P(\\\\bar{A}) = 1 - ' + p.toFixed(3) + ' = \\\\mathbf{' + pBar.toFixed(3) + '} = \\\\mathbf{' + (pBar*100).toFixed(1) + '\\\\%}$';
             if (window.MathJax) MathJax.typeset();
         }
         calcProb();
     </script>
 </body>
 </html>
+`;
+
+fs.writeFileSync(path.join(targetDir, 'cours.html'), coursHtml, 'utf8');
+console.log('✅ cours.html pour probabilites-fluctuation généré avec succès !');
