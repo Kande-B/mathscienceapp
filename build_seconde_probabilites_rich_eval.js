@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'probabilites-fluctuation');
+
+const evalHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,8 +30,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"><\/script>
 
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -140,7 +145,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 <!-- Q1 -->
                 <div class="p-3 bg-slate-50 rounded-2xl border space-y-1.5">
-                    <p class="font-bold text-slate-900">1. Un lot contient 80 pièces conformes et 20 défectueuses. $P(\text{défectueuse}) = $ ?</p>
+                    <p class="font-bold text-slate-900">1. Un lot contient 80 pièces conformes et 20 défectueuses. $P(\\text{défectueuse}) = $ ?</p>
                     <div class="space-y-1 text-slate-700">
                         <label class="flex items-center gap-2"><input type="radio" name="eval-q1" class="accent-red-600"> <span>A) $0{,}80$</span></label>
                         <label class="flex items-center gap-2"><input type="radio" name="eval-q1" class="accent-red-600"> <span>B) $0{,}20$ (car $20/100$)</span></label>
@@ -150,7 +155,7 @@
 
                 <!-- Q2 -->
                 <div class="p-3 bg-slate-50 rounded-2xl border space-y-1.5">
-                    <p class="font-bold text-slate-900">2. Si $P(A) = 0{,}15$, que vaut la probabilité de l'événement contraire $P(\bar{A})$ ?</p>
+                    <p class="font-bold text-slate-900">2. Si $P(A) = 0{,}15$, que vaut la probabilité de l'événement contraire $P(\\bar{A})$ ?</p>
                     <div class="space-y-1 text-slate-700">
                         <label class="flex items-center gap-2"><input type="radio" name="eval-q2" class="accent-red-600"> <span>A) $0{,}85$ (car $1 - 0{,}15$)</span></label>
                         <label class="flex items-center gap-2"><input type="radio" name="eval-q2" class="accent-red-600"> <span>B) $-0{,}15$</span></label>
@@ -160,9 +165,9 @@
 
                 <!-- Q3 -->
                 <div class="p-3 bg-slate-50 rounded-2xl border space-y-1.5">
-                    <p class="font-bold text-slate-900">3. Si deux événements $A$ et $B$ sont incompatibles ($A \cap B = \emptyset$), alors $P(A \cup B) = $ ?</p>
+                    <p class="font-bold text-slate-900">3. Si deux événements $A$ et $B$ sont incompatibles ($A \\cap B = \\emptyset$), alors $P(A \\cup B) = $ ?</p>
                     <div class="space-y-1 text-slate-700">
-                        <label class="flex items-center gap-2"><input type="radio" name="eval-q3" class="accent-red-600"> <span>A) $P(A) \times P(B)$</span></label>
+                        <label class="flex items-center gap-2"><input type="radio" name="eval-q3" class="accent-red-600"> <span>A) $P(A) \\times P(B)$</span></label>
                         <label class="flex items-center gap-2"><input type="radio" name="eval-q3" class="accent-red-600"> <span>B) $P(A) + P(B)$</span></label>
                         <label class="flex items-center gap-2"><input type="radio" name="eval-q3" class="accent-red-600"> <span>C) $1$</span></label>
                     </div>
@@ -243,7 +248,7 @@
 
                     <ol class="list-decimal list-inside space-y-1.5 text-slate-800 font-medium">
                         <li><strong>(1 pt)</strong> Calculez la probabilité $P(L_1)$ qu'un capteur vienne de la Ligne 1.</li>
-                        <li><strong>(1,5 pt)</strong> Calculez la probabilité $P(L_1 \cap D)$ que le capteur soit issu de la Ligne 1 ET défectueux.</li>
+                        <li><strong>(1,5 pt)</strong> Calculez la probabilité $P(L_1 \\cap D)$ que le capteur soit issu de la Ligne 1 ET défectueux.</li>
                         <li><strong>(1,5 pt)</strong> Calculez la probabilité globale de défaut $P(D)$ sur le lot.</li>
                         <li><strong>(1 pt)</strong> En déduire la probabilité $P(C)$ que le capteur soit conforme.</li>
                     </ol>
@@ -268,10 +273,10 @@
             </div>
             <div id="corr-ex2" class="hidden pt-3 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                 <p class="font-bold text-red-900">Corrigé Ex 2 :</p>
-                <p>1. $P(L_1) = \frac{250}{400} = \mathbf{0{,}625} = \mathbf{62{,}5\%}$. <em>(1 pt)</em></p>
-                <p>2. $P(L_1 \cap D) = \frac{15}{400} = \mathbf{0{,}0375} = \mathbf{3{,}75\%}$. <em>(1,5 pt)</em></p>
-                <p>3. $P(D) = \frac{24}{400} = \mathbf{0{,}06} = \mathbf{6\%}$. <em>(1,5 pt)</em></p>
-                <p>4. $P(C) = 1 - 0{,}06 = \mathbf{0{,}94} = \mathbf{94\%}$. <em>(1 pt)</em></p>
+                <p>1. $P(L_1) = \\frac{250}{400} = \\mathbf{0{,}625} = \\mathbf{62{,}5\\%}$. <em>(1 pt)</em></p>
+                <p>2. $P(L_1 \\cap D) = \\frac{15}{400} = \\mathbf{0{,}0375} = \\mathbf{3{,}75\\%}$. <em>(1,5 pt)</em></p>
+                <p>3. $P(D) = \\frac{24}{400} = \\mathbf{0{,}06} = \\mathbf{6\\%}$. <em>(1,5 pt)</em></p>
+                <p>4. $P(C) = 1 - 0{,}06 = \\mathbf{0{,}94} = \\mathbf{94\\%}$. <em>(1 pt)</em></p>
             </div>
         </div>
 
@@ -293,11 +298,11 @@
                     <ul class="list-disc list-inside space-y-1 text-slate-800">
                         <li>Événement $A$ : « Défaut de freinage » ($P(A) = 0{,}12$).</li>
                         <li>Événement $B$ : « Défaut de signalisation » ($P(B) = 0{,}08$).</li>
-                        <li>Événement $A \cap B$ : « Présente les deux défauts » ($P(A \cap B) = 0{,}02$).</li>
+                        <li>Événement $A \\cap B$ : « Présente les deux défauts » ($P(A \\cap B) = 0{,}02$).</li>
                     </ul>
 
                     <ol class="list-decimal list-inside space-y-1.5 text-slate-800 font-medium">
-                        <li><strong>(2 pts)</strong> Calculez la probabilité $P(A \cup B)$ qu'un véhicule présente au moins un défaut.</li>
+                        <li><strong>(2 pts)</strong> Calculez la probabilité $P(A \\cup B)$ qu'un véhicule présente au moins un défaut.</li>
                         <li><strong>(1,5 pt)</strong> Calculez la probabilité qu'un véhicule ne présente AUCUN défaut.</li>
                         <li><strong>(1,5 pt)</strong> Déterminez le nombre exact de véhicules en parfait état dans la flotte.</li>
                     </ol>
@@ -321,9 +326,9 @@
             </div>
             <div id="corr-ex3" class="hidden pt-3 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                 <p class="font-bold text-red-900">Corrigé Ex 3 :</p>
-                <p>1. $P(A \cup B) = 0{,}12 + 0{,}08 - 0{,}02 = \mathbf{0{,}18} = \mathbf{18\%}$. <em>(2 pts)</em></p>
-                <p>2. $P(\text{Aucun}) = 1 - 0{,}18 = \mathbf{0{,}82} = \mathbf{82\%}$. <em>(1,5 pt)</em></p>
-                <p>3. Nombre de véhicules $= 0{,}82 \times 500 = \mathbf{410 \text{ véhicules}}$. <em>(1,5 pt)</em></p>
+                <p>1. $P(A \\cup B) = 0{,}12 + 0{,}08 - 0{,}02 = \\mathbf{0{,}18} = \\mathbf{18\\%}$. <em>(2 pts)</em></p>
+                <p>2. $P(\\text{Aucun}) = 1 - 0{,}18 = \\mathbf{0{,}82} = \\mathbf{82\\%}$. <em>(1,5 pt)</em></p>
+                <p>3. Nombre de véhicules $= 0{,}82 \\times 500 = \\mathbf{410 \\text{ véhicules}}$. <em>(1,5 pt)</em></p>
             </div>
         </div>
 
@@ -341,11 +346,11 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 <div class="md:col-span-2 text-xs text-slate-700 space-y-3">
-                    <p>Un atelier d'usinage fabrique des axes de précision en alliage d'aluminium. La probabilité théorique de défaut de cote est $p = 0{,}05$ ($5\%$). Le technicien qualité teste 3 séries :</p>
+                    <p>Un atelier d'usinage fabrique des axes de précision en alliage d'aluminium. La probabilité théorique de défaut de cote est $p = 0{,}05$ ($5\\%$). Le technicien qualité teste 3 séries :</p>
                     <ul class="list-disc list-inside space-y-1 text-slate-800">
                         <li>Échantillon 1 : $N_1 = 50$ pièces, 5 défectueuses.</li>
                         <li>Échantillon 2 : $N_2 = 200$ pièces, 14 défectueuses.</li>
-                        <li>Échantillon 3 : $N_3 = 1\,000$ pièces, 51 défectueuses.</li>
+                        <li>Échantillon 3 : $N_3 = 1\\,000$ pièces, 51 défectueuses.</li>
                     </ul>
 
                     <ol class="list-decimal list-inside space-y-1.5 text-slate-800 font-medium">
@@ -374,10 +379,10 @@
             </div>
             <div id="corr-ex4" class="hidden pt-3 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                 <p class="font-bold text-red-900">Corrigé Ex 4 :</p>
-                <p>1. $f_1 = \frac{5}{50} = \mathbf{0{,}10} = \mathbf{10\%}$. $f_2 = \frac{14}{200} = \mathbf{0{,}07} = \mathbf{7\%}$. $f_3 = \frac{51}{1000} = \mathbf{0{,}051} = \mathbf{5{,}1\%}$. <em>(2 pts)</em></p>
+                <p>1. $f_1 = \\frac{5}{50} = \\mathbf{0{,}10} = \\mathbf{10\\%}$. $f_2 = \\frac{14}{200} = \\mathbf{0{,}07} = \\mathbf{7\\%}$. $f_3 = \\frac{51}{1000} = \\mathbf{0{,}051} = \\mathbf{5{,}1\\%}$. <em>(2 pts)</em></p>
                 <p>2. L'écart est dû à la <strong>fluctuation d'échantillonnage</strong> sur un faible effectif ($N_1 = 50$). <em>(1,5 pt)</em></p>
                 <p>3. Conformément à la <strong>Loi des Grands Nombres</strong>, la fréquence observée $f$ se rapproche de la probabilité théorique $p = 0{,}05$ lorsque la taille $N$ augmente. <em>(1,5 pt)</em></p>
-                <p>4. Pour un contrôle qualité fiable, il est nécessaire de choisir des échantillons de grande taille ($N \ge 500$) afin d'éviter les faux signaux dus aux petites séries. <em>(1 pt)</em></p>
+                <p>4. Pour un contrôle qualité fiable, il est nécessaire de choisir des échantillons de grande taille ($N \\ge 500$) afin d'éviter les faux signaux dus aux petites séries. <em>(1 pt)</em></p>
             </div>
         </div>
 
@@ -408,3 +413,7 @@
     </script>
 </body>
 </html>
+`;
+
+fs.writeFileSync(path.join(targetDir, 'eval.html'), evalHtml, 'utf8');
+console.log('✅ eval.html pour probabilites-fluctuation généré avec succès !');
