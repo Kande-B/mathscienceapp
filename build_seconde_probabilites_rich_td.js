@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'probabilites-fluctuation');
+
+const tdHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -117,7 +122,7 @@
                         <p>Un restaurant gastronomique propose une carte comprenant <strong>15 plats de viande</strong>, <strong>10 plats de poisson</strong> et <strong>5 plats végétariens</strong> (total $N = 30$ plats). Un client choisit un plat au hasard.</p>
                         <ol class="list-decimal list-inside space-y-1 text-slate-800 font-medium">
                             <li>Calculez la probabilité $P(V)$ que le client choisisse un plat végétarien.</li>
-                            <li>En déduire la probabilité $P(\bar{V})$ qu'il choisisse un plat non végétarien.</li>
+                            <li>En déduire la probabilité $P(\\bar{V})$ qu'il choisisse un plat non végétarien.</li>
                         </ol>
                     </div>
                     <!-- SVG EX 1 -->
@@ -139,8 +144,8 @@
                 </div>
                 <div id="corr-ex1" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>1. Total $N = 15 + 10 + 5 = 30$. $P(V) = \frac{5}{30} = \mathbf{\frac{1}{6} \approx 0{,}167} = \mathbf{16{,}7\%}$.</p>
-                    <p>2. $P(\bar{V}) = 1 - P(V) = 1 - \frac{1}{6} = \mathbf{\frac{5}{6} \approx 0{,}833} = \mathbf{83{,}3\%}$.</p>
+                    <p>1. Total $N = 15 + 10 + 5 = 30$. $P(V) = \\frac{5}{30} = \\mathbf{\\frac{1}{6} \\approx 0{,}167} = \\mathbf{16{,}7\\%}$.</p>
+                    <p>2. $P(\\bar{V}) = 1 - P(V) = 1 - \\frac{1}{6} = \\mathbf{\\frac{5}{6} \\approx 0{,}833} = \\mathbf{83{,}3\\%}$.</p>
                 </div>
             </div>
 
@@ -180,8 +185,8 @@
                 </div>
                 <div id="corr-ex2" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>1. $P(N) = \frac{140}{200} = \mathbf{0{,}70} = \mathbf{70\%}$.</p>
-                    <p>2. $P(D) = \frac{20}{200} = \mathbf{0{,}10} = \mathbf{10\%}$.</p>
+                    <p>1. $P(N) = \\frac{140}{200} = \\mathbf{0{,}70} = \\mathbf{70\\%}$.</p>
+                    <p>2. $P(D) = \\frac{20}{200} = \\mathbf{0{,}10} = \\mathbf{10\\%}$.</p>
                 </div>
             </div>
 
@@ -220,8 +225,8 @@
                 </div>
                 <div id="corr-ex3" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>1. $P(\text{Impeccable}) = \frac{225}{250} = \mathbf{0{,}90} = \mathbf{90\%}$.</p>
-                    <p>2. $P(\text{Fissures}) = 1 - 0{,}90 = \mathbf{0{,}10} = \mathbf{10\%}$.</p>
+                    <p>1. $P(\\text{Impeccable}) = \\frac{225}{250} = \\mathbf{0{,}90} = \\mathbf{90\\%}$.</p>
+                    <p>2. $P(\\text{Fissures}) = 1 - 0{,}90 = \\mathbf{0{,}10} = \\mathbf{10\\%}$.</p>
                 </div>
             </div>
 
@@ -230,16 +235,16 @@
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                     <h4 class="font-bold text-slate-900 text-base flex items-center gap-2">
                         <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
-                        Électricité : Formule de la Réunion $P(A \cup B)$
+                        Électricité : Formule de la Réunion $P(A \\cup B)$
                     </h4>
                     <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser (C3)</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-2">
-                        <p>Lors d'un contrôle de disjoncteurs : $P(A) = 0{,}12$ (défaut thermique), $P(B) = 0{,}08$ (défaut magnétique) et $P(A \cap B) = 0{,}02$ (les deux défauts).</p>
+                        <p>Lors d'un contrôle de disjoncteurs : $P(A) = 0{,}12$ (défaut thermique), $P(B) = 0{,}08$ (défaut magnétique) et $P(A \\cap B) = 0{,}02$ (les deux défauts).</p>
                         <ol class="list-decimal list-inside space-y-1 text-slate-800 font-medium">
-                            <li>Calculez la probabilité $P(A \cup B)$ qu'un disjoncteur présente au moins un défaut.</li>
+                            <li>Calculez la probabilité $P(A \\cup B)$ qu'un disjoncteur présente au moins un défaut.</li>
                             <li>En déduire la probabilité qu'un disjoncteur n'ait aucun défaut.</li>
                         </ol>
                     </div>
@@ -261,8 +266,8 @@
                 </div>
                 <div id="corr-ex4" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>1. $P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0{,}12 + 0{,}08 - 0{,}02 = \mathbf{0{,}18} = \mathbf{18\%}$.</p>
-                    <p>2. $P(\text{Aucun}) = 1 - 0{,}18 = \mathbf{0{,}82} = \mathbf{82\%}$.</p>
+                    <p>1. $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0{,}12 + 0{,}08 - 0{,}02 = \\mathbf{0{,}18} = \\mathbf{18\\%}$.</p>
+                    <p>2. $P(\\text{Aucun}) = 1 - 0{,}18 = \\mathbf{0{,}82} = \\mathbf{82\\%}$.</p>
                 </div>
             </div>
 
@@ -301,8 +306,8 @@
                 </div>
                 <div id="corr-ex5" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>1. $P(\text{Noires}) = \frac{240}{400} = \mathbf{0{,}60} = \mathbf{60\%}$.</p>
-                    <p>2. $P(\text{Noires} \cap 42) = \frac{60}{400} = \mathbf{0{,}15} = \mathbf{15\%}$.</p>
+                    <p>1. $P(\\text{Noires}) = \\frac{240}{400} = \\mathbf{0{,}60} = \\mathbf{60\\%}$.</p>
+                    <p>2. $P(\\text{Noires} \\cap 42) = \\frac{60}{400} = \\mathbf{0{,}15} = \\mathbf{15\\%}$.</p>
                 </div>
             </div>
 
@@ -339,7 +344,7 @@
                 </div>
                 <div id="corr-ex6" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>Total non conformes $= 30 + 20 = 50$. $P(\text{Non conforme}) = \frac{50}{500} = \mathbf{0{,}10} = \mathbf{10\%}$.</p>
+                    <p>Total non conformes $= 30 + 20 = 50$. $P(\\text{Non conforme}) = \\frac{50}{500} = \\mathbf{0{,}10} = \\mathbf{10\\%}$.</p>
                 </div>
             </div>
 
@@ -355,7 +360,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-2">
-                        <p>Lors de pannes sur un automate : $40\%$ sont d'origine électrique ($E$) et $60\%$ d'origine mécanique ($M$). Si la panne est électrique, le changement de fusible suffit dans $80\%$ des cas.</p>
+                        <p>Lors de pannes sur un automate : $40\\%$ sont d'origine électrique ($E$) et $60\\%$ d'origine mécanique ($M$). Si la panne est électrique, le changement de fusible suffit dans $80\\%$ des cas.</p>
                         <ol class="list-decimal list-inside space-y-1 text-slate-800 font-medium">
                             <li>Calculez la probabilité que la panne soit électrique ET résolue par le fusible.</li>
                         </ol>
@@ -379,7 +384,7 @@
                 </div>
                 <div id="corr-ex7" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>$P(E \cap F) = 0{,}40 \times 0{,}80 = \mathbf{0{,}32} = \mathbf{32\%}$.</p>
+                    <p>$P(E \\cap F) = 0{,}40 \\times 0{,}80 = \\mathbf{0{,}32} = \\mathbf{32\\%}$.</p>
                 </div>
             </div>
 
@@ -417,7 +422,7 @@
                 </div>
                 <div id="corr-ex8" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>$P(O) = \frac{180}{400} = \mathbf{0{,}45} = \mathbf{45\%}$.</p>
+                    <p>$P(O) = \\frac{180}{400} = \\mathbf{0{,}45} = \\mathbf{45\\%}$.</p>
                 </div>
             </div>
 
@@ -454,7 +459,7 @@
                 </div>
                 <div id="corr-ex9" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>$P(\text{Insatisfait}) = \frac{20}{200} = \mathbf{0{,}10} = \mathbf{10\%}$.</p>
+                    <p>$P(\\text{Insatisfait}) = \\frac{20}{200} = \\mathbf{0{,}10} = \\mathbf{10\\%}$.</p>
                 </div>
             </div>
 
@@ -492,7 +497,7 @@
                 </div>
                 <div id="corr-ex10" class="hidden pt-3 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-1 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                    <p>$f_1 = \frac{4}{40} = 0{,}10$ (écart de 0,05). $f_2 = \frac{26}{500} = 0{,}052$ (écart de 0,002). L'échantillon 2 ($N_2 = 500$) est beaucoup plus proche de $p=0{,}05$ conformément à la Loi des grands nombres.</p>
+                    <p>$f_1 = \\frac{4}{40} = 0{,}10$ (écart de 0,05). $f_2 = \\frac{26}{500} = 0{,}052$ (écart de 0,002). L'échantillon 2 ($N_2 = 500$) est beaucoup plus proche de $p=0{,}05$ conformément à la Loi des grands nombres.</p>
                 </div>
             </div>
         </section>
@@ -567,7 +572,7 @@
                         <ol class="list-decimal list-inside space-y-1.5 text-slate-700">
                             <li>Calculer la probabilité $P(M_1)$ qu'un rivet vienne de la Machine 1. <span class="text-indigo-600 font-bold">(C1 - S'approprier)</span></li>
                             <li>Calculer la probabilité globale de défaut $P(D)$ sur l'ensemble du lot. <span class="text-indigo-600 font-bold">(C3 - Réaliser)</span></li>
-                            <li>La norme aéronautique exige que le taux de défaut ne dépasse pas $1{,}8%$. Le lot est-il conforme à la norme usine ? Justifier. <span class="text-indigo-600 font-bold">(C4 - Valider & C5 - Communiquer)</span></li>
+                            <li>La norme aéronautique exige que le taux de défaut ne dépasse pas $1{,}8\%$. Le lot est-il conforme à la norme usine ? Justifier. <span class="text-indigo-600 font-bold">(C4 - Valider & C5 - Communiquer)</span></li>
                         </ol>
                     </div>
                 </div>
@@ -579,9 +584,9 @@
                 </div>
                 <div id="corr-probA" class="hidden pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-2 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé du Problème A :</p>
-                    <p>1. $P(M_1) = \frac{600}{1000} = \mathbf{0{,}60} = \mathbf{60\%}$.</p>
-                    <p>2. $P(D) = \frac{16}{1000} = \mathbf{0{,}016} = \mathbf{1{,}6\%}$.</p>
-                    <p>3. Comme $1{,}6\% \le 1{,}8\%$, le lot respecte la norme qualité aéronautique usine et peut être validé pour l'assemblage.</p>
+                    <p>1. $P(M_1) = \\frac{600}{1000} = \\mathbf{0{,}60} = \\mathbf{60\\%}$.</p>
+                    <p>2. $P(D) = \\frac{16}{1000} = \\mathbf{0{,}016} = \\mathbf{1{,}6\\%}$.</p>
+                    <p>3. Comme $1{,}6\\% \\le 1{,}8\\%$, le lot respecte la norme qualité aéronautique usine et peut être validé pour l'assemblage.</p>
                 </div>
             </div>
 
@@ -604,13 +609,13 @@
                 <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
                     <p class="font-medium">
                         Une entreprise de transport gère un parc de <strong>200 camions</strong>. Lors du bilan annuel :
-                        $15\%$ des camions ont eu une panne de freins ($A$), $10\%$ ont eu une panne moteur ($B$) et $3\%$ ont eu les deux pannes ($A \cap B$).
+                        $15\\%$ des camions ont eu une panne de freins ($A$), $10\\%$ ont eu une panne moteur ($B$) et $3\\%$ ont eu les deux pannes ($A \\cap B$).
                     </p>
 
                     <div class="space-y-2 font-medium text-slate-900">
                         <p><strong>Travail à effectuer :</strong></p>
                         <ol class="list-decimal list-inside space-y-1.5 text-slate-700">
-                            <li>Calculer la probabilité $P(A \cup B)$ qu'un camion ait eu au moins une panne dans l'année. <span class="text-indigo-600 font-bold">(C3 - Réaliser)</span></li>
+                            <li>Calculer la probabilité $P(A \\cup B)$ qu'un camion ait eu au moins une panne dans l'année. <span class="text-indigo-600 font-bold">(C3 - Réaliser)</span></li>
                             <li>Calculer le nombre exact de camions de la flotte n'ayant subi AUCUNE panne. <span class="text-indigo-600 font-bold">(C3 - Réaliser)</span></li>
                             <li>Rédiger une note d'information synthétique destinée au directeur d'exploitation sur la fiabilité de la flotte. <span class="text-indigo-600 font-bold">(C5 - Communiquer)</span></li>
                         </ol>
@@ -624,9 +629,9 @@
                 </div>
                 <div id="corr-probB" class="hidden pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-2 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé du Problème B :</p>
-                    <p>1. $P(A \cup B) = 0{,}15 + 0{,}10 - 0{,}03 = \mathbf{0{,}22} = \mathbf{22\%}$.</p>
-                    <p>2. $P(\text{Aucune}) = 1 - 0{,}22 = 0{,}78$. Nombre $= 0{,}78 \times 200 = \mathbf{156 \text{ camions}}$.</p>
-                    <p>3. Note : $78\%$ du parc n'a connu aucune défaillance majeure. Seuls $22\%$ ont subi au moins une panne, démontrant un bon entretien global du parc.</p>
+                    <p>1. $P(A \\cup B) = 0{,}15 + 0{,}10 - 0{,}03 = \\mathbf{0{,}22} = \\mathbf{22\\%}$.</p>
+                    <p>2. $P(\\text{Aucune}) = 1 - 0{,}22 = 0{,}78$. Nombre $= 0{,}78 \\times 200 = \\mathbf{156 \\text{ camions}}$.</p>
+                    <p>3. Note : $78\\%$ du parc n'a connu aucune défaillance majeure. Seuls $22\\%$ ont subi au moins une panne, démontrant un bon entretien global du parc.</p>
                 </div>
             </div>
 
@@ -648,11 +653,11 @@
 
                 <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
                     <p class="font-medium">
-                        Une tour numérique produit des axes en acier. La probabilité théorique qu'un axe soit hors tolérance de cote est $p = 0{,}04$ ($4\%$).
+                        Une tour numérique produit des axes en acier. La probabilité théorique qu'un axe soit hors tolérance de cote est $p = 0{,}04$ ($4\\%$).
                         Un régleur effectue 3 séries de contrôle d'échantillons :
                         - Échantillon 1 : $N_1 = 25$ pièces (2 hors tolérance).
                         - Échantillon 2 : $N_2 = 100$ pièces (6 hors tolérance).
-                        - Échantillon 3 : $N_3 = 1\,000$ pièces (41 hors tolérance).
+                        - Échantillon 3 : $N_3 = 1\\,000$ pièces (41 hors tolérance).
                     </p>
 
                     <div class="space-y-2 font-medium text-slate-900">
@@ -672,7 +677,7 @@
                 </div>
                 <div id="corr-probC" class="hidden pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-2xl text-xs space-y-2 text-slate-800 print-correction">
                     <p class="font-bold text-indigo-900">Corrigé rédigé du Problème C :</p>
-                    <p>1. $f_1 = \frac{2}{25} = 0{,}080 = 8\%$. $f_2 = \frac{6}{100} = 0{,}060 = 6\%$. $f_3 = \frac{41}{1000} = 0{,}041 = 4{,}1\%$.</p>
+                    <p>1. $f_1 = \\frac{2}{25} = 0{,}080 = 8\\%$. $f_2 = \\frac{6}{100} = 0{,}060 = 6\\%$. $f_3 = \\frac{41}{1000} = 0{,}041 = 4{,}1\\%$.</p>
                     <p>2. L'écart est dû à la fluctuation d'échantillonnage naturelle sur de faibles effectifs.</p>
                     <p>3. Plus la taille de l'échantillon $N$ augmente, plus la fréquence observée $f$ converge vers la probabilité théorique $p = 0{,}04$. Seul un grand échantillon garantit un contrôle fiable du procédé d'usinage.</p>
                 </div>
@@ -706,3 +711,7 @@
     </script>
 </body>
 </html>
+`;
+
+fs.writeFileSync(path.join(targetDir, 'td.html'), tdHtml, 'utf8');
+console.log('✅ td.html pour probabilites-fluctuation généré avec succès !');
