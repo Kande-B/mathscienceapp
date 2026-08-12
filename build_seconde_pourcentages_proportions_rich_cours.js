@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'pourcentages-proportions');
+
+const coursHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -77,7 +82,7 @@
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Baccalauréat Professionnel</span>
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Je Note l'Essentiel : Pourcentages & Évolutions</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Loi des proportions $p = \frac{n}{N}$, Coefficient Multiplicateur $CM = 1 \pm \frac{t}{100}$, Taux d'évolution $t = \frac{V_1 - V_0}{V_0}$ et évolutions successives.</p>
+                    <p class="text-sm text-slate-300 max-w-2xl">Loi des proportions $p = \\frac{n}{N}$, Coefficient Multiplicateur $CM = 1 \\pm \\frac{t}{100}$, Taux d'évolution $t = \\frac{V_1 - V_0}{V_0}$ et évolutions successives.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -101,14 +106,14 @@
                     <div class="bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-sky-950 text-sm">📌 Définition Officielle (Proportion) :</h4>
                         <p>Dans une population de référence de taille totale $N$, la proportion $p$ d'une sous-population de taille $n$ s'exprime par le rapport :</p>
-                        <p class="font-mono text-sky-900 font-bold text-sm">$$p = \frac{n}{N} \quad \text{avec } 0 \le p \le 1$$</p>
-                        <p>Le <strong>pourcentage</strong> associé est $p_{\%} = p \times 100$.</p>
+                        <p class="font-mono text-sky-900 font-bold text-sm">$$p = \\frac{n}{N} \\quad \\text{avec } 0 \\le p \\le 1$$</p>
+                        <p>Le <strong>pourcentage</strong> associé est $p_{\\%} = p \\times 100$.</p>
                     </div>
 
                     <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-2xl space-y-2">
-                        <h4 class="font-bold text-indigo-950 text-sm">🔗 Propriété : Proportions Étagées (Sous-ensemble $B \subset A \subset E$)</h4>
+                        <h4 class="font-bold text-indigo-950 text-sm">🔗 Propriété : Proportions Étagées (Sous-ensemble $B \\subset A \\subset E$)</h4>
                         <p>Si la sous-population $A$ représente une proportion $p_1$ de $E$, et que la sous-population $B$ représente une proportion $p_2$ de $A$, alors la proportion globale de $B$ dans $E$ est :</p>
-                        <p class="font-mono text-indigo-900 font-bold text-sm">$$p = p_1 \times p_2$$</p>
+                        <p class="font-mono text-indigo-900 font-bold text-sm">$$p = p_1 \\times p_2$$</p>
                     </div>
                 </div>
 
@@ -140,32 +145,32 @@
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <p>Pour passer d'une valeur initiale $V_0$ à une valeur finale $V_1$ après une variation de $t\%$, on utilise le <strong>Coefficient Multiplicateur ($CM$)</strong> :</p>
+                <p>Pour passer d'une valeur initiale $V_0$ à une valeur finale $V_1$ après une variation de $t\\%$, on utilise le <strong>Coefficient Multiplicateur ($CM$)</strong> :</p>
 
                 <!-- REGLES ET SCHÉMA CM -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                     <div class="space-y-3">
                         <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-1">
-                            <h4 class="font-bold text-emerald-950 text-sm">📈 Cas d'une Augmentation (Hausse de $t\%$) :</h4>
-                            <p class="font-mono text-emerald-900 font-bold text-sm">$$CM = 1 + \frac{t}{100}$$</p>
+                            <h4 class="font-bold text-emerald-950 text-sm">📈 Cas d'une Augmentation (Hausse de $t\\%$) :</h4>
+                            <p class="font-mono text-emerald-900 font-bold text-sm">$$CM = 1 + \\frac{t}{100}$$</p>
                         </div>
                         <div class="p-4 bg-rose-50 border-l-4 border-rose-500 rounded-r-2xl space-y-1">
-                            <h4 class="font-bold text-rose-950 text-sm">📉 Cas d'une Diminution (Baisse de $t\%$) :</h4>
-                            <p class="font-mono text-rose-900 font-bold text-sm">$$CM = 1 - \frac{t}{100}$$</p>
+                            <h4 class="font-bold text-rose-950 text-sm">📉 Cas d'une Diminution (Baisse de $t\\%$) :</h4>
+                            <p class="font-mono text-rose-900 font-bold text-sm">$$CM = 1 - \\frac{t}{100}$$</p>
                         </div>
                         <div class="p-4 bg-slate-900 text-white rounded-2xl border border-slate-800 space-y-1">
                             <h4 class="font-bold text-amber-400 text-sm">⚡ Formule de Calcul Direct :</h4>
-                            <p class="font-mono text-slate-200 font-bold text-sm">$$V_1 = V_0 \times CM \quad \iff \quad V_0 = \frac{V_1}{CM}$$</p>
+                            <p class="font-mono text-slate-200 font-bold text-sm">$$V_1 = V_0 \\times CM \\quad \\iff \\quad V_0 = \\frac{V_1}{CM}$$</p>
                         </div>
                     </div>
 
                     <!-- TABLEAU CONVERTER QUICK REPERE -->
                     <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">
-                        <h4 class="font-bold text-slate-900 text-xs text-center border-b pb-2">Tableau Mémoire de Conversion Rapide $t \leftrightarrow CM$</h4>
+                        <h4 class="font-bold text-slate-900 text-xs text-center border-b pb-2">Tableau Mémoire de Conversion Rapide $t \\leftrightarrow CM$</h4>
                         <table class="w-full text-center border-collapse font-mono text-[11px]">
                             <thead>
                                 <tr class="bg-slate-200 text-slate-800">
-                                    <th class="p-1.5 border">Évolution ($t\%$)</th>
+                                    <th class="p-1.5 border">Évolution ($t\\%$)</th>
                                     <th class="p-1.5 border">Calcul $CM$</th>
                                     <th class="p-1.5 border">Valeur $CM$</th>
                                 </tr>
@@ -212,11 +217,11 @@
                 <!-- SUCCESSIVES -->
                 <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-3">
                     <h4 class="font-bold text-purple-950 text-sm">🔄 1. Évolutions Successives</h4>
-                    <p>Lorsqu'une grandeur subit plusieurs évolutions successives de coefficients $CM_1, CM_2, \dots, CM_k$, le <strong>Coefficient Multiplicateur Global</strong> est le produit des coefficients :</p>
-                    <p class="font-mono text-purple-900 font-bold text-sm">$$CM_{\text{global}} = CM_1 \times CM_2 \times \dots \times CM_k$$</p>
-                    <p>Le taux d'évolution global s'obtient par : $t_{\text{global}} = (CM_{\text{global}} - 1) \times 100$.</p>
+                    <p>Lorsqu'une grandeur subit plusieurs évolutions successives de coefficients $CM_1, CM_2, \\dots, CM_k$, le <strong>Coefficient Multiplicateur Global</strong> est le produit des coefficients :</p>
+                    <p class="font-mono text-purple-900 font-bold text-sm">$$CM_{\\text{global}} = CM_1 \\times CM_2 \\times \\dots \\times CM_k$$</p>
+                    <p>Le taux d'évolution global s'obtient par : $t_{\\text{global}} = (CM_{\\text{global}} - 1) \\times 100$.</p>
                     <div class="p-2.5 bg-white border border-purple-200 rounded-xl font-mono text-[11px] text-purple-950">
-                        ⚠️ <strong>ATTENTION :</strong> Ne JAMAIS additionner les pourcentages ! ($+20\% -20\% \neq 0\%$, mais $1{,}20 \times 0{,}80 = 0{,}96 \implies -4\%$).
+                        ⚠️ <strong>ATTENTION :</strong> Ne JAMAIS additionner les pourcentages ! ($+20\\% -20\\% \\neq 0\\%$, mais $1{,}20 \\times 0{,}80 = 0{,}96 \\implies -4\\%$).
                     </div>
                 </div>
 
@@ -224,10 +229,10 @@
                 <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-3">
                     <h4 class="font-bold text-amber-950 text-sm">↩️ 2. Taux Réciproque (Retour au Prix Initial)</h4>
                     <p>Pour revenir à la valeur initiale $V_0$ après une évolution de coefficient $CM$, il faut appliquer le <strong>Coefficient Multiplicateur Réciproque $CM'$</strong> :</p>
-                    <p class="font-mono text-amber-900 font-bold text-sm">$$CM' = \frac{1}{CM}$$</p>
-                    <p>Le taux d'évolution réciproque est : $t' = (CM' - 1) \times 100$.</p>
+                    <p class="font-mono text-amber-900 font-bold text-sm">$$CM' = \\frac{1}{CM}$$</p>
+                    <p>Le taux d'évolution réciproque est : $t' = (CM' - 1) \\times 100$.</p>
                     <div class="p-2.5 bg-white border border-amber-200 rounded-xl font-mono text-[11px] text-amber-950">
-                        💡 <strong>Exemple :</strong> Pour annuler une hausse de $+25\%$ ($CM = 1{,}25$), $CM' = \frac{1}{1{,}25} = 0{,}80 \implies$ Baisse réciproque de <strong>$-20\%$</strong>.
+                        💡 <strong>Exemple :</strong> Pour annuler une hausse de $+25\\%$ ($CM = 1{,}25$), $CM' = \\frac{1}{1{,}25} = 0{,}80 \\implies$ Baisse réciproque de <strong>$-20\\%$</strong>.
                     </div>
                 </div>
             </div>
@@ -307,4 +312,7 @@
         runSim();
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'cours.html'), coursHtml, 'utf-8');
+console.log('Successfully updated cours.html for pourcentages-proportions with clean typography!');
