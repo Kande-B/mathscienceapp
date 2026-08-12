@@ -1,10 +1,18 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'pourcentages-proportions');
+
+// ──────────────────────────────────────────
+// 1. AUTOMATISMES.HTML
+// ──────────────────────────────────────────
+const automatismesHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP TICE Excel - Pourcentages & Proportions 2nde Pro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Automatismes & Ritualisation - Pourcentages & Proportions 2nde Pro</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
     <script>
         tailwind.config = {
             theme: {
@@ -19,11 +27,428 @@
                 }
             }
         }
-    </script>
+    <\/script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };<\/script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"><\/script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 8px rgba(234, 179, 8, 0.3); } 50% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.6); } }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+        .shake { animation: shake 0.4s ease-in-out; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 2 • Seconde Professionnelle Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Pourcentages, Proportions & Taux d'Évolution</h1>
+                </div>
+            </div>
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Excel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- SCOREBOARD EN DIRECT -->
+        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
+                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Pourcentages & CM Flash</h2>
+                <p class="text-xs text-slate-400 mt-1">3 Modules — Flashcards, QCM Chrono, Exercices Rapides</p>
+            </div>
+            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700 pulse-glow">
+                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
+                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 26</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D   -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire
+                </h3>
+                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner • <span id="fc-count" class="text-yellow-600">0/10</span></span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="fc-grid">
+${generateFlashcards()}
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 2 : QCM CHRONO (10 QUESTIONS)       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-stopwatch text-emerald-500"></i> Module 2 : QCM Chrono (10 Questions)
+                </h3>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs font-bold text-slate-500">Temps : <span id="chrono" class="text-emerald-600 font-mono">0:00</span></span>
+                    <button onclick="startChrono()" id="btn-chrono" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors no-print">
+                        <i class="fa-solid fa-play mr-1"></i> Démarrer
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs" id="qcm-grid">
+${generateQCM()}
+            </div>
+
+            <button onclick="checkQCM()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses QCM
+            </button>
+            <div id="fb-qcm" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 3 : 6 EXERCICES RAPIDES À SAISIR    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-indigo-500"></i> Module 3 : Calculs Rapides (6 Défis)
+                </h3>
+                <span class="text-xs font-bold text-slate-500"><span id="m3-count" class="text-indigo-600">0/6</span></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <!-- Défi 1 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="m3-d1-card">
+                    <label class="font-bold text-slate-900 block">1. Calculez le CM pour une hausse de $+15\\%$ :</label>
+                    <p class="text-slate-500">Rappel : $CM = 1 + \\frac{t}{100}$</p>
+                    <input type="text" id="m3-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="CM = ?">
+                </div>
+                <!-- Défi 2 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="m3-d2-card">
+                    <label class="font-bold text-slate-900 block">2. Prix final après une baisse de $-25\\%$ sur $V_0 = 200$ € :</label>
+                    <p class="text-slate-500">$V_1 = V_0 \\times CM$</p>
+                    <input type="text" id="m3-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="V₁ = ? €">
+                </div>
+                <!-- Défi 3 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="m3-d3-card">
+                    <label class="font-bold text-slate-900 block">3. Taux $t$ si $V_0 = 80$ € et $V_1 = 100$ € :</label>
+                    <p class="text-slate-500">$t = \\frac{V_1 - V_0}{V_0} \\times 100$</p>
+                    <input type="text" id="m3-q3" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="t = ? %">
+                </div>
+                <!-- Défi 4 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="m3-d4-card">
+                    <label class="font-bold text-slate-900 block">4. CM global : hausse de $+20\\%$ puis baisse de $-10\\%$ :</label>
+                    <p class="text-slate-500">$CM_{global} = CM_1 \\times CM_2$</p>
+                    <input type="text" id="m3-q4" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="CM global = ?">
+                </div>
+                <!-- Défi 5 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="m3-d5-card">
+                    <label class="font-bold text-slate-900 block">5. Proportion : 120 filles sur 400 élèves = ? %</label>
+                    <p class="text-slate-500">$p = \\frac{n}{N} \\times 100$</p>
+                    <input type="text" id="m3-q5" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="p = ? %">
+                </div>
+                <!-- Défi 6 -->
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="m3-d6-card">
+                    <label class="font-bold text-slate-900 block">6. CM réciproque après une hausse de $+25\\%$ ($CM = 1{,}25$) :</label>
+                    <p class="text-slate-500">$CM' = \\frac{1}{CM}$</p>
+                    <input type="text" id="m3-q6" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="CM' = ?">
+                </div>
+            </div>
+
+            <button onclick="checkM3()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes calculs
+            </button>
+            <div id="fb-m3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- ════════════════════════ JS ════════════════════════ -->
+    <script>
+        // ── Scores ──
+        let fcScores = new Set();
+        let qcmScore = 0;
+        let m3Score = 0;
+
+        function updateGlobal() {
+            let total = fcScores.size + qcmScore + m3Score;
+            document.getElementById('global-score').innerText = total + ' / 26';
+            document.getElementById('fc-count').innerText = fcScores.size + '/10';
+        }
+
+        // ── Module 1 : Flashcards ──
+        function flipCard(el) {
+            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
+        }
+        function markFC(num) {
+            if (!fcScores.has(num)) {
+                fcScores.add(num);
+                updateGlobal();
+            }
+        }
+
+        // ── Module 2 : Chrono ──
+        let chronoInterval = null;
+        let chronoSec = 0;
+        function startChrono() {
+            if (chronoInterval) return;
+            let btn = document.getElementById('btn-chrono');
+            btn.innerHTML = '<i class="fa-solid fa-clock mr-1"></i> En cours...';
+            btn.classList.replace('bg-emerald-600', 'bg-amber-600');
+            chronoInterval = setInterval(() => {
+                chronoSec++;
+                let m = Math.floor(chronoSec / 60);
+                let s = chronoSec % 60;
+                document.getElementById('chrono').innerText = m + ':' + (s < 10 ? '0' : '') + s;
+            }, 1000);
+        }
+        function stopChrono() {
+            clearInterval(chronoInterval);
+            chronoInterval = null;
+        }
+
+        // ── Module 2 : QCM check ──
+        const qcmAnswers = {
+            'qcm1': 'B', 'qcm2': 'A', 'qcm3': 'C', 'qcm4': 'B', 'qcm5': 'A',
+            'qcm6': 'C', 'qcm7': 'B', 'qcm8': 'A', 'qcm9': 'C', 'qcm10': 'B'
+        };
+        function checkQCM() {
+            stopChrono();
+            let score = 0;
+            for (let [qid, correct] of Object.entries(qcmAnswers)) {
+                let selected = document.querySelector('input[name="' + qid + '"]:checked');
+                let card = document.getElementById(qid + '-card');
+                if (selected && selected.value === correct) {
+                    score++;
+                    card.classList.add('correct-bg');
+                    card.classList.remove('wrong-bg');
+                } else {
+                    card.classList.add('wrong-bg');
+                    card.classList.remove('correct-bg');
+                }
+            }
+            qcmScore = score;
+            updateGlobal();
+
+            let fb = document.getElementById('fb-qcm');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            if (score === 10) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 10/10 au QCM en ' + document.getElementById('chrono').innerText + ' !';
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ' + score + '/10. Temps : ' + document.getElementById('chrono').innerText + '. Révisez les flashcards et réessayez !';
+            }
+        }
+
+        // ── Module 3 : Calculs rapides ──
+        const m3Answers = {
+            'm3-q1': ['1.15', '1,15'],
+            'm3-q2': ['150'],
+            'm3-q3': ['25'],
+            'm3-q4': ['1.08', '1,08'],
+            'm3-q5': ['30'],
+            'm3-q6': ['0.8', '0,8', '0.80', '0,80']
+        };
+        function checkM3() {
+            let score = 0;
+            for (let [qid, acceptedVals] of Object.entries(m3Answers)) {
+                let val = document.getElementById(qid).value.trim();
+                let cardId = qid.replace('q', 'd').replace('-d', '-d') ;
+                // build card id like m3-d1-card
+                let num = qid.replace('m3-q', '');
+                let card = document.getElementById('m3-d' + num + '-card');
+                if (acceptedVals.includes(val)) {
+                    score++;
+                    card.classList.add('correct-bg');
+                    card.classList.remove('wrong-bg');
+                } else {
+                    card.classList.add('wrong-bg');
+                    card.classList.remove('correct-bg');
+                    card.classList.add('shake');
+                    setTimeout(() => card.classList.remove('shake'), 500);
+                }
+            }
+            m3Score = score;
+            updateGlobal();
+            document.getElementById('m3-count').innerText = score + '/6';
+
+            let fb = document.getElementById('fb-m3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            if (score === 6) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! 6/6 aux calculs rapides !';
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ' + score + '/6. Corrigés : CM(+15%)=1,15 | V₁=150€ | t=25% | CMglobal=1,08 | p=30% | CM\\'=0,80';
+            }
+        }
+    <\/script>
+</body>
+</html>`;
+
+function generateFlashcards() {
+    const cards = [
+        { q: "CM d'une hausse de $+20\\%$ ?", a: "$CM = 1 + 0{,}20 = \\\\mathbf{1{,}20}$" },
+        { q: "CM d'une baisse de $-30\\%$ ?", a: "$CM = 1 - 0{,}30 = \\\\mathbf{0{,}70}$" },
+        { q: "Calculer $50\\%$ de $80$ € ?", a: "$80 \\\\div 2 = \\\\mathbf{40}$ €" },
+        { q: "Calculer $10\\%$ de $250$ € ?", a: "$250 \\\\div 10 = \\\\mathbf{25}$ €" },
+        { q: "Taux $t$ si $CM = 1{,}05$ ?", a: "Hausse de $\\\\mathbf{+5\\%}$" },
+        { q: "Taux $t$ si $CM = 0{,}85$ ?", a: "Baisse de $\\\\mathbf{-15\\%}$" },
+        { q: "TVA standard en France ?", a: "$\\\\mathbf{20\\%}$ $(CM = 1{,}20)$" },
+        { q: "De $100$ € à $150$ € = hausse de ?", a: "$t = \\\\frac{50}{100} = \\\\mathbf{+50\\%}$" },
+        { q: "Doublement = hausse de ?", a: "$\\\\mathbf{+100\\%}$ $(CM = 2)$" },
+        { q: "Formule du taux $t$ ?", a: "$t = \\\\frac{V_1 - V_0}{V_0}$" }
+    ];
+
+    return cards.map((c, i) => `
+                <!-- FC ${i+1} -->
+                <div class="h-48 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard ${i+1}</span>
+                            <p class="text-xs font-bold text-center leading-relaxed">${c.q}</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Cliquez pour voir la réponse</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center leading-relaxed">${c.a}</p>
+                            <button onclick="event.stopPropagation(); markFC(${i+1})" class="w-full bg-slate-950 text-white text-[10px] py-1.5 rounded-lg font-bold hover:bg-slate-800 transition-colors">✅ Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>`).join('\n');
+}
+
+function generateQCM() {
+    const questions = [
+        {
+            q: "1. Quel est le CM d'une hausse de $+8\\%$ ?",
+            opts: [{ v: 'A', t: '$0{,}92$' }, { v: 'B', t: '$1{,}08$' }, { v: 'C', t: '$1{,}80$' }]
+        },
+        {
+            q: '2. $25\\%$ de $160$ € = ?',
+            opts: [{ v: 'A', t: '$40$ €' }, { v: 'B', t: '$45$ €' }, { v: 'C', t: '$35$ €' }]
+        },
+        {
+            q: '3. Un article passe de $80$ € à $60$ €. Le taux est :',
+            opts: [{ v: 'A', t: '$-20\\%$' }, { v: 'B', t: '$+25\\%$' }, { v: 'C', t: '$-25\\%$' }]
+        },
+        {
+            q: "4. Hausse de $+10\\%$ puis baisse de $-10\\%$. Prix initial retrouvé ?",
+            opts: [{ v: 'A', t: 'Oui' }, { v: 'B', t: 'Non ($CM = 0{,}99$)' }, { v: 'C', t: "Cela dépend du prix" }]
+        },
+        {
+            q: '5. Proportion : $72$ filles sur $240$ élèves = ?',
+            opts: [{ v: 'A', t: '$30\\%$' }, { v: 'B', t: '$25\\%$' }, { v: 'C', t: '$35\\%$' }]
+        },
+        {
+            q: "6. Après une baisse de $-20\\%$ ($CM = 0{,}80$), la hausse pour revenir au prix initial :",
+            opts: [{ v: 'A', t: '$+20\\%$' }, { v: 'B', t: '$+30\\%$' }, { v: 'C', t: '$+25\\%$' }]
+        },
+        {
+            q: '7. $V_0 = 500$ €, hausse de $+12\\%$. $V_1 = $ ?',
+            opts: [{ v: 'A', t: '$600$ €' }, { v: 'B', t: '$560$ €' }, { v: 'C', t: '$512$ €' }]
+        },
+        {
+            q: '8. $CM = 0{,}65$ correspond à une baisse de :',
+            opts: [{ v: 'A', t: '$-35\\%$' }, { v: 'B', t: '$-65\\%$' }, { v: 'C', t: '$+35\\%$' }]
+        },
+        {
+            q: '9. Proportions étagées : $40\\%$ des $60\\%$ de bacheliers = ?',
+            opts: [{ v: 'A', t: '$100\\%$' }, { v: 'B', t: '$20\\%$' }, { v: 'C', t: '$24\\%$' }]
+        },
+        {
+            q: '10. CM global de deux hausses successives $+10\\%$ et $+20\\%$ :',
+            opts: [{ v: 'A', t: '$1{,}30$' }, { v: 'B', t: '$1{,}32$' }, { v: 'C', t: '$1{,}02$' }]
+        }
+    ];
+
+    return questions.map((q, i) => {
+        const name = 'qcm' + (i + 1);
+        const optHtml = q.opts.map(o => `
+                        <label class="flex items-center gap-2 cursor-pointer hover:text-slate-900 transition-colors">
+                            <input type="radio" name="${name}" value="${o.v}" class="accent-emerald-600">
+                            <span>${o.t}</span>
+                        </label>`).join('');
+
+        return `
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-3" id="${name}-card">
+                    <p class="font-bold text-slate-900">${q.q}</p>
+                    <div class="space-y-1.5 text-slate-700">
+${optHtml}
+                    </div>
+                </div>`;
+    }).join('\n');
+}
+
+// ──────────────────────────────────────────
+// 2. TICE.HTML
+// ──────────────────────────────────────────
+const ticeHtml = `<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE Excel - Pourcentages & Proportions 2nde Pro</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    <\/script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };<\/script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"><\/script>
 
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
@@ -118,7 +543,7 @@
                                 <td class="font-bold bg-slate-100">Filière</td>
                                 <td class="font-bold bg-slate-100">Effectif $n$</td>
                                 <td class="font-bold bg-slate-100">Proportion $p$</td>
-                                <td class="font-bold bg-slate-100">Pourcentage $p_{\%}$</td>
+                                <td class="font-bold bg-slate-100">Pourcentage $p_{\\%}$</td>
                             </tr>
                             <tr>
                                 <td class="excel-header">2</td>
@@ -511,6 +936,17 @@
                 fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ' + score + '/' + total + ' — Corrigés : Commerce=30% | Jean=-20% | Baskets CM=1,10 | An2=34,02€ | CMglobal=1,21 | Camembert.';
             }
         }
-    </script>
+    <\/script>
 </body>
-</html>
+</html>`;
+
+// ──────────────────────────────────────────
+// WRITE FILES
+// ──────────────────────────────────────────
+fs.writeFileSync(path.join(targetDir, 'automatismes.html'), automatismesHtml, 'utf8');
+console.log('✅ automatismes.html écrit avec succès');
+
+fs.writeFileSync(path.join(targetDir, 'tice.html'), ticeHtml, 'utf8');
+console.log('✅ tice.html écrit avec succès');
+
+console.log('🎉 Les deux fichiers ont été générés !');
