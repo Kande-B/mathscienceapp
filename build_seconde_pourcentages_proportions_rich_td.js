@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'pourcentages-proportions');
+
+const tdHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -119,8 +124,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un outillage professionnel est affiché à $150{,}00\text{ € HT}$. Le magasin accorde une remise exceptionnelle de $20\%$. Ensuite, la TVA de $20\%$ s'applique sur le prix remisé.</p>
-                        <p class="font-bold text-slate-900">1. Calculer le prix après remise $V_{\text{remise}}$.<br>2. Calculer le prix final $V_{\text{TTC}}$ et le coefficient multiplicateur global $CM_{\text{global}}$.</p>
+                        <p>Un outillage professionnel est affiché à $150{,}00\\text{ € HT}$. Le magasin accorde une remise exceptionnelle de $20\\%$. Ensuite, la TVA de $20\\%$ s'applique sur le prix remisé.</p>
+                        <p class="font-bold text-slate-900">1. Calculer le prix après remise $V_{\\text{remise}}$.<br>2. Calculer le prix final $V_{\\text{TTC}}$ et le coefficient multiplicateur global $CM_{\\text{global}}$.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
@@ -143,9 +148,9 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 1
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Prix remisé :</strong> $CM_1 = 1 - 0{,}20 = 0{,}80 \implies V_{\text{remise}} = 150 \times 0{,}80 = \mathbf{120{,}00\text{ €}}$.</p>
-                        <p>2. <strong>Prix final TTC :</strong> $CM_2 = 1 + 0{,}20 = 1{,}20 \implies V_{\text{TTC}} = 120 \times 1{,}20 = \mathbf{144{,}00\text{ €}}$.</p>
-                        <p>3. <strong>$CM_{\text{global}}$ :</strong> $0{,}80 \times 1{,}20 = \mathbf{0{,}96}$ (soit une baisse globale de $-4\%$ par rapport au prix HT initial !).</p>
+                        <p>1. <strong>Prix remisé :</strong> $CM_1 = 1 - 0{,}20 = 0{,}80 \\implies V_{\\text{remise}} = 150 \\times 0{,}80 = \\mathbf{120{,}00\\text{ €}}$.</p>
+                        <p>2. <strong>Prix final TTC :</strong> $CM_2 = 1 + 0{,}20 = 1{,}20 \\implies V_{\\text{TTC}} = 120 \\times 1{,}20 = \\mathbf{144{,}00\\text{ €}}$.</p>
+                        <p>3. <strong>$CM_{\\text{global}}$ :</strong> $0{,}80 \\times 1{,}20 = \\mathbf{0{,}96}$ (soit une baisse globale de $-4\\%$ par rapport au prix HT initial !).</p>
                     </div>
                 </details>
             </div>
@@ -162,7 +167,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un bloc brut d'acier pèse $M_0 = 45{,}00\text{ kg}$. Lors du tournage et du fraisage, la pièce subit une perte de matière (chutes d'usinage et copeaux) de $12\%$.</p>
+                        <p>Un bloc brut d'acier pèse $M_0 = 45{,}00\\text{ kg}$. Lors du tournage et du fraisage, la pièce subit une perte de matière (chutes d'usinage et copeaux) de $12\\%$.</p>
                         <p class="font-bold text-slate-900">1. Calculer la masse de la pièce finie usinée $M_1$.<br>2. Calculer la masse exacte des copeaux récupérés pour le recyclage.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
@@ -180,8 +185,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 2
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Masse finie :</strong> $CM = 1 - 0{,}12 = 0{,}88 \implies M_1 = 45 \times 0{,}88 = \mathbf{39{,}60\text{ kg}}$.</p>
-                        <p>2. <strong>Masse des copeaux :</strong> $45 - 39{,}60 = \mathbf{5{,}40\text{ kg}}$ (ou $45 \times 0{,}12 = 5{,}40\text{ kg}$).</p>
+                        <p>1. <strong>Masse finie :</strong> $CM = 1 - 0{,}12 = 0{,}88 \\implies M_1 = 45 \\times 0{,}88 = \\mathbf{39{,}60\\text{ kg}}$.</p>
+                        <p>2. <strong>Masse des copeaux :</strong> $45 - 39{,}60 = \\mathbf{5{,}40\\text{ kg}}$ (ou $45 \\times 0{,}12 = 5{,}40\\text{ kg}$).</p>
                     </div>
                 </details>
             </div>
@@ -198,7 +203,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Dans un élevage bovin de $N = 250$ têtes, $60\%$ des animaux sont des vaches laitières Prim'Holstein ($p_1 = 0{,}60$). Parmi ces laitières, $45\%$ sont certifiées Agriculture Biologique ($p_2 = 0{,}45$).</p>
+                        <p>Dans un élevage bovin de $N = 250$ têtes, $60\\%$ des animaux sont des vaches laitières Prim'Holstein ($p_1 = 0{,}60$). Parmi ces laitières, $45\\%$ sont certifiées Agriculture Biologique ($p_2 = 0{,}45$).</p>
                         <p class="font-bold text-slate-900">1. Calculer la proportion globale $p$ de vaches laitières bio dans tout l'élevage.<br>2. Calculer le nombre effectif de vaches laitières bio.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
@@ -216,8 +221,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 3
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>1. <strong>Proportion globale :</strong> $p = p_1 \times p_2 = 0{,}60 \times 0{,}45 = \mathbf{0{,}27}$ (soit **$27\%$** de l'élevage).</p>
-                        <p>2. <strong>Nombre effectif :</strong> $250 \times 0{,}27 = \mathbf{67{,}5} \implies \mathbf{67\text{ ou } 68\text{ vaches}}$.</p>
+                        <p>1. <strong>Proportion globale :</strong> $p = p_1 \\times p_2 = 0{,}60 \\times 0{,}45 = \\mathbf{0{,}27}$ (soit **$27\\%$** de l'élevage).</p>
+                        <p>2. <strong>Nombre effectif :</strong> $250 \\times 0{,}27 = \\mathbf{67{,}5} \\implies \\mathbf{67\\text{ ou } 68\\text{ vaches}}$.</p>
                     </div>
                 </details>
             </div>
@@ -234,8 +239,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Le prix du m³ de béton subit une hausse de $+15\%$ en raison du coût des matières premières. L'entreprise de maçonnerie négocie ensuite une remise pro de $-8\%$ sur la facture globale.</p>
-                        <p class="font-bold text-slate-900">Calculer le $CM_{\text{global}}$ et le pourcentage de variation net final.</p>
+                        <p>Le prix du m³ de béton subit une hausse de $+15\\%$ en raison du coût des matières premières. L'entreprise de maçonnerie négocie ensuite une remise pro de $-8\\%$ sur la facture globale.</p>
+                        <p class="font-bold text-slate-900">Calculer le $CM_{\\text{global}}$ et le pourcentage de variation net final.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
@@ -253,8 +258,8 @@
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
                         <p>• $CM_1 = 1{,}15$ et $CM_2 = 0{,}92$.</p>
-                        <p>• $CM_{\text{global}} = 1{,}15 \times 0{,}92 = \mathbf{1{,}058}$.</p>
-                        <p>• Taux net : $(1{,}058 - 1) \times 100 = \mathbf{+5{,}8\%}$ de hausse réelle.</p>
+                        <p>• $CM_{\\text{global}} = 1{,}15 \\times 0{,}92 = \\mathbf{1{,}058}$.</p>
+                        <p>• Taux net : $(1{,}058 - 1) \\times 100 = \\mathbf{+5{,}8\\%}$ de hausse réelle.</p>
                     </div>
                 </details>
             </div>
@@ -271,7 +276,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Un fourgon de société acheté neuf $28\,000\text{ €}$ perd $18\%$ de sa valeur chaque année pendant 2 ans consécutifs.</p>
+                        <p>Un fourgon de société acheté neuf $28\\,000\\text{ €}$ perd $18\\%$ de sa valeur chaque année pendant 2 ans consécutifs.</p>
                         <p class="font-bold text-slate-900">Calculer la valeur résiduelle du véhicule au bout de 2 ans.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
@@ -292,7 +297,7 @@
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
                         <p>• $CM = 1 - 0{,}18 = 0{,}82$.</p>
-                        <p>• Valeur an 2 : $V_2 = 28\,000 \times (0{,}82)^2 = 28\,000 \times 0{,}6724 = \mathbf{18\,827{,}20\text{ €}}$.</p>
+                        <p>• Valeur an 2 : $V_2 = 28\\,000 \\times (0{,}82)^2 = 28\\,000 \\times 0{,}6724 = \\mathbf{18\\,827{,}20\\text{ €}}$.</p>
                     </div>
                 </details>
             </div>
@@ -309,8 +314,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                     <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                        <p>Une facture TTC s'élève à $V_1 = 288{,}00\text{ €}$ incluant une TVA de $20\%$ ($CM = 1{,}20$).</p>
-                        <p class="font-bold text-slate-900">Calculer le montant du prix hors taxe $V_0 = \frac{V_1}{CM}$ ainsi que le montant exact de la TVA.</p>
+                        <p>Une facture TTC s'élève à $V_1 = 288{,}00\\text{ €}$ incluant une TVA de $20\\%$ ($CM = 1{,}20$).</p>
+                        <p class="font-bold text-slate-900">Calculer le montant du prix hors taxe $V_0 = \\frac{V_1}{CM}$ ainsi que le montant exact de la TVA.</p>
                     </div>
                     <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
                         <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
@@ -328,8 +333,8 @@
                         <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 6
                     </summary>
                     <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                        <p>• Prix HT : $V_0 = \frac{288}{1{,}20} = \mathbf{240{,}00\text{ € HT}}$.</p>
-                        <p>• Montant TVA : $288 - 240 = \mathbf{48{,}00\text{ €}}$.</p>
+                        <p>• Prix HT : $V_0 = \\frac{288}{1{,}20} = \\mathbf{240{,}00\\text{ € HT}}$.</p>
+                        <p>• Montant TVA : $288 - 240 = \\mathbf{48{,}00\\text{ €}}$.</p>
                     </div>
                 </details>
             </div>
@@ -342,8 +347,8 @@
                         <span class="font-bold text-slate-900 text-xs">Ex 7 • Énergie : Rendement Solaire Étagé</span>
                         <span class="bg-cyan-100 text-cyan-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Analyser (C2)</span>
                     </div>
-                    <p class="text-xs text-slate-700">Toit de $200\text{ m}^2$, $40\%$ de panneaux solaires, rendement des cellules de $18\%$.</p>
-                    <p class="text-xs font-bold text-slate-900">$p = 0{,}40 \times 0{,}18 = 0{,}072 \implies$ Surface utile efficace $= 200 \times 0{,}072 = \mathbf{14{,}40\text{ m}^2}$.</p>
+                    <p class="text-xs text-slate-700">Toit de $200\\text{ m}^2$, $40\\%$ de panneaux solaires, rendement des cellules de $18\\%$.</p>
+                    <p class="text-xs font-bold text-slate-900">$p = 0{,}40 \\times 0{,}18 = 0{,}072 \\implies$ Surface utile efficace $= 200 \\times 0{,}072 = \\mathbf{14{,}40\\text{ m}^2}$.</p>
                 </div>
 
                 <!-- EXERCICE 8 -->
@@ -352,8 +357,8 @@
                         <span class="font-bold text-slate-900 text-xs">Ex 8 • Restauration : Ratio Food Cost</span>
                         <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">S'approprier (C1)</span>
                     </div>
-                    <p class="text-xs text-slate-700">CA mensuel $= 35\,000\text{ €}$, coût matières imposé $= 28\%$.</p>
-                    <p class="text-xs font-bold text-slate-900">Budget achats ingrédients max $= 35\,000 \times 0{,}28 = \mathbf{9\,800{,}00\text{ €}}$.</p>
+                    <p class="text-xs text-slate-700">CA mensuel $= 35\\,000\\text{ €}$, coût matières imposé $= 28\\%$.</p>
+                    <p class="text-xs font-bold text-slate-900">Budget achats ingrédients max $= 35\\,000 \\times 0{,}28 = \\mathbf{9\\,800{,}00\\text{ €}}$.</p>
                 </div>
 
                 <!-- EXERCICE 9 -->
@@ -362,8 +367,8 @@
                         <span class="font-bold text-slate-900 text-xs">Ex 9 • Ventes : Vrai Taux après +25% puis -25%</span>
                         <span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Valider (C4)</span>
                     </div>
-                    <p class="text-xs text-slate-700">Un produit valant $100\text{ €}$ subit $+25\%$ puis $-25\%$.</p>
-                    <p class="text-xs font-bold text-slate-900">$CM_{\text{global}} = 1{,}25 \times 0{,}75 = 0{,}9375 \implies$ Prix final $= \mathbf{93{,}75\text{ €}}$ (Baisse de $-6{,}25\%$).</p>
+                    <p class="text-xs text-slate-700">Un produit valant $100\\text{ €}$ subit $+25\\%$ puis $-25\\%$.</p>
+                    <p class="text-xs font-bold text-slate-900">$CM_{\\text{global}} = 1{,}25 \\times 0{,}75 = 0{,}9375 \\implies$ Prix final $= \\mathbf{93{,}75\\text{ €}}$ (Baisse de $-6{,}25\\%$).</p>
                 </div>
 
                 <!-- EXERCICE 10 -->
@@ -372,8 +377,8 @@
                         <span class="font-bold text-slate-900 text-xs">Ex 10 • Finance : Taux Réciproque d'une Inflation</span>
                         <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Communiquer (C5)</span>
                     </div>
-                    <p class="text-xs text-slate-700">L'inflation augmente les prix de $+12\%$ ($CM = 1{,}12$).</p>
-                    <p class="text-xs font-bold text-slate-900">$CM' = \frac{1}{1{,}12} \approx 0{,}8929 \implies$ Remise nécessaire pour annuler $= \mathbf{-10{,}71\%}$.</p>
+                    <p class="text-xs text-slate-700">L'inflation augmente les prix de $+12\\%$ ($CM = 1{,}12$).</p>
+                    <p class="text-xs font-bold text-slate-900">$CM' = \\frac{1}{1{,}12} \\approx 0{,}8929 \\implies$ Remise nécessaire pour annuler $= \\mathbf{-10{,}71\\%}$.</p>
                 </div>
             </div>
         </section>
@@ -414,20 +419,20 @@
                         <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
                             <h5 class="font-bold text-amber-400">📋 Données d'Évolution Trimestrielle (C1) :</h5>
                             <ul class="list-disc list-inside space-y-1">
-                                <li>Chiffre d'affaires initial en début d'année : $CA_0 = 180\,000\text{ €}$.</li>
-                                <li>Trimestre 1 (T1) : $+8\%$ (Campagne de printemps).</li>
-                                <li>Trimestre 2 (T2) : $+12\%$ (Période estivale).</li>
-                                <li>Trimestre 3 (T3) : $-15\%$ (Ralentissement d'automne).</li>
-                                <li>Trimestre 4 (T4) : $-5\%$ (Fermeture pour travaux).</li>
-                                <li>Objectif annuel fixé par la direction : Attendre au moins $185\,000\text{ €}$.</li>
+                                <li>Chiffre d'affaires initial en début d'année : $CA_0 = 180\\,000\\text{ €}$.</li>
+                                <li>Trimestre 1 (T1) : $+8\\%$ (Campagne de printemps).</li>
+                                <li>Trimestre 2 (T2) : $+12\\%$ (Période estivale).</li>
+                                <li>Trimestre 3 (T3) : $-15\\%$ (Ralentissement d'automne).</li>
+                                <li>Trimestre 4 (T4) : $-5\\%$ (Fermeture pour travaux).</li>
+                                <li>Objectif annuel fixé par la direction : Attendre au moins $185\\,000\\text{ €}$.</li>
                             </ul>
                         </div>
 
                         <div class="space-y-2 text-slate-200">
                             <h5 class="font-bold text-amber-300">Travail à Réaliser par l'Élève :</h5>
                             <p><strong>1. (C1/C2) Modélisation :</strong> Écrire les 4 coefficients multiplicateurs $CM_1, CM_2, CM_3, CM_4$.</p>
-                            <p><strong>2. (C3) Calculs :</strong> Calculer le $CM_{\text{global}}$, le chiffre d'affaires final $CA_4$ et le taux d'évolution net annuel $t_{\text{global}}$.</p>
-                            <p><strong>3. (C4) Validation :</strong> Vérifier si l'objectif annuel de $185\,000\text{ €}$ est atteint.</p>
+                            <p><strong>2. (C3) Calculs :</strong> Calculer le $CM_{\\text{global}}$, le chiffre d'affaires final $CA_4$ et le taux d'évolution net annuel $t_{\\text{global}}$.</p>
+                            <p><strong>3. (C4) Validation :</strong> Vérifier si l'objectif annuel de $185\\,000\\text{ €}$ est atteint.</p>
                             <p><strong>4. (C5) Communication :</strong> Rédiger la synthèse commerciale pour le bilan de fin d'année.</p>
                         </div>
                     </div>
@@ -449,14 +454,14 @@
                         <i class="fa-solid fa-graduation-cap text-amber-400"></i> Corrigé Intégral & Barème par Compétences (Problème A)
                     </summary>
                     <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
-                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $CA_0 = 180\,000\text{ €}$. Taux : $+8\%$, $+12\%$, $-15\%$, $-5\%$.</p>
+                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $CA_0 = 180\\,000\\text{ €}$. Taux : $+8\\%$, $+12\\%$, $-15\\%$, $-5\\%$.</p>
                         <p><strong class="text-blue-300">C2 (Analyser/Modéliser) :</strong><br>
                         • $CM_1 = 1{,}08$, $CM_2 = 1{,}12$, $CM_3 = 0{,}85$, $CM_4 = 0{,}95$.<br>
-                        • $CM_{\text{global}} = 1{,}08 \times 1{,}12 \times 0{,}85 \times 0{,}95 = \mathbf{0{,}9767}$.</p>
+                        • $CM_{\\text{global}} = 1{,}08 \\times 1{,}12 \\times 0{,}85 \\times 0{,}95 = \\mathbf{0{,}9767}$.</p>
                         <p><strong class="text-emerald-300">C3 (Réaliser) :</strong><br>
-                        • Chiffre d'affaires final : $CA_4 = 180\,000 \times 0{,}9767 = \mathbf{175\,806{,}00\text{ €}}$.<br>
-                        • Taux d'évolution net : $t_{\text{global}} = (0{,}9767 - 1) \times 100 = \mathbf{-2{,}33\%}$.</p>
-                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Comme $175\,806\text{ €} < 185\,000\text{ €}$, l'objectif de la direction **n'est pas atteint** (-9 194 € d'écart).</p>
+                        • Chiffre d'affaires final : $CA_4 = 180\\,000 \\times 0{,}9767 = \\mathbf{175\\,806{,}00\\text{ €}}$.<br>
+                        • Taux d'évolution net : $t_{\\text{global}} = (0{,}9767 - 1) \\times 100 = \\mathbf{-2{,}33\\%}$.</p>
+                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Comme $175\\,806\\text{ €} < 185\\,000\\text{ €}$, l'objectif de la direction **n'est pas atteint** (-9 194 € d'écart).</p>
                         <p><strong class="text-rose-300">C5 (Communiquer) :</strong> "Le chiffre d'affaires clôture à 175 806 €, soit une baisse nette annuelle de -2,33%. L'objectif de 185 000 € n'est pas atteint en raison de la baisse prolongée des T3 et T4."</p>
                     </div>
                 </details>
@@ -480,15 +485,15 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
                     <div class="md:col-span-2 space-y-4">
-                        <p>Une usine agroalimentaire produit $M_0 = 8\,500\text{ kg}$ de matière brute par jour. Les pertes sur la chaîne de conditionnement sont les suivantes :</p>
+                        <p>Une usine agroalimentaire produit $M_0 = 8\\,500\\text{ kg}$ de matière brute par jour. Les pertes sur la chaîne de conditionnement sont les suivantes :</p>
                         
                         <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
                             <h5 class="font-bold text-purple-400">📋 Pertes aux Étapes de Production (C1) :</h5>
                             <ul class="list-disc list-inside space-y-1">
-                                <li>Étape 1 (Tri & Épluchage) : $-8\%$ de perte.</li>
-                                <li>Étape 2 (Cuisson & Évaporation) : $-6\%$ de perte.</li>
-                                <li>Étape 3 (Mise en barquettes & Pesée) : $-3\%$ de perte.</li>
-                                <li>Norme de rendement global usine : Le rendement net final doit dépasser $83\%$.</li>
+                                <li>Étape 1 (Tri & Épluchage) : $-8\\%$ de perte.</li>
+                                <li>Étape 2 (Cuisson & Évaporation) : $-6\\%$ de perte.</li>
+                                <li>Étape 3 (Mise en barquettes & Pesée) : $-3\\%$ de perte.</li>
+                                <li>Norme de rendement global usine : Le rendement net final doit dépasser $83\\%$.</li>
                             </ul>
                         </div>
 
@@ -496,7 +501,7 @@
                             <h5 class="font-bold text-purple-300">Travail à Réaliser par l'Élève :</h5>
                             <p><strong>1. (C1/C2) :</strong> Exprimer les 3 coefficients de perte $CM_1, CM_2, CM_3$.</p>
                             <p><strong>2. (C3) :</strong> Calculer la masse nette consommable emballée $M_3$ et la masse totale de déchets.</p>
-                            <p><strong>3. (C4) :</strong> Calculer le rendement global et valider la norme usine ($>83%$).</p>
+                            <p><strong>3. (C4) :</strong> Calculer le rendement global et valider la norme usine ($>83\%$).</p>
                             <p><strong>4. (C5) :</strong> Rédiger la synthèse de contrôle qualité industrielle.</p>
                         </div>
                     </div>
@@ -518,12 +523,12 @@
                         <i class="fa-solid fa-graduation-cap text-purple-400"></i> Corrigé Intégral & Barème par Compétences (Problème B)
                     </summary>
                     <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
-                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $M_0 = 8\,500\text{ kg}$. Pertes : $-8\%$, $-6\%$, $-3\%$.</p>
-                        <p><strong class="text-blue-300">C2 (Analyser) :</strong> $CM_1 = 0{,}92$, $CM_2 = 0{,}94$, $CM_3 = 0{,}97 \implies CM_{\text{global}} = 0{,}92 \times 0{,}94 \times 0{,}97 = \mathbf{0{,}8389}$.</p>
+                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $M_0 = 8\\,500\\text{ kg}$. Pertes : $-8\\%$, $-6\\%$, $-3\\%$.</p>
+                        <p><strong class="text-blue-300">C2 (Analyser) :</strong> $CM_1 = 0{,}92$, $CM_2 = 0{,}94$, $CM_3 = 0{,}97 \\implies CM_{\\text{global}} = 0{,}92 \\times 0{,}94 \\times 0{,}97 = \\mathbf{0{,}8389}$.</p>
                         <p><strong class="text-emerald-300">C3 (Réaliser) :</strong><br>
-                        • Masse nette finale : $M_3 = 8\,500 \times 0{,}8389 = \mathbf{7\,130{,}65\text{ kg}}$.<br>
-                        • Perte totale : $8\,500 - 7\,130{,}65 = \mathbf{1\,369{,}35\text{ kg}}$ de déchets.</p>
-                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Rendement global $= 83{,}89\% > 83{,}0\% \implies$ Production **conforme aux exigences de qualité**.</p>
+                        • Masse nette finale : $M_3 = 8\\,500 \\times 0{,}8389 = \\mathbf{7\\,130{,}65\\text{ kg}}$.<br>
+                        • Perte totale : $8\\,500 - 7\\,130{,}65 = \\mathbf{1\\,369{,}35\\text{ kg}}$ de déchets.</p>
+                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Rendement global $= 83{,}89\\% > 83{,}0\\% \\implies$ Production **conforme aux exigences de qualité**.</p>
                         <p><strong class="text-rose-300">C5 (Communiquer) :</strong> "La ligne d'emballage livre 7 130,65 kg de produit fini avec un rendement net de 83,89%, respectant l'objectif industriel fixé."</p>
                     </div>
                 </details>
@@ -551,4 +556,7 @@
         }
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'td.html'), tdHtml, 'utf-8');
+console.log('Successfully updated td.html for pourcentages-proportions with 10 exercises + 3 Multi-Competency Problems!');
