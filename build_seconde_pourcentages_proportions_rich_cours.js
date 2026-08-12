@@ -82,7 +82,7 @@ const coursHtml = `<!DOCTYPE html>
                         <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Baccalauréat Professionnel</span>
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Je Note l'Essentiel : Pourcentages & Évolutions</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Loi des proportions $p = \\frac{n}{N}$, Coefficient Multiplicateur $CM = 1 \\pm \\frac{t}{100}$, Taux d'évolution $t = \\frac{V_1 - V_0}{V_0}$ et évolutions successives.</p>
+                    <p class="text-sm text-slate-300 max-w-2xl">Loi des proportions $p = \\frac{n}{N}$, Coefficient Multiplicateur $CM = 1 \\pm \\frac{t}{100}$, Taux d'évolution $t = \\frac{V_1 - V_0}{V_0}$ et exemples illustrés pour chaque notion.</p>
                 </div>
 
                 <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
@@ -101,7 +101,7 @@ const coursHtml = `<!DOCTYPE html>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700 leading-relaxed items-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700 leading-relaxed items-start">
                 <div class="md:col-span-2 space-y-4">
                     <div class="bg-sky-50 border-l-4 border-sky-500 p-4 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-sky-950 text-sm">📌 Définition Officielle (Proportion) :</h4>
@@ -114,6 +114,23 @@ const coursHtml = `<!DOCTYPE html>
                         <h4 class="font-bold text-indigo-950 text-sm">🔗 Propriété : Proportions Étagées (Sous-ensemble $B \\subset A \\subset E$)</h4>
                         <p>Si la sous-population $A$ représente une proportion $p_1$ de $E$, et que la sous-population $B$ représente une proportion $p_2$ de $A$, alors la proportion globale de $B$ dans $E$ est :</p>
                         <p class="font-mono text-indigo-900 font-bold text-sm">$$p = p_1 \\times p_2$$</p>
+                    </div>
+
+                    <!-- EXEMPLES CONCRETS ET SIMPLES PARTIE 1 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-sky-700">
+                            <i class="fa-solid fa-pen-to-square"></i> Exemples Simples d'Application (Notion 1) :
+                        </h4>
+                        <div class="space-y-2 font-mono text-[11px] text-slate-800">
+                            <p class="p-2 bg-white rounded-xl border border-slate-200">
+                                <strong>Ex 1 (Proportion simple) :</strong> Dans un lycée de $N = 400$ élèves, $n = 240$ sont inscrits en filière professionnelle.<br>
+                                $p = \\frac{240}{400} = 0{,}60 \\implies \\mathbf{60\\%}$ de la sous-population.
+                            </p>
+                            <p class="p-2 bg-white rounded-xl border border-slate-200">
+                                <strong>Ex 2 (Proportions étagées) :</strong> Dans une entreprise de $500$ salariés, $60\\%$ sont techniciens ($p_1 = 0{,}60$). Parmi eux, $40\\%$ travaillent de nuit ($p_2 = 0{,}40$).<br>
+                                $p = 0{,}60 \\times 0{,}40 = \\mathbf{0{,}24} \\implies \\mathbf{24\\%}$ du total (soit $500 \\times 0{,}24 = 120$ salariés).
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -148,7 +165,7 @@ const coursHtml = `<!DOCTYPE html>
                 <p>Pour passer d'une valeur initiale $V_0$ à une valeur finale $V_1$ après une variation de $t\\%$, on utilise le <strong>Coefficient Multiplicateur ($CM$)</strong> :</p>
 
                 <!-- REGLES ET SCHÉMA CM -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                     <div class="space-y-3">
                         <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-1">
                             <h4 class="font-bold text-emerald-950 text-sm">📈 Cas d'une Augmentation (Hausse de $t\\%$) :</h4>
@@ -164,40 +181,25 @@ const coursHtml = `<!DOCTYPE html>
                         </div>
                     </div>
 
-                    <!-- TABLEAU CONVERTER QUICK REPERE -->
-                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2">
-                        <h4 class="font-bold text-slate-900 text-xs text-center border-b pb-2">Tableau Mémoire de Conversion Rapide $t \\leftrightarrow CM$</h4>
-                        <table class="w-full text-center border-collapse font-mono text-[11px]">
-                            <thead>
-                                <tr class="bg-slate-200 text-slate-800">
-                                    <th class="p-1.5 border">Évolution ($t\\%$)</th>
-                                    <th class="p-1.5 border">Calcul $CM$</th>
-                                    <th class="p-1.5 border">Valeur $CM$</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-emerald-50 text-emerald-900">
-                                    <td class="p-1.5 border font-bold">+ 5% (Hausse)</td>
-                                    <td class="p-1.5 border">$1 + 0{,}05$</td>
-                                    <td class="p-1.5 border font-extrabold">1,05</td>
-                                </tr>
-                                <tr class="bg-emerald-100 text-emerald-950">
-                                    <td class="p-1.5 border font-bold">+ 20% (TVA)</td>
-                                    <td class="p-1.5 border">$1 + 0{,}20$</td>
-                                    <td class="p-1.5 border font-extrabold">1,20</td>
-                                </tr>
-                                <tr class="bg-rose-50 text-rose-900">
-                                    <td class="p-1.5 border font-bold">- 15% (Remise)</td>
-                                    <td class="p-1.5 border">$1 - 0{,}15$</td>
-                                    <td class="p-1.5 border font-extrabold">0,85</td>
-                                </tr>
-                                <tr class="bg-rose-100 text-rose-950">
-                                    <td class="p-1.5 border font-bold">- 30% (Soldes)</td>
-                                    <td class="p-1.5 border">$1 - 0{,}30$</td>
-                                    <td class="p-1.5 border font-extrabold">0,70</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- EXEMPLES CONCRETS SIMPLES PARTIE 2 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-emerald-700">
+                            <i class="fa-solid fa-pen-to-square"></i> Exemples Simples d'Application (Notion 2) :
+                        </h4>
+                        <div class="space-y-2 font-mono text-[11px] text-slate-800">
+                            <p class="p-2 bg-white rounded-xl border border-slate-200">
+                                <strong>Ex 1 (Hausse de +15%) :</strong> Un produit de $V_0 = 80\\text{ €}$ augmente de $15\\%$.<br>
+                                $CM = 1 + 0{,}15 = 1{,}15 \\implies V_1 = 80 \\times 1{,}15 = \\mathbf{92\\text{ €}}$.
+                            </p>
+                            <p class="p-2 bg-white rounded-xl border border-slate-200">
+                                <strong>Ex 2 (Remise de -25%) :</strong> Un vêtement de $V_0 = 60\\text{ €}$ baisse de $25\\%$.<br>
+                                $CM = 1 - 0{,}25 = 0{,}75 \\implies V_1 = 60 \\times 0{,}75 = \\mathbf{45\\text{ €}}$.
+                            </p>
+                            <p class="p-2 bg-white rounded-xl border border-slate-200">
+                                <strong>Ex 3 (Retrouver V₀) :</strong> Après une hausse de $+20\\%$ ($CM = 1{,}20$), un matériel coûte $V_1 = 144\\text{ €}$.<br>
+                                $V_0 = \\frac{144}{1{,}20} = \\mathbf{120\\text{ €}}$.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,8 +222,13 @@ const coursHtml = `<!DOCTYPE html>
                     <p>Lorsqu'une grandeur subit plusieurs évolutions successives de coefficients $CM_1, CM_2, \\dots, CM_k$, le <strong>Coefficient Multiplicateur Global</strong> est le produit des coefficients :</p>
                     <p class="font-mono text-purple-900 font-bold text-sm">$$CM_{\\text{global}} = CM_1 \\times CM_2 \\times \\dots \\times CM_k$$</p>
                     <p>Le taux d'évolution global s'obtient par : $t_{\\text{global}} = (CM_{\\text{global}} - 1) \\times 100$.</p>
-                    <div class="p-2.5 bg-white border border-purple-200 rounded-xl font-mono text-[11px] text-purple-950">
-                        ⚠️ <strong>ATTENTION :</strong> Ne JAMAIS additionner les pourcentages ! ($+20\\% -20\\% \\neq 0\\%$, mais $1{,}20 \\times 0{,}80 = 0{,}96 \\implies -4\\%$).
+
+                    <!-- EXEMPLE DE NOTION 3 (SUCCESSIVES) -->
+                    <div class="p-3 bg-white rounded-xl border border-purple-200 font-mono text-[11px] text-purple-950 space-y-1">
+                        <strong>📌 Exemple d'Évolutions Successives :</strong><br>
+                        Un article de $100\\text{ €}$ subit $+10\\%$ ($CM_1 = 1{,}10$) puis $-20\\%$ ($CM_2 = 0{,}80$).<br>
+                        • $CM_{\\text{global}} = 1{,}10 \\times 0{,}80 = \\mathbf{0{,}88}$.<br>
+                        • Prix final : $100 \\times 0{,}88 = \\mathbf{88\\text{ €}}$ (soit **$-12\\%$** au global).
                     </div>
                 </div>
 
@@ -231,8 +238,13 @@ const coursHtml = `<!DOCTYPE html>
                     <p>Pour revenir à la valeur initiale $V_0$ après une évolution de coefficient $CM$, il faut appliquer le <strong>Coefficient Multiplicateur Réciproque $CM'$</strong> :</p>
                     <p class="font-mono text-amber-900 font-bold text-sm">$$CM' = \\frac{1}{CM}$$</p>
                     <p>Le taux d'évolution réciproque est : $t' = (CM' - 1) \\times 100$.</p>
-                    <div class="p-2.5 bg-white border border-amber-200 rounded-xl font-mono text-[11px] text-amber-950">
-                        💡 <strong>Exemple :</strong> Pour annuler une hausse de $+25\\%$ ($CM = 1{,}25$), $CM' = \\frac{1}{1{,}25} = 0{,}80 \\implies$ Baisse réciproque de <strong>$-20\\%$</strong>.
+
+                    <!-- EXEMPLE DE NOTION 3 (RÉCIPROQUE) -->
+                    <div class="p-3 bg-white rounded-xl border border-amber-200 font-mono text-[11px] text-amber-950 space-y-1">
+                        <strong>📌 Exemple de Taux Réciproque :</strong><br>
+                        Après une hausse de $+25\\%$ ($CM = 1{,}25$), pour retrouver le prix initial :<br>
+                        • $CM' = \\frac{1}{1{,}25} = \\mathbf{0{,}80}$.<br>
+                        • Taux réciproque : $(0{,}80 - 1) \\times 100 = \\mathbf{-20\\%}$ (il faut baisse de $20\\%$).
                     </div>
                 </div>
             </div>
@@ -315,4 +327,4 @@ const coursHtml = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync(path.join(targetDir, 'cours.html'), coursHtml, 'utf-8');
-console.log('Successfully updated cours.html for pourcentages-proportions with clean typography!');
+console.log('Successfully added simple examples for each notion in cours.html!');
