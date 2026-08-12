@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & Ritualisation - Trigonométrie 2nde Pro</title>
+    <title>Automatismes & Ritualisation - Géométrie Plane & Trigonométrie (2nde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -34,12 +34,18 @@
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
         .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
+        .transform-style-3d { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
 
         .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
         .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
@@ -56,13 +62,13 @@
                     <h1 class="text-xl font-bold font-heading">Géométrie Plane & Trigonométrie</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Maths -->
+            <!-- Navigation de la Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Excel</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
                 <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
             </nav>
         </div>
@@ -74,7 +80,7 @@
         <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
                 <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
-                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Trigonométrie Flash</h2>
+                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Trigonométrie & Géométrie Plane</h2>
             </div>
             <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
                 <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
@@ -89,24 +95,24 @@
         <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                 <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Trigonométrie)
+                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Trigonométrie & Théorèmes)
                 </h3>
-                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+                <span class="text-xs font-bold text-slate-500">Cliquez sur une carte pour la retourner</span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <!-- FC 1 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
-                            <p class="text-xs font-bold text-center">Que signifie SOH ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 1</span>
+                            <p class="text-xs font-bold font-heading">Que signifie le mnémonique SOH ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Sinus = Opposé / Hypoténuse !</p>
-                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-yellow-500 text-slate-950 rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-xs font-extrabold font-mono">$$\sin(\alpha) = \frac{\text{Opposé}}{\text{Hypoténuse}}$$</p>
+                            <span class="text-[10px] font-bold">Sinus = Opposé / Hyp</span>
                         </div>
                     </div>
                 </div>
@@ -114,15 +120,15 @@
                 <!-- FC 2 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
-                            <p class="text-xs font-bold text-center">Que signifie CAH ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 2</span>
+                            <p class="text-xs font-bold font-heading">Que signifie le mnémonique CAH ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Cosinus = Adjacence / Hypoténuse !</p>
-                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-sky-500 text-slate-950 rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-xs font-extrabold font-mono">$$\cos(\alpha) = \frac{\text{Adjacente}}{\text{Hypoténuse}}$$</p>
+                            <span class="text-[10px] font-bold">Cosinus = Adjacente / Hyp</span>
                         </div>
                     </div>
                 </div>
@@ -130,15 +136,15 @@
                 <!-- FC 3 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
-                            <p class="text-xs font-bold text-center">Que signifie TOA ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 3</span>
+                            <p class="text-xs font-bold font-heading">Que signifie le mnémonique TOA ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Tangente = Opposé / Adjacence !</p>
-                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-emerald-500 text-slate-950 rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-xs font-extrabold font-mono">$$\tan(\alpha) = \frac{\text{Opposé}}{\text{Adjacente}}$$</p>
+                            <span class="text-[10px] font-bold">Tangente = Opposé / Adj</span>
                         </div>
                     </div>
                 </div>
@@ -146,15 +152,15 @@
                 <!-- FC 4 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
-                            <p class="text-xs font-bold text-center">Valeur de cos(60°) ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 4</span>
+                            <p class="text-xs font-bold font-heading">Égalité du Théorème de Pythagore</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">0,5 (1/2) !</p>
-                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-amber-500 text-slate-950 rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-xs font-extrabold font-mono">$$\text{Hyp}^2 = a^2 + b^2$$</p>
+                            <span class="text-[10px] font-bold">Triangle rectangle uniquement</span>
                         </div>
                     </div>
                 </div>
@@ -162,15 +168,15 @@
                 <!-- FC 5 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
-                            <p class="text-xs font-bold text-center">Valeur de sin(30°) ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 5</span>
+                            <p class="text-xs font-bold font-heading">Comment calculer un angle $\alpha$ ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">0,5 (1/2) !</p>
-                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-purple-500 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-[11px] font-bold font-mono">$\alpha = \arccos(\text{Adj}/\text{Hyp})$<br>$\alpha = \arctan(\text{Opp}/\text{Adj})$</p>
+                            <span class="text-[10px] font-bold">Calculatrice en DEG</span>
                         </div>
                     </div>
                 </div>
@@ -178,15 +184,15 @@
                 <!-- FC 6 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
-                            <p class="text-xs font-bold text-center">Valeur de tan(45°) ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 6</span>
+                            <p class="text-xs font-bold font-heading">Formule de la pente en %</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Exactement 1 !</p>
-                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-indigo-500 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-xs font-extrabold font-mono">$$\text{Pente }\% = \tan(\alpha) \times 100$$</p>
+                            <span class="text-[10px] font-bold">Hauteur / Longueur $\times 100$</span>
                         </div>
                     </div>
                 </div>
@@ -194,15 +200,15 @@
                 <!-- FC 7 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
-                            <p class="text-xs font-bold text-center">Le côté en face de l'angle droit est ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 7</span>
+                            <p class="text-xs font-bold font-heading">Égalité de Thalès</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">L'HYPOTÉNUSE !</p>
-                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-rose-500 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-[11px] font-bold font-mono">$$\frac{AM}{AB} = \frac{AN}{AC} = \frac{MN}{BC}$$</p>
+                            <span class="text-[10px] font-bold">Si $(MN) \parallel (BC)$</span>
                         </div>
                     </div>
                 </div>
@@ -210,15 +216,15 @@
                 <!-- FC 8 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
-                            <p class="text-xs font-bold text-center">Somme des angles d'un triangle ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 8</span>
+                            <p class="text-xs font-bold font-heading">Somme des angles d'un triangle ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">180° !</p>
-                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-teal-500 text-slate-950 rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-sm font-extrabold font-mono">$$180^\circ$$</p>
+                            <span class="text-[10px] font-bold">Dans tout triangle</span>
                         </div>
                     </div>
                 </div>
@@ -226,15 +232,15 @@
                 <!-- FC 9 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
-                            <p class="text-xs font-bold text-center">Calculer hypoténuse si a=6 et b=8 ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 9</span>
+                            <p class="text-xs font-bold font-heading">Triangle rectangle isocèle ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">c = √(36+64) = 10 !</p>
-                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-orange-500 text-slate-950 rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-xs font-extrabold font-mono">Angles : $90^circ, 45^circ, 45^circ$<br>Côtés : $a = b$</p>
+                            <span class="text-[10px] font-bold">$\tan(45^circ) = 1$</span>
                         </div>
                     </div>
                 </div>
@@ -242,126 +248,138 @@
                 <!-- FC 10 -->
                 <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
                     <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
-                            <p class="text-xs font-bold text-center">Encadrement de cos(x) et sin(x) ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden border border-slate-800 shadow">
+                            <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">Flashcard 10</span>
+                            <p class="text-xs font-bold font-heading">Valeur exacte de $\cos(60^circ)$ ?</p>
+                            <span class="text-[10px] text-slate-400"><i class="fa-solid fa-rotate mr-1"></i> Recto</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Toujours entre -1 et +1 !</p>
-                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <div class="absolute inset-0 bg-pink-500 text-white rounded-2xl p-4 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow">
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Réponse</span>
+                            <p class="text-sm font-extrabold font-mono">$$\cos(60^circ) = 0{,}5 = \sin(30^circ)$$</p>
+                            <span class="text-[10px] font-bold">Remarquable</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
+        <!-- MODULE 2 : 6 QCM FLASH AVEC FEEDBACK EN DIRECT -->
         <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
             <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                 <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-calculator text-emerald-500"></i> Module 2 : Quiz Trigonométrie 2nde Pro
+                    <i class="fa-solid fa-list-check text-yellow-500"></i> Module 2 : 6 QCM de Calcul Rapide
                 </h3>
-                <span class="text-xs font-bold text-slate-500">6 Défis</span>
+                <span class="text-xs font-bold text-slate-500">Sélectionnez la bonne réponse</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Calculez tan(45°) :</label>
-                    <input type="number" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="tan(45°) = ?">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Q1 -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full uppercase">Question 1</span>
+                    <p class="text-xs font-bold text-slate-800">Un triangle ABC est rectangle en B. Si $AB = 3\text{ cm}$ et $BC = 4\text{ cm}$, combien vaut $AC$ ?</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+                        <button onclick="checkQCM(this, false, 1)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">A) $6\text{ cm}$</button>
+                        <button onclick="checkQCM(this, true, 1)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">B) $5\text{ cm}$</button>
+                        <button onclick="checkQCM(this, false, 1)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">C) $7\text{ cm}$</button>
+                    </div>
                 </div>
 
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Calculez l'hypoténuse si a = 5 m et b = 12 m :</label>
-                    <input type="number" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="c = ? m">
+                <!-- Q2 -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full uppercase">Question 2</span>
+                    <p class="text-xs font-bold text-slate-800">Dans un triangle rectangle, quel est le côté opposé à l'angle droit ?</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+                        <button onclick="checkQCM(this, false, 2)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">A) L'adjacent</button>
+                        <button onclick="checkQCM(this, true, 2)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">B) L'hypoténuse</button>
+                        <button onclick="checkQCM(this, false, 2)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">C) La hauteur</button>
+                    </div>
                 </div>
 
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Dans SOH CAH TOA, le cosinus égale :</label>
-                    <select id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="CAH">Adjacence / Hypoténuse</option>
-                        <option value="SOH">Opposé / Hypoténuse</option>
-                    </select>
+                <!-- Q3 -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full uppercase">Question 3</span>
+                    <p class="text-xs font-bold text-slate-800">Si un toit monte de $1,20\text{ m}$ sur une longueur horizontale de $12\text{ m}$, quelle est sa pente ?</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+                        <button onclick="checkQCM(this, true, 3)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">A) $10\%$</button>
+                        <button onclick="checkQCM(this, false, 3)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">B) $12\%$</button>
+                        <button onclick="checkQCM(this, false, 3)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">C) $15\%$</button>
+                    </div>
                 </div>
 
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">4. Si cos(A) = 0.5, l'angle A mesure (en degrés) :</label>
-                    <input type="number" id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="Angle = ? °">
+                <!-- Q4 -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full uppercase">Question 4</span>
+                    <p class="text-xs font-bold text-slate-800">Quelle formule permet de calculer le côté opposé connaissant l'adjacente et l'angle ?</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+                        <button onclick="checkQCM(this, false, 4)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">A) $\text{Adj} \times \cos(\alpha)$</button>
+                        <button onclick="checkQCM(this, true, 4)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">B) $\text{Adj} \times \tan(\alpha)$</button>
+                        <button onclick="checkQCM(this, false, 4)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">C) $\text{Adj} / \sin(\alpha)$</button>
+                    </div>
                 </div>
 
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">5. La somme des deux angles aigus d'un triangle rectangle est :</label>
-                    <input type="number" id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="Somme = ? °">
+                <!-- Q5 -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full uppercase">Question 5</span>
+                    <p class="text-xs font-bold text-slate-800">Thalès : Si $AM/AB = 1/3$ et $BC = 15\text{ m}$, combien vaut $MN$ ?</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+                        <button onclick="checkQCM(this, false, 5)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">A) $3\text{ m}$</button>
+                        <button onclick="checkQCM(this, true, 5)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">B) $5\text{ m}$</button>
+                        <button onclick="checkQCM(this, false, 5)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">C) $10\text{ m}$</button>
+                    </div>
                 </div>
 
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">6. Le théorème de Pythagore s'applique-t-il dans TOUS les triangles ?</label>
-                    <select id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="NON">Non (uniquement dans les triangles RECTANGLES)</option>
-                        <option value="OUI">Oui</option>
-                    </select>
+                <!-- Q6 -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full uppercase">Question 6</span>
+                    <p class="text-xs font-bold text-slate-800">Si $\cos(\alpha) = 0{,}5$, quel est l'angle $\alpha$ ?</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs font-bold">
+                        <button onclick="checkQCM(this, false, 6)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">A) $30^\circ$</button>
+                        <button onclick="checkQCM(this, false, 6)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">B) $45^\circ$</button>
+                        <button onclick="checkQCM(this, true, 6)" class="p-2.5 bg-white border border-slate-300 rounded-xl hover:bg-slate-100 transition">C) $60^\circ$</button>
+                    </div>
                 </div>
             </div>
-
-            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
-            </button>
-            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
         </section>
 
     </main>
 
-    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
     <script>
-        let fcScores = new Set();
-        let m2Score = 0;
+        let score = 0;
+        let answeredQuestions = new Set();
 
         function flipCard(el) {
-            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
+            const inner = el.querySelector('.card-inner');
+            inner.classList.toggle('rotate-y-180');
         }
 
-        function markFC(num) {
-            fcScores.add(num);
-            updateScore();
-        }
+        function checkQCM(btn, isCorrect, qId) {
+            if (answeredQuestions.has(qId)) return;
+            answeredQuestions.add(qId);
 
-        function checkM2() {
-            let q1 = document.getElementById('m2-q1').value.trim();
-            let q2 = document.getElementById('m2-q2').value.trim();
-            let q3 = document.getElementById('m2-q3').value;
-            let q4 = document.getElementById('m2-q4').value.trim();
-            let q5 = document.getElementById('m2-q5').value.trim();
-            let q6 = document.getElementById('m2-q6').value;
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('button');
 
-            let score = 0;
-            if (q1 === "1") score++;
-            if (q2 === "13") score++;
-            if (q3 === "CAH") score++;
-            if (q4 === "60") score++;
-            if (q5 === "90") score++;
-            if (q6 === "NON") score++;
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.add('opacity-60', 'cursor-not-allowed');
+            });
 
-            m2Score = score;
-            updateScore();
-
-            let fb = document.getElementById('fb-m2');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (score === 6) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le quiz Trigonométrie 2nde Pro !`;
+            if (isCorrect) {
+                btn.classList.remove('opacity-60', 'bg-white');
+                btn.classList.add('correct-bg');
+                score += 1;
             } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+                btn.classList.remove('opacity-60', 'bg-white');
+                btn.classList.add('wrong-bg');
+                buttons.forEach(b => {
+                    if (b !== btn && (b.innerText.includes('5') || b.innerText.includes('Hypoténuse') || b.innerText.includes('10%') || b.innerText.includes('tan') || b.innerText.includes('60°'))) {
+                        b.classList.remove('opacity-60');
+                        b.classList.add('correct-bg');
+                    }
+                });
             }
-        }
 
-        function updateScore() {
-            let total = fcScores.size + m2Score;
-            document.getElementById('global-score').innerText = `${total} / 16`;
+            document.getElementById('global-score').innerText = score + ' / 16';
         }
     </script>
 </body>

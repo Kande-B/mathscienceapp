@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TICE GeoGebra - Trigonométrie 2nde Pro</title>
+    <title>TP Numérique & TICE - Trigonométrie 2nde Pro</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,8 +33,11 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        @media print {
+            header, nav, .no-print { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
@@ -51,83 +54,98 @@
                     <h1 class="text-xl font-bold font-heading">Géométrie Plane & Trigonométrie</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Maths -->
+            <!-- Navigation de la Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TICE Excel</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique</a>
                 <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- EN-TÊTE DU MODULE TICE -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-purple-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+        <!-- ENTÊTE DE TP NUMÉRIQUE -->
+        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
-                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
-                        <span>Module TICE • GeoGebra & Calculatrice Scientifique</span>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-purple-500 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">TP Informatique Tableur & GeoGebra</span>
+                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Seconde Pro</span>
                     </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP TICE : Construction Géométrique & Mesures d'Angles</h2>
+                    <h2 class="text-3xl font-extrabold font-heading text-white">Automatisation des Calculs de Pente sur Tableur</h2>
+                    <p class="text-sm text-slate-300 max-w-2xl">Conception d'une feuille Excel / Calc pour la vérification automatique de conformité PMR et de rampants de toitures.</p>
                 </div>
             </div>
-
-            <p class="text-xs text-slate-600 leading-relaxed">
-                <strong>Touches Calculatrice :</strong> `cos^-1` (ou `acos`), `sin^-1` (ou `asin`) et `tan^-1` (ou `atan`) en mode **Degré (DEG)**.
-            </p>
         </div>
 
-        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
-        <section class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
-                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
-                <h3 class="font-bold text-slate-900 text-base">Validation du TP TICE</h3>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Quel mode d'angle doit impérativement être sélectionné sur la calculatrice ?</label>
-                    <select id="tice-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="DEG">Mode Degré (DEG)</option>
-                        <option value="RAD">Mode Radian (RAD)</option>
-                    </select>
+        <!-- PARTIE 1 : TABLEUR EXCEL / CALC -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-file-excel text-emerald-600"></i>
                 </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Quelle touche calcule un angle dont le cosinus vaut 0.5 ?</label>
-                    <input type="text" id="tice-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="arccos ou cos^-1">
+                <div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Partie 1 • Tableur Excel / LibreOffice Calc</span>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Formules d'Automatisation Trigonométrique</h3>
                 </div>
             </div>
 
-            <button onclick="checkTICE()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-double mr-2"></i> Valider les réponses TICE
-            </button>
-            <div id="fb-tice" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div class="space-y-4 text-xs leading-relaxed">
+                <p class="text-slate-700">Créer la feuille de calcul suivante dans votre tableur :</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse border border-slate-300 font-mono text-[11px]">
+                        <thead>
+                            <tr class="bg-slate-800 text-white">
+                                <th class="border border-slate-700 p-2"></th>
+                                <th class="border border-slate-700 p-2">A</th>
+                                <th class="border border-slate-700 p-2">B</th>
+                                <th class="border border-slate-700 p-2">C</th>
+                                <th class="border border-slate-700 p-2">D</th>
+                                <th class="border border-slate-700 p-2">E</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-slate-100 font-bold">
+                                <td class="border border-slate-300 p-2">1</td>
+                                <td class="border border-slate-300 p-2">Projet</td>
+                                <td class="border border-slate-300 p-2">Base b (m)</td>
+                                <td class="border border-slate-300 p-2">Hauteur h (m)</td>
+                                <td class="border border-slate-300 p-2">Pente (%)</td>
+                                <td class="border border-slate-300 p-2">Angle (deg)</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-bold">2</td>
+                                <td class="border border-slate-300 p-2">Rampe PMR 1</td>
+                                <td class="border border-slate-300 p-2 bg-yellow-50">10,00</td>
+                                <td class="border border-slate-300 p-2 bg-yellow-50">0,50</td>
+                                <td class="border border-slate-300 p-2 font-bold text-purple-600">=C2/B2*100</td>
+                                <td class="border border-slate-300 p-2 font-bold text-indigo-600">=DEGRES(ATAN(C2/B2))</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-2 font-bold">3</td>
+                                <td class="border border-slate-300 p-2">Toit Garage</td>
+                                <td class="border border-slate-300 p-2 bg-yellow-50">6,00</td>
+                                <td class="border border-slate-300 p-2 bg-yellow-50">2,50</td>
+                                <td class="border border-slate-300 p-2 font-bold text-purple-600">=C3/B3*100</td>
+                                <td class="border border-slate-300 p-2 font-bold text-indigo-600">=DEGRES(ATAN(C3/B3))</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-2xl space-y-1">
+                    <h4 class="font-bold text-purple-950 text-sm">Formules Clés Excel/Calc à Retenir :</h4>
+                    <p class="font-mono text-purple-900">• <strong>Calcul de l'angle en degrés :</strong> <code>=DEGRES(ATAN(Oppose/Adjacent))</code></p>
+                    <p class="font-mono text-purple-900">• <strong>Calcul de l'hypoténuse :</strong> <code>=RACINE(B2^2 + C2^2)</code></p>
+                </div>
+            </div>
         </section>
 
     </main>
-
-    <!-- JS POUR LE TP TICE -->
-    <script>
-        function checkTICE() {
-            let q1 = document.getElementById('tice-q1').value;
-            let q2 = document.getElementById('tice-q2').value.trim().toLowerCase();
-            let fb = document.getElementById('fb-tice');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (q1 === "DEG" && (q2.includes("cos") || q2.includes("acos"))) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> TP TICE validé ! Mode Degré (DEG) et touche arccos (cos⁻¹).`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Mode Degré (DEG) et arccos.`;
-            }
-        }
-    </script>
 </body>
 </html>
