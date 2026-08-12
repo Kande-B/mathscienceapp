@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'geometrie-plane-trigonometrie');
+
+const activitesHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -99,7 +104,7 @@
             </div>
 
             <p class="text-xs text-slate-700 leading-relaxed">
-                Avant de démarrer l'investigation, vérifiez que vous maîtrisez le nom des 3 côtés dans un triangle rectangle par rapport à l'angle considéré $\alpha$ :
+                Avant de démarrer l'investigation, vérifiez que vous maîtrisez le nom des 3 côtés dans un triangle rectangle par rapport à l'angle considéré $\\alpha$ :
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
@@ -116,7 +121,7 @@
 
                 <!-- Q2 -->
                 <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Le côté situé en face de l'angle considéré $\alpha$ :</label>
+                    <label class="font-bold text-slate-900 block">2. Le côté situé en face de l'angle considéré $\\alpha$ :</label>
                     <select id="diag-q2" class="border border-slate-300 rounded-xl p-2.5 w-full font-bold bg-white text-slate-900">
                         <option value="">Sélectionnez...</option>
                         <option value="HYP">L'hypoténuse</option>
@@ -127,7 +132,7 @@
 
                 <!-- Q3 -->
                 <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Le côté qui touche l'angle $\alpha$ (hors hypoténuse) :</label>
+                    <label class="font-bold text-slate-900 block">3. Le côté qui touche l'angle $\\alpha$ (hors hypoténuse) :</label>
                     <select id="diag-q3" class="border border-slate-300 rounded-xl p-2.5 w-full font-bold bg-white text-slate-900">
                         <option value="">Sélectionnez...</option>
                         <option value="HYP">L'hypoténuse</option>
@@ -157,7 +162,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700 leading-relaxed items-center">
                 <div class="md:col-span-2 space-y-4">
-                    <p>Un apprenti charpentier prépare plusieurs fermes de toiture inclinées avec un même angle $\alpha = 30^\circ$. Il construit 3 triangles rectangles de tailles différentes :</p>
+                    <p>Un apprenti charpentier prépare plusieurs fermes de toiture inclinées avec un même angle $\\alpha = 30^\\circ$. Il construit 3 triangles rectangles de tailles différentes :</p>
                     
                     <div class="overflow-x-auto">
                         <table class="w-full text-center border-collapse border border-slate-200 font-mono text-[11px]">
@@ -202,9 +207,9 @@
 
                     <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-2 text-slate-800">
                         <h4 class="font-bold text-emerald-950 text-sm">Constat Scientifique Majeur :</h4>
-                        <p>Quelle que soit la dimension de la charpente, tant que l'angle reste $\alpha = 30^\circ$ :</p>
-                        <p>• Le rapport $\frac{\text{Opposé}}{\text{Hypoténuse}}$ vaut toujours <strong>$0{,}50$</strong>. On l'appelle **Sinus($30^circ$)**.</p>
-                        <p>• Le rapport $\frac{\text{Adjacents}}{\text{Hypoténuse}}$ vaut toujours <strong>$0{,}866$</strong>. On l'appelle **Cosinus($30^circ$)**.</p>
+                        <p>Quelle que soit la dimension de la charpente, tant que l'angle reste $\\alpha = 30^\\circ$ :</p>
+                        <p>• Le rapport $\\frac{\\text{Opposé}}{\\text{Hypoténuse}}$ vaut toujours <strong>$0{,}50$</strong>. On l'appelle **Sinus($30^\circ$)**.</p>
+                        <p>• Le rapport $\\frac{\\text{Adjacents}}{\\text{Hypoténuse}}$ vaut toujours <strong>$0{,}866$</strong>. On l'appelle **Cosinus($30^\circ$)**.</p>
                     </div>
                 </div>
 
@@ -233,21 +238,21 @@
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <p>Un technicien d'accessibilité étudie le lien entre la pente d'une rampe au sol et l'angle d'inclinaison $\alpha$.</p>
+                <p>Un technicien d'accessibilité étudie le lien entre la pente d'une rampe au sol et l'angle d'inclinaison $\\alpha$.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                     <div class="p-5 bg-sky-50 border-l-4 border-sky-500 rounded-r-2xl space-y-3">
                         <h4 class="font-bold text-sky-950 text-sm">Définition de la Tangente (TOA) :</h4>
-                        <p>La pente en $%$ est définie par : $\text{Pente }\% = \frac{\text{Hauteur } h}{\text{Longueur } d} \times 100$.</p>
-                        <p>Or, le rapport $\frac{\text{Hauteur (Opp)}}{\text{Longueur (Adj)}}$ correspond exactement à la **Tangente** de l'angle :</p>
-                        <p class="font-mono text-sky-900 font-bold">$$\tan(\alpha) = \frac{h}{d} = \frac{\text{Pente }\%}{100}$$</p>
+                        <p>La pente en $\%$ est définie par : $\\text{Pente }\\% = \\frac{\\text{Hauteur } h}{\\text{Longueur } d} \\times 100$.</p>
+                        <p>Or, le rapport $\\frac{\\text{Hauteur (Opp)}}{\\text{Longueur (Adj)}}$ correspond exactement à la **Tangente** de l'angle :</p>
+                        <p class="font-mono text-sky-900 font-bold">$$\\tan(\\alpha) = \\frac{h}{d} = \\frac{\\text{Pente }\\%}{100}$$</p>
                     </div>
 
                     <div class="p-5 bg-slate-900 text-white rounded-2xl border border-slate-800 space-y-3">
                         <h4 class="font-bold text-amber-400 text-sm">Exemple Pratique PMR :</h4>
-                        <p>Si la norme exige une pente maximale de <strong>$5\%$</strong> :</p>
-                        <p class="font-mono text-slate-300">• $\tan(\alpha) = \frac{5}{100} = 0{,}05$.</p>
-                        <p class="font-mono text-slate-300">• L'angle maximum autorisé est : $\alpha = \arctan(0{,}05) \approx \mathbf{2{,}86^circ}$.</p>
+                        <p>Si la norme exige une pente maximale de <strong>$5\\%$</strong> :</p>
+                        <p class="font-mono text-slate-300">• $\\tan(\\alpha) = \\frac{5}{100} = 0{,}05$.</p>
+                        <p class="font-mono text-slate-300">• L'angle maximum autorisé est : $\\alpha = \\arctan(0{,}05) \\approx \\mathbf{2{,}86^\circ}$.</p>
                     </div>
                 </div>
             </div>
@@ -265,12 +270,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700 leading-relaxed items-center">
                 <div class="md:col-span-2 space-y-3">
-                    <p>Un géomètre veut mesurer la hauteur d'un château d'eau. Il se place à $D = 40\text{ m}$ du pied et pointe le sommet avec un viseur à une hauteur d'œil $h_{\text{œil}} = 1{,}70\text{ m}$. L'angle mesuré est $\alpha = 35^\circ$.</p>
+                    <p>Un géomètre veut mesurer la hauteur d'un château d'eau. Il se place à $D = 40\\text{ m}$ du pied et pointe le sommet avec un viseur à une hauteur d'œil $h_{\\text{œil}} = 1{,}70\\text{ m}$. L'angle mesuré est $\\alpha = 35^\\circ$.</p>
                     
                     <div class="p-4 bg-purple-50 border-l-4 border-purple-500 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-purple-950 text-sm">Méthode de Calcul en 2 Étapes :</h4>
-                        <p>1. **Calcul de la hauteur haute $h_1$ :** $h_1 = D \times \tan(35^\circ) = 40 \times 0{,}7002 = \mathbf{28{,}01\text{ m}}$.</p>
-                        <p>2. **Hauteur totale du bâtiment :** $H = h_1 + h_{\text{œil}} = 28{,}01 + 1{,}70 = \mathbf{29{,}71\text{ m}}$.</p>
+                        <p>1. **Calcul de la hauteur haute $h_1$ :** $h_1 = D \\times \\tan(35^\\circ) = 40 \\times 0{,}7002 = \\mathbf{28{,}01\\text{ m}}$.</p>
+                        <p>2. **Hauteur totale du bâtiment :** $H = h_1 + h_{\\text{œil}} = 28{,}01 + 1{,}70 = \\mathbf{29{,}71\\text{ m}}$.</p>
                     </div>
                 </div>
 
@@ -318,4 +323,7 @@
         }
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'activites.html'), activitesHtml, 'utf-8');
+console.log('Successfully updated activites.html with engaging guided discovery & interactive diagnostic!');
