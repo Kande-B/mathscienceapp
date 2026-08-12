@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'pourcentages-proportions');
+
+const activitesHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -180,19 +185,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                     <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-indigo-950 text-sm">Méthode 1 : Calculs Étape par Étape</h4>
-                        <p>1. Montant de la remise : $450 \times \frac{10}{100} = 45\text{ €}$.</p>
-                        <p>2. Prix après remise : $450 - 45 = \mathbf{405\text{ €}}$.</p>
-                        <p>3. Montant de la TVA (20%) : $405 \times 0{,}20 = 81\text{ €}$.</p>
-                        <p>4. Prix final TTC : $405 + 81 = \mathbf{486\text{ €}}$.</p>
+                        <p>1. Montant de la remise : $450 \\times \\frac{10}{100} = 45\\text{ €}$.</p>
+                        <p>2. Prix après remise : $450 - 45 = \\mathbf{405\\text{ €}}$.</p>
+                        <p>3. Montant de la TVA (20%) : $405 \\times 0{,}20 = 81\\text{ €}$.</p>
+                        <p>4. Prix final TTC : $405 + 81 = \\mathbf{486\\text{ €}}$.</p>
                     </div>
 
                     <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-emerald-950 text-sm">Méthode 2 : Découverte du CM Global !</h4>
                         <p>Au lieu de faire 4 calculs, on multiplie directement par les coefficients :</p>
-                        <p>• $CM_1 = 1 - 0{,}10 = \mathbf{0{,}90}$.</p>
-                        <p>• $CM_2 = 1 + 0{,}20 = \mathbf{1{,}20}$.</p>
-                        <p>• **$CM_{\text{global}} = 0{,}90 \times 1{,}20 = \mathbf{1{,}08}$** (soit +8% global !).</p>
-                        <p class="font-bold text-emerald-900">• Prix TTC direct : $450 \times 1{,}08 = \mathbf{486\text{ €}}$ !</p>
+                        <p>• $CM_1 = 1 - 0{,}10 = \\mathbf{0{,}90}$.</p>
+                        <p>• $CM_2 = 1 + 0{,}20 = \\mathbf{1{,}20}$.</p>
+                        <p>• **$CM_{\\text{global}} = 0{,}90 \\times 1{,}20 = \\mathbf{1{,}08}$** (soit +8% global !).</p>
+                        <p class="font-bold text-emerald-900">• Prix TTC direct : $450 \\times 1{,}08 = \\mathbf{486\\text{ €}}$ !</p>
                     </div>
                 </div>
 
@@ -223,23 +228,23 @@
                 <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
                 <div>
                     <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Activité 2 • Qualité & Agronomie (Proportions Étagées)</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Proportions d'Ensembles & Sous-Populations ($p = p_1 \times p_2$)</h3>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Proportions d'Ensembles & Sous-Populations ($p = p_1 \\times p_2$)</h3>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700 leading-relaxed items-center">
                 <div class="md:col-span-2 space-y-3">
-                    <p>Un laboratoire d'analyse contrôle $N = 1\,200$ lots de semences agricoles :</p>
+                    <p>Un laboratoire d'analyse contrôle $N = 1\\,200$ lots de semences agricoles :</p>
                     <ul class="list-disc list-inside space-y-1 font-semibold text-slate-900">
-                        <li>$40%$ des lots sont issus de l'agriculture Biologique (Ensemble A).</li>
-                        <li>Parmi ces lots Bio, $75%$ sont certifiés Label Qualité Supérieure (Ensemble B).</li>
+                        <li>$40\%$ des lots sont issus de l'agriculture Biologique (Ensemble A).</li>
+                        <li>Parmi ces lots Bio, $75\%$ sont certifiés Label Qualité Supérieure (Ensemble B).</li>
                     </ul>
 
                     <div class="p-4 bg-sky-50 border-l-4 border-sky-500 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-sky-950 text-sm">Formule de la Proportion Étagée :</h4>
                         <p>La proportion globale $p$ de lots Bio Qualité Supérieure par rapport à l'ENSEMBLE TOTAL est le produit des deux proportions :</p>
-                        <p class="font-mono text-sky-900 font-bold">$$p = p_1 \times p_2 = 0{,}40 \times 0{,}75 = \mathbf{0{,}30} \quad (\text{soit } 30\%)$$</p>
-                        <p>Nombre effectif de lots : $1\,200 \times 0{,}30 = \mathbf{360\text{ lots}}$.</p>
+                        <p class="font-mono text-sky-900 font-bold">$$p = p_1 \\times p_2 = 0{,}40 \\times 0{,}75 = \\mathbf{0{,}30} \\quad (\\text{soit } 30\\%)$$</p>
+                        <p>Nombre effectif de lots : $1\\,200 \\times 0{,}30 = \\mathbf{360\\text{ lots}}$.</p>
                     </div>
                 </div>
 
@@ -280,17 +285,17 @@
                     <div class="p-5 bg-rose-50 border-l-4 border-rose-500 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-rose-950 text-sm">❌ Idée Reçue Démasquée !</h4>
                         <p>Prenons un article valant 100 € :</p>
-                        <p>1. Hausse de $+20\%$ : $100 \times 1{,}20 = \mathbf{120\text{ €}}$.</p>
-                        <p>2. Baisse de $-20\%$ : $120 \times 0{,}80 = \mathbf{96\text{ €}}$ ! (Perte de 4 €).</p>
-                        <p class="font-bold text-rose-900">• $CM_{\text{global}} = 1{,}20 \times 0{,}80 = \mathbf{0{,}96} \implies$ Baisse globale de **$-4\%$**.</p>
+                        <p>1. Hausse de $+20\\%$ : $100 \\times 1{,}20 = \\mathbf{120\\text{ €}}$.</p>
+                        <p>2. Baisse de $-20\\%$ : $120 \\times 0{,}80 = \\mathbf{96\\text{ €}}$ ! (Perte de 4 €).</p>
+                        <p class="font-bold text-rose-900">• $CM_{\\text{global}} = 1{,}20 \\times 0{,}80 = \\mathbf{0{,}96} \\implies$ Baisse globale de **$-4\\%$**.</p>
                     </div>
 
                     <div class="p-5 bg-purple-50 border-l-4 border-purple-500 rounded-r-2xl space-y-2">
                         <h4 class="font-bold text-purple-950 text-sm">✔ Calcul du Vrai Taux Réciproque !</h4>
-                        <p>Pour annuler une hausse de $+20\%$ ($CM = 1{,}20$), le coefficient réciproque vaut :</p>
-                        <p class="font-mono text-purple-900 font-bold">$$CM' = \frac{1}{CM} = \frac{1}{1{,}20} \approx \mathbf{0{,}8333}$$</p>
+                        <p>Pour annuler une hausse de $+20\\%$ ($CM = 1{,}20$), le coefficient réciproque vaut :</p>
+                        <p class="font-mono text-purple-900 font-bold">$$CM' = \\frac{1}{CM} = \\frac{1}{1{,}20} \\approx \\mathbf{0{,}8333}$$</p>
                         <p>Le taux de baisse nécessaire est donc :</p>
-                        <p class="font-bold text-purple-950">• $t' = (0{,}8333 - 1) \times 100 = \mathbf{-16{,}67\%}$ !</p>
+                        <p class="font-bold text-purple-950">• $t' = (0{,}8333 - 1) \\times 100 = \\mathbf{-16{,}67\\%}$ !</p>
                     </div>
                 </div>
             </div>
@@ -341,4 +346,7 @@
         }
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'activites.html'), activitesHtml, 'utf-8');
+console.log('Successfully updated activites.html for pourcentages-proportions with clean LaTeX!');
