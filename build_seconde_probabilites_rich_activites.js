@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'probabilites-fluctuation');
+
+const activitesHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -81,7 +86,7 @@
                     </div>
                     <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Contrôle Qualité, Équiprobabilité & Simulation</h2>
                     <p class="text-sm text-slate-300 max-w-2xl mt-1">
-                        Explorez le calcul des probabilités $P(A) = \frac{\text{cas favorables}}{\text{cas possibles}}$, les événements contraires $P(\bar{A}) = 1 - P(A)$, les intersections et réunions, ainsi que la fluctuation d'échantillonnage par simulation numérique.
+                        Explorez le calcul des probabilités $P(A) = \\frac{\\text{cas favorables}}{\\text{cas possibles}}$, les événements contraires $P(\\bar{A}) = 1 - P(A)$, les intersections et réunions, ainsi que la fluctuation d'échantillonnage par simulation numérique.
                     </p>
                 </div>
             </div>
@@ -113,7 +118,7 @@
 
                 <!-- Q2 -->
                 <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Si la probabilité qu'un équipement tombe en panne est $P(A) = 0{,}15$, quelle est la probabilité qu'il ne tombe PAS en panne $P(\bar{A})$ ?</label>
+                    <label class="font-bold text-slate-900 block">2. Si la probabilité qu'un équipement tombe en panne est $P(A) = 0{,}15$, quelle est la probabilité qu'il ne tombe PAS en panne $P(\\bar{A})$ ?</label>
                     <input type="number" step="0.01" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="P(Ā) = ?">
                 </div>
 
@@ -242,25 +247,25 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="p-3 bg-white border rounded-xl space-y-1">
                             <label class="font-bold text-slate-900 block">1. Probabilité $P(L_A)$ que la pièce provienne de la Ligne A :</label>
-                            <p class="text-[11px] text-slate-500">$P(L_A) = \frac{\text{Nombre de pièces Ligne A}}{\text{Total du lot}} = \frac{300}{500}$</p>
+                            <p class="text-[11px] text-slate-500">$P(L_A) = \\frac{\\text{Nombre de pièces Ligne A}}{\\text{Total du lot}} = \\frac{300}{500}$</p>
                             <input type="number" step="0.01" id="act1-q1" class="w-full p-2 border rounded-xl font-bold bg-slate-50" placeholder="P(LA) = ? (ex: 0.60)">
                         </div>
 
                         <div class="p-3 bg-white border rounded-xl space-y-1">
                             <label class="font-bold text-slate-900 block">2. Probabilité $P(D)$ que la pièce soit défectueuse :</label>
-                            <p class="text-[11px] text-slate-500">$P(D) = \frac{\text{Total pièces défectueuses}}{\text{Total du lot}} = \frac{25}{500}$</p>
+                            <p class="text-[11px] text-slate-500">$P(D) = \\frac{\\text{Total pièces défectueuses}}{\\text{Total du lot}} = \\frac{25}{500}$</p>
                             <input type="number" step="0.001" id="act1-q2" class="w-full p-2 border rounded-xl font-bold bg-slate-50" placeholder="P(D) = ? (ex: 0.05)">
                         </div>
 
                         <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">3. Probabilité $P(L_A \cap D)$ (pièce de la Ligne A ET défectueuse) :</label>
-                            <p class="text-[11px] text-slate-500">$P(L_A \cap D) = \frac{15}{500}$</p>
+                            <label class="font-bold text-slate-900 block">3. Probabilité $P(L_A \\cap D)$ (pièce de la Ligne A ET défectueuse) :</label>
+                            <p class="text-[11px] text-slate-500">$P(L_A \\cap D) = \\frac{15}{500}$</p>
                             <input type="number" step="0.001" id="act1-q3" class="w-full p-2 border rounded-xl font-bold bg-slate-50" placeholder="P(LA ∩ D) = ? (ex: 0.03)">
                         </div>
 
                         <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">4. Probabilité $P(C)$ que la pièce soit conforme (événement contraire $\bar{D}$) :</label>
-                            <p class="text-[11px] text-slate-500">$P(C) = 1 - P(D) = \frac{475}{500}$</p>
+                            <label class="font-bold text-slate-900 block">4. Probabilité $P(C)$ que la pièce soit conforme (événement contraire $\\bar{D}$) :</label>
+                            <p class="text-[11px] text-slate-500">$P(C) = 1 - P(D) = \\frac{475}{500}$</p>
                             <input type="number" step="0.01" id="act1-q4" class="w-full p-2 border rounded-xl font-bold bg-slate-50" placeholder="P(C) = ? (ex: 0.95)">
                         </div>
                     </div>
@@ -279,7 +284,7 @@
                 <span class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-lg">2</span>
                 <div>
                     <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Activité 2 • Domaine Transport & Sécurité au Travail</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Analyse de Sécurité : Formule de la Réunion $P(A \cup B)$</h3>
+                    <h3 class="text-xl font-bold font-heading text-slate-900">Analyse de Sécurité : Formule de la Réunion $P(A \\cup B)$</h3>
                 </div>
             </div>
 
@@ -291,7 +296,7 @@
                     <ul class="list-disc list-inside space-y-1 text-slate-700 ml-2">
                         <li>Événement $A$ : « Le véhicule présente un défaut de freinage » ($P(A) = 0{,}20$, soit 20 véhicules).</li>
                         <li>Événement $B$ : « Le véhicule présente un défaut d'éclairage » ($P(B) = 0{,}15$, soit 15 véhicules).</li>
-                        <li>Événement $A \cap B$ : « Le véhicule présente les DEUX défauts » ($P(A \cap B) = 0{,}05$, soit 5 véhicules).</li>
+                        <li>Événement $A \\cap B$ : « Le véhicule présente les DEUX défauts » ($P(A \\cap B) = 0{,}05$, soit 5 véhicules).</li>
                     </ul>
                 </div>
 
@@ -327,18 +332,18 @@
                 </div>
 
                 <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-4">
-                    <span class="font-bold text-indigo-900 text-sm block">Questions & Application de la formule du cours : $P(A \cup B) = P(A) + P(B) - P(A \cap B)$</span>
+                    <span class="font-bold text-indigo-900 text-sm block">Questions & Application de la formule du cours : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$</span>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">1. Calculez la probabilité $P(A \cup B)$ qu'un véhicule ait au moins un défaut :</label>
-                            <p class="text-[11px] text-slate-500">$P(A \cup B) = 0{,}20 + 0{,}15 - 0{,}05$</p>
+                            <label class="font-bold text-slate-900 block">1. Calculez la probabilité $P(A \\cup B)$ qu'un véhicule ait au moins un défaut :</label>
+                            <p class="text-[11px] text-slate-500">$P(A \\cup B) = 0{,}20 + 0{,}15 - 0{,}05$</p>
                             <input type="number" step="0.01" id="act2-q1" class="w-full p-2 border rounded-xl font-bold bg-slate-50" placeholder="P(A ∪ B) = ? (ex: 0.30)">
                         </div>
 
                         <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">2. Calculez la probabilité qu'un véhicule n'ait AUCUN défaut $P(\overline{A \cup B})$ :</label>
-                            <p class="text-[11px] text-slate-500">$P(\text{aucun défaut}) = 1 - P(A \cup B)$</p>
+                            <label class="font-bold text-slate-900 block">2. Calculez la probabilité qu'un véhicule n'ait AUCUN défaut $P(\\overline{A \\cup B})$ :</label>
+                            <p class="text-[11px] text-slate-500">$P(\\text{aucun défaut}) = 1 - P(A \\cup B)$</p>
                             <input type="number" step="0.01" id="act2-q2" class="w-full p-2 border rounded-xl font-bold bg-slate-50" placeholder="P = ? (ex: 0.70)">
                         </div>
                     </div>
@@ -364,7 +369,7 @@
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
                 <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
                     <p class="font-semibold text-slate-900">
-                        <strong>Objectif de l'investigation :</strong> Observez la différence entre la <em>fréquence observée</em> $f$ sur un échantillon de taille $N$ et la <em>probabilité théorique</em> $p = \frac{1}{6} \approx 0{,}167$ lors du lancer d'un dé équilibré.
+                        <strong>Objectif de l'investigation :</strong> Observez la différence entre la <em>fréquence observée</em> $f$ sur un échantillon de taille $N$ et la <em>probabilité théorique</em> $p = \\frac{1}{6} \\approx 0{,}167$ lors du lancer d'un dé équilibré.
                     </p>
                     <p>
                         Cliquez sur les boutons ci-dessous pour simuler $N$ lancers successifs et observer comment varie la fréquence d'apparition du numéro 6 !
@@ -376,7 +381,7 @@
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div>
                             <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Simulateur interactif en temps réel</span>
-                            <h4 class="text-lg font-bold font-heading">Lancement d'un dé à 6 faces ($p = 1/6 \approx 0{,}167$)</h4>
+                            <h4 class="text-lg font-bold font-heading">Lancement d'un dé à 6 faces ($p = 1/6 \\approx 0{,}167$)</h4>
                         </div>
                         <div class="flex items-center gap-2">
                             <button onclick="runSimulation(10)" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-colors text-xs">
@@ -440,7 +445,7 @@
                         </div>
 
                         <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">2. Que se passe-t-il lorsque la taille de l'échantillon $N$ devient très grande ($N = 1\,000$) ?</label>
+                            <label class="font-bold text-slate-900 block">2. Que se passe-t-il lorsque la taille de l'échantillon $N$ devient très grande ($N = 1\\,000$) ?</label>
                             <select id="act3-q2" class="w-full p-2 border rounded-xl font-bold bg-slate-50">
                                 <option value="">Sélectionnez...</option>
                                 <option value="CONVERGE">La fréquence f se rapproche très près de p = 0,167 (Loi des grands nombres)</option>
@@ -470,14 +475,14 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
                     <span class="font-bold text-indigo-300 block">1. Probabilité en Équiprobabilité</span>
-                    <p class="text-slate-300">$P(A) = \frac{\text{Nombre de cas favorables}}{\text{Nombre de cas possibles}}$</p>
-                    <p class="text-[11px] text-slate-400">Toujours comprise entre 0 et 1 (soit de $0\%$ à $100\%$).</p>
+                    <p class="text-slate-300">$P(A) = \\frac{\\text{Nombre de cas favorables}}{\\text{Nombre de cas possibles}}$</p>
+                    <p class="text-[11px] text-slate-400">Toujours comprise entre 0 et 1 (soit de $0\\%$ à $100\\%$).</p>
                 </div>
 
                 <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
                     <span class="font-bold text-indigo-300 block">2. Événement Contraire & Réunion</span>
-                    <p class="text-slate-300">$P(\bar{A}) = 1 - P(A)$</p>
-                    <p class="text-slate-300">$P(A \cup B) = P(A) + P(B) - P(A \cap B)$</p>
+                    <p class="text-slate-300">$P(\\bar{A}) = 1 - P(A)$</p>
+                    <p class="text-slate-300">$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$</p>
                 </div>
 
                 <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2">
@@ -578,7 +583,7 @@
 
             if (q1 === "NON" && q2 === "CONVERGE") {
                 fb.classList.add('correct-bg');
-                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Très bien ! Vous avez compris le principe fondamental de la fluctuation d'échantillonnage et la Loi des Grands Nombres.';
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Très bien ! Vous avez compris le principe fondamental de la fluctuation d\'échantillonnage et la Loi des Grands Nombres.';
             } else {
                 fb.classList.add('wrong-bg');
                 fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Réessayez : 1) Non, f varie fortement pour petit N | 2) f se rapproche de p = 0.167 quand N devient grand.';
@@ -587,3 +592,7 @@
     </script>
 </body>
 </html>
+`;
+
+fs.writeFileSync(path.join(targetDir, 'activites.html'), activitesHtml, 'utf8');
+console.log('✅ activites.html pour probabilites-fluctuation généré avec succès !');
