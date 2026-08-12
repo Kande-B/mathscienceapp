@@ -232,7 +232,7 @@ const tdHtml = `<!DOCTYPE html>
                 <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                     <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
                         <span class="w-8 h-8 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-xs">Ex 4</span>
-                        BTP : Variation du Prix des Matériaux (Haussse & Remise)
+                        BTP : Variation du Prix des Matériaux (Hausse & Remise)
                     </h3>
                     <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-3 py-1 rounded-full">Analyser (C2)</span>
                 </div>
@@ -322,8 +322,8 @@ const tdHtml = `<!DOCTYPE html>
                             <rect x="20" y="35" width="80" height="40" fill="#10b981" rx="6"/>
                             <text x="60" y="58" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">288 € TTC</text>
                             <line x1="110" y1="55" x2="140" y2="55" stroke="#64748b" stroke-width="2"/>
-                            <rect x="150" y="35" width="55" height="40" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="6"/>
-                            <text x="177" y="58" font-size="9" font-weight="bold" fill="#0284c7" text-anchor="middle">? € HT</text>
+                            <rect x="150" y="35" width="55" height="40" fill="#0284c7" rx="6"/>
+                            <text x="177" y="58" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">? € HT</text>
                         </svg>
                     </div>
                 </div>
@@ -339,47 +339,149 @@ const tdHtml = `<!DOCTYPE html>
                 </details>
             </div>
 
-            <!-- EXERCICES 7 A 10 (COMPACTS ET RICHES) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- EXERCICE 7 -->
-                <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <span class="font-bold text-slate-900 text-xs">Ex 7 • Énergie : Rendement Solaire Étagé</span>
-                        <span class="bg-cyan-100 text-cyan-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Analyser (C2)</span>
-                    </div>
-                    <p class="text-xs text-slate-700">Toit de $200\\text{ m}^2$, $40\\%$ de panneaux solaires, rendement des cellules de $18\\%$.</p>
-                    <p class="text-xs font-bold text-slate-900">$p = 0{,}40 \\times 0{,}18 = 0{,}072 \\implies$ Surface utile efficace $= 200 \\times 0{,}072 = \\mathbf{14{,}40\\text{ m}^2}$.</p>
+            <!-- EXERCICE 7 -->
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow print-card space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="w-8 h-8 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-xs">Ex 7</span>
+                        Énergie : Rendement Solaire & Proportions Étagées
+                    </h3>
+                    <span class="bg-cyan-100 text-cyan-800 text-xs font-extrabold px-3 py-1 rounded-full">Analyser (C2)</span>
                 </div>
 
-                <!-- EXERCICE 8 -->
-                <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <span class="font-bold text-slate-900 text-xs">Ex 8 • Restauration : Ratio Food Cost</span>
-                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">S'approprier (C1)</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p>Une entreprise installe des panneaux photovoltaïques sur le toit d'un entrepôt de superficie totale $S = 200\\text{ m}^2$. Les panneaux recouvrent $40\\%$ du toit ($p_1 = 0{,}40$). Les cellules photovoltaïques possèdent un rendement énergétique de $18\\%$ ($p_2 = 0{,}18$).</p>
+                        <p class="font-bold text-slate-900">1. Calculer la proportion globale $p$ de surface utile captant l'énergie solaire.<br>2. Calculer la superficie efficace équivalente $S_{\\text{utile}}$ en $\\text{m}^2$.</p>
                     </div>
-                    <p class="text-xs text-slate-700">CA mensuel $= 35\\,000\\text{ €}$, coût matières imposé $= 28\\%$.</p>
-                    <p class="text-xs font-bold text-slate-900">Budget achats ingrédients max $= 35\\,000 \\times 0{,}28 = \\mathbf{9\\,800{,}00\\text{ €}}$.</p>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
+                        <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
+                            <rect x="10" y="20" width="200" height="70" fill="#64748b" rx="6"/>
+                            <rect x="30" y="30" width="100" height="50" fill="#0284c7" rx="4"/>
+                            <rect x="40" y="40" width="80" height="30" fill="#10b981" fill-opacity="0.6" rx="2"/>
+                            <text x="80" y="58" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">S_utile = ? m²</text>
+                        </svg>
+                    </div>
                 </div>
 
-                <!-- EXERCICE 9 -->
-                <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <span class="font-bold text-slate-900 text-xs">Ex 9 • Ventes : Vrai Taux après +25% puis -25%</span>
-                        <span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Valider (C4)</span>
+                <details class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs print-correction">
+                    <summary class="font-bold text-slate-900 cursor-pointer hover:text-indigo-600 transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 7
+                    </summary>
+                    <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                        <p>1. <strong>Proportion globale :</strong> $p = p_1 \\times p_2 = 0{,}40 \\times 0{,}18 = \\mathbf{0{,}072}$ (soit **$7{,}2\\%$** du toit).</p>
+                        <p>2. <strong>Superficie utile :</strong> $S_{\\text{utile}} = 200 \\times 0{,}072 = \\mathbf{14{,}40\\text{ m}^2}$.</p>
                     </div>
-                    <p class="text-xs text-slate-700">Un produit valant $100\\text{ €}$ subit $+25\\%$ puis $-25\\%$.</p>
-                    <p class="text-xs font-bold text-slate-900">$CM_{\\text{global}} = 1{,}25 \\times 0{,}75 = 0{,}9375 \\implies$ Prix final $= \\mathbf{93{,}75\\text{ €}}$ (Baisse de $-6{,}25\\%$).</p>
+                </details>
+            </div>
+
+            <!-- EXERCICE 8 -->
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow print-card space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="w-8 h-8 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-xs">Ex 8</span>
+                        Restauration & Gestion : Ratio Dépenses Food Cost
+                    </h3>
+                    <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full">S'approprier (C1)</span>
                 </div>
 
-                <!-- EXERCICE 10 -->
-                <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow space-y-3">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                        <span class="font-bold text-slate-900 text-xs">Ex 10 • Finance : Taux Réciproque d'une Inflation</span>
-                        <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Communiquer (C5)</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p>Un restaurant traditionnel réalise un chiffre d'affaires mensuel de $CA = 35\\,000\\text{ €}$. Le cahier des charges de gestion fixe un ratio maximal de dépenses en matières premières alimentaires (Food Cost) de $28\\%$.</p>
+                        <p class="font-bold text-slate-900">1. Exprimer la proportion sous forme décimale.<br>2. Calculer le budget maximal d'achats d'ingrédients autorisé pour le mois.</p>
                     </div>
-                    <p class="text-xs text-slate-700">L'inflation augmente les prix de $+12\\%$ ($CM = 1{,}12$).</p>
-                    <p class="text-xs font-bold text-slate-900">$CM' = \\frac{1}{1{,}12} \\approx 0{,}8929 \\implies$ Remise nécessaire pour annuler $= \\mathbf{-10{,}71\\%}$.</p>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
+                        <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
+                            <circle cx="110" cy="55" r="40" fill="#e2e8f0"/>
+                            <path d="M 110 55 L 150 55 A 40 40 0 0 1 110 95 Z" fill="#f59e0b"/>
+                            <text x="110" y="58" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">Food Cost 28%</text>
+                        </svg>
+                    </div>
                 </div>
+
+                <details class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs print-correction">
+                    <summary class="font-bold text-slate-900 cursor-pointer hover:text-indigo-600 transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 8
+                    </summary>
+                    <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                        <p>1. <strong>Proportion décimale :</strong> $p = \\frac{28}{100} = \\mathbf{0{,}28}$.</p>
+                        <p>2. <strong>Budget maximal :</strong> $35\\,000 \\times 0{,}28 = \\mathbf{9\\,800{,}00\\text{ €}}$.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- EXERCICE 9 -->
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow print-card space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="w-8 h-8 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-xs">Ex 9</span>
+                        Ventes & Économie : Le Piège des Soldes (+25% puis -25%)
+                    </h3>
+                    <span class="bg-rose-100 text-rose-800 text-xs font-extrabold px-3 py-1 rounded-full">Valider (C4)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p>Avant une période de promotions, un magasin augmente le prix d'un produit valant $V_0 = 100\\text{ €}$ de $+25\\%$. Pendant les soldes, il applique une remise de $-25\\%$.</p>
+                        <p class="font-bold text-slate-900">1. Calculer le $CM_1$, le $CM_2$ et le $CM_{\\text{global}}$.<br>2. Calculer le prix soldé final $V_2$ et déterminer le pourcentage de variation net par rapport au prix d'origine.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
+                        <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
+                            <line x1="20" y1="80" x2="110" y2="20" stroke="#ef4444" stroke-width="3"/>
+                            <line x1="110" y1="20" x2="200" y2="90" stroke="#10b981" stroke-width="3"/>
+                            <text x="60" y="40" font-size="9" font-weight="bold" fill="#ef4444">+25%</text>
+                            <text x="165" y="45" font-size="9" font-weight="bold" fill="#10b981">-25%</text>
+                            <text x="180" y="105" font-size="9" font-weight="bold" fill="#ef4444">Prix = ? €</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <details class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs print-correction">
+                    <summary class="font-bold text-slate-900 cursor-pointer hover:text-indigo-600 transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 9
+                    </summary>
+                    <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                        <p>1. <strong>Coefficients :</strong> $CM_1 = 1{,}25$, $CM_2 = 0{,}75 \\implies CM_{\\text{global}} = 1{,}25 \\times 0{,}75 = \\mathbf{0{,}9375}$.</p>
+                        <p>2. <strong>Prix final :</strong> $100 \\times 0{,}9375 = \\mathbf{93{,}75\\text{ €}}$.</p>
+                        <p>3. <strong>Variation net :</strong> $(0{,}9375 - 1) \\times 100 = \\mathbf{-6{,}25\\%}$ (soit une perte de 6,25 € par rapport aux 100 € initiaux !).</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- EXERCICE 10 -->
+            <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow print-card space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <span class="w-8 h-8 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-xs">Ex 10</span>
+                        Finance : Taux Réciproque d'une Inflation de 12%
+                    </h3>
+                    <span class="bg-rose-100 text-rose-800 text-xs font-extrabold px-3 py-1 rounded-full">Communiquer (C5)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p>L'inflation augmente le tarif d'un équipement informatique de $+12\\%$ ($CM = 1{,}12$). Un acheteur professionnel négocie une remise spéciale pour revenir exactement au tarif d'origine avant hausse.</p>
+                        <p class="font-bold text-slate-900">1. Calculer le coefficient multiplicateur réciproque $CM' = \\frac{1}{CM}$.<br>2. Calculer le pourcentage de remise exact à obtenir au centième près.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-center overflow-x-auto">
+                        <svg width="220" height="110" viewBox="0 0 220 110" class="mx-auto font-sans">
+                            <line x1="20" y1="80" x2="110" y2="30" stroke="#ef4444" stroke-width="3"/>
+                            <line x1="110" y1="30" x2="200" y2="80" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="3,3"/>
+                            <text x="65" y="45" font-size="9" font-weight="bold" fill="#ef4444">+12%</text>
+                            <text x="160" y="45" font-size="9" font-weight="bold" fill="#8b5cf6">Remise = ? %</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <details class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs print-correction">
+                    <summary class="font-bold text-slate-900 cursor-pointer hover:text-indigo-600 transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-500"></i> Voir la démonstration détaillée de l'Exercice 10
+                    </summary>
+                    <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                        <p>1. <strong>$CM'$ réciproque :</strong> $CM' = \\frac{1}{1{,}12} \\approx \\mathbf{0{,}892857}$.</p>
+                        <p>2. <strong>Taux de remise :</strong> $t' = (0{,}892857 - 1) \\times 100 = \\mathbf{-10{,}71\\%}$ (il faut $10{,}71\\%$ de remise pour annuler la hausse de $12\\%$).</p>
+                    </div>
+                </details>
             </div>
         </section>
 
@@ -533,6 +635,74 @@ const tdHtml = `<!DOCTYPE html>
                     </div>
                 </details>
             </div>
+
+            <!-- PROBLÈME C -->
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6 border border-slate-800">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="bg-cyan-500 text-slate-950 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Problème C • BTP & Audit Énergétique</span>
+                        <h4 class="text-2xl font-bold font-heading text-white mt-1">Rénovation Énergétique & Amortissement d'un Bâtiment</h4>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-1.5 text-[10px] font-extrabold">
+                        <span class="bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-md border border-amber-500/30">C1</span>
+                        <span class="bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-md border border-blue-500/30">C2</span>
+                        <span class="bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-500/30">C3</span>
+                        <span class="bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-md border border-purple-500/30">C4</span>
+                        <span class="bg-rose-500/20 text-rose-300 px-2.5 py-1 rounded-md border border-rose-500/30">C5</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
+                    <div class="md:col-span-2 space-y-4">
+                        <p>La facture annuelle d'électricité d'un bâtiment commercial s'élève à $F_0 = 45\\,000\\text{ €}$. Une hausse du prix du kWh de $+18\\%$ est annoncée. Pour compenser, le propriétaire investit $30\\,000\\text{ €}$ dans une isolation thermique permettant de réduire la consommation de $-25\\%$.</p>
+                        
+                        <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
+                            <h5 class="font-bold text-cyan-400">📋 Données de l'Audit (C1) :</h5>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Facture d'origine : $F_0 = 45\\,000\\text{ €}$.</li>
+                                <li>Hausse de tarif : $+18\\%$ ($CM_1 = 1{,}18$).</li>
+                                <li>Réduction consommation : $-25\\%$ ($CM_2 = 0{,}75$).</li>
+                                <li>Investissement isolation : $30\\,000\\text{ €}$.</li>
+                            </ul>
+                        </div>
+
+                        <div class="space-y-2 text-slate-200">
+                            <h5 class="font-bold text-cyan-300">Travail à Réaliser par l'Élève :</h5>
+                            <p><strong>1. (C1/C2) :</strong> Calculer le $CM_{\\text{global}}$ résultant de la hausse et de l'isolation.</p>
+                            <p><strong>2. (C3) :</strong> Calculer le montant de la nouvelle facture $F_1$ et l'économie annuelle réalisée par rapport à la facture ajustée sans travaux ($45\\,000 \\times 1{,}18 = 53\\,100\\text{ €}$).</p>
+                            <p><strong>3. (C4) :</strong> Calculer en combien d'années l'investissement d'isolation de $30\\,000\\text{ €}$ sera amorti grâce aux économies annuelles.</p>
+                            <p><strong>4. (C5) :</strong> Rédiger la conclusion d'amortissement technico-financière.</p>
+                        </div>
+                    </div>
+
+                    <!-- SCHEMA FIGURE SVG PROBLEME C -->
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col justify-center items-center text-center">
+                        <svg width="220" height="150" viewBox="0 0 220 150" class="mx-auto font-sans">
+                            <rect x="20" y="30" width="180" height="90" fill="#1e293b" stroke="#38bdf8" stroke-width="2" rx="8"/>
+                            <path d="M 20 60 L 200 60" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4"/>
+                            <text x="110" y="50" font-size="9" fill="#f59e0b" font-weight="bold" text-anchor="middle">Facture avec hausse = 53 100 €</text>
+                            <text x="110" y="90" font-size="9" fill="#10b981" font-weight="bold" text-anchor="middle">Facture isolée = 39 825 €</text>
+                            <text x="110" y="110" font-size="9" fill="#38bdf8" text-anchor="middle">Économie = 13 275 €/an</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <details class="bg-slate-800 border border-slate-700 rounded-2xl p-5 text-xs text-slate-200">
+                    <summary class="font-bold text-cyan-400 cursor-pointer hover:text-cyan-300 transition flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Corrigé Intégral & Barème par Compétences (Problème C)
+                    </summary>
+                    <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
+                        <p><strong class="text-amber-300">C1 (S'approprier) :</strong> $F_0 = 45\\,000\\text{ €}$. Taux : $+18\\%$ et $-25\\%$.</p>
+                        <p><strong class="text-blue-300">C2 (Analyser/Modéliser) :</strong> $CM_{\\text{global}} = 1{,}18 \\times 0{,}75 = \\mathbf{0{,}885}$ (baise nette globale de $-11{,}5\\%$ par rapport au départ).</p>
+                        <p><strong class="text-emerald-300">C3 (Réaliser) :</strong><br>
+                        • Nouvelle facture isolée : $F_1 = 45\\,000 \\times 0{,}885 = \\mathbf{39\\,825{,}00\\text{ €}}$.<br>
+                        • Facture sans isolation : $45\\,000 \\times 1{,}18 = 53\\,100\\text{ €}$.<br>
+                        • Économie annuelle générée par l'isolation : $53\\,100 - 39\\,825 = \\mathbf{13\\,275{,}00\\text{ €/an}}$.</p>
+                        <p><strong class="text-purple-300">C4 (Valider) :</strong> Temps d'amortissement : $\\frac{30\\,000}{13\\,275} \\approx \\mathbf{2{,}26\\text{ ans}}$ (soit environ 2 ans et 3 mois). L'investissement est **extrêmement rentable**.</p>
+                        <p><strong class="text-rose-300">C5 (Communiquer) :</strong> "L'isolation réduit la facture à 39 825 € malgré la hausse de 18%. Elle génère 13 275 € d'économies annuelles et amortit les 30 000 € d'investissement en seulement 2,26 ans."</p>
+                    </div>
+                </details>
+            </div>
         </section>
 
     </main>
@@ -559,4 +729,4 @@ const tdHtml = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync(path.join(targetDir, 'td.html'), tdHtml, 'utf-8');
-console.log('Successfully updated td.html for pourcentages-proportions with 10 exercises + 3 Multi-Competency Problems!');
+console.log('Successfully updated td.html with 10 full exercises + 3 complete multi-competency problems (A, B, C)!');
