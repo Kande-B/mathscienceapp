@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+const fs = require('fs');
+const path = require('path');
+
+const targetDir = path.join(__dirname, 'ressources', 'seconde', 'maths', 'pourcentages-proportions');
+
+const evalHtml = `<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- MathJax pour les formules LaTeX -->
-    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -133,7 +138,7 @@
                 <p class="font-bold text-slate-900">Répondre aux questions suivantes ou cocher la bonne réponse :</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="p-3 bg-slate-50 border rounded-2xl space-y-1">
-                        <p><strong>1. (1 pt)</strong> Quel est le $CM$ associé à une remise de $15\%$ ?</p>
+                        <p><strong>1. (1 pt)</strong> Quel est le $CM$ associé à une remise de $15\\%$ ?</p>
                         <p class="font-mono text-slate-600">A. 0,15 | B. 0,85 | C. 1,15 | D. -15</p>
                     </div>
                     <div class="p-3 bg-slate-50 border rounded-2xl space-y-1">
@@ -141,7 +146,7 @@
                         <p class="font-mono text-slate-600">A. 0,40 (40%) | B. 2,5 | C. 48% | D. 0,25</p>
                     </div>
                     <div class="p-3 bg-slate-50 border rounded-2xl space-y-1">
-                        <p><strong>3. (1 pt)</strong> Une hausse de $+20\%$ suivie d'une baisse de $-20\%$ donne un $CM_{\text{global}}$ de :</p>
+                        <p><strong>3. (1 pt)</strong> Une hausse de $+20\\%$ suivie d'une baisse de $-20\\%$ donne un $CM_{\\text{global}}$ de :</p>
                         <p class="font-mono text-slate-600">A. 1,00 | B. 0,96 | C. 0,80 | D. 1,04</p>
                     </div>
                     <div class="p-3 bg-slate-50 border rounded-2xl space-y-1">
@@ -156,9 +161,9 @@
                     <i class="fa-solid fa-circle-check text-emerald-500"></i> Correction de l'Exercice 1
                 </summary>
                 <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                    <p>1. B. $CM = 1 - 0{,}15 = \mathbf{0{,}85}$. (1 pt)</p>
-                    <p>2. A. $p = \frac{48}{120} = \mathbf{0{,}40 = 40\%}$. (1 pt)</p>
-                    <p>3. B. $1{,}20 \times 0{,}80 = \mathbf{0{,}96}$ (baisse de $-4\%$). (1 pt)</p>
+                    <p>1. B. $CM = 1 - 0{,}15 = \\mathbf{0{,}85}$. (1 pt)</p>
+                    <p>2. A. $p = \\frac{48}{120} = \\mathbf{0{,}40 = 40\\%}$. (1 pt)</p>
+                    <p>3. B. $1{,}20 \\times 0{,}80 = \\mathbf{0{,}96}$ (baisse de $-4\\%$). (1 pt)</p>
                     <p>4. B. **Hausse de 35%** ($1 + 0{,}35 = 1{,}35$). (1 pt)</p>
                 </div>
             </details>
@@ -176,7 +181,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                    <p>Une entreprise de services numériques emploie une population totale de $N = 350$ salariés. $60\%$ des salariés travaillent dans le pôle maintenance informatique ($p_1 = 0{,}60$). Parmi ces techniciens de maintenance, $35\%$ sont des femmes ($p_2 = 0{,}35$).</p>
+                    <p>Une entreprise de services numériques emploie une population totale de $N = 350$ salariés. $60\\%$ des salariés travaillent dans le pôle maintenance informatique ($p_1 = 0{,}60$). Parmi ces techniciens de maintenance, $35\\%$ sont des femmes ($p_2 = 0{,}35$).</p>
 
                     <div class="space-y-1.5 font-bold text-slate-900">
                         <p>1. (C1 - 1 pt) Donner la taille $N$ de l'entreprise et les proportions $p_1$ et $p_2$.</p>
@@ -202,8 +207,8 @@
                 </summary>
                 <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
                     <p>1. <strong>(C1) :</strong> $N = 350$ salariés, $p_1 = 0{,}60$ (techniciens), $p_2 = 0{,}35$ (femmes). (1 pt)</p>
-                    <p>2. <strong>(C2) :</strong> $p = p_1 \times p_2 = 0{,}60 \times 0{,}35 = \mathbf{0{,}21}$ (soit **21%** de l'entreprise). (2 pts)</p>
-                    <p>3. <strong>(C3) :</strong> Effectif $= 350 \times 0{,}21 = \mathbf{73{,}5} \implies \mathbf{73\text{ ou } 74\text{ femmes}}$. (2 pts)</p>
+                    <p>2. <strong>(C2) :</strong> $p = p_1 \\times p_2 = 0{,}60 \\times 0{,}35 = \\mathbf{0{,}21}$ (soit **21%** de l'entreprise). (2 pts)</p>
+                    <p>3. <strong>(C3) :</strong> Effectif $= 350 \\times 0{,}21 = \\mathbf{73{,}5} \\implies \\mathbf{73\\text{ ou } 74\\text{ femmes}}$. (2 pts)</p>
                 </div>
             </details>
         </div>
@@ -220,12 +225,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 <div class="md:col-span-2 text-xs text-slate-700 space-y-3 leading-relaxed">
-                    <p>Un outillage industriel est affiché au tarif catalogue HT de $V_0 = 1\,250{,}00\text{ €}$. Le fournisseur accorde une remise pro de $-12\%$. Ensuite, une taxe de recyclage de $+5\%$ s'applique sur le tarif remisé.</p>
+                    <p>Un outillage industriel est affiché au tarif catalogue HT de $V_0 = 1\\,250{,}00\\text{ €}$. Le fournisseur accorde une remise pro de $-12\\%$. Ensuite, une taxe de recyclage de $+5\\%$ s'applique sur le tarif remisé.</p>
 
                     <div class="space-y-1.5 font-bold text-slate-900">
                         <p>1. (C2 - 2 pts) Calculer le prix après remise $V_1$ et donner le $CM_1$ de la remise.</p>
-                        <p>2. (C3 - 2 pts) Calculer le prix final après éco-taxe $V_2$ et déduire le $CM_{\text{global}}$.</p>
-                        <p>3. (C4 - 1 pt) Déterminer le pourcentage de variation net net par rapport aux $1\,250\text{ €}$ initiaux.</p>
+                        <p>2. (C3 - 2 pts) Calculer le prix final après éco-taxe $V_2$ et déduire le $CM_{\\text{global}}$.</p>
+                        <p>3. (C4 - 1 pt) Déterminer le pourcentage de variation net net par rapport aux $1\\,250\\text{ €}$ initiaux.</p>
                     </div>
                 </div>
 
@@ -251,10 +256,10 @@
                     <i class="fa-solid fa-circle-check text-emerald-500"></i> Correction de l'Exercice 3
                 </summary>
                 <div class="mt-3 pt-3 border-t border-slate-200 space-y-1 font-mono text-slate-700">
-                    <p>1. <strong>(C2) :</strong> $CM_1 = 1 - 0{,}12 = 0{,}88 \implies V_1 = 1\,250 \times 0{,}88 = \mathbf{1\,100{,}00\text{ €}}$. (2 pts)</p>
-                    <p>2. <strong>(C3) :</strong> $CM_2 = 1 + 0{,}05 = 1{,}05 \implies V_2 = 1\,100 \times 1{,}05 = \mathbf{1\,155{,}00\text{ €}}$.<br>
-                    • $CM_{\text{global}} = 0{,}88 \times 1{,}05 = \mathbf{0{,}924}$. (2 pts)</p>
-                    <p>3. <strong>(C4) :</strong> Taux net : $(0{,}924 - 1) \times 100 = \mathbf{-7{,}6\%}$ de baisse globale. (1 pt)</p>
+                    <p>1. <strong>(C2) :</strong> $CM_1 = 1 - 0{,}12 = 0{,}88 \\implies V_1 = 1\\,250 \\times 0{,}88 = \\mathbf{1\\,100{,}00\\text{ €}}$. (2 pts)</p>
+                    <p>2. <strong>(C3) :</strong> $CM_2 = 1 + 0{,}05 = 1{,}05 \\implies V_2 = 1\\,100 \\times 1{,}05 = \\mathbf{1\\,155{,}00\\text{ €}}$.<br>
+                    • $CM_{\\text{global}} = 0{,}88 \\times 1{,}05 = \\mathbf{0{,}924}$. (2 pts)</p>
+                    <p>3. <strong>(C4) :</strong> Taux net : $(0{,}924 - 1) \\times 100 = \\mathbf{-7{,}6\\%}$ de baisse globale. (1 pt)</p>
                 </div>
             </details>
         </div>
@@ -271,20 +276,20 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300 leading-relaxed">
                 <div class="md:col-span-2 space-y-4">
-                    <p>La consommation électrique d'un atelier s'élevait à $F_0 = 24\,000\text{ kWh}$ l'an dernier.</p>
+                    <p>La consommation électrique d'un atelier s'élevait à $F_0 = 24\\,000\\text{ kWh}$ l'an dernier.</p>
 
                     <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-2 text-slate-200">
                         <h5 class="font-bold text-amber-400">📋 Évolutions de Consommation :</h5>
                         <ul class="list-disc list-inside space-y-1">
-                            <li>Année 1 : Augmentation de la consommation de $+15\%$ ($CM_1 = 1{,}15$) suite à l'extension du parc machines.</li>
-                            <li>Année 2 : Installation d'équipements basse consommation et relampage LED réduisant la consommation de $-20\%$ ($CM_2 = 0{,}80$).</li>
+                            <li>Année 1 : Augmentation de la consommation de $+15\\%$ ($CM_1 = 1{,}15$) suite à l'extension du parc machines.</li>
+                            <li>Année 2 : Installation d'équipements basse consommation et relampage LED réduisant la consommation de $-20\\%$ ($CM_2 = 0{,}80$).</li>
                         </ul>
                     </div>
 
                     <div class="space-y-2 text-slate-200">
                         <h5 class="font-bold text-amber-300">Travail à Réaliser par l'Élève :</h5>
-                        <p><strong>1. (C1/C2 - 2 pts) :</strong> Calculer le $CM_{\text{global}}$ et la consommation finale $F_2$ à la fin de l'Année 2.</p>
-                        <p><strong>2. (C3/C4 - 2 pts) :</strong> Déterminer le pourcentage de variation net sur les 2 ans. L'objectif d'économie par rapport aux $24\,000\text{ kWh}$ initiaux est-il atteint ?</p>
+                        <p><strong>1. (C1/C2 - 2 pts) :</strong> Calculer le $CM_{\\text{global}}$ et la consommation finale $F_2$ à la fin de l'Année 2.</p>
+                        <p><strong>2. (C3/C4 - 2 pts) :</strong> Déterminer le pourcentage de variation net sur les 2 ans. L'objectif d'économie par rapport aux $24\\,000\\text{ kWh}$ initiaux est-il atteint ?</p>
                         <p><strong>3. (C5 - 2 pts) :</strong> Calculer le coefficient multiplicateur réciproque $CM'$ nécessaire pour revenir exactement à la consommation initiale $F_0$. Rédiger la conclusion pour le gérant.</p>
                     </div>
                 </div>
@@ -307,14 +312,14 @@
                 </summary>
                 <div class="mt-4 pt-4 border-t border-slate-700 space-y-3 font-mono">
                     <p><strong class="text-amber-300">1. (C1/C2) :</strong><br>
-                    • $CM_{\text{global}} = 1{,}15 \times 0{,}80 = \mathbf{0{,}92}$.<br>
-                    • Consommation finale $F_2 = 24\,000 \times 0{,}92 = \mathbf{22\,080\text{ kWh}}$. (2 pts)</p>
+                    • $CM_{\\text{global}} = 1{,}15 \\times 0{,}80 = \\mathbf{0{,}92}$.<br>
+                    • Consommation finale $F_2 = 24\\,000 \\times 0{,}92 = \\mathbf{22\\,080\\text{ kWh}}$. (2 pts)</p>
                     <p><strong class="text-emerald-300">2. (C3/C4) :</strong><br>
-                    • Taux net : $(0{,}92 - 1) \times 100 = \mathbf{-8\%}$ de consommation en moins.<br>
-                    • Validation : La PME a diminué sa consommation de $1\,920\text{ kWh}$ par rapport au départ. **Objectif atteint**. (2 pts)</p>
+                    • Taux net : $(0{,}92 - 1) \\times 100 = \\mathbf{-8\\%}$ de consommation en moins.<br>
+                    • Validation : La PME a diminué sa consommation de $1\\,920\\text{ kWh}$ par rapport au départ. **Objectif atteint**. (2 pts)</p>
                     <p><strong class="text-rose-300">3. (C5) :</strong><br>
-                    • $CM' = \frac{1}{0{,}92} \approx \mathbf{1{,}086956}$.<br>
-                    • Taux réciproque : $+8{,}70\%$.<br>
+                    • $CM' = \\frac{1}{0{,}92} \\approx \\mathbf{1{,}086956}$.<br>
+                    • Taux réciproque : $+8{,}70\\%$.<br>
                     • *Rapport* : "Grâce au relampage LED, la consommation baisse à 22 080 kWh (-8% net sur 2 ans). Pour réaugmenter la consommation jusqu'au seuil initial de 24 000 kWh, il faudrait une hausse de +8,70%." (2 pts)</p>
                 </div>
             </details>
@@ -342,4 +347,7 @@
         }
     </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync(path.join(targetDir, 'eval.html'), evalHtml, 'utf-8');
+console.log('Successfully updated eval.html for pourcentages-proportions with official 20-point CCF subject and solution accordions!');
