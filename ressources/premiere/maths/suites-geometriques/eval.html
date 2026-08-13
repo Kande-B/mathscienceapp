@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation Summative - Suites Géométriques 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Première Professionnelle • Évaluation Officielle CCF</span>
+                    <h1 class="text-xl font-bold font-heading">Suites Géométriques</h1>
+                </div>
+            </div>
+            <!-- Navigation -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE OFFICIEL EVALUATION BAC PRO -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-red-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-red-600 tracking-wider">
+                        <span>Éducation Nationale</span> • <span>Évaluation de Première Professionnelle</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Évaluation Summative : Suites Géométriques (Sujets A & B)</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer les sujets (PDF)
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-red-200 transition-colors">
+                        <i class="fa-solid fa-key"></i> <span id="toggle-all-text">Afficher les corrigés rédigés</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- GRILLE DES COMPÉTENCES AVEC BARÈME -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-[11px] font-bold">
+                <div class="p-2.5 bg-slate-50 border rounded-xl text-center"><span class="text-pink-600 block font-extrabold">S'approprier (4 pts)</span> Raison q = 1 ± t</div>
+                <div class="p-2.5 bg-slate-50 border rounded-xl text-center"><span class="text-orange-600 block font-extrabold">Analyser (4 pts)</span> Formule un</div>
+                <div class="p-2.5 bg-slate-50 border rounded-xl text-center"><span class="text-blue-600 block font-extrabold">Réaliser (6 pts)</span> Calculs de termes</div>
+                <div class="p-2.5 bg-slate-50 border rounded-xl text-center"><span class="text-green-600 block font-extrabold">Valider (3 pts)</span> Somme Sn</div>
+                <div class="p-2.5 bg-slate-50 border rounded-xl text-center"><span class="text-yellow-600 block font-extrabold">Communiquer (3 pts)</span> Rapport financier</div>
+            </div>
+        </div>
+
+        <!-- SUJET A : SECTEUR INDUSTRIE & ÉNERGIE -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow print-card border-l-4 border-l-red-600 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                    <span class="px-3 py-1 bg-red-600 text-white text-xs font-extrabold rounded-full uppercase tracking-wider">Sujet A</span>
+                    <h3 class="font-extrabold text-slate-900 text-xl font-heading mt-1">Dépréciation d'une Ligne de Production Automatisée</h3>
+                </div>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full border border-red-200">Barème : /20 Points</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4">
+                <p class="leading-relaxed">
+                    Une usine fait l'acquisition d'une nouvelle ligne d'assemblage d'une valeur initiale de $u_1 = 80\ 000\ \text{€}$. En raison de l'usure, la valeur comptable de cette machine diminue de **12 % par an**.
+                </p>
+
+                <!-- QUESTIONS SUJET A -->
+                <div class="space-y-3 pt-2">
+                    <h4 class="font-extrabold text-slate-900 text-sm">Questions :</h4>
+                    <ol class="list-decimal pl-5 space-y-2.5 text-slate-800">
+                        <li><strong>(4 pts) [S'approprier]</strong> Justifiez que la suite $(u_n)$ est une suite géométrique. Montrez que la raison vaut $q = 0{,}88$. Précisez son sens de variation.</li>
+                        <li><strong>(4 pts) [Analyser]</strong> Écrivez l'expression du terme général $u_n$ en fonction du rang $n$.</li>
+                        <li><strong>(6 pts) [Réaliser]</strong> Calculez la valeur comptable de la machine à la 6e année ($u_6$). Arrondissez au centième.</li>
+                        <li><strong>(6 pts) [Valider & Communiquer]</strong>
+                            a) Calculez la somme cumulée $S_6 = u_1 + u_2 + \dots + u_6$ des valeurs comptables annuelles.<br>
+                            b) Si la valeur résiduelle tombe sous le seuil de 35 000 €, l'entreprise doit renouveler son équipement. Faut-il renouveler la machine à la 6e année ? Rédigez la note décisionnelle.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- CORRIGÉ SUJET A -->
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-sujeta')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé barémé Sujet A
+                </button>
+            </div>
+            <div id="corr-sujeta" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-2xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-red-900 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé Officiel Sujet A (20/20) :
+                </p>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>Une baisse de 12 % correspond au coefficient multiplicateur $q = 1 - 0{,}12 = \mathbf{0{,}88}$. Comme $0 < 0{,}88 < 1$, la suite est **strictly décroissante**. <em>(4 pts)</em></li>
+                    <li>Terme général : $u_n = u_1 \times q^{n-1} \implies \mathbf{u_n = 80000 \times 0{,}88^{n-1}}$. <em>(4 pts)</em></li>
+                    <li>$u_6 = 80000 \times 0{,}88^5 = 80000 \times 0{,}52773 = \mathbf{42\ 218{,}52\ \text{€}}$. <em>(6 pts)</em></li>
+                    <li>a) $S_6 = 80000 \times \frac{1 - 0{,}88^6}{1 - 0{,}88} = 80000 \times \frac{0{,}53559}{0{,}12} = \mathbf{357\ 064{,}59\ \text{€}}$.<br>
+                    b) <strong>Note Responsable Maintenance :</strong> <em>"À la 6e année, la valeur résiduelle s'élève à 42 218,52 €, ce qui est supérieur au seuil critique de 35 000 €. Il n'est donc pas nécessaire de renouveler la machine dès la 6e année ; son renouvellement pourra être reporté à la 8e année."</em> <em>(6 pts)</em></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- SUJET B : SECTEUR BTP & LOGISTIQUE -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow print-card border-l-4 border-l-red-600 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                    <span class="px-3 py-1 bg-red-600 text-white text-xs font-extrabold rounded-full uppercase tracking-wider">Sujet B</span>
+                    <h3 class="font-extrabold text-slate-900 text-xl font-heading mt-1">Capitalisation d'un Fonds de Placement BTP</h3>
+                </div>
+                <span class="bg-red-100 text-red-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full border border-red-200">Barème : /20 Points</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4">
+                <p class="leading-relaxed">
+                    Une entreprise de BTP place un capital de réserve de $u_1 = 30\ 000\ \text{€}$ à un taux d'intérêt composé de **6 % par an**.
+                </p>
+
+                <!-- QUESTIONS SUJET B -->
+                <div class="space-y-3 pt-2">
+                    <h4 class="font-extrabold text-slate-900 text-sm">Questions :</h4>
+                    <ol class="list-decimal pl-5 space-y-2.5 text-slate-800">
+                        <li><strong>(4 pts) [S'approprier]</strong> Justifiez que la suite $(u_n)$ est géométrique de raison $q = 1{,}06$. Indiquez son sens de variation.</li>
+                        <li><strong>(4 pts) [Analyser]</strong> Donnez l'expression de $u_n$ en fonction de $n$.</li>
+                        <li><strong>(6 pts) [Réaliser]</strong> Calculez le capital disponible au bout de la 8e année ($u_8$).</li>
+                        <li><strong>(6 pts) [Valider & Communiquer]</strong>
+                            a) Calculez la somme cumulée $S_8 = u_1 + u_2 + \dots + u_8$.<br>
+                            b) L'entreprise souhaite financer un camion toupie de 45 000 € à la 8e année. Le capital $u_8$ est-il suffisant ? Rédigez le bilan financier.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- CORRIGÉ SUJET B -->
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-sujetb')" class="text-xs font-bold text-red-600 hover:text-red-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir le corrigé barémé Sujet B
+                </button>
+            </div>
+            <div id="corr-sujetb" class="hidden mt-4 pt-4 border-t border-dashed border-red-200 bg-red-50/40 p-4 rounded-2xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-red-900 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé Officiel Sujet B (20/20) :
+                </p>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>Une hausse de 6 % donne $q = 1 + 0{,}06 = \mathbf{1{,}06}$. Comme $q = 1{,}06 > 1$, la suite est **strictly croissante**. <em>(4 pts)</em></li>
+                    <li>Terme général : $u_n = 30000 \times 1{,}06^{n-1}$. <em>(4 pts)</em></li>
+                    <li>$u_8 = 30000 \times 1{,}06^7 = 30000 \times 1{,}50363 = \mathbf{45\ 108{,}90\ \text{€}}$. <em>(6 pts)</em></li>
+                    <li>a) $S_8 = 30000 \times \frac{1 - 1{,}06^8}{1 - 1{,}06} = 30000 \times \frac{-0{,}59385}{-0{,}06} = \mathbf{296\ 923{,}78\ \text{€}}$.<br>
+                    b) <strong>Bilan Financier :</strong> <em>"À la 8e année, le capital disponible atteint 45 108,90 €, dépassent l'objectif de 45 000 € nécessaire pour acquérir le camion toupie. L'investissement est intégralement autofinancé."</em> <em>(6 pts)</em></li>
+                </ol>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPTS JS POUR L'AFFICHAGE DES CORRECTIONS -->
+    <script>
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            const ids = ['corr-sujeta', 'corr-sujetb'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            });
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Masquer les corrigés" : "Afficher les corrigés rédigés";
+        }
+    </script>
+</body>
+</html>

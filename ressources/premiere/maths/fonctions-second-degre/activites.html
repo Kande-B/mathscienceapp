@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Fonctions du 2nd Degré 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-square-root-variable text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions du Second Degré</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-indigo-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Activités d'Investigation • Découverte Guidée</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Paraboles, Sommet et Équations du 2nd Degré</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : $f(x) = ax^2+bx+c$, Sommet $S(\alpha ; \beta)$, Discriminant $\Delta$</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Découvrez la forme parabole des trajectoires physiques et d'optimisation d'entreprise. Apprenez à calculer les coordonnées du sommet $S(\alpha ; \beta)$ et à résoudre des équations du second degré $ax^2 + bx + c = 0$ grâce au discriminant $\Delta$.
+            </p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE             -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">0</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-slate-500 tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Rappels : Identification des Coefficients $a$, $b$ et $c$</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Pour la fonction $f(x) = -2x^2 + 8x - 5$, quelle est la valeur de $a$ ?</label>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="a = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Calculez $f(2)$ pour $f(x) = 3x^2 - 4x + 1$ :</label>
+                    <p class="text-slate-500">$3(2)^2 - 4(2) + 1 = 12 - 8 + 1$</p>
+                    <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="f(2) = ?">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes prérequis
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : TRAJECTOIRE & SOMMET DE PARABOLE -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Activité 1 • Génie Civil & Trajectoire</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Trajectoire d'un Jet d'Eau & Coordonnées du Sommet</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-water text-indigo-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un paysagiste conçoit une fontaine. La hauteur $h(x)$ (en mètres) de l'eau en fonction de la distance horizontale $x$ (en mètres) est modélisée par :
+                    $$\mathbf{h(x) = -x^2 + 6x} \quad \text{pour } x \in [0 ; 6]$$
+                </p>
+            </div>
+
+            <!-- SCHÉMA SVG PARABOLE TRAJECTOIRE ET SOMMET -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-chart-area text-indigo-600"></i> Représentation graphique de la courbe parabole $h(x)$ et de son sommet $S$
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 220" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Quadrillage -->
+                        <defs>
+                            <pattern id="grid-act1-deg2" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="450" height="220" fill="url(#grid-act1-deg2)"/>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="190" x2="420" y2="190" stroke="#64748b" stroke-width="2"/>
+                        <line x1="60" y1="20" x2="60" y2="190" stroke="#64748b" stroke-width="2"/>
+                        <text x="420" y="205" font-size="10" font-weight="bold" fill="#475569">Distance x (m)</text>
+                        <text x="25" y="30" font-size="10" font-weight="bold" fill="#475569">Hauteur h (m)</text>
+
+                        <!-- Parabole h(x) = -x^2 + 6x (Sommet en x=3, h=9 => x_svg=240, y_svg=40) -->
+                        <path d="M 60 190 Q 240 -10 420 190" fill="none" stroke="#4f46e5" stroke-width="3.5"/>
+
+                        <!-- Sommet S(3 ; 9) -->
+                        <circle cx="240" cy="40" r="5.5" fill="#4338ca"/>
+                        <line x1="240" y1="40" x2="240" y2="190" stroke="#4338ca" stroke-width="1.5" stroke-dasharray="3"/>
+                        <line x1="60" y1="40" x2="240" y2="40" stroke="#4338ca" stroke-width="1.5" stroke-dasharray="3"/>
+                        <text x="240" y="25" font-size="11" font-weight="extrabold" fill="#312e81" text-anchor="middle">Sommet S (3m ; 9m)</text>
+
+                        <!-- Graduations x -->
+                        <text x="60" y="205" font-size="9" fill="#64748b" text-anchor="middle">0</text>
+                        <text x="240" y="205" font-size="9" font-weight="bold" fill="#312e81" text-anchor="middle">x = 3m</text>
+                        <text x="420" y="205" font-size="9" fill="#64748b" text-anchor="middle">6m</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS -->
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">Formule officielle du Sommet $S(\alpha ; \beta)$</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        Pour tout polynôme $f(x) = ax^2 + bx + c$, l'abscisse de son sommet est donnée par :
+                        $$\mathbf{\alpha = -\frac{b}{2a}}$$
+                        Pour $h(x) = -1x^2 + 6x + 0$, on a $a = -1$ et $b = 6$.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">1. Calculez l'abscisse $\alpha = -\frac{6}{2(-1)}$ :</label>
+                            <input type="number" id="act1-alpha" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="α = ? m">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">2. Calculez la hauteur maximale $\beta = h(3)$ en mètres :</label>
+                            <input type="number" id="act1-beta" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="h(3) = -(3)^2 + 6(3) = ? m">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : ÉQUATION AX² + BX + C = 0     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Activité 2 • Résolution d'Équation &amp; Discriminant</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Résolution de l'Équation $ax^2 + bx + c = 0$ par le Discriminant $\Delta$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-calculator text-sky-600 mr-1"></i> Recherche des seuils de rentabilité :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Une entreprise souhaite connaître les quantités d'articles $x$ pour lesquelles son bénéfice est nul ($B(x) = 0$).
+                    La formule du bénéfice est : $$\mathbf{B(x) = -x^2 + 6x - 5 = 0}$$
+                </p>
+            </div>
+
+            <!-- EXPLICATION DISCRIMINANT -->
+            <div class="p-4 bg-sky-50 border border-sky-200 rounded-2xl space-y-3 text-xs">
+                <span class="font-bold text-sky-900 text-sm block">Formule du Discriminant $\Delta = b^2 - 4ac$</span>
+                <p class="text-slate-700">Pour $a = -1$, $b = 6$, $c = -5$ :</p>
+                <p class="font-mono bg-white p-3 rounded-xl border border-sky-300 font-bold text-center">
+                    $$\Delta = 6^2 - 4(-1)(-5) = 36 - 20 = \mathbf{16}$$
+                </p>
+                <p class="text-slate-700">Comme $\Delta > 0$, l'équation possède <strong>deux solutions (racines) distinctes</strong> :</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono font-bold text-center">
+                    <div class="p-3 bg-white border rounded-xl">$x_1 = \frac{-b - \sqrt{\Delta}}{2a} = \frac{-6 - 4}{-2} = 5$</div>
+                    <div class="p-3 bg-white border rounded-xl">$x_2 = \frac{-b + \sqrt{\Delta}}{2a} = \frac{-6 + 4}{-2} = 1$</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Si $\Delta > 0$, combien l'équation possède-t-elle de solutions ?</label>
+                    <select id="act2-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="2">Deux solutions distinctes (x1 et x2)</option>
+                        <option value="1">Une seule solution</option>
+                        <option value="0">Aucune solution</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelles sont les 2 solutions de l'équation $-x^2 + 6x - 5 = 0$ ?</label>
+                    <input type="text" id="act2-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="x1 = 1 et x2 = 5">
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : ORIENTATION DE LA PARABOLE    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Activité 3 • Orientation &amp; Extremum</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Influence du Signe de $a$ sur la Parabole</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-3 text-center">
+                    <span class="font-bold text-emerald-900 text-sm block">Cas 1 : $a > 0$ (Positif)</span>
+                    <div class="p-3 bg-white rounded-xl border">
+                        <svg viewBox="0 0 160 90" class="w-full max-w-[160px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 20 20 Q 80 110 140 20" fill="none" stroke="#16a34a" stroke-width="3"/>
+                            <circle cx="80" cy="65" r="4" fill="#16a34a"/>
+                            <text x="80" y="82" font-size="9" font-weight="bold" fill="#15803d" text-anchor="middle">Minimum S</text>
+                        </svg>
+                    </div>
+                    <p class="text-slate-600">La parabole est tournée <strong>vers le haut (forme U)</strong>. Le sommet $S$ est un <strong>MINIMUM</strong>.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-3 text-center">
+                    <span class="font-bold text-red-900 text-sm block">Cas 2 : $a < 0$ (Négatif)</span>
+                    <div class="p-3 bg-white rounded-xl border">
+                        <svg viewBox="0 0 160 90" class="w-full max-w-[160px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 20 70 Q 80 -20 140 70" fill="none" stroke="#dc2626" stroke-width="3"/>
+                            <circle cx="80" cy="25" r="4" fill="#dc2626"/>
+                            <text x="80" y="15" font-size="9" font-weight="bold" fill="#b91c1c" text-anchor="middle">Maximum S</text>
+                        </svg>
+                    </div>
+                    <p class="text-slate-600">La parabole est tournée <strong>vers le bas (forme ∩)</strong>. Le sommet $S$ est un <strong>MAXIMUM</strong>.</p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 text-xs">
+                <label class="font-bold text-slate-900 block">Pour la fonction $f(x) = 2x^2 - 8x + 3$, le coefficient $a = 2 > 0$. Le sommet $S$ est-il un maximum ou un minimum ?</label>
+                <select id="act3-choice" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                    <option value="">Sélectionnez...</option>
+                    <option value="MIN">Un MINIMUM (parabole tournée vers le haut)</option>
+                    <option value="MAX">Un MAXIMUM</option>
+                </select>
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LES ACTIVITÉS -->
+    <script>
+        // MODULE 0
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "-2" && q2 === "5") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! a = -2 et f(2) = 3(4) - 8 + 1 = 5.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> a = -2 et f(2) = 5.`;
+            }
+        }
+
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let alpha = document.getElementById('act1-alpha').value.trim();
+            let beta = document.getElementById('act1-beta').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (alpha === "3" && beta === "9") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! α = -6 / (-2) = 3 mètres et la hauteur maximale atteinte par l'eau est h(3) = 9 mètres !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> α = 3m et h(3) = 9m.`;
+            }
+        }
+
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let q1 = document.getElementById('act2-q1').value;
+            let q2 = document.getElementById('act2-q2').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "2" && (q2.includes("1") && q2.includes("5"))) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! Δ > 0 donne 2 solutions : x1 = 1 et x2 = 5.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> 2 solutions distinctes : x1 = 1 et x2 = 5.`;
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let choice = document.getElementById('act3-choice').value;
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (choice === "MIN") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Exact ! Comme a = 2 > 0, la parabole est en forme de U et possède un MINIMUM.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Si a > 0, c'est un MINIMUM.`;
+            }
+        }
+    </script>
+</body>
+</html>

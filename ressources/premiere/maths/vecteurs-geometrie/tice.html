@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TICE GeoGebra - Vecteurs 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Vecteurs du Plan</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DU MODULE TICE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-purple-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
+                        <span>Module TICE • Logiciel de Géométrie Dynamique GeoGebra</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP GeoGebra : Construction du Vecteur Somme et Calcul de la Norme</h2>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>Commandes GeoGebra clés :</strong> <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">Vecteur(A, B)</code> pour tracer $\vec{AB}$, <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">u + v</code> pour la somme vectorielle, et <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">Longueur(u)</code> pour afficher la norme.
+            </p>
+        </div>
+
+        <!-- PROTOCOLE TICE STEP-BY-STEP -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="font-bold text-slate-900 text-base">Protocole de Construction sous GeoGebra</h3>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Placer les points d'origine et d'extrémité</p>
+                    <p class="text-slate-700">
+                        Dans la barre de saisie, tapez : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">A = (1, 2)</code> et <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">B = (7, 10)</code>.
+                    </p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Créer le vecteur $\vec{u} = \vec{AB}$</p>
+                    <p class="text-slate-700">
+                        Dans la barre de saisie, tapez : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">u = Vecteur(A, B)</code>.<br>
+                        GeoGebra affiche dans la fenêtre d'algèbre les coordonnées de la colonne : $u = \begin{pmatrix} 6 \\ 8 \end{pmatrix}$.
+                    </p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 3 : Calculer la longueur (norme) du vecteur</p>
+                    <p class="text-slate-700">
+                        Tapez : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">Longueur(u)</code> ou <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">Distance(A, B)</code>.<br>
+                        GeoGebra renvoie la valeur exacte $10$.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Validation du TP GeoGebra</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle commande GeoGebra permet de tracer le vecteur reliant A à B ?</label>
+                    <input type="text" id="tice-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Vecteur(A, B)">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle commande GeoGebra donne la norme du vecteur u ?</label>
+                    <input type="text" id="tice-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Longueur(u)">
+                </div>
+            </div>
+
+            <button onclick="checkTICE()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Valider les réponses du TP GeoGebra
+            </button>
+            <div id="fb-tice" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LE TP TICE -->
+    <script>
+        function checkTICE() {
+            let q1 = document.getElementById('tice-q1').value.trim();
+            let q2 = document.getElementById('tice-q2').value.trim();
+            let fb = document.getElementById('fb-tice');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if ((q1.toUpperCase().includes("VECTEUR(A, B)") || q1.toUpperCase().includes("VECTEUR(A,B)")) && (q2.toUpperCase().includes("LONGUEUR(U)") || q2.toUpperCase().includes("DISTANCE(A, B)"))) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> TP GeoGebra validé ! Les commandes Vecteur(A, B) et Longueur(u) affichent parfaitement les coordonnées et la norme.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Commande 1 = Vecteur(A, B) et Commande 2 = Longueur(u).`;
+            }
+        }
+    </script>
+</body>
+</html>

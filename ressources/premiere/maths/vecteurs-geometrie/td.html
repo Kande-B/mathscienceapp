@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de TD - Vecteurs du Plan 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Vecteurs du Plan</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable</span> • <span>Baccalauréat Professionnel</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur les Vecteurs et Forces</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- GRILLE DES COMPETENCES DU BAC PRO -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Origine, Extrémité, Sens</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Formule AB(xB-xA ; yB-yA)</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Norme ||AB||</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Somme de forces</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Note de sécurité mécanique</div>
+            </div>
+        </div>
+
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    Usinage sur Commande Numérique (CN)
+                </h3>
+                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier & Analyser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un outil de fraiseuse se déplace du point $A(10 ; 15)$ au point $B(50 ; 45)$ en mm.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées du vecteur déplacement $\vec{AB}$.<br>
+                    2. Calculez la longueur totale du déplacement $\|\vec{AB}\|$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{AB} = \begin{pmatrix} 50 - 10 \\ 45 - 15 \end{pmatrix} = \mathbf{\begin{pmatrix} 40 \\ 30 \end{pmatrix}\ \text{mm}}$.<br>
+                2. $\|\vec{AB}\| = \sqrt{40^2 + 30^2} = \sqrt{1600 + 900} = \sqrt{2500} = \mathbf{50\ \text{mm}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    Chantier BTP : Levage de Charge par Grue
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Deux filins exercent les forces $\vec{F_1} = \begin{pmatrix} 600 \\ 200 \end{pmatrix}\ \text{N}$ et $\vec{F_2} = \begin{pmatrix} -200 \\ 600 \end{pmatrix}\ \text{N}$.</p>
+                <p class="font-bold">
+                    1. Déterminez les coordonnées de la force résultante $\vec{F} = \vec{F_1} + \vec{F_2}$.<br>
+                    2. Calculez l'intensité de la force résultante $\|\vec{F}\|$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{F} = \begin{pmatrix} 600 + (-200) \\ 200 + 600 \end{pmatrix} = \mathbf{\begin{pmatrix} 400 \\ 800 \end{pmatrix}\ \text{N}}$.<br>
+                2. $\|\vec{F}\| = \sqrt{400^2 + 800^2} = \sqrt{160000 + 640000} = \sqrt{800000} \approx \mathbf{894{,}43\ \text{N}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 3 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 3</span>
+                    Aéronautique : Trajectoire d'un Drone de Cartographie
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un drone effectue un trajet $A(0 ; 0) \to B(120 ; 50) \to C(200 ; 110)$ en mètres.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées de $\vec{AB}$ et $\vec{BC}$.<br>
+                    2. Vérifiez la relation de Chasles $\vec{AC} = \vec{AB} + \vec{BC}$ et calculez la distance en ligne droite $AC$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{AB} = \begin{pmatrix} 120 \\ 50 \end{pmatrix}$ et $\vec{BC} = \begin{pmatrix} 200 - 120 \\ 110 - 50 \end{pmatrix} = \begin{pmatrix} 80 \\ 60 \end{pmatrix}$.<br>
+                2. $\vec{AC} = \begin{pmatrix} 120 + 80 \\ 50 + 60 \end{pmatrix} = \mathbf{\begin{pmatrix} 200 \\ 110 \end{pmatrix}}$.<br>
+                $AC = \|\vec{AC}\| = \sqrt{200^2 + 110^2} = \sqrt{40000 + 12100} = \sqrt{52100} \approx \mathbf{228{,}25\ \text{m}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 4 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
+                    Automobile : Alignement de Parallélisme des Roues
+                </h3>
+                <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Analyser & Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Deux vecteurs de direction de roues sont $\vec{u} = \begin{pmatrix} 4 \\ 6 \end{pmatrix}$ et $\vec{v} = \begin{pmatrix} 10 \\ 15 \end{pmatrix}$.</p>
+                <p class="font-bold">
+                    1. Montrez que ces deux vecteurs sont colinéaires ($\vec{v} = k \cdot \vec{u}$).<br>
+                    2. Les roues sont-elles parfaitement parallèles ?
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\frac{10}{4} = 2{,}5$ et $\frac{15}{6} = 2{,}5$. Donc **$\vec{v} = 2{,}5 \cdot \vec{u}$**.<br>
+                2. Les vecteurs étant colinéaires, les directions des roues sont **parfaitement parallèles**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 5 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 5</span>
+                    Logistique : Force de Traction d'un Chariot Élévateur
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser & Communiquer</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un chariot est tiré par une force $\vec{F} = \begin{pmatrix} 1500 \\ 800 \end{pmatrix}\ \text{N}$.</p>
+                <p class="font-bold">
+                    1. Calculez l'intensité totale de la force de traction $\|\vec{F}\|$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\|\vec{F}\| = \sqrt{1500^2 + 800^2} = \sqrt{2250000 + 640000} = \sqrt{2890000} = \mathbf{1\ 700\ \text{N}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 6 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 6</span>
+                    Électrotechnique : Déphasage de Deux Tensions
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Communiquer</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Deux tensions sinusoïdales sont représentées par les Fresnel $\vec{V_1} = \begin{pmatrix} 230 \\ 0 \end{pmatrix}$ et $\vec{V_2} = \begin{pmatrix} 0 \\ 230 \end{pmatrix}$.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées de la tension composée $\vec{V} = \vec{V_1} + \vec{V_2}$.<br>
+                    2. Calculez son niveau efficace $\|\vec{V}\|$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex6')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex6" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{V} = \mathbf{\begin{pmatrix} 230 \\ 230 \end{pmatrix}\ \text{V}}$.<br>
+                2. $\|\vec{V}\| = \sqrt{230^2 + 230^2} = 230\sqrt{2} \approx \mathbf{325{,}27\ \text{V}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 7 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 7</span>
+                    Naval : Dérive d'un Navire face au Courant
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un navire avance vers le Nord avec le vecteur vitesse $\vec{V_{moteur}} = \begin{pmatrix} 0 \\ 12 \end{pmatrix}\ \text{nœuds}$. Le courant marin pousse vers l'Est avec $\vec{V_{courant}} = \begin{pmatrix} 5 \\ 0 \end{pmatrix}\ \text{nœuds}$.</p>
+                <p class="font-bold">
+                    1. Calculez la vitesse réelle du navire par rapport au fond $\|\vec{V_{réelle}}\|$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex7')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex7" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{V_{réelle}} = \begin{pmatrix} 5 \\ 12 \end{pmatrix} \implies \|\vec{V_{réelle}}\| = \sqrt{5^2 + 12^2} = \sqrt{25 + 144} = \sqrt{169} = \mathbf{13\ \text{nœuds}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 8 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 8</span>
+                    Maintenance : Vérification d'un Châssis Rectangulaire
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Quatre repères de position d'un châssis sont $A(0;0)$, $B(4;0)$, $C(4;3)$, $D(0;3)$.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées de $\vec{AB}$ et $\vec{DC}$.<br>
+                    2. Montrez que $ABCD$ est un parallélogramme.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex8')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex8" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{AB} = \begin{pmatrix} 4 \\ 0 \end{pmatrix}$ et $\vec{DC} = \begin{pmatrix} 4 - 0 \\ 3 - 3 \end{pmatrix} = \begin{pmatrix} 4 \\ 0 \end{pmatrix}$.<br>
+                2. Comme **$\vec{AB} = \vec{DC}$**, le quadrilatère $ABCD$ est un **parallélogramme**. Comme les angles sont droits, c'est un rectangle.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 9 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 9</span>
+                    Topographie : Triangulation d'un Pylône
+                </h3>
+                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un géomètre relève les visées $\vec{u} = \begin{pmatrix} 20 \\ 15 \end{pmatrix}$ et $\vec{v} = 3\vec{u}$.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées de $\vec{v}$.<br>
+                    2. Calculez la norme $\|\vec{v}\|$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex9')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex9" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
+                <p>1. $\vec{v} = \mathbf{\begin{pmatrix} 60 \\ 45 \end{pmatrix}}$.<br>
+                2. $\|\vec{v}\| = \sqrt{60^2 + 45^2} = \sqrt{3600 + 2025} = \sqrt{5625} = \mathbf{75\ \text{m}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 10 : SYNTHÈSE BAC PRO MULTI-COMPÉTENCES -->
+        <div class="bg-white rounded-3xl border-2 border-indigo-500 p-6 md:p-8 card-shadow print-card space-y-6">
+            <div class="flex items-center justify-between border-b border-indigo-100 pb-3">
+                <h3 class="font-bold text-indigo-950 text-lg flex items-center gap-2">
+                    <span class="w-8 h-8 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-sm">Ex 10</span>
+                    Grand Problème de Synthèse : Étude de Stabilité d'un Pont Roulant
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-3 py-1 rounded-full">Communiquer & Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4">
+                <p class="leading-relaxed">
+                    Un pont roulant d'atelier est soumis à deux forces principales lors du déplacement d'une charge : le poids propre vertical $\vec{P} = \begin{pmatrix} 0 \\ -5\ 000 \end{pmatrix}\ \text{N}$ et la force de poussée latérale $\vec{F_L} = \begin{pmatrix} 1\ 200 \\ 0 \end{pmatrix}\ \text{N}$.
+                </p>
+
+                <div class="space-y-2 font-bold text-slate-900">
+                    <p>1. <strong>[S'approprier]</strong> Donnez les caractéristiques de chaque force (sens et direction).</p>
+                    <p>2. <strong>[Réaliser]</strong> Calculez les coordonnées de la force résultante $\vec{F_R} = \vec{P} + \vec{F_L}$.</p>
+                    <p>3. <strong>[Valider]</strong> Calculez l'intensité totale $\|\vec{F_R}\|$.</p>
+                    <p>4. <strong>[Communiquer]</strong> Le câble de sécurité supporte une tension maximale de 5 500 N. Le pont roulant fonctionne-t-il sous conditions de sécurité optimale ? Rédigez le bilan.</p>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex10')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex10" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                <p class="font-bold text-indigo-900">Corrigé rédigé du Problème de Synthèse :</p>
+                <p>1. $\vec{P}$ est vertical vers le bas (poids). $\vec{F_L}$ est horizontal vers la droite (poussière).<br>
+                2. $\vec{F_R} = \begin{pmatrix} 1200 \\ -5000 \end{pmatrix}\ \text{N}$.<br>
+                3. $\|\vec{F_R}\| = \sqrt{1200^2 + (-5000)^2} = \sqrt{1440000 + 25000000} = \sqrt{26440000} \approx \mathbf{5\ 141{,}98\ \text{N}}$.<br>
+                4. <strong>Rapport de Sécurité :</strong> <em>"L'intensité de la force résultante subie par le câble est de 5 141,98 N. Cette valeur reste inférieure à la tension maximale admissible de 5 500 N. Le fonctionnement du pont roulant est donc pleinement validé en toute sécurité."</em></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPTS JS -->
+    <script>
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            for (let i = 1; i <= 10; i++) {
+                const el = document.getElementById('corr-ex' + i);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            }
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+        }
+    </script>
+</body>
+</html>

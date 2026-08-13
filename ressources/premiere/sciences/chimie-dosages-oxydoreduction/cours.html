@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Oxydoréduction & Dosages 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Physique-Chimie -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-500/20 border border-teal-400/30 text-teal-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask-vial text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-teal-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Oxydoréduction &amp; Dosages</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Simulation</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-teal-100 text-teal-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-teal-200">Synthèse de Cours Illustrée avec Exemples par Notion</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Oxydoréduction &amp; Dosages</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Oxydant/Réducteur, couples $Ox/Red$, demi-équations électroniques et principe du titrage volumétrique colorimétrique.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. DÉFINITIONS OXYDANT ET RÉDUCTEUR        -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-teal-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center text-sm">I</span>
+                Notions d'Oxydant, Réducteur et Couple Redox
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-blue-800 text-base uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-blue-600"></i> Définitions Fondamentales
+                </h3>
+                <ul class="list-disc pl-5 space-y-2 text-blue-950">
+                    <li>Un <strong>Oxydant</strong> ($Ox$) est une espèce chimique capable de <strong>gagner un ou plusieurs électrons</strong> ($e^-$).</li>
+                    <li>Un <strong>Réducteur</strong> ($Red$) est une espèce chimique capable de <strong>céder un ou plusieurs électrons</strong> ($e^-$).</li>
+                    <li>Un <strong>Couple Oxydant / Réducteur</strong> est noté $\mathbf{Ox / Red}$ et relié par la demi-équation :
+                        $$\mathbf{Ox + n\, e^- \rightleftharpoons Red}$$
+                    </li>
+                </ul>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION I -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Le Couple du Cuivre $Cu^{2+} / Cu$
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Dans le couple $Cu^{2+}/Cu$ :</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>L'ion cuivre $Cu^{2+}$ est l'oxydant :</strong> il peut capter 2 électrons.</li>
+                        <li><strong>Le cuivre métallique $Cu$ est le réducteur :</strong> il peut céder 2 électrons.</li>
+                    </ul>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$\text{Demi-équation : } Cu^{2+} + 2 e^- \rightleftharpoons Cu$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. ÉQUATION DE RÉACTION REDOX              -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                Réaction d'Oxydoréduction
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-atom text-emerald-600"></i> Transfert d'Électrons entre Deux Couples
+                </h3>
+                <p class="text-emerald-950 font-medium">
+                    Une réaction d'oxydoréduction est une réaction chimique au cours de laquelle il y a un <strong>transfert d'électrons</strong> entre le réducteur du couple 1 et l'oxydant du couple 2.
+                </p>
+                <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                    $$\mathbf{Ox_1 + Red_2 \longrightarrow Red_1 + Ox_2}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION II -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Réaction entre le Zinc et les Ions Cuivre
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>On fait réagir du zinc métallique $Zn$ avec des ions cuivre $Cu^{2+}$ en solution :</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Demi-équation 1 (Réduction) : $Cu^{2+} + 2 e^- \longrightarrow Cu$</li>
+                        <li>Demi-équation 2 (Oxydation) : $Zn \longrightarrow Zn^{2+} + 2 e^-$</li>
+                    </ul>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$\text{Équation bilan globale : } Cu^{2+} + Zn \longrightarrow Cu + Zn^{2+}$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. DOSAGE VOLUMÉTRIQUE COLORIMÉTRIQUE     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-purple-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">III</span>
+                Titrage / Dosage Volumétrique Colorimétrique
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-purple-50 border border-purple-200 rounded-2xl space-y-2">
+                    <span class="font-extrabold text-purple-900 text-sm block">1. Montage de Titrage</span>
+                    <p class="text-slate-700">La <strong>burette graduée</strong> contient la solution titrante de concentration connue $C_2$. Le <strong>bêcher</strong> contient la solution titrée de concentration inconnue $C_1$ et de volume mesuré $V_1$.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+                    <span class="font-extrabold text-slate-900 text-sm block">2. Point d'Équivalence</span>
+                    <p class="text-slate-700">À l'équivalence (volume versé $V_E$) :</p>
+                    <p class="text-center font-bold text-indigo-900 text-sm">$$\mathbf{C_1 \times V_1 = C_2 \times V_E}$$</p>
+                </div>
+            </div>
+
+            <!-- SCHÉMA SVG TITRAGE/DOSAGE -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-flask text-purple-600"></i> Figure 1 : Schéma du dispositif de titrage volumétrique
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 200" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="200" fill="#ffffff" rx="8"/>
+
+                        <!-- Potence -->
+                        <rect x="50" y="20" width="10" height="170" fill="#64748b"/>
+                        <rect x="30" y="180" width="80" height="10" fill="#64748b"/>
+                        <rect x="50" y="40" width="100" height="8" fill="#64748b"/>
+
+                        <!-- Burette graduée -->
+                        <rect x="135" y="20" width="16" height="110" fill="#f1f5f9" stroke="#0284c7" stroke-width="1.5"/>
+                        <line x1="135" y1="40" x2="142" y2="40" stroke="#0284c7"/>
+                        <line x1="135" y1="60" x2="142" y2="60" stroke="#0284c7"/>
+                        <line x1="135" y1="80" x2="142" y2="80" stroke="#0284c7"/>
+                        <line x1="135" y1="100" x2="142" y2="100" stroke="#0284c7"/>
+                        <polygon points="138,130 148,130 143,142" fill="#0284c7"/>
+                        <text x="160" y="60" font-size="10" font-weight="extrabold" fill="#0284c7">Burette (C2, VE)</text>
+
+                        <!-- Goutte -->
+                        <circle cx="143" cy="150" r="3" fill="#a855f7"/>
+
+                        <!-- Bêcher -->
+                        <rect x="100" y="155" width="85" height="35" rx="4" fill="#fae8ff" stroke="#a855f7" stroke-width="1.5"/>
+                        <text x="195" y="175" font-size="10" font-weight="extrabold" fill="#7e22ce">Bêcher (C1 inconnue, V1)</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION III -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Calcul Rapide de la Concentration à l'Équivalence
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>On dose $V_1 = 20\ \text{mL}$ d'une solution d'ions $Fe^{2+}$ par du permanganate à $C_2 = 0{,}02\ \text{mol/L}$. Le changement de couleur survient pour $V_E = 10\ \text{mL}$.</p>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$C_1 = \frac{C_2 \times V_E}{V_1} = \frac{0{,}02 \times 10}{20} = \mathbf{0{,}01\ \text{mol/L}}$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. EXEMPLE RÉDIGÉ PAS À PAS                -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">IV</span>
+                Exemple Rédigé d'Application Professionnelle
+            </h2>
+
+            <div class="exemple-box rounded-2xl p-5 space-y-4 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-amber-600"></i> Application : Dosage du Fer dans un Produit d'Usinage
+                </h3>
+
+                <div class="space-y-3 leading-relaxed">
+                    <p>On titrer $V_1 = 25\ \text{mL}$ d'une solution de décapage contenant des ions $Fe^{2+}$ par du permanganate $C_2 = 0{,}01\ \text{mol/L}$. Le virage à la couleur violette persistant survient pour $V_E = 18\ \text{mL}$.</p>
+
+                    <p><strong>1. Calcul de la concentration molaire $C_1$ :</strong><br>
+                    $C_1 = \frac{C_2 \times V_E}{V_1} = \frac{0{,}01 \times 18}{25} = \frac{0{,}18}{25} = \mathbf{0{,}0072\ \text{mol/L}}$.</p>
+
+                    <p><strong>2. Concentration massique $C_m$ ($M_{Fe} = 55{,}8\ \text{g/mol}$) :</strong><br>
+                    $C_m = C_1 \times M_{Fe} = 0{,}0072 \times 55{,}8 = \mathbf{0{,}402\ \text{g/L}}$.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

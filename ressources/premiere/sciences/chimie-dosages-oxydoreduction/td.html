@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de TD - Oxydoréduction & Dosages 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Physique-Chimie -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-500/20 border border-teal-400/30 text-teal-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-teal-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Oxydoréduction &amp; Dosages</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-teal-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Simulation</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-teal-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-teal-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable</span> • <span>Baccalauréat Professionnel</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur l'Oxydoréduction et les Dosages</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-teal-50 hover:bg-teal-100 text-teal-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-teal-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- GRILLE DES COMPETENCES DU BAC PRO -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Couples Ox/Red</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Demi-équations</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Calcul C1 = (C2 × VE)/V1</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Conformité norme g/L</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Rapport d'analyse produit</div>
+            </div>
+        </div>
+
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    Traitement de Surface : Nickelage Electrolytique
+                </h3>
+                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier & Analyser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Dans un bain de nickelage, l'ion nickel $Ni^{2+}$ gagne 2 électrons pour se déposer sous forme de nickel métallique $Ni$.</p>
+                <p class="font-bold">
+                    1. Identifiez le couple Oxydant/Réducteur concerné.<br>
+                    2. Écrivez la demi-équation électronique correspondante.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. Couple Ox/Red : **$Ni^{2+} / Ni$**.<br>
+                2. Demi-équation : **$Ni^{2+} + 2 e^- \rightleftharpoons Ni$**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    Industrie Agroalimentaire : Titrage de l'Éthanol ou de l'Acide
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On dose $V_1 = 10\ \text{mL}$ d'un jus d'orange par du diiode $C_2 = 0{,}05\ \text{mol/L}$. L'équivalence est atteinte pour $V_E = 12\ \text{mL}$.</p>
+                <p class="font-bold">
+                    1. Calculez la concentration molaire $C_1$ en vitamine C de ce jus.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. $C_1 = \frac{C_2 \times V_E}{V_1} = \frac{0{,}05 \times 12}{10} = \mathbf{0{,}06\ \text{mol/L}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 3 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 3</span>
+                    Bâtiment &amp; Métallurgie : Galvanisation à Chaud du Zinc
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Le zinc $Zn$ protège l'acier en s'oxydant selon : $Zn \rightleftharpoons Zn^{2+} + 2 e^-$.</p>
+                <p class="font-bold">
+                    1. Le zinc joue-t-il le rôle d'oxydant ou de réducteur ? Justifiez.<br>
+                    2. Écrivez l'équation globale de la réaction avec les ions $Cu^{2+}$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. Le zinc est le **réducteur** car il cède 2 électrons.<br>
+                2. Équation globale : **$Zn + Cu^{2+} \longrightarrow Zn^{2+} + Cu$**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 4 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
+                    Maintenance Automobile : Contrôle de l'Eau Électrolytique d'une Batterie
+                </h3>
+                <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Analyser & Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On dose $V_1 = 20\ \text{mL}$ d'une solution d'ions ferreux par permanganate $C_2 = 0{,}02\ \text{mol/L}$. $V_E = 14\ \text{mL}$.</p>
+                <p class="font-bold">
+                    1. Calculez la concentration molaire $C_1$.<br>
+                    2. Calculez la concentration massique $C_m$ ($M_{Fe} = 56\ \text{g/mol}$).
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. $C_1 = \frac{0{,}02 \times 14}{20} = \mathbf{0{,}014\ \text{mol/L}}$.<br>
+                2. $C_m = 0{,}014 \times 56 = \mathbf{0{,}784\ \text{g/L}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 5 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 5</span>
+                    Chimie du Traitement de l'Eau : Chloration de Piscine
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser & Communiquer</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On dose $V_1 = 50\ \text{mL}$ d'eau chlorée par une solution de thiosulfate $C_2 = 0{,}01\ \text{mol/L}$. $V_E = 8\ \text{mL}$.</p>
+                <p class="font-bold">
+                    1. Calculez la concentration $C_1$ du chlore actif dans l'eau de piscine.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. $C_1 = \frac{0{,}01 \times 8}{50} = \mathbf{0{,}0016\ \text{mol/L}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 6 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 6</span>
+                    Élevage &amp; Métiers de l'Agriculture : Dosage des Nitrates
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Communiquer</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Une analyse d'eau indique une concentration $C_1 = 0{,}0008\ \text{mol/L}$ de nitrates ($M_{NO3} = 62\ \text{g/mol}$).</p>
+                <p class="font-bold">
+                    1. Calculez la concentration massique $C_m$ en mg/L.<br>
+                    2. La norme potable est de 50 mg/L. L'eau est-elle potable ?
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex6')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex6" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. $C_m = 0{,}0008 \times 62 = 0{,}0496\ \text{g/L} = \mathbf{49{,}6\ \text{mg/L}}$.<br>
+                2. $49{,}6\ \text{mg/L} \le 50\ \text{mg/L}$. L'eau respecte la norme de potabilité.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 7 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 7</span>
+                    Plasturgie : Recyclage et Décoloration des Polyamides
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>La décoloration utilise le permanganate de potassium $MnO_4^-$. Le manganese passe de $MnO_4^-$ (oxydant) à $Mn^{2+}$.</p>
+                <p class="font-bold">
+                    1. Complétez le nombre d'électrons captés : $MnO_4^- + 8 H^+ + \dots e^- \rightleftharpoons Mn^{2+} + 4 H_2O$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex7')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex7" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. Il faut **$5\ e^-$** pour équilibrer les charges : $(+7 \to +2)$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 8 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 8</span>
+                    Métiers de la Coiffure / Cosmétique : Titrage de l'Eau Oxygénée
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Une bouteille d'eau oxygénée $H_2O_2$ à 20 volumes est titrée. $V_1 = 10\ \text{mL}$, $C_2 = 0{,}1\ \text{mol/L}$, $V_E = 17{,}8\ \text{mL}$.</p>
+                <p class="font-bold">
+                    1. Calculez la concentration molaire $C_1$ de l'eau oxygénée.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex8')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex8" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. $C_1 = \frac{0{,}1 \times 17{,}8}{10} = \mathbf{0{,}178\ \text{mol/L}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 9 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-teal-100 text-teal-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 9</span>
+                    Contrôle Qualité : Pureté d'un Échantillon de Cuivre
+                </h3>
+                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On dissout un morceau de laiton de $2\ \text{g}$ pour doser le cuivre. On trouve une masse de cuivre pur de $1{,}4\ \text{g}$.</p>
+                <p class="font-bold">
+                    1. Calculez le pourcentage en masse de cuivre dans ce laiton.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex9')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex9" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé :</p>
+                <p>1. $\% = \frac{1{,}4}{2} \times 100 = \mathbf{70\ \%}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 10 : SYNTHÈSE BAC PRO MULTI-COMPÉTENCES -->
+        <div class="bg-white rounded-3xl border-2 border-teal-500 p-6 md:p-8 card-shadow print-card space-y-6">
+            <div class="flex items-center justify-between border-b border-teal-100 pb-3">
+                <h3 class="font-bold text-teal-950 text-lg flex items-center gap-2">
+                    <span class="w-8 h-8 bg-teal-600 text-white rounded-xl flex items-center justify-center font-bold text-sm">Ex 10</span>
+                    Grand Problème de Synthèse : Analyse de la Pollution en Fer d'un Bain d'Usinage
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-3 py-1 rounded-full">Communiquer & Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4">
+                <p class="leading-relaxed">
+                    Un technicien prélève $V_1 = 20\ \text{mL}$ d'un bain industriel usagé. Il réalise un dosage volumétrique au permanganate de potassium de concentration $C_2 = 0{,}025\ \text{mol/L}$. Le virage est obtenu pour $V_E = 16\ \text{mL}$.
+                </p>
+
+                <div class="space-y-2 font-bold text-slate-900">
+                    <p>1. <strong>[S'approprier]</strong> Écrivez la demi-équation de l'ion ferreux $Fe^{2+} \rightleftharpoons Fe^{3+} + e^-$.</p>
+                    <p>2. <strong>[Réaliser]</strong> Calculez la concentration molaire $C_1$ en ions $Fe^{2+}$ du bain.</p>
+                    <p>3. <strong>[Valider]</strong> Calculez la concentration massique $C_m$ ($M_{Fe} = 56\ \text{g/mol}$).</p>
+                    <p>4. <strong>[Communiquer]</strong> Si la concentration massique dépasse 1,0 g/L, le bain doit être régénéré. Rédigez le compte-rendu technique d'intervention.</p>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex10')" class="text-xs font-bold text-teal-600 hover:text-teal-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex10" class="hidden mt-4 pt-4 border-t border-dashed border-teal-200 bg-teal-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                <p class="font-bold text-teal-900">Corrigé rédigé du Problème de Synthèse :</p>
+                <p>1. Demi-équation : $Fe^{2+} \rightleftharpoons Fe^{3+} + e^-$.<br>
+                2. $C_1 = \frac{0{,}025 \times 16}{20} = \frac{0{,}4}{20} = \mathbf{0{,}02\ \text{mol/L}}$.<br>
+                3. $C_m = 0{,}02 \times 56 = \mathbf{1{,}12\ \text{g/L}}$.<br>
+                4. <strong>Compte-Rendu Intervention :</strong> <em>"La concentration en ions fer du bain industriel s'élève à 1,12 g/L, dépassant le seuil maximal toléré de 1,0 g/L. Il est préconisé d'effectuer la régénération immédiate de la solution de décapage avant la prochaine session d'usinage."</em></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPTS JS -->
+    <script>
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            for (let i = 1; i <= 10; i++) {
+                const el = document.getElementById('corr-ex' + i);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            }
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+        }
+    </script>
+</body>
+</html>

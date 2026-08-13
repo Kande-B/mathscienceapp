@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TICE Simulation - Oxydoréduction & Dosages 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @keyframes dropFall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(50px); opacity: 0; }
+        }
+        .anim-drop { animation: dropFall 0.4s ease-in forwards; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Physique-Chimie -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask-vial text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Oxydoréduction &amp; Dosages</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TICE Simulation</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- 1. OBJECTIF DU TP ET PROBLÉMATIQUE MÉTIER   -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-purple-600 space-y-4">
+            <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
+                <i class="fa-solid fa-bullseye"></i>
+                <span>Démarche d'Investigation Scientifique • TP Virtuel</span>
+            </div>
+            <h2 class="text-2xl font-extrabold text-slate-900 font-heading">Objectif du TP : Dosage du Fer dans une Solution de Décapage</h2>
+            
+            <div class="p-4 bg-purple-50 border border-purple-200 rounded-2xl text-xs space-y-2 text-slate-800">
+                <p class="font-bold text-purple-900"><i class="fa-solid fa-industry mr-1"></i> Problématique Professionnelle :</p>
+                <p class="leading-relaxed">
+                    Lors d'une opération de décapage industriel, un bain contient une concentration inconnue $C_1$ d'ions fer $Fe^{2+}$. Pour vérifier la conformité du traitement, vous devez <strong>déterminer expérimentalement la valeur de $C_1$</strong> à l'aide d'un dosage volumétrique par une solution titrante de permanganate de potassium $KMnO_4$.
+                </p>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- 2. MATÉRIEL DISPONIBLE À LA PAILLASSE       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-4">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2 border-b pb-3">
+                <i class="fa-solid fa-vial text-purple-600"></i> Matériel &amp; Solutions à Disposition
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 border rounded-2xl space-y-1">
+                    <span class="font-bold text-purple-900 block text-sm">1. Burette Graduée</span>
+                    <p class="text-slate-700">Contient la <strong>solution titrante</strong> de permanganate de potassium $KMnO_4$ (couleur violette), de concentration connue $\mathbf{C_2 = 0{,}02\ \text{mol/L}}$.</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 border rounded-2xl space-y-1">
+                    <span class="font-bold text-purple-900 block text-sm">2. Bêcher sous Agitation</span>
+                    <p class="text-slate-700">Contient un volume mesuré $\mathbf{V_1 = 20\ \text{mL}}$ de la <strong>solution titrée</strong> d'ions $Fe^{2+}$ (concentration $\mathbf{C_1}$ inconnue à déterminer).</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 border rounded-2xl space-y-1">
+                    <span class="font-bold text-purple-900 block text-sm">3. Dispositif de Commande</span>
+                    <p class="text-slate-700">Un bouton d'ajout rapide <strong>+ 1,0 mL</strong> et un bouton de goutte-à-goutte <strong>+ 0,1 mL</strong> pour repérer avec précision le virage colorimétrique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- 3. MODE OPÉRATOIRE ET GUIDE DE MANIPULATION -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-4">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2 border-b pb-3">
+                <i class="fa-solid fa-list-check text-purple-600"></i> Mode Opératoire Guidé (À réaliser sur la paillasse ci-dessous)
+            </h3>
+
+            <ol class="list-decimal pl-5 space-y-2.5 text-xs text-slate-700">
+                <li><strong>Début du versage :</strong> Cliquez sur le bouton <span class="font-bold text-purple-700">+ 1,0 mL</span> pour ajouter la solution titrante millilitre par millilitre. Observez l'aspect du mélange dans le bêcher.</li>
+                <li><strong>Approche du virage :</strong> Lorsque la coloration violette met un peu plus de temps à s'estomper lors de l'agitation, ralentissez le versage.</li>
+                <li><strong>Goutte-à-goutte :</strong> Utilisez le bouton <span class="font-bold text-indigo-700">+ 0,1 mL (Goutte)</span>.</li>
+                <li><strong>Relevé du volume d'équivalence $V_E$ :</strong> Arrêtez le versage à la <strong>première goutte qui colore le mélange de manière rose permanente et persistante</strong>. Lisez la valeur exacte du volume versé $V_{versé}$ affiché sur le compteur : c'est votre <strong>volume d'équivalence $V_E$</strong> !</li>
+            </ol>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- 4. PAILLASSE VIRTUELLE ET SIMULATEUR         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-flask text-purple-600"></i> Paillasse Expérimentale Virtuelle
+                </h3>
+                <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-3 py-1 rounded-full">Réalisez votre manipulation</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- PANNEAU COMMANDES EXPÉRIMENTALES -->
+                <div class="lg:col-span-5 space-y-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 text-xs">
+                    <!-- AFFICHAGE VOLUME VERSÉ -->
+                    <div class="bg-slate-900 text-white p-4 rounded-2xl text-center space-y-1 shadow-inner">
+                        <span class="text-[10px] font-bold uppercase text-purple-400 tracking-wider">Volume versé $V_{versé}$</span>
+                        <div id="sim-v-disp" class="text-3xl font-extrabold text-yellow-400 font-mono">0.0 mL</div>
+                    </div>
+
+                    <!-- BOUTONS D'ACTION -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="addVolume(1.0)" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-3 rounded-xl transition-colors shadow-sm text-xs flex items-center justify-center gap-1">
+                            <i class="fa-solid fa-plus"></i> + 1,0 mL
+                        </button>
+                        <button onclick="addVolume(0.1)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-3 rounded-xl transition-colors shadow-sm text-xs flex items-center justify-center gap-1">
+                            <i class="fa-solid fa-droplet"></i> + 0,1 mL (Goutte)
+                        </button>
+                    </div>
+
+                    <button onclick="resetSim()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 rounded-xl transition-colors text-xs border border-slate-300">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> Réinitialiser l'expérience
+                    </button>
+
+                    <!-- ÉTAT DU VIRAGE -->
+                    <div id="sim-status" class="p-3 bg-blue-50 border border-blue-200 text-blue-900 rounded-xl text-center font-bold text-xs">
+                        Observez le bêcher : commencez à verser la solution titrante.
+                    </div>
+                </div>
+
+                <!-- SCHÉMA SVG SIMULATION INTERACTIVE DE LA PAILLASSE -->
+                <div class="lg:col-span-7 flex justify-center bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl overflow-x-auto">
+                    <svg viewBox="0 0 320 320" class="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Potence de fixation -->
+                        <rect x="30" y="20" width="10" height="270" fill="#64748b" rx="2"/>
+                        <rect x="15" y="280" width="100" height="12" fill="#475569" rx="3"/>
+                        <rect x="30" y="50" width="90" height="8" fill="#64748b" rx="2"/>
+
+                        <!-- Agitateur magnétique sous le bêcher -->
+                        <rect x="80" y="250" width="120" height="30" fill="#334155" rx="6" stroke="#475569" stroke-width="1.5"/>
+                        <circle cx="140" cy="265" r="4" fill="#22c55e"/> <!-- Diode marche -->
+                        <text x="140" y="275" font-size="7" font-weight="bold" fill="#94a3b8" text-anchor="middle">AGITATION</text>
+
+                        <!-- Burette graduée -->
+                        <rect x="110" y="30" width="20" height="150" fill="#f8fafc" opacity="0.9" stroke="#38bdf8" stroke-width="1.5"/>
+                        <!-- Solution violette KMnO4 dans la burette -->
+                        <rect id="svg-burette-liq" x="111" y="31" width="18" height="148" fill="#a855f7"/>
+
+                        <!-- Graduations de la burette -->
+                        <line x1="110" y1="50" x2="118" y2="50" stroke="#ffffff" stroke-width="1"/>
+                        <line x1="110" y1="80" x2="118" y2="80" stroke="#ffffff" stroke-width="1"/>
+                        <line x1="110" y1="110" x2="118" y2="110" stroke="#ffffff" stroke-width="1"/>
+                        <line x1="110" y1="140" x2="118" y2="140" stroke="#ffffff" stroke-width="1"/>
+                        <text x="105" y="53" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="end">0</text>
+                        <text x="105" y="113" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="end">10</text>
+                        <text x="105" y="173" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="end">20</text>
+
+                        <!-- Robinet de la burette -->
+                        <polygon points="115,180 125,180 120,192" fill="#cbd5e1"/>
+                        <rect x="110" y="183" width="20" height="4" fill="#0284c7" rx="1"/>
+
+                        <!-- Goutte d'eau animée -->
+                        <circle id="svg-drop" cx="120" cy="196" r="3" fill="#a855f7" opacity="0"/>
+
+                        <!-- Bêcher -->
+                        <rect x="85" y="200" width="70" height="50" rx="4" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+                        <!-- Liquide dans le bêcher (couleur dynamique) -->
+                        <rect id="svg-becher-liq" x="87" y="215" width="66" height="33" rx="2" fill="#e0f2fe" opacity="0.7"/>
+
+                        <!-- Barreau aimanté -->
+                        <rect x="110" y="242" width="20" height="4" fill="#ffffff" rx="2" stroke="#64748b"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- 5. COMPTE-RENDU, CALCULS ET CONCLUSION ÉLÈVE-->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">5</div>
+                <h3 class="font-bold text-slate-900 text-base">Compte-Rendu Expérimental &amp; Conclusion de l'Élève</h3>
+            </div>
+
+            <div class="space-y-6 text-xs">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                        <label class="font-bold text-slate-900 block">1. Quel volume d'équivalence $V_E$ (en mL) avez-vous relevé lors de votre manipulation au moment du virage au rose ?</label>
+                        <input type="number" step="0.1" id="tice-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Saisissez votre mesure de V_E...">
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                        <label class="font-bold text-slate-900 block">2. À l'aide de la formule $C_1 = \frac{C_2 \times V_E}{V_1}$ avec $C_2 = 0{,}02\ \text{mol/L}$ et $V_1 = 20\ \text{mL}$, calculez la concentration $C_1$ (en mol/L) :</label>
+                        <input type="number" step="0.001" id="tice-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Saisissez votre calcul de C1...">
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">3. Conclusion technique : Rédigez votre interprétation de l'expérience et la valeur de la concentration obtenue.</label>
+                    <textarea id="tice-conclusion" rows="3" class="border rounded-xl p-3 w-full font-bold bg-white" placeholder="Rédigez votre conclusion expérimentale..."></textarea>
+                </div>
+            </div>
+
+            <button onclick="checkTICE()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Soumettre mon Compte-Rendu Expérimental
+            </button>
+            <div id="fb-tice" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LE SIMULATEUR INTERACTIF -->
+    <script>
+        let vol = 0.0;
+        const veTarget = 15.0; // Volume d'équivalence exact dissimulé
+
+        function addVolume(amount) {
+            vol = parseFloat((vol + amount).toFixed(1));
+            updateSimView();
+
+            // Animer la goutte
+            let drop = document.getElementById('svg-drop');
+            drop.style.opacity = '1';
+            drop.classList.remove('anim-drop');
+            void drop.offsetWidth; // Trigger reflow
+            drop.classList.add('anim-drop');
+            setTimeout(() => { drop.style.opacity = '0'; }, 400);
+        }
+
+        function resetSim() {
+            vol = 0.0;
+            updateSimView();
+        }
+
+        function updateSimView() {
+            document.getElementById('sim-v-disp').innerText = `${vol.toFixed(1)} mL`;
+
+            // Baisse de niveau burette
+            let bLiq = document.getElementById('svg-burette-liq');
+            let h = Math.max(10, 148 - (vol * 6));
+            bLiq.setAttribute('height', h);
+
+            // Changement de couleur dans le bêcher
+            let becherLiq = document.getElementById('svg-becher-liq');
+            let status = document.getElementById('sim-status');
+
+            if (vol < veTarget) {
+                becherLiq.setAttribute('fill', '#e0f2fe'); // Incolore
+                becherLiq.setAttribute('opacity', '0.7');
+                if (vol >= 14.0) {
+                    status.className = "p-3 bg-yellow-50 border border-yellow-300 text-yellow-950 rounded-xl text-center font-bold text-xs";
+                    status.innerHTML = `<i class="fa-solid fa-eye mr-1 text-amber-600"></i> Observation : La coloration violette met un temps à disparaître lors du mélange. Passez au goutte-à-goutte (+ 0,1 mL).`;
+                } else {
+                    status.className = "p-3 bg-blue-50 border border-blue-200 text-blue-900 rounded-xl text-center font-bold text-xs";
+                    status.innerHTML = `<i class="fa-solid fa-flask mr-1 text-blue-600"></i> Observation : La solution dans le bêcher demeure transparente lors de l'agitation.`;
+                }
+            } else if (vol === veTarget) {
+                becherLiq.setAttribute('fill', '#f472b6'); // Rose persistant (Équivalence)
+                becherLiq.setAttribute('opacity', '0.9');
+                status.className = "p-3 bg-purple-100 border border-purple-300 text-purple-950 rounded-xl text-center font-extrabold text-xs";
+                status.innerHTML = `<i class="fa-solid fa-circle-check mr-1 text-purple-600"></i> VIRAGE OBSERVÉ ! La solution a pris une teinte ROSE PERMANENTE. Relevez la valeur affichée du volume versé V_E !`;
+            } else {
+                becherLiq.setAttribute('fill', '#a855f7'); // Violet intense (Excès)
+                becherLiq.setAttribute('opacity', '0.95');
+                status.className = "p-3 bg-amber-50 border border-amber-300 text-amber-950 rounded-xl text-center font-bold text-xs";
+                status.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1 text-amber-600"></i> Observation : Excès de permanganate. La solution vire au violet intense.`;
+            }
+        }
+
+        function checkTICE() {
+            let q1 = parseFloat(document.getElementById('tice-q1').value);
+            let q2 = parseFloat(document.getElementById('tice-q2').value);
+            let ccl = document.getElementById('tice-conclusion').value.trim();
+            let fb = document.getElementById('fb-tice');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (isNaN(q1) || isNaN(q2) || ccl === "") {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Veuillez compléter le relevé de V_E, votre calcul de C1 et votre conclusion avant de valider.`;
+                return;
+            }
+
+            let expectedC1 = (0.02 * q1) / 20;
+            let diffC1 = Math.abs(q2 - expectedC1);
+
+            if (Math.abs(q1 - veTarget) <= 0.2 && diffC1 <= 0.001) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Compte-rendu expérimental validé. Votre relevé V_E = ${q1} mL et votre calcul C1 = ${q2} mol/L sont parfaitement rigoureux.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vérifiez vos mesures : avec V_E = ${q1} mL, le calcul donne C1 = (0,02 × ${q1}) / 20 = ${expectedC1.toFixed(4)} mol/L.`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de TD - Statistiques à 2 Variables 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
+            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
+            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-cyan-500/20 border border-cyan-400/30 text-cyan-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-cyan-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-cyan-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DE LA FICHE DE TD -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-cyan-600 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-cyan-600 tracking-wider">
+                        <span>Fiche d'Entraînement A4 Imprimable</span> • <span>Baccalauréat Professionnel</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier de Statistiques à Deux Variables</h2>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
+                    </button>
+                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-cyan-200 transition-colors">
+                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- GRILLE DES COMPETENCES DU BAC PRO -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Nuage de points</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Point Moyen G</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Équation y = ax + b</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Interpolation</div>
+                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Extrapolation</div>
+            </div>
+        </div>
+
+        <!-- EXERCICE 1 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
+                    Usinage : Usure d'un Outil de Coupe
+                </h3>
+                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier & Analyser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un mécanicien enregistre l'usure $y_i$ (en $\mu\text{m}$) d'un outil en fonction du temps d'utilisation $x_i$ (en minutes) :</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse">
+                        <tr class="bg-slate-800 text-white font-bold">
+                            <th class="p-2 border border-slate-700">Temps $x_i$ (min)</th>
+                            <th class="p-2 border border-slate-700">2</th>
+                            <th class="p-2 border border-slate-700">4</th>
+                            <th class="p-2 border border-slate-700">6</th>
+                            <th class="p-2 border border-slate-700">8</th>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-2 border font-bold">Usure $y_i$ ($\mu\text{m}$)</td>
+                            <td class="p-2 border">6</td>
+                            <td class="p-2 border">10</td>
+                            <td class="p-2 border">14</td>
+                            <td class="p-2 border">18</td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="font-bold">
+                    1. Calculez les coordonnées du Point Moyen $G(\bar{x} \,;\, \bar{y})$.<br>
+                    2. Vérifiez si le point moyen $G$ appartient à la droite d'équation $y = 2x + 2$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. $\bar{x} = \frac{2+4+6+8}{4} = \mathbf{5\ \text{min}}$ et $\bar{y} = \frac{6+10+14+18}{4} = \mathbf{12\ \mu\text{m}}$. Le point moyen est **$G(5 \,;\, 12)$**.<br>
+                2. Test d'appartenance : $2(5) + 2 = 10 + 2 = 12 = \bar{y}$. Le point **$G$ appartient bien à la droite**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 2 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
+                    Électrotechnique : Puissance d'un Panneau Photovoltaïque
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On mesure la puissance $y_i$ (en Watts) produite par un panneau en fonction de l'éclairement $x_i$ (en $\text{W/m}^2$) :</p>
+                <p>Données : $(200 \,;\, 18)$, $(400 \,;\, 26)$, $(600 \,;\, 34)$, $(800 \,;\, 42)$.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées du point moyen $G(\bar{x} \,;\, \bar{y})$.<br>
+                    2. Déterminez l'équation de la droite d'ajustement $y = ax + b$ sachant que la pente $a = 0{,}04$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. $\bar{x} = \frac{200+400+600+800}{4} = \mathbf{500}$ et $\bar{y} = \frac{18+26+34+42}{4} = \mathbf{30}$. Le point est **$G(500 \,;\, 30)$**.<br>
+                2. Comme la droite passe par $G$ : $b = \bar{y} - a\bar{x} = 30 - 0{,}04(500) = 30 - 20 = \mathbf{10}$. L'équation est **$y = 0{,}04x + 10$**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 3 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 3</span>
+                    Mécanique Automobile : Distance de Freinage
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un technicien mesure la distance de freinage $y$ (en mètres) sur sol mouillé selon la vitesse $x$ (en km/h) entre 30 km/h et 90 km/h. L'ajustement linéaire obtenu est $y = 0{,}8x - 10$.</p>
+                <p class="font-bold">
+                    1. Calculez la distance de freinage estimée pour une vitesse de $x = 70\ \text{km/h}$ (Interpolation).<br>
+                    2. Calculez la vitesse estimée pour une distance de freinage observée de $y = 54\ \text{mètres}$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex3')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex3" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. Pour $x = 70$ : $y = 0{,}8(70) - 10 = 56 - 10 = \mathbf{46\ \text{mètres}}$.<br>
+                2. Pour $y = 54$ : $54 = 0{,}8x - 10 \implies 0{,}8x = 64 \implies x = \frac{64}{0{,}8} = \mathbf{80\ \text{km/h}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 4 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 4</span>
+                    Commerce : Impact du Marketing Digital
+                </h3>
+                <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Analyser & Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un magasin étudie ses ventes mensuelles $y$ (en k€) selon le budget publicitaire sur les réseaux $x$ (en k€). La droite d'ajustement est $y = 4x + 15$.</p>
+                <p class="font-bold">
+                    1. Interprétez la valeur de la pente $a = 4$ et de l'ordonnée à l'origine $b = 15$.<br>
+                    2. Estimez les ventes pour un budget de $x = 3{,}5\ \text{k€}$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex4')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex4" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. **Pente $a = 4$** : Chaque k€ supplémentaire investi en pub génère 4 k€ de ventes en plus.<br>
+                **Ordonnée à l'origine $b = 15$** : Sans pub ($x = 0$), les ventes de base s'élèvent à 15 k€.<br>
+                2. Pour $x = 3{,}5$ k€ : $y = 4(3{,}5) + 15 = 14 + 15 = \mathbf{29\ \text{k€}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 5 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 5</span>
+                    Logistique : Consommation de Carburant d'un Poids-Lourd
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser & Communiquer</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2 text-xs text-slate-700 space-y-3">
+                    <p>Un transporteur enregistre la consommation $y$ (en L/100km) selon la charge $x$ (en tonnes) :</p>
+                    <p>Points d'essai : $(5 ; 31)$, $(10 ; 37)$, $(15 ; 43)$, $(20 ; 49)$.</p>
+                    <p class="font-bold">
+                        1. Calculez les coordonnées du Point Moyen $G(\bar{x} \,;\, \bar{y})$.<br>
+                        2. Déterminez l'équation de la droite d'ajustement $y = 1{,}2x + b$.
+                    </p>
+                </div>
+                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
+                    <svg viewBox="0 0 160 100" class="w-full max-w-[160px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="80" r="3" fill="#0284c7"/>
+                        <circle cx="60" cy="60" r="3" fill="#0284c7"/>
+                        <circle cx="90" cy="40" r="3" fill="#0284c7"/>
+                        <circle cx="120" cy="20" r="3" fill="#0284c7"/>
+                        <line x1="20" y1="90" x2="135" y2="10" stroke="#ef4444" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex5')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex5" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. $\bar{x} = \frac{5+10+15+20}{4} = \mathbf{12{,}5\ \text{t}}$ et $\bar{y} = \frac{31+37+43+49}{4} = \mathbf{40\ \text{L/100km}}$. Le point est **$G(12{,}5 \,;\, 40)$**.<br>
+                2. $b = \bar{y} - 1{,}2\bar{x} = 40 - 1{,}2(12{,}5) = 40 - 15 = \mathbf{25}$. L'équation est **$y = 1{,}2x + 25$**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 6 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 6</span>
+                    Agroalimentaire : Rendement d'une Serre Légumière
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Communiquer</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Un maraîcher modélise le rendement $y$ (en kg/m²) selon la quantité d'engrais apportée $x$ (en g/m²) entre 10 g et 50 g par l'équation $y = 0{,}1x + 2$.</p>
+                <p class="font-bold">
+                    1. Calculez le rendement estimé pour $x = 40\ \text{g/m²}$ (Interpolation).<br>
+                    2. Expliquez pourquoi extrapolant pour $x = 300\ \text{g/m²}$ ($y = 32\ \text{kg/m²}$) n'est pas réaliste biologiquement.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex6')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex6" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. Pour $x = 40$ : $y = 0{,}1(40) + 2 = 4 + 2 = \mathbf{6\ \text{kg/m²}}$.<br>
+                2. **Mise en garde Extrapolation :** Un surdosage massif d'engrais ($300\ \text{g}$) brûlerait les racines des plantes et réduirait le rendement à zéro. La relation linéaire s'arrête en cas de toxicité du sol.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 7 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 7</span>
+                    Bâtiment : Isolation Thermique d'un Mur
+                </h3>
+                <span class="bg-green-100 text-green-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On étudie la résistance thermique $R$ (en $\text{m}^2\cdot\text{K/W}$) selon l'épaisseur $e$ de laine de verre (en cm). La droite d'ajustement est $R = 0{,}25e + 0{,}5$.</p>
+                <p class="font-bold">
+                    1. Calculez l'épaisseur $e$ requise pour atteindre une résistance thermique minimale recommandée de $R = 5\ \text{m}^2\cdot\text{K/W}$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex7')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex7" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. $5 = 0{,}25e + 0{,}5 \implies 0{,}25e = 4{,}5 \implies e = \frac{4{,}5}{0{,}25} = \mathbf{18\ \text{cm}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 8 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 8</span>
+                    Chimie Industrielle : Vitesse de Réaction
+                </h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>On mesure la vitesse de réaction $v$ (en mmol/L/s) selon la température $T$ (en °C) : $(20 ; 10)$, $(30 ; 15)$, $(40 ; 20)$, $(50 ; 25)$.</p>
+                <p class="font-bold">
+                    1. Calculez les coordonnées du point moyen $G(\bar{T} \,;\, \bar{v})$.<br>
+                    2. Donnez l'équation de la droite d'ajustement $v = aT + b$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex8')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex8" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. $\bar{T} = \mathbf{35\ ^\circ\text{C}}$ et $\bar{v} = \mathbf{17,5\ \text{mmol/L/s}}$. Point moyen **$G(35 \,;\, 17{,}5)$**.<br>
+                2. Pente $a = \frac{25-10}{50-20} = \frac{15}{30} = 0{,}5$. Ordonnée $b = 17{,}5 - 0{,}5(35) = 0$. L'équation est **$v = 0{,}5T$**.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 9 -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <span class="w-7 h-7 bg-cyan-100 text-cyan-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 9</span>
+                    Santé au Travail : Fréquence Cardiaque et Effort
+                </h3>
+                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-3">
+                <p>Lors d'un test d'effort, la fréquence cardiaque $FC$ (bpm) évolue selon la puissance $P$ (Watts) par $FC = 0{,}5P + 70$.</p>
+                <p class="font-bold">
+                    1. Calculez la fréquence cardiaque au repos ($P = 0\ \text{W}$).<br>
+                    2. Estimez la fréquence cardiaque pour un effort intensif de $P = 180\ \text{W}$.
+                </p>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex9')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex9" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé :</p>
+                <p>1. Pour $P = 0$ : $FC = 0{,}5(0) + 70 = \mathbf{70\ \text{bpm}}$.<br>
+                2. Pour $P = 180$ : $FC = 0{,}5(180) + 70 = 90 + 70 = \mathbf{160\ \text{bpm}}$.</p>
+            </div>
+        </div>
+
+        <!-- EXERCICE 10 : SYNTHÈSE BAC PRO MULTI-COMPÉTENCES -->
+        <div class="bg-white rounded-3xl border-2 border-cyan-500 p-6 md:p-8 card-shadow print-card space-y-6">
+            <div class="flex items-center justify-between border-b border-cyan-100 pb-3">
+                <h3 class="font-bold text-cyan-950 text-lg flex items-center gap-2">
+                    <span class="w-8 h-8 bg-cyan-600 text-white rounded-xl flex items-center justify-center font-bold text-sm">Ex 10</span>
+                    Grand Problème de Synthèse : Budget de Maintenance d'un Parc Industriel
+                </h3>
+                <span class="bg-yellow-100 text-yellow-800 text-xs font-extrabold px-3 py-1 rounded-full">Communiquer & Valider</span>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-4">
+                <p class="leading-relaxed">
+                    Un directeur d'usine analyse l'évolution des coûts annuels de maintenance $y_i$ (en k€) de son parc de 50 machines sur 6 années consécutives ($x_i$ rang de l'année) :
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse">
+                        <tr class="bg-slate-800 text-white font-bold">
+                            <th class="p-2 border border-slate-700">Rang de l'année $x_i$</th>
+                            <th class="p-2 border border-slate-700">1</th>
+                            <th class="p-2 border border-slate-700">2</th>
+                            <th class="p-2 border border-slate-700">3</th>
+                            <th class="p-2 border border-slate-700">4</th>
+                            <th class="p-2 border border-slate-700">5</th>
+                            <th class="p-2 border border-slate-700">6</th>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-2 border font-bold">Coût maintenance $y_i$ (k€)</td>
+                            <td class="p-2 border">12</td>
+                            <td class="p-2 border">15</td>
+                            <td class="p-2 border">17</td>
+                            <td class="p-2 border">20</td>
+                            <td class="p-2 border">22</td>
+                            <td class="p-2 border">25</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="space-y-2 font-bold text-slate-900">
+                    <p>1. <strong>[S'approprier]</strong> Placez les points dans un repère orthogonal ou esquissez le nuage.</p>
+                    <p>2. <strong>[Analyser]</strong> Calculez les coordonnées du Point Moyen $G(\bar{x} \,;\, \bar{y})$.</p>
+                    <p>3. <strong>[Réaliser]</strong> Sachant que la pente de la droite de tendance vaut $a = 2{,}5$, déterminez l'ordonnée à l'origine $b$ et écrivez l'équation de la droite d'ajustement $y = ax + b$.</p>
+                    <p>4. <strong>[Valider & Communiquer]</strong> Estimez le coût de maintenance pour l'année 8 ($x = 8$). Rédigez une note de synthèse pour la direction financière.</p>
+                </div>
+            </div>
+
+            <div class="mt-4 no-print">
+                <button onclick="toggleCorrection('corr-ex10')" class="text-xs font-bold text-cyan-600 hover:text-cyan-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+                </button>
+            </div>
+            <div id="corr-ex10" class="hidden mt-4 pt-4 border-t border-dashed border-cyan-200 bg-cyan-50/40 p-4 rounded-xl text-xs space-y-3 text-slate-800 print-correction">
+                <p class="font-bold text-cyan-900">Corrigé rédigé du Problème de Synthèse :</p>
+                <p>1. Nuage de points croissant régulier.<br>
+                2. $\bar{x} = \frac{1+2+3+4+5+6}{6} = \mathbf{3{,}5}$ et $\bar{y} = \frac{12+15+17+20+22+25}{6} = \frac{111}{6} = \mathbf{18{,}5\ \text{k€}}$. Le point moyen est **$G(3{,}5 \,;\, 18{,}5)$**.<br>
+                3. Calcul de $b$ : $b = \bar{y} - a\bar{x} = 18{,}5 - 2{,}5(3{,}5) = 18{,}5 - 8{,}75 = \mathbf{9{,}75}$. L'équation est **$y = 2{,}5x + 9{,}75$**.<br>
+                4. Pour l'année 8 ($x = 8$) : $y = 2{,}5(8) + 9{,}75 = 20 + 9{,}75 = \mathbf{29{,}75\ \text{k€}}$.<br>
+                <strong>Note à la Direction Financière :</strong> <em>"Le budget de maintenance augmente d'environ 2,5 k€ par an. Pour l'année 8, il faudra prévoir une enveloppe budgétaire de 29 750 €. Il est recommandé de programmer le remplacement d'une partie du parc d'ici l'année 7 afin de stabiliser ces frais d'entretien."</em></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPTS JS -->
+    <script>
+        let allShown = false;
+
+        function toggleCorrection(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function toggleAllCorrections() {
+            allShown = !allShown;
+            for (let i = 1; i <= 10; i++) {
+                const el = document.getElementById('corr-ex' + i);
+                if (el) {
+                    if (allShown) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            }
+            const btnText = document.getElementById('toggle-all-text');
+            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Probabilités Conditionnelles 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-500/20 border border-teal-400/30 text-teal-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-diagram-project text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-teal-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités Conditionnelles</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-teal-100 text-teal-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-teal-200">Synthèse de Cours Illustrée avec Exemples par Notion</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Probabilités Conditionnelles</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Probabilité sachant que $P_A(B)$, arbre pondéré, formule des probabilités totales et indépendance.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. DÉFINITION DE LA PROBABILITÉ CONDITIONNELLE -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-teal-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center text-sm">I</span>
+                Notion de Probabilité Conditionnelle $P_A(B)$
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-blue-800 text-base uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-blue-600"></i> Définition : Probabilité Conditionnelle
+                </h3>
+                <p class="text-blue-900 leading-relaxed">
+                    La <strong>probabilité conditionnelle de l'événement $B$ sachant que l'événement $A$ est réalisé</strong>, notée $\mathbf{P_A(B)}$, est égale à :
+                    $$\mathbf{P_A(B) = \frac{P(A \cap B)}{P(A)}}$$
+                </p>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION I -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Contrôle de Qualité d'une Usine
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Sur 100 pièces, $P(A) = 0{,}20$ (20% produites sur la ligne A) et $P(A \cap D) = 0{,}02$ (2% sont de la ligne A et défectueuses).</p>
+                    <p>La probabilité qu'une pièce soit défectueuse <em>sachant qu'elle vient de la ligne A</em> est :</p>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$P_A(D) = \frac{P(A \cap D)}{P(A)} = \frac{0{,}02}{0{,}20} = \mathbf{0{,}10\quad (10\ \%)}$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. L'ARBRE DE PROBABILITÉS PONDÉRÉ         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                L'Arbre de Probabilités Pondéré et ses Règles
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-4 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-sitemap text-emerald-600"></i> Règles de Calcul dans un Arbre
+                </h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <div class="p-4 bg-white border border-emerald-300 rounded-2xl space-y-1">
+                        <span class="font-bold text-emerald-900 block text-sm">1. Règle des Nœuds</span>
+                        La somme des probabilités des branches d'un même nœud vaut 1 : $\mathbf{P_A(B) + P_A(\bar{B}) = 1}$.
+                    </div>
+                    <div class="p-4 bg-white border border-emerald-300 rounded-2xl space-y-1">
+                        <span class="font-bold text-emerald-900 block text-sm">2. Règle des Chemins</span>
+                        Probabilité d'un chemin par multiplication : $\mathbf{P(A \cap B) = P(A) \times P_A(B)}$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION II -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Calcul de la Branche $P(A \cap D)$
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Si $P(A) = 0{,}60$ et que le taux de défaut sur la ligne A est $P_A(D) = 0{,}03$ :</p>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$P(A \cap D) = P(A) \times P_A(D) = 0{,}60 \times 0{,}03 = \mathbf{0{,}018\quad (1{,}8\ \%)}$$
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCHÉMA SVG ARBRE DE PROBABILITÉS -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-diagram-project text-teal-600"></i> Figure 1 : Arbre de probabilités à deux niveaux
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="180" fill="#ffffff" rx="8"/>
+
+                        <!-- Racines -->
+                        <circle cx="40" cy="90" r="4" fill="#0f172a"/>
+
+                        <!-- Branches Niveau 1 -->
+                        <line x1="40" y1="90" x2="160" y2="45" stroke="#0284c7" stroke-width="2"/>
+                        <line x1="40" y1="90" x2="160" y2="135" stroke="#0284c7" stroke-width="2"/>
+                        <text x="100" y="60" font-size="10" font-weight="extrabold" fill="#0284c7">P(A)</text>
+                        <text x="100" y="125" font-size="10" font-weight="extrabold" fill="#0284c7">P(Ā)</text>
+
+                        <!-- Nœuds Niveau 1 -->
+                        <rect x="160" y="35" width="25" height="20" rx="4" fill="#e0f2fe" stroke="#0284c7"/>
+                        <text x="172" y="49" font-size="11" font-weight="extrabold" fill="#0369a1">A</text>
+                        <rect x="160" y="125" width="25" height="20" rx="4" fill="#e0f2fe" stroke="#0284c7"/>
+                        <text x="172" y="139" font-size="11" font-weight="extrabold" fill="#0369a1">Ā</text>
+
+                        <!-- Branches Niveau 2 top -->
+                        <line x1="185" y1="45" x2="310" y2="25" stroke="#16a34a" stroke-width="2"/>
+                        <line x1="185" y1="45" x2="310" y2="65" stroke="#dc2626" stroke-width="2"/>
+                        <text x="240" y="30" font-size="10" font-weight="extrabold" fill="#16a34a">P_A(B)</text>
+                        <text x="240" y="65" font-size="10" font-weight="extrabold" fill="#dc2626">P_A(B̄)</text>
+
+                        <!-- Feuillets -->
+                        <text x="320" y="30" font-size="11" font-weight="extrabold" fill="#15803d">B  ➔ P(A ∩ B)</text>
+                        <text x="320" y="70" font-size="11" font-weight="extrabold" fill="#b91c1c">B̄ ➔ P(A ∩ B̄)</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. FORMULE DES PROBABILITÉS TOTALES       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-indigo-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">III</span>
+                Formule des Probabilités Totales &amp; Indépendance
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-emerald-600"></i> Formule des Probabilités Totales
+                </h3>
+                <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                    $$\mathbf{P(B) = P(A \cap B) + P(\bar{A} \cap B) = P(A) \times P_A(B) + P(\bar{A}) \times P_{\bar{A}}(B)}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION III -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Taux Global de Défaillance d'un Parc
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Si la Ligne A ($60\%$) a $3\%$ de défauts et la Ligne B ($40\%$) a $5\%$ de défauts :</p>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$P(D) = (0{,}60 \times 0{,}03) + (0{,}40 \times 0{,}05) = 0{,}018 + 0{,}020 = \mathbf{0{,}038\quad (3{,}8\ \%)}$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. EXEMPLE RÉDIGÉ PAS À PAS                 -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">IV</span>
+                Exemple Rédigé d'Application Professionnelle
+            </h2>
+
+            <div class="exemple-box rounded-2xl p-5 space-y-4 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-amber-600"></i> Application : Test Médical / Biologique Rapide
+                </h3>
+
+                <div class="space-y-3 leading-relaxed">
+                    <p>Dans un élevage, une maladie $M$ touche $5\%$ des animaux ($P(M) = 0{,}05$). Un test est positif $T$ dans $98\%$ des cas pour les malades ($P_M(T) = 0{,}98$) et donne $2\%$ de faux positifs ($P_{\bar{M}}(T) = 0{,}02$).</p>
+
+                    <p><strong>1. Probabilité qu'un animal soit malade et testé positif :</strong><br>
+                    $P(M \cap T) = P(M) \times P_M(T) = 0{,}05 \times 0{,}98 = \mathbf{0{,}049\quad (4{,}9\ \%)}$.</p>
+
+                    <p><strong>2. Probabilité globale d'un test positif $P(T)$ :</strong><br>
+                    $P(T) = P(M \cap T) + P(\bar{M} \cap T) = 0{,}049 + (0{,}95 \times 0{,}02) = 0{,}049 + 0{,}019 = \mathbf{0{,}068\quad (6{,}8\ \%)}$.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

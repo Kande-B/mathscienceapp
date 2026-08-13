@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TICE Tableur - Suites Arithmétiques 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Suites Arithmétiques</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TICE Tableur</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DU MODULE TICE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-purple-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
+                        <span>Module TICE • Tableur (Excel / Calc) &amp; Poignées d'étirement</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP TICE : Génération de Suites Arithmétiques et Somme Cumulée sous Tableur</h2>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>Formules Tableur clés :</strong> `=B2+50` pour générer le terme suivant par récurrence, `=1800+(A2-1)*50` pour la formule directe, et `=SOMME(B2:B13)` pour calculer la somme cumulée $S_{12}$.
+            </p>
+        </div>
+
+        <!-- PROTOCOLE TICE STEP-BY-STEP -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="font-bold text-slate-900 text-base">Protocole d'Expérimentation Numérique sous Tableur</h3>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Générer les rangs $n$ en colonne A</p>
+                    <p class="text-slate-700">
+                        Dans les cellules <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">A2</code> et <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">A3</code>, tapez 1 et 2.<br>
+                        Sélectionnez A2:A3 et étirez vers le bas à l'aide de la poignée de recopie jusqu'à la ligne 13 ($n = 12$).
+                    </p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Générer les termes par la formule de récurrence</p>
+                    <p class="text-slate-700">
+                        Dans la cellule $B2$, entrez le premier terme : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">1800</code>.<br>
+                        Dans la cellule $B3$, tapez la formule de récurrence : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">=B2+50</code>.<br>
+                        Étirez vers le bas jusqu'en $B13$.
+                    </p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 3 : Calculer la somme des 12 termes avec `=SOMME`</p>
+                    <p class="text-slate-700">
+                        Dans la cellule $B14$, tapez la formule : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">=SOMME(B2:B13)</code>.<br>
+                        Le tableur affiche le résultat cumulé direct.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Validation du TP Tableur</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle formule tableur entrée en B3 permet de calculer le terme suivant avec r = 50 ?</label>
+                    <input type="text" id="tice-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="=B2+50">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle formule tableur permet de calculer le total cumulé des cellules B2 à B13 ?</label>
+                    <input type="text" id="tice-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="=SOMME(B2:B13)">
+                </div>
+            </div>
+
+            <button onclick="checkTICE()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Valider les réponses du TP Tableur
+            </button>
+            <div id="fb-tice" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LE TP TICE -->
+    <script>
+        function checkTICE() {
+            let q1 = document.getElementById('tice-q1').value.trim();
+            let q2 = document.getElementById('tice-q2').value.trim();
+            let fb = document.getElementById('fb-tice');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if ((q1.toUpperCase() === "=B2+50" || q1.toUpperCase() === "B2+50") && (q2.toUpperCase().includes("SOMME(B2:B13)"))) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> TP Tableur validé ! Les formules =B2+50 et =SOMME(B2:B13) génèrent parfaitement la suite et sa somme.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Formule 1 = =B2+50 et Formule 2 = =SOMME(B2:B13).`;
+            }
+        }
+    </script>
+</body>
+</html>

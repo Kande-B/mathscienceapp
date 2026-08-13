@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Dérivation et Variations 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-chart-line text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Dérivation et Étude de Variations</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-indigo-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Activités d'Investigation • Découverte Guidée</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Du Taux de Variation au Nombre Dérivé</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : Tangente, Pente $f'(x_0)$, Sens de variation</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                À travers trois situations concrètes (vitesse instantanée d'un véhicule, pente d'une trajectoire et optimisation du bénéfice d'une entreprise), découvrez comment le calcul dérivé permet d'étudier la vitesse d'évolution et de trouver des valeurs maximales ou minimales.
+            </p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE & PENTE    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">0</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-slate-500 tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Rappels : Pente et Coefficient Directeur d'une Droite</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Coefficient directeur de la droite passant par $A(1 ; 2)$ et $B(3 ; 8)$ :</label>
+                    <p class="text-slate-500">Formule : $m = \frac{y_B - y_A}{x_B - x_A} = \frac{8 - 2}{3 - 1}$</p>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Pente m = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Si une droite "monte" de gauche à droite, son coefficient directeur $m$ est :</label>
+                    <select id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="POS">Stricteement Positif (m > 0)</option>
+                        <option value="NEG">Négatif (m < 0)</option>
+                        <option value="NUL">Nul (m = 0)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes prérequis
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : VITESSE MOYENNE A INSTANTANÉE -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Activité 1 • Transport & Automobile</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">De la Vitesse Moyenne à la Vitesse Instantanée</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-car-side text-indigo-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un véhicule de test accélère sur une piste d'essai. La distance parcourue $d(t)$ (en mètres) en fonction du temps $t$ (en secondes) est donnée par la fonction : 
+                    $$\mathbf{d(t) = 2t^2}$$
+                </p>
+            </div>
+
+            <!-- SCHÉMA SVG INTERACTIF SÉCANTE VERS TANGENTE -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-chart-area text-indigo-600"></i> Représentation graphique de la courbe $d(t) = 2t^2$ et de la tangente en $t = 2\text{s}$
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 200" class="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Quadrillage -->
+                        <defs>
+                            <pattern id="grid-act1" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="450" height="200" fill="url(#grid-act1)"/>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="170" x2="420" y2="170" stroke="#64748b" stroke-width="2"/>
+                        <line x1="40" y1="20" x2="40" y2="170" stroke="#64748b" stroke-width="2"/>
+                        <text x="420" y="185" font-size="10" font-weight="bold" fill="#475569">Temps t (s)</text>
+                        <text x="15" y="30" font-size="10" font-weight="bold" fill="#475569">Distance d(m)</text>
+
+                        <!-- Courbe y = 2*t^2 (Échelle: t de 0 a 4 => x de 40 a 360, y de 170 a 30) -->
+                        <path d="M 40 170 Q 200 160 360 30" fill="none" stroke="#4f46e5" stroke-width="3"/>
+
+                        <!-- Point A (t=2, d=8) => x=200, y=106 -->
+                        <circle cx="200" cy="106" r="5" fill="#4f46e5"/>
+                        <text x="180" y="100" font-size="11" font-weight="bold" fill="#312e81">A (2s ; 8m)</text>
+
+                        <!-- Tangente en A (pente = 8) -->
+                        <line x1="120" y1="170" x2="280" y2="42" stroke="#ef4444" stroke-width="2" stroke-dasharray="4"/>
+                        <text x="290" y="40" font-size="10" font-weight="bold" fill="#dc2626">Tangente en t=2s (pente = 8)</text>
+
+                        <!-- Graduations -->
+                        <text x="120" y="185" font-size="9" fill="#64748b" text-anchor="middle">1s</text>
+                        <text x="200" y="185" font-size="9" fill="#64748b" font-weight="bold" text-anchor="middle">2s</text>
+                        <text x="280" y="185" font-size="9" fill="#64748b" text-anchor="middle">3s</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS -->
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">Étape 1 : Vitesse moyenne entre $t = 2\text{s}$ et $t = 3\text{s}$</span>
+                    <p class="text-slate-700">À $t=2$, $d(2) = 2 \times 2^2 = 8\text{ m}$. À $t=3$, $d(3) = 2 \times 3^2 = 18\text{ m}$.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">1. Distance parcourue $\Delta d = d(3) - d(2)$ :</label>
+                            <input type="number" id="act1-d" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="18 - 8 = ? m">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">2. Vitesse moyenne $v_{\text{moy}} = \frac{\Delta d}{\Delta t}$ en m/s :</label>
+                            <input type="number" id="act1-vmoy" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="10 / 1s = ? m/s">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">Étape 2 : Vitesse instantanée exacte à $t = 2\text{s}$ (Le Nombre Dérivé $d'(2)$)</span>
+                    <p class="text-slate-700 leading-relaxed">
+                        Lorsque l'intervalle de temps s'approche de $0$, la vitesse moyenne se rapproche de la <strong>vitesse instantanée</strong> à $t = 2\text{s}$.
+                        Géométriquement, cela correspond au <strong>coefficient directeur (la pente) de la droite tangente</strong> à la courbe au point $A(2 ; 8)$.
+                    </p>
+                    <div>
+                        <label class="font-bold text-slate-900 block mb-1">3. En observant le graphique ci-dessus, quelle est la valeur exacte du nombre dérivé $d'(2)$ (pente de la tangente en $t=2$) ?</label>
+                        <input type="number" id="act1-deriv" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="Pente = ? m/s">
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : LECTURE GRAPHIQUE PENTE TANGENTE -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Activité 2 • Approche Géométrique</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Lecture Graphique du Nombre Dérivé $f'(x_0)$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-ruler-combined text-sky-600 mr-1"></i> Règle d'or du calcul dérivé :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Le nombre dérivé $f'(x_0)$ en un point $x_0$ est égal au **coefficient directeur (la pente) de la droite tangente** à la courbe au point d'abscisse $x_0$.
+                </p>
+            </div>
+
+            <!-- SCHÉMA SVG LECTURE GRAPHIQUE -->
+            <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                <svg viewBox="0 0 400 200" class="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="200" fill="#f8fafc" rx="8"/>
+                    <!-- Quadrillage -->
+                    <path d="M 0 50 L 400 50 M 0 100 L 400 100 M 0 150 L 400 150 M 100 0 L 100 200 M 200 0 L 200 200 M 300 0 L 300 200" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                    
+                    <!-- Axes -->
+                    <line x1="40" y1="150" x2="360" y2="150" stroke="#475569" stroke-width="2"/>
+                    <line x1="100" y1="20" x2="100" y2="180" stroke="#475569" stroke-width="2"/>
+                    <text x="360" y="165" font-size="10" font-weight="bold" fill="#475569">x</text>
+                    <text x="85" y="30" font-size="10" font-weight="bold" fill="#475569">y</text>
+
+                    <!-- Courbe f(x) -->
+                    <path d="M 60 140 Q 200 20 340 140" fill="none" stroke="#0284c7" stroke-width="3"/>
+                    
+                    <!-- Sommet S(2, 4) => x=200, y=50 -->
+                    <circle cx="200" cy="50" r="5" fill="#0284c7"/>
+                    <text x="200" y="40" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">Sommet S (x=2)</text>
+                    <!-- Tangente horizontale en S -->
+                    <line x1="120" y1="50" x2="280" y2="50" stroke="#10b981" stroke-width="2"/>
+                    <text x="300" y="45" font-size="9" font-weight="bold" fill="#047857">Tangente Horizontale (pente = 0)</text>
+
+                    <!-- Point P (x=1) => x=150, y=80 -->
+                    <circle cx="150" cy="80" r="5" fill="#e11d48"/>
+                    <line x1="100" y1="130" x2="200" y2="30" stroke="#e11d48" stroke-width="2" stroke-dasharray="4"/>
+                    <text x="130" y="95" font-size="9" font-weight="bold" fill="#be123c">P (x=1, monte de +2 quand x avance de +1)</text>
+
+                    <!-- Graduations -->
+                    <text x="150" y="165" font-size="9" fill="#475569" text-anchor="middle">1</text>
+                    <text x="200" y="165" font-size="9" fill="#475569" font-weight="bold" text-anchor="middle">2</text>
+                    <text x="250" y="165" font-size="9" fill="#475569" text-anchor="middle">3</text>
+                </svg>
+            </div>
+
+            <!-- QUESTIONS ACTIVITÉ 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle est la pente de la tangente horizontale au sommet $S$ ($x=2$) ? Que vaut $f'(2)$ ?</label>
+                    <input type="number" id="act2-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="f'(2) = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Au point $P$ ($x=1$), la droite tangente rouge monte de $+2$ unités quand $x$ avance de $+1$. Que vaut $f'(1)$ ?</label>
+                    <input type="number" id="act2-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="f'(1) = ?">
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : SIGNE DÉRIVÉE & VARIATIONS    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Activité 3 • Gestion & Optimisation</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Lien entre le Signe de la Dérivée et le Sens de Variation</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-euro-sign text-emerald-600 mr-1"></i> Problème d'Optimisation du Bénéfice :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Le bénéfice d'une entreprise industrielle $B(x)$ (en milliers d'euros) dépend de la quantité $x$ fabriquée (en centaines d'articles) :
+                    $$\mathbf{B(x) = -x^2 + 10x - 9} \quad \text{pour } x \in [1 ; 9]$$
+                    Sa fonction dérivée est : $\mathbf{B'(x) = -2x + 10}$.
+                </p>
+            </div>
+
+            <!-- TABLEAU DE VARIATION À COMPLÉTER -->
+            <div class="space-y-4 text-xs">
+                <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-table-list text-emerald-600"></i> Étude du signe de $B'(x)$ et déduction des variations de $B(x)$
+                </h4>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold">
+                                <th class="p-3 border border-slate-700 w-1/4">x (centaines d'unités)</th>
+                                <th class="p-3 border border-slate-700">1</th>
+                                <th class="p-3 border border-slate-700">5</th>
+                                <th class="p-3 border border-slate-700">9</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Signe de la dérivée $B'(x)$</td>
+                                <td class="p-3 border border-slate-200 font-extrabold text-emerald-600 text-base">+</td>
+                                <td class="p-3 border border-slate-200 font-extrabold text-slate-900 text-base">0</td>
+                                <td class="p-3 border border-slate-200 font-extrabold text-red-600 text-base">-</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Variations du Bénéfice $B(x)$</td>
+                                <td class="p-3 border border-slate-200 text-emerald-700 font-bold">↗ Croissante (Monte)</td>
+                                <td class="p-3 border border-slate-200 font-extrabold text-indigo-900 bg-indigo-50">Maximum !</td>
+                                <td class="p-3 border border-slate-200 text-red-700 font-bold">↘ Décroissante (Descend)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                        <label class="font-bold text-slate-900 block">1. Pour quelle valeur de $x$ la dérivée s'annule-t-elle ($B'(x) = 0$) ?</label>
+                        <input type="number" id="act3-xopt" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="-2x + 10 = 0 => x = ?">
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                        <label class="font-bold text-slate-900 block">2. Quel est le bénéfice maximal $B(5)$ en milliers d'euros ?</label>
+                        <p class="text-slate-500">Calcul : $B(5) = -(5)^2 + 10(5) - 9 = -25 + 50 - 9$</p>
+                        <input type="number" id="act3-bmax" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="B(5) = ? k€">
+                    </div>
+                </div>
+
+                <button onclick="checkAct3()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+                </button>
+                <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LES ACTIVITÉS -->
+    <script>
+        // MODULE 0
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value;
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "3" && q2 === "POS") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! La pente m = (8-2)/(3-1) = 6/2 = 3. Une droite qui monte a un coefficient directeur strictement positif.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Pente m = 3 et m est Positif.`;
+            }
+        }
+
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let d = document.getElementById('act1-d').value.trim();
+            let vmoy = document.getElementById('act1-vmoy').value.trim();
+            let deriv = document.getElementById('act1-deriv').value.trim();
+
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (d === "10" && vmoy === "10" && deriv === "8") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! Distance Δd = 10 m, vitesse moyenne = 10 m/s, et la vitesse instantanée exacte à t=2s est d'(2) = 8 m/s !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Correction : Δd = 10m, vmoy = 10 m/s et le nombre dérivé d'(2) = 8.`;
+            }
+        }
+
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let q1 = document.getElementById('act2-q1').value.trim();
+            let q2 = document.getElementById('act2-q2').value.trim();
+
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "0" && q2 === "2") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! Une tangente horizontale a une pente nulle (f'(2) = 0). En x=1, la pente vaut f'(1) = 2.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Au sommet f'(2) = 0 (tangente horizontale). En x=1, f'(1) = 2.`;
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let xopt = document.getElementById('act3-xopt').value.trim();
+            let bmax = document.getElementById('act3-bmax').value.trim();
+
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (xopt === "5" && bmax === "16") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Félicitations ! Le bénéfice est maximal pour 5 centaines d'articles (x = 5), et le bénéfice maximal s'élève à B(5) = 16 milliers d'euros (16 000 €) !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Correction : x = 5 (car -2x+10=0) et Bénéfice max B(5) = 16 k€.`;
+            }
+        }
+    </script>
+</body>
+</html>

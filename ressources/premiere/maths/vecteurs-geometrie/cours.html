@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Vecteurs du Plan 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-arrows-up-down-left-right text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Vecteurs du Plan</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Synthèse de Cours Illustrée avec Exemples par Notion</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Vecteurs du Plan</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Définition, caractéristiques, calcul des coordonnées $\vec{AB}(x_B-x_A ; y_B-y_A)$, norme $\|\vec{AB}\|$ et opérations (Chasles &amp; Colinéarité).</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. DÉFINITION ET CARACTÉRISTIQUES           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-indigo-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">I</span>
+                Notion de Vecteur et Caractéristiques
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-blue-800 text-base uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-blue-600"></i> Définition : Vecteur $\vec{AB}$
+                </h3>
+                <p class="text-blue-900 leading-relaxed">
+                    Un <strong>vecteur</strong> $\vec{AB}$ est un objet mathématique défini par un segment orienté allant d'une origine $A$ à une extrémité $B$. Il possède **3 caractéristiques indissociables** :
+                </p>
+                <ul class="list-disc pl-5 space-y-1.5 text-blue-950 font-medium">
+                    <li><strong>1. Sa Direction :</strong> La pente de la droite $(AB)$ (orientation géométrique des droites parallèles).</li>
+                    <li><strong>2. Son Sens :</strong> L'orientation du déplacement (de $A$ vers $B$).</li>
+                    <li><strong>3. Sa Norme (Intensité/Longueur) :</strong> La longueur de la flèche, notée $\|\vec{AB}\| = AB$.</li>
+                </ul>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION I -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Force de Levage par Grue
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>La force s'exerçant sur le câble de levage d'une grue est représentée par le vecteur $\vec{F}$ :</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Direction :</strong> Verticale</li>
+                        <li><strong>Sens :</strong> Vers le haut</li>
+                        <li><strong>Norme :</strong> $\|\vec{F}\| = 5\ 000\ \text{N}$ (soit 500 kg de charge)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. COORDONNÉES ET NORME                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                Coordonnées et Norme d'un Vecteur
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-emerald-600"></i> Formules de Calcul dans un Repère Orthonormé
+                </h3>
+                <p class="text-emerald-950 font-medium">
+                    Soient deux points $A(x_A ; y_A)$ et $B(x_B ; y_B)$ dans un repère orthonormé $(O, \vec{i}, \vec{j})$ :
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                        $$\mathbf{\vec{AB} = \begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}}$$
+                        <span class="text-xs font-normal text-slate-600 block mt-1">Coordonnées (Déplacement X, Y)</span>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                        $$\mathbf{\|\vec{AB}\| = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}}$$
+                        <span class="text-xs font-normal text-slate-600 block mt-1">Norme (Distance exacte)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION II -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Coordonnées et Longueur du Vecteur $\vec{AB}$
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Soient les points $A(1 ; 2)$ et $B(7 ; 10)$ :</p>
+                    <p>1. Coordonnées : $\vec{AB} = \begin{pmatrix} 7 - 1 \\ 10 - 2 \end{pmatrix} = \mathbf{\begin{pmatrix} 6 \\ 8 \end{pmatrix}}$.</p>
+                    <p>2. Norme : $\|\vec{AB}\| = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = \mathbf{10\ \text{unités}}$.</p>
+                </div>
+            </div>
+
+            <!-- SCHÉMA SVG DÉCOMPOSITION ORTHOGONALE D'UN VECTEUR -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-draw-polygon text-indigo-600"></i> Figure 1 : Décomposition d'un vecteur $\vec{u}(x;y)$ sur les axes
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="180" fill="#ffffff" rx="8"/>
+
+                        <!-- Repère -->
+                        <line x1="40" y1="150" x2="420" y2="150" stroke="#64748b" stroke-width="2"/>
+                        <line x1="50" y1="10" x2="50" y2="160" stroke="#64748b" stroke-width="2"/>
+
+                        <!-- Composantes dx dy -->
+                        <line x1="90" y1="120" x2="330" y2="120" stroke="#0284c7" stroke-width="2" stroke-dasharray="4"/>
+                        <line x1="330" y1="120" x2="330" y2="40" stroke="#0284c7" stroke-width="2" stroke-dasharray="4"/>
+
+                        <!-- Vecteur AB -->
+                        <line x1="90" y1="120" x2="330" y2="40" stroke="#6366f1" stroke-width="3.5" marker-end="url(#arrow-head)"/>
+                        
+                        <!-- Points -->
+                        <circle cx="90" cy="120" r="5" fill="#4338ca"/>
+                        <circle cx="330" cy="40" r="5" fill="#4338ca"/>
+                        <text x="80" y="135" font-size="11" font-weight="extrabold" fill="#4338ca">A</text>
+                        <text x="340" y="35" font-size="11" font-weight="extrabold" fill="#4338ca">B</text>
+
+                        <!-- Labels -->
+                        <text x="200" y="135" font-size="11" font-weight="extrabold" fill="#0284c7">x_B - x_A = 6</text>
+                        <text x="340" y="85" font-size="11" font-weight="extrabold" fill="#0284c7">y_B - y_A = 8</text>
+                        <text x="180" y="70" font-size="12" font-weight="extrabold" fill="#6366f1">||AB|| = 10</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. OPÉRATIONS ET RELATION DE CHASLES       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-purple-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">III</span>
+                Opérations sur les Vecteurs &amp; Colinéarité
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-purple-50 border border-purple-200 rounded-2xl space-y-2">
+                    <span class="font-extrabold text-purple-900 text-sm block">1. Relation de Chasles</span>
+                    <p class="text-slate-700">Pour tous points $A$, $B$, $C$ du plan :</p>
+                    <p class="text-center font-bold text-purple-900 text-sm">$$\mathbf{\vec{AB} + \vec{BC} = \vec{AC}}$$</p>
+                </div>
+
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+                    <span class="font-extrabold text-slate-900 text-sm block">2. Colinéarité (Parallélisme)</span>
+                    <p class="text-slate-700">Deux vecteurs $\vec{u}$ et $\vec{v}$ sont colinéaires s'il existe $k \in \mathbb{R}$ tel que :</p>
+                    <p class="text-center font-bold text-slate-900 text-sm">$$\mathbf{\vec{v} = k \cdot \vec{u}}$$</p>
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION III -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Test de Colinéarité entre Deux Trajectoires
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Soient $\vec{u}\begin{pmatrix} 3 \\ 4 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 6 \\ 8 \end{pmatrix}$.</p>
+                    <p class="font-bold text-amber-950">Comme $\vec{v} = 2 \cdot \vec{u}$, les deux vecteurs sont colinéaires et les trajectoires sont rigoureusement parallèles.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. EXEMPLE RÉDIGÉ PAS À PAS                 -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">IV</span>
+                Exemple Rédigé d'Application Professionnelle
+            </h2>
+
+            <div class="exemple-box rounded-2xl p-5 space-y-4 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-amber-600"></i> Application : Résultante de Deux Forces de Traction
+                </h3>
+
+                <div class="space-y-3 leading-relaxed">
+                    <p>Deux moteurs de remorquage appliquent sur une charge les forces $\vec{F_1}\begin{pmatrix} 300 \\ 100 \end{pmatrix}$ N et $\vec{F_2}\begin{pmatrix} 100 \\ 200 \end{pmatrix}$ N.</p>
+
+                    <p><strong>1. Coordonnées de la force résultante $\vec{F} = \vec{F_1} + \vec{F_2}$ :</strong><br>
+                    $\vec{F} = \begin{pmatrix} 300 + 100 \\ 100 + 200 \end{pmatrix} = \mathbf{\begin{pmatrix} 400 \\ 300 \end{pmatrix}\ \text{N}}$.</p>
+
+                    <p><strong>2. Intensité (norme) de la force totale de traction :</strong><br>
+                    $\|\vec{F}\| = \sqrt{400^2 + 300^2} = \sqrt{160000 + 90000} = \sqrt{250000} = \mathbf{500\ \text{N}}$.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

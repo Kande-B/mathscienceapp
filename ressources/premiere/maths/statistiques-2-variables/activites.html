@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Statistiques à 2 Variables 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-cyan-500/20 border border-cyan-400/30 text-cyan-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-chart-line text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-cyan-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-cyan-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-cyan-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-cyan-600 tracking-wider">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Activités d'Investigation • Découverte Guidée</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Nuage de Points, Point Moyen $G$ et Droite d'Ajustement</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : Nuage $M_i(x_i ; y_i)$, Point moyen $G(\bar{x} ; \bar{y})$, Ajustement $y = ax + b$</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Découvrez comment analyser le lien entre deux grandeurs mesurées simultanément. Apprenez à placer un nuage de points, à calculer le point moyen $G(\bar{x} \,;\, \bar{y})$ et à modéliser la tendance par une droite d'ajustement $y = ax + b$ pour réaliser des prédictions professionnelles.
+            </p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE             -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">0</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-slate-500 tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Rappels : Calcul d'une Moyenne Arithmétique</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Calculez la moyenne $\bar{x}$ des valeurs : 10, 15, 20, 25, 30 :</label>
+                    <p class="text-slate-500">$\bar{x} = \frac{10 + 15 + 20 + 25 + 30}{5} = \frac{100}{5}$</p>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="20">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Pour la droite $y = 3x + 10$, calculez $y$ pour $x = 4$ :</label>
+                    <p class="text-slate-500">$y = 3(4) + 10 = 12 + 10$</p>
+                    <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="22">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes prérequis
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : NUAGE DE POINTS & POINT MOYEN G -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-cyan-100 text-cyan-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-cyan-600 tracking-wider">Activité 1 • Gestion &amp; Ventes</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Tracé du Nuage de Points et Calcul du Point Moyen $G(\bar{x} \,;\, \bar{y})$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-chart-line text-cyan-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un chef d'entreprise du secteur du BTP étudie la relation entre ses dépenses en publicité $x_i$ (en k€) et son chiffre d'affaires $y_i$ (en k€) sur 5 mois consécutifs.
+                </p>
+            </div>
+
+            <!-- TABLEAU DE DONNÉES -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-center border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-800 text-white font-bold">
+                            <th class="p-3 border border-slate-700">Mois ($i$)</th>
+                            <th class="p-3 border border-slate-700">1</th>
+                            <th class="p-3 border border-slate-700">2</th>
+                            <th class="p-3 border border-slate-700">3</th>
+                            <th class="p-3 border border-slate-700">4</th>
+                            <th class="p-3 border border-slate-700">5</th>
+                            <th class="p-3 border border-slate-700 bg-cyan-700 text-white">Moyenne</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-white">
+                            <td class="p-3 border font-bold text-slate-900">Budget Pub $x_i$ (k€)</td>
+                            <td class="p-3 border">1</td>
+                            <td class="p-3 border">2</td>
+                            <td class="p-3 border">3</td>
+                            <td class="p-3 border">4</td>
+                            <td class="p-3 border">5</td>
+                            <td class="p-3 border font-extrabold bg-cyan-50 text-cyan-900">x̄ = ?</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-3 border font-bold text-slate-900">Chiffre d'affaires $y_i$ (k€)</td>
+                            <td class="p-3 border">10</td>
+                            <td class="p-3 border">15</td>
+                            <td class="p-3 border">20</td>
+                            <td class="p-3 border">25</td>
+                            <td class="p-3 border">30</td>
+                            <td class="p-3 border font-extrabold bg-cyan-50 text-cyan-900">ȳ = ?</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SCHÉMA SVG NUAGE DE POINTS ET POINT MOYEN G -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-chart-scatter text-cyan-600"></i> Figure 1 : Nuage de points $M_i(x_i \,;\, y_i)$ et Point Moyen $G(3 \,;\, 20)$
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 200" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="200" fill="#ffffff" rx="8"/>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="170" x2="420" y2="170" stroke="#64748b" stroke-width="2"/>
+                        <line x1="50" y1="10" x2="50" y2="180" stroke="#64748b" stroke-width="2"/>
+                        <text x="420" y="185" font-size="10" font-weight="bold" fill="#475569">Budget Pub x (k€)</text>
+                        <text x="25" y="20" font-size="10" font-weight="bold" fill="#475569">CA y (k€)</text>
+
+                        <!-- Points M1(1,10), M2(2,15), M3(3,20), M4(4,25), M5(5,30) -->
+                        <!-- Echelle: x: 1=100, 2=160, 3=220, 4=280, 5=340. y: 10=140, 15=115, 20=90, 25=65, 30=40 -->
+                        <circle cx="100" cy="140" r="4.5" fill="#0284c7"/>
+                        <circle cx="160" cy="115" r="4.5" fill="#0284c7"/>
+                        <circle cx="220" cy="90" r="4.5" fill="#0284c7"/>
+                        <circle cx="280" cy="65" r="4.5" fill="#0284c7"/>
+                        <circle cx="340" cy="40" r="4.5" fill="#0284c7"/>
+
+                        <!-- Point Moyen G(3 ; 20) => x=220, y=90 -->
+                        <circle cx="220" cy="90" r="7" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+                        <line x1="220" y1="90" x2="220" y2="170" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3"/>
+                        <line x1="50" y1="90" x2="220" y2="90" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3"/>
+                        <text x="220" y="75" font-size="12" font-weight="extrabold" fill="#dc2626" text-anchor="middle">Point Moyen G (3 ; 20)</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS -->
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-cyan-50 border border-cyan-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-cyan-900 text-sm block">1. Formule des coordonnées du Point Moyen $G(\bar{x} \,;\, \bar{y})$ :</span>
+                    <p class="text-slate-700">
+                        $$\bar{x} = \frac{x_1 + x_2 + x_3 + x_4 + x_5}{5} \quad \text{et} \quad \bar{y} = \frac{y_1 + y_2 + y_3 + y_4 + y_5}{5}$$
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Calculez l'abscisse moyenne $\bar{x}$ (en k€) :</label>
+                            <input type="number" id="act1-xbar" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="x̄ = ?">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Calculez l'ordonnée moyenne $\bar{y}$ (en k€) :</label>
+                            <input type="number" id="act1-ybar" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="ȳ = ?">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : DROITE D'AJUSTEMENT AFFINE    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Activité 2 • Modélisation Affine $y = ax + b$</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Tracé de la Droite d'Ajustement Passant par $G$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-ruler-combined text-sky-600 mr-1"></i> Règle d'or de l'ajustement linéaire :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Toute droite d'ajustement linéaire représentative de la tendance globale du nuage de points <strong>passer impérativement par le point moyen $G(\bar{x} \,;\, \bar{y})$</strong>.
+                </p>
+            </div>
+
+            <div class="p-4 bg-sky-50 border border-sky-200 rounded-2xl space-y-3 text-xs">
+                <span class="font-bold text-sky-900 text-sm block">Équation de la droite $y = a x + b$ :</span>
+                <p class="text-slate-700">Dans notre exemple, les points forment une droite de pente $a = 5$ et d'ordonnée à l'origine $b = 5$ :</p>
+                <div class="p-3 bg-white border border-sky-300 rounded-xl font-mono font-bold text-center text-sky-900 text-sm">
+                    $$\mathbf{y = 5x + 5}$$
+                </div>
+                <p class="text-slate-700">Vérifions que $G(3 \,;\, 20)$ appartient à la droite : $5(3) + 5 = 15 + 5 = 20$. L'égalité est parfaitement vérifiée !</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Une droite d'ajustement linéaire doit-elle obligatoirement passer par le point moyen $G$ ?</label>
+                    <select id="act2-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="OUI">OUI, impérativement !</option>
+                        <option value="NON">NON, ce n'est pas nécessaire</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. En utilisant l'équation $y = 5x + 5$, calculez le chiffre d'affaires $y$ pour un budget pub $x = 6$ k€ :</label>
+                    <input type="number" id="act2-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="y = 5(6) + 5 = ? k€">
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : PREDICTION ET EXTRAPOLATION    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Activité 3 • Prédictions &amp; Limites</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Interpolation et Extrapolation de Données</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <span class="font-bold text-indigo-900 text-sm block">Interpolation (Fiable)</span>
+                    <p class="text-slate-600">Estimation d'une valeur <strong>à l'intérieur de l'intervalle des données connues</strong> (ex: $x = 3.5$ k€ entre 1 k€ et 5 k€).</p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <span class="font-bold text-red-900 text-sm block">Extrapolation (Prudence)</span>
+                    <p class="text-slate-600">Estimation d'une valeur <strong>en dehors de l'intervalle connu</strong> (ex: $x = 20$ k€). La relation linéaire peut s'estomper à cause de la saturation du marché.</p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 text-xs">
+                <label class="font-bold text-slate-900 block">Estimer le chiffre d'affaires pour un budget de pub de $x = 2.5$ k€ relève-t-il de l'interpolation ou de l'extrapolation ?</label>
+                <select id="act3-choice" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                    <option value="">Sélectionnez...</option>
+                    <option value="INTER">INTERPOLATION (valeur située entre x = 1 et x = 5)</option>
+                    <option value="EXTRA">EXTRAPOLATION</option>
+                </select>
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LES ACTIVITÉS -->
+    <script>
+        // MODULE 0
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "20" && q2 === "22") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! x̄ = 100/5 = 20 et y = 3(4)+10 = 22.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> x̄ = 20 et y = 22.`;
+            }
+        }
+
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let xbar = document.getElementById('act1-xbar').value.trim();
+            let ybar = document.getElementById('act1-ybar').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (xbar === "3" && ybar === "20") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! Le point moyen a pour coordonnées G(3 k€ ; 20 k€).`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> x̄ = 3 k€ et ȳ = 20 k€.`;
+            }
+        }
+
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let q1 = document.getElementById('act2-q1').value;
+            let q2 = document.getElementById('act2-q2').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "OUI" && q2 === "35") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! La droite passe toujours par G et y = 5(6) + 5 = 35 k€.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> OUI et y = 35 k€.`;
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let choice = document.getElementById('act3-choice').value;
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (choice === "INTER") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> C'est exact ! 2.5 k€ est situé dans la plage des données [1 ; 5], il s'agit donc d'une INTERPOLATION.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> C'est une INTERPOLATION car 2.5 est compris entre 1 et 5.`;
+            }
+        }
+    </script>
+</body>
+</html>

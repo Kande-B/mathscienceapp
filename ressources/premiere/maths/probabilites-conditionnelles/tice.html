@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TICE Tableur - Probabilités Conditionnelles 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités Conditionnelles</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TICE Tableur</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- EN-TÊTE DU MODULE TICE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm border-l-8 border-l-purple-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
+                        <span>Module TICE • Tableur (Excel / Calc) &amp; Simulation</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP TICE : Tableau de Fréquences et Simulation de Tirages Conditionnels</h2>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>Formules Tableur clés :</strong> `=SOMME(B2:B3)` pour calculer les marges, `=B2/$D2` pour la probabilité conditionnelle $P_A(B)$, et `=NB.SI()` pour compter les occurrences dans une simulation de 1 000 tirages.
+            </p>
+        </div>
+
+        <!-- PROTOCOLE TICE STEP-BY-STEP -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="font-bold text-slate-900 text-base">Protocole d'Expérimentation sous Tableur (Excel / LibreOffice Calc)</h3>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-800">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 1 : Saisir la grille d'effectifs</p>
+                    <p class="text-slate-700">
+                        Dans les cellules <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">B2:C3</code>, saisissez les effectifs usine ($B2 = 40$, $C2 = 560$, $B3 = 20$, $C3 = 380$).<br>
+                        Dans la cellule $D2$, tapez la formule de somme : <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">=SOMME(B2:C2)</code>.
+                    </p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 2 : Calculer automatiquement les probabilités conditionnelles</p>
+                    <p class="text-slate-700">
+                        Dans la cellule $E2$, tapez la formule donnant la probabilité de défaut sachant l'usine A $P_A(D)$ :<br>
+                        <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">=B2/D2</code>.<br>
+                        Le tableur affiche automatiquement <code class="font-mono font-bold">0,06666...</code> (soit 6,7 %).
+                    </p>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <p class="font-bold text-purple-900">Étape 3 : Simuler 1 000 tirages aléatoires</p>
+                    <p class="text-slate-700">
+                        Utilisez la formule <code class="bg-slate-200 px-2 py-1 rounded text-purple-900 font-mono font-bold">=ALEA.ENTRE.BORNES(1;100)</code> pour simuler le tirage aléatoire et observer la convergence vers $P(D) = 0{,}06$.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPTE-RENDU ÉLÈVE INTERACTIF -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-base">Validation du TP Tableur</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelle formule tableur exacte permet de calculer la somme d'une ligne B2 à C2 ?</label>
+                    <input type="text" id="tice-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="=SOMME(B2:C2)">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle formule tableur divise le nombre de défauts usine A (cellule B2) par le total usine A (cellule D2) ?</label>
+                    <input type="text" id="tice-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="=B2/D2">
+                </div>
+            </div>
+
+            <button onclick="checkTICE()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-double mr-2"></i> Valider les réponses du TP Tableur
+            </button>
+            <div id="fb-tice" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LE TP TICE -->
+    <script>
+        function checkTICE() {
+            let q1 = document.getElementById('tice-q1').value.trim();
+            let q2 = document.getElementById('tice-q2').value.trim();
+            let fb = document.getElementById('fb-tice');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1.toUpperCase().includes("SOMME(B2:C2)") && (q2.toUpperCase() === "=B2/D2" || q2.toUpperCase() === "B2/D2")) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> TP Tableur validé ! Les formules =SOMME(B2:C2) et =B2/D2 calculent instantanément la probabilité conditionnelle.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Formule 1 = =SOMME(B2:C2) et Formule 2 = =B2/D2.`;
+            }
+        }
+    </script>
+</body>
+</html>

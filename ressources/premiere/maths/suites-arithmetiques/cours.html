@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Suites Arithmétiques 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Suites Arithmétiques</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Synthèse de Cours Illustrée avec Exemples par Notion</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Suites Arithmétiques</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Définition, formule de récurrence, calcul direct du $n$-ième terme $u_n$ et somme cumulée $S_n$.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. DÉFINITION ET RAISON r                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">I</span>
+                Définition et Formule de Récurrence
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-blue-800 text-base uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-blue-600"></i> Définition : Suite Arithmétique
+                </h3>
+                <p class="text-blue-900 leading-relaxed">
+                    Une suite $(u_n)$ est une <strong>suite arithmétique</strong> si chaque terme s'obtient en ajoutant au terme précédent un même nombre réel constant $r$, appelé <strong>la raison</strong> de la suite :
+                </p>
+                <div class="bg-white p-3.5 rounded-xl border border-blue-300 text-center font-extrabold text-base text-blue-900">
+                    $$\mathbf{u_{n+1} = u_n + r} \quad \iff \quad \mathbf{u_{n+1} - u_n = r}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION I -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Évolution d'une Production Mensuelle
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Un atelier produit $u_1 = 100$ pièces au mois 1 et augmente sa production de $r = 15$ pièces chaque mois.</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>$u_2 = u_1 + r = 100 + 15 = 115\ \text{pièces}$</li>
+                        <li>$u_3 = u_2 + r = 115 + 15 = 130\ \text{pièces}$</li>
+                    </ul>
+                    <div class="bg-white p-2.5 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-xs">
+                        $$u_{n+1} = u_n + 15$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. TERME GÉNÉRAL u_n                       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                Expression du Terme Général $u_n$
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-emerald-600"></i> Calcul Direct d'un Terme de Rang $n$
+                </h3>
+                <p class="text-emerald-950 font-medium">
+                    Pour une suite arithmétique $(u_n)$ de premier terme $u_1$ et de raison $r$, l'expression du terme général $u_n$ est :
+                </p>
+                <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                    $$\mathbf{u_n = u_1 + (n - 1) \cdot r}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION II -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Calcul Direct de la Production du 12e mois
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Avec $u_1 = 100$ et $r = 15$, la production du 12e mois ($n = 12$) s'obtient directement sans calculer tous les termes :</p>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$u_{12} = u_1 + (12 - 1) \times r = 100 + 11 \times 15 = 100 + 165 = \mathbf{265\ \text{pièces}}$$
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCHÉMA SVG REPRÉSENTATION GRAPHIQUE DES POINTS ALIGNÉS -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-chart-line text-sky-600"></i> Figure 1 : Propriété géométrique des suites arithmétiques
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="180" fill="#ffffff" rx="8"/>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="150" x2="420" y2="150" stroke="#64748b" stroke-width="2"/>
+                        <line x1="50" y1="10" x2="50" y2="160" stroke="#64748b" stroke-width="2"/>
+                        <text x="420" y="165" font-size="10" fill="#475569">Rang n</text>
+                        <text x="35" y="20" font-size="10" fill="#475569">un</text>
+
+                        <!-- Points alignés -->
+                        <circle cx="90" cy="120" r="4.5" fill="#10b981"/>
+                        <circle cx="160" cy="95" r="4.5" fill="#10b981"/>
+                        <circle cx="230" cy="70" r="4.5" fill="#10b981"/>
+                        <circle cx="300" cy="45" r="4.5" fill="#10b981"/>
+
+                        <!-- Droite -->
+                        <line x1="50" y1="134" x2="340" y2="31" stroke="#10b981" stroke-width="2"/>
+                        <text x="210" y="55" font-size="11" font-weight="extrabold" fill="#047857">Points alignés sur une droite de pente r</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. SENS DE VARIATION                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-purple-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">III</span>
+                Sens de Variation d'une Suite Arithmétique
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2 text-center">
+                    <span class="font-extrabold text-emerald-900 text-sm block">Si $r > 0$</span>
+                    <p class="text-slate-700">La suite est <strong>strictement croissante</strong>.</p>
+                </div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2 text-center">
+                    <span class="font-extrabold text-slate-900 text-sm block">Si $r = 0$</span>
+                    <p class="text-slate-700">La suite est <strong>constante</strong>.</p>
+                </div>
+                <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-2 text-center">
+                    <span class="font-extrabold text-red-900 text-sm block">Si $r < 0$</span>
+                    <p class="text-slate-700">La suite est <strong>strictement décroissante</strong>.</p>
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION III -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Suite Décroissante (Baisse de Stock)
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Un stock initial comporte $u_1 = 500$ unités et diminue de $r = -25$ unités chaque jour.</p>
+                    <p class="font-bold text-amber-950">Comme la raison $r = -25 < 0$, la suite est strictement décroissante.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. SOMME DES TERMES S_n                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-indigo-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">IV</span>
+                Somme des $n$ Premiers Termes $S_n$
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-sigma text-emerald-600"></i> Formule de la Somme Cumulée $S_n$
+                </h3>
+                <p class="text-emerald-950 font-medium">
+                    La somme $S_n = u_1 + u_2 + \dots + u_n$ des $n$ premiers termes s'obtient par la formule :
+                </p>
+                <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                    $$\mathbf{S_n = n \times \frac{u_1 + u_n}{2}}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION IV -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Calcul du Cumul de Production Annuelle
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Pour l'atelier avec $u_1 = 100$ et $u_{12} = 265$, la somme cumulée $S_{12}$ des pièces fabriquées sur 12 mois vaut :</p>
+                    <div class="bg-white p-3 rounded-xl border border-amber-300 font-extrabold text-center text-amber-950 text-sm">
+                        $$S_{12} = 12 \times \frac{u_1 + u_{12}}{2} = 12 \times \frac{100 + 265}{2} = 12 \times 182{,}5 = \mathbf{2\ 190\ \text{pièces}}$$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- V. EXEMPLE RÉDIGÉ PAS À PAS                 -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">V</span>
+                Exemple Rédigé d'Application Professionnelle
+            </h2>
+
+            <div class="exemple-box rounded-2xl p-5 space-y-4 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-amber-600"></i> Application : Amortissement d'un Équipement
+                </h3>
+
+                <div class="space-y-3 leading-relaxed">
+                    <p>Une machine perd $1\ 500\ \text{€}$ de valeur chaque année ($r = -1500$). Sa valeur initiale à l'année 1 vaut $u_1 = 20\ 000\ \text{€}$.</p>
+
+                    <p><strong>1. Calcul de la valeur à la 6e année ($u_6$) :</strong><br>
+                    $u_6 = u_1 + (6 - 1) \cdot r = 20000 + 5(-1500) = 20000 - 7500 = \mathbf{12\ 500\ \text{€}}$.</p>
+
+                    <p><strong>2. Cumul de l'amortissement sur les 6 premières années :</strong><br>
+                    $S_6 = 6 \times \frac{20000 + 12500}{2} = 6 \times \frac{32500}{2} = 6 \times 16250 = \mathbf{97\ 500\ \text{€}}$.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

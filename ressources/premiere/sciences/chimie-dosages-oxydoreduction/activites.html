@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Oxydoréduction & Dosages 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Physique-Chimie -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-500/20 border border-teal-400/30 text-teal-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask-vial text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-teal-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Oxydoréduction &amp; Dosages</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-teal-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Simulation</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-teal-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-teal-600 tracking-wider">
+                        <i class="fa-solid fa-flask"></i>
+                        <span>Activités d'Investigation Expérimentale</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Transfert d'Électrons, Couples Redox &amp; Titrage Volumétrique</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : Oxydant/Réducteur, Demi-équations, Équivalence $C_1 V_1 = C_2 V_E$</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Explorez les réactions d'oxydoréduction à travers le traitement anticorrosion des métaux et le contrôle qualité par dosage volumétrique colorimétrique.
+            </p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE             -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">0</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-slate-500 tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Rappels : Ions, Charges Électriques &amp; Concentrations</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. L'ion Cuivre $Cu^{2+}$ a-t-il perdu ou gagné 2 électrons ?</label>
+                    <select id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="PERDU">Perdu 2 électrons (chargé positivement)</option>
+                        <option value="GAGNE">Gagné 2 électrons</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle est la formule de la concentration molaire $C$ en mol/L ?</label>
+                    <select id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="C_nV">C = n / V</option>
+                        <option value="C_Vn">C = V / n</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes prérequis
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : DÉCOUVERTES DE L'OXYDORÉDUCTION-->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-teal-100 text-teal-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-teal-600 tracking-wider">Activité 1 • Corrosion du Fer dans le Sulfate de Cuivre</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Transfert d'Électrons : Oxydant et Réducteur</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-vial text-teal-600 mr-1"></i> Expérience de Laboratoire :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    On plonge un clou en fer $Fe$ dans une solution bleue de sulfate de cuivre $(Cu^{2+} + SO_4^{2-})$. Au bout de quelques minutes, le clou se recouvre d'un dépôt rouge de cuivre métallique $Cu$, et la solution devient verdâtre par formation d'ions fer $Fe^{2+}$.
+                </p>
+            </div>
+
+            <!-- SCHÉMA SVG EXPÉRIENCE CLOU DE FER DANS SULFATE DE CUIVRE -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-eye text-teal-600"></i> Figure 1 : Schéma expérimental de l'oxydoréduction $Fe + Cu^{2+} \to Fe^{2+} + Cu$
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="180" fill="#ffffff" rx="8"/>
+
+                        <!-- Bécher 1 : Avant réaction -->
+                        <rect x="50" y="50" width="120" height="110" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+                        <rect x="55" y="70" width="110" height="85" fill="#38bdf8" opacity="0.6"/>
+                        <rect x="100" y="30" width="20" height="110" fill="#94a3b8" rx="2"/>
+                        <text x="110" y="175" font-size="10" text-anchor="middle" font-weight="bold" fill="#0f172a">Solution bleue (Cu²+)</text>
+
+                        <!-- Flèche de réaction -->
+                        <path d="M 200 100 L 250 100" stroke="#0f172a" stroke-width="3" marker-end="url(#arrow)"/>
+                        <text x="225" y="90" font-size="10" text-anchor="middle" font-weight="extrabold" fill="#0d9488">Transfert 2 e-</text>
+
+                        <!-- Bécher 2 : Après réaction -->
+                        <rect x="280" y="50" width="120" height="110" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                        <rect x="285" y="70" width="110" height="85" fill="#86efac" opacity="0.5"/>
+                        <rect x="330" y="30" width="20" height="110" fill="#b45309" rx="2"/>
+                        <text x="340" y="175" font-size="10" text-anchor="middle" font-weight="bold" fill="#0f172a">Dépôt rouge Cu + ions Fe²+</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS -->
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-teal-50 border border-teal-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-teal-900 text-sm block">1. Identification du transfert d'électrons :</span>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                        <li>L'ion $Cu^{2+}$ capte 2 électrons pour devenir $Cu$ : c'est l'<strong>Oxydant</strong>.</li>
+                        <li>L'atome $Fe$ cède 2 électrons pour devenir $Fe^{2+}$ : c'est le <strong>Réducteur</strong>.</li>
+                    </ul>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Un Oxydant est une espèce qui...</label>
+                            <select id="act1-ox" class="w-full p-2.5 border rounded-xl font-bold bg-white">
+                                <option value="">Sélectionnez...</option>
+                                <option value="GAGNE">Gagne des électrons (capteur)</option>
+                                <option value="PERD">Perd des électrons</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Un Réducteur est une espèce qui...</label>
+                            <select id="act1-red" class="w-full p-2.5 border rounded-xl font-bold bg-white">
+                                <option value="">Sélectionnez...</option>
+                                <option value="PERD">Perd des électrons (donneur)</option>
+                                <option value="GAGNE">Gagne des électrons</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : DEMI-ÉQUATIONS ET BILAN        -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Activité 2 • Galvanisation Anticorrosion</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Équilibrage des Demi-Équations Electroniques et Équation Bilan</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-atom text-sky-600 mr-1"></i> Écriture canonique des demi-équations :</p>
+                <p class="text-slate-800 leading-relaxed font-bold">
+                    $$\text{Réduction de l'oxydant : } Cu^{2+} + 2 e^- \rightleftharpoons Cu$$
+                    $$\text{Oxydation du réducteur : } Fe \rightleftharpoons Fe^{2+} + 2 e^-$$
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Combien d'électrons sont échangés entre $Cu^{2+}$ et $Fe$ ?</label>
+                    <input type="number" id="act2-e" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="2">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle est l'équation bilan globale de la réaction ?</label>
+                    <select id="act2-bilan" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="OK">Cu²+ + Fe ⟶ Cu + Fe²+</option>
+                        <option value="FAUX">Cu + Fe²+ ⟶ Cu²+ + Fe</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : DOSAGE VOLUMÉTRIQUE            -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Activité 3 • Contrôle Qualité en Laboratoire</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Dosage Volumétrique Colorimétrique &amp; Point d'Équivalence $C_1 V_1 = C_2 V_E$</h3>
+                </div>
+            </div>
+
+            <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3 text-xs">
+                <span class="font-bold text-indigo-900 text-sm block">Principe de l'Équivalence :</span>
+                <p class="text-slate-800 leading-relaxed">
+                    À l'équivalence du titrage (changement brusque de couleur de la solution), les réactifs ont été introduits dans les proportions stœchiométriques.
+                    $$\mathbf{C_1 \times V_1 = C_2 \times V_E} \implies \mathbf{C_1 = \frac{C_2 \times V_E}{V_1}}$$
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. On dose $V_1 = 20\ \text{mL}$ d'une solution d'ions $Fe^{2+}$ par du permanganate $C_2 = 0{,}02\ \text{mol/L}$. Le virage a lieu pour $V_E = 15\ \text{mL}$.</label>
+                    <p class="text-slate-500">Calculez $C_1 = \frac{0{,}02 \times 15}{20}$ en mol/L :</p>
+                    <input type="number" step="0.001" id="act3-c1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="0.015">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Comment repère-t-on le point d'équivalence lors d'un titrage colorimétrique ?</label>
+                    <select id="act3-virage" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="COULEUR">Par le changement persistant de couleur (changement de teinte)</option>
+                        <option value="BULLES">Par l'apparition de bulles</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LES ACTIVITÉS -->
+    <script>
+        // MODULE 0
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value;
+            let q2 = document.getElementById('diag-q2').value;
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "PERDU" && q2 === "C_nV") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Cu²+ a perdu 2 e- et C = n / V.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Cu²+ a perdu 2 e- et C = n / V.`;
+            }
+        }
+
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let ox = document.getElementById('act1-ox').value;
+            let red = document.getElementById('act1-red').value;
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (ox === "GAGNE" && red === "PERD") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! L'Oxydant gagne des e- et le Réducteur perd des e-.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Oxydant = Gagne e- ; Réducteur = Perd e-.`;
+            }
+        }
+
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let e = document.getElementById('act2-e').value.trim();
+            let bilan = document.getElementById('act2-bilan').value;
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (e === "2" && bilan === "OK") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! 2 e- sont échangés et l'équation est Cu²+ + Fe ⟶ Cu + Fe²+.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> 2 électrons et Cu²+ + Fe ⟶ Cu + Fe²+.`;
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let c1 = document.getElementById('act3-c1').value.trim();
+            let virage = document.getElementById('act3-virage').value;
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (c1 === "0.015" && virage === "COULEUR") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> C'est exact ! C1 = (0.02 × 15) / 20 = 0.015 mol/L et l'équivalence est repérée par le changement de couleur.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> C1 = 0.015 mol/L et repérage par changement de couleur.`;
+            }
+        }
+    </script>
+</body>
+</html>

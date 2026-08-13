@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+import os
+
+target_dir = os.path.join(os.path.dirname(__file__), 'ressources', 'seconde', 'maths', 'probabilites-fluctuation')
+os.makedirs(target_dir, exist_ok=True)
+
+# 1. AUTOMATISMES.HTML
+automatismes_html = r'''<!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -655,4 +661,308 @@
         }
     </script>
 </body>
-</html>
+</html>'''
+
+# 2. TICE.HTML
+tice_html = r'''<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE Excel - Probabilités & Fluctuation 2nde Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        .excel-cell { font-family: 'Courier New', monospace; background: #f1f5f9; border: 1px solid #94a3b8; padding: 6px 10px; font-size: 12px; font-weight: 600; }
+        .excel-header { background: #334155; color: white; font-weight: 700; text-align: center; }
+        table.excel-table { border-collapse: collapse; width: 100%; }
+        table.excel-table td, table.excel-table th { border: 1px solid #94a3b8; padding: 8px 12px; text-align: center; font-size: 12px; }
+        table.excel-table th { background: #334155; color: white; font-weight: 700; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Séquence 8 • Seconde Professionnelle Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités & Fluctuation d'Échantillonnage</h1>
+                </div>
+            </div>
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TICE Excel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE TICE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-purple-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-purple-600 tracking-wider">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <span>Module TICE • Tableur Excel & Simulation</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TP TICE : Simulation de Tirages & Fluctuation sous Excel</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Compétences : C1, C2, C3, C4</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Ce TP guidé vous apprend à <strong>simuler des tirages aléatoires sous Excel</strong> avec `=ALEA.ENTRE.BORNES(1; 6)` et `=SI(ALEA()<0.05; ...)`, puis à compter les fréquences avec `=NB.SI()` pour observer la <strong>Loi des Grands Nombres</strong>.
+            </p>
+        </div>
+
+        <!-- PARTIE 1 -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">1</div>
+                <h3 class="font-bold text-slate-900 text-lg font-heading">Partie 1 : Simulation de 1 000 Lanchers d'un Dé à 6 Faces</h3>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4">
+                <p class="text-xs text-slate-700"><strong>Contexte :</strong> On souhaite simuler 1 000 lancers d'un dé non truqué à 6 faces et vérifier que la fréquence d'apparition du numéro 6 tend vers $p = \frac{1}{6} \approx 0{,}167$.</p>
+
+                <div class="overflow-x-auto">
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th class="w-8"></th>
+                                <th>A</th><th>B</th><th>C</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="excel-header">1</td>
+                                <td class="font-bold bg-slate-100">N° Langer</td>
+                                <td class="font-bold bg-slate-100">Résultat du dé</td>
+                                <td class="font-bold bg-slate-100">Statistiques du 6</td>
+                            </tr>
+                            <tr>
+                                <td class="excel-header">2</td>
+                                <td>1</td>
+                                <td class="text-purple-700 font-bold">=ALEA.ENTRE.BORNES(1; 6)</td>
+                                <td class="font-bold bg-yellow-50">Nombre de '6' :</td>
+                            </tr>
+                            <tr>
+                                <td class="excel-header">3</td>
+                                <td>2</td>
+                                <td class="text-purple-700 font-bold">=ALEA.ENTRE.BORNES(1; 6)</td>
+                                <td class="text-purple-700 font-bold bg-yellow-50">=NB.SI(B2:B1001; 6)</td>
+                            </tr>
+                            <tr>
+                                <td class="excel-header">4</td>
+                                <td>...</td><td>...</td>
+                                <td class="font-bold bg-emerald-50">Fréquence observée f :</td>
+                            </tr>
+                            <tr>
+                                <td class="excel-header">5</td>
+                                <td>1000</td>
+                                <td class="text-purple-700 font-bold">=ALEA.ENTRE.BORNES(1; 6)</td>
+                                <td class="text-purple-700 font-bold bg-emerald-50">=C3/1000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-xs space-y-2">
+                    <p class="font-bold text-purple-800"><i class="fa-solid fa-lightbulb mr-1"></i> Instructions Excel :</p>
+                    <ol class="list-decimal list-inside text-purple-700 space-y-1">
+                        <li>En <strong>A2</strong>, taper <code class="bg-white px-1 rounded">1</code> puis étirer jusqu'à <strong>A1001</strong> (1 000 lancers).</li>
+                        <li>En <strong>B2</strong>, saisir <code class="bg-white px-1 rounded">=ALEA.ENTRE.BORNES(1; 6)</code> puis double-cliquer pour étirer sur toute la colonne B.</li>
+                        <li>En <strong>C3</strong>, saisir la formule <code class="bg-white px-1 rounded">=NB.SI(B2:B1001; 6)</code> pour compter le nombre de 6.</li>
+                        <li>En <strong>C5</strong>, calculer la fréquence avec <code class="bg-white px-1 rounded">=C3/1000</code>.</li>
+                        <li>Appuyer sur la touche <strong>F9</strong> d'Excel pour recalculer la feuille et observer la fluctuation de $f$ !</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-question-circle text-purple-600 mr-1"></i> Question : Quelle formule Excel permet de compter le nombre de fois où le chiffre 6 apparaît dans la plage B2:B1001 ?</p>
+                <input type="text" id="tice-p1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="=NB.SI(...)">
+            </div>
+        </section>
+
+        <!-- PARTIE 2 -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">2</div>
+                <h3 class="font-bold text-slate-900 text-lg font-heading">Partie 2 : Simulation d'un Contrôle Qualité de 500 Capteurs</h3>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4">
+                <p class="text-xs text-slate-700"><strong>Contexte :</strong> La probabilité théorique de défaut d'un capteur est $p = 0{,}05$ ($5\%$). On veut simuler le contrôle de 500 capteurs sous Excel.</p>
+
+                <div class="overflow-x-auto">
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th class="w-8"></th>
+                                <th>A</th><th>B</th><th>C</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="excel-header">1</td>
+                                <td class="font-bold bg-slate-100">N° Capteur</td>
+                                <td class="font-bold bg-slate-100">Valeur Aléatoire [0,1[</td>
+                                <td class="font-bold bg-slate-100">Statut du capteur</td>
+                            </tr>
+                            <tr>
+                                <td class="excel-header">2</td>
+                                <td>1</td>
+                                <td class="text-purple-700 font-bold">=ALEA()</td>
+                                <td class="text-purple-700 font-bold">=SI(B2 &lt; 0,05; "Défectueux"; "Conforme")</td>
+                            </tr>
+                            <tr>
+                                <td class="excel-header">3</td>
+                                <td>2</td>
+                                <td class="text-purple-700 font-bold">=ALEA()</td>
+                                <td class="text-purple-700 font-bold">=SI(B3 &lt; 0,05; "Défectueux"; "Conforme")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-xs space-y-2">
+                    <p class="font-bold text-purple-800"><i class="fa-solid fa-lightbulb mr-1"></i> Instructions :</p>
+                    <ol class="list-decimal list-inside text-purple-700 space-y-1">
+                        <li>La fonction <code class="bg-white px-1 rounded">=ALEA()</code> génère un nombre décimal aléatoire entre 0 et 1.</li>
+                        <li>En <strong>C2</strong>, utiliser <code class="bg-white px-1 rounded">=SI(B2 &lt; 0.05; "Défectueux"; "Conforme")</code>.</li>
+                        <li>Compter les défectueux avec <code class="bg-white px-1 rounded">=NB.SI(C2:C501; "Défectueux")</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-question-circle text-purple-600 mr-1"></i> Question : Quelle condition dans la formule =SI(...) permet d'obtenir un événement de probabilité p = 0,05 ?</p>
+                <input type="text" id="tice-p2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="B2 < 0.05 (ou 0,05)">
+            </div>
+        </section>
+
+        <!-- PARTIE 3 -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
+                <div class="w-8 h-8 bg-purple-100 text-purple-800 rounded-lg flex items-center justify-center font-bold text-sm">3</div>
+                <h3 class="font-bold text-slate-900 text-lg font-heading">Partie 3 : Graphique de Fluctuation de la Fréquence f</h3>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4">
+                <p class="text-xs text-slate-700">Vous allez tracer la courbe d'évolution de la <strong>fréquence cumulée $f_N$</strong> en fonction du nombre de tirages $N$ de 1 à 1 000 sous Excel.</p>
+
+                <div class="flex justify-center">
+                    <svg viewBox="0 0 500 200" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="500" height="200" fill="#f8fafc" rx="12"/>
+                        <text x="250" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Graphique Excel attendu : Fluctuation de f vs N</text>
+                        <line x1="50" y1="110" x2="460" y2="110" stroke="#eab308" stroke-width="2" stroke-dasharray="4,4"/>
+                        <text x="465" y="113" font-size="9" font-weight="700" fill="#ca8a04">p = 0,167</text>
+
+                        <line x1="50" y1="30" x2="50" y2="160" stroke="#475569" stroke-width="1.5"/>
+                        <line x1="50" y1="160" x2="460" y2="160" stroke="#475569" stroke-width="1.5"/>
+
+                        <path d="M 50 40 Q 90 150, 150 70 T 250 120 T 350 108 T 450 110" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+                        <text x="250" y="180" font-size="9" fill="#475569" text-anchor="middle">Nombre de tirages N (1 à 1 000)</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-question-circle text-purple-600 mr-1"></i> Question : Quel type de graphique sous Excel est recommandé pour tracer l'évolution de la fréquence en fonction de N ?</p>
+                <select id="tice-p3" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                    <option value="">Sélectionnez...</option>
+                    <option value="COURBE">Graphique en Courbe (ou Nuage de points)</option>
+                    <option value="SECTEUR">Diagramme circulaire (camembert)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- VALIDATION GLOBAL -->
+        <div class="space-y-4">
+            <button onclick="checkAllTICE()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-4 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-double mr-2"></i> Valider toutes mes réponses TICE Excel
+            </button>
+            <div id="fb-tice-global" class="text-sm hidden p-5 rounded-2xl font-bold"></div>
+        </div>
+
+    </main>
+
+    <script>
+        function checkAllTICE() {
+            let score = 0;
+            let total = 3;
+
+            let p1 = document.getElementById('tice-p1').value.trim().toUpperCase();
+            if (p1.indexOf('NB.SI') !== -1) score++;
+
+            let p2 = document.getElementById('tice-p2').value.trim().toUpperCase();
+            if (p2.indexOf('0.05') !== -1 || p2.indexOf('0,05') !== -1 || p2.indexOf('<') !== -1) score++;
+
+            let p3 = document.getElementById('tice-p3').value;
+            if (p3 === 'COURBE') score++;
+
+            let fb = document.getElementById('fb-tice-global');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (score === total) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> TP TICE Excel validé ! ' + score + '/' + total + ' — Parfaite maîtrise d\'ALEA.ENTRE.BORNES, NB.SI et de la fluctuation !';
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Score : ' + score + '/' + total + ' — Corrigés : Formule =NB.SI(B2:B1001; 6) | Condition B2 < 0,05 | Graphique en Courbe.';
+            }
+        }
+    </script>
+</body>
+</html>'''
+
+with open(os.path.join(target_dir, 'automatismes.html'), 'w', encoding='utf-8') as f:
+    f.write(automatismes_html)
+print("SUCCESS: automatismes.html generes avec succes !")
+
+with open(os.path.join(target_dir, 'tice.html'), 'w', encoding='utf-8') as f:
+    f.write(tice_html)
+print("SUCCESS: tice.html generes avec succes !")

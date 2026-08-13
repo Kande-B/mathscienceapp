@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Suites Arithmétiques 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-arrow-trend-up text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Suites Arithmétiques</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-emerald-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-emerald-600 tracking-wider">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Activités d'Investigation • Découverte Guidée</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Raison $r$, Terme Général $u_n$ et Somme $S_n$</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : $u_{n+1} = u_n + r$, $u_n = u_1 + (n-1)r$, Somme $S_n$</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Découvrez comment modéliser une évolution régulière où la quantité ajoutée reste **constante** à chaque étape. Apprenez à déterminer la raison $r$, à calculer directement le $n$-ième terme d'une suite et à calculer la somme cumulée.
+            </p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE             -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">0</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-slate-500 tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Rappels : Suites d'Nombres avec Ajout Constant</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Complétez le nombre suivant de la suite : 10, 15, 20, 25, ... :</label>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="30">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Quelle est la différence constante entre deux termes consécutifs dans la suite précédente ?</label>
+                    <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="5">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes prérequis
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : DÉCOUVERTE DE LA RAISON r      -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Activité 1 • Évolution Salariale</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Définition de la Raison $r$ et Formule $u_{n+1} = u_n + r$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-user-tie text-emerald-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un technicien est embauché avec un salaire mensuel initial de $u_1 = 1\ 800\ \text{€}$. Son contrat prévoit une augmentation fixe de **$50\ \text{€}$** chaque année.
+                </p>
+            </div>
+
+            <!-- TABLEAU DES PREMIERS TERMES -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-center border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-800 text-white font-bold">
+                            <th class="p-3 border border-slate-700">Année ($n$)</th>
+                            <th class="p-3 border border-slate-700">1</th>
+                            <th class="p-3 border border-slate-700">2</th>
+                            <th class="p-3 border border-slate-700">3</th>
+                            <th class="p-3 border border-slate-700">4</th>
+                            <th class="p-3 border border-slate-700">5</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-white">
+                            <td class="p-3 border font-bold text-slate-900">Salaire $u_n$ (€)</td>
+                            <td class="p-3 border font-extrabold text-emerald-700">1 800</td>
+                            <td class="p-3 border">1 850</td>
+                            <td class="p-3 border">1 900</td>
+                            <td class="p-3 border">1 950</td>
+                            <td class="p-3 border">2 000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS -->
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-emerald-900 text-sm block">1. Formule de récurrence :</span>
+                    <p class="text-slate-700">
+                        Chaque terme s'obtient en ajoutant la même quantité constante $r = 50\ \text{€}$ au terme précédent :
+                        $$\mathbf{u_{n+1} = u_n + 50}$$
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Quelle est la valeur de la raison $r$ ?</label>
+                            <input type="number" id="act1-r" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="r = ?">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Calculez le salaire à l'année 6 ($u_6$) :</label>
+                            <input type="number" id="act1-u6" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="u6 = ?">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : TERME GÉNÉRAL u_n               -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Activité 2 • Calcul Direct de $u_n$</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Expression du Terme Général $u_n = u_1 + (n-1) \cdot r$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-lightbulb text-sky-600 mr-1"></i> Astuce de calcul direct :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Pour passer de $u_1$ à $u_n$, on a ajouté $(n - 1)$ fois la raison $r$ :
+                    $$u_2 = u_1 + 1r, \quad u_3 = u_1 + 2r, \quad \dots \quad \mathbf{u_n = u_1 + (n-1)r}$$
+                </p>
+            </div>
+
+            <!-- SCHÉMA SVG ALIGNEMENT DES TERMES -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-chart-line text-sky-600"></i> Figure 1 : Représentation graphique d'une suite arithmétique (points alignés)
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="180" fill="#ffffff" rx="8"/>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="150" x2="420" y2="150" stroke="#64748b" stroke-width="2"/>
+                        <line x1="50" y1="10" x2="50" y2="160" stroke="#64748b" stroke-width="2"/>
+                        <text x="420" y="165" font-size="10" fill="#475569">n</text>
+                        <text x="35" y="20" font-size="10" fill="#475569">un</text>
+
+                        <!-- Points (1, 1800), (2, 1850), (3, 1900), (4, 1950), (5, 2000) -->
+                        <circle cx="100" cy="130" r="4.5" fill="#0284c7"/>
+                        <circle cx="160" cy="110" r="4.5" fill="#0284c7"/>
+                        <circle cx="220" cy="90" r="4.5" fill="#0284c7"/>
+                        <circle cx="280" cy="70" r="4.5" fill="#0284c7"/>
+                        <circle cx="340" cy="50" r="4.5" fill="#0284c7"/>
+
+                        <!-- Ligne pointillée d'alignement -->
+                        <line x1="60" y1="143" x2="380" y2="36" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="4"/>
+                        <text x="230" y="70" font-size="11" font-weight="extrabold" fill="#0369a1">Pente = r = 50</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Calculez le salaire à la 10e année ($u_{10}$) avec la formule direct $u_{10} = 1800 + (10 - 1) \times 50$ :</label>
+                    <input type="number" id="act2-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="u10 = ? €">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Les points représentant une suite arithmétique sont-ils toujours alignés ?</label>
+                    <select id="act2-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="OUI">OUI, ils sont alignés sur une droite de pente r</option>
+                        <option value="NON">NON</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : SOMME DES TERMES               -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Activité 3 • Cumul &amp; Somme</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Somme des Termes d'une Suite Arithmétique $S_n = n \times \frac{u_1 + u_n}{2}$</h3>
+                </div>
+            </div>
+
+            <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3 text-xs">
+                <span class="font-bold text-indigo-900 text-sm block">Formule de la somme cumulée $S_n = u_1 + u_2 + \dots + u_n$ :</span>
+                <p class="text-slate-800 leading-relaxed">
+                    $$\mathbf{S_n = n \times \frac{u_1 + u_n}{2}}$$
+                    (Nombre de termes $\times$ Moyenne du premier et du dernier terme).
+                </p>
+            </div>
+
+            <div class="p-4 bg-slate-50 rounded-2xl border space-y-3 text-xs">
+                <p class="font-bold text-slate-900">Calcul du cumul des salaires sur les 5 premières années :</p>
+                <p class="text-slate-700">On a $u_1 = 1800\ \text{€}$ et $u_5 = 2000\ \text{€}$ pour $n = 5$ ans.</p>
+                <p class="text-slate-700">$S_5 = 5 \times \frac{1800 + 2000}{2} = 5 \times 1900 = ?\ \text{€}$</p>
+
+                <input type="number" id="act3-sum" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="S5 = ? €">
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LES ACTIVITÉS -->
+    <script>
+        // MODULE 0
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "30" && q2 === "5") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Le terme suivant est 30 et l'ajout constant est de 5.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Terme suivant = 30 et différence = 5.`;
+            }
+        }
+
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let r = document.getElementById('act1-r').value.trim();
+            let u6 = document.getElementById('act1-u6').value.trim();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (r === "50" && u6 === "2050") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! La raison est r = 50 € et u6 = 2 000 + 50 = 2 050 €.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> r = 50 € et u6 = 2 050 €.`;
+            }
+        }
+
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let q1 = document.getElementById('act2-q1').value.trim();
+            let q2 = document.getElementById('act2-q2').value;
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "2250" && q2 === "OUI") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! u10 = 1800 + 9 × 50 = 2 250 € et les points d'une suite arithmétique sont toujours alignés.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> u10 = 2 250 € et la réponse est OUI.`;
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let sum = document.getElementById('act3-sum').value.trim();
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (sum === "9500") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> C'est exact ! S5 = 5 × (3800 / 2) = 5 × 1900 = 9 500 €.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> S5 = 5 × 1900 = 9 500 €.`;
+            }
+        }
+    </script>
+</body>
+</html>

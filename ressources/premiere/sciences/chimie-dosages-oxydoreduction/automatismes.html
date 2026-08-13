@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Oxydoréduction & Dosages 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Physique-Chimie -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Oxydoréduction &amp; Dosages</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Simulation</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- SCOREBOARD EN DIRECT -->
+        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Ritualisation 10 min • Ox/Red &amp; Titrages Volumétriques</span>
+                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Automatismes : Flash Chimie Redox</h2>
+            </div>
+            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
+                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
+                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Oxydant, Réducteur &amp; Équivalence)
+                </h3>
+                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- FC 1 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
+                            <p class="text-xs font-bold text-center">Qu'est-ce qu'un Oxydant ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Espèce qui gagne des électrons e-</p>
+                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 2 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
+                            <p class="text-xs font-bold text-center">Qu'est-ce qu'un Réducteur ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Espèce qui cède/perd des électrons e-</p>
+                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 3 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
+                            <p class="text-xs font-bold text-center">Formule de la relation à l'équivalence ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">C1 × V1 = C2 × VE</p>
+                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 4 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
+                            <p class="text-xs font-bold text-center">Demi-équation du couple $Cu^{2+} / Cu$ ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Cu²⁺ + 2 e⁻ ⇌ Cu</p>
+                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 5 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
+                            <p class="text-xs font-bold text-center">Dans quel élément se trouve la solution titrante $C_2$ ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Dans la burette graduée</p>
+                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 6 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
+                            <p class="text-xs font-bold text-center">Dans quel récipient verse-t-on le volume $V_1$ à doser ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Dans le bêcher (ou erlenmeyer)</p>
+                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 7 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
+                            <p class="text-xs font-bold text-center">Relation entre $C_m$ (g/L), $C$ (mol/L) et $M$ (g/mol) ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Cm = C × M</p>
+                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 8 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
+                            <p class="text-xs font-bold text-center">Comment repère-t-on le virage de couleur ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Changement de teinte persistant à la goutte</p>
+                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 9 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
+                            <p class="text-xs font-bold text-center">Demi-équation du couple $Fe^{3+} / Fe^{2+}$ ?</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">Fe³⁺ + 1 e⁻ ⇌ Fe²⁺</p>
+                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FC 10 -->
+                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
+                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
+                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
+                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
+                            <p class="text-xs font-bold text-center">Si $C_2 = 0{,}02$, $V_E = 20\ \text{mL}$, $V_1 = 10\ \text{mL} \implies C_1 = ?$</p>
+                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                        </div>
+                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
+                            <span class="text-[10px] font-bold uppercase">Réponse</span>
+                            <p class="text-xs font-extrabold text-center">C1 = (0,02 × 20) / 10 = 0,04 mol/L</p>
+                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 2 : QUIZ DE CALCUL CONDITIONNEL RAPIDE -->
+        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-teal-500"></i> Module 2 : Quiz Calcul de Concentrations Redox
+                </h3>
+                <span class="text-xs font-bold text-slate-500">6 Défis</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Si $C_2 = 0{,}01\ \text{mol/L}$, $V_E = 15\ \text{mL}$, $V_1 = 25\ \text{mL}$, calculez $C_1 = \frac{0{,}01 \times 15}{25}$ :</label>
+                    <input type="number" step="0.001" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="0.006">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Si $C_1 = 0{,}02\ \text{mol/L}$ et $M = 56\ \text{g/mol}$, calculez $C_m = C_1 \times M$ :</label>
+                    <input type="number" step="0.01" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="1.12">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">3. L'ion $Fe^{2+}$ est-il l'oxydant ou le réducteur du couple $Fe^{3+}/Fe^{2+}$ ?</label>
+                    <select id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="RED">Réducteur</option>
+                        <option value="OX">Oxydant</option>
+                    </select>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">4. Combien d'électrons sont transférés dans la demi-équation $Zn^{2+} + 2e^- \rightleftharpoons Zn$ ?</label>
+                    <input type="number" id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="2">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">5. Si $C_m = 0{,}5\ \text{g/L}$ et $V = 2\ \text{L}$, quelle est la masse dissolved $m = C_m \times V$ ?</label>
+                    <input type="number" id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="1">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">6. À l'équivalence, la solution dans le bêcher change-t-elle de couleur ?</label>
+                    <select id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white">
+                        <option value="">Sélectionnez...</option>
+                        <option value="OUI">OUI</option>
+                        <option value="NON">NON</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="checkM2()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
+            </button>
+            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <script>
+        let fcScores = new Set();
+        let m2Score = 0;
+
+        function flipCard(el) {
+            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
+        }
+
+        function markFC(num) {
+            fcScores.add(num);
+            updateScore();
+        }
+
+        function checkM2() {
+            let q1 = document.getElementById('m2-q1').value.trim();
+            let q2 = document.getElementById('m2-q2').value.trim();
+            let q3 = document.getElementById('m2-q3').value;
+            let q4 = document.getElementById('m2-q4').value.trim();
+            let q5 = document.getElementById('m2-q5').value.trim();
+            let q6 = document.getElementById('m2-q6').value;
+
+            let score = 0;
+            if (q1 === "0.006") score++;
+            if (q2 === "1.12") score++;
+            if (q3 === "RED") score++;
+            if (q4 === "2") score++;
+            if (q5 === "1") score++;
+            if (q6 === "OUI") score++;
+
+            m2Score = score;
+            updateScore();
+
+            let fb = document.getElementById('fb-m2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (score === 6) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! 6 / 6 dans le quiz Oxydoréduction !`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Score obtenu : ${score}/6. Réessayez !`;
+            }
+        }
+
+        function updateScore() {
+            let total = fcScores.size + m2Score;
+            document.getElementById('global-score').innerText = `${total} / 16`;
+        }
+    </script>
+</body>
+</html>

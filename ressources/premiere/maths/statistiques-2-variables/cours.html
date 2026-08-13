@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Statistiques à Deux Variables 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-cyan-500/20 border border-cyan-400/30 text-cyan-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-chart-line text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-cyan-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-cyan-100 text-cyan-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-cyan-200">Synthèse de Cours Illustrée avec Exemples par Notion</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Statistiques à Deux Variables</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Nuage de points, point moyen $G(\bar{x} \,;\, \bar{y})$, droite d'ajustement linéaire $y = ax + b$ et prédictions.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. DÉFINITION ET NUAGE DE POINTS           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-cyan-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-cyan-100 text-cyan-600 flex items-center justify-center text-sm">I</span>
+                Série Statistique à Deux Variables et Nuage de Points
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-blue-800 text-base uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-blue-600"></i> Définition : Nuage de Points
+                </h3>
+                <p class="text-blue-900 leading-relaxed">
+                    Une <strong>série statistique à deux variables quantitatives</strong> mesure deux grandeurs $X$ et $Y$ sur une même population.
+                    Elle est représentée par une suite de couples de valeurs $(x_1 \,;\, y_1), (x_2 \,;\, y_2), \dots, (x_n \,;\, y_n)$.<br>
+                    L'ensemble des points $M_i(x_i \,;\, y_i)$ placés dans un repère orthogonal constitue le <strong>nuage de points</strong>.
+                </p>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION I -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Ancienneté et Salaire
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Pour 3 salariés, on relève l'ancienneté $X$ (en années) et le salaire $Y$ (en k€) : $(1 ; 20)$, $(3 ; 24)$, $(5 ; 28)$. Les 3 points du nuage sont $M_1(1 ; 20)$, $M_2(3 ; 24)$ et $M_3(5 ; 28)$.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. LE POINT MOYEN G                        -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">II</span>
+                Le Point Moyen $G(\bar{x} \,;\, \bar{y})$
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-bullseye text-emerald-600"></i> Définition &amp; Propriété du Point Moyen $G$
+                </h3>
+                <p class="text-emerald-950 font-medium">
+                    Le <strong>point moyen</strong> d'un nuage de points, noté $\mathbf{G(\bar{x} \,;\, \bar{y})}$, est le point dont les coordonnées sont les moyennes arithmétiques des deux variables :
+                </p>
+                <div class="bg-white p-4 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                    $$\bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n} \quad \text{et} \quad \bar{y} = \frac{y_1 + y_2 + \dots + y_n}{n}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION II -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Calcul des Coordonnées de $G$
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Pour la série précédente $(1 ; 20)$, $(3 ; 24)$, $(5 ; 28)$ ($n = 3$) :</p>
+                    <ul class="list-disc pl-5 space-y-1 font-bold">
+                        <li>$\bar{x} = \frac{1 + 3 + 5}{3} = \frac{9}{3} = \mathbf{3}$</li>
+                        <li>$\bar{y} = \frac{20 + 24 + 28}{3} = \frac{72}{3} = \mathbf{24}$</li>
+                    </ul>
+                    <p class="font-bold text-amber-950">Le point moyen est $G(3 \,;\, 24)$.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. AJUSTEMENT AFFINE                     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">III</span>
+                Ajustement Affine (Droite de Tendance $y = ax + b$)
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-ruler-combined text-emerald-600"></i> Propriété Fondamentale de la Droite d'Ajustement
+                </h3>
+                <p class="text-emerald-950 font-medium">
+                    Lorsque le nuage de points présente une forme allongée, on peut ajuster ce nuage par une droite d'équation $\mathbf{y = a x + b}$.
+                </p>
+                <div class="bg-white p-3.5 rounded-xl border border-emerald-300 text-center font-extrabold text-base text-emerald-900">
+                    $$\text{La droite d'ajustement passe obligatoirement par le point moyen } G(\bar{x} \,;\, \bar{y}) \implies \mathbf{\bar{y} = a \bar{x} + b}$$
+                </div>
+            </div>
+
+            <!-- EXEMPLE CONCRET POUR LA NOTION III -->
+            <div class="exemple-box rounded-2xl p-5 space-y-3 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'illustration : Équation de la Droite $y = 2x + 18$
+                </h3>
+                <div class="space-y-2 leading-relaxed">
+                    <p>Pour la pente $a = 2$ et le point moyen $G(3 ; 24)$ :</p>
+                    <p>$b = \bar{y} - a \bar{x} = 24 - (2 \times 3) = 24 - 6 = \mathbf{18}$.</p>
+                    <p class="font-bold text-amber-950">L'équation de la droite d'ajustement est $y = 2 x + 18$.</p>
+                </div>
+            </div>
+
+            <!-- SCHÉMA SVG NUAGE DE POINTS ET DROITE -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-chart-scatter text-sky-600"></i> Figure 1 : Nuage de points, droite de régression et point moyen G
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="450" height="180" fill="#ffffff" rx="8"/>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="150" x2="420" y2="150" stroke="#64748b" stroke-width="2"/>
+                        <line x1="50" y1="10" x2="50" y2="160" stroke="#64748b" stroke-width="2"/>
+
+                        <!-- Points nuage -->
+                        <circle cx="90" cy="130" r="4" fill="#0284c7"/>
+                        <circle cx="150" cy="110" r="4" fill="#0284c7"/>
+                        <circle cx="220" cy="85" r="4" fill="#0284c7"/>
+                        <circle cx="310" cy="55" r="4" fill="#0284c7"/>
+                        <circle cx="380" cy="30" r="4" fill="#0284c7"/>
+
+                        <!-- Point Moyen G -->
+                        <circle cx="230" cy="82" r="7" fill="#ef4444"/>
+                        <text x="242" y="85" font-size="12" font-weight="extrabold" fill="#dc2626">G(x̄ ; ȳ)</text>
+
+                        <!-- Droite -->
+                        <line x1="50" y1="145" x2="410" y2="20" stroke="#16a34a" stroke-width="2.5"/>
+                        <text x="280" y="35" font-size="11" font-weight="extrabold" fill="#15803d">y = ax + b</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. EXEMPLE RÉDIGÉ PAS À PAS                 -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">IV</span>
+                Exemple Rédigé d'Application Professionnelle
+            </h2>
+
+            <div class="exemple-box rounded-2xl p-5 space-y-4 text-xs text-slate-800">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-amber-600"></i> Application : Prédiction de Consommation de Carburant
+                </h3>
+
+                <div class="space-y-3 leading-relaxed">
+                    <p>La consommation $Y$ d'un poids lourd en fonction de la vitesse $X$ est modélisée par $y = 0{,}4 x + 5$.</p>
+
+                    <p><strong>1. Prédiction pour une vitesse $x = 90\ \text{km/h}$ :</strong><br>
+                    $y = 0{,}4(90) + 5 = 36 + 5 = \mathbf{41\ \text{L/100km}}$.</p>
+
+                    <p><strong>2. Vitesse pour une consommation maximale de $33\ \text{L/100km}$ :</strong><br>
+                    $33 = 0{,}4 x + 5 \implies 0{,}4 x = 28 \implies x = \frac{28}{0{,}4} = \mathbf{70\ \text{km/h}}$.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

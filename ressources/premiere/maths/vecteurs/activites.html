@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Vecteurs 1ère Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Nav unifiée pour Première Pro Maths -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-arrows-up-down-left-right text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Vecteurs du Plan</h1>
+                </div>
+            </div>
+            <!-- Navigation de la Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE GeoGebra</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- EN-TÊTE DU MODULE -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-indigo-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Activités d'Investigation • Découverte Guidée</span>
+                    </div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Caractéristiques, Coordonnées $\vec{AB}(x_B-x_A ; y_B-y_A)$ &amp; Somme de Forces</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : Direction, Sens, Norme, Chasles, Somme de forces</span>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Découvrez la notion de vecteur pour représenter des déplacements de machines-outils et des forces en mécanique. Apprenez à calculer les coordonnées d'un vecteur $\vec{AB}$, sa norme $\|\vec{AB}\|$, et à déterminer la résultante de deux forces.
+            </p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE             -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">0</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-slate-500 tracking-wider">Module 0 • Test de Positionnement</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Rappels : Coordonnées de Points &amp; Distance dans un Repère</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Soit $A(2 ; 3)$ et $B(6 ; 6)$. Calculez la différence $x_B - x_A$ :</label>
+                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="6 - 2 = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Calculez la distance $AB = \sqrt{(6-2)^2 + (6-3)^2} = \sqrt{4^2 + 3^2}$ :</label>
+                    <input type="number" id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="√25 = ?">
+                </div>
+            </div>
+
+            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes prérequis
+            </button>
+            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : DÉCOUVERTES DES CARACTÉRISTIQUES-->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Activité 1 • Trajectoire d'un Bras Robotisé</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Les 3 Caractéristiques d'un Vecteur : Direction, Sens et Norme</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-robot text-indigo-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un bras robotisé déplace une pièce métallique du point d'origine $A(1 ; 1)$ jusqu'au point d'arrivée $B(5 ; 4)$. Ce déplacement rectiligne est modélisé par le vecteur $\vec{AB}$.
+                </p>
+            </div>
+
+            <!-- SCHÉMA SVG INTERACTIF VECTEUR -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-draw-polygon text-indigo-600"></i> Figure 1 : Représentation du vecteur déplacement $\vec{AB}$
+                </h4>
+                
+                <div class="flex justify-center bg-white p-4 rounded-2xl border text-center overflow-x-auto">
+                    <svg viewBox="0 0 450 200" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#4f46e5"/>
+                            </marker>
+                        </defs>
+                        <rect width="450" height="200" fill="#ffffff" rx="8"/>
+
+                        <!-- Grille -->
+                        <g stroke="#f1f5f9" stroke-width="1">
+                            <line x1="50" y1="20" x2="50" y2="180"/><line x1="120" y1="20" x2="120" y2="180"/>
+                            <line x1="190" y1="20" x2="190" y2="180"/><line x1="260" y1="20" x2="260" y2="180"/>
+                            <line x1="330" y1="20" x2="330" y2="180"/><line x1="400" y1="20" x2="400" y2="180"/>
+                            <line x1="30" y1="160" x2="420" y2="160"/><line x1="30" y1="120" x2="420" y2="120"/>
+                            <line x1="30" y1="80" x2="420" y2="80"/><line x1="30" y1="40" x2="420" y2="40"/>
+                        </g>
+
+                        <!-- Axes -->
+                        <line x1="40" y1="160" x2="420" y2="160" stroke="#64748b" stroke-width="2"/>
+                        <line x1="50" y1="20" x2="50" y2="170" stroke="#64748b" stroke-width="2"/>
+
+                        <!-- Vecteur AB -->
+                        <line x1="120" y1="160" x2="330" y2="80" stroke="#4f46e5" stroke-width="3.5" marker-end="url(#arrow)"/>
+                        
+                        <!-- Points -->
+                        <circle cx="120" cy="160" r="5" fill="#4f46e5"/>
+                        <circle cx="330" cy="80" r="5" fill="#4f46e5"/>
+                        <text x="105" y="175" font-size="12" font-weight="extrabold" fill="#1e1b4b">A(1 ; 1)</text>
+                        <text x="340" y="75" font-size="12" font-weight="extrabold" fill="#1e1b4b">B(5 ; 4)</text>
+
+                        <!-- Composantes dx et dy -->
+                        <line x1="120" y1="160" x2="330" y2="160" stroke="#94a3b8" stroke-dasharray="4" stroke-width="1.5"/>
+                        <line x1="330" y1="160" x2="330" y2="80" stroke="#94a3b8" stroke-dasharray="4" stroke-width="1.5"/>
+                        <text x="210" y="175" font-size="10" font-weight="bold" fill="#0284c7">dx = 5 - 1 = 4</text>
+                        <text x="340" y="125" font-size="10" font-weight="bold" fill="#10b981">dy = 4 - 1 = 3</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS -->
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
+                    <span class="font-bold text-indigo-900 text-sm block">1. Les 3 Caractéristiques du vecteur $\vec{AB}$ :</span>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                        <li><strong>Direction :</strong> La droite $(AB)$ inclinée.</li>
+                        <li><strong>Sens :</strong> De $A$ vers $B$ (indiqué par la flèche).</li>
+                        <li><strong>Norme :</strong> La longueur du segment $AB$.</li>
+                    </ul>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Quelle est l'origine du vecteur $\vec{AB}$ ?</label>
+                            <input type="text" id="act1-orig" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="Point ...">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-900 block mb-1">Quelle est l'extrémité du vecteur $\vec{AB}$ ?</label>
+                            <input type="text" id="act1-extr" class="w-full p-2.5 border rounded-xl font-bold bg-white" placeholder="Point ...">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="checkAct1()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                    <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
+                </button>
+                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : COORDONNÉES ET NORME           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Activité 2 • Commande Numérique (CN)</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Calcul des Coordonnées $\vec{AB}(x_B-x_A ; y_B-y_A)$ et Norme $\|\vec{AB}\|$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-microchip text-sky-600 mr-1"></i> Formules canoniques :</p>
+                <p class="text-slate-800 leading-relaxed font-bold">
+                    $$\mathbf{\vec{AB} = \begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}} \quad \text{et} \quad \mathbf{\|\vec{AB}\| = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}}$$
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Soit $A(1 ; 2)$ et $B(7 ; 10)$. Calculez l'abscisse du vecteur $x = x_B - x_A$ :</label>
+                    <input type="number" id="act2-x" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="7 - 1 = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Calculez l'ordonnée du vecteur $y = y_B - y_A$ :</label>
+                    <input type="number" id="act2-y" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="10 - 2 = ?">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 md:col-span-2">
+                    <label class="font-bold text-slate-900 block">3. Calculez la norme $\|\vec{AB}\| = \sqrt{6^2 + 8^2} = \sqrt{36 + 64}$ :</label>
+                    <input type="number" id="act2-norme" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="√100 = ?">
+                </div>
+            </div>
+
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : SOMME DE VECTEURS              -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Activité 3 • Résultante des Forces en Mécanique</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Somme de Vecteurs $\vec{F} = \vec{F_1} + \vec{F_2}$ &amp; Relation de Chasles</h3>
+                </div>
+            </div>
+
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-3 text-xs">
+                <span class="font-bold text-emerald-900 text-sm block">Somme de deux forces orthogonales :</span>
+                <p class="text-slate-800 leading-relaxed">
+                    Deux câbles exercent des forces $\vec{F_1} = \begin{pmatrix} 300 \\ 0 \end{pmatrix}\ \text{N}$ et $\vec{F_2} = \begin{pmatrix} 0 \\ 400 \end{pmatrix}\ \text{N}$ sur un crochet de levage.
+                    La force résultante $\vec{F} = \vec{F_1} + \vec{F_2}$ a pour coordonnées la somme composante par composante.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">1. Quelles sont les coordonnées du vecteur résultant $\vec{F}$ ?</label>
+                    <p class="text-slate-500">$\vec{F} = \begin{pmatrix} 300+0 \\ 0+400 \end{pmatrix}$</p>
+                    <div class="flex gap-2">
+                        <input type="number" id="act3-fx" class="border rounded-xl p-2 w-1/2 font-bold bg-white" placeholder="Fx = 300">
+                        <input type="number" id="act3-fy" class="border rounded-xl p-2 w-1/2 font-bold bg-white" placeholder="Fy = 400">
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+                    <label class="font-bold text-slate-900 block">2. Calculez l'intensité de la force résultante $\|\vec{F}\| = \sqrt{300^2 + 400^2}$ :</label>
+                    <input type="number" id="act3-norme" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="F = ? N">
+                </div>
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
+
+    </main>
+
+    <!-- JS POUR LES ACTIVITÉS -->
+    <script>
+        // MODULE 0
+        function checkDiag() {
+            let q1 = document.getElementById('diag-q1').value.trim();
+            let q2 = document.getElementById('diag-q2').value.trim();
+            let fb = document.getElementById('fb-diag');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (q1 === "4" && q2 === "5") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! xB - xA = 4 et la distance AB = √25 = 5.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> xB - xA = 4 et AB = 5.`;
+            }
+        }
+
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let orig = document.getElementById('act1-orig').value.trim().toUpperCase();
+            let extr = document.getElementById('act1-extr').value.trim().toUpperCase();
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (orig === "A" && extr === "B") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! Le vecteur AB a pour origine A et pour extrémité B.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Origine = A et Extrémité = B.`;
+            }
+        }
+
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let x = document.getElementById('act2-x').value.trim();
+            let y = document.getElementById('act2-y').value.trim();
+            let norme = document.getElementById('act2-norme').value.trim();
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (x === "6" && y === "8" && norme === "10") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Excellent ! AB = (6 ; 8) et la norme ||AB|| = √(36+64) = 10.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> x = 6, y = 8 et norme = 10.`;
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let fx = document.getElementById('act3-fx').value.trim();
+            let fy = document.getElementById('act3-fy').value.trim();
+            let norme = document.getElementById('act3-norme').value.trim();
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+            if (fx === "300" && fy === "400" && norme === "500") {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> C'est exact ! F = (300 ; 400) N et l'intensité de la résultante vaut ||F|| = 500 N.`;
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Fx = 300, Fy = 400 et ||F|| = 500 N.`;
+            }
+        }
+    </script>
+</body>
+</html>

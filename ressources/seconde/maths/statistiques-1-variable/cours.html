@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Je note l'essentiel (Cours) - Statistiques 1 Variable 2nde Pro</title>
+    <title>Cours - Statistiques à une variable 2nde Pro</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,8 +33,13 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
         @media print {
-            header, nav, .no-print { display: none !important; }
+            header, nav, .no-print, button { display: none !important; }
             body { background-color: white; color: black; padding-bottom: 0 !important; }
             .card-shadow { box-shadow: none; border: 1px solid #ccc; }
         }
@@ -42,7 +47,7 @@
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Maths -->
+    <!-- Header & Nav -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -50,11 +55,11 @@
                     <i class="fa-solid fa-book-open text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 1 • Seconde Professionnelle Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable (Moyenne, Médiane, Étendue)</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Séquence 9 • Seconde Professionnelle Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Maths -->
+            <!-- Navigation -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
                 <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
@@ -66,124 +71,177 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- ENTÊTE DE SÉQUENCE DE COURS CONFORME ÉDUCATION NATIONALE -->
-        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="bg-sky-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Référentiel National 2nde Pro</span>
-                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Baccalauréat Professionnel</span>
-                    </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Fiche de Cours : Statistiques à 1 Variable</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Formule de la moyenne pondérée $\bar{x} = \frac{\sum n_i x_i}{N}$, médiane $\text{Me}$, étendue $E$ et représentations graphiques.</p>
-                </div>
-
-                <button onclick="window.print()" class="no-print bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-print"></i> Imprimer le Cours PDF
-                </button>
-            </div>
-
-            <!-- SOMMAIRE COURS INTERACTIF -->
-            <div class="pt-4 border-t border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-semibold">
-                <a href="#partie1" class="p-2 bg-slate-800 hover:bg-slate-700 text-sky-300 rounded-lg text-center transition-colors">Partie 1. Vocabulaire Statistique</a>
-                <a href="#partie2" class="p-2 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg text-center transition-colors">Partie 2. Moyenne Pondérée x̄</a>
-                <a href="#partie3" class="p-2 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg text-center transition-colors">Partie 3. Médiane Me & Étendue E</a>
-                <a href="#partie4" class="p-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 rounded-lg text-center transition-colors">Partie 4. Graphiques</a>
-            </div>
+        <!-- TITLE -->
+        <div class="text-center space-y-3">
+            <span class="bg-sky-100 text-sky-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-sky-200">Synthèse de Cours</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Statistiques à une Variable</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Moyenne pondérée, Médiane, Quartiles et Indicateurs de Dispersion pour l'analyse de données professionnelles.</p>
         </div>
 
-        <!-- PARTIE 1 & 2 : MOYENNE ET MÉDIANE -->
-        <section id="partie1" class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-sky-100 text-sky-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
-                <div>
-                    <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Partie 1 • Formules Générales</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Indicateurs de Tendance Centrale & de Dispersion</h3>
-                </div>
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF)
+        </button>
+
+        <!-- 1. VOCABULAIRE ET NOTATIONS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">I</span>
+                Vocabulaire et Notations
+            </h2>
+            
+            <div class="definition-box rounded-xl p-5 space-y-3 text-sm">
+                <h3 class="font-bold text-blue-800 text-base uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-book text-blue-600"></i> Définitions Fondamentales
+                </h3>
+                <ul class="list-none space-y-3 text-blue-900">
+                    <li><span class="font-bold bg-blue-200 px-1 rounded">Population :</span> L'ensemble étudié (ex: un lot de pièces, les clients d'un magasin).</li>
+                    <li><span class="font-bold bg-blue-200 px-1 rounded">Individu :</span> Un élément de cette population (ex: une pièce usinée).</li>
+                    <li><span class="font-bold bg-blue-200 px-1 rounded">Caractère (ou Variable) :</span> La particularité étudiée (ex: le diamètre en mm).</li>
+                    <li><span class="font-bold bg-blue-200 px-1 rounded">Effectif Total ($N$) :</span> Le nombre total d'individus de la population.</li>
+                </ul>
             </div>
 
-            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2">
-                    <h4 class="font-bold text-sky-900 text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-calculator"></i> Définitions Officielles
-                    </h4>
-                    <p class="text-slate-800">
-                        • **Moyenne Pondérée ($\bar{x}$)** : $\bar{x} = \frac{n_1 x_1 + n_2 x_2 + \dots + n_p x_p}{N}$ où $N = \sum n_i$. <br>
-                        • **Médiane ($\text{Me}$)** : Valeur centrale séparant la population ordonnée en deux effectifs égaux (50% $\le \text{Me}$ et 50% $\ge \text{Me}$). <br>
-                        • **Étendue ($E$)** : Différence $E = x_{\text{max}} - x_{\text{min}}$.
-                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-2 border-b pb-1">Variable Discrète</h4>
+                    <p class="text-slate-600">Prend des valeurs <strong>isolées</strong> (souvent entières).<br><span class="text-xs italic text-slate-400">Ex: Nombre d'enfants, nombre de défauts par pièce (0, 1, 2, 3...).</span></p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-2 border-b pb-1">Variable Continue</h4>
+                    <p class="text-slate-600">Prend n'importe quelle valeur dans un <strong>intervalle</strong> (classe).<br><span class="text-xs italic text-slate-400">Ex: Taille (cm), Poids (kg), Salaire (€). Regroupement en classes ex: [10 ; 15[.</span></p>
                 </div>
             </div>
         </section>
 
-        <!-- SIMULATEUR DYNAMIQUE DE MOYENNE & MÉDIANE JS -->
-        <section class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl border border-slate-800 space-y-6 card-shadow">
-            <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
-                <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center font-bold text-lg">
-                    <i class="fa-solid fa-calculator"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Outil Numérique de Classe</span>
-                    <h3 class="text-xl font-bold font-heading text-white">Calculateur Statistique Dynamique (2nde Pro)</h3>
-                </div>
-            </div>
+        <!-- 2. INDICATEURS DE POSITION -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">II</span>
+                Indicateurs de Position (Moyenne, Médiane)
+            </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div class="space-y-3 text-slate-800">
-                    <p class="text-slate-300 font-bold">Saisissez les valeurs et leurs coefficients :</p>
-                    <div class="grid grid-cols-2 gap-2 text-slate-200">
-                        <div>
-                            <label class="font-bold block text-xs">Valeur x₁ :</label>
-                            <input type="number" id="st-v1" value="10" oninput="calcStat()" class="border rounded-xl p-2 w-full font-bold text-slate-900">
-                        </div>
-                        <div>
-                            <label class="font-bold block text-xs">Effectif n₁ :</label>
-                            <input type="number" id="st-n1" value="2" oninput="calcStat()" class="border rounded-xl p-2 w-full font-bold text-slate-900">
-                        </div>
-                        <div>
-                            <label class="font-bold block text-xs">Valeur x₂ :</label>
-                            <input type="number" id="st-v2" value="14" oninput="calcStat()" class="border rounded-xl p-2 w-full font-bold text-slate-900">
-                        </div>
-                        <div>
-                            <label class="font-bold block text-xs">Effectif n₂ :</label>
-                            <input type="number" id="st-n2" value="3" oninput="calcStat()" class="border rounded-xl p-2 w-full font-bold text-slate-900">
-                        </div>
+            <div class="space-y-6">
+                <!-- La Moyenne -->
+                <div class="propriete-box rounded-xl p-5 space-y-3 text-sm">
+                    <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-emerald-600"></i> La Moyenne Pondérée $\bar{x}$ (x barre)
+                    </h3>
+                    <p class="text-emerald-900">La moyenne d'une série statistique s'obtient en additionnant toutes les valeurs multipliées par leur effectif, puis en divisant par l'effectif total $N$.</p>
+                    <div class="bg-white p-3 rounded-lg border border-emerald-200 text-center text-lg font-bold text-emerald-900">
+                        $$ \bar{x} = \frac{n_1 x_1 + n_2 x_2 + ... + n_p x_p}{N} = \frac{\sum (n_i \times x_i)}{N} $$
+                    </div>
+                    <div class="text-xs mt-2 text-emerald-700 italic">
+                        <strong>Note :</strong> Pour une série regroupée en classes (variable continue), on utilise le <strong>centre de classe</strong> comme valeur $x_i$. (Ex: Centre de [10; 20[ = 15).
                     </div>
                 </div>
 
-                <div class="p-4 bg-slate-800 border border-slate-700 rounded-2xl space-y-2 text-slate-200 font-mono">
-                    <span class="text-xs font-bold uppercase text-sky-400 block">Démonstration en Direct :</span>
-                    <p id="st-res-n">• Effectif total $N = 2 + 3 = \mathbf{5}$</p>
-                    <p id="st-res-moy">• Moyenne $\bar{x} = \frac{10 \times 2 + 14 \times 3}{5} = \mathbf{12,40}$</p>
-                    <p id="st-res-et">• Étendue $E = 14 - 10 = \mathbf{4,00}$</p>
+                <!-- La Médiane -->
+                <div class="propriete-box rounded-xl p-5 space-y-3 text-sm">
+                    <h3 class="font-bold text-emerald-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-left-right-to-line text-emerald-600"></i> La Médiane $Me$
+                    </h3>
+                    <p class="text-emerald-900">
+                        La médiane est la valeur qui partage la série <strong>ordonnée</strong> en deux groupes de même effectif (50% en dessous, 50% au-dessus).
+                        Elle est très utile car, contrairement à la moyenne, <strong>elle n'est pas influencée par les valeurs extrêmes</strong>.
+                    </p>
                 </div>
+
+                <!-- Exemple Moyenne/Médiane -->
+                <div class="exemple-box rounded-xl p-5 space-y-3 text-sm">
+                    <h3 class="font-bold text-amber-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> Exemple : Notes d'un élève
+                    </h3>
+                    <p class="text-amber-900">Série brute non ordonnée : 14, 5, 12, 11, 15.</p>
+                    <ul class="list-disc ml-5 text-amber-900 space-y-1">
+                        <li><strong>Moyenne :</strong> $\bar{x} = \frac{14+5+12+11+15}{5} = \frac{57}{5} = 11,4$.</li>
+                        <li><strong>Médiane :</strong> On ordonne d'abord : 5, 11, <strong>12</strong>, 14, 15. La valeur centrale est $Me = 12$.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INDICATEURS DE DISPERSION ET QUARTILES -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-purple-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">III</span>
+                Indicateurs de Dispersion & Boîte à Moustaches
+            </h2>
+
+            <p class="text-sm text-slate-700">
+                Les indicateurs de position ne suffisent pas toujours (deux machines peuvent avoir la même moyenne mais l'une peut produire des pièces avec beaucoup plus de défauts variables). On utilise donc des indicateurs de dispersion pour mesurer <strong>l'écartement</strong> des valeurs.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="definition-box rounded-xl p-4 space-y-2 text-sm border-l-purple-500 bg-purple-50">
+                    <h4 class="font-bold text-purple-900">L'Étendue ($E$)</h4>
+                    <p class="text-purple-800">
+                        C'est la différence entre la plus grande valeur ($x_{max}$) et la plus petite valeur ($x_{min}$) de la série.
+                    </p>
+                    <div class="bg-white p-2 text-center rounded border border-purple-200 font-bold font-mono">
+                        E = x_{max} - x_{min}
+                    </div>
+                </div>
+
+                <div class="definition-box rounded-xl p-4 space-y-2 text-sm border-l-purple-500 bg-purple-50">
+                    <h4 class="font-bold text-purple-900">Les Quartiles ($Q_1$ et $Q_3$)</h4>
+                    <ul class="text-purple-800 space-y-1 text-xs list-disc ml-4">
+                        <li><strong>$Q_1$ (1er Quartile) :</strong> Valeur telle qu'au moins 25% des valeurs lui sont inférieures ou égales.</li>
+                        <li><strong>$Q_3$ (3ème Quartile) :</strong> Valeur telle qu'au moins 75% des valeurs lui sont inférieures ou égales.</li>
+                    </ul>
+                    <p class="text-purple-900 font-bold mt-2">Écart interquartile = $Q_3 - Q_1$.</p>
+                </div>
+            </div>
+
+            <div class="methode-box rounded-xl p-5 space-y-4 text-sm mt-4">
+                <h3 class="font-bold text-purple-800 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-chart-simple text-purple-600"></i> Le Diagramme en Boîte (Boîte à Moustaches / Box Plot)
+                </h3>
+                <p class="text-purple-900">Ce diagramme résume visuellement la série grâce à 5 valeurs clés : $x_{min}, Q_1, Me, Q_3, x_{max}$.</p>
+                
+                <!-- SCHEMA SVG EXPLICATIF BOX PLOT -->
+                <div class="flex justify-center bg-white p-4 rounded-xl border border-purple-200">
+                    <svg viewBox="0 0 400 120" class="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Axe -->
+                        <line x1="20" y1="100" x2="380" y2="100" stroke="#94a3b8" stroke-width="2"/>
+                        
+                        <!-- Box Plot -->
+                        <!-- Moustache gauche -->
+                        <line x1="50" y1="50" x2="120" y2="50" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4"/>
+                        <line x1="50" y1="35" x2="50" y2="65" stroke="#7c3aed" stroke-width="3"/>
+                        
+                        <!-- Boîte -->
+                        <rect x="120" y="30" width="160" height="40" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" rx="2"/>
+                        <line x1="180" y1="30" x2="180" y2="70" stroke="#5b21b6" stroke-width="3"/> <!-- Médiane -->
+                        
+                        <!-- Moustache droite -->
+                        <line x1="280" y1="50" x2="350" y2="50" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4"/>
+                        <line x1="350" y1="35" x2="350" y2="65" stroke="#7c3aed" stroke-width="3"/>
+
+                        <!-- Labels -->
+                        <text x="50" y="20" font-size="12" font-weight="bold" fill="#6b21a8" text-anchor="middle">Min</text>
+                        <text x="120" y="20" font-size="12" font-weight="bold" fill="#6b21a8" text-anchor="middle">Q1</text>
+                        <text x="180" y="20" font-size="12" font-weight="bold" fill="#4c1d95" text-anchor="middle">Me</text>
+                        <text x="280" y="20" font-size="12" font-weight="bold" fill="#6b21a8" text-anchor="middle">Q3</text>
+                        <text x="350" y="20" font-size="12" font-weight="bold" fill="#6b21a8" text-anchor="middle">Max</text>
+
+                        <!-- Infos 25% / 50% -->
+                        <text x="85" y="60" font-size="9" fill="#6b21a8" text-anchor="middle">25%</text>
+                        <text x="150" y="55" font-size="9" fill="#6b21a8" text-anchor="middle">25%</text>
+                        <text x="230" y="55" font-size="9" fill="#6b21a8" text-anchor="middle">25%</text>
+                        <text x="315" y="60" font-size="9" fill="#6b21a8" text-anchor="middle">25%</text>
+                        
+                        <!-- IQR -->
+                        <path d="M 120 80 Q 200 95 280 80" fill="none" stroke="#7c3aed" stroke-width="1"/>
+                        <text x="200" y="90" font-size="10" font-weight="bold" fill="#6b21a8" text-anchor="middle">50% des valeurs (IQR)</text>
+                    </svg>
+                </div>
+                <p class="text-xs text-center text-purple-700 font-medium">Plus la boîte (entre Q1 et Q3) est resserrée, plus les valeurs sont concentrées autour de la médiane (faible dispersion, forte régularité).</p>
             </div>
         </section>
 
     </main>
 
-    <!-- JS POUR CALCULATEUR STATISTIQUE -->
-    <script>
-        function calcStat() {
-            let v1 = parseFloat(document.getElementById('st-v1').value);
-            let n1 = parseFloat(document.getElementById('st-n1').value);
-            let v2 = parseFloat(document.getElementById('st-v2').value);
-            let n2 = parseFloat(document.getElementById('st-n2').value);
-
-            if (isNaN(v1) || isNaN(n1) || isNaN(v2) || isNaN(n2) || (n1 + n2) === 0) return;
-
-            let nTot = n1 + n2;
-            let moy = (v1 * n1 + v2 * n2) / nTot;
-            let et = Math.abs(v2 - v1);
-
-            document.getElementById('st-res-n').innerHTML = `• Effectif total $N = ${n1} + ${n2} = \\mathbf{${nTot}}$`;
-            document.getElementById('st-res-moy').innerHTML = `• Moyenne $\\bar{x} = \\frac{${v1} \\times ${n1} + ${v2} \\times ${n2}}{${nTot}} = \\mathbf{${moy.toFixed(2)}}$`;
-            document.getElementById('st-res-et').innerHTML = `• Étendue $E = \\mathbf{${et.toFixed(2)}}$`;
-            if (window.MathJax) MathJax.typeset();
-        }
-        calcStat();
-    </script>
 </body>
 </html>

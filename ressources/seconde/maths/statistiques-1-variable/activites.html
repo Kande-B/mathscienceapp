@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activités d'Investigation - Statistiques 1 Variable 2nde Pro</title>
-    <!-- Tailwind CSS -->
+    <title>Activités - Statistiques à une variable 2nde Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -21,10 +20,8 @@
             }
         }
     </script>
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax pour les formules LaTeX -->
     <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
@@ -32,29 +29,33 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-
         .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
         .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Maths -->
+    <!-- Header & Nav -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-chart-bar text-lg"></i>
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-chart-column text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 1 • Seconde Professionnelle Mathématiques</span>
-                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable (Moyenne, Médiane, Étendue)</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 9 • Seconde Professionnelle Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à une Variable</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Maths -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
                 <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TICE Excel</a>
@@ -63,149 +64,354 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- PRESENTATION DE LA SÉQUENCE -->
-        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <!-- EN-TÊTE MODULE ACTIVITÉS -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm border-l-8 border-l-emerald-600">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
                 <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="bg-indigo-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier 2nde Pro</span>
-                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Baccalauréat Professionnel</span>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-emerald-600 tracking-wider">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Activités d'Investigation • Découverte Guidée</span>
                     </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Analyse de Production & Indicateurs Statistiques</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Calculez la moyenne pondérée $\bar{x}$, la médiane et l'étendue de séries statistiques issues de la gestion industrielle et du contrôle qualité !</p>
+                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">Exploration : Analyse de Données & Indicateurs Statistiques</h2>
+                </div>
+                <div class="flex flex-col gap-1 text-xs text-slate-500">
+                    <span><i class="fa-solid fa-clock mr-1"></i> Durée conseillée : 1h30</span>
+                    <span><i class="fa-solid fa-bullseye mr-1"></i> Objectifs : Moyenne, Médiane, Quartiles, Diagrammes</span>
                 </div>
             </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Découvrez à travers 3 situations professionnelles réelles comment analyser des séries de mesures, calculer les indicateurs de position ($\bar{x}$, $Me$, $Q_1$, $Q_3$) et interpréter la dispersion avec les diagrammes en boîtes.
+            </p>
         </div>
 
-        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : STATISTIQUE DISCRÈTE (QUALITÉ) -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
+                <div class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">1</div>
                 <div>
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Moyenne Simple & Vocabulaire Statistique</h3>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Série Discrète • Contrôle Qualité Usinage</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Activité 1 : Nombre de Défauts par Lot de Pièces Metalliques</h3>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Calculez la moyenne de la série : 10, 12, 14, 16</label>
-                    <input type="number" id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Moyenne = ?">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Comment appelle-t-on le nombre total d'individus dans une étude statistique ?</label>
-                    <select id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="EFFECTIF">L'effectif total (N)</option>
-                        <option value="ETENDUE">L'étendue</option>
-                    </select>
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-industry text-emerald-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Dans un atelier d'usinage automobile, un contrôleur qualité inspecte <strong>50 lots de pièces</strong>. 
+                    Il comptabilise le nombre de micro-imperfections $x_i$ sur chaque lot. Voici le relevé brut des 50 lots :
+                </p>
+                
+                <div class="bg-white p-3.5 rounded-xl border border-slate-300 font-mono text-center text-slate-700 tracking-widest text-[11px] leading-relaxed">
+                    0, 1, 2, 0, 1, 3, 0, 1, 2, 1, 0, 0, 2, 1, 1, 4, 0, 1, 2, 0,<br>
+                    1, 0, 1, 3, 2, 0, 1, 1, 2, 0, 1, 0, 2, 1, 0, 1, 3, 0, 1, 2,<br>
+                    0, 1, 1, 0, 2, 1, 0, 1, 0, 2
                 </div>
             </div>
 
-            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+            <!-- TABLEAU À COMPLÉTER -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Étape 1 : Compléter le tableau statistique
+                </h4>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold">
+                                <th class="p-3 border border-slate-700">Nbr de défauts $x_i$</th>
+                                <th class="p-3 border border-slate-700">0</th>
+                                <th class="p-3 border border-slate-700">1</th>
+                                <th class="p-3 border border-slate-700">2</th>
+                                <th class="p-3 border border-slate-700">3</th>
+                                <th class="p-3 border border-slate-700">4</th>
+                                <th class="p-3 border border-slate-700 bg-slate-900">Total $N$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Effectif $n_i$ (Nbr de lots)</td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-n0" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n0 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-n1" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n1 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-n2" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n2 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-n3" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n3 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-n4" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n4 = ?"></td>
+                                <td class="p-3 font-extrabold border border-slate-200 bg-slate-100 text-slate-900">50</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Produit $n_i \times x_i$</td>
+                                <td class="p-2 border border-slate-200 text-slate-500 font-bold">0</td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-p1" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="p1 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-p2" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="p2 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-p3" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="p3 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act1-p4" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="p4 = ?"></td>
+                                <td class="p-2 border border-slate-200 bg-emerald-50"><input type="text" id="act1-ptot" class="w-20 border rounded p-1.5 text-center font-extrabold text-emerald-800" placeholder="Somme"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- QUESTIONS ET CALCULS DE POSITION -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="card-act1-moy">
+                    <label class="font-bold text-slate-900 block">Calcul de la Moyenne $\bar{x}$ :</label>
+                    <p class="text-slate-500">Formule : $\bar{x} = \frac{\sum (n_i \times x_i)}{N} = \frac{\text{Somme}}{50}$</p>
+                    <input type="text" id="act1-moy" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="x̄ = ? (ex: 1,08)">
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="card-act1-med">
+                    <label class="font-bold text-slate-900 block">Détermination de la Médiane $Me$ :</label>
+                    <p class="text-slate-500">Lot médian à $N/2 = 25^{\text{ème}}$ lot ordonné.</p>
+                    <input type="text" id="act1-med" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Me = ? (ex: 1)">
+                </div>
+            </div>
+
+            <button onclick="checkAct1()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 1
             </button>
-            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
         </section>
 
-        <!-- ACTIVITÉ 1 : CONTRÔLE QUALITÉ USINE (MOYENNE PONDÉRÉE) -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : VARIABLE CONTINUE & CLASSES   -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
+                <div class="w-10 h-10 bg-sky-100 text-sky-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">2</div>
                 <div>
-                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Activité 1 • Domaine Industrie & Production</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Moyenne Pondérée d'un Lot de Pièces Mécaniques</h3>
+                    <span class="text-xs font-bold uppercase text-sky-600 tracking-wider">Variable Continue & Classes • Logistique Expeditions</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Activité 2 : Masse des Colis et Centres de Classes</h3>
                 </div>
             </div>
 
-            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <p class="font-medium">Un responsable qualité mesure le diamètre (en mm) d'un échantillon de $N = 50$ pièces usinées :</p>
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-box text-sky-600 mr-1"></i> Situation Professionnelle :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un centre logistique pèse <strong>100 colis</strong> de matériel informatique. Les masses $m$ (en kg) sont regroupées en 4 classes d'amplitude 5 kg :
+                </p>
+            </div>
 
-                <!-- SCHÉMA SVG HISTOGRAMME SUR QUADRILLAGE NET -->
-                <div class="p-4 bg-slate-50 border rounded-2xl text-center overflow-x-auto">
-                    <svg width="340" height="130" viewBox="0 0 340 130" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-act1-stat" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="340" height="130" fill="url(#grid-act1-stat)" />
+            <!-- TABLEAU AVEC CENTRES DE CLASSES -->
+            <div class="space-y-3">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold">
+                                <th class="p-3 border border-slate-700">Classe de Masse $m$ (kg)</th>
+                                <th class="p-3 border border-slate-700">[10 ; 15[</th>
+                                <th class="p-3 border border-slate-700">[15 ; 20[</th>
+                                <th class="p-3 border border-slate-700">[20 ; 25[</th>
+                                <th class="p-3 border border-slate-700">[25 ; 30[</th>
+                                <th class="p-3 border border-slate-700 bg-slate-900">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Centre de classe $x_i$</td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act2-x1" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="x1 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act2-x2" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="x2 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act2-x3" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="x3 = ?"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act2-x4" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="x4 = ?"></td>
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100 text-slate-400">-</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Effectif $n_i$ (Nbr colis)</td>
+                                <td class="p-2 border border-slate-200 font-bold text-slate-700">15</td>
+                                <td class="p-2 border border-slate-200 font-bold text-slate-700">40</td>
+                                <td class="p-2 border border-slate-200 font-bold text-slate-700">30</td>
+                                <td class="p-2 border border-slate-200 font-bold text-slate-700">15</td>
+                                <td class="p-3 font-extrabold border border-slate-200 bg-slate-100">100</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="p-3 font-bold border border-slate-200 bg-slate-100">Produit $n_i \times x_i$</td>
+                                <td class="p-2 border border-slate-200 font-bold text-slate-600">187,5</td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act2-p2" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n2.x2"></td>
+                                <td class="p-2 border border-slate-200"><input type="text" id="act2-p3" class="w-16 border rounded p-1.5 text-center font-bold" placeholder="n3.x3"></td>
+                                <td class="p-2 border border-slate-200 font-bold text-slate-600">412,5</td>
+                                <td class="p-2 border border-slate-200 bg-sky-50"><input type="text" id="act2-ptot" class="w-20 border rounded p-1.5 text-center font-extrabold text-sky-800" placeholder="Somme"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                        <!-- Barres de diagramme -->
-                        <!-- x=19.8mm n=10 -->
-                        <rect x="40" y="60" width="40" height="40" fill="#6366f1" stroke="#4338ca" stroke-width="2" rx="4"/>
-                        <text x="60" y="52" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">n=10</text>
-                        <text x="60" y="115" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">19,8 mm</text>
+            <!-- MOYENNE DU GROUPEMENT PAR CLASSES -->
+            <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 text-xs" id="card-act2-moy">
+                <label class="font-bold text-slate-900 block">Moyenne estimée de la masse des colis $\bar{x}$ :</label>
+                <p class="text-slate-500">$\bar{x} = \frac{\sum (n_i \cdot x_i)}{100} = \frac{\text{Somme totale}}{100}$</p>
+                <input type="text" id="act2-moy" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Moyenne = ? (ex: 19,5 kg)">
+            </div>
 
-                        <!-- x=20.0mm n=30 -->
-                        <rect x="130" y="20" width="40" height="80" fill="#4f46e5" stroke="#3730a3" stroke-width="2" rx="4"/>
-                        <text x="150" y="12" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">n=30</text>
-                        <text x="150" y="115" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">20,0 mm</text>
+            <button onclick="checkAct2()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 2
+            </button>
+            <div id="fb-act2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+        </section>
 
-                        <!-- x=20.2mm n=10 -->
-                        <rect x="220" y="60" width="40" height="40" fill="#6366f1" stroke="#4338ca" stroke-width="2" rx="4"/>
-                        <text x="240" y="52" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">n=10</text>
-                        <text x="240" y="115" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">20,2 mm</text>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : BOX PLOT (QUARTILES)          -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 card-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 bg-indigo-100 text-indigo-800 rounded-2xl flex items-center justify-center font-bold text-lg font-heading">3</div>
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Dispersion & Médiane • Boîte à Moustaches</span>
+                    <h3 class="font-bold text-slate-900 text-xl font-heading">Activité 3 : Diagramme en Boîte (Box Plot) & Quartiles $Q_1, Q_3$</h3>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 text-xs">
+                <p class="font-bold text-slate-900"><i class="fa-solid fa-sliders text-indigo-600 mr-1"></i> Comparaison de 2 Machines de Production :</p>
+                <p class="text-slate-700 leading-relaxed">
+                    Un ingénieur compare la régularité du diamètre (en mm) de rondelles produites par deux machines <strong>A</strong> et <strong>B</strong>.
+                    Voici le diagramme en boîte à moustaches récapitulatif :
+                </p>
+
+                <!-- SCHEMA SVG DES 2 BOX PLOTS -->
+                <div class="flex justify-center bg-white p-4 rounded-2xl border">
+                    <svg viewBox="0 0 500 180" class="w-full max-w-lg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="500" height="180" fill="#ffffff" rx="10"/>
+                        <!-- Axe -->
+                        <line x1="50" y1="150" x2="450" y2="150" stroke="#64748b" stroke-width="2"/>
+                        <text x="50" y="170" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">10,0</text>
+                        <text x="150" y="170" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">10,2</text>
+                        <text x="250" y="170" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">10,4</text>
+                        <text x="350" y="170" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">10,6</text>
+                        <text x="450" y="170" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">10,8</text>
+
+                        <!-- Machine A (Violet) -->
+                        <text x="30" y="45" font-size="11" font-weight="800" fill="#6366f1">Machine A</text>
+                        <line x1="100" y1="40" x2="400" y2="40" stroke="#6366f1" stroke-width="2"/>
+                        <rect x="180" y="25" width="140" height="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="2" rx="4"/>
+                        <line x1="250" y1="25" x2="250" y2="55" stroke="#4338ca" stroke-width="3"/>
+
+                        <!-- Machine B (Émeraude) -->
+                        <text x="30" y="105" font-size="11" font-weight="800" fill="#10b981">Machine B</text>
+                        <line x1="200" y1="100" x2="300" y2="100" stroke="#10b981" stroke-width="2"/>
+                        <rect x="230" y="85" width="40" height="30" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="4"/>
+                        <line x1="250" y1="85" x2="250" y2="115" stroke="#047857" stroke-width="3"/>
                     </svg>
                 </div>
+            </div>
 
-                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-3">
-                    <span class="font-bold text-indigo-900 text-sm block">Étape 1 : Calculez le diamètre moyen $\bar{x}$</span>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">1. Produit total $\sum (x_i \times n_i)$ (en mm) :</label>
-                            <input type="number" id="act1-prod" class="w-full p-2 border rounded-xl font-bold" placeholder="10x19.8 + 30x20.0 + 10x20.2 = ?">
-                        </div>
-
-                        <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">2. Diamètre moyen $\bar{x} = \frac{1000}{50}$ en mm :</label>
-                            <input type="number" step="0.1" id="act1-moy" class="w-full p-2 border rounded-xl font-bold" placeholder="Moyenne = ? mm">
-                        </div>
-                    </div>
+            <!-- QUESTIONS BOX PLOT -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="card-act3-q1">
+                    <label class="font-bold text-slate-900 block">1. Quelle est la médiane $Me$ commune aux deux machines ?</label>
+                    <input type="text" id="act3-med" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="Me = ? (ex: 10,4 mm)">
                 </div>
 
-                <button onclick="checkAct1()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider les statistiques
-                </button>
-                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2" id="card-act3-q2">
+                    <label class="font-bold text-slate-900 block">2. Écart interquartile $IQR = Q_3 - Q_1$ de la Machine A :</label>
+                    <p class="text-slate-500">Machine A : $Q_1 = 10{,}26$ et $Q_3 = 10{,}54$</p>
+                    <input type="text" id="act3-iqr" class="border rounded-xl p-2.5 w-full font-bold bg-white" placeholder="IQR Machine A = ?">
+                </div>
             </div>
+
+            <div class="p-4 bg-slate-50 rounded-2xl border space-y-2 text-xs" id="card-act3-q3">
+                <label class="font-bold text-slate-900 block">3. Quelle machine est la plus régulière et précise ?</label>
+                <select id="act3-choice" class="border rounded-xl p-2.5 w-full font-bold bg-white">
+                    <option value="">Sélectionnez...</option>
+                    <option value="B">Machine B (boîte et moustaches plus resserrées autour de 10,4 mm)</option>
+                    <option value="A">Machine A (dispersion plus large)</option>
+                </select>
+            </div>
+
+            <button onclick="checkAct3()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-3.5 rounded-2xl shadow-md transition-colors no-print">
+                <i class="fa-solid fa-check-circle mr-2"></i> Valider l'Activité 3
+            </button>
+            <div id="fb-act3" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
         </section>
 
     </main>
 
-    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
+    <!-- JS DES ACTIVITÉS -->
     <script>
-        function checkDiag() {
-            let q1 = document.getElementById('diag-q1').value.trim();
-            let q2 = document.getElementById('diag-q2').value;
-            let fb = document.getElementById('fb-diag');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+        // ACTIVITÉ 1
+        function checkAct1() {
+            let n0 = document.getElementById('act1-n0').value.trim();
+            let n1 = document.getElementById('act1-n1').value.trim();
+            let n2 = document.getElementById('act1-n2').value.trim();
+            let n3 = document.getElementById('act1-n3').value.trim();
+            let n4 = document.getElementById('act1-n4').value.trim();
 
-            if (q1 === "13" && q2 === "EFFECTIF") {
+            let p1 = document.getElementById('act1-p1').value.trim();
+            let p2 = document.getElementById('act1-p2').value.trim();
+            let p3 = document.getElementById('act1-p3').value.trim();
+            let p4 = document.getElementById('act1-p4').value.trim();
+            let ptot = document.getElementById('act1-ptot').value.trim();
+
+            let moy = document.getElementById('act1-moy').value.trim();
+            let med = document.getElementById('act1-med').value.trim();
+
+            let score = 0;
+            if (n0 === '16' && n1 === '18' && n2 === '11' && n3 === '4' && n4 === '1') score += 2;
+            if (p1 === '18' && p2 === '22' && p3 === '12' && p4 === '4' && ptot === '56') score += 2;
+            if (['1.12', '1,12'].indexOf(moy) !== -1) score += 1;
+            if (['1', '1.0', '1,0'].indexOf(med) !== -1) score += 1;
+
+            let fb = document.getElementById('fb-act1');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            if (score >= 5) {
                 fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! La moyenne est $(10+12+14+16)/4 = 13$ et l'effectif total représente le nombre d'individus.`;
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Activité 1 Validée ! Effectifs : 16, 18, 11, 4, 1. Somme des produits = 56. Moyenne x̄ = 1,12 défauts/lot. Médiane Me = 1.';
             } else {
                 fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Moyenne = 13 et effectif total = N.`;
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Correction Activité 1 : Effectifs n_i = (16, 18, 11, 4, 1). Somme ∑(n_i × x_i) = 56. Moyenne = 56/50 = 1,12. Médiane Me = 1.';
             }
         }
 
-        function checkAct1() {
-            let prod = document.getElementById('act1-prod').value.trim();
-            let moy = document.getElementById('act1-moy').value.trim();
-            let fb = document.getElementById('fb-act1');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+        // ACTIVITÉ 2
+        function checkAct2() {
+            let x1 = document.getElementById('act2-x1').value.trim();
+            let x2 = document.getElementById('act2-x2').value.trim();
+            let x3 = document.getElementById('act2-x3').value.trim();
+            let x4 = document.getElementById('act2-x4').value.trim();
 
-            if (prod === "1000" && (moy === "20" || moy === "20.0" || moy === "20,0")) {
+            let p2 = document.getElementById('act2-p2').value.trim();
+            let p3 = document.getElementById('act2-p3').value.trim();
+            let ptot = document.getElementById('act2-ptot').value.trim();
+            let moy = document.getElementById('act2-moy').value.trim();
+
+            let score = 0;
+            if (['12.5', '12,5'].indexOf(x1) !== -1 && ['17.5', '17,5'].indexOf(x2) !== -1 && ['22.5', '22,5'].indexOf(x3) !== -1 && ['27.5', '27,5'].indexOf(x4) !== -1) score += 2;
+            if (['700', '700.0'].indexOf(p2) !== -1 && ['675', '675.0'].indexOf(p3) !== -1 && ['1975', '1975.0', '1 975'].indexOf(ptot) !== -1) score += 2;
+            if (['19.75', '19,75'].indexOf(moy) !== -1) score += 1;
+
+            let fb = document.getElementById('fb-act2');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            if (score >= 4) {
                 fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! Produit total $= 1000\\text{ mm}$, diamètre moyen $\\bar{x} = \\frac{1000}{50} = \\mathbf{20,0\\text{ mm}}$ !`;
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Activité 2 Validée ! Centres x_i = (12.5 ; 17.5 ; 22.5 ; 27.5). Somme = 1 975 kg. Moyenne x̄ = 19,75 kg par colis !';
             } else {
                 fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Produit total = 1000 mm et moyenne = 20,0 mm.`;
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Correction Activité 2 : Centres x_i = (12.5, 17.5, 22.5, 27.5). Produits n_i.x_i = (187.5 ; 700 ; 675 ; 412.5). Somme = 1 975. Moyenne = 19,75 kg.';
+            }
+        }
+
+        // ACTIVITÉ 3
+        function checkAct3() {
+            let med = document.getElementById('act3-med').value.trim();
+            let iqr = document.getElementById('act3-iqr').value.trim();
+            let choice = document.getElementById('act3-choice').value;
+
+            let score = 0;
+            if (['10.4', '10,4'].indexOf(med) !== -1) score += 1;
+            if (['0.28', '0,28'].indexOf(iqr) !== -1) score += 1;
+            if (choice === 'B') score += 1;
+
+            let fb = document.getElementById('fb-act3');
+            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+            if (score === 3) {
+                fb.classList.add('correct-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Activité 3 Validée ! Médiane Me = 10,4 mm. IQR Machine A = 10,54 - 10,26 = 0,28 mm. Machine B est bien la plus régulière !';
+            } else {
+                fb.classList.add('wrong-bg');
+                fb.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Correction Activité 3 : Médiane = 10,4 mm. IQR A = 10,54 - 10,26 = 0,28 mm. Machine B a une boîte très étroite (faible dispersion).';
             }
         }
     </script>
