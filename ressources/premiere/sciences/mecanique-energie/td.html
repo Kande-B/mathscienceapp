@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Mécanique & Énergie (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Mécanique &amp; Énergie</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Fiche d'Entraînement A4 • Corrigés Inclus</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TD &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application pour s'entraîner aux calculs d'énergie cinétique $E_c$, potentielle $E_p$, du travail $W$ et de la puissance $P$.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer la Fiche de TD (PDF A4)
+        </button>
+
+        <!-- EXERCICE 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Conversions de Vitesse et Énergie Cinétique
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>1. Convertir les vitesses suivantes en mètres par seconde (m/s) : $v_1 = 45\text{ km/h}$, $v_2 = 90\text{ km/h}$, $v_3 = 130\text{ km/h}$.</p>
+                <p>2. Une voiture de masse $m = 1200\text{ kg}$ roule à la vitesse $v = 90\text{ km/h}$. Calculer son énergie cinétique $E_c$ en Joules (J) puis en kiloJoules (kJ).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 1
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $v_1 = \frac{45}{3{,}6} = 12{,}5\text{ m/s}$ ; $v_2 = \frac{90}{3{,}6} = 25\text{ m/s}$ ; $v_3 = \frac{130}{3{,}6} \approx 36{,}11\text{ m/s}$.</p>
+                        <p><strong>2.</strong> $v_2 = 25\text{ m/s}$. <br>$E_c = \frac{1}{2} m v^2 = \frac{1}{2} \times 1200 \times (25)^2 = 600 \times 625 = 375\,000\text{ J} = 375\text{ kJ}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Travail d'une Force de Traction
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un chariot de manutention est tiré par un ouvrier qui exerce une force constante horizontale de $F = 350\text{ N}$ sur une distance de $d = 40\text{ m}$.</p>
+                <p>1. Calculer le travail $W$ effectué par cette force.</p>
+                <p>2. Ce travail est-il moteur ou résistant ? Justifier.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 2
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $W = F \times d = 350 \times 40 = 14\,000\text{ J} = 14\text{ kJ}$.</p>
+                        <p><strong>2.</strong> $W > 0$, la force s'exerce dans le sens du déplacement : c'est un **travail moteur**.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Énergie Potentielle de Pesanteur
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un réservoir d'eau de masse $m = 1500\text{ kg}$ est placé sur le toit d'un bâtiment d'atelier à une hauteur de $h = 18\text{ m}$ ($g = 9{,}81\text{ N/kg}$).</p>
+                <p>1. Calculer l'énergie potentielle $E_p$ stockée par le réservoir d'eau.</p>
+                <p>2. Si le réservoir est vidé à moitié, que devient son énergie potentielle ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 3
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $E_p = m \cdot g \cdot h = 1500 \times 9{,}81 \times 18 = 264\,870\text{ J} \approx 264{,}9\text{ kJ}$.</p>
+                        <p><strong>2.</strong> Comme $E_p$ est proportionnelle à la masse $m$, si la masse est divisée par 2 ($750\text{ kg}$), l'énergie potentielle est également **divisée par 2** ($132{,}4\text{ kJ}$).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 4 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Puissance Mécanique d'une Grue de Chantier
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une grue soulève une poutre en acier de masse $m = 600\text{ kg}$ à une hauteur de $h = 25\text{ m}$ en une durée $\Delta t = 20\text{ s}$ ($g = 9{,}81\text{ N/kg}$).</p>
+                <p>1. Calculer le poids $P$ de la poutre et le travail $W$ effectué par le câble de levage.</p>
+                <p>2. Calculer la puissance mécanique utile $P_{utile}$ développée par le moteur de la grue en Watts (W) et en kiloWatts (kW).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 4
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> Poids $P = m \cdot g = 600 \times 9{,}81 = 5886\text{ N}$. <br>Travail $W = P \times h = 5886 \times 25 = 147\,150\text{ J} = 147{,}15\text{ kJ}$.</p>
+                        <p><strong>2.</strong> Puissance $P_{utile} = \frac{W}{\Delta t} = \frac{147150}{20} = 7357{,}5\text{ W} \approx 7{,}36\text{ kW}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 5 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Conservation de l'Énergie Mécanique (Chute Libre)
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un marteau de masse $m = 1{,}5\text{ kg}$ tombe du haut d'un échafaudage de hauteur $h = 20\text{ m}$ sans vitesse initiale ($g = 9{,}81\text{ N/kg}$). On néglige les frottements de l'air.</p>
+                <p>1. Calculer l'énergie mécanique $E_m$ au sommet.</p>
+                <p>2. En utilisant la conservation de l'énergie mécanique, calculer la vitesse d'impact $v$ du marteau lorsqu'il touche le sol ($v = \sqrt{2 g h}$).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 5
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> Au sommet : $v=0 \Rightarrow E_c = 0$. $E_m = E_p = m \cdot g \cdot h = 1{,}5 \times 9{,}81 \times 20 = 294{,}3\text{ J}$.</p>
+                        <p><strong>2.</strong> Au sol : $h=0 \Rightarrow E_p = 0 \Rightarrow E_c = E_m = 294{,}3\text{ J}$. <br>$v = \sqrt{\frac{2 E_c}{m}} = \sqrt{\frac{2 \times 294{,}3}{1{,}5}} = \sqrt{392{,}4} \approx 19{,}81\text{ m/s}$ (soit $71{,}3\text{ km/h}$).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 6 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Freinage et Dissipation d'Énergie Thermique
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un chariot élévateur d'usine de masse totale $m = 2200\text{ kg}$ roule à $v = 18\text{ km/h}$ ($5\text{ m/s}$). Le conducteur stoppe le véhicule sur une distance de $d = 4\text{ m}$.</p>
+                <p>1. Calculer l'énergie cinétique initiale $E_c$ du chariot.</p>
+                <p>2. En déduire la force de freinage moyenne $F_{frot}$ développée par les freins ($W_{frot} = E_c = F_{frot} \times d$).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 6
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $E_c = \frac{1}{2} \times 2200 \times 5^2 = 1100 \times 25 = 27\,500\text{ J} = 27{,}5\text{ kJ}$.</p>
+                        <p><strong>2.</strong> $F_{frot} = \frac{E_c}{d} = \frac{27500}{4} = 6875\text{ N}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 7 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Rendement Énergétique d'un Système de Levage
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un treuil électrique d'atelier absorbe une puissance électrique de $P_{elec} = 5\text{ kW}$ ($5000\text{ W}$) pendant $\Delta t = 10\text{ s}$. Il élève une masse de $m = 300\text{ kg}$ sur une hauteur de $h = 12\text{ m}$ ($g = 9{,}81\text{ N/kg}$).</p>
+                <p>1. Calculer l'énergie électrique consommée $E_{elec} = P_{elec} \times \Delta t$.</p>
+                <p>2. Calculer l'énergie potentielle utile gagnée par la masse $E_p = m \cdot g \cdot h$.</p>
+                <p>3. Calculer le rendement du treuil $\eta = \frac{E_p}{E_{elec}} \times 100$.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 7
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $E_{elec} = 5000 \times 10 = 50\,000\text{ J} = 50\text{ kJ}$.</p>
+                        <p><strong>2.</strong> $E_p = 300 \times 9{,}81 \times 12 = 35\,316\text{ J} \approx 35{,}32\text{ kJ}$.</p>
+                        <p><strong>3.</strong> Rendement : $\eta = \frac{35316}{50000} \times 100 = 70{,}63\% \approx 70{,}6\%$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 8 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Problème Synthèse Type Examen / CCF
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Dans un parc d'attraction, un wagonnet de masse $m = 400\text{ kg}$ s'élance sans vitesse initiale du haut d'un sommet A situé à la hauteur $h_A = 25\text{ m}$. Il descend jusqu'au point B au niveau du sol ($h_B = 0\text{ m}$), puis remonte sur une seconde bosse au point C ($h_C = 15\text{ m}$). On néglige dans un premier temps les frottements ($g = 9{,}81\text{ N/kg}$).</p>
+                <p>1. Calculer la vitesse théorique $v_B$ du wagonnet au point B au bas de la descente.</p>
+                <p>2. Calculer la vitesse théorique $v_C$ au sommet de la seconde bosse au point C.</p>
+                <p>3. En réalité, en raison des frottements, la vitesse au point C n'est que de $v_{C, réel} = 12\text{ m/s}$. Calculer l'énergie mécanique perdue sous forme de chaleur entre A et C.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 8
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> Au point A : $E_{mA} = m \cdot g \cdot h_A = 400 \times 9{,}81 \times 25 = 98\,100\text{ J}$. <br>Au point B : $E_p = 0 \Rightarrow E_{cB} = 98100\text{ J} \Rightarrow v_B = \sqrt{\frac{2 \times 98100}{400}} = \sqrt{490{,}5} \approx 22{,}15\text{ m/s}$ ($79{,}7\text{ km/h}$).</p>
+                        <p><strong>2.</strong> Au point C théorique : $E_{pC} = 400 \times 9{,}81 \times 15 = 58\,860\text{ J}$. <br>$E_{cC} = E_{mA} - E_{pC} = 98100 - 58860 = 39\,240\text{ J}$. <br>$v_C = \sqrt{\frac{2 \times 39240}{400}} = \sqrt{196{,}2} \approx 14{,}01\text{ m/s}$ ($50{,}4\text{ km/h}$).</p>
+                        <p><strong>3.</strong> Énergie mécanique réelle en C : $E_{mC, réel} = E_{pC} + E_{cC, réel} = 58860 + \frac{1}{2} \times 400 \times 12^2 = 58860 + 28800 = 87\,660\text{ J}$. <br>Perte par frottement : $E_{frot} = E_{mA} - E_{mC, réel} = 98100 - 87660 = 10\,440\text{ J} = 10{,}44\text{ kJ}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

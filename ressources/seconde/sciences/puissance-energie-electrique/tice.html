@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Puissance & Énergie (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #d97706;
+            color: white;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Seconde Professionnelle • Physique-Chimie</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Puissance &amp; Énergie Électriques</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Mesure de Puissance &amp; Consommation Énergétique</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : manipulation physique avec wattmètre et multimètres ou banc de puissance virtuel Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Sécurité Électrique
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Couper l'alimentation stabilisée avant toute modification de circuit.</li>
+                        <li>• Le voltmètre se branche en dérivation (parallèle).</li>
+                        <li>• L'ampèremètre se branche impérativement en série !</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-amber-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-[#1e293b] fa-plug-circle-bolt text-amber-500"></i> Alimentation DC 12V
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-cyan-500"></i> Wattmètre Numérique
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-yellow-500"></i> Récepteurs 6W, 12W, 24W
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-indigo-500"></i> Chronomètre &amp; Câbles
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Câblage du Circuit de Puissance :</strong>
+                            Réaliser le circuit série comprenant l'alimentation 12V, l'ampèremètre et la première lampe ($6\text{ W}$). Brancher le voltmètre en dérivation aux bornes de la lampe.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure de $U$ et $I$ sous $12\text{ V}$ :</strong>
+                            Allumer l'alimentation stabilisée. Ajuster la tension à $U = 12{,}0\text{ V}$. Relever l'intensité $I_1$ affichée par l'ampèremètre.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul du Produit $P_{calc} = U \cdot I$ :</strong>
+                            Effectuer le produit $U \cdot I$ et comparer le résultat avec la valeur $P_{watt}$ mesurée directement sur le wattmètre numérique.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Tests des Récepteurs de $12\text{ W}$ et $24\text{ W}$ :</strong>
+                            Remplacer la lampe par le modèle $12\text{ W}$ puis $24\text{ W}$. Relever les valeurs de $U, I, P$ pour chaque récepteur.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure de l'Énergie Consommée $E = P \cdot t$ :</strong>
+                            Laisser la lampe de $12\text{ W}$ allumée pendant $t = 5\text{ minutes}$ ($300\text{ s}$). Calculer l'énergie $E$ consommée en Joules et en Wh.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation Pédagogique :</strong>
+                            Conclure sur la vérification de la loi de puissance $P = U \cdot I$ et de consommation $E = P \cdot t$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-amber-600"></i> Tableau de Relevé des Mesures de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Récepteur Électrique Tested</th>
+                                <th class="p-3 font-bold border border-slate-200">Tension $U$ mesurée (V)</th>
+                                <th class="p-3 font-bold border border-slate-200">Intensité $I$ mesurée (A)</th>
+                                <th class="p-3 font-bold border border-slate-200">Produit $U \cdot I$ calculé (W)</th>
+                                <th class="p-3 font-bold border border-slate-200">Puissance Wattmètre $P_{watt}$ (W)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Lampe 6 W / 12 V</td>
+                                <td class="p-3"><input type="number" step="0.1" id="u-6w" value="12.0" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="i-6w" placeholder="ex: 0.50" oninput="calcRealPower()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                                <td class="p-3 font-extrabold text-amber-800" id="p-calc-6w">-- W</td>
+                                <td class="p-3"><input type="number" step="0.1" id="pw-6w" placeholder="ex: 6.0" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Lampe 12 W / 12 V</td>
+                                <td class="p-3"><input type="number" step="0.1" id="u-12w" value="12.0" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="i-12w" placeholder="ex: 1.00" oninput="calcRealPower()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                                <td class="p-3 font-extrabold text-amber-800" id="p-calc-12w">-- W</td>
+                                <td class="p-3"><input type="number" step="0.1" id="pw-12w" placeholder="ex: 12.0" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Lampe 24 W / 12 V</td>
+                                <td class="p-3"><input type="number" step="0.1" id="u-24w" value="12.0" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="i-24w" placeholder="ex: 2.00" oninput="calcRealPower()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                                <td class="p-3 font-extrabold text-amber-800" id="p-calc-24w">-- W</td>
+                                <td class="p-3"><input type="number" step="0.1" id="pw-24w" placeholder="ex: 24.0" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-amber-700"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Circuit de Puissance &amp; Compteur Virtuel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Wattmètre &amp; Compteur d'Énergie</h2>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Circuit Bench -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-amber-400">
+                            <span>CIRCUIT ÉLECTRIQUE P = U * I</span>
+                            <span id="sim-power-text">U = 12.0 V | I = 2.00 A • P = 24.0 W</span>
+                        </div>
+                        <canvas id="powerCanvas" width="600" height="260" class="w-full h-56 bg-black rounded-xl border border-amber-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Tension d'Alimentation U (V)</label>
+                                <input type="range" id="sim-u" min="0" max="24" step="1" value="12" oninput="updateSimPower()" class="w-full accent-amber-500">
+                                <span class="font-mono text-amber-300 font-bold text-xs" id="val-sim-u">U = 12.0 V</span>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Résistance de Charge R (Ω)</label>
+                                <input type="range" id="sim-r" min="2" max="48" step="2" value="6" oninput="updateSimPower()" class="w-full accent-yellow-500">
+                                <span class="font-mono text-yellow-300 font-bold text-xs" id="val-sim-r">R = 6.0 Ω</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">AFFICHEURS DIGITAUX</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Puissance Instantanée P</span>
+                            <span class="text-2xl font-bold font-mono text-amber-400" id="meter-P-val">24.0 W</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Énergie Consommée (Joules)</span>
+                            <span class="text-lg font-bold font-mono text-emerald-400" id="meter-E-joules">0 J</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Énergie Consommée (Wh)</span>
+                            <span class="text-lg font-bold font-mono text-cyan-400" id="meter-E-wh">0.000 Wh</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-amber-600"></i> Défi Mystère : Calculer la Puissance de la Lampe
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un projecteur de chantier est branché sous la tension du secteur $U = 230\text{ V}$. L'ampèremètre indique une intensité $I = 2{,}0\text{ A}$. Quelle est la puissance $P$ de ce projecteur en Watts ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="10" id="user-power-guess" placeholder="Votre réponse en Watts" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessPower()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Puissance
+                    </button>
+                </div>
+                <div id="guess-result-power" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-amber-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-amber-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initPowerCanvas();
+            }
+        }
+
+        function calcRealPower() {
+            const u6 = parseFloat(document.getElementById('u-6w').value);
+            const i6 = parseFloat(document.getElementById('i-6w').value);
+            if (!isNaN(u6) && !isNaN(i6)) {
+                document.getElementById('p-calc-6w').innerText = (u6 * i6).toFixed(2) + " W";
+            }
+
+            const u12 = parseFloat(document.getElementById('u-12w').value);
+            const i12 = parseFloat(document.getElementById('i-12w').value);
+            if (!isNaN(u12) && !isNaN(i12)) {
+                document.getElementById('p-calc-12w').innerText = (u12 * i12).toFixed(2) + " W";
+            }
+
+            const u24 = parseFloat(document.getElementById('u-24w').value);
+            const i24 = parseFloat(document.getElementById('i-24w').value);
+            if (!isNaN(u24) && !isNaN(i24)) {
+                document.getElementById('p-calc-24w').innerText = (u24 * i24).toFixed(2) + " W";
+            }
+        }
+
+        let canvas, ctx;
+        let accumJoules = 0;
+        let lastTime = 0;
+
+        function initPowerCanvas() {
+            canvas = document.getElementById('powerCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            lastTime = performance.now();
+            requestAnimationFrame(drawPower);
+            updateSimPower();
+        }
+
+        function drawPower(now) {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            const dt = (now - lastTime) / 1000; // seconds
+            lastTime = now;
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const U = parseFloat(document.getElementById('sim-u').value);
+            const R = parseFloat(document.getElementById('sim-r').value);
+            const I = R > 0 ? U / R : 0;
+            const P = U * I;
+
+            // Accumulate energy
+            if (P > 0 && dt < 1) {
+                accumJoules += P * dt * 5; // speed up time x5 for demo
+            }
+
+            // Update displays
+            document.getElementById('meter-P-val').innerText = P.toFixed(1) + " W";
+            document.getElementById('meter-E-joules').innerText = Math.round(accumJoules) + " J";
+            document.getElementById('meter-E-wh').innerText = (accumJoules / 3600).toFixed(3) + " Wh";
+
+            // Draw Wires (Blue rectangle circuit)
+            const margin = 40;
+            const w = canvas.width - margin * 2;
+            const h = canvas.height - margin * 2;
+
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(margin, margin, w, h);
+
+            // Draw Generator DC (Left)
+            ctx.fillStyle = '#1e293b';
+            ctx.fillRect(margin - 15, margin + h / 2 - 25, 30, 50);
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(margin - 15, margin + h / 2 - 25, 30, 50);
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = 'bold 12px Outfit';
+            ctx.fillText("DC", margin - 8, margin + h / 2 + 4);
+
+            // Draw Lamp / Load (Right)
+            const rx = margin + w;
+            const ry = margin + h / 2;
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath();
+            ctx.arc(rx, ry, 22, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(rx, ry, 22, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Glow intensity based on Power
+            if (P > 0) {
+                const glow = Math.min(P / 80, 1.0);
+                ctx.fillStyle = `rgba(253, 224, 71, ${glow * 0.7})`;
+                ctx.beginPath();
+                ctx.arc(rx, ry, 35, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Electron Flow Dots Animation
+            if (I > 0) {
+                const speed = (now * 0.05 * I) % 40;
+                ctx.fillStyle = '#facc15';
+
+                // Top wire
+                for (let x = margin; x <= margin + w; x += 40) {
+                    const px = (x + speed - margin) % w + margin;
+                    ctx.beginPath();
+                    ctx.arc(px, margin, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            requestAnimationFrame(drawPower);
+        }
+
+        function updateSimPower() {
+            const U = parseFloat(document.getElementById('sim-u').value);
+            const R = parseFloat(document.getElementById('sim-r').value);
+            const I = R > 0 ? U / R : 0;
+            const P = U * I;
+
+            document.getElementById('val-sim-u').innerText = `U = ${U.toFixed(1)} V`;
+            document.getElementById('val-sim-r').innerText = `R = ${R.toFixed(1)} Ω`;
+            document.getElementById('sim-power-text').innerText = `U = ${U.toFixed(1)} V | I = ${I.toFixed(2)} A • P = ${P.toFixed(1)} W`;
+        }
+
+        function checkGuessPower() {
+            const ans = parseFloat(document.getElementById('user-power-guess').value);
+            const target = 460; // P = U * I = 230 * 2 = 460 W
+            const res = document.getElementById('guess-result-power');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Bravo ! P = U × I = 230 V × 2,0 A = 460 W !";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Incorrect. Indice : Effectuez le produit P = U × I en multipliant 230 par 2,0.";
+            }
+        }
+    </script>
+</body>
+</html>

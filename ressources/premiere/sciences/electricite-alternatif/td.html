@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Courant Alternatif Sinusoïdal (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f5f3ff', 100: '#ede9fe', 500: '#8b5cf6', 600: '#7c3aed', 900: '#4c1d95' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Électricité : Courant Alternatif Sinusoïdal</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> Oscilloscope Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Fiche d'Entraînement A4 • Corrigés Inclus</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TD &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application pour s'entraîner aux calculs de fréquence, période, tension efficace et à l'analyse d'oscillogrammes.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer la Fiche de TD (PDF A4)
+        </button>
+
+        <!-- EXERCICE 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Conversions et Calculs de Période et Fréquence
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>1. Convertir les périodes suivantes en secondes : $T_1 = 10\text{ ms}$, $T_2 = 2{,}5\text{ ms}$, $T_3 = 500\text{ ms}$.</p>
+                <p>2. Calculer la fréquence $f$ en Hertz associée à chacune de ces périodes à l'aide de la formule $f = \frac{1}{T}$.</p>
+                <p>3. Convertir une fréquence de $f = 2500\text{ Hz}$ en kiloHertz (kHz).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 1
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $T_1 = 0{,}01\text{ s}$, $T_2 = 0{,}0025\text{ s}$, $T_3 = 0{,}5\text{ s}$.</p>
+                        <p><strong>2.</strong> $f_1 = 1 / 0{,}01 = 100\text{ Hz}$ ; $f_2 = 1 / 0{,}0025 = 400\text{ Hz}$ ; $f_3 = 1 / 0{,}5 = 2\text{ Hz}$.</p>
+                        <p><strong>3.</strong> $2500\text{ Hz} = 2{,}5\text{ kHz}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Tension Maximale et Tension Efficace
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>1. Un générateur alternatif fournit une tension efficace mesurée au voltmètre de $U_{eff} = 24\text{ V}$. Calculer la valeur maximale $U_{max}$.</p>
+                <p>2. L'oscillogramme d'une tension indique une crête maximale de $U_{max} = 17\text{ V}$. Quelle valeur affichera un voltmètre branché en mode AC ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 2
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $U_{max} = U_{eff} \times \sqrt{2} = 24 \times 1{,}414 = 33{,}94\text{ V}$.</p>
+                        <p><strong>2.</strong> $U_{eff} = \frac{U_{max}}{\sqrt{2}} = \frac{17}{1{,}414} \approx 12\text{ V}$. Le voltmètre affichera $12\text{ V}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Lecture d'un Oscillogramme Réseau
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>On observe un signal sinusoïdal sur l'écran d'un oscilloscope avec les réglages suivants :</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Sensibilité verticale : $S_v = 5\text{ V/div}$</li>
+                    <li>Base de temps : $S_h = 2\text{ ms/div}$</li>
+                </ul>
+                <p>Sur l'écran, le sommet culmine à 4 divisions de l'axe central, et un motif complet s'étend sur 5 divisions horizontales.</p>
+                <p>1. Déterminer la tension maximale $U_{max}$ et la tension efficace $U_{eff}$.</p>
+                <p>2. Déterminer la période $T$ en ms puis en s, et calculer la fréquence $f$.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 3
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $U_{max} = 4\text{ div} \times 5\text{ V/div} = 20\text{ V}$. <br>$U_{eff} = \frac{20}{1{,}414} \approx 14{,}14\text{ V}$.</p>
+                        <p><strong>2.</strong> $T = 5\text{ div} \times 2\text{ ms/div} = 10\text{ ms} = 0{,}01\text{ s}$. <br>Fréquence : $f = \frac{1}{0{,}01} = 100\text{ Hz}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 4 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Plaque Signalétique d'un Groupe Électrogène
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>La plaque signalétique d'un groupe électrogène de chantier porte les indications suivantes :</p>
+                <div class="bg-slate-900 text-amber-400 font-mono p-3 rounded-xl text-center font-bold">
+                    OUTPUT : 230 V ~ / 50 Hz / 3500 W
+                </div>
+                <p>1. Que signifie le symbole $\sim$ ?</p>
+                <p>2. Calculer la tension maximale $U_{max}$ délivrée par ce groupe.</p>
+                <p>3. Calculer la période $T$ en millisecondes du signal de sortie.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 4
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> Le symbole $\sim$ indique que la tension est alternative sinusoïdale (AC).</p>
+                        <p><strong>2.</strong> $U_{max} = 230 \times \sqrt{2} \approx 325\text{ V}$.</p>
+                        <p><strong>3.</strong> $T = \frac{1}{50} = 0{,}02\text{ s} = 20\text{ ms}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 5 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Transformateur de Sécurité (230V / 24V)
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Dans une armoire électrique, un transformateur abaisse la tension du secteur de $230\text{ V}$ à $24\text{ V}$ efficace (Très Basse Tension de Sécurité TBTS) pour alimenter les boutons de commande.</p>
+                <p>1. Calculer la tension maximale de sortie $U_{2,max}$ du transformateur.</p>
+                <p>2. La fréquence du signal change-t-elle au secondaire du transformateur ? Justifier.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 5
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $U_{2,max} = 24 \times \sqrt{2} \approx 33{,}9\text{ V}$.</p>
+                        <p><strong>2.</strong> Non, un transformateur modifie l'amplitude de la tension mais conserve exactement la même fréquence ($50\text{ Hz}$).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 6 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Réglage d'un Oscilloscope pour GBF
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un GBF produit une tension sinusoïdale de fréquence $f = 400\text{ Hz}$ et d'amplitude $U_{max} = 6\text{ V}$.</p>
+                <p>1. Calculer la période $T$ du signal en ms.</p>
+                <p>2. Pour afficher exactement 2 motifs complets sur un écran comportant 8 carreaux horizontaux, quelle base de temps $S_h$ faut-il choisir ?</p>
+                <p>3. Pour que l'onde occupe 3 carreaux en hauteur ($Y_{max} = 3\text{ div}$), quelle sensibilité verticale $S_v$ (V/div) faut-il régler ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 6
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $T = \frac{1}{400} = 0{,}0025\text{ s} = 2{,}5\text{ ms}$.</p>
+                        <p><strong>2.</strong> 2 motifs occupent $2 \times 2{,}5 = 5\text{ ms}$. Durée par carreau sur 8 div : $S_h = \frac{5\text{ ms}}{8\text{ div}} \approx 0{,}625\text{ ms/div}$ (ou régler $0{,}5\text{ ms/div}$ pour $4\text{ ms}$ d'écran).</p>
+                        <p><strong>3.</strong> $S_v = \frac{U_{max}}{Y_{max}} = \frac{6\text{ V}}{3\text{ div}} = 2\text{ V/div}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 7 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Signaux Acoustiques et Fréquences Élevées
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>1. Le son "La 3" de référence a une fréquence de $f = 440\text{ Hz}$. Calculer sa période $T$ en millisecondes.</p>
+                <p>2. Un capteur d'ultrasons pour radar de recul automobile émet une onde électrique alternative à $f = 40\text{ kHz}$. Calculer sa période $T$ en microsecondes ($\mu\text{s}$, avec $1\mu\text{s} = 10^{-6}\text{ s}$).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 7
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $T = \frac{1}{440} \approx 0{,}00227\text{ s} = 2{,}27\text{ ms}$.</p>
+                        <p><strong>2.</strong> $f = 40\text{ kHz} = 40\,000\text{ Hz}$. $T = \frac{1}{40\,000} = 0{,}000025\text{ s} = 25\,\mu\text{s}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 8 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Problème Synthèse Type Examen / CCF
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Dans un atelier de maintenance, un réseau monophasé alimente une machine de découpe. Suite à des baisses de tension, un élève mesure la tension au voltmètre et obtient $U_{eff} = 195\text{ V}$.</p>
+                <p>1. Calculer la tension maximale $U_{max}$ correspondante.</p>
+                <p>2. Si le secteur théorique doit délivrer $230\text{ V} \pm 10\%$, calculer la plage de tension efficace acceptable ($U_{min}$ et $U_{max,eff}$). La tension de $195\text{ V}$ est-elle conforme ?</p>
+                <p>3. Quel risque cela présente-t-il pour les moteurs électriques de la machine ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 8
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $U_{max} = 195 \times \sqrt{2} \approx 275{,}7\text{ V}$.</p>
+                        <p><strong>2.</strong> $10\%$ de $230\text{ V} = 23\text{ V}$. Plage acceptable : $207\text{ V}$ à $253\text{ V}$. La tension de $195\text{ V}$ est sous le seuil minimal de $207\text{ V}$, elle n'est donc **pas conforme**.</p>
+                        <p><strong>3.</strong> Une sous-tension provoque une augmentation de l'intensité du courant absorbé par les moteurs (pour maintenir la puissance), entraînant une surchauffe par effet Joule et un risque de grillage des enroulements.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

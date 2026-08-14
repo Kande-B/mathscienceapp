@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Sécurité Chimique (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #e11d48;
+            color: white;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-rose-500/20 border border-rose-400/30 text-rose-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-rose-400">Seconde Professionnelle • Physique-Chimie</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Sécurité des Produits Chimiques</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-rose-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Audit des Étiquettes SGH &amp; Choix des EPI</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : manipulation physique avec flacons et fiches FDS de paillasse ou atelier d'audit virtuel Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> EPI de Paillasse Obligatoires
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Port obligatoire de la blouse en coton fermée.</li>
+                        <li>• Lunettes de sécurité avec protections latérales.</li>
+                        <li>• Gants étanches en nitrile/néoprène.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-rose-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-flask text-rose-500"></i> Flacons factices A, B, C, D
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-file-medical text-cyan-500"></i> Fiches FDS plastifiées
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-check text-emerald-500"></i> Grille d'audit CLP/SGH
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-glasses text-indigo-500"></i> Baie des EPI du labo
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-rose-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Équipement de Protection :</strong>
+                            Enfiler la blouse coton fermée, chausser les lunettes de sécurité et enfiler les gants en nitrile.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Analyse du Flacon A (Eau de Javel) :</strong>
+                            Observer le flacon A. Relever le pictogramme SGH principal, la mention d'avertissement et la phrase H.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Analyse du Flacon B (Acide Chlorhydrique) :</strong>
+                            Vérifier le pictogramme *Corrosif* sur le flacon B et relever la phrase de danger H314.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Analyse des Flacons C (Acétone) et D (Soude) :</strong>
+                            Identifier le pictogramme *Inflammable* sur C et le pictogramme *Corrosif* sur D.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Consultation des FDS (Rubrique 8) :</strong>
+                            Rechercher dans les fiches FDS plastifiées les EPI spécifiques exigés pour chaque produit.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation de l'Audit :</strong>
+                            Consigner l'ensemble des données dans la grille d'audit de sécurité de paillasse ci-dessous.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-rose-600"></i> Grille d'Audit de Sécurité des Flacons de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Code Flacon</th>
+                                <th class="p-3 font-bold border border-slate-200">Nom du Produit Chimique</th>
+                                <th class="p-3 font-bold border border-slate-200">Pictogramme SGH Principal</th>
+                                <th class="p-3 font-bold border border-slate-200">Mention d'Avertissement</th>
+                                <th class="p-3 font-bold border border-slate-200">EPI Obligatoire (Rubrique 8 FDS)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-rose-700">Flacon A</td>
+                                <td class="p-3"><input type="text" value="Eau de Javel (Solution hypochlorite)" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold"></td>
+                                <td class="p-3"><select id="picto-a" onchange="checkRealAudit()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-rose-700"><option value="">Sélectionner...</option><option value="corrosif">Corrosif</option><option value="nocif">Nocif / Irritant</option><option value="environnement">Environnement</option></select></td>
+                                <td class="p-3"><select id="warn-a" onchange="checkRealAudit()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-rose-700"><option value="">Sélectionner...</option><option value="danger">DANGER</option><option value="attention">ATTENTION</option></select></td>
+                                <td class="p-3"><input type="text" placeholder="ex: Lunettes + Gants Nitrile" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-rose-700">Flacon B</td>
+                                <td class="p-3"><input type="text" value="Acide Chlorhydrique (37%)" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold"></td>
+                                <td class="p-3"><select id="picto-b" onchange="checkRealAudit()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-rose-700"><option value="">Sélectionner...</option><option value="corrosif">Corrosif</option><option value="toxique">Toxicité Aiguë</option><option value="inflammable">Inflammable</option></select></td>
+                                <td class="p-3"><select id="warn-b" onchange="checkRealAudit()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-rose-700"><option value="">Sélectionner...</option><option value="danger">DANGER</option><option value="attention">ATTENTION</option></select></td>
+                                <td class="p-3"><input type="text" placeholder="ex: Blouse + Lunettes + Gants Nitrile + Hotte" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-rose-700">Flacon C</td>
+                                <td class="p-3"><input type="text" value="Acétone Pur Dégraissant" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold"></td>
+                                <td class="p-3"><select id="picto-c" onchange="checkRealAudit()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-rose-700"><option value="">Sélectionner...</option><option value="inflammable">Inflammable</option><option value="explosif">Explosif</option><option value="comburant">Comburant</option></select></td>
+                                <td class="p-3"><select id="warn-c" onchange="checkRealAudit()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-rose-700"><option value="">Sélectionner...</option><option value="danger">DANGER</option><option value="attention">ATTENTION</option></select></td>
+                                <td class="p-3"><input type="text" placeholder="ex: Lunettes + Gants Butyl" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-semibold"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-audit-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Atelier d'Audit Virtuel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur d'Étiquetage SGH &amp; Baie des EPI</h2>
+                    </div>
+                    <!-- Sélecteur de Réactif -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-slate-300">Flacon à Auditer :</label>
+                        <select id="sim-chemical" onchange="updateSimChemical()" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-3 py-2 focus:ring-rose-400">
+                            <option value="acetone">Acétone Dégraissant (Solvant)</option>
+                            <option value="acide">Acide Chlorhydrique Concentré</option>
+                            <option value="soude">Soude Caustique (Décapant)</option>
+                            <option value="javel">Eau de Javel Concentrée</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Chemical Bench -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-rose-400">
+                            <span>FLACON CHIMIQUE &amp; ÉTIQUETTE SGH</span>
+                            <span id="sim-chem-title">ACÉTONE DÉGRAISSANT • H225</span>
+                        </div>
+                        <canvas id="chemCanvas" width="600" height="260" class="w-full h-56 bg-black rounded-xl border border-rose-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                            <button onclick="selectSimPicto('inflammable')" class="bg-slate-800 hover:bg-slate-700 text-white p-2 rounded-xl border border-slate-700 text-[11px] font-bold">
+                                🔥 Inflammable
+                            </button>
+                            <button onclick="selectSimPicto('corrosif')" class="bg-slate-800 hover:bg-slate-700 text-white p-2 rounded-xl border border-slate-700 text-[11px] font-bold">
+                                🧪 Corrosif
+                            </button>
+                            <button onclick="selectSimPicto('toxique')" class="bg-slate-800 hover:bg-slate-700 text-white p-2 rounded-xl border border-slate-700 text-[11px] font-bold">
+                                ☠️ Toxicité Aiguë
+                            </button>
+                            <button onclick="selectSimPicto('environnement')" class="bg-slate-800 hover:bg-slate-700 text-white p-2 rounded-xl border border-slate-700 text-[11px] font-bold">
+                                🐟 Environnement
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-rose-400 uppercase tracking-wider">ÉTIQUETTE SGH ASSOCIÉE</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Mention d'Avertissement</span>
+                            <span class="text-xl font-bold font-mono text-rose-400" id="sim-warn-val">DANGER</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Phrase H principale</span>
+                            <span class="text-xs font-bold font-mono text-amber-300" id="sim-phrase-h">H225 : Liquide très inflammable</span>
+                        </div>
+
+                        <div id="sim-audit-status" class="w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-rose-950/40 border-rose-500 text-rose-400">
+                            SÉLECTIONNER LE PICTOGRAMME EXACT
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-rose-600"></i> Défi Mystère : Trouver le Pictogramme de l'Acide Chlorhydrique
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un flacon d'acide chlorhydrique concentré réagit violemment avec les métaux et provoque des brûlures de la peau. Quel pictogramme SGH faut-il coller en priorité sur le flacon ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <select id="user-picto-guess" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                        <option value="">Choisir le pictogramme...</option>
+                        <option value="inflammable">Inflammable</option>
+                        <option value="corrosif">Corrosif</option>
+                        <option value="explosif">Explosif</option>
+                        <option value="gaz">Gaz sous pression</option>
+                    </select>
+                    <button onclick="checkGuessPicto()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider le Pictogramme
+                    </button>
+                </div>
+                <div id="guess-result-picto" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-rose-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-rose-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initChemCanvas();
+            }
+        }
+
+        function checkRealAudit() {
+            const pa = document.getElementById('picto-a').value;
+            const pb = document.getElementById('picto-b').value;
+            const pc = document.getElementById('picto-c').value;
+            const status = document.getElementById('real-audit-status');
+
+            status.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-amber-100', 'text-amber-900');
+
+            if (pa === 'nocif' && pb === 'corrosif' && pc === 'inflammable') {
+                status.classList.add('bg-emerald-100', 'text-emerald-900');
+                status.innerHTML = "🎉 Audit paillasse 100% conforme ! Les pictogrammes SGH sélectionnés sont exacts.";
+            } else {
+                status.classList.add('bg-amber-100', 'text-amber-900');
+                status.innerHTML = "⚠️ Vérifiez vos sélections : A = Nocif/Irritant, B = Corrosif, C = Inflammable.";
+            }
+        }
+
+        let canvas, ctx;
+        let selectedPicto = "";
+
+        const chemicalDB = {
+            acetone: { name: "ACÉTONE DÉGRAISSANT", correctPicto: "inflammable", warn: "DANGER", phrase: "H225 : Liquide très inflammable" },
+            acide: { name: "ACIDE CHLORHYDRIQUE", correctPicto: "corrosif", warn: "DANGER", phrase: "H314 : Provoque de graves brûlures" },
+            soude: { name: "SOUDE CAUSTIQUE", correctPicto: "corrosif", warn: "DANGER", phrase: "H314 : Corrosif pour la peau et yeux" },
+            javel: { name: "EAU DE JAVEL", correctPicto: "environnement", warn: "ATTENTION", phrase: "H400 : Toxique pour les organismes aquatiques" }
+        };
+
+        function initChemCanvas() {
+            canvas = document.getElementById('chemCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawChem);
+            updateSimChemical();
+        }
+
+        function selectSimPicto(picto) {
+            selectedPicto = picto;
+            const currentChem = document.getElementById('sim-chemical').value;
+            const target = chemicalDB[currentChem].correctPicto;
+            const status = document.getElementById('sim-audit-status');
+
+            if (selectedPicto === target) {
+                status.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400";
+                status.innerText = "🎉 PICTOGRAMME SGH VALIDE !";
+            } else {
+                status.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-rose-950/40 border-rose-500 text-rose-400";
+                status.innerText = "❌ PICTOGRAMME INCORRECT. RÉESSAYER";
+            }
+        }
+
+        function drawChem() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2 + 10;
+
+            // Draw Bottle
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(cx - 60, cy - 70, 120, 140);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(cx - 60, cy - 70, 120, 140);
+
+            // Bottle Neck & Cap
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(cx - 25, cy - 95, 50, 25);
+            ctx.strokeRect(cx - 25, cy - 95, 50, 25);
+
+            // Bottle Label
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(cx - 50, cy - 50, 100, 100);
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.strokeRect(cx - 50, cy - 50, 100, 100);
+
+            // SGH Diamond Outline on Label
+            const dx = cx;
+            const dy = cy + 10;
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(dx, dy - 20);
+            ctx.lineTo(dx + 20, dy);
+            ctx.lineTo(dx, dy + 20);
+            ctx.lineTo(dx - 20, dy);
+            ctx.closePath();
+            ctx.stroke();
+
+            // Label Title
+            const currentChem = document.getElementById('sim-chemical').value;
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 10px Outfit';
+            ctx.fillText(chemicalDB[currentChem].name.substring(0, 14), cx - 45, cy - 35);
+
+            // Drawn Icon inside Diamond if selected
+            if (selectedPicto) {
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 12px FontAwesome';
+                let symbol = "⚠️";
+                if (selectedPicto === 'inflammable') symbol = "🔥";
+                if (selectedPicto === 'corrosif') symbol = "🧪";
+                if (selectedPicto === 'toxique') symbol = "☠️";
+                if (selectedPicto === 'environnement') symbol = "🐟";
+                ctx.fillText(symbol, dx - 7, dy + 5);
+            }
+
+            requestAnimationFrame(drawChem);
+        }
+
+        function updateSimChemical() {
+            const currentChem = document.getElementById('sim-chemical').value;
+            const data = chemicalDB[currentChem];
+
+            document.getElementById('sim-chem-title').innerText = `${data.name} • ${data.warn}`;
+            document.getElementById('sim-warn-val').innerText = data.warn;
+            document.getElementById('sim-phrase-h').innerText = data.phrase;
+            selectedPicto = "";
+
+            const status = document.getElementById('sim-audit-status');
+            status.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-rose-950/40 border-rose-500 text-rose-400";
+            status.innerText = "SÉLECTIONNER LE PICTOGRAMME EXACT";
+        }
+
+        function checkGuessPicto() {
+            const ans = document.getElementById('user-picto-guess').value;
+            const target = 'corrosif';
+            const res = document.getElementById('guess-result-picto');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Bravo ! L'acide chlorhydrique attaque les métaux et ronge la peau : pictogramme CORROSIF !";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Incorrect. Indice : L'acide chlorhydrique attaque la peau et les métaux. Choisissez Corrosif.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & Ritualisation - Électricité 2nde Pro</title>
+    <title>Automatismes - Circuits Électriques CC (2nde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#fefce8', 100: '#fef9c3', 500: '#eab308', 600: '#ca8a04', 900: '#713f12' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -31,20 +31,30 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-
+        
         .perspective-1000 { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
 
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Sciences -->
+    <!-- Header & Navigation Unifiée -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -52,317 +62,417 @@
                     <i class="fa-solid fa-bolt text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 6 • Seconde Professionnelle Sciences Physiques</span>
-                    <h1 class="text-xl font-bold font-heading">Électricité : Circuit à Courant Continu</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Circuits Électriques CC</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
-                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-purple-400"></i> TP Expérimental</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- SCOREBOARD EN DIRECT -->
-        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
-                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Électricité Courant Continu Flash</h2>
-            </div>
-            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
-                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
-                <div>
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
-                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-yellow-100 text-yellow-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-yellow-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes &amp; Mémorisation</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Réviser la loi d'Ohm $U = R \cdot I$, le branchement des multimètres, et les lois des circuits en série et en dérivation avec nos cartes mémoires et le test chrono.</p>
         </div>
 
-        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Électricité DC)
-                </h3>
-                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-yellow-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <!-- FC 1 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
-                            <p class="text-xs font-bold text-center">Formule de la loi d'Ohm ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-yellow-500">
+                            <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest">Loi d'Ohm</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-bolt text-3xl text-yellow-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la formule fondamentale de la loi d'Ohm ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">U = R x I !</p>
-                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-yellow-400">
+                            <span class="text-xs font-bold text-yellow-400 uppercase tracking-widest">Formule Clé</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-yellow-300">$U = R \cdot I$</p>
+                                <p class="text-xs text-slate-300">$U$ tension en Volts (V), $R$ résistance en Ohms ($\Omega$), $I$ intensité en Ampères (A).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 2 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
-                            <p class="text-xs font-bold text-center">Unité de la tension U ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Mesure de Tension U</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-wave-square text-3xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment se branche un Voltmètre dans un circuit ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le Volt (V) !</p>
-                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 3 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
-                            <p class="text-xs font-bold text-center">Unité de l'intensité I ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">L'Ampère (A) !</p>
-                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Branchement Voltmètre</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-xl font-bold font-heading text-sky-300">En Dérivation (Parallèle)</p>
+                                <p class="text-xs text-slate-300">Aux bornes du composant dont on veut mesurer la tension $U$ (en Volts).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 4 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
-                            <p class="text-xs font-bold text-center">Unité de la résistance R ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Mesure d'Intensité I</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-gauge text-3xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment se branche un Ampèremètre dans un circuit ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">L'Ohm (Ω) !</p>
-                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 5 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
-                            <p class="text-xs font-bold text-center">Mode de branchement de l'ampèremètre ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">EN SÉRIE dans le circuit !</p>
-                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Branchement Ampèremètre</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-xl font-bold font-heading text-emerald-300">En Série (dans la boucle)</p>
+                                <p class="text-xs text-slate-300">Le courant doit obligatoirement traverser l'ampèremètre.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 6 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
-                            <p class="text-xs font-bold text-center">Mode de branchement du voltmètre ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Lois en Circuit Série</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-link text-3xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Que se passe-t-il pour l'intensité $I$ et la tension $U$ en Série ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">EN DÉRIVATION (parallèle) !</p>
-                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 7 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
-                            <p class="text-xs font-bold text-center">Loi de l'intensité dans un circuit série ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Intensité unique (I1 = I2) !</p>
-                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Règles du Circuit Série</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-sm font-bold text-indigo-300">• Unicité de $I$ : $I = I_1 = I_2$</p>
+                                <p class="text-sm font-bold text-indigo-300">• Additivité de $U$ : $U_{tot} = U_1 + U_2$</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 8 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
-                            <p class="text-xs font-bold text-center">Formule de I si U = 12V et R = 24 Ω ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Lois en Dérivation</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-code-fork text-3xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Que se passe-t-il pour l'intensité $I$ et la tension $U$ en Dérivation ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">I = 12 / 24 = 0,5 A !</p>
-                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 9 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
-                            <p class="text-xs font-bold text-center">Sens conventionnel du courant électrique ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Du pôle (+) vers le pôle (-) !</p>
-                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Règles en Dérivation</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-sm font-bold text-purple-300">• Unicité de $U$ : $U = U_1 = U_2$</p>
+                                <p class="text-sm font-bold text-purple-300">• Loi des Nœuds : $I_{tot} = I_1 + I_2$</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 10 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
-                            <p class="text-xs font-bold text-center">Que mesure un ohmmètre ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Conversions mA ↔ A</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-arrow-right-arrow-left text-3xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment convertir $250\text{ mA}$ en Ampères (A) ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">La résistance R hors tension !</p>
-                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Conversion d'Unités</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-red-300">$250\text{ mA} = 0{,}25\text{ A}$</p>
+                                <p class="text-xs text-slate-300">On divise par 1000 ($1\text{ A} = 1000\text{ mA}$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-calculator text-emerald-500"></i> Module 2 : Quiz Électricité DC 2nde Pro
-                </h3>
-                <span class="text-xs font-bold text-slate-500">6 Défis</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Tension U en Volts si R = 50 Ω et I = 0,2 A :</label>
-                    <input type="number" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="U = ? V">
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-yellow-600 tracking-wider">Test de Rapidité</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes (10 Questions • 20 Pts)</h2>
                 </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Intensité I en Ampères si U = 230 V et R = 46 Ω :</label>
-                    <input type="number" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="I = ? A">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Résistance R en Ohms si U = 12 V et I = 3 A :</label>
-                    <input type="number" id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="R = ? Ω">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">4. Dans un circuit en dérivation, la tension U est :</label>
-                    <select id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="IDENTIQUE">Identique aux bornes de tous les dipôles</option>
-                        <option value="DIVISEE">Divisée</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">5. Faut-il mesurer une résistance R lorsque le composant est sous tension ?</label>
-                    <select id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="NON">Non (Toujours HORS TENSION)</option>
-                        <option value="OUI">Oui</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">6. 500 mA équivaut à combien en Ampères (A) ?</label>
-                    <input type="number" step="0.1" id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="0,5 A">
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-yellow-100 text-yellow-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-yellow-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
                 </div>
             </div>
 
-            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
-            </button>
-            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-yellow-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
         </section>
 
     </main>
 
-    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <!-- SCRIPT DU QUIZ -->
     <script>
-        let fcScores = new Set();
-        let m2Score = 0;
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un conducteur ohmique de résistance $R = 220\\,\\Omega$ est traversé par un courant $I = 0{,}05\\text{ A}$. Quelle est la tension $U$ à ses bornes ?",
+                options: ["4,4 V", "11 V", "22 V", "440 V"],
+                correct: 1,
+                explanation: "$U = R \\cdot I = 220 \\times 0{,}05 = 11\\text{ V}$."
+            },
+            {
+                id: 2,
+                q: "Aux bornes d'un dipôle, on mesure $U = 12\\text{ V}$ et $I = 0{,}2\\text{ A}$. Quelle est sa résistance $R$ ?",
+                options: ["2,4 Ω", "24 Ω", "60 Ω", "120 Ω"],
+                correct: 2,
+                explanation: "$R = \\frac{U}{I} = \\frac{12}{0{,}2} = 60\\,\\Omega$."
+            },
+            {
+                id: 3,
+                q: "Dans un circuit **en série**, deux lampes reçoivent des tensions de $U_1 = 4{,}5\\text{ V}$ et $U_2 = 7{,}5\\text{ V}$. Quelle est la tension totale $U_{gen}$ fournie par le générateur ?",
+                options: ["3,0 V", "4,5 V", "7,5 V", "12,0 V"],
+                correct: 3,
+                explanation: "D'après la loi des mailles (additivité en série) : $U_{gen} = U_1 + U_2 = 4{,}5 + 7{,}5 = 12{,}0\\text{ V}$."
+            },
+            {
+                id: 4,
+                q: "Dans un circuit **en dérivation**, la branche principale délivre un courant total $I_{tot} = 1{,}5\\text{ A}$. La première branche consomme $I_1 = 0{,}6\\text{ A}$. Quelle est l'intensité $I_2$ de la seconde branche ?",
+                options: ["0,6 A", "0,9 A", "1,5 A", "2,1 A"],
+                correct: 1,
+                explanation: "D'après la loi des nœuds : $I_{tot} = I_1 + I_2 \\implies I_2 = 1{,}5 - 0{,}6 = 0{,}9\\text{ A}$."
+            },
+            {
+                id: 5,
+                q: "Que vaut une intensité de $350\\text{ mA}$ convertie en Ampères (A) ?",
+                options: ["0,035 A", "0,35 A", "3,5 A", "35 A"],
+                correct: 1,
+                explanation: "$350\\text{ mA} = \\frac{350}{1000} = 0{,}35\\text{ A}$."
+            },
+            {
+                id: 6,
+                q: "Dans un circuit comportant deux ampoules branchées **en dérivation** sous une tension secteur de $230\\text{ V}$, quelle est la tension aux bornes de chaque ampoule ?",
+                options: ["115 V aux bornes de chacune", "230 V aux bornes de chacune", "460 V aux bornes de chacune", "0 V"],
+                correct: 1,
+                explanation: "En dérivation, la tension est la même aux bornes de chaque branche : $U_1 = U_2 = U_{gen} = 230\\text{ V}$."
+            },
+            {
+                id: 7,
+                q: "Comment doit-on mesurer la résistance d'un composant avec un Ohmmètre ?",
+                options: ["Brancher l'ohmmètre en série pendant que le circuit fonctionne", "Brancher l'ohmmètre en dérivation sur le composant isolé HORS TENSION", "Placer l'ohmmètre aux bornes de la pile sous tension", "Le composant doit être relié à la terre"],
+                correct: 1,
+                explanation: "La mesure à l'ohmmètre s'effectue obligatoirement **hors tension**, composant débranché du circuit."
+            },
+            {
+                id: 8,
+                q: "Deux résistances $R_1 = 100\\,\\Omega$ et $R_2 = 150\\,\\Omega$ sont associées **en série**. Que vaut la résistance équivalente $R_{eq}$ ?",
+                options: ["50 Ω", "125 Ω", "250 Ω", "15 000 Ω"],
+                correct: 2,
+                explanation: "En série, les résistances s'additionnent : $R_{eq} = R_1 + R_2 = 100 + 150 = 250\\,\\Omega$."
+            },
+            {
+                id: 9,
+                q: "Si la caractéristique $U = f(I)$ d'un composant est une **droite passant par l'origine**, ce composant est :",
+                options: ["Une diode DEL", "Un conducteur ohmique (résistance)", "Une batterie", "Un condensateur"],
+                correct: 1,
+                explanation: "La droite passant par l'origine est la caractéristique linéaire d'un conducteur ohmique d'après $U = R \\cdot I$ (pente $= R$)."
+            },
+            {
+                id: 10,
+                q: "Dans un circuit en série, si une ampoule grille (circuit ouvert), que se passe-t-il pour les autres ampoules de la boucle ?",
+                options: ["Elles brilleront plus fort", "Elles s'éteignent toutes car le courant ne circule plus", "Seule l'ampoule grillée s'éteint", "Elles clignotent"],
+                correct: 1,
+                explanation: "Dans un circuit série, si une ampoule grille, la boucle est ouverte : le courant s'arrête et toutes les ampoules s'éteignent."
+            }
+        ];
 
-        function flipCard(el) {
-            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
-        }
+        let userAnswers = {};
 
-        function markFC(num) {
-            fcScores.add(num);
-            updateScore();
-        }
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
 
-        function checkM2() {
-            let q1 = document.getElementById('m2-q1').value.trim();
-            let q2 = document.getElementById('m2-q2').value.trim();
-            let q3 = document.getElementById('m2-q3').value.trim();
-            let q4 = document.getElementById('m2-q4').value;
-            let q5 = document.getElementById('m2-q5').value;
-            let q6 = document.getElementById('m2-q6').value.trim();
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-yellow-500 focus:ring-yellow-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
 
-            let score = 0;
-            if (q1 === "10") score++;
-            if (q2 === "5") score++;
-            if (q3 === "4") score++;
-            if (q4 === "IDENTIQUE") score++;
-            if (q5 === "NON") score++;
-            if (q6 === "0.5" || q6 === "0,5") score++;
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-yellow-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
 
-            m2Score = score;
-            updateScore();
-
-            let fb = document.getElementById('fb-m2');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (score === 6) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le quiz Électricité DC 2nde Pro !`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+            if (window.MathJax) {
+                MathJax.typesetPromise();
             }
         }
 
-        function updateScore() {
-            let total = fcScores.size + m2Score;
-            document.getElementById('global-score').innerText = `${total} / 16`;
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
         }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement la loi d'Ohm $U = R \\cdot I$, le branchement des multimètres et les lois des circuits !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions essentielles sont acquises. Révisez la différence entre circuit en série et en dérivation.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et réentraînez-vous sur les calculs de $U = R \\cdot I$ et les conversions en Ampères.";
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resultBox]);
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
     </script>
+
 </body>
 </html>

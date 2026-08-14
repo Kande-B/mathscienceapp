@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Acoustique & Bruit (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Acoustique &amp; Bruit</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation Professionnelle</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités d'Investigation Contextualisées</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Audit sonore d'atelier, analyse oscilloscopique d'une sirène et télémètre d'obstacle à ultrasons.</p>
+        </div>
+
+        <div class="flex justify-center gap-3 no-print">
+            <button onclick="window.print()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+                <i class="fa-solid fa-print"></i> Imprimer les Activités (A4)
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : AUDIT SONORE ET EPI            -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 font-extrabold flex items-center justify-center text-lg">1</span>
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filières Chaudronnerie TCI / Mécanique MVM / Santé au Travail</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Audit Sonore &amp; Protection Auditive en Atelier</h2>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1.5 rounded-lg">Durée : 25 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2 text-sm text-amber-950">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-volume-high text-amber-600"></i> Situation Professionnelle
+                </h3>
+                <p class="leading-relaxed">
+                    Dans un atelier de fabrication, un opérateur utilise une meuleuse d'angle générant un niveau sonore de $L_1 = 88\text{ dB(A)}$. Un second opérateur allume un poste d'usinage identique produisant également $L_2 = 88\text{ dB(A)}$ juste à côté. Le responsable sécurité (HSE) effectue une mesure au sonomètre pour vérifier la conformité avec la réglementation du travail.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm">
+                <h3 class="font-bold text-slate-900 text-base border-l-4 border-emerald-500 pl-3">Travail à réaliser</h3>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>1. Seuil de Danger et Réglementation (Compétence S'approprier) :</strong></p>
+                    <p class="text-slate-600">a) Rappeler le seuil d'exposition quotidienne déclenchant l'action de prévention ($80\text{ dB}$) et celui rendant obligatoire le port d'EPI ($85\text{ dB}$).</p>
+                    <p class="text-slate-600">b) L'opérateur travaillant seul avec la meuleuse ($88\text{ dB}$) doit-il obligatoirement porter un casque antibruit ?</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>2. Cumul de 2 Machines de 88 dB (Compétence Analyser &amp; Réaliser) :</strong></p>
+                    <p class="text-slate-600">En appliquant la règle du cumul sonore pour 2 sources de niveau identique ($+3\text{ dB}$), déterminer le niveau sonore total $L_{tot}$ lorsque les 2 machines fonctionnent simultanément.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>3. Atténuation par Casque Antibruit (Compétence Valider) :</strong></p>
+                    <p class="text-slate-600">Le salarié met un casque antibruit ayant un indice d'atténuation $SNR = 26\text{ dB}$. Calculer le niveau sonore $L_{percu}$ qui parvient réellement au tympan de l'opérateur et vérifier qu'il est inférieur au seuil de risque.</p>
+                </div>
+            </div>
+
+            <!-- Help & Solution Accordion -->
+            <div class="space-y-3 no-print">
+                <details class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-emerald-900">
+                        <i class="fa-solid fa-check-circle text-emerald-600"></i> Voir le corrigé rédigé complet de l'Activité 1
+                    </summary>
+                    <div class="mt-3 space-y-2 leading-relaxed">
+                        <p><strong>1.</strong> a) Seuil de risque/alerte $= 80\text{ dB(A)}$ ; Obligation de port d'EPI $= 85\text{ dB(A)}$.<br>
+                        b) Oui, car $88\text{ dB} > 85\text{ dB}$. Le port d'EPI antibruit est **strictement obligatoire**.</p>
+                        <p><strong>2.</strong> $L_{tot} = 88\text{ dB} + 3\text{ dB} = 91\text{ dB(A)}$. La puissance acoustique est doublée.</p>
+                        <p><strong>3.</strong> $L_{percu} = 91\text{ dB} - 26\text{ dB} = 65\text{ dB(A)}$. Le niveau est bien inférieur à $80\text{ dB}$ : l'oreille est parfaitement protégée.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : MELEC / SN / OSCILLOSCOPE      -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 font-extrabold flex items-center justify-center text-lg">2</span>
+                    <div>
+                        <span class="bg-sky-100 text-sky-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filières Électrotechnique MELEC / Systèmes Numériques</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Analyse d'un Signal de Sirène sur Oscilloscope</h2>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1.5 rounded-lg">Durée : 20 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2 text-sm text-sky-950">
+                <h3 class="font-bold text-sky-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-wave-square text-sky-600"></i> Situation Professionnelle
+                </h3>
+                <p class="leading-relaxed">
+                    Un technicien réseau câble une sirène d'avertissement sonore sur une armoire de commande. Pour vérifier le bon réglage du signal d'alarme, il branche un microphone sur un oscilloscope numérique. La sensibilité horizontale de l'écran est réglée sur $S_h = 2\text{ ms/div}$ ($0{,}002\text{ s/div}$). Sur l'écran, un motif périodique complet s'étend sur $N_{div} = 4\text{ divisions}$.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm">
+                <h3 class="font-bold text-slate-900 text-base border-l-4 border-sky-500 pl-3">Questions d'Investigation</h3>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>1. Période $T$ du Signal (Compétence Réaliser) :</strong> Calculer la période $T$ du signal sonore en millisecondes (ms) puis en secondes ($T = N_{div} \times S_h$).</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>2. Fréquence $f$ et Hauteur du Son (Compétence Analyser) :</strong></p>
+                    <p class="text-slate-600">a) Calculer la fréquence $f$ du signal en Hertz ($f = \frac{1}{T}$ avec $T$ en secondes).</p>
+                    <p class="text-slate-600">b) Ce son est-il grave, médium ou aigu ? Justifier.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>3. Audibilité (Compétence Communiquer) :</strong> Vérifier que ce son appartient à la bande audible par l'être humain ($20\text{ Hz}$ à $20\text{ kHz}$).</p>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="no-print">
+                <details class="bg-sky-50 border border-sky-200 rounded-xl p-4 text-xs text-sky-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-sky-900">
+                        <i class="fa-solid fa-check-circle text-sky-600"></i> Voir le corrigé de l'Activité 2
+                    </summary>
+                    <div class="mt-3 space-y-2 leading-relaxed">
+                        <p><strong>1.</strong> $T = 4\text{ div} \times 2\text{ ms/div} = 8\text{ ms} = 0{,}008\text{ s}$.</p>
+                        <p><strong>2.</strong> a) $f = \frac{1}{0{,}008} = 125\text{ Hz}$.<br>
+                        b) Comme $f = 125\text{ Hz} < 200\text{ Hz}$, il s'agit d'un **son grave** (propice à la traversée des parois en atelier).</p>
+                        <p><strong>3.</strong> $20\text{ Hz} < 125\text{ Hz} < 20\,000\text{ Hz}$ : le son est parfaitement audible par le personnel de l'usine.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : BTP / LOGISTIQUE / ULTRASON    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 font-extrabold flex items-center justify-center text-lg">3</span>
+                    <div>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filières BTP / Logistique / Engins de Chantier</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Télémètre Acoustique &amp; Détecteur de Recul</h2>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1.5 rounded-lg">Durée : 20 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-purple-950">
+                <h3 class="font-bold text-purple-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-truck-monster text-purple-600"></i> Situation Professionnelle
+                </h3>
+                <p class="leading-relaxed">
+                    Un engin de chantier est équipé d'un télémètre ultrasonique de recul. Le capteur émet une impulsion sonore vers un obstacle (mur d'échafaudage). Le récepteur capte le signal réfléchi après une durée d'aller-retour $t_{tot} = 0{,}030\text{ s}$ ($30\text{ ms}$). La vitesse du son dans l'air est $v = 340\text{ m/s}$.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm">
+                <h3 class="font-bold text-slate-900 text-base border-l-4 border-purple-500 pl-3">Questions &amp; Calculs Théoriques</h3>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>1. Utilité des Ultrasons (Compétence S'approprier) :</strong> Pourquoi utilise-t-on des **ultrasons** ($f > 20\text{ kHz}$) plutôt que des sons audibles pour ce détecteur de recul ?</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>2. Distance Parcourue par l'Onde (Compétence Réaliser) :</strong> Calculer la distance totale $d_{tot}$ parcourue par le signal sonore en mètres ($d = v \cdot t_{tot}$).</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>3. Distance de l'Obstacle (Compétence Valider) :</strong></p>
+                    <p class="text-slate-600">a) En déduire la distance exacte $D$ séparant l'engin du mur ($D = \frac{d_{tot}}{2}$).</p>
+                    <p class="text-slate-600">b) Si le bip d'avertissement de choc doit se déclencher à moins de $6\text{ mètres}$, l'alarme doit-elle retentir ?</p>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="no-print">
+                <details class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-xs text-purple-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-purple-900">
+                        <i class="fa-solid fa-check-circle text-purple-600"></i> Voir le corrigé de l'Activité 3
+                    </summary>
+                    <div class="mt-3 space-y-2 leading-relaxed">
+                        <p><strong>1.</strong> Les ultrasons sont **inaudibles pour les ouvriers du chantier**, ce qui évite d'ajouter une gêne sonore permanente, tout en se propageant en ligne droite.</p>
+                        <p><strong>2.</strong> $d_{tot} = 340 \times 0{,}030 = 10{,}2\text{ mètres}$.</p>
+                        <p><strong>3.</strong> a) $D = \frac{10{,}2}{2} = 5{,}1\text{ mètres}$.<br>
+                        b) Comme $5{,}1\text{ m} < 6\text{ m}$, l'alarme de recul doit **immédiatement retentir** en cabine pour avertir le conducteur.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

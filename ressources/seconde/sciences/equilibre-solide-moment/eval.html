@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation CCF - Équilibre & Moment (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Équilibre Solide &amp; Moment</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-red-100 text-red-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-red-200">Évaluation Sommative Type CCF • Sur 20 Points</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Sujet d'Évaluation de Sciences</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Contrôle de sécurité et d'équilibrage lors du levage d'une charpente métallique.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Durée conseillée : 45 min</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher le Corrigé Enseignant</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- GRILLE OFFICIELLE PAR COMPÉTENCES -->
+        <section class="bg-white rounded-3xl p-6 border border-slate-200 card-shadow space-y-3">
+            <h2 class="text-sm font-bold font-heading text-slate-900 uppercase tracking-wider text-center border-b border-slate-100 pb-2">
+                Grille Évaluation Nationale des Compétences (Sciences Physiques Bac Pro)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs">
+                <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-200">
+                    <span class="font-bold text-pink-700 block">S'approprier</span>
+                    <span class="text-[10px] text-slate-500">Identifier formule M=F*d</span>
+                </div>
+                <div class="bg-orange-50 p-2.5 rounded-xl border border-orange-200">
+                    <span class="font-bold text-orange-700 block">Analyser</span>
+                    <span class="text-[10px] text-slate-500">Appliquer théorème moments</span>
+                </div>
+                <div class="bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                    <span class="font-bold text-blue-700 block">Réaliser</span>
+                    <span class="text-[10px] text-slate-500">Calculer F et m_contrepoids</span>
+                </div>
+                <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                    <span class="font-bold text-emerald-700 block">Valider</span>
+                    <span class="text-[10px] text-slate-500">Valider l'équilibre horizontal</span>
+                </div>
+                <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 col-span-2 md:col-span-1">
+                    <span class="font-bold text-yellow-700 block">Communiquer</span>
+                    <span class="text-[10px] text-slate-500">Justifier l'effet de levier</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 1 (4 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Partie 1 : Restitution de Connaissances (4 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">4 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p><strong>1.1 (1,5 pt) - Compétence S'approprier :</strong> Donner la formule mathématique du moment $M$ d'une force et préciser les unités de $M, F, d$.</p>
+                <p><strong>1.2 (1,5 pt) - Compétence S'approprier :</strong> Définir précisément ce qu'est le bras de levier $d$ par rapport à l'axe de rotation $\Delta$.</p>
+                <p><strong>1.3 (1 pt) - Compétence Réaliser :</strong> Convertir $65\text{ cm}$ en mètres (m).</p>
+            </div>
+
+            <!-- Solution PART 1 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 1 :</span>
+                <p>• <strong>1.1 :</strong> $M = F \cdot d$. $M$ en Newton-mètre ($\text{N}\cdot\text{m}$), $F$ en Newton (N), $d$ en mètre (m) (1,5 pt).</p>
+                <p>• <strong>1.2 :</strong> Le bras de levier $d$ est la distance **perpendiculaire** minimale entre l'axe de rotation $\Delta$ et la ligne d'action de la force (1,5 pt).</p>
+                <p>• <strong>1.3 :</strong> $65\text{ cm} = 0{,}65\text{ m}$ (1 pt).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Partie 2 : Serrage d'une Charpente à la Clé Dynamométrique (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un chaudronnier doit assembler des poutres métalliques sous un couple de serrage obligatoire $M_{cible} = 220\text{ N}\cdot\text{m}$. Il utilise une clé de longueur $d_1 = 0{,}55\text{ m}$.</p>
+                <p><strong>2.1 (3 pts) - Compétence Réaliser :</strong> Calculer la force $F_1$ en Newtons (N) qu'il doit exercer sur le manche de la clé.</p>
+                <p><strong>2.2 (3 pts) - Compétence Analyser :</strong> S'il ajoute un tube rallonge pour porter la longueur à $d_2 = 0{,}80\text{ m}$, calculer la nouvelle force $F_2$ nécessaire.</p>
+                <p><strong>2.3 (2 pts) - Compétence Communiquer :</strong> Expliquer l'intérêt ergono-mécanique de l'utilisation de ce tube rallonge pour la santé du salarié (prévention des TMS).</p>
+            </div>
+
+            <!-- Solution PART 2 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 2 :</span>
+                <p>• <strong>2.1 :</strong> $F_1 = \frac{M}{d_1} = \frac{220}{0{,}55} = 400\text{ N}$ (3 pts).</p>
+                <p>• <strong>2.2 :</strong> $F_2 = \frac{M}{d_2} = \frac{220}{0{,}80} = 275\text{ N}$ (3 pts).</p>
+                <p>• <strong>2.3 :</strong> Le tube rallonge augmente le bras de levier $d$, ce qui **réduit l'effort musculaire** à fournir de $400\text{ N}$ à $275\text{ N}$ pour un même couple, préservant ainsi le dos et les épaules du salarié (2 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Partie 3 : Audit de Sécurité d'un Palonnier de Levage (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un palonnier de levage est en équilibre horizontal autour de son anneau central ($\Delta$). Il porte à gauche une pièce de charpente de poids $P_1 = 12\,000\text{ N}$ accrochée à $d_1 = 3{,}0\text{ m}$. À droite, un bloc de contrepoids est installé à une distance $d_2 = 2{,}0\text{ m}$.</p>
+                <p><strong>3.1 (2 pts) - Compétence Réaliser :</strong> Calculer le moment $M_1$ exercé par la pièce de charpente par rapport au pivot central.</p>
+                <p><strong>3.2 (3 pts) - Compétence Analyser :</strong> En écrivant le théorème des moments ($M_1 = M_2$), calculer la force $F_{contrepoids}$ exercée par le bloc de contrepoids à droite.</p>
+                <p><strong>3.3 (3 pts) - Compétence Valider :</strong> Déduire la masse minimale $m_{contrepoids}$ (en kg puis en tonnes) du bloc de contrepoids ($g \approx 10\text{ N/kg}$). Valider si un contrepoids de $1{,}5\text{ tonne}$ suffit.</p>
+            </div>
+
+            <!-- Solution PART 3 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 3 :</span>
+                <p>• <strong>3.1 :</strong> $M_1 = P_1 \cdot d_1 = 12\,000 \times 3{,}0 = 36\,000\text{ N}\cdot\text{m}$ (2 pts).</p>
+                <p>• <strong>3.2 :</strong> $M_2 = M_1 = 36\,000\text{ N}\cdot\text{m} \implies F_{contrepoids} = \frac{36\,000}{2{,}0} = 18\,000\text{ N}$ (3 pts).</p>
+                <p>• <strong>3.3 :</strong> $m_{contrepoids} = \frac{18\,000}{10} = 1800\text{ kg} = 1{,}8\text{ tonne}$. Un contrepoids de $1{,}5\text{ t}$ est **insuffisant** ($1{,}5\text{ t} < 1{,}8\text{ t}$), le palonnier basculerait à gauche (3 pts).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer le Corrigé Enseignant" : "Afficher le Corrigé Enseignant";
+        }
+    </script>
+</body>
+</html>

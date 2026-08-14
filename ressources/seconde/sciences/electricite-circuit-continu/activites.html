@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activités d'Investigation - Électricité Courant Continu 2nde Pro</title>
+    <title>Activités - Circuits Électriques CC (2nde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#fefce8', 100: '#fef9c3', 500: '#eab308', 600: '#ca8a04', 900: '#713f12' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -33,190 +33,232 @@
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Sciences -->
+    <!-- Header & Navigation Unifiée -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-car-battery text-lg"></i>
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 6 • Seconde Professionnelle Sciences Physiques</span>
-                    <h1 class="text-xl font-bold font-heading">Électricité : Circuit à Courant Continu</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Circuits Électriques CC</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-purple-400"></i> TP Expérimental</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- PRESENTATION DE LA SÉQUENCE -->
-        <div class="bg-slate-900 text-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800 space-y-4">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="bg-emerald-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Investigation Métier 2nde Pro</span>
-                        <span class="bg-slate-800 text-slate-300 text-xs font-semibold px-3 py-1 rounded-full border border-slate-700">Sciences Physiques & Chimiques</span>
-                    </div>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">Activités : Loi d'Ohm $U = R \times I$ & Branchements</h2>
-                    <p class="text-sm text-slate-300 max-w-2xl">Branchez le voltmètre (en dérivations) et l'ampèremètre (en série), vérifiez la Loi d'Ohm et les lois des mailles / nœuds.</p>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation Professionnelle</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités d'Investigation Contextualisées</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Câblage d'un coffret d'éclairage, diagnostic automobile des phares et dimensionnement de résistance de voyant DEL.</p>
         </div>
 
-        <!-- MODULE 0 : DIAGNOSTIC NUMÉRIQUE -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center font-bold text-lg">0</span>
-                <div>
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 0 • Test de Positionnement</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Multimètre et Grandeurs Électriques</h3>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Comment se branche un voltmètre pour mesurer une tension U aux bornes d'un dipôle ?</label>
-                    <select id="diag-q1" class="border rounded-xl p-2.5 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="DERIVATION">En dérivation (en parallèle)</option>
-                        <option value="SERIE">En série</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Quelle est la formule de la loi d'Ohm aux bornes d'un conducteur ohmique R ?</label>
-                    <select id="diag-q2" class="border rounded-xl p-2.5 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="U_RI">U = R x I</option>
-                        <option value="I_RU">I = R x U</option>
-                    </select>
-                </div>
-            </div>
-
-            <button onclick="checkDiag()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Vérifier mes réponses
+        <div class="flex justify-center gap-3 no-print">
+            <button onclick="window.print()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+                <i class="fa-solid fa-print"></i> Imprimer les Activités (A4)
             </button>
-            <div id="fb-diag" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
-        </section>
+        </div>
 
-        <!-- ACTIVITÉ 1 : ALIMENTATION D'UN PHARE DE AUTOMOBILE 12V -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                <span class="w-10 h-10 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center font-bold text-lg">1</span>
-                <div>
-                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Activité 1 • Domaine Électrotechnique / Automobile</span>
-                    <h3 class="text-xl font-bold font-heading text-slate-900">Mesure de Résistance & Intensité sous 12V DC</h3>
-                </div>
-            </div>
-
-            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
-                <p class="font-medium">Sur une batterie $U = 12\text{ V}$, on alimente une résistance de chauffage de rétroviseur $R = 24\text{ }\Omega$.</p>
-
-                <!-- SCHÉMA SVG SCHÉMA ÉLECTRIQUE ON GRID -->
-                <div class="p-4 bg-slate-50 border rounded-2xl text-center overflow-x-auto">
-                    <svg width="340" height="110" viewBox="0 0 340 110" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-act1-elec" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="340" height="110" fill="url(#grid-act1-elec)" />
-                        <!-- Générateur 12V DC -->
-                        <circle cx="60" cy="55" r="16" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
-                        <text x="60" y="58" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">12V DC</text>
-
-                        <!-- Circuit fil -->
-                        <line x1="60" y1="39" x2="60" y2="20" stroke="#0f172a" stroke-width="2"/>
-                        <line x1="60" y1="20" x2="280" y2="20" stroke="#0f172a" stroke-width="2"/>
-                        <line x1="280" y1="20" x2="280" y2="40" stroke="#0f172a" stroke-width="2"/>
-
-                        <!-- Résistance R=24 Ohms -->
-                        <rect x="260" y="40" width="40" height="30" fill="#fef08a" stroke="#0f172a" stroke-width="2" rx="4"/>
-                        <text x="280" y="58" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">24 Ω</text>
-
-                        <line x1="280" y1="70" x2="280" y2="90" stroke="#0f172a" stroke-width="2"/>
-                        <line x1="280" y1="90" x2="60" y2="90" stroke="#0f172a" stroke-width="2"/>
-                        <line x1="60" y1="90" x2="60" y2="71" stroke="#0f172a" stroke-width="2"/>
-
-                        <!-- Flèche Intensité I -->
-                        <line x1="140" y1="20" x2="180" y2="20" stroke="#dc2626" stroke-width="2.5"/>
-                        <polygon points="180,20 170,16 170,24" fill="#dc2626"/>
-                        <text x="160" y="14" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">I = ? A</text>
-                    </svg>
-                </div>
-
-                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-3">
-                    <span class="font-bold text-emerald-900 text-sm block">Étape 1 : Calculez l'intensité I = U / R</span>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">1. Intensité I en Ampères (I = 12 / 24) :</label>
-                            <input type="number" step="0.1" id="act1-i-val" class="w-full p-2 border rounded-xl font-bold" placeholder="I = ? A">
-                        </div>
-
-                        <div class="p-3 bg-white border rounded-xl space-y-1">
-                            <label class="font-bold text-slate-900 block">2. Si R augmente à 48 Ω sous 12V, I vaut :</label>
-                            <input type="number" step="0.05" id="act1-i-double" class="w-full p-2 border rounded-xl font-bold" placeholder="I = ? A">
-                        </div>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 1 : COFFRET D'ÉCLAIRAGE SÉRIE      -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 font-extrabold flex items-center justify-center text-lg">1</span>
+                    <div>
+                        <span class="bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filières Électrotechnique MELEC / Systèmes Numériques</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Câblage d'un Coffret d'Éclairage d'Atelier (Circuit Série)</h2>
                     </div>
                 </div>
+                <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1.5 rounded-lg">Durée : 25 min</span>
+            </div>
 
-                <button onclick="checkAct1()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                    <i class="fa-solid fa-paper-plane mr-2"></i> Valider les calculs électriques
-                </button>
-                <div id="fb-act1" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <!-- Context Box -->
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-2 text-sm text-amber-950">
+                <h3 class="font-bold text-amber-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-[#1e293b] fa-plug text-amber-600"></i> Situation Professionnelle
+                </h3>
+                <p class="leading-relaxed">
+                    Sur un chantier d'équipement électrique d'atelier, un technicien doit installer deux réglettes d'éclairage identiques conçues chacune pour fonctionner sous une tension nominale $U_{reg} = 12\text{ V}$. Le transformateur continu disponible délivre une tension totale $U_{gen} = 24\text{ V}$. L'ampèremètre mesurant le courant débité par le générateur indique $I = 0{,}8\text{ A}$.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm">
+                <h3 class="font-bold text-slate-900 text-base border-l-4 border-amber-500 pl-3">Travail à réaliser</h3>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>1. Choix du Type de Montage (Compétence S'approprier) :</strong></p>
+                    <p class="text-slate-600">a) Pour fonctionner sous un transformateur $24\text{ V}$ sans être détruites, les deux réglettes $12\text{ V}$ doivent-elles être branchées en série ou en dérivation ? Justifier avec la loi des mailles ($U_{tot} = U_1 + U_2$).</p>
+                    <p class="text-slate-600">b) Tracer le schéma normalisé du circuit comportant le générateur $24\text{ V}$, les 2 réglettes en série, un interrupteur et l'ampèremètre.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>2. Intensité et Résistance Équivalente (Compétence Réaliser) :</strong></p>
+                    <p class="text-slate-600">a) Quelle est l'intensité $I_2$ qui traverse la seconde réglette ? Justifier avec la règle d'unicité de l'intensité en série.</p>
+                    <p class="text-slate-600">b) Calculer la résistance totale équivalente $R_{tot}$ de l'ensemble du circuit d'éclairage ($R_{tot} = \frac{U_{gen}}{I}$).</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>3. Diagnostic de Panne (Compétence Valider) :</strong> Si l'une des réglettes venait à griller (circuit ouvert), que se passerait-il pour la seconde réglette ?</p>
+                </div>
+            </div>
+
+            <!-- Help & Solution Accordion -->
+            <div class="space-y-3 no-print">
+                <details class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-amber-900">
+                        <i class="fa-solid fa-check-circle text-amber-600"></i> Voir le corrigé rédigé complet de l'Activité 1
+                    </summary>
+                    <div class="mt-3 space-y-2 leading-relaxed">
+                        <p><strong>1.</strong> a) Elles doivent être montées en **série**. En série, les tensions s'additionnent : $U_{tot} = U_1 + U_2 = 12 + 12 = 24\text{ V}$.<br>
+                        b) Le schéma comprend la boucle unique fermée traversant le générateur, l'ampèremètre, l'interrupteur et les 2 récepteurs.</p>
+                        <p><strong>2.</strong> a) En série, l'intensité est **identique en tout point** du circuit : $I_2 = I_1 = I = 0{,}8\text{ A}$.<br>
+                        b) $R_{tot} = \frac{24}{0{,}8} = 30\,\Omega$.</p>
+                        <p><strong>3.</strong> Le circuit étant en série, la rupture du filament d'une réglette **ouvre le circuit** : la seconde réglette s'éteint immédiatement.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 2 : DIAGNOSTIC FEUX AUTOMOBILE     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 font-extrabold flex items-center justify-center text-lg">2</span>
+                    <div>
+                        <span class="bg-sky-100 text-sky-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filières Automobile MVM / Motocyles MMEV</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Ligne d'Alimentation des Feux de Croisement (Circuit en Dérivation)</h2>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1.5 rounded-lg">Durée : 20 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-sky-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-2 text-sm text-sky-950">
+                <h3 class="font-bold text-sky-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-car text-sky-600"></i> Situation Professionnelle
+                </h3>
+                <p class="leading-relaxed">
+                    Un mécanicien automobile contrôle le circuit électrique des deux ampoules de feux de croisement (phares) d'un véhicule alimenté par une batterie $U_{batt} = 12\text{ V}$. Les deux ampoules sont montées en dérivation. L'ampoule gauche consomme $I_1 = 4{,}5\text{ A}$ et l'ampoule droite consomme $I_2 = 4{,}5\text{ A}$. Le circuit est protégé par un fusible principal.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm">
+                <h3 class="font-bold text-slate-900 text-base border-l-4 border-sky-500 pl-3">Questions d'Investigation</h3>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>1. Tension et Indépendance (Compétence S'approprier) :</strong> Donnez 2 raisons majeures pour lesquelles les éclairages d'un véhicule sont obligatoirement montés en dérivation (parallèle) et non en série.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>2. Courant Total et Loi des Nœuds (Compétence Réaliser) :</strong> En appliquant la loi des nœuds, calculer l'intensité totale $I_{tot}$ consommée sur la batterie lorsque les deux phares sont allumés.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>3. Choix du Fusible de Protection (Compétence Valider) :</strong> Dans le tiroir du magasin de pièces, le mécanicien dispose de fusibles de $5\text{ A}$, $10\text{ A}$, $15\text{ A}$ et $20\text{ A}$. Quel calibre de fusible doit-il sélectionner pour protéger la ligne des deux phares sans risquer de fondre prématurément ? Justifier.</p>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="no-print">
+                <details class="bg-sky-50 border border-sky-200 rounded-xl p-4 text-xs text-sky-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-sky-900">
+                        <i class="fa-solid fa-check-circle text-sky-600"></i> Voir le corrigé de l'Activité 2
+                    </summary>
+                    <div class="mt-3 space-y-2 leading-relaxed">
+                        <p><strong>1.</strong> 1) Pour que chaque ampoule reçoive l'intégralité des **12 V de la batterie**. 2) Pour assurer l'**indépendance des feux** : si une ampoule grille, l'autre continue de fonctionner pour la sécurité du conducteur.</p>
+                        <p><strong>2.</strong> $I_{tot} = I_1 + I_2 = 4{,}5\text{ A} + 4{,}5\text{ A} = 9{,}0\text{ A}$.</p>
+                        <p><strong>3.</strong> Il doit choisir le fusible de **$10\text{ A}$**. Le calibre de $10\text{ A}$ est juste supérieur à $9{,}0\text{ A}$, ce qui protège efficacement le câblage contre les surintensités tout en laissant passer le courant de fonctionnement normal ($5\text{ A}$ fondrait instantanément).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ACTIVITÉ 3 : VOYANT DEL & RESISTANCE DE PROTECTION -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 font-extrabold flex items-center justify-center text-lg">3</span>
+                    <div>
+                        <span class="bg-purple-100 text-purple-900 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase">Filières Chaudronnerie TCI / Conception MP3D</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Dimensionnement d'une Résistance de Protection d'un Voyant DEL</h2>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1.5 rounded-lg">Durée : 20 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-purple-950">
+                <h3 class="font-bold text-purple-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-purple-600"></i> Situation Professionnelle
+                </h3>
+                <p class="leading-relaxed">
+                    Sur l'armoire de commande d'une presse plieuse hydraulique alimentée sous une tension continue $U_{gen} = 24\text{ V}$, un concepteur souhaite installer une diode électroluminescente (DEL) comme voyant de sous-tension. La DEL fonctionne idéalement sous une tension $U_{DEL} = 2{,}0\text{ V}$ et est traversée par un courant nominal $I = 20\text{ mA}$ ($0{,}020\text{ A}$). Pour ne pas détruire la DEL sous $24\text{ V}$, on monte une résistance de protection $R$ en série avec la DEL.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm">
+                <h3 class="font-bold text-slate-900 text-base border-l-4 border-purple-500 pl-3">Calculs de Dimensionnement</h3>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>1. Tension aux Bornes de la Résistance (Compétence Analyser) :</strong> En utilisant la loi des mailles ($U_{gen} = U_R + U_{DEL}$), calculer la tension $U_R$ que doit encaisser la résistance de protection.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>2. Calcul par la Loi d'Ohm (Compétence Réaliser) :</strong> En appliquant la loi d'Ohm $U_R = R \cdot I$, calculer la valeur théorique de la résistance $R$ en Ohms ($\Omega$) pour $I = 0{,}020\text{ A}$.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                    <p><strong>3. Choix du Composant Normalisé (Compétence Valider) :</strong> Dans le catalogue des composants électroniques d'atelier, les résistances disponibles sont : $1000\,\Omega$, $1100\,\Omega$, $1200\,\Omega$. Quelle valeur normalisée convient parfaitement ?</p>
+                </div>
+            </div>
+
+            <!-- Solution -->
+            <div class="no-print">
+                <details class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-xs text-purple-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-purple-900">
+                        <i class="fa-solid fa-check-circle text-purple-600"></i> Voir le corrigé de l'Activité 3
+                    </summary>
+                    <div class="mt-3 space-y-2 leading-relaxed">
+                        <p><strong>1.</strong> $U_R = U_{gen} - U_{DEL} = 24 - 2{,}0 = 22\text{ V}$.</p>
+                        <p><strong>2.</strong> $R = \frac{U_R}{I} = \frac{22}{0{,}020} = 1100\,\Omega$ ($1{,}1\text{ k}\Omega$).</p>
+                        <p><strong>3.</strong> Il faut sélectionner la résistance normalisée de **$1100\,\Omega$** (ou $1{,}1\text{ k}\Omega$). La DEL fonctionnera parfaitement en toute sécurité.</p>
+                    </div>
+                </details>
             </div>
         </section>
 
     </main>
 
-    <!-- JS POUR DIAGNOSTIC ET ACTIVITÉS INTERACTIVES -->
-    <script>
-        function checkDiag() {
-            let q1 = document.getElementById('diag-q1').value;
-            let q2 = document.getElementById('diag-q2').value;
-            let fb = document.getElementById('fb-diag');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (q1 === "DERIVATION" && q2 === "U_RI") {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! Le voltmètre se branche en dérivation et la loi d'Ohm s'écrit U = R x I.`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> En dérivation et U = R x I.`;
-            }
-        }
-
-        function checkAct1() {
-            let val = document.getElementById('act1-i-val').value.trim();
-            let dbl = document.getElementById('act1-i-double').value.trim();
-            let fb = document.getElementById('fb-act1');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if ((val === "0.5" || val === "0,5") && (dbl === "0.25" || dbl === "0,25")) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Bravo ! $I = \\frac{12\\text{ V}}{24\\text{ }\\Omega} = \\mathbf{0,5\\text{ A}}$ et sous $48\\text{ }\\Omega$, $I = \\mathbf{0,25\\text{ A}}$ !`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> I = 0,5 A et 0,25 A.`;
-            }
-        }
-    </script>
 </body>
 </html>

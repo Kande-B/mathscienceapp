@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Optique & Réflexion (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #0891b2;
+            color: white;
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-cyan-500/20 border border-cyan-400/30 text-cyan-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-cyan-400">Seconde Professionnelle • Physique-Chimie</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Optique &amp; Réflexion</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-cyan-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Vérification Expérimentale des Lois de la Réflexion</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : manipulation physique avec disque optique et laser ou banc d'optique virtuel Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Consignes de Sécurité Laser (Classe 2)
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Ne jamais regarder directement l'orifice d'émission du faisceau laser.</li>
+                        <li>• Ne jamais orienter le laser vers le visage d'un camarade.</li>
+                        <li>• Éteindre la source laser après chaque série de mesures.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-cyan-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-wand-magic-sparkles text-red-500"></i> Source Laser Rouge 650nm
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-compass-drafting text-cyan-500"></i> Disque Optique Gradué
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-border-all text-indigo-500"></i> Miroir Plan sur support
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler-combined text-amber-500"></i> Rapporteur &amp; Règle
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-cyan-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Installation du Miroir sur le Disque Optique :</strong>
+                            Placer le miroir plan au centre du disque gradué, exactement le long de la ligne $90^\circ-270^\circ$. La normale correspond à la ligne $0^\circ-180^\circ$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Alignement sous Incidence Nulle ($i_1 = 0^\circ$) :</strong>
+                            Allumer le laser et faire coincider le rayon incident avec la normale ($0^\circ$). Vérifier que le rayon réfléchi repart exactement sur la même ligne ($i_2 = 0^\circ$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure pour $i_1 = 20^\circ$ :</strong>
+                            Faire tourner la source ou le disque pour obtenir un angle d'incidence $i_1 = 20^\circ$. Relever précisément l'angle de réflexion $i_2$ sur le limbe gradué.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesures pour des Angles Accrus :</strong>
+                            Répéter l'expérience pour des angles d'incidence $i_1$ égaux à $30^\circ, 45^\circ, 60^\circ$ et $75^\circ$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Saisie et Analyse des Résultats :</strong>
+                            Consigner l'ensemble des mesures dans le tableau ci-dessous et calculer l'écart $(i_1 - i_2)$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation de la Loi de Descartes :</strong>
+                            Conclure sur la relation entre l'angle d'incidence $i_1$ et l'angle de réflexion $i_2$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-cyan-600"></i> Tableau de Relevé des Mesures de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Angle d'Incidence $i_1$ (imposé)</th>
+                                <th class="p-3 font-bold border border-slate-200">15.0°</th>
+                                <th class="p-3 font-bold border border-slate-200">30.0°</th>
+                                <th class="p-3 font-bold border border-slate-200">45.0°</th>
+                                <th class="p-3 font-bold border border-slate-200">60.0°</th>
+                                <th class="p-3 font-bold border border-slate-200">75.0°</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Angle de Réflexion $i_2$ mesuré (°)</td>
+                                <td class="p-3"><input type="number" step="0.5" id="i2-15" placeholder="ex: 15.0" oninput="calcRealOptics()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-cyan-700"></td>
+                                <td class="p-3"><input type="number" step="0.5" id="i2-30" placeholder="ex: 30.0" oninput="calcRealOptics()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-cyan-700"></td>
+                                <td class="p-3"><input type="number" step="0.5" id="i2-45" placeholder="ex: 45.0" oninput="calcRealOptics()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-cyan-700"></td>
+                                <td class="p-3"><input type="number" step="0.5" id="i2-60" placeholder="ex: 60.0" oninput="calcRealOptics()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-cyan-700"></td>
+                                <td class="p-3"><input type="number" step="0.5" id="i2-75" placeholder="ex: 75.0" oninput="calcRealOptics()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-cyan-700"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Écart $(i_1 - i_2)$ moyen</td>
+                                <td class="p-3 font-extrabold text-cyan-800" id="optics-calc-avg" colspan="5">-- ° (Moyenne des écarts)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Banc d'Optique Virtuel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Laser &amp; Miroir Plan</h2>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Optical Bench -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-cyan-400">
+                            <span>BANC D'OPTIQUE : LOI i1 = i2</span>
+                            <span id="optics-angle-text">i1 = 45.0° | i2 = 45.0° • RÉFLEXION SPÉCULAIRE</span>
+                        </div>
+                        <canvas id="opticsCanvas" width="600" height="260" class="w-full h-56 bg-black rounded-xl border border-cyan-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Angle d'Incidence i1 (°)</label>
+                                <input type="range" id="sim-i1" min="0" max="80" step="1" value="45" oninput="updateSimOptics()" class="w-full accent-cyan-500">
+                                <span class="font-mono text-cyan-300 font-bold text-xs" id="val-i1">i1 = 45.0°</span>
+                            </div>
+                            <div class="flex items-center justify-center pt-3">
+                                <button onclick="toggleVirtualImage()" id="btn-virtual-img" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs border border-slate-700 transition-all">
+                                    <i class="fa-solid fa-eye mr-1.5"></i> Afficher Image Virtuelle
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">RAPPORTEUR NUMÉRIQUE</span>
+                        
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Angle d'Incidence i1</span>
+                            <span class="text-2xl font-bold font-mono text-cyan-400" id="meter-i1">45.0°</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Angle de Réflexion i2</span>
+                            <span class="text-2xl font-bold font-mono text-emerald-400" id="meter-i2">45.0°</span>
+                        </div>
+
+                        <div id="optics-status-badge" class="w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            i1 = i2 CONFORME À LA LOI
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-cyan-600"></i> Défi Mystère : Viser la Cible C
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un rayon laser horizontal frappe un miroir orientable au point $I$. La cible réceptrice se trouve sous un angle de déviation de $90^\circ$ par rapport au rayon initial. Quel angle d'incidence $i_1$ faut-il régler sur la normale ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="1" id="user-i1-guess" placeholder="Votre réponse en degrés (°)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessI1()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider l'Angle
+                    </button>
+                </div>
+                <div id="guess-result-i1" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-cyan-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-cyan-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initOpticsCanvas();
+            }
+        }
+
+        function calcRealOptics() {
+            const inputs = [
+                { i1: 15.0, i2: parseFloat(document.getElementById('i2-15').value) },
+                { i1: 30.0, i2: parseFloat(document.getElementById('i2-30').value) },
+                { i1: 45.0, i2: parseFloat(document.getElementById('i2-45').value) },
+                { i1: 60.0, i2: parseFloat(document.getElementById('i2-60').value) },
+                { i1: 75.0, i2: parseFloat(document.getElementById('i2-75').value) }
+            ];
+
+            let sumDiff = 0;
+            let count = 0;
+
+            inputs.forEach(item => {
+                if (!isNaN(item.i2)) {
+                    sumDiff += Math.abs(item.i1 - item.i2);
+                    count++;
+                }
+            });
+
+            if (count > 0) {
+                const avgDiff = (sumDiff / count).toFixed(2);
+                document.getElementById('optics-calc-avg').innerText = avgDiff + "° (Écart moyen i1 - i2)";
+            }
+        }
+
+        let canvas, ctx;
+        let showVirtual = false;
+
+        function initOpticsCanvas() {
+            canvas = document.getElementById('opticsCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawOptics);
+            updateSimOptics();
+        }
+
+        function toggleVirtualImage() {
+            showVirtual = !showVirtual;
+            const btn = document.getElementById('btn-virtual-img');
+            btn.className = showVirtual ? "bg-cyan-600 text-white font-bold py-2 px-4 rounded-xl text-xs shadow-md border border-cyan-500" : "bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs border border-slate-700";
+        }
+
+        function drawOptics() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const i1Deg = parseFloat(document.getElementById('sim-i1').value);
+            const i1Rad = i1Deg * (Math.PI / 180);
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2 + 30;
+
+            // Draw Mirror (Horizontal line)
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(cx - 220, cy);
+            ctx.lineTo(cx + 220, cy);
+            ctx.stroke();
+
+            // Hatching behind mirror
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 1;
+            for (let x = cx - 220; x <= cx + 220; x += 15) {
+                ctx.beginPath();
+                ctx.moveTo(x, cy);
+                ctx.lineTo(x - 8, cy + 12);
+                ctx.stroke();
+            }
+
+            // Draw Normal (Vertical Dashed Cyan)
+            ctx.strokeStyle = '#06b6d4';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 6]);
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - 180);
+            ctx.lineTo(cx, cy + 50);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Incident Ray (Laser Red)
+            const len = 160;
+            const ix = cx - len * Math.sin(i1Rad);
+            const iy = cy - len * Math.cos(i1Rad);
+
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(ix, iy);
+            ctx.lineTo(cx, cy);
+            ctx.stroke();
+
+            // Laser source dot
+            ctx.fillStyle = '#ef4444';
+            ctx.beginPath();
+            ctx.arc(ix, iy, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Reflected Ray (Laser Red)
+            const rx = cx + len * Math.sin(i1Rad);
+            const ry = cy - len * Math.cos(i1Rad);
+
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(rx, ry);
+            ctx.stroke();
+
+            // Virtual Ray extension behind mirror if enabled
+            if (showVirtual) {
+                const vx = cx + len * Math.sin(i1Rad);
+                const vy = cy + len * Math.cos(i1Rad);
+
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(vx, vy);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Virtual Source Point
+                ctx.fillStyle = '#38bdf8';
+                ctx.beginPath();
+                ctx.arc(vx, vy, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(drawOptics);
+        }
+
+        function updateSimOptics() {
+            const i1 = parseFloat(document.getElementById('sim-i1').value);
+            const i2 = i1;
+
+            document.getElementById('val-i1').innerText = `i1 = ${i1.toFixed(1)}°`;
+            document.getElementById('meter-i1').innerText = i1.toFixed(1) + "°";
+            document.getElementById('meter-i2').innerText = i2.toFixed(1) + "°";
+
+            document.getElementById('optics-angle-text').innerText = `i1 = ${i1.toFixed(1)}° | i2 = ${i2.toFixed(1)}° • RÉFLEXION SPÉCULAIRE`;
+        }
+
+        function checkGuessI1() {
+            const ans = parseFloat(document.getElementById('user-i1-guess').value);
+            const target = 45; // 90° deviation -> i1 + i2 = 90° -> 2 * i1 = 90° -> i1 = 45°
+            const res = document.getElementById('guess-result-i1');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Bravo ! Déviation totale = 90° => i1 + i2 = 90°. Comme i1 = i2, on a 2 × i1 = 90° => i1 = 45° !";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Incorrect. Indice : La déviation totale est i1 + i2 = 90°. Calculez 90 / 2.";
+            }
+        }
+    </script>
+</body>
+</html>

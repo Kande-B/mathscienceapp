@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Transferts Thermiques & Isolation (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Transferts Thermiques &amp; Isolation</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Individuel &amp; Autonome</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application gradués avec corrigés rédigés pas à pas.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices de difficulté progressive</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Identification du Mode de Transfert Principal
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Modes de transfert)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Associer chacune des 4 situations suivantes au mode de transfert thermique prédominant (Conduction, Convection, Rayonnement) :<br>
+                A) Une cuillère en métal plongeant dans une soupe chaude devient brûlante. <br>
+                B) Un feu de camp réchauffe les mains des campeurs à 2 mètres sans contact. <br>
+                C) L'eau d'un chauffe-eau remonte vers le haut de la cuve lorsqu'elle est chauffée. <br>
+                D) La chaleur traverse la paroi en verre d'une fenêtre.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Nommer le mode de transfert pour chaque cas A, B, C et D.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• A = **Conduction** &nbsp;|&nbsp; B = **Rayonnement** &nbsp;|&nbsp; C = **Convection** &nbsp;|&nbsp; D = **Conduction**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Calcul Direct de Résistance Thermique Rth
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Calcul Rth)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une plaque de polystyrène d'épaisseur $e = 50\text{ mm} = 0{,}05\text{ m}$ et de surface $S = 2{,}0\text{ m}^2$ possède une conductivité $\lambda = 0{,}032\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Calculer la résistance thermique $R_{th}$ de cette plaque en K/W.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• $R_{th} = \frac{e}{\lambda \cdot S} = \frac{0{,}05}{0{,}032 \times 2{,}0} = \frac{0{,}05}{0{,}064} = 0{,}78125\text{ K/W} \approx 0{,}781\text{ K/W}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Calcul du Flux Thermique Déperdi
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Calcul du flux Phi)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                La plaque de polystyrène de l'Exercice 2 ($R_{th} = 0{,}781\text{ K/W}$) est soumise à une température intérieure $T_1 = 20\ ^\circ\text{C}$ et extérieure $T_2 = -5\ ^\circ\text{C}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                3.1. Calculer l'écart de température $\Delta T = T_1 - T_2$.<br>
+                3.2. Calculer le flux thermique déperdi $\Phi$ en Watts (W).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : $\Delta T = 20 - (-5) = 25\ ^\circ\text{C} = 25\text{ K}$.</p>
+                <p>• 3.2 : $\Phi = \frac{\Delta T}{R_{th}} = \frac{25}{0{,}781} \approx 32{,}0\text{ W}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Comparaison Aluminium vs Polystyrène
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Comparatif isolant)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                On compare deux plaques de même surface $S = 1{,}0\text{ m}^2$ et même épaisseur $e = 10\text{ mm} = 0{,}010\text{ m}$ : Plaque A en aluminium ($\lambda_A = 230\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$) et Plaque B en polystyrène ($\lambda_B = 0{,}032\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$).
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                4.1. Calculer la résistance thermique $R_{thA}$ et $R_{thB}$.<br>
+                4.2. Combien de fois le polystyrène est-il plus isolant que l'aluminium ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 4.1 : $R_{thA} = \frac{0{,}010}{230 \times 1} = 0{,}0000435\text{ K/W}$. &nbsp;|&nbsp; $R_{thB} = \frac{0{,}010}{0{,}032 \times 1} = 0{,}3125\text{ K/W}$.</p>
+                <p>• 4.2 : Rapport $= \frac{R_{thB}}{R_{thA}} = \frac{0{,}3125}{0{,}0000435} \approx 7184$ fois plus isolant !</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Épaisseur pour Diviser le Flux par 2
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Épaisseur d'isolant)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une couche de laine de verre d'épaisseur $e = 100\text{ mm}$ laisse passer un flux de perte $\Phi = 400\text{ W}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Quelle nouvelle épaisseur d'isolant faut-il poser pour réduire le flux de fuite à $\Phi_{cible} = 200\text{ W}$ sous la même température ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• Comme $\Phi = \frac{\Delta T \cdot \lambda \cdot S}{e}$, le flux est inversement proportionnel à l'épaisseur $e$.</p>
+                <p>• Pour diviser le flux par 2, il faut **doubler l'épaisseur** d'isolant : $e_{nouvelle} = 2 \times 100\text{ mm} = 200\text{ mm} = 0{,}20\text{ m}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Réduction de Pertes par Calorifugeage
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Calorifugeage)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une tuyauterie de chaufferie non isolée perd un flux $\Phi_1 = 200\text{ W/m}$. Après la pose d'un manchon en élastomère de $30\text{ mm}$, le flux tombe à $\Phi_2 = 25\text{ W/m}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Calculer le pourcentage de réduction du flux thermique déperdi.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• Gain $= \Phi_1 - \Phi_2 = 200 - 25 = 175\text{ W/m}$.</p>
+                <p>• Pourcentage $= \frac{175}{200} \times 100 = 87{,}5\%$. L'isolation élimine $87{,}5\%$ des pertes thermiques !</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Interprétation d'un Cliché de Caméra Infrarouge
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Thermographie IR)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Lors d'un audit de bâtiment par caméra infrarouge en hiver, la façade extérieure en béton apparaît en bleu ($5\ ^\circ\text{C}$), mais les contours du coffre de volet roulant apparaissent en jaune-rouge lumineux ($16\ ^\circ\text{C}$).
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                7.1. Quel est le mode de transfert capté par la caméra ?<br>
+                7.2. Expliquer ce que révèle la tache jaune-rouge sur le coffre de volet.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : Le **rayonnement infrarouge** émis par la surface de la paroi.</p>
+                <p>• 7.2 : La zone rouge chauffe l'extérieur à $16\ ^\circ\text{C}$, ce qui indique un **pont thermique majeur** (absence d'isolant au niveau du coffre de volet roulant).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Bilan Thermique &amp; Économie d'un Atelier
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Bilan complet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un atelier métallique de $S = 200\text{ m}^2$ perdait $\Phi_{brut} = 4000\text{ W}$ en hiver. Après isolation des murs par du polystyrène, le flux déperdi passe à $\Phi_{iso} = 800\text{ W}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                8.1. Calculer le gain de puissance thermique en kW.<br>
+                8.2. Calculer l'économie d'énergie réalisée sur un mois de chauffe continu de $t = 720\text{ heures}$ en kWh.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : Gain $\Delta \Phi = 4000 - 800 = 3200\text{ W} = 3{,}2\text{ kW}$.</p>
+                <p>• 8.2 : Énergie économisée $E = 3{,}2\text{ kW} \times 720\text{ h} = 2304\text{ kWh}$ économisés sur le mois.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

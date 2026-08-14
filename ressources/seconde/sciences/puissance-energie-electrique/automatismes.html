@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & Ritualisation - Puissance & Énergie 2nde Pro</title>
+    <title>Automatismes - Puissance & Énergie (2nde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -31,334 +31,448 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-
+        
         .perspective-1000 { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
 
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Sciences -->
+    <!-- Header & Navigation Unifiée -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-bolt text-lg"></i>
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-charging-station text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 7 • Seconde Professionnelle Sciences Physiques</span>
-                    <h1 class="text-xl font-bold font-heading">Puissance & Énergie Électrique</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Puissance &amp; Énergie Électriques</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
-                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-yellow-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-purple-400"></i> TP Expérimental</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- SCOREBOARD EN DIRECT -->
-        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
-                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Puissance & Énergie Flash</h2>
-            </div>
-            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
-                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
-                <div>
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
-                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes &amp; Mémorisation</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Réviser $P = U \cdot I$, $E = P \cdot t$, les conversions Joules / Wh / kWh et le fonctionnement des récepteurs.</p>
         </div>
 
-        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Puissance)
-                </h3>
-                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-amber-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <!-- FC 1 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
-                            <p class="text-xs font-bold text-center">Formule de la puissance électrique P ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Formule de la Puissance</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-plug-circle-bolt text-3xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la formule de la puissance électrique $P$ en courant continu ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">P = U x I !</p>
-                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Formule Fondamentale</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-amber-300">$P = U \cdot I$</p>
+                                <p class="text-xs text-slate-300">$P$ en Watts (W), $U$ en Volts (V), $I$ en Ampères (A).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 2 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
-                            <p class="text-xs font-bold text-center">Unité légale de la puissance P ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-yellow-500">
+                            <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest">Formule de l'Énergie</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-battery-full text-3xl text-yellow-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la relation entre l'énergie $E$, la puissance $P$ et la durée $t$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le Watt (W) !</p>
-                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 3 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
-                            <p class="text-xs font-bold text-center">Formule de l'énergie électrique E ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">E = P x t !</p>
-                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-yellow-400">
+                            <span class="text-xs font-bold text-yellow-400 uppercase tracking-widest">Consommation Électrique</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-yellow-300">$E = P \cdot t$</p>
+                                <p class="text-xs text-slate-300">$E$ en Joules (J) si $t$ en s ; ou en Wh/kWh si $t$ en heures (h).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 4 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
-                            <p class="text-xs font-bold text-center">Unité légale (Système International) de l'énergie E ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Conversion Joules vs Wh</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-left-right text-3xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Combien de Joules (J) compte-t-on dans $1\text{ Watt-heure (Wh)}$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le Joule (J) !</p>
-                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 5 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
-                            <p class="text-xs font-bold text-center">Unité d'énergie des factures d'électricité ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le kiloWatt-heure (kWh) !</p>
-                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Facteur de Conversion</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-xl font-bold font-heading text-emerald-300">$1\text{ Wh} = 3600\text{ J}$</p>
+                                <p class="text-xs text-slate-300">Et $1\text{ kWh} = 1000\text{ Wh} = 3\,600\,000\text{ J} = 3{,}6 \times 10^6\text{ J}$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 6 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
-                            <p class="text-xs font-bold text-center">Formule de la puissance thermique (Joule) ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Effet Joule</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-fire text-3xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est l'expression de la puissance thermique dissipée par Effet Joule ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">P = R x I² !</p>
-                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 7 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
-                            <p class="text-xs font-bold text-center">Equivalence de 1 kW en Watts ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">1 kW = 1 000 W !</p>
-                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Dissipation Thermique</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-indigo-300">$P_J = R \cdot I^2$</p>
+                                <p class="text-xs text-slate-300">La puissance thermique augmente avec le carré de l'intensité $I$ !</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 8 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
-                            <p class="text-xs font-bold text-center">Instrument mesurant la puissance instantanée ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Conversion des Durées</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-clock text-3xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment convertir une durée $t = 45\text{ min}$ en heures et en secondes ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le Wattmètre !</p>
-                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 9 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
-                            <p class="text-xs font-bold text-center">Instrument comptabilisant l'énergie dans une maison ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le compteur électrique (Linky) !</p>
-                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Unités Temporelles</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-xs font-bold text-purple-300">En heures : $45 / 60 = 0{,}75\text{ h}$</p>
+                                <p class="text-xs font-bold text-purple-300">En secondes : $45 \times 60 = 2700\text{ s}$</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 10 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
-                            <p class="text-xs font-bold text-center">Nombre de secondes dans 1 heure ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Appareil de Mesure de Puissance</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-gauge-high text-3xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quel appareil mesure directement la puissance active d'un récepteur ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">3 600 s (60 x 60) !</p>
-                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Le Wattmètre</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-lg font-bold font-heading text-red-300">Le Wattmètre</p>
+                                <p class="text-xs text-slate-300">Il comporte une voie tension en parallèle et une voie intensité en série.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-calculator text-emerald-500"></i> Module 2 : Quiz Puissance & Énergie 2nde Pro
-                </h3>
-                <span class="text-xs font-bold text-slate-500">6 Défis</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Puissance P en Watts sous U = 230 V et I = 10 A :</label>
-                    <input type="number" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="P = ? W">
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-amber-600 tracking-wider">Test de Rapidité</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes (10 Questions • 20 Pts)</h2>
                 </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Énergie E en kWh pour P = 2 kW tournant pendant 5 h :</label>
-                    <input type="number" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="E = ? kWh">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Intensité I en Ampères pour une machine P = 2 300 W sous 230 V :</label>
-                    <input type="number" id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="I = ? A">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">4. Si P = 100 W et t = 10 s, l'énergie E en Joules est :</label>
-                    <input type="number" id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="E = ? J">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">5. L'effet Joule transforme l'électricité en :</label>
-                    <select id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="CHALEUR">Chaleur (Energie thermique)</option>
-                        <option value="LUMIERE">Mouvement mécanique</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">6. Coût de 10 kWh à 0,20 € / kWh :</label>
-                    <input type="number" step="0.1" id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="2 €">
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-amber-100 text-amber-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-amber-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
                 </div>
             </div>
 
-            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
-            </button>
-            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-amber-50 border-2 border-amber-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-amber-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-amber-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
         </section>
 
     </main>
 
-    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <!-- SCRIPT DU QUIZ -->
     <script>
-        let fcScores = new Set();
-        let m2Score = 0;
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un réchauffeur d'atelier alimenté en $230\\text{ V}$ absorbe un courant de $I = 10\\text{ A}$. Quelle est sa puissance électrique $P$ ?",
+                options: ["23 W", "230 W", "2 300 W", "23 000 W"],
+                correct: 2,
+                explanation: "$P = U \\cdot I = 230 \\times 10 = 2300\\text{ W} = 2{,}3\\text{ kW}$."
+            },
+            {
+                id: 2,
+                q: "Un aérotherme de chantier consomme $P = 3000\\text{ W}$. Convertir cette puissance en kilowatts (kW).",
+                options: ["0,3 kW", "3 kW", "30 kW", "300 kW"],
+                correct: 1,
+                explanation: "$3000\\text{ W} = \\frac{3000}{1000} = 3\\text{ kW}$."
+            },
+            {
+                id: 3,
+                q: "Un projecteur LED de puissance $P = 50\\text{ W}$ fonctionne pendant $t = 4\\text{ heures}$. Quelle est l'énergie électrique consommée en Watt-heures (Wh) ?",
+                options: ["12,5 Wh", "200 Wh", "500 Wh", "2 000 Wh"],
+                correct: 1,
+                explanation: "$E = P \\cdot t = 50 \\times 4 = 200\\text{ Wh}$."
+            },
+            {
+                id: 4,
+                q: "Convertir cette énergie $E = 200\\text{ Wh}$ en Joules (J).",
+                options: ["7 200 J", "72 000 J", "720 000 J", "7 200 000 J"],
+                correct: 2,
+                explanation: "$E = 200 \\times 3600 = 720\\,000\\text{ J}$."
+            },
+            {
+                id: 5,
+                q: "Un moteur électrique alimenté en $12\\text{ V}$ absorbe une puissance $P = 60\\text{ W}$. Quelle est l'intensité $I$ du courant ?",
+                options: ["0,2 A", "5 A", "72 A", "720 A"],
+                correct: 1,
+                explanation: "$I = \\frac{P}{U} = \\frac{60}{12} = 5\\text{ A}$."
+            },
+            {
+                id: 6,
+                q: "Une meuleuse d'angle de $1500\\text{ W}$ fonctionne pendant $20\\text{ minutes}$. Convertir $20\\text{ min}$ en heures (h).",
+                options: ["0,20 h", "0,33 h", "0,50 h", "1,20 h"],
+                correct: 1,
+                explanation: "$t = \\frac{20}{60} = 0{,}333\\text{ h}$."
+            },
+            {
+                id: 7,
+                q: "Quelle est l'énergie consommée par cette meuleuse de $1{,}5\\text{ kW}$ pendant $t = 0{,}333\\text{ h}$ ?",
+                options: ["0,5 kWh", "1,5 kWh", "3,0 kWh", "5,0 kWh"],
+                correct: 0,
+                explanation: "$E = 1{,}5 \\times 0{,}333 = 0{,}5\\text{ kWh}$."
+            },
+            {
+                id: 8,
+                q: "Si le tarif de l'électricité est de $0{,}25\\text{ € / kWh}$, quel est le coût d'utilisation de la meuleuse ($0{,}5\\text{ kWh}$) ?",
+                options: ["0,05 €", "0,125 €", "0,25 €", "0,50 €"],
+                correct: 1,
+                explanation: "Coût $= 0{,}5 \\times 0{,}25 = 0{,}125\\text{ €}$ (soit environ 12,5 centimes)."
+            },
+            {
+                id: 9,
+                q: "Quelle est l'expression de la puissance thermique dissipée par Effet Joule dans un câble de résistance $R$ parcouru par un courant $I$ ?",
+                options: ["P = R / I", "P = R × I", "P = R × I²", "P = R² × I"],
+                correct: 2,
+                explanation: "Loi de Joule : $P_J = R \\cdot I^2$."
+            },
+            {
+                id: 10,
+                q: "Comment se branche la voie tension d'un wattmètre numérique dans un circuit ?",
+                options: ["En série", "En parallèle (dérivation)", "En diagonale", "Elle ne se branche pas"],
+                correct: 1,
+                explanation: "La tension se mesure toujours **en parallèle (dérivation)** aux bornes du récepteur !"
+            }
+        ];
 
-        function flipCard(el) {
-            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
-        }
+        let userAnswers = {};
 
-        function markFC(num) {
-            fcScores.add(num);
-            updateScore();
-        }
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
 
-        function checkM2() {
-            let q1 = document.getElementById('m2-q1').value.trim();
-            let q2 = document.getElementById('m2-q2').value.trim();
-            let q3 = document.getElementById('m2-q3').value.trim();
-            let q4 = document.getElementById('m2-q4').value.trim();
-            let q5 = document.getElementById('m2-q5').value;
-            let q6 = document.getElementById('m2-q6').value.trim();
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-amber-500 focus:ring-amber-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
 
-            let score = 0;
-            if (q1 === "2300") score++;
-            if (q2 === "10") score++;
-            if (q3 === "10") score++;
-            if (q4 === "1000") score++;
-            if (q5 === "CHALEUR") score++;
-            if (q6 === "2" || q6 === "2.0" || q6 === "2,0") score++;
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-amber-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
 
-            m2Score = score;
-            updateScore();
-
-            let fb = document.getElementById('fb-m2');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (score === 6) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le quiz Puissance & Énergie 2nde Pro !`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+            if (window.MathJax) {
+                MathJax.typesetPromise();
             }
         }
 
-        function updateScore() {
-            let total = fcScores.size + m2Score;
-            document.getElementById('global-score').innerText = `${total} / 16`;
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
         }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement la puissance $P = U \\cdot I$, l'énergie $E = P \\cdot t$ et les facturations EDF !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions essentielles sont acquises. Pensez à convertir les minutes en heures pour le calcul des kWh !";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et réentraînez-vous sur les conversions Joules vs Watt-heures.";
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resultBox]);
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
     </script>
+
 </body>
 </html>

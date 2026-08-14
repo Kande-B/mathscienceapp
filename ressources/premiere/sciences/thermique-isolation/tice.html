@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Thermique & Isolation (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 30px -5px rgba(249, 115, 22, 0.15); }
+
+        #thermalCanvas {
+            background-color: #090d16;
+            box-shadow: inset 0 0 20px rgba(249, 115, 22, 0.2), 0 0 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .tab-btn.active {
+            background-color: #ea580c;
+            color: #ffffff;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white !important; color: black !important; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-100 bg-slate-950 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-orange-500/20 border border-orange-400/30 text-orange-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-orange-400">Première Professionnelle • Physique-Chimie</span> <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    <h1 class="text-xl font-bold font-heading">Thermique &amp; Isolation</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-orange-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- ENTÊTE DE TP LYCÉE ET MATÉRIEL -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-lg space-y-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-orange-400">Labo Maths-Sciences • Thermique &amp; Isolation</span>
+                    <h1 class="text-3xl font-extrabold font-heading text-white">TP — Mesures Calorimétriques &amp; Profil de Température d'un Mur</h1>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 text-xs">
+                    <span class="bg-orange-900/60 text-orange-300 px-3 py-1.5 rounded-xl border border-orange-700/50 font-bold">⏱ Durée : 55 min</span>
+                    <span class="bg-blue-900/60 text-blue-300 px-3 py-1.5 rounded-xl border border-blue-700/50 font-bold">1ère Pro / Bac Pro</span>
+                </div>
+            </div>
+
+            <!-- MODES SELECTOR TABS -->
+            <div class="flex flex-wrap items-center justify-between gap-4 no-print">
+                <div class="flex bg-slate-950 p-1.5 rounded-2xl border border-slate-800 gap-2">
+                    <button onclick="switchTab('real')" id="tabRealBtn" class="tab-btn active px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-flask-vial text-amber-400"></i> Mode 1 : Manipulations Paillasse (Matériel Réel)
+                    </button>
+                    <button onclick="switchTab('virtual')" id="tabVirtualBtn" class="tab-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-laptop-code text-emerald-400"></i> Mode 2 : Simulateur Numérique (Profil Température Canvas)
+                    </button>
+                </div>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all border border-slate-700 flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer Fiche TP (A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <!-- MODE 1 : TP PAILLASSE RÉELLE (MATÉRIEL DU LABORATOIRE)           -->
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <div id="tabReal" class="space-y-8">
+
+            <!-- CONTEXTE & FORMULES DE BASE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Contexte Pro -->
+                <div class="bg-sky-950/40 border border-sky-800/60 rounded-3xl p-6 space-y-3">
+                    <h3 class="font-bold text-sky-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase"></i> Contexte Professionnel
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        L'évaluation expérimentale de la résistance thermique $R = \frac{e}{\lambda}$ et de la quantité de chaleur $Q = m c \Delta T$ permet de valider le choix des matériaux d'isolation (DPE bâtiment, calorifugeage des canalisations et refroidissement des fluides industriels).
+                    </p>
+                </div>
+
+                <!-- Formules Clés -->
+                <div class="bg-amber-950/40 border border-amber-800/60 rounded-3xl p-6 space-y-3">
+                    <h3 class="font-bold text-amber-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable"></i> Formules &amp; Relations Clés
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-center text-xs font-mono">
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$Q = m \cdot c \cdot \Delta T$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$R = \frac{e}{\lambda}$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300 col-span-2">$\Phi = \frac{S \cdot \Delta T}{R_{tot}}$ (Watts)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATÉRIEL RÉEL DU LABO ET SÉCURITÉ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Liste Matériel -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <h3 class="font-bold font-heading text-orange-400 text-base flex items-center gap-2 border-b border-slate-800 pb-2">
+                        <i class="fa-solid fa-toolbox"></i> Matériel Réel Nécessaire (Paillasse de TP)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-orange-900/50 text-orange-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-flask text-lg"></i></span>
+                            <div>
+                                <strong class="text-white block">Calorimètre Isotherme + Agitateur</strong>
+                                <span class="text-slate-400 text-[11px]">Vase Dewar ou enceinte isolée</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-temperature-full"></i></span>
+                            <div>
+                                <strong class="text-white block">2 Thermomètres Numériques 0,1°C</strong>
+                                <span class="text-slate-400 text-[11px]">Sondes thermocouple ou Pt100</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-sky-900/50 text-sky-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-cube"></i></span>
+                            <div>
+                                <strong class="text-white block">Échantillons d'Isolants (10x10 cm)</strong>
+                                <span class="text-slate-400 text-[11px]">Polystyrène, bois, laine de verre</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-amber-900/50 text-amber-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-scale-balanced"></i></span>
+                            <div>
+                                <strong class="text-white block">Balance + Éprouvette Graduée</strong>
+                                <span class="text-slate-400 text-[11px]">Pesée de la masse d'eau $m$</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consignes Sécurité -->
+                <div class="bg-red-950/30 border border-red-900/50 rounded-3xl p-6 space-y-3 text-xs text-red-200">
+                    <h3 class="font-bold text-red-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Consignes de Sécurité TP
+                    </h3>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li>⚠️ <strong>Risque de brûlure :</strong> Manipuler l'eau chaude avec précaution à l'aide de gants isolants de laboratoire.</li>
+                        <li>⚠️ <strong>Stabilité du calorimètre :</strong> Placer le calorimètre bien à plat au centre de la paillasse.</li>
+                        <li>⚠️ Ne pas immerger les boîtiers électroniques des sondes dans l'eau.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- ÉTAPES DÉTAILLÉES DU PROTOCOLE EXPERIMENTAL -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6">
+                <h3 class="text-xl font-bold font-heading text-white border-b border-slate-800 pb-3 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-orange-600 text-white flex items-center justify-center text-sm font-extrabold"><i class="fa-solid fa-list-check"></i></span>
+                    Déroulement Expérimental — 6 Étapes Guidées
+                </h3>
+
+                <div class="space-y-4 text-xs">
+
+                    <!-- Étape 1 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-orange-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-orange-900 text-orange-200 flex items-center justify-center text-xs">1</span>
+                                Préparation et Mesure de la Masse d'Eau
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Verser une masse $m = 0{,}200\text{ kg}$ ($200\text{ g}$) d'eau tiède dans le calorimètre.</li>
+                            <li>Placer la sonde numérique et relever la température initiale stabilisée $T_i$ (ex: $20{,}0^\circ\text{C}$).</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-amber-900 text-amber-200 flex items-center justify-center text-xs">2</span>
+                                Mélange Calorimétrique et Équilibre Thermique
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 10 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Ajouter une masse $m_{chaude} = 0{,}100\text{ kg}$ d'eau chaude portée à $T_{chaud} = 60{,}0^\circ\text{C}$.</li>
+                            <li>Agiter doucement et relever la température d'équilibre $T_{eq}$ obtenue (ex: $33{,}2^\circ\text{C}$).</li>
+                            <li>Vérifier l'égalité $m_1 c (T_{eq} - T_1) = m_2 c (T_2 - T_{eq})$.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 3 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-emerald-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-emerald-900 text-emerald-200 flex items-center justify-center text-xs">3</span>
+                                Mesure des Déperditions Thermiques à travers un Isolant
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 12 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Fixer l'échantillon d'isolant (polystyrène $e = 2\text{ cm}$) sur l'enceinte de chauffage.</li>
+                            <li>Mesurer la chute de température $\Delta T$ au bout de $10\text{ minutes}$.</li>
+                            <li>Calculer la résistance thermique expérimentale $R_{exp} = \frac{S \cdot \Delta T}{\Phi}$.</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TABLEAU INTERACTIF DE RELEVÉ DE MESURES DE PAILLASSE -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-3 gap-2">
+                    <h3 class="text-lg font-bold font-heading text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-table"></i> Tableau de Relevé des Mesures Réelles du Labo
+                    </h3>
+                    <span class="text-xs text-slate-400">Saisissez vos mesures réelles ci-dessous</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse min-w-[650px]">
+                        <thead>
+                            <tr class="bg-slate-950 text-slate-400 font-mono border-b border-slate-800">
+                                <th class="p-3">Matériau Isolant</th>
+                                <th class="p-3">Épaisseur $e$ (cm)</th>
+                                <th class="p-3">Surface $S$ (m²)</th>
+                                <th class="p-3">Temp. $T_{int}$ (°C)</th>
+                                <th class="p-3">Temp. $T_{ext}$ (°C)</th>
+                                <th class="p-3">Résistance $R$ (m²K/W)</th>
+                                <th class="p-3">Flux $\Phi$ (Watts)</th>
+                                <th class="p-3">Pertes 24h (kWh)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200">
+                            <!-- Ligne 1 : Polystyrène -->
+                            <tr class="hover:bg-slate-950/50">
+                                <td class="p-3 font-bold text-orange-400">Polystyrène (λ=0.035)</td>
+                                <td class="p-3"><input type="number" id="thmE1" step="1" value="10" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="thmS1" step="5" value="50" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-amber-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="thmTint1" step="1" value="20" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-sky-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="thmText1" step="1" value="-5" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-sky-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-emerald-400" id="thmR1">2.86 m²K/W</td>
+                                <td class="p-3 font-mono font-bold text-orange-400" id="thmPhi1">437 W</td>
+                                <td class="p-3 font-mono font-bold text-amber-400" id="thmKwh1">10.5 kWh</td>
+                            </tr>
+                            <!-- Ligne 2 : Laine de Verre -->
+                            <tr class="hover:bg-slate-950/50">
+                                <td class="p-3 font-bold text-orange-400">Laine de verre (λ=0.040)</td>
+                                <td class="p-3"><input type="number" id="thmE2" step="1" value="12" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="thmS2" step="5" value="50" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-amber-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="thmTint2" step="1" value="20" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-sky-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="thmText2" step="1" value="-5" oninput="calcThmTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-sky-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-emerald-400" id="thmR2">3.00 m²K/W</td>
+                                <td class="p-3 font-mono font-bold text-orange-400" id="thmPhi2">417 W</td>
+                                <td class="p-3 font-mono font-bold text-amber-400" id="thmKwh2">10.0 kWh</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- COMPTE RENDU BILAN LIBRE -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3">
+                <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider">Compte-rendu — Bilan de TP &amp; Réponses aux questions</h3>
+                <textarea rows="4" placeholder="Rédigez vos conclusions de TP (comparaison de R mesuré / théorique, interprétation de la courbe de refroidissement...)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 focus:outline-none focus:border-orange-500 font-sans leading-relaxed"></textarea>
+            </div>
+
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <!-- MODE 2 : TP SIMULATEUR NUMÉRIQUE (PROFIL DE TEMPÉRATURE CANVAS)   -->
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <div id="tabVirtual" class="hidden space-y-8">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- CANVAS SIMULATEUR (LEFT 7 COLS) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-6 card-shadow space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></span>
+                                <span class="font-bold text-sm text-orange-400 font-mono uppercase tracking-wider">SIMULATEUR PAROI MULTICOUCHE • PROFIL T(x)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="resetThermal()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all border border-slate-700">
+                                    <i class="fa-solid fa-arrows-rotate"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Element -->
+                        <div class="relative w-full overflow-hidden rounded-2xl border-2 border-orange-900/60">
+                            <canvas id="thermalCanvas" width="600" height="400" class="w-full h-auto block"></canvas>
+                        </div>
+
+                        <!-- Thermal Info Bar -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs font-mono">
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">RÉSISTANCE R_TOT</span>
+                                <span class="text-emerald-400 font-bold text-sm" id="simRtot">3.63 m²K/W</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">FLUX THERMIQUE Φ</span>
+                                <span class="text-orange-400 font-bold text-sm" id="simPhi">344 W</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">PERTES EN 24H</span>
+                                <span class="text-amber-400 font-bold text-sm" id="simKwh">8.26 kWh</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">COÛT ESTIMÉ/JOUR</span>
+                                <span class="text-sky-400 font-bold text-sm" id="simCost">2.07 €/jour</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUTO-EVALUATION CHALLENGE -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <h3 class="font-bold font-heading text-purple-400 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye"></i> Défi Mode Masqué (Auto-Évaluation)
+                            </h3>
+                            <button onclick="generateRandomThermal()" class="bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all">
+                                Générer Paroi Mystère
+                            </button>
+                        </div>
+
+                        <p class="text-xs text-slate-400">
+                            Observez le profil de température du mur et les épaisseurs, puis calculez le flux thermique :
+                        </p>
+
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                            <div>
+                                <label class="block text-slate-400 mb-1">R_tot (m²K/W) :</label>
+                                <input type="number" id="userRtot" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Flux Φ (Watts) :</label>
+                                <input type="number" id="userPhi" step="5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-orange-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Pertes 24h (kWh) :</label>
+                                <input type="number" id="userKwh" step="0.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-amber-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <button onclick="checkUserThmAnswers()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md">
+                                Vérifier mes calculs
+                            </button>
+                            <div id="checkThmResult" class="text-xs font-bold"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTROL PANEL (RIGHT 5 COLS) -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- PARAMÈTRES DE LA PAROI ET TEMPÉRATURES -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5 card-shadow">
+                        <h3 class="text-lg font-bold font-heading text-amber-400 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-amber-500"></i> Réglages de la Paroi
+                        </h3>
+
+                        <!-- Choix de l'isolant -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-300">Matériau Isolant :</label>
+                            <select id="selectIsolant" onchange="updateThermalParams()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-orange-400 font-bold focus:outline-none focus:border-orange-500">
+                                <option value="0.035">Polystyrène Expansé (λ = 0,035 W/mK)</option>
+                                <option value="0.040" selected>Laine de Verre (λ = 0,040 W/mK)</option>
+                                <option value="0.050">Laine de Bois (λ = 0,050 W/mK)</option>
+                                <option value="1.150">Béton Nu (Pas d'isolant, λ = 1,15 W/mK)</option>
+                            </select>
+                        </div>
+
+                        <!-- Épaisseur isolant -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Épaisseur de l'isolant :</span>
+                                <span class="font-mono font-bold text-orange-400" id="valEiso">12 cm</span>
+                            </div>
+                            <input type="range" id="sliderEiso" min="2" max="30" step="2" value="12" oninput="updateThermalParams()" class="w-full accent-orange-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Température Intérieure -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Température Intérieure $T_{int}$ :</span>
+                                <span class="font-mono font-bold text-emerald-400" id="valTint">20 °C</span>
+                            </div>
+                            <input type="range" id="sliderTint" min="15" max="25" step="1" value="20" oninput="updateThermalParams()" class="w-full accent-emerald-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Température Extérieure -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Température Extérieure $T_{ext}$ :</span>
+                                <span class="font-mono font-bold text-sky-400" id="valText">-5 °C</span>
+                            </div>
+                            <input type="range" id="sliderText" min="-15" max="10" step="1" value="-5" oninput="updateThermalParams()" class="w-full accent-sky-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- AFFICHAGE DES MESURES SIMULÉES -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 card-shadow">
+                        <h3 class="text-lg font-bold font-heading text-emerald-400 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-calculator"></i> Bilan Énergétique Calculé
+                        </h3>
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="flex justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+                                <span class="text-slate-400">Écart $\Delta T = T_{int} - T_{ext}$ :</span>
+                                <span class="text-emerald-400 font-bold" id="simDeltaT">25 °C</span>
+                            </div>
+                            <div class="flex justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+                                <span class="text-slate-400">Surface testée $S$ :</span>
+                                <span class="text-amber-400 font-bold">50 m²</span>
+                            </div>
+                            <div class="flex justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+                                <span class="text-slate-400">Résistance parpaing $R_2$ :</span>
+                                <span class="text-slate-300 font-bold">0.17 m²K/W</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SIMULATOR & TAB SWITCHING JAVASCRIPT -->
+    <script>
+        // Tab switching
+        function switchTab(mode) {
+            const realTab = document.getElementById('tabReal');
+            const virtualTab = document.getElementById('tabVirtual');
+            const realBtn = document.getElementById('tabRealBtn');
+            const virtualBtn = document.getElementById('tabVirtualBtn');
+
+            if (mode === 'real') {
+                realTab.classList.remove('hidden');
+                virtualTab.classList.add('hidden');
+                realBtn.classList.add('active');
+                virtualBtn.classList.remove('active');
+            } else {
+                realTab.classList.add('hidden');
+                virtualTab.classList.remove('hidden');
+                virtualBtn.classList.add('active');
+                realBtn.classList.remove('active');
+            }
+        }
+
+        // Real lab table calculations
+        function calcThmTable() {
+            // Row 1
+            const e1 = (parseFloat(document.getElementById('thmE1').value) || 10) / 100; // cm -> m
+            const s1 = parseFloat(document.getElementById('thmS1').value) || 50;
+            const tint1 = parseFloat(document.getElementById('thmTint1').value) || 20;
+            const text1 = parseFloat(document.getElementById('thmText1').value) || -5;
+
+            const r1 = e1 / 0.035;
+            document.getElementById('thmR1').innerText = r1.toFixed(2) + " m²K/W";
+
+            const deltaT1 = tint1 - text1;
+            const phi1 = r1 > 0 ? (s1 * deltaT1) / r1 : 0;
+            document.getElementById('thmPhi1').innerText = Math.round(phi1) + " W";
+
+            const kwh1 = (phi1 * 24) / 1000;
+            document.getElementById('thmKwh1').innerText = kwh1.toFixed(1) + " kWh";
+
+            // Row 2
+            const e2 = (parseFloat(document.getElementById('thmE2').value) || 12) / 100;
+            const s2 = parseFloat(document.getElementById('thmS2').value) || 50;
+            const tint2 = parseFloat(document.getElementById('thmTint2').value) || 20;
+            const text2 = parseFloat(document.getElementById('thmText2').value) || -5;
+
+            const r2 = e2 / 0.040;
+            document.getElementById('thmR2').innerText = r2.toFixed(2) + " m²K/W";
+
+            const deltaT2 = tint2 - text2;
+            const phi2 = r2 > 0 ? (s2 * deltaT2) / r2 : 0;
+            document.getElementById('thmPhi2').innerText = Math.round(phi2) + " W";
+
+            const kwh2 = (phi2 * 24) / 1000;
+            document.getElementById('thmKwh2').innerText = kwh2.toFixed(1) + " kWh";
+        }
+
+        // Canvas Thermal Simulator JS
+        const canvas = document.getElementById('thermalCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let lambdaIso = 0.040;
+        let eIsoCm = 12.0;
+        let tInt = 20;
+        let tExt = -5;
+        const S_WALL = 50; // m²
+
+        function updateThermalParams() {
+            lambdaIso = parseFloat(document.getElementById('selectIsolant').value);
+            eIsoCm = parseFloat(document.getElementById('sliderEiso').value);
+            tInt = parseFloat(document.getElementById('sliderTint').value);
+            tExt = parseFloat(document.getElementById('sliderText').value);
+
+            document.getElementById('valEiso').innerText = `${eIsoCm} cm`;
+            document.getElementById('valTint').innerText = `${tInt} °C`;
+            document.getElementById('valText').innerText = `${tExt} °C`;
+
+            updateThermalCalculations();
+        }
+
+        function resetThermal() {
+            document.getElementById('selectIsolant').value = "0.040";
+            document.getElementById('sliderEiso').value = 12;
+            document.getElementById('sliderTint').value = 20;
+            document.getElementById('sliderText').value = -5;
+            updateThermalParams();
+        }
+
+        function updateThermalCalculations() {
+            const eIsoM = eIsoCm / 100;
+            const rPlatre = 0.01 / 0.35; // 0.029
+            const rParpaing = 0.20 / 1.15; // 0.174
+            const rIso = eIsoM / lambdaIso;
+
+            const rTot = rPlatre + rParpaing + rIso;
+            const deltaT = tInt - tExt;
+            const phi = (S_WALL * deltaT) / rTot;
+            const kwh24 = (phi * 24) / 1000;
+            const costDay = kwh24 * 0.25;
+
+            document.getElementById('simRtot').innerText = `${rTot.toFixed(2)} m²K/W`;
+            document.getElementById('simPhi').innerText = `${Math.round(phi)} W`;
+            document.getElementById('simKwh').innerText = `${kwh24.toFixed(1)} kWh`;
+            document.getElementById('simCost').innerText = `${costDay.toFixed(2)} €/jour`;
+            document.getElementById('simDeltaT').innerText = `${deltaT} °C`;
+        }
+
+        function drawThermal() {
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Layers x coordinates
+            const x0 = 80;
+            const x1 = 120; // Plâtre (40px)
+            const x2 = 260; // Parpaing (140px)
+            const x3 = 260 + (eIsoCm * 6); // Isolant (dynamic)
+            const xEnd = Math.min(x3 + 40, w - 80);
+
+            // Background & Grid
+            ctx.fillStyle = '#090d16';
+            ctx.fillRect(0, 0, w, h);
+
+            // Layer 1: Plâtre (Indoor Side)
+            ctx.fillStyle = '#cbd5e1';
+            ctx.fillRect(x0, 80, x1 - x0, 240);
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 11px sans-serif';
+            ctx.fillText('Plâtre', x0 + 5, 200);
+
+            // Layer 2: Parpaing Béton
+            ctx.fillStyle = '#475569';
+            ctx.fillRect(x1, 80, x2 - x1, 240);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('Parpaing (20cm)', x1 + 25, 200);
+
+            // Layer 3: Isolant
+            ctx.fillStyle = lambdaIso < 0.05 ? '#f97316' : '#94a3b8';
+            ctx.fillRect(x2, 80, x3 - x2, 240);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(`Isolant (${eIsoCm}cm)`, x2 + 10, 200);
+
+            // Outdoor Air Area
+            ctx.fillStyle = '#0284c7';
+            ctx.fillRect(x3, 80, w - x3 - 40, 240);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('Air Extérieur', x3 + 15, 200);
+
+            // Temperature Axis (Right Y)
+            const minT = -20;
+            const maxT = 30;
+            function tToY(t) {
+                return 320 - ((t - minT) / (maxT - minT)) * 240;
+            }
+
+            // Draw Temperature Profile Curve T(x)
+            const yInt = tToY(tInt);
+            const yExt = tToY(tExt);
+
+            // Intermediate Temperatures at Interfaces
+            const rPlatre = 0.01 / 0.35;
+            const rParpaing = 0.20 / 1.15;
+            const rIso = (eIsoCm / 100) / lambdaIso;
+            const rTot = rPlatre + rParpaing + rIso;
+            const deltaT = tInt - tExt;
+
+            const t1 = tInt - (deltaT * (rPlatre / rTot));
+            const t2 = t1 - (deltaT * (rParpaing / rTot));
+
+            const y1 = tToY(t1);
+            const y2 = tToY(t2);
+
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3.5;
+            ctx.beginPath();
+            ctx.moveTo(x0 - 30, yInt);
+            ctx.lineTo(x0, yInt);
+            ctx.lineTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineTo(x3, yExt);
+            ctx.lineTo(w - 30, yExt);
+            ctx.stroke();
+
+            // Draw Nodes
+            ctx.fillStyle = '#f8fafc';
+            [ {x: x0, y: yInt}, {x: x1, y: y1}, {x: x2, y: y2}, {x: x3, y: yExt} ].forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Labels Temperature
+            ctx.fillStyle = '#10b981';
+            ctx.font = 'bold 12px font-mono';
+            ctx.fillText(`Tint = ${tInt}°C`, x0 - 70, yInt - 10);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.fillText(`Text = ${tExt}°C`, x3 + 20, yExt - 10);
+
+            requestAnimationFrame(drawThermal);
+        }
+
+        // Random Challenge
+        let mysteryLambda = 0;
+        let mysteryE = 0;
+        let mysteryText = 0;
+
+        function generateRandomThermal() {
+            mysteryLambda = [0.035, 0.040, 0.050][Math.floor(Math.random() * 3)];
+            mysteryE = [10, 15, 20][Math.floor(Math.random() * 3)];
+            mysteryText = [-5, -10, 0][Math.floor(Math.random() * 3)];
+
+            document.getElementById('selectIsolant').value = mysteryLambda;
+            document.getElementById('sliderEiso').value = mysteryE;
+            document.getElementById('sliderText').value = mysteryText;
+            updateThermalParams();
+
+            document.getElementById('userRtot').value = '';
+            document.getElementById('userPhi').value = '';
+            document.getElementById('userKwh').value = '';
+            document.getElementById('checkThmResult').innerHTML = '<span class="text-amber-400">Paroi mystère générée ! À vos calculs.</span>';
+        }
+
+        function checkUserThmAnswers() {
+            const rIn = parseFloat(document.getElementById('userRtot').value);
+            const phiIn = parseFloat(document.getElementById('userPhi').value);
+            const kwhIn = parseFloat(document.getElementById('userKwh').value);
+
+            const eIsoM = mysteryE / 100;
+            const expectedR = (0.01 / 0.35) + (0.20 / 1.15) + (eIsoM / mysteryLambda);
+            const expectedPhi = (50 * (20 - mysteryText)) / expectedR;
+            const expectedKwh = (expectedPhi * 24) / 1000;
+
+            let correctCount = 0;
+            if (Math.abs(rIn - expectedR) < 0.2) correctCount++;
+            if (Math.abs(phiIn - expectedPhi) < 25) correctCount++;
+            if (Math.abs(kwhIn - expectedKwh) < 1.0) correctCount++;
+
+            const resDiv = document.getElementById('checkThmResult');
+            if (correctCount === 3) {
+                resDiv.innerHTML = `<span class="text-emerald-400">🎉 Parfait ! 3/3 calculs exacts ($R_{tot}=${expectedR.toFixed(2)}m^2K/W, \\Phi=${Math.round(expectedPhi)}W, E=${expectedKwh.toFixed(1)}kWh$).</span>`;
+            } else {
+                resDiv.innerHTML = `<span class="text-amber-400">⚠️ ${correctCount}/3 exacts. Attendu : $R_{tot}=${expectedR.toFixed(2)}m^2K/W, \\Phi=${Math.round(expectedPhi)}W, E=${expectedKwh.toFixed(1)}kWh$.</span>`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resDiv]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calcThmTable();
+            updateThermalParams();
+            requestAnimationFrame(drawThermal);
+        });
+    </script>
+</body>
+</html>

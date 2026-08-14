@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Mouvement & Vitesse (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #0284c7;
+            color: white;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Seconde Professionnelle • Physique-Chimie</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Mouvement &amp; Vitesse</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Étude de la Vitesse &amp; Freinage d'Urgence</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : manipulation physique avec rail de guidage et barrières photoélectriques ou banc de cinématique Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Consignes de Sécurité
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Ajuster les pieds du rail de guidage avec le niveau à bulle (horizontalité parfaite).</li>
+                        <li>• Vérifier que la butée d'arrêt en bout de rail est bien amortie.</li>
+                        <li>• Ne pas regarder directement l'émetteur infrarouge des cellules photoélectriques.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-sky-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler-horizontal text-sky-500"></i> Rail de guidage 1,5m
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-car-side text-emerald-500"></i> Chariot autopropulsé
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-stopwatch text-indigo-500"></i> 2 Cellules optiques
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-amber-500"></i> Chrono au 1/1000e s
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-sky-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Alignement des Barrières Optiques :</strong>
+                            Positionner la première barrière optique A à l'origine $x_A = 0{,}00\text{ m}$. Placer la seconde barrière B à $x_B = 0{,}20\text{ m}$ ($d = 0{,}20\text{ m}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Premier Lancement &amp; Chronométrage :</strong>
+                            Lancer le chariot autopropulsé à vitesse constante depuis le début du rail. Le chronomètre électronique se déclenche en A et s'arrête en B. Relever $\Delta t$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Variation de la Distance $d$ :</strong>
+                            Déplacer la barrière B successivement à $d = 0{,}40\text{ m}$, $0{,}60\text{ m}$, $0{,}80\text{ m}$ et $1{,}00\text{ m}$. Relever les durées $\Delta t$ associées.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul des Vitesses Moyennes :</strong>
+                            Pour chaque mesure, calculer la vitesse $v = \frac{d}{\Delta t}$ en m/s, puis convertir en km/h ($v \times 3{,}6$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Tracé du Graphe $d = f(t)$ :</strong>
+                            Tracer la courbe représentant la distance $d$ en fonction de la durée $t$. Vérifier qu'elle forme une droite passant par l'origine.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Conclusion Cinématique :</strong>
+                            Conclure sur la nature du mouvement (mouvement rectiligne uniforme) et calculer la pente de la droite qui représente la vitesse du chariot.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-sky-600"></i> Tableau de Relevé des Mesures de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Distance $d$ (m)</th>
+                                <th class="p-3 font-bold border border-slate-200">0.20 m</th>
+                                <th class="p-3 font-bold border border-slate-200">0.40 m</th>
+                                <th class="p-3 font-bold border border-slate-200">0.60 m</th>
+                                <th class="p-3 font-bold border border-slate-200">0.80 m</th>
+                                <th class="p-3 font-bold border border-slate-200">1.00 m</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Temps $t$ mesuré (s)</td>
+                                <td class="p-3"><input type="number" step="0.01" id="t-02" placeholder="ex: 0.40" oninput="calcRealSpeed()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-sky-700"></td>
+                                <td class="p-3"><input type="number" step="0.01" id="t-04" placeholder="ex: 0.80" oninput="calcRealSpeed()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-sky-700"></td>
+                                <td class="p-3"><input type="number" step="0.01" id="t-06" placeholder="ex: 1.20" oninput="calcRealSpeed()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-sky-700"></td>
+                                <td class="p-3"><input type="number" step="0.01" id="t-08" placeholder="ex: 1.60" oninput="calcRealSpeed()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-sky-700"></td>
+                                <td class="p-3"><input type="number" step="0.01" id="t-10" placeholder="ex: 2.00" oninput="calcRealSpeed()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-sky-700"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Vitesse calculée $v = d/t$</td>
+                                <td class="p-3 font-extrabold text-sky-800" id="v-calc-avg" colspan="5">-- m/s (-- km/h) Moyenne</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Banc de Cinématique Virtuel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur de Véhicule &amp; Test de Freinage</h2>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Track -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-sky-400">
+                            <span>PISTE D'ESSAI CINÉMATIQUE 60 FPS</span>
+                            <span id="motion-type-text">MOUVEMENT UNIFORME : v = 15.0 m/s (54 km/h)</span>
+                        </div>
+                        <canvas id="motionCanvas" width="600" height="260" class="w-full h-56 bg-black rounded-xl border border-sky-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Vitesse initiale v0 (m/s)</label>
+                                <input type="range" id="sim-v0" min="5" max="35" step="1" value="15" oninput="updateSimMotion()" class="w-full accent-sky-500">
+                                <span class="font-mono text-sky-300 font-bold text-xs" id="val-v0">15 m/s (54 km/h)</span>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Accélération / Freinage</label>
+                                <select id="sim-mode" onchange="updateSimMotion()" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg p-1.5 font-bold">
+                                    <option value="uniforme">Mouvement Uniforme (v = Cte)</option>
+                                    <option value="accelere">Mouvement Accéléré (v croît)</option>
+                                    <option value="freinage">Freinage d'Urgence (v décroît)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test du temps de réaction interactif -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">TEST TEMPS DE RÉACTION ÉLÈVE</span>
+                        
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 w-full space-y-2">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Temps de Réaction Mesuré</span>
+                            <span class="text-3xl font-bold font-mono text-amber-400" id="meter-tr">-- ms</span>
+                        </div>
+
+                        <button id="reaction-btn" onclick="triggerReactionTest()" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs transition-all shadow-lg">
+                            <i class="fa-solid fa-hand-pointer mr-1.5"></i> DÉMARRER LE TEST DE FREINAGE
+                        </button>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full text-[11px] font-mono text-slate-300 space-y-1 text-left">
+                            <div>Dr (Réaction) : <span class="font-bold text-amber-300" id="res-dr">-- m</span></div>
+                            <div>Df (Freinage) : <span class="font-bold text-sky-300" id="res-df">-- m</span></div>
+                            <div class="border-t border-slate-800 pt-1">Da (Arrêt Total) : <span class="font-bold text-emerald-400" id="res-da">-- m</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-sky-600"></i> Défi Mystère : Calculer la Distance de Réaction
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un camion roule sur autoroute à la vitesse de $v = 108\text{ km/h}$ ($30\text{ m/s}$). Le temps de réaction du chauffeur fatigué est $t_r = 1{,}5\text{ s}$. Quelle est la distance de réaction $D_r$ parcourue avant que le camion ne commence à freiner ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="0.5" id="user-dr-guess" placeholder="Votre réponse en mètres (m)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessDr()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Distance Dr
+                    </button>
+                </div>
+                <div id="guess-result-dr" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS & TEST DE RÉACTION -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-sky-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-sky-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initMotionCanvas();
+            }
+        }
+
+        function calcRealSpeed() {
+            const inputs = [
+                { d: 0.20, t: parseFloat(document.getElementById('t-02').value) },
+                { d: 0.40, t: parseFloat(document.getElementById('t-04').value) },
+                { d: 0.60, t: parseFloat(document.getElementById('t-06').value) },
+                { d: 0.80, t: parseFloat(document.getElementById('t-08').value) },
+                { d: 1.00, t: parseFloat(document.getElementById('t-10').value) }
+            ];
+
+            let sumV = 0;
+            let count = 0;
+
+            inputs.forEach(item => {
+                if (!isNaN(item.t) && item.t > 0) {
+                    const v = item.d / item.t;
+                    sumV += v;
+                    count++;
+                }
+            });
+
+            if (count > 0) {
+                const avgV = (sumV / count).toFixed(2);
+                const avgKmh = (avgV * 3.6).toFixed(1);
+                document.getElementById('v-calc-avg').innerText = avgV + " m/s (" + avgKmh + " km/h) Moyenne sur " + count + " points";
+            }
+        }
+
+        let canvas, ctx;
+        let posX = 50;
+
+        function initMotionCanvas() {
+            canvas = document.getElementById('motionCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawMotion);
+            updateSimMotion();
+        }
+
+        function drawMotion() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const v0 = parseFloat(document.getElementById('sim-v0').value);
+            const mode = document.getElementById('sim-mode').value;
+
+            let speedPx = v0 * 0.15;
+            if (mode === 'accelere') speedPx *= 1.5;
+            if (mode === 'freinage') speedPx *= 0.4;
+
+            posX += speedPx;
+            if (posX > canvas.width - 50) posX = 50;
+
+            // Draw Road Track
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(30, 180);
+            ctx.lineTo(570, 180);
+            ctx.stroke();
+
+            // Dashed center lines
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([15, 15]);
+            ctx.beginPath();
+            ctx.moveTo(30, 180);
+            ctx.lineTo(570, 180);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw Vehicle
+            ctx.fillStyle = '#0284c7';
+            ctx.fillRect(posX - 25, 150, 50, 25);
+
+            // Wheels
+            ctx.fillStyle = '#e2e8f0';
+            ctx.beginPath();
+            ctx.arc(posX - 15, 175, 6, 0, Math.PI * 2);
+            ctx.arc(posX + 15, 175, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            requestAnimationFrame(drawMotion);
+        }
+
+        function updateSimMotion() {
+            const v0 = parseFloat(document.getElementById('sim-v0').value);
+            const kmh = (v0 * 3.6).toFixed(0);
+            document.getElementById('val-v0').innerText = v0 + " m/s (" + kmh + " km/h)";
+
+            const mode = document.getElementById('sim-mode').value;
+            const text = document.getElementById('motion-type-text');
+
+            if (mode === 'uniforme') text.innerText = `MOUVEMENT UNIFORME : v = ${v0} m/s (${kmh} km/h)`;
+            if (mode === 'accelere') text.innerText = `MOUVEMENT ACCÉLÉRÉ : v augmente au cours du temps`;
+            if (mode === 'freinage') text.innerText = `FREINAGE D'URGENCE : v diminue jusqu'à l'arrêt`;
+        }
+
+        // Test temps de réaction
+        let reactionState = 'idle'; // 'idle', 'waiting', 'ready'
+        let startTime = 0;
+        let timerTimeout;
+
+        function triggerReactionTest() {
+            const btn = document.getElementById('reaction-btn');
+
+            if (reactionState === 'idle') {
+                reactionState = 'waiting';
+                btn.className = "w-full bg-red-600 text-white font-extrabold py-3 px-4 rounded-xl text-xs shadow-lg animate-pulse";
+                btn.innerText = "ATTENDEZ LE SIGNAL ROUGE...";
+
+                const randomDelay = 1500 + Math.random() * 3000;
+                timerTimeout = setTimeout(() => {
+                    reactionState = 'ready';
+                    startTime = performance.now();
+                    btn.className = "w-full bg-emerald-500 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs shadow-lg animate-bounce";
+                    btn.innerText = "🚨 FREINEZ MAINTENANT ! (CLIQUEZ !)";
+                }, randomDelay);
+
+            } else if (reactionState === 'ready') {
+                const trMs = (performance.now() - startTime).toFixed(0);
+                const trSec = trMs / 1000;
+
+                reactionState = 'idle';
+                btn.className = "w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs shadow-lg";
+                btn.innerText = "RECOMMENCER LE TEST";
+
+                document.getElementById('meter-tr').innerText = trMs + " ms";
+
+                const v0 = parseFloat(document.getElementById('sim-v0').value);
+                const dr = (v0 * trSec).toFixed(1);
+                const df = ((v0 * v0) / 20).toFixed(1); // approx Df
+                const da = (parseFloat(dr) + parseFloat(df)).toFixed(1);
+
+                document.getElementById('res-dr').innerText = dr + " m";
+                document.getElementById('res-df').innerText = df + " m";
+                document.getElementById('res-da').innerText = da + " m";
+
+            } else if (reactionState === 'waiting') {
+                clearTimeout(timerTimeout);
+                reactionState = 'idle';
+                btn.className = "w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs shadow-lg";
+                btn.innerText = "FAUX DÉPART ! RECOMMENCER";
+            }
+        }
+
+        function checkGuessDr() {
+            const ans = parseFloat(document.getElementById('user-dr-guess').value);
+            const target = 45.0; // 30 m/s * 1.5 s = 45 m
+            const res = document.getElementById('guess-result-dr');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Bravo ! Dr = v × tr = 30 m/s × 1,5 s = 45,0 m !";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Incorrect. Indice : v = 30 m/s et tr = 1,5 s. Calculez 30 × 1,5.";
+            }
+        }
+    </script>
+</body>
+</html>

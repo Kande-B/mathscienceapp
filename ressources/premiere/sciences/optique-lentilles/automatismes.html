@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Optique & Lentilles (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fdf4ff', 100: '#fae8ff', 500: '#d946ef', 600: '#c026d3', 900: '#701a75' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-fuchsia-500/20 border border-fuchsia-400/30 text-fuchsia-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-eye text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-fuchsia-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Optique &amp; Lentilles</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-fuchsia-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-fuchsia-100 text-fuchsia-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-fuchsia-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes &amp; Mémorisation</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Réviser la vergence $V = 1/f'$, les 3 rayons remarquables, le grandissement $\gamma$ et les propriétés des images avec nos cartes mémoires et le test chrono.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-fuchsia-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-fuchsia-500">
+                            <span class="text-xs font-bold text-fuchsia-600 uppercase tracking-widest">Vergence &amp; Focale</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-glasses text-3xl text-fuchsia-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la formule de la vergence $V$ d'une lentille ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-fuchsia-400">
+                            <span class="text-xs font-bold text-fuchsia-400 uppercase tracking-widest">Formule Clé</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-fuchsia-300">$V = \frac{1}{f'}$</p>
+                                <p class="text-xs text-slate-300">$f'$ distance focale en mètres (m), $V$ en dioptries ($\delta$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Rayon Centre Optique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-arrow-right text-3xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Que fait un rayon lumineux qui passe par le centre optique $O$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Propriété Optique</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-lg font-bold font-heading text-emerald-300">Il n'est JAMAIS dévié</p>
+                                <p class="text-xs text-slate-300 font-medium">Il continue sa trajectoire en ligne droite tout droit.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Rayon Parallèle</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-bars text-3xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Où passe un rayon incident parallèle à l'axe optique ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Foyer Image F'</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-lg font-bold font-heading text-sky-300">Il ressort en passant par le Foyer Image $F'$</p>
+                                <p class="text-xs text-slate-300">$F'$ se trouve du côté de la lumière émergente (après la lentille).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Rayon Foyer Objet</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-bullseye text-3xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment ressort un rayon qui passe par le Foyer Objet $F$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Émergence Parallèle</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-lg font-bold font-heading text-indigo-300">Il ressort PARALLÈLEMENT à l'axe optique</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Grandissement</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-expand text-3xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la formule du grandissement $\gamma$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Formule Clé</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-purple-300">$\gamma = \frac{\overline{A'B'}}{\overline{AB}} = \frac{\overline{OA'}}{\overline{OA}}$</p>
+                                <p class="text-xs text-slate-300">Si $\gamma < 0$, l'image est renversée.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-pink-500">
+                            <span class="text-xs font-bold text-pink-600 uppercase tracking-widest">Image Réelle sur Écran</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-tv text-3xl text-pink-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">À quelle condition obtient-on une image réelle sur un écran ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-pink-400">
+                            <span class="text-xs font-bold text-pink-400 uppercase tracking-widest">Condition d'Écran</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-base font-bold font-heading text-pink-300">L'objet doit être situé AVANT le foyer objet $F$ ($OA > f'$)</p>
+                                <p class="text-xs text-slate-300">L'image est alors réelle et renversée.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-fuchsia-600 tracking-wider">Test de Rapidité</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-fuchsia-100 text-fuchsia-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-fuchsia-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-emerald-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "Une lentille mince convergente a une distance focale $f' = 0{,}10\\text{ m}$ ($10\\text{ cm}$). Quelle est sa vergence $V$ ?",
+                options: ["+1 δ", "+5 δ", "+10 δ", "+20 δ"],
+                correct: 2,
+                explanation: "$V = \\frac{1}{f'} = \\frac{1}{0{,}10} = +10\\text{ dioptries } (\\delta)$."
+            },
+            {
+                id: 2,
+                q: "Une loupe ou un verre correcteur a une vergence $V = +5\\text{ }\\delta$. Quelle est sa distance focale $f'$ ?",
+                options: ["0,05 m (5 cm)", "0,20 m (20 cm)", "0,50 m (50 cm)", "2,0 m (200 cm)"],
+                correct: 1,
+                explanation: "$f' = \\frac{1}{V} = \\frac{1}{5} = 0{,}20\\text{ m} = 20\\text{ cm}$."
+            },
+            {
+                id: 3,
+                q: "Sur le schéma d'une lentille convergente, où se trouve le foyer image $F'$ par rapport au sens de la lumière (de gauche à droite) ?",
+                options: [
+                    "Au niveau du centre optique O",
+                    "À gauche de la lentille (côté objet)",
+                    "À droite de la lentille (côté émergent)",
+                    "À l'infini au-dessus de l'axe optique"
+                ],
+                correct: 2,
+                explanation: "Pour une lentille convergente, le foyer image $F'$ se trouve du côté de la lumière émergente (à droite, $\\overline{OF'} = +f' > 0$)."
+            },
+            {
+                id: 4,
+                q: "Un objet $AB = 4\\text{ cm}$ donne une image réelle renversée $A'B' = -8\\text{ cm}$. Que vaut le grandissement $\\gamma$ ?",
+                options: ["+2", "-2", "+0,5", "-0,5"],
+                correct: 1,
+                explanation: "$\\gamma = \\frac{A'B'}{AB} = \\frac{-8}{4} = -2$ (l'image est 2 fois plus grande et renversée)."
+            },
+            {
+                id: 5,
+                q: "Quel symbole géométrique représente une lentille mince **convergente** ?",
+                options: [
+                    "Un segment terminé par des flèches vers l'extérieur (bords minces)",
+                    "Un segment terminé par des flèches rentrantes vers l'intérieur (bords épais)",
+                    "Un cercle fermé avec un point central",
+                    "Un rectangle plein hachuré"
+                ],
+                correct: 0,
+                explanation: "Une lentille convergente a des bords minces et est représentée par une flèche à double pointe tournée vers l'extérieur."
+            },
+            {
+                id: 6,
+                q: "Si un objet lumineux est placé exactement au foyer objet $F$ ($OA = f'$), où se forme l'image $A'B'$ ?",
+                options: [
+                    "Sur la lentille au centre O",
+                    "Au foyer image F'",
+                    "À l'infini (les rayons émergents sont parallèles)",
+                    "Aucune image n'existe"
+                ],
+                correct: 2,
+                explanation: "Un objet situé au foyer $F$ émerge sous forme de rayons tous parallèles entre eux : l'image est rejetée à l'infini."
+            },
+            {
+                id: 7,
+                q: "Un œil hypermétrope ou presbyte ne converge pas assez la lumière. Quel type de verres doit-on utiliser pour corriger sa vue ?",
+                options: [
+                    "Des verres divergents (dioptries négatives)",
+                    "Des verres convergents (dioptries positives)",
+                    "Des miroirs cylindriques concaves",
+                    "Des filtres teintés neutres"
+                ],
+                correct: 1,
+                explanation: "L'hypermétropie et la presbytie se corrigent avec des verres **convergents** (puissance positive $+V$) pour faire converger la lumière sur la rétine."
+            },
+            {
+                id: 8,
+                q: "Pour obtenir une image réelle nette projetée sur un écran blanc avec une lentille $+10\\delta$, la distance objet-écran minimale doit être :",
+                options: ["Inférieure à 10 cm", "Au moins égale à 4 fois la focal (4f' = 40 cm)", "Strictement nulle", "Égale à 1 mètre"],
+                correct: 1,
+                explanation: "La distance minimale objet-écran pour projeter une image réelle est $D_{min} = 4 f' = 4 \\times 10\\text{ cm} = 40\\text{ cm}$."
+            },
+            {
+                id: 9,
+                q: "L'axe optique d'un système lentille est une droite orientée perpendiculaire à la lentille et passant par :",
+                options: ["L'écran", "Le centre optique O", "La source de tension", "Le sommet du capteur"],
+                correct: 1,
+                explanation: "L'axe optique principal passe par le centre optique $O$ et est perpendiculaire au plan de la lentille."
+            },
+            {
+                id: 10,
+                q: "Une lentille a une distance focale $f' = 25\\text{ cm} = 0{,}25\\text{ m}$. Sa vergence $V$ vaut :",
+                options: ["+2 δ", "+4 δ", "+10 δ", "+25 δ"],
+                correct: 1,
+                explanation: "$V = \\frac{1}{0{,}25} = +4\\text{ dioptries } (\\delta)$."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-fuchsia-500 focus:ring-fuchsia-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-fuchsia-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement les formules $V = 1/f'$, les 3 rayons remarquables et les constructions d'images !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions de base sont comprises. Révisez la conversion de la distance focale $f'$ en mètres.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et entraînez-vous sur les 3 rayons remarquables.";
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resultBox]);
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Poids & Forces (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Seconde Professionnelle • Physique-Chimie</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Poids, Masse &amp; Forces</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Détermination Expérimentale de $g$ et Étalonnage du Dynamomètre</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : manipulation physique avec dynamomètres et masses marquées ou banc de mécanique virtuel Canvas 60 FPS sur différentes planètes.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Sécurité Dynamomètre
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Ne pas dépasser le calibre maximum du dynamomètre ($5\text{ N}$).</li>
+                        <li>• Ajuster la vis du zéro avant toute mesure à vide.</li>
+                        <li>• Ne pas laisser les masses suspendues inutilement après la mesure.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge text-emerald-500"></i> Dynamomètres 2N et 5N
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-[#1e293b] fa-weight-hanging text-amber-500"></i> Masses crochetées (50g à 500g)
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-arrows-up-down text-indigo-500"></i> Support statif &amp; Pince
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler text-cyan-500"></i> Réglette d'allongement
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Réglage du Zéro du Dynamomètre :</strong>
+                            Fixer le dynamomètre de $5\text{ N}$ verticalement sur le statif. Tourner la vis de tarage supérieure pour que l'index indique exactement $0\text{ N}$ à vide.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Première Mesure ($m_1 = 100\text{ g}$) :</strong>
+                            Accrocher la masse marquée de $100\text{ g}$ ($0{,}100\text{ kg}$). Relever la valeur du Poids $P_1$ en Newtons sur la graduation.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesures Successives :</strong>
+                            Répéter l'expérience pour les masses de $200\text{ g}$, $300\text{ g}$, $400\text{ g}$ et $500\text{ g}$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul des Rapports $P/m$ :</strong>
+                            Pour chaque essai, diviser l'intensité du poids $P$ par la masse $m$ exprimée en kg.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Tracé du Graphe $P = f(m)$ :</strong>
+                            Porter la masse $m$ en kg en abscisse et le Poids $P$ en N en ordonnée. Vérifier l'obtention d'une droite passant par l'origine.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Détermination du Coefficient $g$ :</strong>
+                            Calculer la pente de la droite qui représente la valeur expérimentale de l'intensité de la pesanteur $g$ dans le labo.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau de Relevé des Mesures de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Masse $m$ suspendue (g)</th>
+                                <th class="p-3 font-bold border border-slate-200">100 g</th>
+                                <th class="p-3 font-bold border border-slate-200">200 g</th>
+                                <th class="p-3 font-bold border border-slate-200">300 g</th>
+                                <th class="p-3 font-bold border border-slate-200">400 g</th>
+                                <th class="p-3 font-bold border border-slate-200">500 g</th>
+                            </tr>
+                            <tr class="bg-slate-50 text-slate-600">
+                                <th class="p-2 font-semibold border border-slate-200">Masse $m$ en kg</th>
+                                <th class="p-2 border border-slate-200">0.100 kg</th>
+                                <th class="p-2 border border-slate-200">0.200 kg</th>
+                                <th class="p-2 border border-slate-200">0.300 kg</th>
+                                <th class="p-2 border border-slate-200">0.400 kg</th>
+                                <th class="p-2 border border-slate-200">0.500 kg</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Poids $P$ mesuré (N)</td>
+                                <td class="p-3"><input type="number" step="0.05" id="p-100" placeholder="ex: 0.98" oninput="calcRealG()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="p-200" placeholder="ex: 1.96" oninput="calcRealG()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="p-300" placeholder="ex: 2.94" oninput="calcRealG()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="p-400" placeholder="ex: 3.92" oninput="calcRealG()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><input type="number" step="0.05" id="p-500" placeholder="ex: 4.90" oninput="calcRealG()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Moyenne du rapport $g = P/m$</td>
+                                <td class="p-3 font-extrabold text-emerald-800" id="g-calc-avg" colspan="5">-- N/kg (Pesanteur expérimentale)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Banc de Mécanique Virtuel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur de Dynamomètre &amp; Planètes</h2>
+                    </div>
+                    <!-- Sélecteur d'Astre -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-slate-300">Astre / Lieu :</label>
+                        <select id="sim-planet" onchange="updateSimForce()" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-3 py-2 focus:ring-emerald-400">
+                            <option value="9.81" selected>Terre (g = 9.81 N/kg)</option>
+                            <option value="1.62">Lune (g = 1.62 N/kg)</option>
+                            <option value="3.71">Mars (g = 3.71 N/kg)</option>
+                            <option value="24.79">Jupiter (g = 24.79 N/kg)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Mechanical Bench -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>DYNAMOMÈTRE DE RESSORT VECTEUR P</span>
+                            <span id="sim-status-text">m = 0.50 kg | P = 4.91 N • TENSION ÉQUILIBRÉE</span>
+                        </div>
+                        <canvas id="forceCanvas" width="600" height="260" class="w-full h-56 bg-black rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Masse Suspendue m (kg)</label>
+                                <input type="range" id="sim-m" min="0.05" max="1.0" step="0.05" value="0.5" oninput="updateSimForce()" class="w-full accent-emerald-500">
+                                <span class="font-mono text-emerald-300 font-bold text-xs" id="val-sim-m">m = 0.50 kg (500 g)</span>
+                            </div>
+                            <div class="flex items-center justify-center pt-3">
+                                <button onclick="toggleVectorLabel()" id="btn-vector-label" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs border border-slate-700 transition-all">
+                                    <i class="fa-solid fa-eye mr-1.5"></i> Afficher Vecteur Poids P
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">AFFICHEURS DIGITAUX</span>
+                        
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Intensité du Poids P</span>
+                            <span class="text-2xl font-bold font-mono text-emerald-400" id="meter-P">4.91 N</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Allongement du Ressort ΔL</span>
+                            <span class="text-2xl font-bold font-mono text-cyan-400" id="meter-dl">4.91 cm</span>
+                        </div>
+
+                        <div id="sim-warning-badge" class="w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            CAPACITÉ DYNAMOMÈTRE OK
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Trouver la Masse Inconnue
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un objet de masse inconnue est suspendu au dynamomètre sur Terre ($g = 9{,}81\text{ N/kg}$). L'aiguille indique une force de poids $P = 7{,}85\text{ N}$. Quelle est la masse $m$ de cet objet en kg ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="0.01" id="user-mass-guess" placeholder="Votre réponse en kg" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessMass()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Masse
+                    </button>
+                </div>
+                <div id="guess-result-mass" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initForceCanvas();
+            }
+        }
+
+        function calcRealG() {
+            const inputs = [
+                { m: 0.100, p: parseFloat(document.getElementById('p-100').value) },
+                { m: 0.200, p: parseFloat(document.getElementById('p-200').value) },
+                { m: 0.300, p: parseFloat(document.getElementById('p-300').value) },
+                { m: 0.400, p: parseFloat(document.getElementById('p-400').value) },
+                { m: 0.500, p: parseFloat(document.getElementById('p-500').value) }
+            ];
+
+            let sumG = 0;
+            let count = 0;
+
+            inputs.forEach(item => {
+                if (!isNaN(item.p) && item.p > 0) {
+                    sumG += (item.p / item.m);
+                    count++;
+                }
+            });
+
+            if (count > 0) {
+                const avgG = (sumG / count).toFixed(2);
+                document.getElementById('g-calc-avg').innerText = avgG + " N/kg (Moyenne expérimentale)";
+            }
+        }
+
+        let canvas, ctx;
+        let showVector = false;
+
+        function initForceCanvas() {
+            canvas = document.getElementById('forceCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawForce);
+            updateSimForce();
+        }
+
+        function toggleVectorLabel() {
+            showVector = !showVector;
+            const btn = document.getElementById('btn-vector-label');
+            btn.className = showVector ? "bg-emerald-600 text-white font-bold py-2 px-4 rounded-xl text-xs shadow-md border border-emerald-500" : "bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs border border-slate-700";
+        }
+
+        function drawForce() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const m = parseFloat(document.getElementById('sim-m').value);
+            const g = parseFloat(document.getElementById('sim-planet').value);
+            const P = m * g;
+            const dl = P * 5; // Scaling factor for spring stretch
+
+            const cx = canvas.width / 2;
+            const topY = 30;
+
+            // Draw Top Support Bar
+            ctx.fillStyle = '#64748b';
+            ctx.fillRect(cx - 50, topY - 10, 100, 10);
+
+            // Draw Spring (Zigzag)
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(cx, topY);
+            
+            let springY = topY;
+            const numCoils = 10;
+            const coilHeight = (60 + dl) / numCoils;
+
+            for (let i = 0; i < numCoils; i++) {
+                const dx = (i % 2 === 0) ? 12 : -12;
+                springY += coilHeight;
+                ctx.lineTo(cx + dx, springY);
+            }
+            ctx.lineTo(cx, springY + 10);
+            ctx.stroke();
+
+            // Draw Suspended Mass Block
+            const blockY = springY + 10;
+            const blockW = 50 + m * 20;
+            const blockH = 35;
+
+            ctx.fillStyle = '#10b981';
+            ctx.fillRect(cx - blockW / 2, blockY, blockW, blockH);
+            ctx.strokeStyle = '#059669';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(cx - blockW / 2, blockY, blockW, blockH);
+
+            // Center of Gravity G
+            const gx = cx;
+            const gy = blockY + blockH / 2;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(gx, gy, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw Weight Vector P if enabled
+            if (showVector) {
+                const arrowLen = Math.min(P * 6, 90);
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(gx, gy);
+                ctx.lineTo(gx, gy + arrowLen);
+                ctx.stroke();
+
+                // Arrowhead
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.moveTo(gx - 6, gy + arrowLen - 6);
+                ctx.lineTo(gx + 6, gy + arrowLen - 6);
+                ctx.lineTo(gx, gy + arrowLen + 4);
+                ctx.fill();
+
+                // Label
+                ctx.fillStyle = '#f87171';
+                ctx.font = 'bold 12px Outfit';
+                ctx.fillText(`P = ${P.toFixed(2)} N`, gx + 12, gy + arrowLen / 2);
+            }
+
+            requestAnimationFrame(drawForce);
+        }
+
+        function updateSimForce() {
+            const m = parseFloat(document.getElementById('sim-m').value);
+            const g = parseFloat(document.getElementById('sim-planet').value);
+            const P = m * g;
+            const dl = P * 0.8;
+
+            document.getElementById('val-sim-m').innerText = `m = ${m.toFixed(2)} kg (${(m * 1000).toFixed(0)} g)`;
+            document.getElementById('meter-P').innerText = P.toFixed(2) + " N";
+            document.getElementById('meter-dl').innerText = dl.toFixed(2) + " cm";
+
+            const badge = document.getElementById('sim-warning-badge');
+            if (P > 15) {
+                badge.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-red-950/40 border-red-500 text-red-400";
+                badge.innerText = "⚠️ DÉPASSEMENT CAPACITÉ DYNAMOMÈTRE";
+            } else {
+                badge.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400";
+                badge.innerText = "CAPACITÉ DYNAMOMÈTRE OK";
+            }
+
+            document.getElementById('sim-status-text').innerText = `m = ${m.toFixed(2)} kg | P = ${P.toFixed(2)} N • TENSION ÉQUILIBRÉE`;
+        }
+
+        function checkGuessMass() {
+            const ans = parseFloat(document.getElementById('user-mass-guess').value);
+            const target = 0.80; // 7.85 / 9.81 = 0.80 kg
+            const res = document.getElementById('guess-result-mass');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (Math.abs(ans - target) <= 0.02) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Bravo ! m = P / g = 7,85 / 9,81 = 0,80 kg (soit 800 g) !";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Incorrect. Indice : Utilisez m = P / g en divisant 7,85 par 9,81.";
+            }
+        }
+    </script>
+</body>
+</html>

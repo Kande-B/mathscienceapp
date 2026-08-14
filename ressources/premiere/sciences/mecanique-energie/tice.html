@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Mécanique & Énergie (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#faf5ff', 100: '#f3e8ff', 500: '#a855f7', 600: '#9333ea', 900: '#581c87' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 30px -5px rgba(147, 51, 234, 0.15); }
+
+        #mechCanvas {
+            background-color: #090d16;
+            box-shadow: inset 0 0 20px rgba(147, 51, 234, 0.2), 0 0 15px rgba(147, 51, 234, 0.3);
+        }
+
+        .tab-btn.active {
+            background-color: #9333ea;
+            color: #ffffff;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white !important; color: black !important; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-100 bg-slate-950 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Première Professionnelle • Physique-Chimie</span> <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    <h1 class="text-xl font-bold font-heading">Mécanique &amp; Énergie</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- ENTÊTE DE TP LYCÉE ET MATÉRIEL -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-lg space-y-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-purple-400">Labo Maths-Sciences • Mécanique &amp; Énergie</span>
+                    <h1 class="text-3xl font-extrabold font-heading text-white">TP — Conservation de l'Énergie Mécanique sur Rampe</h1>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 text-xs">
+                    <span class="bg-purple-900/60 text-purple-300 px-3 py-1.5 rounded-xl border border-purple-700/50 font-bold">⏱ Durée : 55 min</span>
+                    <span class="bg-blue-900/60 text-blue-300 px-3 py-1.5 rounded-xl border border-blue-700/50 font-bold">1ère Pro / Bac Pro</span>
+                </div>
+            </div>
+
+            <!-- MODES SELECTOR TABS -->
+            <div class="flex flex-wrap items-center justify-between gap-4 no-print">
+                <div class="flex bg-slate-950 p-1.5 rounded-2xl border border-slate-800 gap-2">
+                    <button onclick="switchTab('real')" id="tabRealBtn" class="tab-btn active px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-flask-vial text-amber-400"></i> Mode 1 : Manipulations Paillasse (Matériel Réel)
+                    </button>
+                    <button onclick="switchTab('virtual')" id="tabVirtualBtn" class="tab-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-laptop-code text-emerald-400"></i> Mode 2 : Simulateur Numérique (Rampe Virtuelle)
+                    </button>
+                </div>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all border border-slate-700 flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer Fiche TP (A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <!-- MODE 1 : TP PAILLASSE RÉELLE (MATÉRIEL DU LABORATOIRE)           -->
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <div id="tabReal" class="space-y-8">
+
+            <!-- CONTEXTE & FORMULES DE BASE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Contexte Pro -->
+                <div class="bg-sky-950/40 border border-sky-800/60 rounded-3xl p-6 space-y-3">
+                    <h3 class="font-bold text-sky-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase"></i> Contexte Professionnel
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        L'étude de la conversion de l'énergie potentielle $E_p = mgh$ en énergie cinétique $E_c = \frac{1}{2}mv^2$ est essentielle pour concevoir les systèmes de sécurité dans l'industrie (chutes de charges, crash-tests automobiles, toboggans d'évacuation, chariots de manutention sans moteur).
+                    </p>
+                </div>
+
+                <!-- Formules Clés -->
+                <div class="bg-amber-950/40 border border-amber-800/60 rounded-3xl p-6 space-y-3">
+                    <h3 class="font-bold text-amber-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable"></i> Formules &amp; Relations Clés
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-center text-xs font-mono">
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$E_p = m \cdot g \cdot h$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$E_c = \frac{1}{2} m v^2$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$E_m = E_c + E_p$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$v = \sqrt{2 g h}$</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATÉRIEL RÉEL DU LABO ET SÉCURITÉ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Liste Matériel -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <h3 class="font-bold font-heading text-purple-400 text-base flex items-center gap-2 border-b border-slate-800 pb-2">
+                        <i class="fa-solid fa-toolbox"></i> Matériel Réel Nécessaire (Paillasse de TP)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-purple-900/50 text-purple-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-road"></i></span>
+                            <div>
+                                <strong class="text-white block">Rail / Banc de Dynamique 1,5m</strong>
+                                <span class="text-slate-400 text-[11px]">Rampe inclinable graduée</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-amber-900/50 text-amber-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-car"></i></span>
+                            <div>
+                                <strong class="text-white block">Chariot + Masses Additionnelles</strong>
+                                <span class="text-slate-400 text-[11px]">Masse totale réglable ($100\text{g}$ à $500\text{g}$)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-stopwatch"></i></span>
+                            <div>
+                                <strong class="text-white block">2 Cellules Photoélectriques</strong>
+                                <span class="text-slate-400 text-[11px]">Chronomètre au millième de seconde</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-sky-900/50 text-sky-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-scale-balanced"></i></span>
+                            <div>
+                                <strong class="text-white block">Balance Électronique + Règle</strong>
+                                <span class="text-slate-400 text-[11px]">Mesure masse $m$ et hauteur $h$</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consignes Sécurité -->
+                <div class="bg-red-950/30 border border-red-900/50 rounded-3xl p-6 space-y-3 text-xs text-red-200">
+                    <h3 class="font-bold text-red-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Consignes de Sécurité TP
+                    </h3>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li>⚠️ <strong>Butée d'arrêt obligatoirement installée :</strong> Placer un bloc amortisseur au bas du rail pour arrêter le chariot.</li>
+                        <li>⚠️ <strong>Fixation des surcharges :</strong> Bien visser ou fixer les masses d'alourdissement sur le chariot pour éviter leur projection lors du choc.</li>
+                        <li>⚠️ Dégager la trajectoire du chariot lors du lâcher.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- ÉTAPES DÉTAILLÉES DU PROTOCOLE EXPERIMENTAL -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6">
+                <h3 class="text-xl font-bold font-heading text-white border-b border-slate-800 pb-3 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm font-extrabold"><i class="fa-solid fa-list-check"></i></span>
+                    Déroulement Expérimental — 6 Étapes Guidées
+                </h3>
+
+                <div class="space-y-4 text-xs">
+
+                    <!-- Étape 1 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-purple-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-purple-900 text-purple-200 flex items-center justify-center text-xs">1</span>
+                                Mesure de la masse et Réglage de la Hauteur $h$
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Peser le chariot avec sa surcharge sur la balance électronique. Noter sa masse $m$ en kg (ex: $0{,}25\text{ kg}$).</li>
+                            <li>Incliner le rail de guidage et mesurer la hauteur verticale $h$ entre le point de départ du chariot et le bas du rail (ex: $h = 0{,}20\text{ m}$).</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-amber-900 text-amber-200 flex items-center justify-center text-xs">2</span>
+                                Alignement de la Cellule Photoélectrique de Mesure
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 5 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Fixer la cellule photoélectrique en bas de la rampe à l'altitude zéro ($h = 0$).</li>
+                            <li>Mesurer la largeur de la languette d'occultation fixée sur le chariot (ex: $d = 0{,}05\text{ m}$).</li>
+                            <li>Relier la cellule au chronomètre numérique réglé en mode "durée d'occultation $\Delta t$".</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 3 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-emerald-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-emerald-900 text-emerald-200 flex items-center justify-center text-xs">3</span>
+                                Lâcher du Chariot et Relevé de la Vitesse Instantanée
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Placer le chariot au sommet sans lui donner de vitesse initiale ($v_A = 0$).</li>
+                            <li>Lâcher le chariot et relever la durée de passage $\Delta t$ affichée par le chronomètre.</li>
+                            <li>Calculer la vitesse instantanée de passage au bas de la rampe : $v = \frac{d}{\Delta t}$ (en m/s).</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 4 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-sky-900 text-sky-200 flex items-center justify-center text-xs">4</span>
+                                Calculs d'Énergie et Bilan
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Calculer l'énergie potentielle initiale : $E_p = m \cdot g \cdot h$ (avec $g = 9{,}81\text{ N/kg}$).</li>
+                            <li>Calculer l'énergie cinétique au bas de la rampe : $E_c = \frac{1}{2} m v^2$.</li>
+                            <li>Comparer $E_c$ et $E_p$. Calculer la perte d'énergie thermique due aux frottements : $E_{frot} = E_p - E_c$.</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TABLEAU INTERACTIF DE RELEVÉ DE MESURES DE PAILLASSE -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-3 gap-2">
+                    <h3 class="text-lg font-bold font-heading text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-table"></i> Tableau de Relevé des Mesures Réelles du Labo
+                    </h3>
+                    <span class="text-xs text-slate-400">Saisissez vos mesures réelles ci-dessous</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse min-w-[650px]">
+                        <thead>
+                            <tr class="bg-slate-950 text-slate-400 font-mono border-b border-slate-800">
+                                <th class="p-3">Essai N°</th>
+                                <th class="p-3">Masse $m$ (kg)</th>
+                                <th class="p-3">Hauteur $h$ (m)</th>
+                                <th class="p-3">$E_p = mgh$ (J)</th>
+                                <th class="p-3">Temps $\Delta t$ (s)</th>
+                                <th class="p-3">Vitesse $v$ (m/s)</th>
+                                <th class="p-3">$E_c = \frac{1}{2}mv^2$ (J)</th>
+                                <th class="p-3">Frottements $E_{frot}$ (J)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200">
+                            <!-- Ligne 1 -->
+                            <tr class="hover:bg-slate-950/50">
+                                <td class="p-3 font-bold text-amber-400">Essai 1</td>
+                                <td class="p-3"><input type="number" id="mechM1" step="0.05" value="0.25" oninput="calcMechTable()" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="mechH1" step="0.05" value="0.20" oninput="calcMechTable()" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-sky-400" id="mechEp1">0.49 J</td>
+                                <td class="p-3"><input type="number" id="mechDt1" step="0.005" value="0.026" oninput="calcMechTable()" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-amber-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-white" id="mechV1">1.92 m/s</td>
+                                <td class="p-3 font-mono font-bold text-emerald-400" id="mechEc1">0.46 J</td>
+                                <td class="p-3 font-mono font-bold text-red-400" id="mechEf1">0.03 J</td>
+                            </tr>
+                            <!-- Ligne 2 -->
+                            <tr class="hover:bg-slate-950/50">
+                                <td class="p-3 font-bold text-amber-400">Essai 2 (Surcharge)</td>
+                                <td class="p-3"><input type="number" id="mechM2" step="0.05" value="0.50" oninput="calcMechTable()" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3"><input type="number" id="mechH2" step="0.05" value="0.30" oninput="calcMechTable()" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-sky-400" id="mechEp2">1.47 J</td>
+                                <td class="p-3"><input type="number" id="mechDt2" step="0.005" value="0.021" oninput="calcMechTable()" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-amber-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-white" id="mechV2">2.38 m/s</td>
+                                <td class="p-3 font-mono font-bold text-emerald-400" id="mechEc2">1.42 J</td>
+                                <td class="p-3 font-mono font-bold text-red-400" id="mechEf2">0.05 J</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- COMPTE RENDU BILAN LIBRE -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3">
+                <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider">Compte-rendu — Bilan de TP &amp; Interprétation des frottements</h3>
+                <textarea rows="4" placeholder="Rédigez vos conclusions de TP (comparaison de Ep et Ec, part de l'énergie dissipée par frottement...)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 focus:outline-none focus:border-purple-500 font-sans leading-relaxed"></textarea>
+            </div>
+
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <!-- MODE 2 : TP SIMULATEUR NUMÉRIQUE (RAMPE VIRTUELLE HTML5 CANVAS)   -->
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <div id="tabVirtual" class="hidden space-y-8">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- CANVAS SIMULATEUR (LEFT 7 COLS) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-6 card-shadow space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-purple-500 animate-pulse"></span>
+                                <span class="font-bold text-sm text-purple-400 font-mono uppercase tracking-wider">SIMULATION TEMPS RÉEL • RAMPE 60 FPS</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="resetSim()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all border border-slate-700">
+                                    <i class="fa-solid fa-rotate-left"></i> Sommet
+                                </button>
+                                <button onclick="toggleSim()" id="simPlayBtn" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md">
+                                    <i class="fa-solid fa-play" id="playIcon"></i> Lâcher
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Element -->
+                        <div class="relative w-full overflow-hidden rounded-2xl border-2 border-purple-900/60">
+                            <canvas id="mechCanvas" width="600" height="400" class="w-full h-auto block"></canvas>
+                        </div>
+
+                        <!-- Energy Gauges Bar -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs font-mono">
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-sky-400 block text-[10px]">ÉNERGIE POTENTIELLE</span>
+                                <span class="text-sky-300 font-bold text-sm" id="simEp">0.0 J</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-emerald-400 block text-[10px]">ÉNERGIE CINÉTIQUE</span>
+                                <span class="text-emerald-300 font-bold text-sm" id="simEc">0.0 J</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-amber-400 block text-[10px]">ÉNERGIE MÉCANIQUE</span>
+                                <span class="text-amber-300 font-bold text-sm" id="simEm">0.0 J</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-red-400 block text-[10px]">FROTTEMENT THERMIQUE</span>
+                                <span class="text-red-300 font-bold text-sm" id="simEf">0.0 J</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUTO-EVALUATION CHALLENGE -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <h3 class="font-bold font-heading text-purple-400 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye"></i> Défi Mode Masqué (Auto-Évaluation)
+                            </h3>
+                            <button onclick="generateRandomRampe()" class="bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all">
+                                Générer Rampe Mystère
+                            </button>
+                        </div>
+
+                        <p class="text-xs text-slate-400">
+                            Observez la hauteur et la vitesse affichées par le simulateur, puis calculez l'énergie mécanique :
+                        </p>
+
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                            <div>
+                                <label class="block text-slate-400 mb-1">Ep au sommet (J) :</label>
+                                <input type="number" id="userEp" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sky-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Ec au bas (J) :</label>
+                                <input type="number" id="userEc" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Vitesse théorique (m/s) :</label>
+                                <input type="number" id="userVth" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-amber-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <button onclick="checkUserMechAnswers()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md">
+                                Vérifier mes calculs
+                            </button>
+                            <div id="checkMechResult" class="text-xs font-bold"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTROL PANEL (RIGHT 5 COLS) -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- PARAMÈTRES DU MOBILE ET DE LA RAMPE -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5 card-shadow">
+                        <h3 class="text-lg font-bold font-heading text-amber-400 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-amber-500"></i> Paramètres de la Rampe
+                        </h3>
+
+                        <!-- Hauteur h -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Hauteur $h$ :</span>
+                                <span class="font-mono font-bold text-amber-400" id="valH">2.0 m</span>
+                            </div>
+                            <input type="range" id="sliderH" min="0.5" max="5" step="0.25" value="2" oninput="updateSimParams()" class="w-full accent-amber-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Masse m -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Masse du mobile $m$ :</span>
+                                <span class="font-mono font-bold text-amber-400" id="valM">1.0 kg</span>
+                            </div>
+                            <input type="range" id="sliderM" min="0.2" max="5" step="0.2" value="1" oninput="updateSimParams()" class="w-full accent-amber-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Frottements mu -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Coefficient de frottement $\mu$ :</span>
+                                <span class="font-mono font-bold text-purple-300" id="valMu">0.05</span>
+                            </div>
+                            <input type="range" id="sliderMu" min="0" max="0.3" step="0.02" value="0.05" oninput="updateSimParams()" class="w-full accent-purple-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- AFFICHAGE DES MESURES SIMULÉES -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 card-shadow">
+                        <h3 class="text-lg font-bold font-heading text-emerald-400 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge"></i> Valeurs Instantanées
+                        </h3>
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="flex justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+                                <span class="text-slate-400">Vitesse instantanée $v$ :</span>
+                                <span class="text-emerald-400 font-bold" id="simV">0.00 m/s (0 km/h)</span>
+                            </div>
+                            <div class="flex justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+                                <span class="text-slate-400">Vitesse max théorique $v_{th}$ :</span>
+                                <span class="text-amber-400 font-bold" id="simVth">6.26 m/s</span>
+                            </div>
+                            <div class="flex justify-between p-2 rounded-xl bg-slate-950 border border-slate-800">
+                                <span class="text-slate-400">Taux de conservation :</span>
+                                <span class="text-purple-400 font-bold" id="simRatio">100 %</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SIMULATOR & TAB SWITCHING JAVASCRIPT -->
+    <script>
+        // Tab switching
+        function switchTab(mode) {
+            const realTab = document.getElementById('tabReal');
+            const virtualTab = document.getElementById('tabVirtual');
+            const realBtn = document.getElementById('tabRealBtn');
+            const virtualBtn = document.getElementById('tabVirtualBtn');
+
+            if (mode === 'real') {
+                realTab.classList.remove('hidden');
+                virtualTab.classList.add('hidden');
+                realBtn.classList.add('active');
+                virtualBtn.classList.remove('active');
+            } else {
+                realTab.classList.add('hidden');
+                virtualTab.classList.remove('hidden');
+                virtualBtn.classList.add('active');
+                realBtn.classList.remove('active');
+            }
+        }
+
+        // Real lab table calculations
+        function calcMechTable() {
+            const g = 9.81;
+
+            // Row 1
+            const m1 = parseFloat(document.getElementById('mechM1').value) || 0;
+            const h1 = parseFloat(document.getElementById('mechH1').value) || 0;
+            const ep1 = m1 * g * h1;
+            document.getElementById('mechEp1').innerText = ep1.toFixed(2) + " J";
+
+            const dt1 = parseFloat(document.getElementById('mechDt1').value) || 0.001;
+            const v1 = 0.05 / dt1; // d = 5cm = 0.05m
+            document.getElementById('mechV1').innerText = v1.toFixed(2) + " m/s";
+
+            const ec1 = 0.5 * m1 * v1 * v1;
+            document.getElementById('mechEc1').innerText = ec1.toFixed(2) + " J";
+
+            const ef1 = Math.max(0, ep1 - ec1);
+            document.getElementById('mechEf1').innerText = ef1.toFixed(2) + " J";
+
+            // Row 2
+            const m2 = parseFloat(document.getElementById('mechM2').value) || 0;
+            const h2 = parseFloat(document.getElementById('mechH2').value) || 0;
+            const ep2 = m2 * g * h2;
+            document.getElementById('mechEp2').innerText = ep2.toFixed(2) + " J";
+
+            const dt2 = parseFloat(document.getElementById('mechDt2').value) || 0.001;
+            const v2 = 0.05 / dt2;
+            document.getElementById('mechV2').innerText = v2.toFixed(2) + " m/s";
+
+            const ec2 = 0.5 * m2 * v2 * v2;
+            document.getElementById('mechEc2').innerText = ec2.toFixed(2) + " J";
+
+            const ef2 = Math.max(0, ep2 - ec2);
+            document.getElementById('mechEf2').innerText = ef2.toFixed(2) + " J";
+        }
+
+        // Mechanical Canvas Simulator
+        const canvas = document.getElementById('mechCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let heightM = 2.0; // m
+        let massKg = 1.0; // kg
+        let frictionMu = 0.05;
+        const g = 9.81;
+
+        let posX = 0; // 0 to 1 along ramp
+        let isRunning = false;
+        let currentV = 0; // m/s
+        let currentEp = 0;
+        let currentEc = 0;
+        let currentEf = 0;
+
+        function updateSimParams() {
+            heightM = parseFloat(document.getElementById('sliderH').value);
+            massKg = parseFloat(document.getElementById('sliderM').value);
+            frictionMu = parseFloat(document.getElementById('sliderMu').value);
+
+            document.getElementById('valH').innerText = heightM.toFixed(2) + " m";
+            document.getElementById('valM').innerText = massKg.toFixed(1) + " kg";
+            document.getElementById('valMu').innerText = frictionMu.toFixed(2);
+
+            const vTh = Math.sqrt(2 * g * heightM);
+            document.getElementById('simVth').innerText = vTh.toFixed(2) + " m/s";
+
+            resetSim();
+        }
+
+        function resetSim() {
+            posX = 0;
+            isRunning = false;
+            currentV = 0;
+            currentEp = massKg * g * heightM;
+            currentEc = 0;
+            currentEf = 0;
+
+            document.getElementById('playIcon').className = "fa-solid fa-play";
+            document.getElementById('simPlayBtn').className = "px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md";
+
+            updateGauges();
+        }
+
+        function toggleSim() {
+            isRunning = !isRunning;
+            const btn = document.getElementById('simPlayBtn');
+            const icon = document.getElementById('playIcon');
+
+            if (isRunning) {
+                icon.className = "fa-solid fa-pause";
+                btn.className = "px-4 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition-all shadow-md";
+            } else {
+                icon.className = "fa-solid fa-play";
+                btn.className = "px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md";
+            }
+        }
+
+        function updateGauges() {
+            document.getElementById('simEp').innerText = currentEp.toFixed(1) + " J";
+            document.getElementById('simEc').innerText = currentEc.toFixed(1) + " J";
+            document.getElementById('simEm').innerText = (currentEp + currentEc).toFixed(1) + " J";
+            document.getElementById('simEf').innerText = currentEf.toFixed(1) + " J";
+
+            const vKmh = currentV * 3.6;
+            document.getElementById('simV').innerText = currentV.toFixed(2) + " m/s (" + vKmh.toFixed(1) + " km/h)";
+
+            const totalE = massKg * g * heightM;
+            const ratio = totalE > 0 ? ((currentEp + currentEc) / totalE) * 100 : 100;
+            document.getElementById('simRatio').innerText = ratio.toFixed(0) + " %";
+        }
+
+        function drawMech() {
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Ramp Coordinates
+            const xA = 80, yA = 80;
+            const xB = 520, yB = 320;
+
+            // Draw Ground & Ramp
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(xA, yA);
+            ctx.lineTo(xB, yB);
+            ctx.lineTo(xB + 50, yB);
+            ctx.stroke();
+
+            // Fill Ramp Area
+            ctx.fillStyle = '#1e293b';
+            ctx.beginPath();
+            ctx.moveTo(xA, yA);
+            ctx.lineTo(xB, yB);
+            ctx.lineTo(xA, yB);
+            ctx.closePath();
+            ctx.fill();
+
+            // Height indicator line
+            ctx.strokeStyle = '#38bdf8';
+            ctx.setLineDash([4, 4]);
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(xA, yA);
+            ctx.lineTo(xA, yB);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.fillText(`h = ${heightM.toFixed(1)}m`, xA - 50, (yA + yB) / 2);
+
+            // Update Animation Physics
+            if (isRunning && posX < 1) {
+                posX += 0.008;
+                if (posX > 1) posX = 1;
+
+                const curH = heightM * (1 - posX);
+                currentEp = massKg * g * curH;
+
+                // Accel with friction
+                const maxV = Math.sqrt(2 * g * heightM * (1 - frictionMu));
+                currentV = maxV * Math.sqrt(posX);
+                currentEc = 0.5 * massKg * currentV * currentV;
+
+                const initialTotalE = massKg * g * heightM;
+                currentEf = Math.max(0, initialTotalE - (currentEp + currentEc));
+
+                updateGauges();
+            }
+
+            // Cart Position on Ramp
+            const cartX = xA + (xB - xA) * posX;
+            const cartY = yA + (yB - yA) * posX;
+
+            // Draw Cart
+            ctx.save();
+            ctx.translate(cartX, cartY);
+            const angle = Math.atan2(yB - yA, xB - xA);
+            ctx.rotate(angle);
+
+            // Body
+            ctx.fillStyle = '#a855f7';
+            ctx.shadowColor = '#a855f7';
+            ctx.shadowBlur = 10;
+            ctx.fillRect(-20, -18, 40, 18);
+            ctx.shadowBlur = 0;
+
+            // Wheels
+            ctx.fillStyle = '#f8fafc';
+            ctx.beginPath();
+            ctx.arc(-12, 0, 5, 0, Math.PI * 2);
+            ctx.arc(12, 0, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+
+            requestAnimationFrame(drawMech);
+        }
+
+        // Random Challenge
+        let mysteryH = 0;
+        let mysteryM = 0;
+
+        function generateRandomRampe() {
+            mysteryH = [1.5, 2.0, 3.0, 4.0][Math.floor(Math.random() * 4)];
+            mysteryM = [1.0, 2.0, 5.0][Math.floor(Math.random() * 3)];
+
+            document.getElementById('sliderH').value = mysteryH;
+            document.getElementById('sliderM').value = mysteryM;
+            updateSimParams();
+
+            document.getElementById('userEp').value = '';
+            document.getElementById('userEc').value = '';
+            document.getElementById('userVth').value = '';
+            document.getElementById('checkMechResult').innerHTML = '<span class="text-amber-400">Rampe mystère générée ! À vos calculs.</span>';
+        }
+
+        function checkUserMechAnswers() {
+            const epIn = parseFloat(document.getElementById('userEp').value);
+            const ecIn = parseFloat(document.getElementById('userEc').value);
+            const vthIn = parseFloat(document.getElementById('userVth').value);
+
+            const expectedEp = mysteryM * 9.81 * mysteryH;
+            const expectedVth = Math.sqrt(2 * 9.81 * mysteryH);
+
+            let correctCount = 0;
+            if (Math.abs(epIn - expectedEp) < 1.0) correctCount++;
+            if (Math.abs(ecIn - expectedEp) < 1.5) correctCount++;
+            if (Math.abs(vthIn - expectedVth) < 0.3) correctCount++;
+
+            const resDiv = document.getElementById('checkMechResult');
+            if (correctCount === 3) {
+                resDiv.innerHTML = `<span class="text-emerald-400">🎉 Parfait ! 3/3 calculs exacts ($E_p=${expectedEp.toFixed(1)}J, v_{th}=${expectedVth.toFixed(2)}m/s$).</span>`;
+            } else {
+                resDiv.innerHTML = `<span class="text-amber-400">⚠️ ${correctCount}/3 exacts. Attendu : $E_p=${expectedEp.toFixed(1)}J, v_{th}=${expectedVth.toFixed(2)}m/s$.</span>`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resDiv]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calcMechTable();
+            updateSimParams();
+            requestAnimationFrame(drawMech);
+        });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de TD - Cinématique 2nde Pro</title>
+    <title>TD & Exercices - Mouvement & Vitesse (2nde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -34,128 +34,283 @@
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
         @media print {
-            header, nav, .no-print { display: none !important; }
-            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
-            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
-            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
         }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Sciences -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
                     <i class="fa-solid fa-dumbbell text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3 • Seconde Professionnelle Sciences Physiques</span>
-                    <h1 class="text-xl font-bold font-heading">Mouvement, Trajectoire & Vitesse</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Mouvement &amp; Vitesse</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-purple-400"></i> TP Expérimental</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- EN-TÊTE DE LA FICHE DE TD -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
-                <div>
-                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
-                        <span>Fiche d'Entraînement A4 Imprimable Avec Figures</span> • <span>Sciences Physiques & Chimiques</span>
-                    </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur la Cinématique & la Vitesse</h2>
-                </div>
-                <div class="flex items-center gap-2 no-print">
-                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
-                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
-                    </button>
-                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
-                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
-                    </button>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Individuel &amp; Autonome</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application gradués avec corrigés rédigés pas à pas.</p>
         </div>
 
-        <!-- EXERCICE 1 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
-                    Bac Pro Logistique : Chariot de Manutention Automatisé (AGV)
-                </h3>
-                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un chariot de manutention parcourt une allée d'entrepôt de $180\text{ mètres}$ à la vitesse constante de $v = 1,5\text{ m/s}$.</p>
-                    <p class="font-bold">Calculez le temps nécessaire $t$ en secondes, puis en minutes.</p>
-                </div>
-                <!-- SVG EX 1 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-mvt1" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-mvt1)" />
-                        <line x1="25" y1="50" x2="125" y2="50" stroke="#4f46e5" stroke-width="2.5"/>
-                        <polygon points="125,50 115,45 115,55" fill="#4f46e5"/>
-                        <text x="75" y="40" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">v = 1,5 m/s</text>
-                        <text x="75" y="92" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">t = ? s</text>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices de difficulté progressive</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
                 </button>
             </div>
-            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>$t = \frac{d}{v} = \frac{180\text{ m}}{1,5\text{ m/s}} = \mathbf{120\text{ s}} = \mathbf{2\text{ minutes}}$.</p>
-            </div>
         </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Calcul Direct de Vitesse &amp; Conversion
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Application directe)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un véhicule d'essai parcourt une distance $d = 450\text{ m}$ en une durée $t = 18\text{ s}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                1.1. Calculer la vitesse moyenne $v$ du véhicule en mètres par seconde (m/s).<br>
+                1.2. Convertir cette vitesse en kilomètres par heure (km/h).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• 1.1 : $v = \frac{d}{t} = \frac{450}{18} = 25\text{ m/s}$.</p>
+                <p>• 1.2 : $v_{km/h} = 25 \times 3{,}6 = 90\text{ km/h}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Calcul de Durée d'un Trajet TGV
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Calcul du temps)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un train TGV circule à la vitesse moyenne constante $v = 300\text{ km/h}$ sur une ligne à grande vitesse de longueur $d = 450\text{ km}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                2.1. Calculer la durée du trajet $t$ en heures (h).<br>
+                2.2. Exprimer cette durée en minutes (min).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• 2.1 : $t = \frac{d}{v} = \frac{450}{300} = 1{,}5\text{ h}$.</p>
+                <p>• 2.2 : $1{,}5\text{ h} = 1\text{ h } 30\text{ min} = 90\text{ minutes}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Distance Parcourue par un Tapis Roulant
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Calcul de distance)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Dans un centre de distribution colis, un convoyeur à bande avance à une vitesse constante $v = 0{,}80\text{ m/s}$. Un carton reste sur le tapis pendant une durée $t = 45\text{ s}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Calculer la distance $d$ en mètres parcourue par le carton.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• $d = v \cdot t = 0{,}80 \times 45 = 36\text{ m}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Analyse d'une Chronophotographie
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Nature du mouvement)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une bille roule le long d'un rail incliné. Une caméra enregistre sa position toutes les $\Delta t = 0{,}10\text{ s}$. Les positions mesurées depuis l'origine sont : $x_0 = 0\text{ cm}$, $x_1 = 2\text{ cm}$, $x_2 = 6\text{ cm}$, $x_3 = 12\text{ cm}$, $x_4 = 20\text{ cm}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                4.1. Calculer la distance parcourue entre chaque intervalle de $0{,}10\text{ s}$.<br>
+                4.2. Caractériser la nature du mouvement de la bille (uniforme, accéléré ou ralenti). Justifier.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 4.1 : $d_1 = 2\text{ cm}$, $d_2 = 4\text{ cm}$, $d_3 = 6\text{ cm}$, $d_4 = 8\text{ cm}$.</p>
+                <p>• 4.2 : Les distances parcourues augmentent à chaque intervalle de temps $\Delta t$ égal : le mouvement est **rectiligne accéléré**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Vitesse à l'Extrémité d'une Pale d'Éolienne
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Mouvement circulaire)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                L'extrémité d'une pale d'éolienne de rayon $R = 25\text{ m}$ effectue un tour complet circulaire ($C = 2 \pi R \approx 157\text{ m}$) en une durée $t = 5{,}0\text{ s}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                5.1. Calculer la vitesse $v$ à l'extrémité de la pale en m/s.<br>
+                5.2. Convertir cette vitesse en km/h.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : $v = \frac{C}{t} = \frac{157}{5{,}0} = 31{,}4\text{ m/s}$.</p>
+                <p>• 5.2 : $v = 31{,}4 \times 3{,}6 = 113\text{ km/h}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Contrôle de Vitesse par Radar de Chantier
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Radar & Réglementation)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Sur une zone de chantier BTP, la vitesse est limitée à $v_{lim} = 30\text{ km/h}$. Un engin de chantier parcourt la section de contrôle de $d = 200\text{ m}$ en $t = 24\text{ s}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                6.1. Calculer la vitesse de l'engin en m/s puis en km/h.<br>
+                6.2. L'engin est-il en infraction ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : $v = \frac{200}{24} = 8{,}33\text{ m/s}$. En km/h : $8{,}33 \times 3{,}6 = 30\text{ km/h}$.</p>
+                <p>• 6.2 : Non, l'engin respecte exactement la vitesse maximale autorisée ($30\text{ km/h}$).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Distances d'Arrêt sur Chaussée Sèche vs Mouillée
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Sécurité routière)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une automobile roule en ville à $v = 50\text{ km/h}$ ($13{,}9\text{ m/s}$). Le temps de réaction est $t_r = 1{,}0\text{ s}$. Sur route sèche, la distance de freinage est $D_f = 14\text{ m}$. Sur route mouillée, la distance de freinage augmente de $50\%$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                7.1. Calculer la distance d'arrêt totale $D_{a,sec}$ sur route sèche.<br>
+                7.2. Calculer la nouvelle distance de freinage $D_{f,mouillee}$ puis la distance d'arrêt $D_{a,mouillee}$ sur route mouillée.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : $D_r = 13{,}9 \times 1{,}0 = 13{,}9\text{ m}$. $D_{a,sec} = 13{,}9 + 14 = 27{,}9\text{ m}$.</p>
+                <p>• 7.2 : $D_{f,mouillee} = 14 \times 1{,}5 = 21\text{ m}$. $D_{a,mouillee} = 13{,}9 + 21 = 34{,}9\text{ m}$ (soit 7 mètres de plus !).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Impact du Téléphone au Volant sur le Temps de Réaction
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Prévention routière)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Sur voie rapide à $v = 110\text{ km/h}$ ($30{,}6\text{ m/s}$), un conducteur attentif a un temps de réaction $t_{r1} = 1{,}0\text{ s}$. Un conducteur distrait par son téléphone portable a un temps de réaction qui double : $t_{r2} = 2{,}0\text{ s}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                8.1. Calculer la distance de réaction $D_{r1}$ du conducteur attentif.<br>
+                8.2. Calculer la distance de réaction $D_{r2}$ du conducteur distrait. Conclure sur le danger du téléphone au volant.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $D_{r1} = 30{,}6 \times 1{,}0 = 30{,}6\text{ m}$.</p>
+                <p>• 8.2 : $D_{r2} = 30{,}6 \times 2{,}0 = 61{,}2\text{ m}$. Le véhicule parcourt **30,6 mètres supplémentaires "à l'aveugle"** avant même que le conducteur ne commence à appuyer sur le frein, ce qui augmente considérablement les risques de collision mortelle.</p>
+            </div>
+        </section>
 
     </main>
 
-    <!-- SCRIPTS JS -->
     <script>
-        let allShown = false;
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
 
-        function toggleCorrection(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.toggle('hidden');
-        }
-
-        function toggleAllCorrections() {
-            allShown = !allShown;
-            const ids = ['corr-ex1'];
-            ids.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (allShown) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
                 }
             });
-            const btnText = document.getElementById('toggle-all-text');
-            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
         }
     </script>
 </body>

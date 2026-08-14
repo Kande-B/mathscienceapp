@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Courant Alternatif Sinusoïdal (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #3b82f6; background-color: #eff6ff; }
+        .propriete-box { border-left: 6px solid #10b981; background-color: #ecfdf5; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+        .exemple-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Électricité : Courant Alternatif Sinusoïdal</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> Oscilloscope Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-sky-100 text-sky-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-sky-200">Synthèse de Cours Officielle • Bac Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Courant Alternatif Sinusoïdal</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Définitions, grandeurs physiques $U_{max}, U_{eff}, T, f$, réglages de l'oscilloscope, réseau secteur 230V et consignes de sécurité.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. CONTINU VS ALTERNATIF SINUSOÏDAL         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">I</span>
+                Tension Continue vs Tension Alternative Sinusoïdale
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- DC -->
+                <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center gap-2 text-blue-600 font-bold text-base">
+                        <i class="fa-solid fa-[#1e293b] fa-minus text-xl"></i> Tension Continue (DC / $=$)
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        La tension reste **constante au cours du temps** et conserve toujours la même polarité ($+$ et $-$).
+                    </p>
+                    <div class="bg-slate-900 p-3 rounded-xl">
+                        <svg viewBox="0 0 200 80" class="w-full h-16">
+                            <line x1="10" y1="40" x2="190" y2="40" stroke="#475569" stroke-dasharray="2,2"/>
+                            <line x1="10" y1="25" x2="190" y2="25" stroke="#3b82f6" stroke-width="2.5"/>
+                            <text x="15" y="20" fill="#93c5fd" font-size="10">U = constant</text>
+                        </svg>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block font-medium">Exemples : Piles, batteries d'accumulateurs, panneaux photovoltaïques.</span>
+                </div>
+
+                <!-- AC -->
+                <div class="bg-sky-50 border border-sky-200 p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center gap-2 text-sky-700 font-bold text-base">
+                        <i class="fa-solid fa-wave-square text-xl"></i> Tension Alternative Sinusoïdale (AC / $\sim$)
+                    </div>
+                    <p class="text-xs text-sky-950 leading-relaxed">
+                        La tension varie de façon **périodique** au cours du temps, alternativement positive et négative, selon une courbe ondulée appelée **sinusoïde**.
+                    </p>
+                    <div class="bg-slate-900 p-3 rounded-xl">
+                        <svg viewBox="0 0 200 80" class="w-full h-16">
+                            <line x1="10" y1="40" x2="190" y2="40" stroke="#475569" stroke-dasharray="2,2"/>
+                            <path d="M 10,40 Q 32.5,10 55,40 T 100,40 T 145,40 T 190,40" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+                        </svg>
+                    </div>
+                    <span class="text-[11px] text-sky-800 block font-medium">Exemples : Prise secteur 230V, alternateurs industriels et automobiles.</span>
+                </div>
+            </div>
+
+            <div class="definition-box rounded-2xl p-5 space-y-2 text-sm">
+                <h3 class="font-bold text-blue-900 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-blue-600"></i> Vocabulaire Réseau &amp; Signal
+                </h3>
+                <ul class="list-disc pl-5 space-y-1.5 text-blue-950">
+                    <li><strong>Périodique :</strong> Le signal se répète à l'identique à intervalles de temps réguliers.</li>
+                    <li><strong>Alternatif :</strong> La tension change de signe (positive pendant une demi-période, négative pendant l'autre).</li>
+                    <li><strong>Motif élémentaire :</strong> La plus petite portion du signal qui se répète indéfiniment.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. GRANDEURS CARACTÉRISTIQUES              -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">II</span>
+                Grandeurs Caractéristiques d'une Tension Sinusoïdale
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- 1. Tension Max et Efficace -->
+                <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-500"></i> 1. Tension Maximale $U_{max}$ et Efficace $U_{eff}$
+                    </h3>
+                    <ul class="space-y-2 text-xs text-slate-700">
+                        <li>
+                            <strong>Tension maximale $U_{max}$ :</strong> Valeur atteinte au sommet de la crête positive (exprimée en Volts, V).
+                        </li>
+                        <li>
+                            <strong>Tension crête-à-crête $U_{p-p}$ :</strong> Écart entre la crête positive et la crête négative :
+                            <p class="text-center font-bold text-slate-900 my-1">$U_{p-p} = 2 \times U_{max}$</p>
+                        </li>
+                        <li>
+                            <strong>Tension efficace $U_{eff}$ :</strong> Valeur mesurée par un multimètre numérique réglé en mode alternatif (AC).
+                        </li>
+                    </ul>
+
+                    <div class="propriete-box rounded-xl p-3 text-xs space-y-1">
+                        <span class="font-bold text-emerald-900 block uppercase tracking-wider">Relation Fondamentale :</span>
+                        <p class="text-center text-lg font-bold text-emerald-700 my-1">$U_{max} = U_{eff} \times \sqrt{2}$</p>
+                        <p class="text-slate-700 font-medium">avec $\sqrt{2} \approx 1{,}414$. De même : $U_{eff} = \frac{U_{max}}{\sqrt{2}}$.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Période et Fréquence -->
+                <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
+                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-stopwatch text-indigo-500"></i> 2. Période $T$ et Fréquence $f$
+                    </h3>
+                    <ul class="space-y-2 text-xs text-slate-700">
+                        <li>
+                            <strong>Période $T$ :</strong> Durée d'un motif élémentaire complet (exprimée en secondes, s).
+                        </li>
+                        <li>
+                            <strong>Fréquence $f$ :</strong> Nombre de motifs complets effectués par seconde (exprimée en Hertz, Hz).
+                        </li>
+                    </ul>
+
+                    <div class="methode-box rounded-xl p-3 text-xs space-y-1">
+                        <span class="font-bold text-purple-900 block uppercase tracking-wider">Formules à Mémoriser :</span>
+                        <p class="text-center text-lg font-bold text-purple-700 my-1">$f = \frac{1}{T}$ &nbsp;&nbsp;ou&nbsp;&nbsp; $T = \frac{1}{f}$</p>
+                        <p class="text-slate-700 font-medium">Attention : $T$ doit impérativement être exprimée en **secondes (s)**.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Exemple numérique d'application -->
+            <div class="exemple-box rounded-2xl p-5 space-y-2 text-xs">
+                <h3 class="font-bold text-amber-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'Application Rédigé
+                </h3>
+                <p class="text-slate-800 leading-relaxed">
+                    Un générateur délivre un signal sinusoïdal de période $T = 4\text{ ms}$ et de tension efficace $U_{eff} = 12\text{ V}$.
+                </p>
+                <ul class="list-disc pl-5 space-y-1 text-slate-800 font-medium">
+                    <li>Convertir la période : $T = 4\text{ ms} = \frac{4}{1000} = 0{,}004\text{ s}$.</li>
+                    <li>Calculer la fréquence : $f = \frac{1}{0{,}004} = 250\text{ Hz}$.</li>
+                    <li>Calculer la tension maximale : $U_{max} = 12 \times \sqrt{2} \approx 12 \times 1{,}414 = 16{,}97\text{ V}$.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. L'OSCILLOSCOPE                         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-indigo-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">III</span>
+                Visualisation et Mesures à l'Oscilloscope
+            </h2>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+                L'oscilloscope permet de visualiser l'évolution d'une tension en fonction du temps sur une grille d'écran graduée en divisions (carreaux).
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <div class="bg-indigo-50 border border-indigo-200 p-5 rounded-2xl space-y-3">
+                    <h3 class="font-bold text-indigo-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-up-down text-indigo-600"></i> Calibre Vertical : Sensibilité $S_v$
+                    </h3>
+                    <p class="text-xs text-indigo-950">
+                        La sensibilité verticale $S_v$ (exprimée en Volts par division, V/div) indique la tension représentée par chaque carreau vertical.
+                    </p>
+                    <div class="bg-white p-3 rounded-xl border border-indigo-200 font-bold text-center text-indigo-700">
+                        $U_{max} = Y_{max} \times S_v$
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">$Y_{max}$ : Nombre de carreaux entre la ligne zéro et le sommet du motif.</p>
+                </div>
+
+                <div class="bg-purple-50 border border-purple-200 p-5 rounded-2xl space-y-3">
+                    <h3 class="font-bold text-purple-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-arrows-left-right text-purple-600"></i> Base de Temps : Vitesse $S_h$
+                    </h3>
+                    <p class="text-xs text-purple-950">
+                        La base de temps ou sensibilité horizontale $S_h$ (exprimée en ms/div ou s/div) indique la durée représentée par chaque carreau horizontal.
+                    </p>
+                    <div class="bg-white p-3 rounded-xl border border-purple-200 font-bold text-center text-purple-700">
+                        $T = X \times S_h$
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-medium">$X$ : Nombre de carreaux horizontaux occupés par un motif complet.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. SECTEUR & SÉCURITÉ                      -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-red-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center text-sm">IV</span>
+                Réseau Électrique Secteur et Sécurité des Personnes
+            </h2>
+
+            <!-- Cards Sector -->
+            <div class="bg-red-50 border-l-4 border-red-500 p-5 rounded-r-2xl space-y-3 text-xs text-red-950">
+                <h3 class="font-bold text-red-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-plug text-red-600"></i> Caractéristiques du Secteur en France
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+                    <div class="bg-white p-3 rounded-xl border border-red-200">
+                        <span class="text-slate-400 block font-bold text-[10px]">TENSION EFFICACE</span>
+                        <span class="text-base font-extrabold text-red-600">$U_{eff} = 230\text{ V}$</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-red-200">
+                        <span class="text-slate-400 block font-bold text-[10px]">TENSION MAX</span>
+                        <span class="text-base font-extrabold text-red-600">$U_{max} \approx 325\text{ V}$</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-red-200">
+                        <span class="text-slate-400 block font-bold text-[10px]">FRÉQUENCE</span>
+                        <span class="text-base font-extrabold text-red-600">$f = 50\text{ Hz}$</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-red-200">
+                        <span class="text-slate-400 block font-bold text-[10px]">PÉRIODE</span>
+                        <span class="text-base font-extrabold text-red-600">$T = 20\text{ ms}$</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Protections -->
+            <div class="space-y-3 text-xs">
+                <h3 class="font-bold text-slate-900 text-sm">Organes de Protection Obligatoires en Bac Pro :</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1">
+                        <span class="font-bold text-slate-900 block flex items-center gap-1.5"><i class="fa-solid fa-earth-americas text-emerald-600"></i> Prise de Terre</span>
+                        <p class="text-slate-600">Évacue les fuites de courant vers le sol (fil vert-jaune).</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1">
+                        <span class="font-bold text-slate-900 block flex items-center gap-1.5"><i class="fa-solid fa-toggle-on text-sky-600"></i> Disjoncteur Différentiel ($30\text{ mA}$)</span>
+                        <p class="text-slate-600">Coupe le circuit en cas de fuite supérieure à 30 mA pour protéger les personnes.</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1">
+                        <span class="font-bold text-slate-900 block flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-600"></i> Disjoncteur Divisionnaire</span>
+                        <p class="text-slate-600">Protège le matériel contre les surintensités et court-circuits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- V. SYNTHÈSE & FORMULAIRE                   -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-amber-400 border-b border-slate-800 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-star"></i> Synthèse Mémorisation • Formulaire A4
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs">
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-amber-400 font-bold block uppercase tracking-wider">Relation Fréquence / Période</span>
+                    <p class="text-xl font-bold font-heading text-white">$f = \frac{1}{T}$</p>
+                    <p class="text-slate-400">$f$ en Hz, $T$ en secondes (s)</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-emerald-400 font-bold block uppercase tracking-wider">Relation Tension Efficace / Max</span>
+                    <p class="text-xl font-bold font-heading text-white">$U_{max} = U_{eff} \times \sqrt{2}$</p>
+                    <p class="text-slate-400">$U_{eff}$ mesuré au voltmètre AC</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-sky-400 font-bold block uppercase tracking-wider">Mesures sur Oscilloscope</span>
+                    <p class="text-sm font-bold text-white">$U_{max} = Y_{max} \times S_v$</p>
+                    <p class="text-sm font-bold text-white">$T = X \times S_h$</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

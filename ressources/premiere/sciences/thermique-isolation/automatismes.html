@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Thermique & Isolation (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-orange-500/20 border border-orange-400/30 text-orange-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-temperature-three-quarters text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-orange-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Thermique &amp; Isolation</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-orange-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-orange-100 text-orange-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-orange-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes &amp; Mémorisation</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Réviser la chaleur $Q = mc\Delta T$, la résistance thermique $R = e/\lambda$, le flux $\Phi$ et les déperditions en kWh avec nos cartes mémoires et le test chrono.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-orange-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-orange-500">
+                            <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">3 Modes de Transfert</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-fire text-3xl text-orange-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quels sont les 3 modes de transfert de la chaleur ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-orange-400">
+                            <span class="text-xs font-bold text-orange-400 uppercase tracking-widest">3 Modes Clés</span>
+                            <div class="my-auto space-y-1">
+                                <p class="text-sm font-bold font-heading text-orange-300">1. Conduction (Solides)</p>
+                                <p class="text-sm font-bold font-heading text-sky-300">2. Convection (Fluides/Liquides/Air)</p>
+                                <p class="text-sm font-bold font-heading text-amber-300">3. Rayonnement (Ondes IR)</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Quantité de Chaleur</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-calculator text-3xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la formule de la quantité de chaleur $Q$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Formule Clé</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-emerald-300">$Q = m \cdot c \cdot \Delta T$</p>
+                                <p class="text-xs text-slate-300">$m$ en kg, $c$ en $\text{J}/(\text{kg}\cdot^\circ\text{C})$, $\Delta T$ en $^\circ\text{C}$ ou K.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Résistance Thermique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-shield-halved text-3xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment calcule-t-on la résistance $R$ d'un matériau ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Formule Clé</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-sky-300">$R = \frac{e}{\lambda}$</p>
+                                <p class="text-xs text-slate-300">$e$ épaisseur en mètres (m), $\lambda$ conductivité en $\text{W}/(\text{m}\cdot\text{K})$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Paroi Multicouche</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-cubes text-3xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Comment s'additionnent les résistances $R$ d'un mur multicouche ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Addition Directe</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-xl font-bold font-heading text-indigo-300">$R_{tot} = R_1 + R_2 + R_3 + \dots$</p>
+                                <p class="text-xs text-slate-300">Les résistances des couches s'additionnent directement.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Flux Thermique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-house-fire text-3xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Quelle est la formule du flux thermique $\Phi$ perdu à travers une paroi ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Formule Clé</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-purple-300">$\Phi = \frac{S \cdot \Delta T}{R_{tot}}$</p>
+                                <p class="text-xs text-slate-300">$\Phi$ en Watts (W), $S$ surface en $\text{m}^2$, $\Delta T = T_{int} - T_{ext}$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Conversion kWh - Joules</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-bolt text-3xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-lg">Combien de Joules représente $1\text{ kWh}$ d'énergie ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Facteur de Conversion</span>
+                            <div class="my-auto space-y-2">
+                                <p class="text-2xl font-bold font-heading text-red-300">$1\text{ kWh} = 3{,}6 \times 10^6\text{ J} = 3{,}6\text{ MJ}$</p>
+                                <p class="text-xs text-slate-300">Car $1\text{ kWh} = 1000\text{ W} \times 3600\text{ s}$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-orange-600 tracking-wider">Test de Rapidité</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-orange-100 text-orange-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-orange-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-emerald-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un panneau de laine de verre a une épaisseur $e = 10\\text{ cm} = 0{,}10\\text{ m}$ et une conductivité $\\lambda = 0{,}04\\text{ W}/(\\text{m}\\cdot\\text{K})$. Quelle est sa résistance thermique $R$ ?",
+                options: ["0,004 m²K/W", "0,40 m²K/W", "2,5 m²K/W", "25 m²K/W"],
+                correct: 2,
+                explanation: "$R = \\frac{e}{\\lambda} = \\frac{0{,}10}{0{,}04} = 2{,}5\\text{ m}^2\\cdot\\text{K}/\\text{W}$."
+            },
+            {
+                id: 2,
+                q: "Comment se propage la chaleur par **convection** ?",
+                options: [
+                    "Par contact direct sans déplacement de matière",
+                    "Par déplacement réel de matière au sein d'un liquide ou d'un gaz",
+                    "Par émission d'ondes lumineuses dans le vide",
+                    "Par frottement mécanique entre deux solides"
+                ],
+                correct: 1,
+                explanation: "La convection implique un mouvement macroscopique de matière au sein d'un fluide (air chaud qui monte, liquide de refroidissement)."
+            },
+            {
+                id: 3,
+                q: "On chauffe $m = 2\\text{ kg}$ d'eau ($c = 4180\\text{ J}/(\\text{kg}\\cdot^\\circ\\text{C})$) de $20^\\circ\\text{C}$ à $70^\\circ\\text{C}$ ($\\Delta T = 50^\\circ\\text{C}$). Quelle énergie $Q$ a été fournie ?",
+                options: ["418 000 J (418 kJ)", "209 000 J (209 kJ)", "83 600 J (83,6 kJ)", "4 180 J (4,18 kJ)"],
+                correct: 0,
+                explanation: "$Q = m \\cdot c \\cdot \\Delta T = 2 \\times 4180 \\times 50 = 418\\,000\\text{ J} = 418\\text{ kJ}$."
+            },
+            {
+                id: 4,
+                q: "Un mur multicouche est composé d'un béton ($R_1 = 0{,}2\\text{ m}^2\\text{K}/\\text{W}$) et d'un isolant ($R_2 = 3{,}8\\text{ m}^2\\text{K}/\\text{W}$). Que vaut $R_{tot}$ ?",
+                options: ["0,76 m²K/W", "3,6 m²K/W", "4,0 m²K/W", "19 m²K/W"],
+                correct: 2,
+                explanation: "$R_{tot} = R_1 + R_2 = 0{,}2 + 3{,}8 = 4{,}0\\text{ m}^2\\cdot\\text{K}/\\text{W}$."
+            },
+            {
+                id: 5,
+                q: "Une baie vitrée de surface $S = 5\\text{ m}^2$ ayant une résistance $R_{tot} = 0{,}5\\text{ m}^2\\text{K}/\\text{W}$ subit un écart $\\Delta T = 20^\\circ\\text{C}$. Quel est le flux $\\Phi$ perdu ?",
+                options: ["50 W", "100 W", "200 W", "500 W"],
+                correct: 2,
+                explanation: "$\\Phi = \\frac{S \\cdot \\Delta T}{R_{tot}} = \\frac{5 \\times 20}{0{,}5} = 200\\text{ Watts (W)}$."
+            },
+            {
+                id: 6,
+                q: "Quelle unité caractérise la **conductivité thermique** $\\lambda$ d'un matériau ?",
+                options: ["W/(m·K)", "m²·K/W", "Joules/kg", "Watts/m²"],
+                correct: 0,
+                explanation: "La conductivité $\\lambda$ s'exprime en $\\text{W}/(\\text{m}\\cdot\\text{K})$ ou $\\text{W}/(\\text{m}\\cdot^\\circ\\text{C})$. Plus elle est faible, meilleur est l'isolant."
+            },
+            {
+                id: 7,
+                q: "Un convecteur électrique de puissance $P = 2000\\text{ W}$ fonctionne pendant $t = 5\\text{ heures}$. Quelle est l'énergie $E$ consommée en kWh ?",
+                options: ["2,5 kWh", "10 kWh", "10 000 kWh", "36 kWh"],
+                correct: 1,
+                explanation: "$E = P \\times t = 2\\text{ kW} \\times 5\\text{ h} = 10\\text{ kWh}$."
+            },
+            {
+                id: 8,
+                q: "Par quel mode de transfert la chaleur du Soleil arrive-t-elle sur Terre à travers le vide spatial ?",
+                options: ["Conduction", "Convection", "Rayonnement infrarouge", "Calorimétrie"],
+                correct: 2,
+                explanation: "Le rayonnement électromagnétique est le seul mode de transfert thermique capable de se propager dans le vide."
+            },
+            {
+                id: 9,
+                q: "Si l'on double l'épaisseur $e$ d'une couche d'isolant (en conservant $\\lambda$), sa résistance thermique $R$ :",
+                options: ["Est divisée par 2", "Reste identique", "Est doublée", "Est quadruplée"],
+                correct: 2,
+                explanation: "Comme $R = \\frac{e}{\\lambda}$, la résistance est directement proportionnelle à l'épaisseur $e$."
+            },
+            {
+                id: 10,
+                q: "Une quantité d'énergie thermique de $Q = 7{,}2\\text{ MJ}$ ($7\\,200\\,000\\text{ J}$) équivaut à :",
+                options: ["1 kWh", "2 kWh", "3,6 kWh", "7,2 kWh"],
+                correct: 1,
+                explanation: "$E = \\frac{7\\,200\\,000}{3\\,600\\,000} = 2\\text{ kWh}$."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-orange-500 focus:ring-orange-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-orange-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement la résistance thermique $R = e/\\lambda$, le flux $\\Phi$ et les bilans d'énergie en kWh !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions de base sont comprises. Révisez l'addition des résistances thermiques multicouches.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et entraînez-vous sur les calculs de $Q = m c \\Delta T$ et $R = e/\\lambda$.";
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resultBox]);
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

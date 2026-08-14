@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Optique & Lentilles (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fdf4ff', 100: '#fae8ff', 500: '#d946ef', 600: '#c026d3', 900: '#701a75' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Optique &amp; Lentilles</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Fiche d'Entraînement A4 • Corrigés Inclus</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TD &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application pour s'entraîner aux calculs de vergence $V = 1/f'$, aux tracés des 3 rayons remarquables et à la formule de conjugaison.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer la Fiche de TD (PDF A4)
+        </button>
+
+        <!-- EXERCICE 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Calculs de Vergence et Focales
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>1. Calculer la vergence $V$ des lentilles ayant les distances focales suivantes : $f'_1 = 0{,}20\text{ m}$, $f'_2 = 0{,}05\text{ m}$, $f'_3 = 50\text{ cm}$.</p>
+                <p>2. Déterminer la distance focale $f'$ en cm d'une lentille dont la vergence vaut $V = +8\text{ dioptries } (\delta)$.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 1
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $V_1 = \frac{1}{0{,}20} = +5\text{ }\delta$ ; $V_2 = \frac{1}{0{,}05} = +20\text{ }\delta$ ; $f'_3 = 0{,}50\text{ m} \Rightarrow V_3 = \frac{1}{0{,}50} = +2\text{ }\delta$.</p>
+                        <p><strong>2.</strong> $f' = \frac{1}{V} = \frac{1}{8} = 0{,}125\text{ m} = 12{,}5\text{ cm}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Tracé Optique et Rayons Remarquables
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un objet lumineux $AB = 2\text{ cm}$ est placé perpendiculairement à l'axe optique à une distance $OA = 30\text{ cm}$ en avant d'une lentille convergente de focal $f' = 10\text{ cm}$.</p>
+                <p>1. Rappeler les propriétés d'émergence des 3 rayons issus de $B$ (rayon par $O$, rayon parallèle à l'axe, rayon par $F$).</p>
+                <p>2. Réaliser le schéma à l'échelle (1 div = 5 cm horizontaux) et placer l'image $A'B'$. De quel type d'image s'agit-il ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 2
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> • Rayon par $O$ : continue sans déviation. • Rayon parallèle : ressort par $F'$. • Rayon par $F$ : ressort parallèle à l'axe.</p>
+                        <p><strong>2.</strong> L'image $A'B'$ se forme à $OA' = 15\text{ cm}$ derrière la lentille. C'est une image **réelle, renversée et réduite** ($A'B' = -1\text{ cm}$).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Calcul du Grandissement et Taille d'Image
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un objet de hauteur $AB = 3\text{ cm}$ donne à travers un objectif une image projetée sur écran avec un grandissement $\gamma = -2{,}5$.</p>
+                <p>1. Calculer la hauteur de l'image $A'B'$ sur l'écran.</p>
+                <p>2. Que signifie le signe négatif $\gamma < 0$ ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 3
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $A'B' = \gamma \times AB = -2{,}5 \times 3\text{ cm} = -7{,}5\text{ cm}$ (la taille de l'image est de $7{,}5\text{ cm}$).</p>
+                        <p><strong>2.</strong> Le signe négatif indique que l'image est **renversée** par rapport à l'objet initial.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 4 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Objectif d'Appareil Photo
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un photographe filme un sujet situé à $OA = -2{,}0\text{ m}$ avec un objectif de distance focale $f' = 50\text{ mm} = 0{,}05\text{ m}$.</p>
+                <p>1. Utiliser la formule de conjugaison $\frac{1}{OA'} - \frac{1}{OA} = \frac{1}{f'}$ pour calculer la distance $OA'$ entre l'objectif et le capteur photo.</p>
+                <p>2. De combien de millimètres l'image est-elle décalée par rapport au foyer $F'$ ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 4
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\frac{1}{OA'} = \frac{1}{0{,}05} + \frac{1}{-2{,}0} = 20 - 0{,}5 = 19{,}5\text{ m}^{-1}$. <br>$OA' = \frac{1}{19{,}5} \approx 0{,}05128\text{ m} = 51{,}28\text{ mm}$.</p>
+                        <p><strong>2.</strong> L'image se forme à $51{,}28\text{ mm}$, soit à $1{,}28\text{ mm}$ seulement en arrière du foyer $F'$ ($50\text{ mm}$).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 5 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Effet Loupe (Image Virtuelle)
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>On utilise une lentille convergente de focal $f' = 10\text{ cm}$ comme loupe en la plaçant à $OA = -6\text{ cm}$ d'un texte d'un micro-composant ($AB = 2\text{ mm}$).</p>
+                <p>1. Calculer la distance image $OA'$. L'image se forme-t-elle avant ou après la lentille ?</p>
+                <p>2. Calculer le grandissement $\gamma$. L'image peut-elle être observée directement à l'œil nu ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 5
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\frac{1}{OA'} = \frac{1}{10} + \frac{1}{-6} = 0{,}1 - 0{,}1667 = -0{,}0667\text{ cm}^{-1}$. <br>$OA' = \frac{1}{-0{,}0667} = -15\text{ cm}$. $OA' < 0$ : l'image est **virtuelle** (placée $15\text{ cm}$ du même côté que l'objet).</p>
+                        <p><strong>2.</strong> $\gamma = \frac{-15}{-6} = +2{,}5$. $\gamma > 0$ : l'image est **droite et 2,5 fois plus grande** ($A'B' = 5\text{ mm}$). Elle est perçue directement en regardant à travers la loupe.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 6 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Projection d'une Diapositive de Contrôle
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un projecteur de profil d'atelier projette l'image d'un engrenage de hauteur $AB = 10\text{ mm}$ sur un écran. Le grandissement est $\gamma = -15$.</p>
+                <p>1. Calculer la hauteur $A'B'$ de l'image de l'engrenage sur l'écran en cm.</p>
+                <p>2. Si l'écran est situé à $OA' = 1{,}6\text{ m}$, à quelle distance $OA$ se situe la lentille de l'engrenage ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 6
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $A'B' = -15 \times 10\text{ mm} = -150\text{ mm} = -15\text{ cm}$. (Image renversée de $15\text{ cm}$).</p>
+                        <p><strong>2.</strong> $OA = \frac{OA'}{\gamma} = \frac{1{,}6}{-15} \approx -0{,}1067\text{ m} = -10{,}67\text{ cm}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 7 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Prescription de Verres Correcteurs
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une ordonnance d'ophtalmologie indique pour un salarié : <strong class="text-slate-900">Œil droit : $+3{,}00\text{ dioptries } (\delta)$</strong>.</p>
+                <p>1. De quel trouble de la vision souffre ce salarié (myopie ou hypermétropie/presbytie) ?</p>
+                <p>2. Calculer la distance focale $f'$ de ces verres en centimètres.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 7
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> Vergence positive ($+3\delta$) $\Rightarrow$ verre **convergent**. Il s'agit de corriger l'**hypermétropie** ou la **presbytie**.</p>
+                        <p><strong>2.</strong> $f' = \frac{1}{3{,}0} \approx 0{,}333\text{ m} = 33{,}3\text{ cm}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 8 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Problème Synthèse Type Examen / CCF
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Pour vérifier les cotes d'une pièce d'horlogerie $AB = 4\text{ mm}$, un technicien utilise un banc de contrôle optique équipé d'une lentille $V = +10\text{ }\delta$. L'objet est placé à $OA = -15\text{ cm} = -0{,}15\text{ m}$.</p>
+                <p>1. Calculer la distance focale $f'$ de la lentille en cm.</p>
+                <p>2. Calculer la position $OA'$ de l'écran pour que l'image soit parfaitement nette.</p>
+                <p>3. Calculer le grandissement $\gamma$ et la hauteur $A'B'$ mesurée sur l'écran en mm.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 8
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $f' = \frac{1}{10} = 0{,}10\text{ m} = 10\text{ cm}$.</p>
+                        <p><strong>2.</strong> $\frac{1}{OA'} = \frac{1}{0{,}10} + \frac{1}{-0{,}15} = 10 - 6{,}67 = 3{,}33\text{ m}^{-1}$. <br>$OA' = \frac{1}{3{,}33} = 0{,}30\text{ m} = 30\text{ cm}$ derrière la lentille.</p>
+                        <p><strong>3.</strong> $\gamma = \frac{30}{-15} = -2$. <br>$A'B' = -2 \times 4\text{ mm} = -8\text{ mm}$. L'image est renversée et mesure $8\text{ mm}$ sur l'écran.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

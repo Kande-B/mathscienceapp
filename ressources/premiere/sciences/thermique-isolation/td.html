@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Thermique & Isolation (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Première Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Thermique &amp; Isolation</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Fiche d'Entraînement A4 • Corrigés Inclus</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TD &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application pour s'entraîner aux calculs de chaleur $Q = mc\Delta T$, de résistance $R = e/\lambda$, de flux $\Phi$ et déperditions en kWh.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer la Fiche de TD (PDF A4)
+        </button>
+
+        <!-- EXERCICE 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Chauffage d'un Ballon d'Eau Chaude Sanitaire
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un chauffe-eau électrique contient une masse d'eau $m = 150\text{ kg}$ ($c_{eau} = 4180\text{ J}/(\text{kg}\cdot^\circ\text{C})$). L'eau entre à $T_i = 15^\circ\text{C}$ et doit être portée à $T_f = 65^\circ\text{C}$.</p>
+                <p>1. Calculer l'écart de température $\Delta T$.</p>
+                <p>2. Calculer la quantité de chaleur $Q$ nécessaire en Joules (J) puis en kiloJoules (kJ).</p>
+                <p>3. Convertir cette énergie en kWh ($1\text{ kWh} = 3{,}6\text{ MJ}$).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 1
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\Delta T = 65 - 15 = 50^\circ\text{C}$.</p>
+                        <p><strong>2.</strong> $Q = m \cdot c \cdot \Delta T = 150 \times 4180 \times 50 = 31\,350\,000\text{ J} = 31\,350\text{ kJ} = 31{,}35\text{ MJ}$.</p>
+                        <p><strong>3.</strong> $E = \frac{31\,350\,000}{3\,600\,000} \approx 8{,}71\text{ kWh}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Comparaison de Résistances Thermiques
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 1</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>On compare deux panneaux de même épaisseur $e = 10\text{ cm} = 0{,}10\text{ m}$ :</p>
+                <p>• Panneau A : Béton armé ($\lambda_A = 1{,}60\text{ W}/(\text{m}\cdot\text{K})$).</p>
+                <p>• Panneau B : Laine de verre ($\lambda_B = 0{,}04\text{ W}/(\text{m}\cdot\text{K})$).</p>
+                <p>1. Calculer la résistance thermique $R_A$ et $R_B$ de chaque panneau.</p>
+                <p>2. Combien de fois la laine de verre est-elle plus isolante que le béton ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 2
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $R_A = \frac{0{,}10}{1{,}60} = 0{,}0625\text{ m}^2\text{K/W}$ ; $R_B = \frac{0{,}10}{0{,}04} = 2{,}50\text{ m}^2\text{K/W}$.</p>
+                        <p><strong>2.</strong> Ratio $= \frac{2{,}50}{0{,}0625} = 40$. La laine de verre est **40 fois plus isolante** que le béton à épaisseur égale.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Mur Multicouche d'un Bâtiment
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un mur extérieur est constitué de 3 couches de l'intérieur vers l'extérieur :</p>
+                <p>• Plâtre : $e_1 = 1{,}5\text{ cm} = 0{,}015\text{ m}$, $\lambda_1 = 0{,}35\text{ W}/(\text{m}\cdot\text{K})$.</p>
+                <p>• Polystyrène : $e_2 = 8\text{ cm} = 0{,}08\text{ m}$, $\lambda_2 = 0{,}035\text{ W}/(\text{m}\cdot\text{K})$.</p>
+                <p>• Brique creuse : $e_3 = 20\text{ cm} = 0{,}20\text{ m}$, $\lambda_3 = 0{,}45\text{ W}/(\text{m}\cdot\text{K})$.</p>
+                <p>1. Calculer la résistance thermique de chaque couche.</p>
+                <p>2. Calculer la résistance thermique totale $R_{tot}$ du mur.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 3
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $R_1 = \frac{0{,}015}{0{,}35} \approx 0{,}043\text{ m}^2\text{K/W}$ ; $R_2 = \frac{0{,}08}{0{,}035} \approx 2{,}286\text{ m}^2\text{K/W}$ ; $R_3 = \frac{0{,}20}{0{,}45} \approx 0{,}444\text{ m}^2\text{K/W}$.</p>
+                        <p><strong>2.</strong> $R_{tot} = 0{,}043 + 2{,}286 + 0{,}444 = 2{,}773\text{ m}^2\cdot\text{K}/\text{W}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 4 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Flux Thermique à Travers un Double Vitrage
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une baie vitrée en double vitrage de surface $S = 4\text{ m}^2$ possède une résistance thermique $R_{tot} = 0{,}35\text{ m}^2\text{K/W}$.</p>
+                <p>La température intérieure est $T_{int} = 20^\circ\text{C}$ et la température extérieure est $T_{ext} = -5^\circ\text{C}$.</p>
+                <p>1. Calculer le flux thermique $\Phi = \frac{S \cdot \Delta T}{R_{tot}}$ perdu en Watts (W).</p>
+                <p>2. Quelle serait la perte si la vitre était en simple vitrage ($R_{simple} = 0{,}10\text{ m}^2\text{K/W}$) ?</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 4
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\Delta T = 20 - (-5) = 25^\circ\text{C}$. <br>$\Phi_{double} = \frac{4 \times 25}{0{,}35} = \frac{100}{0{,}35} \approx 285{,}7\text{ Watts}$.</p>
+                        <p><strong>2.</strong> $\Phi_{simple} = \frac{4 \times 25}{0{,}10} = 1000\text{ Watts}$. Le double vitrage divise par 3,5 les fuites de chaleur !</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 5 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Bilan Saisonier de Chauffage
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 2</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un atelier enregistre un flux thermique moyen de déperdition $\Phi = 1200\text{ W}$ pendant les 120 jours de la période de chauffage hivernale (fonctionnement 24h/24).</p>
+                <p>1. Calculer la durée totale d'utilisation $\Delta t$ en heures.</p>
+                <p>2. Calculer l'énergie totale perdue $E$ en kWh ($E = P \times t$).</p>
+                <p>3. Si l'énergie coûte 0,20 € / kWh, calculer la facture annuelle correspondant à ces fuites.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 5
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\Delta t = 120\text{ jours} \times 24\text{ h} = 2880\text{ heures}$.</p>
+                        <p><strong>2.</strong> $E = 1{,}2\text{ kW} \times 2880\text{ h} = 3456\text{ kWh}$.</p>
+                        <p><strong>3.</strong> Coût $= 3456 \times 0{,}20 = 691{,}20\text{ €}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 6 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Calorifugeage d'une Canalisation de Chauffage
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une tuyauterie transportant de l'eau chaude traverse un local non chauffé à $T_{ext} = 5^\circ\text{C}$. Sans isolant, le tuyau perd $\Phi = 450\text{ W}$. En l'entourant d'un manchon isolant en mousse polyuréthane ($R = 1{,}5\text{ m}^2\text{K/W}$ sur une surface $S = 3\text{ m}^2$), la température de l'eau est maintenue à $65^\circ\text{C}$ ($\Delta T = 60^\circ\text{C}$).</p>
+                <p>1. Calculer le nouveau flux thermique $\Phi_{isole}$ à travers la gaine isolante.</p>
+                <p>2. Calculer le gain thermique réalisé en Watts et le pourcentage d'économie.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 6
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\Phi_{isole} = \frac{S \cdot \Delta T}{R} = \frac{3 \times 60}{1{,}5} = 120\text{ Watts}$.</p>
+                        <p><strong>2.</strong> Économie $= 450 - 120 = 330\text{ W}$ évités. <br>Taux de réduction $= \frac{330}{450} \times 100 = 73{,}3\%$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 7 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Trempe et Refroidissement d'une Pièce en Acier
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une pièce mécanique en acier de masse $m = 4\text{ kg}$ ($c_{acier} = 460\text{ J}/(\text{kg}\cdot^\circ\text{C})$) sort du four de traitement thermique à $T_i = 750^\circ\text{C}$. Elle est plongée dans un bac d'huile de trempe et refroidit jusqu'à $T_f = 50^\circ\text{C}$.</p>
+                <p>1. Calculer la variation de température $\Delta T$.</p>
+                <p>2. Calculer l'énergie thermique $Q$ cédée par la pièce d'acier au bain d'huile.</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 7
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $\Delta T = 750 - 50 = 700^\circ\text{C}$.</p>
+                        <p><strong>2.</strong> $Q = m \cdot c \cdot \Delta T = 4 \times 460 \times 700 = 1\,288\,000\text{ J} = 1288\text{ kJ} = 1{,}288\text{ MJ}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- EXERCICE 8 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Problème Synthèse Type Examen / CCF
+                </h2>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">Niveau 3</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un conteneur frigorifique industriel de surface totale $S = 80\text{ m}^2$ maintient des denrées à $T_{int} = 4^\circ\text{C}$ alors que la température extérieure atteint $T_{ext} = 34^\circ\text{C}$ en été ($\Delta T = 30^\circ\text{C}$). La paroi est isolée avec $e = 15\text{ cm} = 0{,}15\text{ m}$ de mousse polyuréthane ($\lambda = 0{,}025\text{ W}/(\text{m}\cdot\text{K})$).</p>
+                <p>1. Calculer la résistance thermique $R$ de la paroi.</p>
+                <p>2. Calculer le flux thermique $\Phi$ entrant dans le conteneur en Watts.</p>
+                <p>3. Calculer la puissance électrique minimale du groupe froid si son rendement est de $80\%$ ($\eta = 0{,}80$).</p>
+            </div>
+
+            <div class="no-print pt-2">
+                <details class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950">
+                    <summary class="font-bold cursor-pointer flex items-center gap-2 text-indigo-900">
+                        <i class="fa-solid fa-check-circle text-indigo-600"></i> Voir la solution de l'Exercice 8
+                    </summary>
+                    <div class="mt-3 space-y-1.5 leading-relaxed">
+                        <p><strong>1.</strong> $R = \frac{0{,}15}{0{,}025} = 6{,}0\text{ m}^2\cdot\text{K}/\text{W}$.</p>
+                        <p><strong>2.</strong> $\Phi = \frac{S \cdot \Delta T}{R} = \frac{80 \times 30}{6{,}0} = 400\text{ Watts}$.</p>
+                        <p><strong>3.</strong> $P_{elec} = \frac{\Phi}{\eta} = \frac{400}{0{,}80} = 500\text{ Watts}$.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

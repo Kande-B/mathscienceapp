@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Acoustique & Bruit (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #7e22ce;
+            color: white;
+            box-shadow: 0 4px 12px rgba(126, 34, 206, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Seconde Professionnelle • Physique-Chimie</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Acoustique &amp; Bruit</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Analyse d'un Son &amp; Échelle des Décibels</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : manipulation physique avec le matériel du laboratoire ou simulation numérique interactive avec oscilloscope Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Consignes de Sécurité
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Ne pas approcher le haut-parleur des oreilles à forte puissance.</li>
+                        <li>• Porter le casque antibruit lors des émissions sonores supérieures à $85\text{ dB}$.</li>
+                        <li>• Manipuler les sonomètres numériques avec précaution.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-purple-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge text-purple-500"></i> Sonomètre dB
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-wave-square text-sky-500"></i> Oscilloscope / PC
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-music text-indigo-500"></i> Diapason 440 Hz
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-headphones text-red-500"></i> Casque EPI
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-purple-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure du Niveau Ambiant :</strong>
+                            Allumer le sonomètre. Relever le niveau sonore ambiant $L_{amb}$ de la salle de classe au repos.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Étude d'un Son Pur (Diapason $440\text{ Hz}$) :</strong>
+                            Frapper le diapason avec le maillet. Approcher le microphone relié à l'oscilloscope et régler la sensibilité horizontale $S_h$ pour observer 2 ou 3 motifs sinusoïdaux.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure de Période &amp; Fréquence :</strong>
+                            Compter le nombre de divisions $N_{div}$ pour 1 période complète. Calculer $T = N_{div} \times S_h$ puis la fréquence $f = 1/T$. Comparer à la valeur théorique de $440\text{ Hz}$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Émission au GBF à $1000\text{ Hz}$ :</strong>
+                            Connecter le haut-parleur au GBF à $f = 1000\text{ Hz}$. Placer le sonomètre à $1\text{ mètre}$ et relever le niveau $L_1$ en dB(A).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Atténuation d'un Casque Antibruit (EPI) :</strong>
+                            Coiffer le microphone du sonomètre avec la coquille du casque antibruit sans modifier le volume. Relever le niveau perçu $L_2$. Calculer l'atténuation $\Delta L = L_1 - L_2$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-purple-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Vérification de la Règle des $+3\text{ dB}$ :</strong>
+                            Connecter 2 haut-parleurs identiques émettant le même volume. Relever le niveau d'un haut-parleur seul puis des deux simultanément. Vérifier l'augmentation de $+3\text{ dB}$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-purple-600"></i> Tableau de Relevé des Mesures de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Grandeur Mesurée</th>
+                                <th class="p-3 font-bold border border-slate-200">Valeur Expérimentale Relevée</th>
+                                <th class="p-3 font-bold border border-slate-200">Calculs &amp; Unités</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Niveau Ambiant $L_{amb}$</td>
+                                <td class="p-3"><input type="number" id="real-lamb" placeholder="ex: 45" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-purple-700"></td>
+                                <td class="p-3 text-slate-500">en dB(A)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Nombre div pour 1 période (Diapason)</td>
+                                <td class="p-3"><input type="number" step="0.1" id="real-ndiv" placeholder="ex: 4.5" oninput="calcRealData()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-purple-700"></td>
+                                <td class="p-3 text-slate-500">div ($S_h = 0{,}5\text{ ms/div}$)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Fréquence calculée $f = 1/T$</td>
+                                <td class="p-3 font-extrabold text-purple-800 text-sm" id="real-f-calc">-- Hz</td>
+                                <td class="p-3 text-slate-500">Cible théorique : $440\text{ Hz}$</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Niveau HP Seul $L_1$ (à 1 m)</td>
+                                <td class="p-3"><input type="number" id="real-l1" placeholder="ex: 88" oninput="calcRealData()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-purple-700"></td>
+                                <td class="p-3 text-slate-500">en dB(A)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Niveau sous Casque $L_2$</td>
+                                <td class="p-3"><input type="number" id="real-l2" placeholder="ex: 63" oninput="calcRealData()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-purple-700"></td>
+                                <td class="p-3 text-slate-500">en dB(A)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-slate-50">Atténuation du Casque $\Delta L$</td>
+                                <td class="p-3 font-extrabold text-emerald-700 text-sm" id="real-attenuation">-- dB</td>
+                                <td class="p-3 text-slate-500">$\Delta L = L_1 - L_2$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Laboratoire Virtuel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Oscilloscope &amp; Sonomètre Virtuel Interactive</h2>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleAudio()" id="btn-audio" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all flex items-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-volume-high"></i> <span id="audio-text">Activer le Son Réel (Web Audio)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas + Sonomètre Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Oscilloscope -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>OSCILLOSCOPE NUMÉRIQUE - VOIE A</span>
+                            <span id="scope-status">T = 2.27 ms • f = 440 Hz</span>
+                        </div>
+                        <canvas id="scopeCanvas" width="600" height="260" class="w-full h-56 bg-black rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Fréquence (Hz)</label>
+                                <input type="range" id="sim-freq" min="100" max="2000" step="10" value="440" oninput="updateSim()" class="w-full accent-purple-500">
+                                <span class="font-mono text-purple-300 font-bold text-xs" id="val-freq">440 Hz</span>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Amplitude / Volume</label>
+                                <input type="range" id="sim-amp" min="10" max="100" value="50" oninput="updateSim()" class="w-full accent-purple-500">
+                                <span class="font-mono text-purple-300 font-bold text-xs" id="val-amp">50 %</span>
+                            </div>
+                            <div class="col-span-2 md:col-span-1">
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Sensibilité S_h</label>
+                                <select id="sim-sh" onchange="updateSim()" class="w-full bg-slate-900 border border-slate-700 text-white rounded-lg p-1 text-xs">
+                                    <option value="0.5">0.5 ms/div</option>
+                                    <option value="1.0" selected>1.0 ms/div</option>
+                                    <option value="2.0">2.0 ms/div</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sonomètre Virtuel Gauges -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">SONOMÈTRE D'ATELIER (dB(A))</span>
+                        
+                        <!-- Dial Gauge Display -->
+                        <div class="relative w-40 h-40 rounded-full border-4 border-slate-800 flex flex-col items-center justify-center shadow-2xl" id="gauge-box">
+                            <span class="text-4xl font-extrabold font-heading text-white" id="db-value">80.0</span>
+                            <span class="text-xs font-bold text-slate-400">dB(A)</span>
+                            <span class="text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full" id="db-status-badge">RISQUE ALERTE</span>
+                        </div>
+
+                        <!-- Additionneur de machines -->
+                        <div class="w-full space-y-2 text-left">
+                            <span class="text-[11px] font-bold text-slate-400 block uppercase">Nombre de Meuleuses Allumées :</span>
+                            <div class="grid grid-cols-4 gap-1">
+                                <button onclick="setMachines(1)" id="m-btn-1" class="py-1.5 bg-purple-600 text-white rounded-lg font-bold text-xs">1</button>
+                                <button onclick="setMachines(2)" id="m-btn-2" class="py-1.5 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-lg font-bold text-xs">2</button>
+                                <button onclick="setMachines(3)" id="m-btn-3" class="py-1.5 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-lg font-bold text-xs">3</button>
+                                <button onclick="setMachines(4)" id="m-btn-4" class="py-1.5 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-lg font-bold text-xs">4</button>
+                            </div>
+                            <p class="text-[10px] text-slate-400 text-center font-mono" id="rule-3db-note">1 meuleuse = 85.0 dB</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-purple-600"></i> Défi Mystère : Déterminer la Fréquence Inconnue
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un générateur de signal émet un son mystère. L'oscillogramme ci-dessus indique que 1 motif complet s'étend sur <strong>4 divisions</strong> avec une sensibilité $S_h = 0{,}5\text{ ms/div}$.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" id="user-freq-guess" placeholder="Votre réponse en Hz" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuess()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Fréquence
+                    </button>
+                </div>
+                <div id="guess-result" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS & AUDIO -->
+    <script>
+        // Tab switching
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-purple-700', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-purple-700', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initCanvas();
+            }
+        }
+
+        // Real Data Table Calculation
+        function calcRealData() {
+            const nDiv = parseFloat(document.getElementById('real-ndiv').value);
+            const l1 = parseFloat(document.getElementById('real-l1').value);
+            const l2 = parseFloat(document.getElementById('real-l2').value);
+
+            if (!isNaN(nDiv) && nDiv > 0) {
+                const tSec = nDiv * 0.0005; // Sh = 0.5 ms/div = 0.0005 s
+                const f = Math.round(1 / tSec);
+                document.getElementById('real-f-calc').innerText = f + " Hz";
+            }
+
+            if (!isNaN(l1) && !isNaN(l2)) {
+                const att = (l1 - l2).toFixed(1);
+                document.getElementById('real-attenuation').innerText = att + " dB";
+            }
+        }
+
+        // Virtual Canvas & Web Audio API
+        let canvas, ctx;
+        let audioCtx = null;
+        let osc = null;
+        let gainNode = null;
+        let isAudioPlaying = false;
+        let numMachines = 1;
+
+        function initCanvas() {
+            canvas = document.getElementById('scopeCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawScope);
+            updateSim();
+        }
+
+        let phase = 0;
+        function drawScope() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            const freq = parseFloat(document.getElementById('sim-freq').value);
+            const amp = parseFloat(document.getElementById('sim-amp').value);
+            const sh = parseFloat(document.getElementById('sim-sh').value);
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Grid
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1;
+
+            const gridX = 10;
+            const gridY = 8;
+            const dx = canvas.width / gridX;
+            const dy = canvas.height / gridY;
+
+            for (let i = 0; i <= gridX; i++) {
+                ctx.beginPath();
+                ctx.moveTo(i * dx, 0);
+                ctx.lineTo(i * dx, canvas.height);
+                ctx.stroke();
+            }
+            for (let j = 0; j <= gridY; j++) {
+                ctx.beginPath();
+                ctx.moveTo(0, j * dy);
+                ctx.lineTo(canvas.width, j * dy);
+                ctx.stroke();
+            }
+
+            // Center axes
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+
+            // Draw Sine Wave
+            ctx.strokeStyle = '#22c55e';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+
+            phase += 0.08;
+            const cyclesOnScreen = (freq * (gridX * sh * 0.001));
+            
+            for (let x = 0; x < canvas.width; x++) {
+                const t = x / canvas.width;
+                const y = (canvas.height / 2) - (amp / 100) * (canvas.height / 2.5) * Math.sin(2 * Math.PI * cyclesOnScreen * t + phase);
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            requestAnimationFrame(drawScope);
+        }
+
+        function updateSim() {
+            const freq = parseFloat(document.getElementById('sim-freq').value);
+            const amp = parseFloat(document.getElementById('sim-amp').value);
+            const sh = parseFloat(document.getElementById('sim-sh').value);
+
+            document.getElementById('val-freq').innerText = freq + " Hz";
+            document.getElementById('val-amp').innerText = amp + " %";
+
+            const tMs = (1000 / freq).toFixed(2);
+            document.getElementById('scope-status').innerText = `T = ${tMs} ms • f = ${freq} Hz`;
+
+            if (audioCtx && osc && isAudioPlaying) {
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime((amp / 100) * 0.1, audioCtx.currentTime);
+            }
+
+            updateSonometer();
+        }
+
+        function setMachines(n) {
+            numMachines = n;
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`m-btn-${i}`);
+                if (i === n) {
+                    btn.className = "py-1.5 bg-purple-600 text-white rounded-lg font-bold text-xs";
+                } else {
+                    btn.className = "py-1.5 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-lg font-bold text-xs";
+                }
+            }
+            updateSonometer();
+        }
+
+        function updateSonometer() {
+            // Base machine = 85 dB. Doublement adds +3 dB.
+            const baseDb = 85.0;
+            const db = (baseDb + 10 * Math.log10(numMachines)).toFixed(1);
+
+            document.getElementById('db-value').innerText = db;
+            document.getElementById('rule-3db-note').innerText = `${numMachines} meuleuse(s) = ${db} dB(A)`;
+
+            const box = document.getElementById('gauge-box');
+            const badge = document.getElementById('db-status-badge');
+
+            if (db < 80) {
+                box.className = "relative w-40 h-40 rounded-full border-4 border-emerald-500 flex flex-col items-center justify-center shadow-2xl bg-emerald-950/20";
+                badge.className = "text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full bg-emerald-500 text-white";
+                badge.innerText = "SANS DANGER";
+            } else if (db < 85) {
+                box.className = "relative w-40 h-40 rounded-full border-4 border-amber-500 flex flex-col items-center justify-center shadow-2xl bg-amber-950/20";
+                badge.className = "text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full bg-amber-500 text-white";
+                badge.innerText = "SEUIL RISQUE";
+            } else if (db < 120) {
+                box.className = "relative w-40 h-40 rounded-full border-4 border-red-500 flex flex-col items-center justify-center shadow-2xl bg-red-950/20";
+                badge.className = "text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full bg-red-600 text-white animate-pulse";
+                badge.innerText = "EPI OBLIGATOIRE";
+            } else {
+                box.className = "relative w-40 h-40 rounded-full border-4 border-purple-500 flex flex-col items-center justify-center shadow-2xl bg-purple-950/20";
+                badge.className = "text-[10px] font-bold mt-1 px-2 py-0.5 rounded-full bg-purple-600 text-white";
+                badge.innerText = "SEUIL DOULEUR";
+            }
+        }
+
+        function toggleAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                osc = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                osc.start();
+                isAudioPlaying = true;
+                document.getElementById('audio-text').innerText = "Couper le Son Réel";
+                document.getElementById('btn-audio').className = "bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all flex items-center gap-2 shadow-lg";
+            } else {
+                if (isAudioPlaying) {
+                    audioCtx.suspend();
+                    isAudioPlaying = false;
+                    document.getElementById('audio-text').innerText = "Activer le Son Réel (Web Audio)";
+                    document.getElementById('btn-audio').className = "bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all flex items-center gap-2 shadow-lg";
+                } else {
+                    audioCtx.resume();
+                    isAudioPlaying = true;
+                    document.getElementById('audio-text').innerText = "Couper le Son Réel";
+                    document.getElementById('btn-audio').className = "bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all flex items-center gap-2 shadow-lg";
+                }
+            }
+            updateSim();
+        }
+
+        function checkGuess() {
+            const ans = parseFloat(document.getElementById('user-freq-guess').value);
+            const target = 500; // T = 4 div * 0.5 ms = 2 ms -> f = 1000/2 = 500 Hz
+            const res = document.getElementById('guess-result');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Excellent ! T = 4 div × 0,5 ms = 2 ms = 0,002 s -> f = 1 / 0,002 = 500 Hz !";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Incorrect. Indice : T = 4 div × 0,5 ms = 2 ms = 0,002 s. Calculez f = 1 / 0,002.";
+            }
+        }
+    </script>
+</body>
+</html>

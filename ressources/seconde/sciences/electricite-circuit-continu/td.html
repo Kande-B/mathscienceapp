@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de TD - Électricité 2nde Pro</title>
+    <title>TD & Exercices - Circuits Électriques CC (2nde Pro)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#fefce8', 100: '#fef9c3', 500: '#eab308', 600: '#ca8a04', 900: '#713f12' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -34,127 +34,283 @@
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
         @media print {
-            header, nav, .no-print { display: none !important; }
-            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
-            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
-            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
         }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence 2nde Pro Sciences -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
                     <i class="fa-solid fa-dumbbell text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 6 • Seconde Professionnelle Sciences Physiques</span>
-                    <h1 class="text-xl font-bold font-heading">Électricité : Circuit à Courant Continu</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Circuits Électriques CC</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence 2nde Pro Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-purple-400"></i> TP Expérimental</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- EN-TÊTE DE LA FICHE DE TD -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
-                <div>
-                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
-                        <span>Fiche d'Entraînement A4 Imprimable Avec Figures</span> • <span>Sciences Physiques & Chimiques</span>
-                    </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur la Loi d'Ohm & Circuits DC</h2>
-                </div>
-                <div class="flex items-center gap-2 no-print">
-                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
-                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
-                    </button>
-                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
-                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
-                    </button>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Individuel &amp; Autonome</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application gradués avec corrigés rédigés pas à pas.</p>
         </div>
 
-        <!-- EXERCICE 1 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
-                    Bac Pro Électrotechnique : Capteur de Température Résistif
-                </h3>
-                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Calculer</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un capteur résistif est traversé par un courant $I = 0,05\text{ A}$ sous une tension $U = 5\text{ V}$.</p>
-                    <p class="font-bold">Calculez la valeur de sa résistance $R$ en Ohms ($\Omega$).</p>
-                </div>
-                <!-- SVG EX 1 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-elec1" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-elec1)" />
-                        <rect x="55" y="35" width="40" height="30" fill="#fef08a" stroke="#0f172a" stroke-width="2" rx="4"/>
-                        <text x="75" y="53" font-size="8" font-weight="bold" fill="#0f172a" text-anchor="middle">R = ? Ω</text>
-                        <text x="75" y="92" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">U = 5V, I = 0,05A</text>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices de difficulté progressive</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
                 </button>
             </div>
-            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>$R = \frac{U}{I} = \frac{5\text{ V}}{0,05\text{ A}} = \mathbf{100\text{ }\Omega}$.</p>
-            </div>
         </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Application Directe de la Loi d'Ohm &amp; Conversion
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Application directe)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un conducteur ohmique de résistance $R = 470\,\Omega$ est traversé par un courant continu $I = 150\text{ mA}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                1.1. Convertir l'intensité $I$ en Ampères (A).<br>
+                1.2. Calculer la tension $U$ aux bornes de la résistance en Volts (V).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• 1.1 : $I = \frac{150}{1000} = 0{,}150\text{ A}$.</p>
+                <p>• 1.2 : $U = R \cdot I = 470 \times 0{,}150 = 70{,}5\text{ V}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Calcul d'une Résistance Inconnue
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Calcul R)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Dans un montage électrique, le voltmètre branché aux bornes d'une résistance inconnue $R$ indique $U = 9{,}0\text{ V}$ et l'ampèremètre en série mesure $I = 0{,}030\text{ A}$ ($30\text{ mA}$).
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Calculer la valeur de la résistance $R$ en Ohms ($\Omega$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• $R = \frac{U}{I} = \frac{9{,}0}{0{,}030} = 300\,\Omega$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Loi des Mailles dans un Circuit Série à 3 Lampes
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Circuit Série)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un transformateur d'atelier délivre une tension $U_{gen} = 24\text{ V}$ dans une boucle unique contenant 3 lampes en série. La première lampe absorbe $U_1 = 6\text{ V}$ et la seconde $U_2 = 10\text{ V}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                3.1. En appliquant la loi des mailles ($U_{gen} = U_1 + U_2 + U_3$), déterminer la tension $U_3$ aux bornes de la troisième lampe.<br>
+                3.2. Si le courant débité est $I = 0{,}5\text{ A}$, quelle est l'intensité qui traverse la lampe 3 ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : $U_3 = U_{gen} - U_1 - U_2 = 24 - 6 - 10 = 8\text{ V}$.</p>
+                <p>• 3.2 : En série, l'intensité est identique en tout point : $I_3 = 0{,}5\text{ A}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Loi des Nœuds dans un Circuit en Dérivation
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Circuit Dérivation)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un circuit comporte 3 récepteurs branchés en dérivation aux bornes d'un générateur $U_{gen} = 12\text{ V}$. Le générateur débite une intensité totale $I_{tot} = 3{,}2\text{ A}$. La première branche est traversée par $I_1 = 1{,}0\text{ A}$ et la seconde par $I_2 = 1{,}5\text{ A}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                4.1. Déterminer la tension aux bornes du troisième récepteur.<br>
+                4.2. En appliquant la loi des nœuds ($I_{tot} = I_1 + I_2 + I_3$), calculer l'intensité $I_3$ de la troisième branche.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 4.1 : En dérivation, la tension est égale partout : $U_3 = 12\text{ V}$.</p>
+                <p>• 4.2 : $I_3 = I_{tot} - I_1 - I_2 = 3{,}2 - 1{,}0 - 1{,}5 = 0{,}7\text{ A}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Comparaison Résistance Équivalente (Série vs Dérivation)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Résistance équivalente)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                On dispose de deux résistances $R_1 = 20\,\Omega$ et $R_2 = 30\,\Omega$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                5.1. Calculer la résistance équivalente $R_{eq,serie}$ si elles sont montées en série.<br>
+                5.2. Calculer la résistance équivalente $R_{eq,deriv}$ si elles sont montées en dérivation ($R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2}$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : En série : $R_{eq,serie} = R_1 + R_2 = 20 + 30 = 50\,\Omega$.</p>
+                <p>• 5.2 : En dérivation : $R_{eq,deriv} = \frac{20 \times 30}{20 + 30} = \frac{600}{50} = 12\,\Omega$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Dimensionnement d'un Fusible Moteur (Filière MVM)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Sujet professionnel)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le moteur électrique de pompe de lave-glace automobile ($U = 12\text{ V}$) présente une résistance interne d'enroulement $R = 1{,}5\,\Omega$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                6.1. Calculer l'intensité du courant $I$ consommée par ce moteur sous $12\text{ V}$.<br>
+                6.2. Le stock d'atelier contient des fusibles de $5\text{ A}$, $10\text{ A}$ et $15\text{ A}$. Lequel doit-on sélectionner ? Justifier.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : $I = \frac{U}{R} = \frac{12}{1{,}5} = 8{,}0\text{ A}$.</p>
+                <p>• 6.2 : Il faut choisir le fusible de **$10\text{ A}$** (le calibre immédiatement supérieur à $8{,}0\text{ A}$). Un fusible de $5\text{ A}$ fondrait instantanément.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Dépannage &amp; Diagnostic d'un Circuit Ouvert
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Dépannage)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Deux ampoules $L_1$ et $L_2$ sont branchées en série sous $U_{gen} = 12\text{ V}$. Le circuit ne fonctionne plus. Un technicien branche un voltmètre aux bornes de la lampe $L_1$ et lit $U_1 = 12\text{ V}$. Lorsqu'il le branche aux bornes de $L_2$, il lit $U_2 = 0\text{ V}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Identifier l'élément défectueux et expliquer pourquoi toute la tension $12\text{ V}$ se retrouve aux bornes de $L_1$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• La lampe **$L_1$ est défectueuse** (filament grillé / circuit ouvert). Comme son filament est rompu, la résistance de $L_1$ devient quasi-infinie et toute la tension du générateur ($12\text{ V}$) apparaît à ses bornes, le courant devenant nul ($I=0$), ce qui explique $U_2 = 0\text{ V}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Bilan d'un Circuit Mixte (Série &amp; Dérivation)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse mixte)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un circuit comprend une résistance $R_1 = 10\,\Omega$ en série avec un bloc parallèle formé de deux résistances identiques $R_2 = 20\,\Omega$ et $R_3 = 20\,\Omega$. Le tout est alimenté sous $U_{gen} = 12\text{ V}$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                8.1. Calculer la résistance équivalente $R_{23}$ du bloc en dérivation.<br>
+                8.2. En déduire la résistance totale $R_{tot}$ du circuit.<br>
+                8.3. Calculer l'intensité totale $I_{tot}$ débitée par le générateur.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $R_{23} = \frac{20 \times 20}{20 + 20} = \frac{400}{40} = 10\,\Omega$.</p>
+                <p>• 8.2 : En série avec $R_1$ : $R_{tot} = R_1 + R_{23} = 10 + 10 = 20\,\Omega$.</p>
+                <p>• 8.3 : $I_{tot} = \frac{U_{gen}}{R_{tot}} = \frac{12}{20} = 0{,}6\text{ A}$.</p>
+            </div>
+        </section>
 
     </main>
 
-    <!-- SCRIPTS JS -->
     <script>
-        let allShown = false;
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
 
-        function toggleCorrection(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.toggle('hidden');
-        }
-
-        function toggleAllCorrections() {
-            allShown = !allShown;
-            const ids = ['corr-ex1'];
-            ids.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (allShown) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
                 }
             });
-            const btnText = document.getElementById('toggle-all-text');
-            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
         }
     </script>
 </body>

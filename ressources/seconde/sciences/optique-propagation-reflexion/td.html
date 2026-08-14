@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Optique & Réflexion (2nde Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 900: '#1e3a8a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Seconde Professionnelle • Physique-Chimie</span>
+                    <h1 class="text-xl font-bold font-heading">Optique &amp; Réflexion</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Individuel &amp; Autonome</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application gradués avec corrigés rédigés pas à pas.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices de difficulté progressive</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Application Directe de la Loi de Réflexion
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Application directe)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un rayon laser rouge frappe la surface d'un miroir plan au point d'incidence $I$. L'angle d'incidence entre le rayon incident et la normale est $i_1 = 28^\circ$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Donner la valeur de l'angle de réflexion $i_2$ et préciser son emplacement.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• D'après la 2ème loi de Descartes pour la réflexion : **$i_2 = i_1 = 28^\circ$**.</p>
+                <p>• L'angle $i_2$ se situe entre le rayon réfléchi et la normale à la surface du miroir au point $I$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Calcul de l'Angle d'Incidence par rapport à la Surface
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Calcul d'angle)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un faisceau lumineux rasant fait un angle de $\alpha = 35^\circ$ avec la surface réfléchissante d'un miroir plan.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                2.1. Calculer l'angle d'incidence $i_1$ par rapport à la normale.<br>
+                2.2. En déduire la valeur de l'angle de réflexion $i_2$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• 2.1 : La normale fait $90^\circ$ avec le miroir $\implies i_1 = 90^\circ - 35^\circ = 55^\circ$.</p>
+                <p>• 2.2 : $i_2 = i_1 = 55^\circ$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Incidence Perpendiculaire (Rétro-réflexion)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Rétro-réflexion)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un rayon laser pointe perpendiculairement à la surface d'un miroir plan (il est confondu avec la normale).
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                3.1. Donner les valeurs de $i_1$ et de $i_2$.<br>
+                3.2. Quelle est la trajectoire du rayon réfléchi ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : Comme le rayon est confondu avec la normale, l'angle d'incidence est $i_1 = 0^\circ$, d'où $i_2 = 0^\circ$.</p>
+                <p>• 3.2 : Le rayon réfléchi repart en sens inverse exactement sur la même ligne droite (rétro-réflexion).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Télémétrie Laser de Précision sur Chantier
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Télémétrie laser)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un télémètre laser émet un signal impulsionnel à $c = 3 \times 10^8\text{ m/s}$. L'onde réfléchie sur un mur en béton est reçue après un temps $t = 3{,}0 \times 10^{-7}\text{ s}$ ($0{,}30\text{ }\mu\text{s}$).
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Calculer la distance $d$ en mètres séparant le télémètre du mur.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• $d = \frac{c \cdot t}{2} = \frac{(3 \times 10^8) \times (3{,}0 \times 10^{-7})}{2} = \frac{90}{2} = 45{,}0\text{ m}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Périscope à Deux Miroirs Parallèles
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Double réflexion)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un périscope est constitué de deux miroirs plans $M_1$ et $M_2$ parallèles entre eux, inclinés à $45^\circ$ par rapport à un rayon horizontal d'entrée.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                5.1. Déterminer la déviation créée par le 1er miroir $M_1$.<br>
+                5.2. Déterminer la déviation créée par le 2e miroir $M_2$. Montrer que le rayon de sortie est parallèle au rayon d'entrée.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : Sur $M_1$, $i_1 = 45^\circ \implies i_2 = 45^\circ$. Le rayon est dévié vers le bas de $90^\circ$.</p>
+                <p>• 5.2 : Sur $M_2$, $i'_1 = 45^\circ \implies i'_2 = 45^\circ$. Le rayon est dévié vers la droite de $90^\circ$. Déviation globale $= 90^\circ - 90^\circ = 0^\circ$ : le rayon ressort dans la même direction horizontale.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Miroir d'Angle à 90° (Équerre Optique)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Miroirs orthogonaux)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Deux miroirs plans sont assemblés à angle droit ($90^\circ$). Un rayon d'entrée arrive sur le premier miroir avec un angle d'incidence $i_1 = 30^\circ$.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                6.1. Donner la valeur de $i_2$ sur le premier miroir.<br>
+                6.2. Calculer l'angle d'incidence $i'_1$ sur le second miroir.<br>
+                6.3. En déduire la direction du rayon de sortie final par rapport au rayon initial.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : $i_2 = i_1 = 30^\circ$.</p>
+                <p>• 6.2 : Les 2 normales forment un angle de $90^\circ \implies i'_1 = 90^\circ - 30^\circ = 60^\circ$.</p>
+                <p>• 6.3 : $i'_2 = 60^\circ$. Le rayon est renvoyé **exactement parallèlement au rayon incident d'origine**, en sens inverse ($180^\circ$). C'est le principe d'un catadioptre.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Distance de Vision dans un Rétroviseur
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Symétrie d'image)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une voiture suit un camion et se trouve à $d_{auto} = 8{,}0\text{ m}$ derrière le rétroviseur plan du camion. Les yeux du chauffeur du camion sont à $d_{chauffeur} = 2{,}0\text{ m}$ devant son rétroviseur.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                7.1. À quelle distance derrière le miroir se forme l'image virtuelle de la voiture ?<br>
+                7.2. Quelle est la distance totale accommodée par les yeux du chauffeur pour voir cette voiture dans son miroir ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : Par symétrie, l'image virtuelle est située à $8{,}0\text{ m}$ derrière le rétroviseur.</p>
+                <p>• 7.2 : Distance totale $= d_{chauffeur} + d_{image} = 2{,}0 + 8{,}0 = 10{,}0\text{ m}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Réflexion sur un Plan d'Eau Calme
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Symétrie eau)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le sommet d'un pilonne d'éclairage de hauteur $H = 15\text{ m}$ se réfléchit sur une flaque d'eau parfaitement calme au sol. Le rayon lumineux incident fait un angle $i_1 = 65^\circ$ avec la normale verticale.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                8.1. Donner la valeur de l'angle de réflexion $i_2$.<br>
+                8.2. À quelle profondeur sous la surface du sol se trouve l'image virtuelle du sommet du pylône ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $i_2 = i_1 = 65^\circ$.</p>
+                <p>• 8.2 : Par symétrie orthogonale, l'image virtuelle du sommet se situe à une "profondeur" de $15\text{ m}$ sous la surface de l'eau.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

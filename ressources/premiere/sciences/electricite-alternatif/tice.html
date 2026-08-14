@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Oscilloscope et Mesures (1ère Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#faf5ff', 100: '#f3e8ff', 500: '#a855f7', 600: '#9333ea', 900: '#581c87' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 30px -5px rgba(168, 85, 247, 0.15); }
+
+        #scopeCanvas {
+            background-color: #021a0f;
+            box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.2), 0 0 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .tab-btn.active {
+            background-color: #9333ea;
+            color: #ffffff;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white !important; color: black !important; padding-bottom: 0 !important; }
+            .print-only-white { background-color: white !important; color: black !important; border: 1px solid #ccc !important; }
+            .no-print-area { display: none !important; }
+            .print-area { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-100 bg-slate-950 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Première Professionnelle • Physique-Chimie</span> <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    <h1 class="text-xl font-bold font-heading">Électricité : Courant Alternatif Sinusoïdal</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- ENTÊTE DE TP LYCÉE ET MATÉRIEL -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-lg space-y-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-purple-400">Labo Maths-Sciences • Électricité</span>
+                    <h1 class="text-3xl font-extrabold font-heading text-white">TP — Signal Sinusoïdal : Oscilloscope &amp; Mesures</h1>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 text-xs">
+                    <span class="bg-purple-900/60 text-purple-300 px-3 py-1.5 rounded-xl border border-purple-700/50 font-bold">⏱ Durée : 55 min</span>
+                    <span class="bg-blue-900/60 text-blue-300 px-3 py-1.5 rounded-xl border border-blue-700/50 font-bold">1ère Pro / CAP / Bac Pro</span>
+                </div>
+            </div>
+
+            <!-- MODES SELECTOR TABS -->
+            <div class="flex flex-wrap items-center justify-between gap-4 no-print">
+                <div class="flex bg-slate-950 p-1.5 rounded-2xl border border-slate-800 gap-2">
+                    <button onclick="switchTab('real')" id="tabRealBtn" class="tab-btn active px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-flask-vial text-amber-400"></i> Mode 1 : Manipulations Paillasse (Matériel Réel)
+                    </button>
+                    <button onclick="switchTab('virtual')" id="tabVirtualBtn" class="tab-btn px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-laptop-code text-emerald-400"></i> Mode 2 : Simulateur Numérique (Oscilloscope Virtuel)
+                    </button>
+                </div>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all border border-slate-700 flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer Fiche TP (A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <!-- MODE 1 : TP PAILLASSE RÉELLE (MATÉRIEL DU LABORATOIRE)           -->
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <div id="tabReal" class="space-y-8">
+
+            <!-- CONTEXTE & FORMULES DE BASE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Contexte Pro -->
+                <div class="bg-sky-950/40 border border-sky-800/60 rounded-3xl p-6 space-y-3">
+                    <h3 class="font-bold text-sky-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase"></i> Contexte Professionnel
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        L'oscilloscope est l'outil fondamental du technicien en électricité, maintenance et électronique. Il permet de "voir" la forme exacte des signaux électriques et de mesurer l'amplitude crête, la tension efficace TRMS, la période $T$ et la fréquence $f$.
+                    </p>
+                </div>
+
+                <!-- Formules Clés -->
+                <div class="bg-amber-950/40 border border-amber-800/60 rounded-3xl p-6 space-y-3">
+                    <h3 class="font-bold text-amber-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-square-root-variable"></i> Formules &amp; Relations Légales
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-center text-xs font-mono">
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$U_{eff} = \frac{U_{max}}{\sqrt{2}}$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$U_{max} = U_{eff} \times \sqrt{2}$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$f = \frac{1}{T}$</div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-amber-900/40 text-amber-300">$U_{p-p} = 2 \times U_{max}$</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATÉRIEL RÉEL DU LABO ET SÉCURITÉ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Liste Matériel -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <h3 class="font-bold font-heading text-purple-400 text-base flex items-center gap-2 border-b border-slate-800 pb-2">
+                        <i class="fa-solid fa-toolbox"></i> Matériel Réel Nécessaire (Paillasse de TP)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-purple-900/50 text-purple-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-desktop"></i></span>
+                            <div>
+                                <strong class="text-white block">Oscilloscope bicourbe 20 MHz</strong>
+                                <span class="text-slate-400 text-[11px]">Sondes BNC $\rightarrow$ bananes E35</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-amber-900/50 text-amber-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-wave-square"></i></span>
+                            <div>
+                                <strong class="text-white block">Générateur de Fonctions (GBF)</strong>
+                                <span class="text-slate-400 text-[11px]"> Plage $1\text{ Hz}$ à $1\text{ MHz}$ + ampli BF</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-calculator"></i></span>
+                            <div>
+                                <strong class="text-white block">Multimètre Numérique TRMS</strong>
+                                <span class="text-slate-400 text-[11px]">Mesure en voltmètre AC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-sky-900/50 text-sky-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-plug"></i></span>
+                            <div>
+                                <strong class="text-white block">Alimentation réglable TP</strong>
+                                <span class="text-slate-400 text-[11px]">Sortie $6/12/24\text{ V}$ AC/DC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consignes Sécurité -->
+                <div class="bg-red-950/30 border border-red-900/50 rounded-3xl p-6 space-y-3 text-xs text-red-200">
+                    <h3 class="font-bold text-red-400 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Consignes de Sécurité TP
+                    </h3>
+                    <ul class="space-y-2 leading-relaxed">
+                        <li>⚠️ <strong>NE JAMAIS MESURER LE 230 V SECTEUR</strong> directement avec les sondes oscilloscope de TP (risque d'électrocution mortelle et de court-circuit).</li>
+                        <li>⚠️ <strong>Raccordement des masses :</strong> Vérifier que la masse de la sonde est reliée au point zéro du circuit.</li>
+                        <li>⚠️ Ne jamais court-circuiter les bornes de sortie du GBF.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- ÉTAPES DÉTAILLÉES DU PROTOCOLE EXPERIMENTAL -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6">
+                <h3 class="text-xl font-bold font-heading text-white border-b border-slate-800 pb-3 flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm font-extrabold"><i class="fa-solid fa-list-check"></i></span>
+                    Déroulement Expérimental — 6 Étapes Guidées
+                </h3>
+
+                <div class="space-y-4 text-xs">
+
+                    <!-- Étape 1 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-purple-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-purple-900 text-purple-200 flex items-center justify-center text-xs">1</span>
+                                Prise en main et Réglage du Zéro Oscilloscope
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Allumer l'oscilloscope et attendre la mise en température (1 minute).</li>
+                            <li>Relever les boutons principaux : <strong class="text-white">VOLTS/DIV</strong> (Calibre tension), <strong class="text-white">TIME/DIV</strong> (Base de temps), <strong class="text-white">POSITION</strong> (Déplacement Y/X), <strong class="text-white">AUTO-SET</strong>.</li>
+                            <li>Relier la sonde sur l'entrée <strong class="text-white">CH1</strong>.</li>
+                            <li>Ajuster la ligne de zéro horizontale au centre de l'écran avec le bouton <strong class="text-white">POSITION Y</strong>.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-amber-900 text-amber-200 flex items-center justify-center text-xs">2</span>
+                                Branchement et Génération du Signal GBF
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 5 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Régler le GBF : sélectionner la forme sinusoïdale ($\sim$), régler la fréquence sur <strong class="text-white font-mono">1000 Hz (1 kHz)</strong>.</li>
+                            <li>Connecter la sortie du GBF à l'entrée CH1 de l'oscilloscope (rouge au + / noir à la masse).</li>
+                            <li>Ajuster <strong class="text-white">VOLTS/DIV</strong> ($1\text{ V/div}$) et <strong class="text-white">TIME/DIV</strong> ($0{,}2\text{ ms/div}$) pour observer 2 à 3 sinusoïdes complètes.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 3 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-emerald-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-emerald-900 text-emerald-200 flex items-center justify-center text-xs">3</span>
+                                Mesure de Tension Maximale et Efficace au Multimètre
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Compter le nombre de carreaux verticaux $Y_{max}$ de l'axe central au sommet de la crête.</li>
+                            <li>Calculer $U_{max} = Y_{max} \times S_v$.</li>
+                            <li>Calculer la valeur efficace théorique $U_{eff} = \frac{U_{max}}{\sqrt{2}}$.</li>
+                            <li>Brancher un multimètre numérique en parallèle en mode <strong class="text-white">Voltmètre AC</strong>. Noter la valeur affichée et comparer avec $U_{eff}$.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Étape 4 -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-sky-400 text-sm flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-sky-900 text-sky-200 flex items-center justify-center text-xs">4</span>
+                                Mesure de la Période T et Fréquence f
+                            </span>
+                            <span class="text-slate-500 font-mono">⏱ 8 min</span>
+                        </div>
+                        <ol class="list-decimal pl-6 space-y-1 text-slate-300 leading-relaxed">
+                            <li>Relever le nombre de divisions horizontales $X$ d'un motif complet.</li>
+                            <li>Calculer la période $T = X \times S_h$ (en millisecondes puis en secondes).</li>
+                            <li>Calculer la fréquence $f = \frac{1}{T}$ en Hz. Comparer avec l'affichage du GBF.</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TABLEAU INTERACTIF DE RELEVÉ DE MESURES DE PAILLASSE -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-3 gap-2">
+                    <h3 class="text-lg font-bold font-heading text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-table"></i> Tableau de Relevé des Mesures Réelles du Labo
+                    </h3>
+                    <span class="text-xs text-slate-400">Saisissez vos mesures réelles ci-dessous</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse min-w-[650px]">
+                        <thead>
+                            <tr class="bg-slate-950 text-slate-400 font-mono border-b border-slate-800">
+                                <th class="p-3">Fréquence GBF</th>
+                                <th class="p-3">Calibre $S_v$</th>
+                                <th class="p-3">Divs $Y_{max}$</th>
+                                <th class="p-3">$U_{max}$ lue (V)</th>
+                                <th class="p-3">Multimètre $U_{AC}$ (V)</th>
+                                <th class="p-3">Calibre $S_h$</th>
+                                <th class="p-3">Divs $X$</th>
+                                <th class="p-3">$T$ mesurée (ms)</th>
+                                <th class="p-3">$f$ calculée (Hz)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200">
+                            <!-- Ligne 1 : 50 Hz -->
+                            <tr class="hover:bg-slate-950/50">
+                                <td class="p-3 font-bold text-amber-400">50 Hz</td>
+                                <td class="p-3"><input type="text" value="2 V/div" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono"></td>
+                                <td class="p-3"><input type="number" id="realY1" step="0.1" value="3.0" oninput="calcRealTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-white" id="realUmax1">6.0 V</td>
+                                <td class="p-3"><input type="number" id="realUrms1" step="0.1" value="4.2" oninput="calcRealTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-sky-400 font-bold"></td>
+                                <td class="p-3"><input type="text" value="5 ms/div" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono"></td>
+                                <td class="p-3"><input type="number" id="realX1" step="0.1" value="4.0" oninput="calcRealTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-white" id="realT1">20.0 ms</td>
+                                <td class="p-3 font-mono font-bold text-purple-400" id="realF1">50.0 Hz</td>
+                            </tr>
+                            <!-- Ligne 2 : 1 kHz -->
+                            <tr class="hover:bg-slate-950/50">
+                                <td class="p-3 font-bold text-amber-400">1000 Hz</td>
+                                <td class="p-3"><input type="text" value="1 V/div" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono"></td>
+                                <td class="p-3"><input type="number" id="realY2" step="0.1" value="3.0" oninput="calcRealTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-white" id="realUmax2">3.0 V</td>
+                                <td class="p-3"><input type="number" id="realUrms2" step="0.1" value="2.1" oninput="calcRealTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-sky-400 font-bold"></td>
+                                <td class="p-3"><input type="text" value="0.2 ms/div" class="w-20 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono"></td>
+                                <td class="p-3"><input type="number" id="realX2" step="0.1" value="5.0" oninput="calcRealTable()" class="w-16 bg-slate-950 border border-slate-800 rounded px-2 py-1 text-center font-mono text-emerald-400 font-bold"></td>
+                                <td class="p-3 font-mono font-bold text-white" id="realT2">1.0 ms</td>
+                                <td class="p-3 font-mono font-bold text-purple-400" id="realF2">1000.0 Hz</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- COMPTE RENDU BILAN LIBRE -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-3">
+                <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider">Compte-rendu — Conclusions &amp; Réponses aux questions</h3>
+                <textarea rows="4" placeholder="Rédigez vos observations de TP (comparaison Umax / Ueff, concordance entre GBF et mesure oscilloscope...)" class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs text-slate-200 focus:outline-none focus:border-purple-500 font-sans leading-relaxed"></textarea>
+            </div>
+
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <!-- MODE 2 : TP SIMULATEUR NUMÉRIQUE (OSCILLOSCOPE VIRTUEL HTML5)    -->
+        <!-- ════════════════════════════════════════════════════════════════ -->
+        <div id="tabVirtual" class="hidden space-y-8">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- CANVA OSCILLOSCOPE (LEFT 7 COLS) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-6 card-shadow space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="font-bold text-sm text-emerald-400 font-mono uppercase tracking-wider">CANAL CH1 • 60 FPS</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button id="audioBtn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-amber-400 hover:bg-slate-700 text-xs font-bold transition-all border border-slate-700 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-volume-xmark" id="audioIcon"></i> Audio Off
+                                </button>
+                                <button onclick="toggleGrid()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold transition-all border border-slate-700">
+                                    <i class="fa-solid fa-border-all"></i> Grille
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Element -->
+                        <div class="relative w-full overflow-hidden rounded-2xl border-2 border-emerald-900/60">
+                            <canvas id="scopeCanvas" width="600" height="400" class="w-full h-auto block"></canvas>
+                        </div>
+
+                        <!-- Scope Info Bar -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs font-mono">
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">CALIBRE SV</span>
+                                <span class="text-emerald-400 font-bold text-sm" id="infoSv">2 V/div</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">BASE SH</span>
+                                <span class="text-emerald-400 font-bold text-sm" id="infoSh">5 ms/div</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">YMAX LUE</span>
+                                <span class="text-amber-400 font-bold text-sm" id="infoYmax">3,0 div</span>
+                            </div>
+                            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="text-slate-500 block text-[10px]">X PÉRIODE LUE</span>
+                                <span class="text-amber-400 font-bold text-sm" id="infoXperiod">4,0 div</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUTO-EVALUATION CHALLENGE -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <h3 class="font-bold font-heading text-purple-400 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye"></i> Défi Mode Masqué (Saisie Autonome)
+                            </h3>
+                            <button onclick="generateRandomSignal()" class="bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl transition-all">
+                                Générer Signal Mystère
+                            </button>
+                        </div>
+
+                        <p class="text-xs text-slate-400">
+                            Lisez les carreaux sur l'oscilloscope ci-dessus, puis saisissez les valeurs calculées :
+                        </p>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                            <div>
+                                <label class="block text-slate-400 mb-1">Umax (V) :</label>
+                                <input type="number" id="userUmax" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">T (ms) :</label>
+                                <input type="number" id="userPeriod" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Fréquence f (Hz) :</label>
+                                <input type="number" id="userFreq" step="1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Ueff (V) :</label>
+                                <input type="number" id="userUeff" step="0.1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono font-bold focus:border-purple-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <button onclick="checkUserAnswers()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md">
+                                Vérifier mes mesures
+                            </button>
+                            <div id="checkResult" class="text-xs font-bold"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTROL PANEL (RIGHT 5 COLS) -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- GBF CONTROLS -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5 card-shadow">
+                        <h3 class="text-lg font-bold font-heading text-amber-400 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-amber-500"></i> 1. Générateur Basse Fréquence (GBF)
+                        </h3>
+
+                        <!-- Wave Shape -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Forme de l'onde :</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="setWave('sine')" id="btnSine" class="py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 border border-amber-400 transition-all">Sinus</button>
+                                <button onclick="setWave('square')" id="btnSquare" class="py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all">Carré</button>
+                                <button onclick="setWave('triangle')" id="btnTriangle" class="py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-all">Triangle</button>
+                            </div>
+                        </div>
+
+                        <!-- Amplitude Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Amplitude $U_{max}$ :</span>
+                                <span class="font-mono font-bold text-amber-400" id="valUmax">6.0 V</span>
+                            </div>
+                            <input type="range" id="sliderUmax" min="1" max="20" step="0.5" value="6" oninput="updateGbf()" class="w-full accent-amber-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Frequency Slider -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Fréquence $f$ :</span>
+                                <span class="font-mono font-bold text-amber-400" id="valFreq">50 Hz</span>
+                            </div>
+                            <input type="range" id="sliderFreq" min="10" max="500" step="5" value="50" oninput="updateGbf()" class="w-full accent-amber-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- OSCILLOSCOPE CONTROLS -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5 card-shadow">
+                        <h3 class="text-lg font-bold font-heading text-purple-400 border-b border-slate-800 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-gear text-purple-500"></i> 2. Réglages Oscilloscope
+                        </h3>
+
+                        <!-- Sensibilité Verticale (Sv) -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Sensibilité Verticale $S_v$ (V/div) :</label>
+                            <select id="selectSv" onchange="updateScope()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-purple-300 font-bold font-mono focus:border-purple-500 focus:outline-none">
+                                <option value="0.5">0.5 V / div</option>
+                                <option value="1">1.0 V / div</option>
+                                <option value="2" selected>2.0 V / div</option>
+                                <option value="5">5.0 V / div</option>
+                                <option value="10">10.0 V / div</option>
+                            </select>
+                        </div>
+
+                        <!-- Base de Temps (Sh) -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Base de temps / Vitesse $S_h$ (ms/div) :</label>
+                            <select id="selectSh" onchange="updateScope()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-purple-300 font-bold font-mono focus:border-purple-500 focus:outline-none">
+                                <option value="1">1.0 ms / div</option>
+                                <option value="2">2.0 ms / div</option>
+                                <option value="5" selected>5.0 ms / div</option>
+                                <option value="10">10.0 ms / div</option>
+                                <option value="20">20.0 ms / div</option>
+                            </select>
+                        </div>
+
+                        <!-- Offset Y -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-slate-300">Position Y (Offset) :</span>
+                                <span class="font-mono text-purple-300" id="valOffsetY">0 div</span>
+                            </div>
+                            <input type="range" id="sliderOffsetY" min="-3" max="3" step="0.5" value="0" oninput="updateScope()" class="w-full accent-purple-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SIMULATOR & TAB SWITCHING JAVASCRIPT -->
+    <script>
+        // Tab switching
+        function switchTab(mode) {
+            const realTab = document.getElementById('tabReal');
+            const virtualTab = document.getElementById('tabVirtual');
+            const realBtn = document.getElementById('tabRealBtn');
+            const virtualBtn = document.getElementById('tabVirtualBtn');
+
+            if (mode === 'real') {
+                realTab.classList.remove('hidden');
+                virtualTab.classList.add('hidden');
+                realBtn.classList.add('active');
+                virtualBtn.classList.remove('active');
+            } else {
+                realTab.classList.add('hidden');
+                virtualTab.classList.remove('hidden');
+                virtualBtn.classList.add('active');
+                realBtn.classList.remove('active');
+            }
+        }
+
+        // Real lab table calculations
+        function calcRealTable() {
+            // Row 1
+            const y1 = parseFloat(document.getElementById('realY1').value) || 0;
+            const umax1 = y1 * 2.0; // Sv = 2V/div
+            document.getElementById('realUmax1').innerText = umax1.toFixed(1) + " V";
+
+            const x1 = parseFloat(document.getElementById('realX1').value) || 0;
+            const t1 = x1 * 5.0; // Sh = 5ms/div
+            document.getElementById('realT1').innerText = t1.toFixed(1) + " ms";
+            const f1 = t1 > 0 ? (1000 / t1) : 0;
+            document.getElementById('realF1').innerText = f1.toFixed(1) + " Hz";
+
+            // Row 2
+            const y2 = parseFloat(document.getElementById('realY2').value) || 0;
+            const umax2 = y2 * 1.0; // Sv = 1V/div
+            document.getElementById('realUmax2').innerText = umax2.toFixed(1) + " V";
+
+            const x2 = parseFloat(document.getElementById('realX2').value) || 0;
+            const t2 = x2 * 0.2; // Sh = 0.2ms/div
+            document.getElementById('realT2').innerText = t2.toFixed(1) + " ms";
+            const f2 = t2 > 0 ? (1000 / t2) : 0;
+            document.getElementById('realF2').innerText = f2.toFixed(1) + " Hz";
+        }
+
+        // Canvas Simulator JS
+        const canvas = document.getElementById('scopeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let waveType = 'sine';
+        let uMax = 6.0;
+        let freq = 50;
+        let sV = 2.0;
+        let sH = 5.0;
+        let offsetY = 0;
+        let showGrid = true;
+        let isAudioPlaying = false;
+        let audioCtx = null;
+        let oscNode = null;
+        let gainNode = null;
+
+        const numDivX = 10;
+        const numDivY = 8;
+
+        function updateGbf() {
+            uMax = parseFloat(document.getElementById('sliderUmax').value);
+            freq = parseFloat(document.getElementById('sliderFreq').value);
+            
+            document.getElementById('valUmax').innerText = uMax.toFixed(1) + " V";
+            document.getElementById('valFreq').innerText = freq + " Hz";
+
+            if (oscNode && audioCtx && isAudioPlaying) {
+                oscNode.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            }
+            updateInfoBar();
+        }
+
+        function updateScope() {
+            sV = parseFloat(document.getElementById('selectSv').value);
+            sH = parseFloat(document.getElementById('selectSh').value);
+            offsetY = parseFloat(document.getElementById('sliderOffsetY').value);
+
+            document.getElementById('valOffsetY').innerText = (offsetY > 0 ? '+' : '') + offsetY + " div";
+            updateInfoBar();
+        }
+
+        function setWave(type) {
+            waveType = type;
+            ['btnSine', 'btnSquare', 'btnTriangle'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.className = "py-2 rounded-xl text-xs font-bold transition-all border " +
+                    (id.toLowerCase().includes(type) 
+                        ? "bg-amber-500 text-slate-950 border-amber-400" 
+                        : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700");
+            });
+            if (oscNode) {
+                oscNode.type = type === 'sine' ? 'sine' : (type === 'square' ? 'square' : 'triangle');
+            }
+        }
+
+        function toggleGrid() {
+            showGrid = !showGrid;
+        }
+
+        function updateInfoBar() {
+            document.getElementById('infoSv').innerText = sV.toFixed(1) + " V/div";
+            document.getElementById('infoSh').innerText = sH.toFixed(1) + " ms/div";
+
+            const yMaxDiv = uMax / sV;
+            const periodMs = (1 / freq) * 1000;
+            const xPeriodDiv = periodMs / sH;
+
+            document.getElementById('infoYmax').innerText = yMaxDiv.toFixed(1) + " div";
+            document.getElementById('infoXperiod').innerText = xPeriodDiv.toFixed(1) + " div";
+        }
+
+        let phase = 0;
+        function drawScope() {
+            const w = canvas.width;
+            const h = canvas.height;
+            const divW = w / numDivX;
+            const divH = h / numDivY;
+            const centerY = (h / 2) - (offsetY * divH);
+
+            ctx.clearRect(0, 0, w, h);
+
+            if (showGrid) {
+                ctx.strokeStyle = '#064e3b';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([2, 2]);
+
+                for (let x = 0; x <= numDivX; x++) {
+                    ctx.beginPath();
+                    ctx.moveTo(x * divW, 0);
+                    ctx.lineTo(x * divW, h);
+                    ctx.stroke();
+                }
+                for (let y = 0; y <= numDivY; y++) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y * divH);
+                    ctx.lineTo(w, y * divH);
+                    ctx.stroke();
+                }
+
+                ctx.setLineDash([]);
+                ctx.strokeStyle = '#047857';
+                ctx.lineWidth = 1.5;
+                
+                ctx.beginPath();
+                ctx.moveTo(0, centerY);
+                ctx.lineTo(w, centerY);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(w / 2, 0);
+                ctx.lineTo(w / 2, h);
+                ctx.stroke();
+            }
+
+            ctx.setLineDash([]);
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.shadowColor = '#10b981';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+
+            const periodMs = (1 / freq) * 1000;
+            const totalScreenMs = numDivX * sH;
+
+            phase += 0.05;
+
+            for (let px = 0; px < w; px++) {
+                const timeMs = (px / w) * totalScreenMs;
+                const angle = (2 * Math.PI * (timeMs / periodMs)) - phase;
+                
+                let val = 0;
+                if (waveType === 'sine') {
+                    val = Math.sin(angle);
+                } else if (waveType === 'square') {
+                    val = Math.sin(angle) >= 0 ? 1 : -1;
+                } else if (waveType === 'triangle') {
+                    val = (2 / Math.PI) * Math.asin(Math.sin(angle));
+                }
+
+                const voltage = val * uMax;
+                const py = centerY - (voltage / sV) * divH;
+
+                if (px === 0) {
+                    ctx.moveTo(px, py);
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            requestAnimationFrame(drawScope);
+        }
+
+        function toggleAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const btn = document.getElementById('audioBtn');
+
+            if (!isAudioPlaying) {
+                oscNode = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+                
+                oscNode.type = waveType === 'sine' ? 'sine' : (waveType === 'square' ? 'square' : 'triangle');
+                oscNode.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+
+                oscNode.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscNode.start();
+
+                isAudioPlaying = true;
+                btn.className = "px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs transition-all border border-amber-400 flex items-center gap-1.5";
+                btn.innerHTML = '<i class="fa-solid fa-volume-high"></i> Audio On';
+            } else {
+                if (oscNode) {
+                    oscNode.stop();
+                    oscNode.disconnect();
+                }
+                isAudioPlaying = false;
+                btn.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-amber-400 hover:bg-slate-700 text-xs font-bold transition-all border border-slate-700 flex items-center gap-1.5";
+                btn.innerHTML = '<i class="fa-solid fa-volume-xmark" id="audioIcon"></i> Audio Off';
+            }
+        }
+
+        let mysteryUmax = 0;
+        let mysteryFreq = 0;
+
+        function generateRandomSignal() {
+            const freqs = [25, 50, 100, 200, 250, 500];
+            const umaxs = [2, 4, 5, 8, 10, 12, 15];
+
+            mysteryFreq = freqs[Math.floor(Math.random() * freqs.length)];
+            mysteryUmax = umaxs[Math.floor(Math.random() * umaxs.length)];
+
+            document.getElementById('sliderUmax').value = mysteryUmax;
+            document.getElementById('sliderFreq').value = mysteryFreq;
+            updateGbf();
+
+            document.getElementById('userUmax').value = '';
+            document.getElementById('userPeriod').value = '';
+            document.getElementById('userFreq').value = '';
+            document.getElementById('userUeff').value = '';
+            document.getElementById('checkResult').innerHTML = '<span class="text-amber-400">Signal mystère généré ! À vos calculs.</span>';
+        }
+
+        function checkUserAnswers() {
+            const umaxIn = parseFloat(document.getElementById('userUmax').value);
+            const tIn = parseFloat(document.getElementById('userPeriod').value);
+            const fIn = parseFloat(document.getElementById('userFreq').value);
+            const ueffIn = parseFloat(document.getElementById('userUeff').value);
+
+            const expectedTMs = (1 / mysteryFreq) * 1000;
+            const expectedUeff = mysteryUmax / Math.sqrt(2);
+
+            let correctCount = 0;
+            if (Math.abs(umaxIn - mysteryUmax) < 0.3) correctCount++;
+            if (Math.abs(tIn - expectedTMs) < 0.5) correctCount++;
+            if (Math.abs(fIn - mysteryFreq) < 5) correctCount++;
+            if (Math.abs(ueffIn - expectedUeff) < 0.5) correctCount++;
+
+            const resDiv = document.getElementById('checkResult');
+            if (correctCount === 4) {
+                resDiv.innerHTML = `<span class="text-emerald-400">🎉 Parfait ! 4/4 mesures exactes ($U_{max}=${mysteryUmax}V, T=${expectedTMs.toFixed(1)}ms, f=${mysteryFreq}Hz, U_{eff}=${expectedUeff.toFixed(1)}V$).</span>`;
+            } else {
+                resDiv.innerHTML = `<span class="text-amber-400">⚠️ ${correctCount}/4 mesures exactes. Réponse attendue : $U_{max}=${mysteryUmax}V, T=${expectedTMs.toFixed(1)}ms, f=${mysteryFreq}Hz, U_{eff}=${expectedUeff.toFixed(1)}V$.</span>`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([resDiv]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calcRealTable();
+            updateGbf();
+            updateScope();
+            requestAnimationFrame(drawScope);
+        });
+    </script>
+</body>
+</html>
