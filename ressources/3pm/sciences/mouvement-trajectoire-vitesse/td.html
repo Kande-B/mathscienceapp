@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Mouvement, Trajectoire & Vitesse (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 3 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Mouvement, Trajectoire &amp; Vitesse Moyenne</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome &amp; Préparation DNB Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices gradués sur la vitesse $v = \frac{d}{t}$, conversions m/s et km/h, trajectoires et distance d'arrêt.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices d'application</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Calcul Direct de Vitesse
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Vitesse m/s et km/h)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un athlète sprinteur parcourt la distance $d = 100\text{ m}$ en une durée $t = 10{,}0\text{ s}$.<br>
+                1.1. Calculer sa vitesse moyenne $v$ en mètres par seconde ($\text{m/s}$).<br>
+                1.2. Convertir cette vitesse en kilomètres par heure ($\text{km/h}$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• 1.1 : $v = \frac{d}{t} = \frac{100}{10{,}0} = \mathbf{10{,}0\text{ m/s}}$.</p>
+                <p>• 1.2 : $v = 10{,}0 \times 3{,}6 = \mathbf{36{,}0\text{ km/h}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Calcul de Distance Parcourue
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Distance d = v x t)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une voiture roule à la vitesse moyenne de $v = 110\text{ km/h}$ sur autoroute pendant une durée de $2\text{h } 15\text{min}$ (soit $t = 2{,}25\text{ h}$).<br>
+                Calculer la distance totale $d$ parcourue en kilomètres.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>$d = v \times t = 110 \times 2{,}25 = \mathbf{247{,}5\text{ km}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Calcul de Durée de Trajet
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Durée t = d / v)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un véhicule utilitaire doit effectuer une livraison à une distance de $d = 210\text{ km}$. Sa vitesse moyenne estimée est de $v = 70\text{ km/h}$.<br>
+                Calculer la durée $t$ du trajet en heures.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>$t = \frac{d}{v} = \frac{210}{70} = \mathbf{3\text{ heures}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Qualification des Trajectoires
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Types de trajectoires)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Indiquer le type de trajectoire (rectiligne, circulaire ou curviligne) pour les objets suivants :<br>
+                a) Une cabine de téléphérique montant en ligne droite.<br>
+                b) L'extrémité de l'aiguille des secondes d'une montre.<br>
+                c) Un ballon de football frappé lors d'un coup franc avec effet.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• a) Téléphérique en ligne droite : **Trajectoire rectiligne**.</p>
+                <p>• b) Aiguille de montre : **Trajectoire circulaire**.</p>
+                <p>• c) Ballon de foot avec effet : **Trajectoire curviligne**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Analyse Chronophotographique d'une Chute
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Chute libre)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                On filme la chute d'une bille d'acier lâchée sans vitesse initiale. La caméra prend une photo tous les $\Delta t = 0{,}1\text{ s}$.<br>
+                On observe que les distances parcourues entre deux images successives augmentent au cours du temps ($5\text{ cm}$, $15\text{ cm}$, $25\text{ cm}$, $35\text{ cm}$).<br>
+                5.1. Qualifier la trajectoire et la nature du mouvement de la bille.<br>
+                5.2. Calculer la vitesse moyenne entre la 3e et la 4e image ($d = 0{,}35\text{ m}$ en $\Delta t = 0{,}1\text{ s}$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : Trajectoire verticale droite $\implies$ **rectiligne**. Distances croissantes $\implies$ **mouvement accéléré**.</p>
+                <p>• 5.2 : $v = \frac{d}{\Delta t} = \frac{0{,}35}{0{,}1} = \mathbf{3{,}5\text{ m/s}}$ (soit $12{,}6\text{ km/h}$).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Comparaison de Vitesses
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Conversions)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Trois véhicules circulent sur une voie rapide :<br>
+                • Véhicule A : $v_A = 22\text{ m/s}$<br>
+                • Véhicule B : $v_B = 80\text{ km/h}$<br>
+                • Véhicule C : parcourt $d = 1200\text{ m}$ en $t = 1\text{ minute}$ ($60\text{ s}$).<br>
+                Classer ces trois véhicules du plus rapide au plus lent en exprimant toutes les vitesses en $\text{km/h}$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• $v_A = 22 \times 3{,}6 = \mathbf{79{,}2\text{ km/h}}$.</p>
+                <p>• $v_B = \mathbf{80{,}0\text{ km/h}}$.</p>
+                <p>• $v_C = \frac{1200}{60} = 20\text{ m/s} = 20 \times 3{,}6 = \mathbf{72{,}0\text{ km/h}}$.</p>
+                <p>• Classement : **Véhicule B (80 km/h) > Véhicule A (79,2 km/h) > Véhicule C (72 km/h)**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Téléphone au Volant &amp; Distance de Réaction
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Sécurité routière)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une automobiliste roule sur route départementale à $v = 90\text{ km/h}$ (soit $25\text{ m/s}$).<br>
+                7.1. Calculer la distance de réaction $D_{R1}$ si son temps de réaction normal est $t_{R1} = 1{,}0\text{ s}$.<br>
+                7.2. En lisant une notification sur son smartphone, son temps de réaction passe à $t_{R2} = 2{,}5\text{ s}$. Calculer la nouvelle distance de réaction $D_{R2}$.<br>
+                7.3. Quelle distance supplémentaire le véhicule parcourt-il à l'aveugle ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : $D_{R1} = 25 \times 1{,}0 = \mathbf{25\text{ mètres}}$.</p>
+                <p>• 7.2 : $D_{R2} = 25 \times 2{,}5 = \mathbf{62{,}5\text{ mètres}}$.</p>
+                <p>• 7.3 : Distance supplémentaire = $62{,}5 - 25 = \mathbf{37{,}5\text{ mètres}}$ (soit la longueur de 8 voitures !).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Distance d'Arrêt d'un Motard (Type Brevet)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse Brevet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un motocycliste roule à $v = 72\text{ km/h}$ ($20\text{ m/s}$). Son temps de réaction est $t_R = 1{,}0\text{ s}$. Sur sol sec, la distance de freinage est $D_F = 20\text{ m}$. Sur sol mouillé, elle est de $D_F = 40\text{ m}$.<br>
+                8.1. Calculer la distance de réaction $D_R$.<br>
+                8.2. Calculer la distance totale d'arrêt $D_{A,\text{sec}}$ sur sol sec.<br>
+                8.3. Calculer la distance totale d'arrêt $D_{A,\text{pluie}}$ sur sol mouillé.<br>
+                8.4. Conclure sur la consigne de sécurité à respecter par temps de pluie.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $D_R = 20 \times 1{,}0 = \mathbf{20\text{ m}}$.</p>
+                <p>• 8.2 : $D_{A,\text{sec}} = 20 + 20 = \mathbf{40\text{ m}}$.</p>
+                <p>• 8.3 : $D_{A,\text{pluie}} = 20 + 40 = \mathbf{60\text{ m}}$.</p>
+                <p>• 8.4 : La distance d'arrêt augmente de 50 % sous la pluie : il faut impérativement **réduire sa vitesse et allonger les distances de sécurité**.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Équilibre d'un Solide CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #16a34a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 5 CAP • Sciences Physiques &amp; Chimiques</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Équilibre d'un Solide</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Table à Forces &amp; Équilibre à 3 Forces</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : table à forces réelle graduée à poulies ou simulateur vectoriel Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Table à Forces &amp; Poulies)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Table à Forces Virtuelle &amp; Dynamique 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Précautions de Manipulation
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• Vérifier le serrage des vis moletées des poulies sur le bord de la table.</li>
+                        <li>• Ne pas laisser tomber les masses marquées sur les pieds.</li>
+                        <li>• Retirer délicatement la goupille centrale sans à-coup.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-notch text-emerald-500"></i> Table à Forces 360°
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-ring text-amber-500"></i> Anneau Central + 3 Fils
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-gear text-sky-500"></i> 3 Poulies à Faible Frottement
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-cubes-stacked text-purple-500"></i> 3 Jeux de Masses
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Horizontalité de la Table :</strong>
+                            Régler les vis calantes sous la table pour que la bulle du niveau soit parfaitement au centre.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Positionnement des 2 Premières Forces :</strong>
+                            Placer la poulie 1 à l'angle $\theta_1 = 0^\circ$ avec $m_1 = 150\text{ g}$ ($F_1 = 1{,}5\text{ N}$) et la poulie 2 à $\theta_2 = 120^\circ$ avec $m_2 = 150\text{ g}$ ($F_2 = 1{,}5\text{ N}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Recherche de l'Équilibre avec la 3e Poulie :</strong>
+                            Déplacer la 3e poulie et ajuster la masse $m_3$ jusqu'à ce que l'anneau central flotte parfaitement au milieu de la tige de centrage sans la toucher.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Relevé des Angles et des Intensités :</strong>
+                            Noter l'angle $\theta_3$ ($240^\circ$) et l'intensité $F_3$ correspondante ($1{,}5\text{ N}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Tracé du Dynamique des Forces :</strong>
+                            Tracer sur feuille les 3 vecteurs forces mis bout à bout ($\vec{F}_1$, puis $\vec{F}_2$, puis $\vec{F}_3$) à l'échelle $1\text{ cm} \leftrightarrow 0{,}5\text{ N}$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation de la Fermeture :</strong>
+                            Constater que le dynamique forme un triangle équilatéral fermé, validant $\vec{F}_1 + \vec{F}_2 + \vec{F}_3 = \vec{0}$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau de Relevé Expérimental des 3 Forces
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Force Appliquée</th>
+                                <th class="p-3 font-bold border border-slate-200">Masse Suspendue $m$</th>
+                                <th class="p-3 font-bold border border-slate-200">Intensité $F = m \times g$ (N)</th>
+                                <th class="p-3 font-bold border border-slate-200">Angle Mesuré $\theta$ (°)</th>
+                                <th class="p-3 font-bold border border-slate-200">Longueur Vecteur (1 cm = 0,5 N)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Force $\vec{F}_1$</td>
+                                <td class="p-3 font-mono font-bold">150 g (0,150 kg)</td>
+                                <td class="p-3 font-mono font-bold text-emerald-600">1,50 N</td>
+                                <td class="p-3 font-mono font-bold">0°</td>
+                                <td class="p-3 font-mono font-bold text-sky-600">3,0 cm</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Force $\vec{F}_2$</td>
+                                <td class="p-3 font-mono font-bold">150 g (0,150 kg)</td>
+                                <td class="p-3 font-mono font-bold text-emerald-600">1,50 N</td>
+                                <td class="p-3 font-mono font-bold">120°</td>
+                                <td class="p-3 font-mono font-bold text-sky-600">3,0 cm</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Force $\vec{F}_3$ (Équilibre)</td>
+                                <td class="p-3"><input type="number" id="m-3-input" placeholder="ex: 150" oninput="checkRealEquil()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold text-purple-600" id="f-3-calc">-- N</td>
+                                <td class="p-3"><input type="number" id="th-3-input" placeholder="ex: 240" oninput="checkRealEquil()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold text-sky-600" id="l-3-calc">-- cm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-equil-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Banc d'Équilibre Statique Vectoriel 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Interactif de Table à Forces</h2>
+                    </div>
+                    <!-- Statut Équilibre Badge -->
+                    <div id="sim-status-badge" class="bg-emerald-950 border border-emerald-500 text-emerald-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> ÉQUILIBRE PARFAIT (F1 + F2 + F3 = 0)
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Force Table Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE POLAIRE 360° &amp; TRIANGLE DES FORCES</span>
+                            <span id="sim-angles-info">F1: 2.0 N (0°) | F2: 2.0 N (120°) | F3: 2.0 N (240°)</span>
+                        </div>
+                        <canvas id="tableCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Sliders Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Angle de la Force F2 (de 60° à 180°)</label>
+                                <input type="range" id="sim-angle-f2" min="60" max="180" step="5" value="120" oninput="updateSimTable()" class="w-full accent-amber-500">
+                                <span class="font-mono text-amber-300 font-bold" id="val-sim-ang2">Angle F2 = 120°</span>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Intensité Force F1 &amp; F2 (N)</label>
+                                <input type="range" id="sim-force-val" min="1" max="4" step="0.5" value="2" oninput="updateSimTable()" class="w-full accent-emerald-500">
+                                <span class="font-mono text-emerald-300 font-bold" id="val-sim-f1">F1 = F2 = 2.0 N</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">FORCE D'ÉQUILIBRE REQUISE F3</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Intensité F3 Calculée</span>
+                            <span class="text-2xl font-bold font-mono text-purple-400" id="sim-f3-digital">2.00 N</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Angle Optimal θ3</span>
+                            <span class="text-2xl font-bold font-mono text-sky-400" id="sim-th3-digital">240.0°</span>
+                        </div>
+
+                        <div id="sim-vector-box" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            DYNAMIQUE VECTORIEL FERMÉ
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Calculer la Force d'Équilibre à 90°
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Deux forces perpendiculaires ($\alpha = 90^\circ$) tirent sur un anneau : $F_1 = 3{,}0\text{ N}$ (vers l'Est) et $F_2 = 4{,}0\text{ N}$ (vers le Nord). Quelle doit être l'intensité de la 3e force $F_3$ pour maintenir l'anneau en équilibre statique ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="0.1" id="user-f3-guess" placeholder="Entrer la force F3 en Newtons (ex: 5.0)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessTable()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Force F3
+                    </button>
+                </div>
+                <div id="guess-result-table" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initTableCanvas();
+            }
+        }
+
+        function checkRealEquil() {
+            const m3 = parseFloat(document.getElementById('m-3-input').value);
+            const th3 = parseFloat(document.getElementById('th-3-input').value);
+            const status = document.getElementById('real-equil-status');
+
+            if (m3 > 0) {
+                const f3 = (m3 / 1000) * 10;
+                document.getElementById('f-3-calc').innerText = f3.toFixed(2) + " N";
+                document.getElementById('l-3-calc').innerText = (f3 / 0.5).toFixed(1) + " cm";
+            }
+
+            status.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900');
+            if (m3 >= 140 && m3 <= 160 && th3 >= 235 && th3 <= 245) {
+                status.classList.add('bg-emerald-100', 'text-emerald-900');
+                status.innerHTML = "🎉 Équilibre parfait validé ! La 3e force F3 = 1,5 N à 240° compense exactement F1 et F2.";
+            }
+        }
+
+        let canvas, ctx;
+        let fVal = 2.0;
+        let ang2Deg = 120;
+
+        function initTableCanvas() {
+            canvas = document.getElementById('tableCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            updateSimTable();
+            requestAnimationFrame(drawTable);
+        }
+
+        function updateSimTable() {
+            ang2Deg = parseFloat(document.getElementById('sim-angle-f2').value);
+            fVal = parseFloat(document.getElementById('sim-force-val').value);
+
+            document.getElementById('val-sim-ang2').innerText = `Angle F2 = ${ang2Deg}°`;
+            document.getElementById('val-sim-f1').innerText = `F1 = F2 = ${fVal.toFixed(1)} N`;
+
+            // Calculate Resultant R of F1 (at 0 deg) and F2 (at ang2Deg)
+            const rad2 = (ang2Deg * Math.PI) / 180;
+            const rx = fVal * 1 + fVal * Math.cos(rad2);
+            const ry = 0 + fVal * Math.sin(rad2);
+
+            const rMag = Math.sqrt(rx * rx + ry * ry);
+            const rAngRad = Math.atan2(ry, rx);
+
+            // Equilibrating force F3 = -R
+            const f3Mag = rMag;
+            let f3AngDeg = ((rAngRad + Math.PI) * 180) / Math.PI;
+            if (f3AngDeg < 0) f3AngDeg += 360;
+
+            document.getElementById('sim-f3-digital').innerText = f3Mag.toFixed(2) + " N";
+            document.getElementById('sim-th3-digital').innerText = f3AngDeg.toFixed(1) + "°";
+            document.getElementById('sim-angles-info').innerText = `F1: ${fVal.toFixed(1)}N (0°) | F2: ${fVal.toFixed(1)}N (${ang2Deg}°) | F3: ${f3Mag.toFixed(1)}N (${f3AngDeg.toFixed(0)}°)`;
+        }
+
+        function drawTable() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const cx = 150;
+            const cy = 130;
+            const radius = 90;
+
+            // Force Table Circle
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Polar markings
+            ctx.fillStyle = '#64748b';
+            ctx.font = '8px monospace';
+            ctx.fillText("0°", cx + radius + 4, cy + 3);
+            ctx.fillText("90°", cx - 6, cy - radius - 4);
+            ctx.fillText("180°", cx - radius - 24, cy + 3);
+            ctx.fillText("270°", cx - 8, cy + radius + 12);
+
+            // Central Pin & Ring
+            ctx.fillStyle = '#0284c7';
+            ctx.beginPath();
+            ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+            ctx.stroke();
+
+            const scale = 25; // 25 px per Newton
+
+            // Vector F1 (0 deg)
+            drawVector(cx, cy, fVal * scale, 0, '#10b981', 'F1');
+
+            // Vector F2 (ang2Deg)
+            const rad2 = (ang2Deg * Math.PI) / 180;
+            drawVector(cx, cy, fVal * scale, -rad2, '#f59e0b', 'F2');
+
+            // Vector F3 (Equilibrating)
+            const rx = fVal * 1 + fVal * Math.cos(rad2);
+            const ry = 0 + fVal * Math.sin(rad2);
+            const rMag = Math.sqrt(rx * rx + ry * ry);
+            const rAngRad = Math.atan2(ry, rx);
+            const f3Rad = rAngRad + Math.PI;
+            drawVector(cx, cy, rMag * scale, -f3Rad, '#c084fc', 'F3');
+
+            // Right side: Draw Triangle of forces (Dynamique)
+            const tx = 380;
+            const ty = 140;
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 11px monospace';
+            ctx.fillText("TRIANGLE DES FORCES FERMÉ", tx - 20, 35);
+
+            // F1
+            const p1x = tx;
+            const p1y = ty;
+            const p2x = p1x + fVal * scale;
+            const p2y = p1y;
+            drawArrow(p1x, p1y, p2x, p2y, '#10b981');
+
+            // F2
+            const p3x = p2x + (fVal * scale) * Math.cos(-rad2);
+            const p3y = p2y + (fVal * scale) * Math.sin(-rad2);
+            drawArrow(p2x, p2y, p3x, p3y, '#f59e0b');
+
+            // F3 closing to p1
+            drawArrow(p3x, p3y, p1x, p1y, '#c084fc');
+
+            requestAnimationFrame(drawTable);
+        }
+
+        function drawVector(x, y, len, angleRad, color, label) {
+            const ex = x + len * Math.cos(angleRad);
+            const ey = y + len * Math.sin(angleRad);
+            drawArrow(x, y, ex, ey, color);
+            ctx.fillStyle = color;
+            ctx.font = 'bold 10px monospace';
+            ctx.fillText(label, ex + 6, ey + 4);
+        }
+
+        function drawArrow(fromx, fromy, tox, toy, color) {
+            const headlen = 8;
+            const angle = Math.atan2(toy - fromy, tox - fromx);
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(fromx, fromy);
+            ctx.lineTo(tox, toy);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(tox, toy);
+            ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function checkGuessTable() {
+            const ans = parseFloat(document.getElementById('user-f3-guess').value);
+            // F3 = sqrt(3^2 + 4^2) = 5.0 N
+            const target = 5.0;
+            const res = document.getElementById('guess-result-table');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Exact ! Par Pythagore : F3 = √(3² + 4²) = √(9 + 16) = √25 = 5,0 N.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Indice : Les deux forces étant perpendiculaires, appliquez le théorème de Pythagore : F3 = √(F1² + F2²).";
+            }
+        }
+    </script>
+</body>
+</html>

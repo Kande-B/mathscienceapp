@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Modèles Moléculaires & Atomes (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 1 • 3ème Prépa-Métiers (Cycle 4)</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Constitution de la Matière &amp; Modèle de l'Atome</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-flask"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Construction d'Atomes &amp; Molécules</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Manipulez la boîte de modèles moléculaires réels ou construisez des atomes dans le simulateur Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Modèles Moléculaires)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Constructeur d'Atomes 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Matériel Réel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-emerald-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-palette text-emerald-600"></i> Code Couleur des Atomes
+                    </h3>
+                    <ul class="space-y-2 text-emerald-950 font-medium">
+                        <li>• ⚪ **Blanc** : Hydrogène ($\text{H}$) - 1 liaison</li>
+                        <li>• ⚫ **Noir** : Carbone ($\text{C}$) - 4 liaisons</li>
+                        <li>• 🔴 **Rouge** : Oxygène ($\text{O}$) - 2 liaisons</li>
+                        <li>• 🔵 **Bleu** : Azote ($\text{N}$) - 3 liaisons</li>
+                        <li>• 🟢 **Vert** : Chlore ($\text{Cl}$) - 1 liaison</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-cubes text-emerald-500"></i> Boîte Modèles 3D
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-link text-sky-500"></i> Tiges de Liaison
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-wrench text-amber-500"></i> Extracteur de Tiges
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-table text-purple-500"></i> Classification Périodique
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole d'Assemblage en 5 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Molécule de Dioxygène (O₂) :</strong>
+                            Prendre 2 boules rouges (Oxygène) et les relier avec 2 tiges souples pour former une **double liaison**.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Molécule d'Eau (H₂O) :</strong>
+                            Prendre 1 boule rouge (Oxygène) et fixer 2 boules blanches (Hydrogène) avec des tiges simples pour former un coude à $105^\circ$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Molécule de Dioxyde de Carbone (CO₂) :</strong>
+                            Prendre 1 boule noire (Carbone) centrale et la relier à 2 boules rouges (Oxygène) par deux doubles liaisons rectilignes.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Molécule de Méthane (CH₄) :</strong>
+                            Prendre 1 boule noire tétraédrique et fixer 4 boules blanches (Hydrogène).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation &amp; Rangement :</strong>
+                            Vérifier qu'aucun trou n'est resté vide sur les boules assemblées et ranger les modèles dans les alvéoles de la boîte.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Constructeur d'Atomes Interactif 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Atomique &amp; Nuage Électronique</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-emerald-950 border border-emerald-500 text-emerald-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-atom text-emerald-400 mr-1.5"></i> SIMULATEUR ACTIF
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Atom Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE MICROSCOPIQUE DE L'ATOME</span>
+                            <span id="sim-atom-name">Élément : Hydrogène (H)</span>
+                        </div>
+                        <canvas id="atomCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Controls -->
+                        <div class="grid grid-cols-3 gap-2 text-xs">
+                            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-center">
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold text-red-400">Protons (+)</label>
+                                <div class="flex items-center justify-center gap-2 mt-1">
+                                    <button onclick="changeParticle('p', -1)" class="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded font-bold">-</button>
+                                    <span id="count-p" class="font-mono font-bold text-red-400 text-sm">1</span>
+                                    <button onclick="changeParticle('p', 1)" class="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded font-bold">+</button>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-center">
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold text-slate-300">Neutrons (0)</label>
+                                <div class="flex items-center justify-center gap-2 mt-1">
+                                    <button onclick="changeParticle('n', -1)" class="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded font-bold">-</button>
+                                    <span id="count-n" class="font-mono font-bold text-slate-300 text-sm">0</span>
+                                    <button onclick="changeParticle('n', 1)" class="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded font-bold">+</button>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 text-center">
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold text-sky-400">Électrons (-)</label>
+                                <div class="flex items-center justify-center gap-2 mt-1">
+                                    <button onclick="changeParticle('e', -1)" class="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded font-bold">-</button>
+                                    <span id="count-e" class="font-mono font-bold text-sky-400 text-sm">1</span>
+                                    <button onclick="changeParticle('e', 1)" class="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">PROPRIÉTÉS ÉLECTRIQUES</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Symbole &amp; Numéro Z</span>
+                            <span class="text-3xl font-bold font-mono text-emerald-400" id="atom-symbol-lcd">H (Z=1)</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Charge Nette Globale</span>
+                            <span class="text-xl font-bold font-mono text-white" id="charge-lcd">Neutre (0)</span>
+                        </div>
+
+                        <div id="neutral-badge" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            ATOME NEUTRE (PROTONS = ÉLECTRONS)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Construire l'Atome de Carbone Neutre
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Ajustez les particules dans le simulateur ci-dessus pour obtenir un **atome neutre de Carbone** ($Z=6$, 6 neutrons). Cliquez ensuite sur le bouton de vérification.
+                </p>
+                <button onclick="checkCarbonChallenge()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all">
+                    Vérifier l'Atome de Carbone
+                </button>
+                <div id="carbon-result" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR ATOMIQUE CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initAtomCanvas();
+            }
+        }
+
+        let numP = 1, numN = 0, numE = 1;
+        let atomCanvas, atomCtx;
+        let angle = 0;
+
+        const elements = [
+            { z: 1, name: "Hydrogène", sym: "H" },
+            { z: 2, name: "Hélium", sym: "He" },
+            { z: 3, name: "Lithium", sym: "Li" },
+            { z: 4, name: "Béryllium", sym: "Be" },
+            { z: 5, name: "Bore", sym: "B" },
+            { z: 6, name: "Carbone", sym: "C" },
+            { z: 7, name: "Azote", sym: "N" },
+            { z: 8, name: "Oxygène", sym: "O" },
+            { z: 9, name: "Fluor", sym: "F" },
+            { z: 10, name: "Néon", sym: "Ne" },
+            { z: 11, name: "Sodium", sym: "Na" },
+            { z: 12, name: "Magnésium", sym: "Mg" },
+            { z: 13, name: "Aluminium", sym: "Al" }
+        ];
+
+        function changeParticle(type, delta) {
+            if (type === 'p') numP = Math.max(1, Math.min(13, numP + delta));
+            if (type === 'n') numN = Math.max(0, Math.min(14, numN + delta));
+            if (type === 'e') numE = Math.max(0, Math.min(14, numE + delta));
+            updateAtomUI();
+        }
+
+        function updateAtomUI() {
+            document.getElementById('count-p').innerText = numP;
+            document.getElementById('count-n').innerText = numN;
+            document.getElementById('count-e').innerText = numE;
+
+            const elem = elements.find(e => e.z === numP) || { name: "Élément Inconnu", sym: "?" };
+            document.getElementById('sim-atom-name').innerText = `Élément : ${elem.name} (${elem.sym})`;
+            document.getElementById('atom-symbol-lcd').innerText = `${elem.sym} (Z=${numP})`;
+
+            const netCharge = numP - numE;
+            const chargeLcd = document.getElementById('charge-lcd');
+            const neutralBadge = document.getElementById('neutral-badge');
+
+            if (netCharge === 0) {
+                chargeLcd.innerText = "Neutre (0)";
+                chargeLcd.className = "text-xl font-bold font-mono text-emerald-400";
+                neutralBadge.className = "w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400";
+                neutralBadge.innerText = "ATOME NEUTRE (PROTONS = ÉLECTRONS)";
+            } else if (netCharge > 0) {
+                chargeLcd.innerText = `Cation (+${netCharge})`;
+                chargeLcd.className = "text-xl font-bold font-mono text-amber-400";
+                neutralBadge.className = "w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-amber-950/40 border-amber-500 text-amber-400";
+                neutralBadge.innerText = `ION POSITIF (CATION +${netCharge})`;
+            } else {
+                chargeLcd.innerText = `Anion (${netCharge})`;
+                chargeLcd.className = "text-xl font-bold font-mono text-sky-400";
+                neutralBadge.className = "w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-sky-950/40 border-sky-500 text-sky-400";
+                neutralBadge.innerText = `ION NÉGATIF (ANION ${netCharge})`;
+            }
+        }
+
+        function initAtomCanvas() {
+            atomCanvas = document.getElementById('atomCanvas');
+            if (!atomCanvas) return;
+            atomCtx = atomCanvas.getContext('2d');
+            updateAtomUI();
+            requestAnimationFrame(drawAtomSim);
+        }
+
+        function drawAtomSim() {
+            if (!atomCanvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            atomCtx.fillStyle = '#0f172a';
+            atomCtx.fillRect(0, 0, atomCanvas.width, atomCanvas.height);
+
+            const cx = atomCanvas.width / 2;
+            const cy = atomCanvas.height / 2;
+
+            // Draw Central Nucleus
+            atomCtx.fillStyle = 'rgba(239, 68, 68, 0.2)';
+            atomCtx.beginPath();
+            atomCtx.arc(cx, cy, 25, 0, Math.PI * 2);
+            atomCtx.fill();
+
+            // Draw Protons & Neutrons clustered
+            for (let i = 0; i < numP; i++) {
+                const a = (i / numP) * Math.PI * 2;
+                const r = Math.min(15, numP * 1.5);
+                atomCtx.fillStyle = '#ef4444';
+                atomCtx.beginPath();
+                atomCtx.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 5, 0, Math.PI * 2);
+                atomCtx.fill();
+            }
+
+            for (let i = 0; i < numN; i++) {
+                const a = (i / (numN || 1)) * Math.PI * 2 + 0.5;
+                const r = Math.min(10, numN * 1.2);
+                atomCtx.fillStyle = '#94a3b8';
+                atomCtx.beginPath();
+                atomCtx.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 4.5, 0, Math.PI * 2);
+                atomCtx.fill();
+            }
+
+            // Draw Electron Orbits
+            atomCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+            atomCtx.lineWidth = 1;
+            atomCtx.beginPath();
+            atomCtx.arc(cx, cy, 60, 0, Math.PI * 2);
+            atomCtx.stroke();
+
+            if (numE > 2) {
+                atomCtx.beginPath();
+                atomCtx.arc(cx, cy, 95, 0, Math.PI * 2);
+                atomCtx.stroke();
+            }
+
+            // Draw Electrons revolving
+            angle += 0.03;
+            for (let i = 0; i < numE; i++) {
+                const orbitR = i < 2 ? 60 : 95;
+                const orbitAngle = angle + (i * (Math.PI * 2 / numE));
+                const ex = cx + Math.cos(orbitAngle) * orbitR;
+                const ey = cy + Math.sin(orbitAngle) * orbitR;
+
+                atomCtx.fillStyle = '#38bdf8';
+                atomCtx.beginPath();
+                atomCtx.arc(ex, ey, 4, 0, Math.PI * 2);
+                atomCtx.fill();
+            }
+
+            requestAnimationFrame(drawAtomSim);
+        }
+
+        function checkCarbonChallenge() {
+            const res = document.getElementById('carbon-result');
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (numP === 6 && numN === 6 && numE === 6) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerHTML = "🎉 Bravo ! Vous avez parfaitement assemblé l'atome neutre de Carbone : $Z=6$ (6 protons), 6 neutrons et 6 électrons.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerHTML = "❌ Pas tout à fait. Pour le carbone neutre : 6 protons, 6 neutrons et 6 électrons. Ajustez les boutons.";
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([res]);
+            }
+        }
+    </script>
+</body>
+</html>

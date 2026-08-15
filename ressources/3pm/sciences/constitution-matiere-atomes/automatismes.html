@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Constitution de la Matière & Atomes (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-atom text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 1 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Constitution de la Matière &amp; Modèle de l'Atome</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes : Atomes, Molécules &amp; Matière</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Modèle de l'atome, protons, neutrons, électrons, symboles chimiques et neutralité électrique.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-emerald-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Modèle de l'Atome</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-atom text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">De quoi est composé un atome et où se situe sa masse ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Noyau + Électrons</span>
+                            <div class="my-auto space-y-1 text-xs text-emerald-300 font-bold">
+                                <p>• **Noyau central** : Protons (+) et Neutrons (0).</p>
+                                <p>• **Nuage électronique** : Électrons (-).</p>
+                                <p class="text-slate-300 font-normal">Quasi toute la masse est concentrée dans le **noyau**.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Neutralité Électrique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-scale-balanced text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Pourquoi un atome isolé est-il électriquement neutre ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Autant de + que de -</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p>Un atome possède **exactement le même nombre de protons (+)** dans son noyau que d'**électrons (-)** dans son nuage.</p>
+                                <p class="text-slate-300 font-normal">Charge totale = $0$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Structure Lacunaire</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-circle-dot text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Que trouve-t-on entre le noyau et les électrons d'un atome ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Du Vide !</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p>L'atome est constitué **essentiellement de vide**.</p>
+                                <p class="text-slate-300 font-normal">L'atome ($10^{-10}\text{ m}$) est 100 000 fois plus grand que son noyau ($10^{-15}\text{ m}$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Symboles des Éléments</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-table-cells text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quels sont les symboles du Carbone, de l'Oxygène, du Fer et du Cuivre ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">C, O, Fe, Cu</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p>• Carbone : $\text{C}$ | Oxygène : $\text{O}$</p>
+                                <p>• Fer : $\text{Fe}$ | Cuivre : $\text{Cu}$</p>
+                                <p class="text-slate-300 font-normal">Hydrogène : $\text{H}$ | Azote : $\text{N}$ | Chlore : $\text{Cl}$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Molécules &amp; Formules</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-dna text-4xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">De quoi est constituée une molécule de dioxyde de carbone $\text{CO}_2$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">1 C + 2 O</span>
+                            <div class="my-auto space-y-1 text-xs text-indigo-300 font-bold">
+                                <p>• **1 atome de carbone ($\text{C}$)**</p>
+                                <p>• **2 atomes d'oxygène ($\text{O}$)**</p>
+                                <p class="text-slate-300 font-normal">Liés ensemble par des liaisons chimiques.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Corps Pur vs Mélange</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-vials text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">L'air que nous respirons est-il un corps pur ou un mélange ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Un Mélange de Gaz</span>
+                            <div class="my-auto space-y-1 text-xs text-red-300 font-bold">
+                                <p>L'air est un **mélange homogène** composé d'environ :</p>
+                                <p>• **$78\%$ de diazote ($\text{N}_2$)**</p>
+                                <p>• **$21\%$ de dioxygène ($\text{O}_2$)**</p>
+                                <p class="text-slate-300 font-normal">et $1\%$ d'autres gaz (argon, $\text{CO}_2$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Test de Mémorisation</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes 3PM (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-emerald-100 text-emerald-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-emerald-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-emerald-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "Dans un atome, quelles particules portent une charge électrique positive ?",
+                options: ["Les électrons", "Les protons", "Les neutrons", "Les molécules"],
+                correct: 1,
+                explanation: "Les **protons** situés dans le noyau portent la charge électrique positive $+e$."
+            },
+            {
+                id: 2,
+                q: "Un atome d'aluminium possède 13 protons. Combien possède-t-il d'électrons ?",
+                options: ["26 électrons", "0 électron", "13 électrons", "14 électrons"],
+                correct: 2,
+                explanation: "L'atome étant électriquement neutre, il possède autant d'électrons que de protons (13)."
+            },
+            {
+                id: 3,
+                q: "Quel est le symbole chimique du Fer ?",
+                options: ["F", "Fe", "Fr", "Fo"],
+                correct: 1,
+                explanation: "Le symbole chimique du Fer est **Fe** (F étant le fluor)."
+            },
+            {
+                id: 4,
+                q: "Quelle est la composition de la molécule d'eau H₂O ?",
+                options: ["2 atomes d'oxygène et 1 atome d'hydrogène", "2 atomes d'hydrogène et 1 atome d'oxygène", "1 atome d'hélium et 2 atomes d'oxygène", "2 atomes de carbone"],
+                correct: 1,
+                explanation: "$\text{H}_2\text{O}$ est formée de **2 atomes d'hydrogène (H)** et **1 atome d'oxygène (O)**."
+            },
+            {
+                id: 5,
+                q: "L'eau minérale en bouteille est :",
+                options: ["Un corps pur simple", "Un mélange hétérogène", "Un mélange homogène", "Un gaz"],
+                correct: 2,
+                explanation: "L'eau minérale contient de l'eau et des minéraux dissous invisibles à l'œil nu : c'est un **mélange homogène**."
+            },
+            {
+                id: 6,
+                q: "Que représente le numéro atomique Z d'un élément chimique ?",
+                options: ["Le nombre de neutrons", "La masse en grammes", "Le nombre de protons dans le noyau", "Le nombre de molécules"],
+                correct: 2,
+                explanation: "$Z$ est le **numéro atomique** : il donne le nombre de protons du noyau."
+            },
+            {
+                id: 7,
+                q: "Quel gaz est le constituant majoritaire de l'air à environ 78 % ?",
+                options: ["Le dioxygène (O₂)", "Le diazote (N₂)", "Le dioxyde de carbone (CO₂)", "L'hélium"],
+                correct: 1,
+                explanation: "L'air contient environ **$78\%$ de diazote ($\text{N}_2$)** et $21\%$ de dioxygène ($\text{O}_2$)."
+            },
+            {
+                id: 8,
+                q: "Pourquoi dit-on que l'atome a une structure lacunaire ?",
+                options: ["Car il est très dense", "Car il est constitué essentiellement de vide entre le noyau et les électrons", "Car il ne pèse rien", "Car il est solide"],
+                correct: 1,
+                explanation: "La structure est lacunaire car il n'y a que du **vide** entre le minuscule noyau et les électrons."
+            },
+            {
+                id: 9,
+                q: "Quel est le symbole chimique du Cuivre utilisé en plomberie et électricité ?",
+                options: ["C", "Co", "Cu", "Cr"],
+                correct: 2,
+                explanation: "Le symbole chimique du cuivre est **Cu**."
+            },
+            {
+                id: 10,
+                q: "Quel est le nom de la molécule de formule CH₄ (gaz naturel) ?",
+                options: ["Le propane", "Le méthane", "Le butane", "L'éthanol"],
+                correct: 1,
+                explanation: "$\text{CH}_4$ (1 carbone et 4 hydrogènes) est la molécule de **méthane**."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-emerald-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement la constitution de la matière, le modèle de l'atome et les molécules !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions clés sont acquises. Pensez à réviser la composition de l'air et la structure lacunaire.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et réentraînez-vous sur les symboles chimiques et les particules de l'atome.";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Signaux Sonores & Lumineux (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 8 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Signaux Sonores &amp; Lumineux pour Communiquer</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome &amp; Préparation DNB Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices gradués sur la propagation du son ($340\text{ m/s}$), de la lumière ($300\,000\text{ km/s}$), l'écho et les décibels.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices d'application</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Éloignement d'un Orage
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Formule d = v * t)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Pendant un orage, un observateur aperçoit l'éclair lumineux instantanément. Le grondement du tonnerre lui parvient $\Delta t = 5\text{ secondes}$ plus tard.<br>
+                Sachant que la vitesse du son dans l'air est $v_{\text{son}} = 340\text{ m/s}$, calculer la distance $d$ de l'impact en mètres puis en kilomètres.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>$d = v \times t = 340 \times 5 = \mathbf{1700\text{ mètres}} = \mathbf{1{,}7\text{ km}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Trajet de la Lumière Soleil-Terre
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Vitesse de la lumière c)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                La distance moyenne entre la Terre et le Soleil est d'environ $d = 150\,000\,000\text{ km}$. La lumière se déplace à $c = 300\,000\text{ km/s}$.<br>
+                2.1. Calculer le temps $t$ en secondes nécessaire à un rayon solaire pour parvenir sur Terre ($t = \frac{d}{c}$).<br>
+                2.2. Exprimer cette durée en minutes et secondes.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• 2.1 : $t = \frac{150\,000\,000}{300\,000} = \mathbf{500\text{ secondes}}$.</p>
+                <p>• 2.2 : $500 = (8 \times 60) + 20 \implies \mathbf{8\text{ minutes et } 20\text{ secondes}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Sondeur Bathymétrique Marin (Écho)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Formule d'écho)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le sonar d'un chalutier émet une onde ultrasonore vers le fond marin. Dans l'eau de mer, la vitesse du son est $v_{\text{eau}} = 1500\text{ m/s}$. L'écho est capté par le récepteur après une durée d'aller-retour $\Delta t = 0{,}080\text{ s}$.<br>
+                Calculer la profondeur $p$ sous le bateau ($p = \frac{v \times \Delta t}{2}$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>$p = \frac{1500 \times 0{,}080}{2} = \frac{120}{2} = \mathbf{60\text{ mètres}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Classification des Fréquences Sonores
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Plage d'audibilité)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Classer les sons suivants en 3 groupes (Infrasons, Sons Audibles, Ultrasons) :<br>
+                a) $f_1 = 12\text{ Hz}$ • b) $f_2 = 440\text{ Hz}$ (La musical) • c) $f_3 = 3500\text{ Hz}$ • d) $f_4 = 40\,000\text{ Hz}$ (sonar) • e) $f_5 = 150\text{ kHz}$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• **Infrasons** (&lt; 20 Hz) : a) $12\text{ Hz}$.</p>
+                <p>• **Sons Audibles** (20 à 20 000 Hz) : b) $440\text{ Hz}$ et c) $3500\text{ Hz}$.</p>
+                <p>• **Ultrasons** (&gt; 20 000 Hz) : d) $40\,000\text{ Hz}$ et e) $150\text{ kHz}$ ($150\,000\text{ Hz}$).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Atténuation par Casque Antibruit
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Décibels & Sécurité)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un marteau-piqueur émet un niveau d'intensité sonore $L = 104\text{ dB}$. Un ouvrier utilise un casque antibruit avec une atténuation acoustique certifiée de $25\text{ dB}$.<br>
+                5.1. Quel niveau sonore $L_{\text{perçu}}$ parvient aux tympans de l'ouvrier ?<br>
+                5.2. Comparer ce niveau au seuil de danger ($85\text{ dB}$) et conclure sur l'efficacité de la protection.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : $L_{\text{perçu}} = 104 - 25 = \mathbf{79\text{ dB}}$.</p>
+                <p>• 5.2 : Comme $79\text{ dB} < 85\text{ dB}$ (seuil de danger), le casque protège parfaitement l'audition de l'ouvrier.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Radar de Recul Automobile
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Ondes ultrasonores)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le capteur de recul d'une voiture émet des ultrasons ($v = 340\text{ m/s}$). L'écho réfléchi par un poteau arrière revient au bout de $\Delta t = 6\text{ ms} = 0{,}006\text{ s}$.<br>
+                Calculer la distance $d$ entre le pare-chocs et le poteau.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>$d = \frac{340 \times 0{,}006}{2} = \frac{2{,}04}{2} = \mathbf{1{,}02\text{ mètre}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Signal dans une Fibre Optique
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Transmission lumière)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une liaison internet par fibre optique relie deux datacenters distants de $d = 50\text{ km}$. La vitesse de l'onde lumineuse dans le verre est $v = 200\,000\text{ km/s}$.<br>
+                Calculer la latence $t$ de transmission en millisecondes ($1\text{ ms} = 0{,}001\text{ s}$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>$t = \frac{50}{200\,000} = 0{,}00025\text{ s} = \mathbf{0{,}25\text{ ms}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Diagnostic Acoustique & Télémétrie Laser (Type Brevet)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse Brevet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Dans une menuiserie industrielle :<br>
+                • Une scie circulaire émet $92\text{ dB}$ et une raboteuse émet $95\text{ dB}$.<br>
+                • Pour installer un capotage acoustique, un technicien utilise un télémètre laser ($c = 300\,000\text{ km/s} = 3 \times 10^8\text{ m/s}$) et mesure un temps d'aller-retour laser $\Delta t = 40\text{ nanosecondes} = 40 \times 10^{-9}\text{ s}$.<br>
+                8.1. Calculer la distance $d$ mesurée par le laser ($d = \frac{c \times \Delta t}{2}$).<br>
+                8.2. Indiquer les mesures de sécurité obligatoires pour les opérateurs travaillant à proximité des machines.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $d = \frac{3 \times 10^8 \times 40 \times 10^{-9}}{2} = \frac{12}{2} = \mathbf{6{,}0\text{ mètres}}$.</p>
+                <p>• 8.2 : 1) Port obligatoire de protecteurs individuels contre le bruit (casque ou bouchons moulés). 2) Affichage du pictogramme de sécurité bleu "Protection auditive obligatoire".</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

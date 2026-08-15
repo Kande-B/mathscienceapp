@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Solutions Aqueuses, Acides & pH CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #16a34a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 2 CAP • Sciences Physiques &amp; Chimiques</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Solutions Aqueuses, Acides &amp; pH</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Mesure de pH &amp; Dilution de Solutions</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : banc de pH-mètre de paillasse réelle ou simulateur digital de titrage/dilution HTML5 Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo CAP)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : pH-mètre Virtuel &amp; Dilution HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Consignes d'Urgence
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• Lunettes de protection étanches et blouse en coton fermée.</li>
+                        <li>• Ne pas toucher les électrodes en verre fragiles avec les doigts.</li>
+                        <li>• Rincer la sonde à l'eau distillée entre chaque mesure.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-[#1e293b] fa-vial-circle-check text-emerald-500"></i> pH-mètre Digital Étalonné
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-[#1e293b] fa-note-sticky text-amber-500"></i> Rouleau de Papier pH
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-vial text-sky-500"></i> 4 Solutions A, B, C, D
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-bottle-water text-purple-500"></i> Pissette Eau Distillée
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Rinçage de la Sonde :</strong>
+                            Rincer délicatement l'électrode du pH-mètre à l'eau distillée et l'essuyer avec un papier absorbant doux sans frotter.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Test au Papier pH :</strong>
+                            Déposer une goutte de chaque solution A, B, C, D sur un morceau de papier pH. Noter la couleur et déduire la plage de pH.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure Précise au pH-mètre :</strong>
+                            Immerger la sonde dans chaque bécher, attendre la stabilisation de la valeur numérique et relever le pH précis.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Dilution d'un Acide (Facteur 10) :</strong>
+                            Prlever $10\text{ mL}$ de la solution acide (solution A), les verser dans une fiole de $100\text{ mL}$ et compléter avec de l'eau distillée.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure du pH Dilué :</strong>
+                            Mesurer le pH de la solution diluée et vérifier l'augmentation de la valeur du pH vers 7.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Classement des Solutions :</strong>
+                            Classer les 4 solutions de la plus acide à la plus basique.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau de Relevé Métrologique des pH
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Échantillon Tested</th>
+                                <th class="p-3 font-bold border border-slate-200">Couleur Papier pH</th>
+                                <th class="p-3 font-bold border border-slate-200">pH Digital Mesuré</th>
+                                <th class="p-3 font-bold border border-slate-200">Nature de la Solution</th>
+                                <th class="p-3 font-bold border border-slate-200">Ion Dominant</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Solution A (Acide Chlorhydrique)</td>
+                                <td class="p-3 font-semibold text-red-600">Rouge Vif</td>
+                                <td class="p-3"><input type="number" step="0.1" id="ph-a" placeholder="ex: 1.8" oninput="checkRealpH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><select id="nat-a" onchange="checkRealpH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Choisir...</option><option value="acide">Fortement Acide</option><option value="basique">Basique</option></select></td>
+                                <td class="p-3 font-mono font-bold text-red-600">H+</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Solution B (Eau Distillée)</td>
+                                <td class="p-3 font-semibold text-emerald-600">Vert Clair</td>
+                                <td class="p-3"><input type="number" step="0.1" id="ph-b" placeholder="ex: 7.0" oninput="checkRealpH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><select id="nat-b" onchange="checkRealpH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Choisir...</option><option value="neutre">Neutre</option><option value="acide">Acide</option></select></td>
+                                <td class="p-3 font-mono font-bold text-emerald-600">H+ / HO- égaux</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Solution C (Lessive de Soude)</td>
+                                <td class="p-3 font-semibold text-blue-600">Bleu / Violet</td>
+                                <td class="p-3"><input type="number" step="0.1" id="ph-c" placeholder="ex: 12.5" oninput="checkRealpH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3"><select id="nat-c" onchange="checkRealpH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Choisir...</option><option value="basique">Fortement Basique</option><option value="neutre">Neutre</option></select></td>
+                                <td class="p-3 font-mono font-bold text-blue-600">HO-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-ph-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Banc de Chimie &amp; pH-mètre Digital 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur de pH, Dilution &amp; Neutralisation</h2>
+                    </div>
+                    <!-- Sélecteur de Solution Virtuelle -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-slate-300">Solution Initiale :</label>
+                        <select id="sim-sol-select" onchange="updateSimpH()" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-3 py-2 focus:ring-emerald-400">
+                            <option value="acide">Acide Chlorhydrique (pH 1,0)</option>
+                            <option value="citron">Jus de Citron (pH 2,5)</option>
+                            <option value="eau">Eau Pure Distillée (pH 7,0)</option>
+                            <option value="soude">Lessive de Soude (pH 13,0)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas pH Bench Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE PAILLASSE VIRTUELLE &amp; SONDE DE PH</span>
+                            <span id="sim-sol-info">Acide Chlorhydrique • pH 1.0</span>
+                        </div>
+                        <canvas id="phCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Ajout d'Eau Distillée (Dilution en mL)</label>
+                                <input type="range" id="sim-eau-vol" min="0" max="900" step="100" value="0" oninput="updateSimpH()" class="w-full accent-emerald-500">
+                                <span class="font-mono text-emerald-300 font-bold text-xs" id="val-sim-eau">+ 0 mL d'eau distillée</span>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Ajout de Base/Acide (Neutralisation)</label>
+                                <input type="range" id="sim-reactif-vol" min="0" max="100" step="10" value="0" oninput="updateSimpH()" class="w-full accent-amber-500">
+                                <span class="font-mono text-amber-300 font-bold text-xs" id="val-sim-react">+ 0 mL de réactif</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">AFFICHEUR DIGITAL DU PH</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Valeur du pH Mesuré</span>
+                            <span class="text-3xl font-bold font-mono text-emerald-400" id="sim-ph-digital">1.0</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Ion Dominant</span>
+                            <span class="text-xl font-bold font-mono text-red-400" id="sim-ion-dom">H+ (Acidité)</span>
+                        </div>
+
+                        <div id="sim-ph-nature" class="w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-red-950/40 border-red-500 text-red-400">
+                            SOLUTION FORTEMENT ACIDE
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Prédire le pH après Dilution au Facteur 100
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Une solution d'acide chlorhydrique a un $\text{pH} = 1{,}0$. Si on la dilue 100 fois avec de l'eau distillée, quelle sera la nouvelle valeur approximative du pH ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="1" id="user-ph-guess" placeholder="Entrer la valeur du pH (ex: 3)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuesspH()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider le pH
+                    </button>
+                </div>
+                <div id="guess-result-ph" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initpHCanvas();
+            }
+        }
+
+        function checkRealpH() {
+            const pa = parseFloat(document.getElementById('ph-a').value);
+            const pb = parseFloat(document.getElementById('ph-b').value);
+            const pc = parseFloat(document.getElementById('ph-c').value);
+            const na = document.getElementById('nat-a').value;
+            const status = document.getElementById('real-ph-status');
+
+            status.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-amber-100', 'text-amber-900');
+
+            if (pa < 3 && pb >= 6.8 && pb <= 7.2 && pc > 10 && na === 'acide') {
+                status.classList.add('bg-emerald-100', 'text-emerald-900');
+                status.innerHTML = "🎉 Relevés 100% conformes ! Solution A = Acide (pH < 7), Solution B = Eau neutre (pH = 7), Solution C = Soude basique (pH > 7).";
+            } else {
+                status.classList.add('bg-amber-100', 'text-amber-900');
+                status.innerHTML = "⚠️ Vérifiez vos valeurs : Acide A (pH ≈ 1-2), Eau B (pH ≈ 7), Soude C (pH ≈ 12-13).";
+            }
+        }
+
+        let canvas, ctx;
+
+        const solDB = {
+            acide: { name: "Acide Chlorhydrique", initpH: 1.0, nature: "ACIDE", ion: "H+ (Acidité)" },
+            citron: { name: "Jus de Citron", initpH: 2.5, nature: "ACIDE", ion: "H+ (Acidité)" },
+            eau: { name: "Eau Pure Distillée", initpH: 7.0, nature: "NEUTRE", ion: "H+ / HO- égaux" },
+            soude: { name: "Lessive de Soude", initpH: 13.0, nature: "BASIQUE", ion: "HO- (Basicité)" }
+        };
+
+        function initpHCanvas() {
+            canvas = document.getElementById('phCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawpH);
+            updateSimpH();
+        }
+
+        function updateSimpH() {
+            const sKey = document.getElementById('sim-sol-select').value;
+            const s = solDB[sKey];
+
+            const vEau = parseFloat(document.getElementById('sim-eau-vol').value);
+            const vReact = parseFloat(document.getElementById('sim-reactif-vol').value);
+
+            document.getElementById('val-sim-eau').innerText = `+ ${vEau} mL d'eau distillée`;
+            document.getElementById('val-sim-react').innerText = `+ ${vReact} mL de réactif`;
+
+            // Calculate new pH based on dilution and neutralization
+            let currentpH = s.initpH;
+
+            if (vEau > 0) {
+                // Dilution effect towards 7
+                if (currentpH < 7) {
+                    currentpH += (7 - currentpH) * (vEau / 1000) * 0.7;
+                } else if (currentpH > 7) {
+                    currentpH -= (currentpH - 7) * (vEau / 1000) * 0.7;
+                }
+            }
+
+            if (vReact > 0) {
+                // Neutralization effect
+                if (s.initpH < 7) currentpH += (vReact / 100) * 6; // Add base to acid
+                else if (s.initpH > 7) currentpH -= (vReact / 100) * 6; // Add acid to base
+            }
+
+            currentpH = Math.max(0.5, Math.min(13.8, currentpH));
+
+            document.getElementById('sim-sol-info').innerText = `${s.name} • pH ${currentpH.toFixed(1)}`;
+            document.getElementById('sim-ph-digital').innerText = currentpH.toFixed(1);
+
+            const natElem = document.getElementById('sim-ph-nature');
+            const ionElem = document.getElementById('sim-ion-dom');
+
+            if (currentpH < 6.5) {
+                natElem.innerText = "SOLUTION ACIDE";
+                natElem.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-red-950/40 border-red-500 text-red-400";
+                ionElem.innerText = "H+ (Acidité)";
+                ionElem.className = "text-xl font-bold font-mono text-red-400";
+            } else if (currentpH > 7.5) {
+                natElem.innerText = "SOLUTION BASIQUE";
+                natElem.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-blue-950/40 border-blue-500 text-blue-400";
+                ionElem.innerText = "HO- (Basicité)";
+                ionElem.className = "text-xl font-bold font-mono text-blue-400";
+            } else {
+                natElem.innerText = "SOLUTION NEUTRE";
+                natElem.className = "w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400";
+                ionElem.innerText = "H+ / HO- égaux";
+                ionElem.className = "text-xl font-bold font-mono text-emerald-400";
+            }
+        }
+
+        function drawpH() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const cx = canvas.width / 2;
+
+            // Draw Beaker Liquid
+            const currentpH = parseFloat(document.getElementById('sim-ph-digital').innerText);
+
+            let liquidColor = '#10b981'; // Green neutral 7
+            if (currentpH < 3) liquidColor = '#ef4444'; // Red strong acid
+            else if (currentpH < 6.5) liquidColor = '#f97316'; // Orange mild acid
+            else if (currentpH > 11) liquidColor = '#8b5cf6'; // Purple strong base
+            else if (currentpH > 7.5) liquidColor = '#3b82f6'; // Blue mild base
+
+            // Beaker
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(cx - 70, 100, 140, 130);
+
+            // Liquid fill
+            ctx.fillStyle = liquidColor;
+            ctx.globalAlpha = 0.75;
+            ctx.fillRect(cx - 66, 130, 132, 98);
+            ctx.globalAlpha = 1.0;
+
+            // pH Probe
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(cx - 8, 30, 16, 120);
+            ctx.fillStyle = '#38bdf8';
+            ctx.beginPath();
+            ctx.arc(cx, 150, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            // pH Meter Display Box on top right
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(canvas.width - 160, 20, 140, 60);
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(canvas.width - 160, 20, 140, 60);
+
+            ctx.fillStyle = '#34d399';
+            ctx.font = 'bold 24px monospace';
+            ctx.fillText("pH " + currentpH.toFixed(1), canvas.width - 140, 58);
+
+            requestAnimationFrame(drawpH);
+        }
+
+        function checkGuesspH() {
+            const ans = parseFloat(document.getElementById('user-ph-guess').value);
+            const target = 3; // pH increases by 2 units for dilution x100
+            const res = document.getElementById('guess-result-ph');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Exact ! Diluer 100 fois un acide de pH = 1 augmente son pH de 2 unités, amenant le nouveau pH à 3,0.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Indice : Chaque facteur 10 de dilution avec de l'eau augmente le pH de 1 unité. Facteur 100 = +2 unités.";
+            }
+        }
+    </script>
+</body>
+</html>

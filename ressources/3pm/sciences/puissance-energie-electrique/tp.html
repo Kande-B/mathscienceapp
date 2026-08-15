@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Puissance & Consommation (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #d97706;
+            color: white;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence 6 • 3ème Prépa-Métiers (Cycle 4)</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Puissance Électrique, Énergie &amp; Facture</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-flask"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Mesure de Puissance &amp; Consommation d'Énergie</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Manipulez le wattmètre et les appareils réels ou pilotez le simulateur Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Wattmètre Prise, Appareils &amp; Chronomètre)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel Compteur Linky 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Matériel Réel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-amber-50 border border-amber-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-plug-circle-bolt text-amber-600"></i> Sécurité 230 V
+                    </h3>
+                    <ul class="space-y-2 text-amber-950 font-medium">
+                        <li>• Ne jamais toucher les parties métalliques sous tension du secteur ($230\text{ V}$).</li>
+                        <li>• Utiliser une **prise wattmètre gigogne** sécurisée avec terre.</li>
+                        <li>• Éteindre l'appareil avant de le débrancher.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-amber-600"></i> Matériel Réel à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-amber-500"></i> Wattmètre Prise
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-mug-hot text-red-500"></i> Bouilloire 2000 W
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-wind text-sky-500"></i> Sèche-cheveux 2 vit.
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-emerald-500"></i> Lampe LED &amp; Halo
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-600"></i> Protocole Expérimental en 5 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Branchement du Wattmètre :</strong>
+                            Insérer le wattmètre dans la prise secteur $230\text{ V}$ et vérifier l'affichage initial de la tension ($U \approx 230\text{ V}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure de la Puissance Active (P) :</strong>
+                            Brancher successivement la lampe LED, la lampe halogène, le sèche-cheveux (vitesses 1 et 2) et la bouilloire. Relever la puissance $P$ (en W) et le courant $I$ (en A).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Vérification de la Relation P = U * I :</strong>
+                            Calculer le produit $U \times I$ pour chaque appareil et le comparer à la puissance affichée sur l'écran du wattmètre.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Chronométrage &amp; Énergie Consommée :</strong>
+                            Faire fonctionner la bouilloire pendant exactement $3\text{ minutes}$ ($180\text{ s}$) et relever l'énergie totale $E$ affichée en kWh.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul Financier :</strong>
+                            Calculer le coût en euros de cette chauffe d'eau au tarif de $0{,}25\text{ €/kWh}$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Compteur Linky Virtuel &amp; Facture 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Énergie &amp; Coût d'Utilisation</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-amber-950 border border-amber-500 text-amber-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-gauge-high text-amber-400 mr-1.5"></i> SIMULATEUR ACTIF
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Linky Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-amber-400">
+                            <span>VUE DU COMPTEUR ÉLECTRIQUE</span>
+                            <span id="sim-app-name">Appareil : Bouilloire (2200 W)</span>
+                        </div>
+                        <canvas id="linkyCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-amber-900/50 shadow-inner"></canvas>
+
+                        <!-- Controls -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                            <button onclick="setSimApp('bouilloire', 2200, 'Bouilloire')" class="bg-amber-900/40 hover:bg-amber-800 border border-amber-700 text-amber-200 p-2 rounded-xl font-bold transition-all">
+                                🫖 Bouilloire (2200 W)
+                            </button>
+                            <button onclick="setSimApp('radiateur', 1500, 'Radiateur')" class="bg-red-900/40 hover:bg-red-800 border border-red-700 text-red-200 p-2 rounded-xl font-bold transition-all">
+                                ♨️ Radiateur (1500 W)
+                            </button>
+                            <button onclick="setSimApp('pc', 250, 'Ordinateur')" class="bg-blue-900/40 hover:bg-blue-800 border border-blue-700 text-blue-200 p-2 rounded-xl font-bold transition-all">
+                                💻 PC Bureau (250 W)
+                            </button>
+                            <button onclick="setSimApp('led', 12, 'Lampe LED')" class="bg-emerald-900/40 hover:bg-emerald-800 border border-emerald-700 text-emerald-200 p-2 rounded-xl font-bold transition-all">
+                                💡 Lampe LED (12 W)
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3 pt-2">
+                            <span class="text-xs text-slate-400 font-bold">Vitesse de simulation :</span>
+                            <button onclick="simSpeed = 1" class="bg-slate-800 text-white px-3 py-1 rounded-lg text-xs font-bold">1x (Temps Réel)</button>
+                            <button onclick="simSpeed = 60" class="bg-slate-800 text-white px-3 py-1 rounded-lg text-xs font-bold">60x (1 min/s)</button>
+                            <button onclick="simSpeed = 3600" class="bg-amber-600 text-white px-3 py-1 rounded-lg text-xs font-bold">3600x (1 h/s)</button>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">MESURES DYNAMIQUES TEMPS RÉEL</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Puissance Appelée (W &amp; kW)</span>
+                            <span class="text-3xl font-bold font-mono text-amber-400" id="sim-p-lcd">2200 W</span>
+                            <span class="block text-xs font-mono text-slate-400" id="sim-i-lcd">I = 9.57 A</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Énergie Cumulée (kWh)</span>
+                            <span class="text-2xl font-bold font-mono text-sky-400" id="sim-e-lcd">0.000 kWh</span>
+                        </div>
+
+                        <div id="sim-cost-badge" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            COÛT TOTAL : 0.00 €
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-amber-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR LINKY CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-amber-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-amber-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initLinkyCanvas();
+            }
+        }
+
+        let linkyCanvas, linkyCtx;
+        let currentPowerW = 2200;
+        let appName = "Bouilloire";
+        let totalEnergyKWh = 0;
+        let simSpeed = 3600;
+        let lastTime = performance.now();
+
+        function initLinkyCanvas() {
+            linkyCanvas = document.getElementById('linkyCanvas');
+            if (!linkyCanvas) return;
+            linkyCtx = linkyCanvas.getContext('2d');
+            lastTime = performance.now();
+            requestAnimationFrame(drawLinkySim);
+        }
+
+        function setSimApp(key, powerW, name) {
+            currentPowerW = powerW;
+            appName = name;
+            document.getElementById('sim-app-name').innerText = `Appareil : ${name} (${powerW} W)`;
+            document.getElementById('sim-p-lcd').innerText = `${powerW} W`;
+            const currentA = powerW / 230;
+            document.getElementById('sim-i-lcd').innerText = `I = ${currentA.toFixed(2)} A (230 V)`;
+        }
+
+        function drawLinkySim(timestamp) {
+            if (!linkyCanvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            const dtSec = (timestamp - lastTime) / 1000;
+            lastTime = timestamp;
+
+            // Increment energy (E = P * t in hours)
+            const dtHours = (dtSec * simSpeed) / 3600;
+            totalEnergyKWh += (currentPowerW / 1000) * dtHours;
+
+            // UI update
+            document.getElementById('sim-e-lcd').innerText = totalEnergyKWh.toFixed(3) + " kWh";
+            const cost = totalEnergyKWh * 0.25;
+            document.getElementById('sim-cost-badge').innerText = `COÛT TOTAL : ${cost.toFixed(2)} € (0.25 €/kWh)`;
+
+            linkyCtx.fillStyle = '#0f172a';
+            linkyCtx.fillRect(0, 0, linkyCanvas.width, linkyCanvas.height);
+
+            // Draw Linky Box
+            const lx = 200, ly = 30, lw = 200, lh = 200;
+            linkyCtx.fillStyle = '#84cc16'; // Linky Green
+            linkyCtx.fillRect(lx, ly, lw, lh);
+            linkyCtx.strokeStyle = '#4d7c0f';
+            linkyCtx.lineWidth = 4;
+            linkyCtx.strokeRect(lx, ly, lw, lh);
+
+            // LCD Display on Linky
+            linkyCtx.fillStyle = '#1e293b';
+            linkyCtx.fillRect(lx + 20, ly + 25, lw - 40, 60);
+            linkyCtx.fillStyle = '#a3e635';
+            linkyCtx.font = 'bold 16px monospace';
+            linkyCtx.textAlign = 'center';
+            linkyCtx.fillText(totalEnergyKWh.toFixed(2) + ' kWh', lx + 100, ly + 60);
+
+            // Power Bar Pulse
+            const pulse = (Math.sin(timestamp / 200) + 1) / 2;
+            linkyCtx.fillStyle = currentPowerW > 1000 ? `rgba(239, 68, 68, ${0.4 + pulse * 0.6})` : `rgba(34, 197, 94, ${0.4 + pulse * 0.6})`;
+            linkyCtx.beginPath();
+            linkyCtx.arc(lx + 100, ly + 140, 16, 0, Math.PI * 2);
+            linkyCtx.fill();
+
+            linkyCtx.fillStyle = '#000000';
+            linkyCtx.font = 'bold 10px Inter';
+            linkyCtx.fillText('P SOUSCRITE', lx + 100, ly + 180);
+
+            requestAnimationFrame(drawLinkySim);
+        }
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & Ritualisation - Équilibre d'un Solide CAP</title>
+    <title>Automatismes - Équilibre d'un Solide CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -31,338 +31,442 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-
+        
         .perspective-1000 { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
 
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
+    <!-- Header & Navigation Unifiée -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-bolt text-lg"></i>
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-scale-unbalanced text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 5 CAP • Sciences Physiques & Chimiques</span>
-                    <h1 class="text-xl font-bold font-heading">Équilibre d'un Solide Soumis à Deux Forces</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 5 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Équilibre d'un Solide</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence CAP Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
-                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Équilibre</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- SCOREBOARD EN DIRECT -->
-        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
-                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Équilibre Flash</h2>
-            </div>
-            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
-                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
-                <div>
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
-                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes &amp; Conditions d'Équilibre</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Conditions d'équilibre d'un solide soumis à 2 ou 3 forces, dynamique fermé et polygone des forces.</p>
         </div>
 
-        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (Conditions d'Équilibre)
-                </h3>
-                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-emerald-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <!-- FC 1 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
-                            <p class="text-xs font-bold text-center">Relation vectorielle à l'équilibre ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Équilibre à 2 Forces</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-arrows-left-right-to-line text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelles sont les conditions d'équilibre sous 2 forces ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">F1 + F2 = 0 !</p>
-                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Même droite, Sens Opposés</span>
+                            <div class="my-auto space-y-1 text-xs text-emerald-300 font-bold">
+                                <p>• Même **droite d'action**</p>
+                                <p>• **Sens opposés**</p>
+                                <p>• **Même intensité** : $F_1 = F_2$ ($\vec{F}_1 + \vec{F}_2 = \vec{0}$)</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 2 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
-                            <p class="text-xs font-bold text-center">Condition sur les intensités ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Équilibre à 3 Forces</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-circle-nodes text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelles sont les conditions pour 3 forces non parallèles ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">F1 = F2 !</p>
-                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 3 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
-                            <p class="text-xs font-bold text-center">Condition sur les sens ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Sens opposés !</p>
-                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Concourantes &amp; Somme Nulle</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p>• Droites d'action **coplanaires** et **concourantes** en un même point.</p>
+                                <p>• Somme vectorielle nulle : $\vec{F}_1 + \vec{F}_2 + \vec{F}_3 = \vec{0}$</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 4 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
-                            <p class="text-xs font-bold text-center">Condition sur les droites d'action ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Triangle des Forces</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-draw-polygon text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Qu'est-ce qu'un polygone (dynamique) fermé ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Même droite d'action !</p>
-                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 5 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
-                            <p class="text-xs font-bold text-center">Force opposée au Poids sur table ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Réaction du support R !</p>
-                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Vecteurs Bout à Bout</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p>Les 3 vecteurs forces mis bout à bout forment un **triangle qui se referme** exactement sur son point de départ.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 6 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
-                            <p class="text-xs font-bold text-center">Force opposée au Poids sur câble ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Réaction du Support</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-arrow-up text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la réaction d'un support horizontal ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Tension du câble T !</p>
-                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 7 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
-                            <p class="text-xs font-bold text-center">R si P = 300 N sur table ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">R = 300 N !</p>
-                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Verticale vers le Haut</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p>Une force $\vec{R}$ perpendiculaire au support, dirigée **vers le haut**, de même intensité que le poids : $R = P$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 8 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
-                            <p class="text-xs font-bold text-center">F2 si F1 = 50 N à l'équilibre ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Tension d'un Câble</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-link text-4xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la direction et le sens de la tension d'un fil ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">F2 = 50 N !</p>
-                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 9 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
-                            <p class="text-xs font-bold text-center">Sens du vecteur Tension T ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Orienté vers le haut !</p>
-                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Dans l'axe du Câble</span>
+                            <div class="my-auto space-y-1 text-xs text-indigo-300 font-bold">
+                                <p>• Direction : **l'axe du fil / câble**</p>
+                                <p>• Sens : **du solide vers le point d'attache**</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 10 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
-                            <p class="text-xs font-bold text-center">Que fait l'objet si F1 > F2 ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Stabilité d'un Solide</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-cubes text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">À quelle condition un objet posé reste-t-il stable sans basculer ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Il se met en mouvement !</p>
-                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Base de Sustentation</span>
+                            <div class="my-auto space-y-1 text-xs text-red-300 font-bold">
+                                <p>La verticale passant par le **centre de gravité G** doit impérativement rester **à l'intérieur du polygone de sustentation** (surface d'appui au sol).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-scale-balanced text-emerald-500"></i> Module 2 : Quiz Équilibre 2 Forces CAP
-                </h3>
-                <span class="text-xs font-bold text-slate-500">6 Défis</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Quelle est la valeur de la tension T d'un fil soutenant une masse de Poids P = 80 N ?</label>
-                    <input type="number" id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="T = ? N">
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Test de Mémorisation</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes CAP (10 Questions • 20 Pts)</h2>
                 </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Si F1 = 120 N vers la gauche, quelle est l'intensité de F2 vers la droite à l'équilibre ?</label>
-                    <input type="number" id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="F2 = ? N">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Deux forces de 50 N non alignées (lignes d'action différentes) maintiennent-elles l'équilibre ?</label>
-                    <select id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="NON">Non, création d'une rotation</option>
-                        <option value="OUI">Oui, toujours</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">4. Quelle est la résultante R = F1 - F2 à l'équilibre ?</label>
-                    <input type="number" id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="R = ? N">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">5. Si un sac de 20 kg repose sur une table (g=10 N/kg), quelle est la valeur de la réaction R de la table ?</label>
-                    <input type="number" id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white" placeholder="R = ? N">
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">6. Comment s'écrit la somme des forces vectorielles à l'équilibre ?</label>
-                    <select id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="ZERO">F1 + F2 = 0</option>
-                        <option value="F1">F1 + F2 = F1</option>
-                    </select>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-emerald-100 text-emerald-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-emerald-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
                 </div>
             </div>
 
-            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
-            </button>
-            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-emerald-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
         </section>
 
     </main>
 
-    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <!-- SCRIPT DU QUIZ -->
     <script>
-        let fcScores = new Set();
-        let m2Score = 0;
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un objet suspendu à un fil vertical est en équilibre. Quelles sont les forces appliquées ?",
+                options: ["Le poids P et la tension du fil T", "Uniquement le poids P", "Le poids P et la vitesse", "La réaction et le frottement"],
+                correct: 0,
+                explanation: "L'objet est soumis à son **poids $\\vec{P}$** et à la **tension du fil $\\vec{T}$**."
+            },
+            {
+                id: 2,
+                q: "Pour un solide en équilibre sous 2 forces, que peut-on dire de leurs intensités F1 et F2 ?",
+                options: ["F1 est supérieure à F2", "F1 = F2 (mêmes intensités)", "F1 = 0", "F1 + F2 = 100"],
+                correct: 1,
+                explanation: "À l'équilibre sous 2 forces, les intensités sont **strictement égales ($F_1 = F_2$)**."
+            },
+            {
+                id: 3,
+                q: "Si un solide de poids P = 50 N est posé sur une table horizontale, quelle est la réaction R de la table ?",
+                options: ["R = 0 N", "R = 50 N vers le haut", "R = 50 N vers le bas", "R = 500 N"],
+                correct: 1,
+                explanation: "La réaction du support est **verticale vers le haut et égale au poids ($R = P = 50\\text{ N}$)**."
+            },
+            {
+                id: 4,
+                q: "À l'équilibre sous 3 forces non parallèles, comment doivent être leurs droites d'action ?",
+                options: ["Parallèles", "Concourantes en un même point et coplanaires", "Perpendiculaires", "Sans aucun point commun"],
+                correct: 1,
+                explanation: "Les 3 droites d'action doivent être **concourantes en un même point**."
+            },
+            {
+                id: 5,
+                q: "Que forme le dynamique des forces (triangle des forces) d'un solide en équilibre ?",
+                options: ["Un polygone ouvert", "Un polygone fermé (la somme vectorielle est nulle)", "Une ligne droite infinie", "Un cercle"],
+                correct: 1,
+                explanation: "La somme vectorielle étant nulle ($\\sum \\vec{F} = \\vec{0}$), le tracé forme un **polygone fermé**."
+            },
+            {
+                id: 6,
+                q: "Un colis de masse m = 12 kg repose sur le plancher d'un camion. Quelle est l'intensité de la réaction du sol (g = 10 N/kg) ?",
+                options: ["1,2 N", "12 N", "120 N", "1200 N"],
+                correct: 2,
+                explanation: "$P = m \\times g = 12 \\times 10 = 120\\text{ N}$. À l'équilibre, $R = P = 120\\text{ N}$."
+            },
+            {
+                id: 7,
+                q: "Quel est le sens de la force de traction exercée par une corde sur un crochet de levage ?",
+                options: ["Du crochet vers la corde (dans l'axe de la corde)", "Vers le sol", "Horizontale", "Aléatoire"],
+                correct: 0,
+                explanation: "La tension d'un câble tire toujours **du point d'attache vers le câble**."
+            },
+            {
+                id: 8,
+                q: "Deux mécaniciens tirent en sens opposés sur une barre avec F1 = 150 N et F2 = 150 N sur la même ligne. La barre :",
+                options: ["Accélère vers la droite", "Est en équilibre statique", "Se déplace vers le haut", "Tourne"],
+                correct: 1,
+                explanation: "Les 2 forces ont même droite d'action, sens opposés et même valeur : la barre est en **équilibre**."
+            },
+            {
+                id: 9,
+                q: "Pourquoi un escabeau ou une échelle ne bascule pas tant que le technicien reste entre ses montants ?",
+                options: ["La force du vent l'annule", "La verticale passant par G reste à l'intérieur du polygone de sustentation", "Le poids devient nul", "La réaction s'annule"],
+                correct: 1,
+                explanation: "Tant que la verticale de G tombe dans l'**aire d'appui au sol**, le solide reste stable."
+            },
+            {
+                id: 10,
+                q: "Quelle relation vectorielle traduit mathématiquement l'équilibre d'un solide soumis à deux forces F1 et F2 ?",
+                options: ["F1 - F2 = 1", "vecteur F1 + vecteur F2 = vecteur 0", "F1 * F2 = 0", "vecteur F1 = vecteur F2"],
+                correct: 1,
+                explanation: "La condition d'équilibre est $\\vec{F}_1 + \\vec{F}_2 = \\vec{0}$."
+            }
+        ];
 
-        function flipCard(el) {
-            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
-        }
+        let userAnswers = {};
 
-        function markFC(num) {
-            fcScores.add(num);
-            updateScore();
-        }
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
 
-        function checkM2() {
-            let q1 = document.getElementById('m2-q1').value.trim();
-            let q2 = document.getElementById('m2-q2').value.trim();
-            let q3 = document.getElementById('m2-q3').value;
-            let q4 = document.getElementById('m2-q4').value.trim();
-            let q5 = document.getElementById('m2-q5').value.trim();
-            let q6 = document.getElementById('m2-q6').value;
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
 
-            let score = 0;
-            if (q1 === "80") score++;
-            if (q2 === "120") score++;
-            if (q3 === "NON") score++;
-            if (q4 === "0") score++;
-            if (q5 === "200") score++;
-            if (q6 === "ZERO") score++;
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-emerald-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
 
-            m2Score = score;
-            updateScore();
-
-            let fb = document.getElementById('fb-m2');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (score === 6) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le quiz équilibre à 2 forces !`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+            if (window.MathJax) {
+                MathJax.typesetPromise();
             }
         }
 
-        function updateScore() {
-            let total = fcScores.size + m2Score;
-            document.getElementById('global-score').innerText = `${total} / 16`;
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
         }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement les conditions d'équilibre à 2 et 3 forces ainsi que le dynamique fermé !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les règles d'équilibre sous 2 forces sont acquises. Pensez à réviser la concourance des 3 forces.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et réentraînez-vous sur les conditions vectorielles d'équilibre.";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
     </script>
+
 </body>
 </html>

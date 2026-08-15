@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Solutions Aqueuses, Ions & pH (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask-vial text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 2 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Solutions Aqueuses, Ions &amp; Mesure du pH</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes : Ions, pH &amp; Neutralisation</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Cations, anions, tests de précipités, échelle de pH 0 à 14, règle de dilution et sécurité.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-emerald-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Formation des Ions</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-bolt text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Qu'est-ce qu'un Cation et qu'est-ce qu'un Anion ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Gains et Pertes d'Électrons</span>
+                            <div class="my-auto space-y-1 text-xs text-emerald-300 font-bold">
+                                <p>• **Cation (+)** : atome ayant **perdu** un ou plusieurs électrons (ex: $\text{Cu}^{2+}, \text{Na}^+$).</p>
+                                <p>• **Anion (-)** : atome ayant **gagné** un ou plusieurs électrons (ex: $\text{Cl}^-, \text{SO}_4^{2-}$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Échelle de pH</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-droplet text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment classe-t-on les solutions sur l'échelle de pH de 0 à 14 ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Acide - Neutre - Basique</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p>• **$pH < 7$** : Acide (excès d'ions $\text{H}^+$).</p>
+                                <p>• **$pH = 7$** : Neutre ($\text{H}^+ = \text{OH}^-$).</p>
+                                <p>• **$pH > 7$** : Basique (excès d'ions $\text{OH}^-$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Mesure du pH</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-gauge text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quels instruments utilise-t-on pour mesurer le pH d'une solution ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Papier pH vs pH-Mètre</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p>• **Papier pH** : mesure rapide et approximative par virage de couleur (à l'unité près).</p>
+                                <p>• **pH-mètre digital** : mesure précise avec sonde (au dixième près : ex. $pH = 3{,}4$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Identification des Ions</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-vial text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelles sont les couleurs des précipités avec la soude ($\text{OH}^-$) ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Bleu - Vert - Rouille</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p>• **$\text{Cu}^{2+}$** : précipité **bleu**</p>
+                                <p>• **$\text{Fe}^{2+}$** : précipité **vert**</p>
+                                <p>• **$\text{Fe}^{3+}$** : précipité **rouille**</p>
+                                <p>• **$\text{Cl}^-$ (avec nitrate d'argent)** : précipité **blanc qui noircit**</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Effet de la Dilution</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-water text-4xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Que devient le pH d'une solution quand on lui ajoute de l'eau pure ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Rapprochement vers pH 7</span>
+                            <div class="my-auto space-y-1 text-xs text-indigo-300 font-bold">
+                                <p>• Pour un **acide** ($pH < 7$) : le pH **augmente** vers 7.</p>
+                                <p>• Pour une **base** ($pH > 7$) : le pH **diminue** vers 7.</p>
+                                <p class="text-slate-300 font-normal">Le pH ne peut jamais dépasser 7 lors d'une simple dilution à l'eau.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Règle de Sécurité Dilution</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-triangle-exclamation text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Dans quel ordre doit-on verser l'acide et l'eau pour éviter les projections ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">L'Acide dans l'Eau</span>
+                            <div class="my-auto space-y-1 text-xs text-red-300 font-bold">
+                                <p>« On verse toujours **l'acide dans l'eau** (jamais l'eau dans l'acide). »</p>
+                                <p class="text-slate-300 font-normal">Pour éviter un dégagement brutal de chaleur et des éclaboussures corrosives.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Test de Mémorisation</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes 3PM (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-emerald-100 text-emerald-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-emerald-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-emerald-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un atome de cuivre neutre (29 protons, 29 électrons) perd 2 électrons. Quel ion obtient-on ?",
+                options: ["L'ion Cu²⁻", "L'ion Cu²⁺", "L'ion Cu⁻", "L'ion Cu⁺"],
+                correct: 1,
+                explanation: "En perdant 2 électrons négatifs, l'atome a 2 charges positives en excès : on obtient le **cation $\\text{Cu}^{2+}$**."
+            },
+            {
+                id: 2,
+                q: "Quel ion est responsable de l'acidité d'une solution aqueuse ?",
+                options: ["L'ion chlorure Cl⁻", "L'ion hydroxyde OH⁻", "L'ion hydrogène H⁺", "L'ion sodium Na⁺"],
+                correct: 2,
+                explanation: "Les solutions acides contiennent une majorité d'**ions hydrogène $\\text{H}^+$**."
+            },
+            {
+                id: 3,
+                q: "Une solution a un pH = 2,5. Cette solution est :",
+                options: ["Basique", "Neutre", "Acide", "Incolore"],
+                correct: 2,
+                explanation: "Un $pH < 7$ caractérise une solution **acide**."
+            },
+            {
+                id: 4,
+                q: "Quel réactif permet d'identifier l'ion cuivre II (Cu²⁺) en formant un précipité bleu ?",
+                options: ["Le nitrate d'argent", "La soude (hydroxyde de sodium)", "L'eau distillée", "Le vinaigre"],
+                correct: 1,
+                explanation: "La **soude** forme un précipité bleu d'hydroxyde de cuivre avec les ions $\\text{Cu}^{2+}$."
+            },
+            {
+                id: 5,
+                q: "Quel précipité est obtenu lorsqu'on verse du nitrate d'argent dans une solution contenant des ions chlorure Cl⁻ ?",
+                options: ["Un précipité bleu", "Un précipité vert", "Un précipité blanc qui noircit à la lumière", "Un précipité rouille"],
+                correct: 2,
+                explanation: "L'ion chlorure réagit avec le nitrate d'argent pour donner du chlorure d'argent, **précipité blanc qui noircit à la lumière**."
+            },
+            {
+                id: 6,
+                q: "Quand on ajoute de l'eau pure (pH = 7) dans du jus de citron (pH = 2,5), le pH :",
+                options: ["Diminue vers 0", "Augmente et se rapproche de 7", "Reste exactement à 2,5", "Passe à 14"],
+                correct: 1,
+                explanation: "La dilution d'un acide diminue sa concentration en ions $\\text{H}^+$ : le pH **augmente vers 7**."
+            },
+            {
+                id: 7,
+                q: "Quelle réaction se produit lors de la neutralisation d'un acide par une base ?",
+                options: ["H⁺ + OH⁻ ➔ H₂O", "Na⁺ + Cl⁻ ➔ NaCl", "Cu²⁺ + 2 e⁻ ➔ Cu", "H₂ + O₂ ➔ H₂O"],
+                correct: 0,
+                explanation: "L'ion hydrogène $\\text{H}^+$ et l'ion hydroxyde $\\text{OH}^-$ se neutralisent pour former de l'**eau neutre $\\text{H}_2\\text{O}$**."
+            },
+            {
+                id: 8,
+                q: "Quel pictogramme de sécurité CLP signale un produit corrosif (acide fort ou base forte) ?",
+                options: ["Flamme", "Tête de mort", "Produit qui ronge une surface et une main", "Point d'exclamation"],
+                correct: 2,
+                explanation: "Le pictogramme **Corrosif** montre une éprouvette attaquant une barre métallique et une main."
+            },
+            {
+                id: 9,
+                q: "Un atome de chlore (17 protons, 17 électrons) gagne 1 électron. Quel est son symbole ?",
+                options: ["Cl⁺", "Cl⁻", "Cl²⁻", "Cl"],
+                correct: 1,
+                explanation: "En gagnant 1 électron négatif, il devient l'**anion chlorure $\\text{Cl}^-$**."
+            },
+            {
+                id: 10,
+                q: "Quel instrument permet de mesurer le pH avec une précision au dixième (ex: pH = 6,8) ?",
+                options: ["Le thermomètre", "Le papier pH", "Le pH-mètre étalonné", "Le compte-gouttes"],
+                correct: 2,
+                explanation: "Le **pH-mètre digital** muni d'une électrode de verre mesure le pH avec une haute précision."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-emerald-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement les ions, le pH et les réactions de neutralisation !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les bases sont acquises. Pensez à réviser la couleur des précipités et l'effet de la dilution.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et réentraînez-vous sur les définitions des acides, bases et cations.";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

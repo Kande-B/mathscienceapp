@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Puissance & Énergie Électrique CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #16a34a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 7 CAP • Sciences Physiques &amp; Chimiques</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Puissance &amp; Énergie Électrique</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Mesure de Puissance &amp; Énergie Électrique</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : mesure paillasse avec prise wattmètre ou simulateur de comptage d'énergie Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Wattmètre &amp; Joulemètre)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Compteur d'Énergie Virtuel 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Précautions &amp; Sécurité
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• Ne jamais toucher un élément chauffant en fonctionnement (risque de brûlure).</li>
+                        <li>• Vérifier que la puissance de l'appareil ne dépasse pas la limite du wattmètre (ex: $3680\text{ W} / 16\text{ A}$).</li>
+                        <li>• Débrancher l'appareil dès la fin des mesures.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-plug text-emerald-500"></i> Prise Wattmètre LCD
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i> Projecteur Halogène 150 W
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-mug-hot text-sky-500"></i> Bouilloire 1000 W
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-stopwatch text-purple-500"></i> Chronomètre Digital
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Branchement du Wattmètre :</strong>
+                            Insérer le wattmètre dans la prise secteur $230\text{ V}$ et brancher l'appareil à tester sur sa prise femelle.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure de la Puissance Absorbée :</strong>
+                            Allumer l'appareil et relever sur l'écran du wattmètre : la tension $U$ (V), l'intensité $I$ (A) et la puissance active $P$ (W).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Vérification de la Formule P = U * I :</strong>
+                            Calculer le produit $U \times I$ et le comparer à la puissance affichée.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Comptage de l'Énergie pendant 120 s :</strong>
+                            Déclencher le chronomètre pour $t = 120\text{ s}$ ($2\text{ minutes}$) et relever l'énergie électrique cumulée.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul de l'Énergie en Joules et en Watt-heures :</strong>
+                            Calculer $E_{\text{Joules}} = P \times t$ et convertir en Watt-heures ($E_{\text{Wh}} = \frac{E_{\text{Joules}}}{3600}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Estimation du Coût :</strong>
+                            Calculer le coût financier de l'énergie consommée au prix de $0{,}25\text{ €/kWh}$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau de Mesures &amp; Bilan Énergétique
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Appareil Testé</th>
+                                <th class="p-3 font-bold border border-slate-200">Tension $U$ (V)</th>
+                                <th class="p-3 font-bold border border-slate-200">Intensité $I$ (A)</th>
+                                <th class="p-3 font-bold border border-slate-200">Puissance $P = U \cdot I$ (W)</th>
+                                <th class="p-3 font-bold border border-slate-200">Énergie en 120 s (Joules)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Projecteur Halogène</td>
+                                <td class="p-3 font-mono font-bold">230 V</td>
+                                <td class="p-3 font-mono font-bold text-emerald-600">0,65 A</td>
+                                <td class="p-3 font-mono font-bold text-purple-600">150 W</td>
+                                <td class="p-3 font-mono font-bold text-sky-600">18 000 J</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Bouilloire d'Atelier</td>
+                                <td class="p-3 font-mono font-bold">230 V</td>
+                                <td class="p-3 font-mono font-bold text-emerald-600">4,35 A</td>
+                                <td class="p-3 font-mono font-bold text-purple-600">1000 W</td>
+                                <td class="p-3 font-mono font-bold text-sky-600">120 000 J</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Fer à Souder Électronique</td>
+                                <td class="p-3 font-mono font-bold">230 V</td>
+                                <td class="p-3"><input type="number" step="0.01" id="i-fer-input" placeholder="ex: 0.20" oninput="checkRealPower()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold text-purple-600" id="p-fer-calc">-- W</td>
+                                <td class="p-3 font-mono font-bold text-sky-600" id="e-fer-calc">-- J</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-power-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Banc Virtuel de Comptage d'Énergie 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Interactif de Compteur Linky &amp; Facture</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-emerald-950 border border-emerald-500 text-emerald-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-bolt text-emerald-400 mr-1.5"></i> COMPTAGE ACTIF (0,25 €/kWh)
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Electric Meter Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE COMPTEUR NUMÉRIQUE &amp; CONSOMMATION EN DIRECT</span>
+                            <span id="sim-power-live">Puissance : 2000 W (2.0 kW)</span>
+                        </div>
+                        <canvas id="meterCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Sliders Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Appareil Connecté</label>
+                                <select id="sim-app-select" onchange="updateSimMeter()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-lg text-white font-bold text-xs">
+                                    <option value="50">Projecteur LED (50 W)</option>
+                                    <option value="600">Ponceuse Électrique (600 W)</option>
+                                    <option value="2000" selected>Compresseur d'Atelier (2000 W)</option>
+                                    <option value="3500">Poste à Souder MIG/MAG (3500 W)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Durée d'Utilisation (Heures)</label>
+                                <input type="range" id="sim-hours-val" min="1" max="10" step="1" value="4" oninput="updateSimMeter()" class="w-full accent-emerald-500">
+                                <span class="font-mono text-emerald-300 font-bold" id="val-sim-hours">Durée = 4 heures</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">BILAN ÉLECTRIQUE CALCULÉ</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Énergie Totale Consommée</span>
+                            <span class="text-2xl font-bold font-mono text-emerald-400" id="sim-kwh-lcd">8.00 kWh</span>
+                            <span class="text-[10px] text-slate-500 block font-mono" id="sim-joules-lcd">(28.8 MJ)</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Coût Financier Énergie (€)</span>
+                            <span class="text-2xl font-bold font-mono text-amber-400" id="sim-cost-lcd">2.00 €</span>
+                        </div>
+
+                        <div class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            COURANT I = 8.7 A (SOUS 230 V)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Calculer le Coût d'un Radiateur
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Un aérotherme de puissance $P = 3{,}0\text{ kW}$ chauffe l'atelier pendant $t = 8\text{ heures}$. Le tarif de l'électricité est de $0{,}25\text{ €/kWh}$. Quel est le coût en euros de cette journée de chauffage ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="0.1" id="user-cost-guess" placeholder="Entrer le coût en Euros (ex: 6.0)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessPower()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider le Coût
+                    </button>
+                </div>
+                <div id="guess-result-power" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initMeterCanvas();
+            }
+        }
+
+        function checkRealPower() {
+            const iVal = parseFloat(document.getElementById('i-fer-input').value);
+            const status = document.getElementById('real-power-status');
+
+            if (iVal > 0) {
+                const pVal = 230 * iVal;
+                const eVal = pVal * 120;
+                document.getElementById('p-fer-calc').innerText = pVal.toFixed(1) + " W";
+                document.getElementById('e-fer-calc').innerText = eVal.toFixed(0) + " J";
+
+                if (Math.abs(pVal - 46) < 10) {
+                    status.classList.remove('hidden', 'bg-red-100', 'text-red-900');
+                    status.classList.add('bg-emerald-100', 'text-emerald-900');
+                    status.innerHTML = "🎉 Mesures conformes ! Pour un fer de 46 W, l'énergie en 120 s vaut 5520 Joules.";
+                }
+            }
+        }
+
+        let canvas, ctx;
+        let pWatts = 2000;
+        let hours = 4;
+        let pulseTimer = 0;
+
+        function initMeterCanvas() {
+            canvas = document.getElementById('meterCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            updateSimMeter();
+            requestAnimationFrame(drawMeter);
+        }
+
+        function updateSimMeter() {
+            pWatts = parseFloat(document.getElementById('sim-app-select').value);
+            hours = parseFloat(document.getElementById('sim-hours-val').value);
+
+            document.getElementById('val-sim-hours').innerText = `Durée = ${hours} heures`;
+
+            const pKw = pWatts / 1000;
+            const eKwh = pKw * hours;
+            const cost = eKwh * 0.25;
+            const eJoules = pWatts * hours * 3600;
+
+            document.getElementById('sim-power-live').innerText = `Puissance : ${pWatts} W (${pKw.toFixed(2)} kW)`;
+            document.getElementById('sim-kwh-lcd').innerText = eKwh.toFixed(2) + " kWh";
+            document.getElementById('sim-joules-lcd').innerText = `(${(eJoules / 1000000).toFixed(2)} MJ)`;
+            document.getElementById('sim-cost-lcd').innerText = cost.toFixed(2) + " €";
+        }
+
+        function drawMeter() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Linky Meter Box
+            ctx.fillStyle = '#84cc16'; // Linky Green body
+            ctx.fillRect(100, 30, 200, 200);
+            ctx.strokeStyle = '#65a30d';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(100, 30, 200, 200);
+
+            // Screen
+            ctx.fillStyle = '#1e293b';
+            ctx.fillRect(120, 60, 160, 60);
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 16px monospace';
+            const eKwh = (pWatts / 1000) * hours;
+            ctx.fillText(`${eKwh.toFixed(2)} kWh`, 135, 95);
+
+            // Pulse LED
+            pulseTimer++;
+            const pulseRate = Math.max(5, Math.floor(60 / (pWatts / 500)));
+            const isLit = (pulseTimer % pulseRate) < (pulseRate / 2);
+
+            ctx.fillStyle = isLit ? '#facc15' : '#713f12';
+            ctx.beginPath();
+            ctx.arc(200, 150, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 8px sans-serif';
+            ctx.fillText("1 Wh / Imp", 180, 175);
+
+            // Right side: Power flow diagram
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 11px monospace';
+            ctx.fillText("ÉCOULEMENT D'ÉNERGIE (EFFET JOULE)", 340, 50);
+
+            // Cable representation
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(340, 130);
+            ctx.lineTo(540, 130);
+            ctx.stroke();
+
+            // Heat waves
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 4; i++) {
+                const hx = 380 + i * 35;
+                ctx.beginPath();
+                ctx.moveTo(hx, 115);
+                ctx.quadraticCurveTo(hx + 5, 105, hx, 95);
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = '#f87171';
+            ctx.font = 'bold 9px monospace';
+            ctx.fillText("DISSIPATION THERMIQUE", 370, 85);
+
+            requestAnimationFrame(drawMeter);
+        }
+
+        function checkGuessPower() {
+            const ans = parseFloat(document.getElementById('user-cost-guess').value);
+            // E = 3 kW * 8 h = 24 kWh -> Cost = 24 * 0.25 = 6.00 €
+            const target = 6.0;
+            const res = document.getElementById('guess-result-power');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Exact ! E = 3 kW × 8 h = 24 kWh. Coût = 24 × 0,25 € = 6,00 €.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Indice : Calculez d'abord E = P × t (en kWh), puis multipliez par 0,25 €.";
+            }
+        }
+    </script>
+</body>
+</html>

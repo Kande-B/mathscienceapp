@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de TD - Poids & Masse CAP</title>
+    <title>TD & Exercices - Poids, Masse & Forces CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -34,177 +34,268 @@
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
         @media print {
-            header, nav, .no-print { display: none !important; }
-            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
-            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
-            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
         }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
                     <i class="fa-solid fa-dumbbell text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 4 CAP • Sciences Physiques & Chimiques</span>
-                    <h1 class="text-xl font-bold font-heading">Poids, Masse et Caractéristiques d'une Force</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 4 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Poids, Masse &amp; Forces</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence CAP Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Dynamomètre</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- EN-TÊTE DE LA FICHE DE TD -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
-                <div>
-                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
-                        <span>Fiche d'Entraînement A4 Imprimable Avec Figures</span> • <span>Certificat d'Aptitude Professionnelle</span>
-                    </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur le Poids et les Forces</h2>
-                </div>
-                <div class="flex items-center gap-2 no-print">
-                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
-                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
-                    </button>
-                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
-                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- GRILLE DES COMPETENCES DU CAP -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Relever P et m</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Lister caractéristiques</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Appliquer P=mxg</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Tester la charge max</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Conclure sur la sécurité</div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome CAP</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application avec corrigés pas à pas dépliables.</p>
         </div>
 
-        <!-- EXERCICE 1 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
-                    CAP BTP : Poids d'une Palette de Plâtre
-                </h3>
-                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un plaquiste reçoit une palette de sacs de plâtre de masse totale $m = 400\text{ kg}$. On donne $g = 10\text{ N/kg}$.</p>
-                    <p class="font-bold">Calculez le Poids $P$ de cette palette en Newtons.</p>
-                </div>
-                <!-- SVG EX 1 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-p1" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-p1)" />
-                        <rect x="30" y="25" width="90" height="50" fill="#ffffff" stroke="#4f46e5" stroke-width="2" rx="6"/>
-                        <text x="75" y="48" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">m = 400 kg</text>
-                        <text x="75" y="92" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">P = ? N</text>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices gradués</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
                 </button>
             </div>
-            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>$P = m \times g = 400 \times 10 = \mathbf{4\,000\text{ Newtons}}$.</p>
-            </div>
         </div>
 
-        <!-- EXERCICE 2 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
-                    CAP Automobile : Masse à partir du Poids
-                </h3>
-                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Calcul Direct du Poids $P = m \times g$
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Calcul P = m * g)</span>
             </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un sac de ciment a une masse $m = 25\text{ kg}$.<br>
+                Calculer son poids $P$ sur Terre avec $g = 9{,}81\text{ N/kg}$.
+            </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un dynamomètre suspendu à une grue d'atelier indique un Poids $P = 1500\text{ N}$ pour un bloc moteur. ($g = 10\text{ N/kg}$).</p>
-                    <p class="font-bold">Déduisez-en la masse $m$ du bloc moteur en $\text{kg}$.</p>
-                </div>
-                <!-- SVG EX 2 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-p2" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-p2)" />
-                        <text x="75" y="50" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">P = 1500 N</text>
-                        <text x="75" y="92" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">m = ? kg</text>
-                    </svg>
-                </div>
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>$P = m \times g = 25 \times 9{,}81 = \mathbf{245{,}25\text{ N}}$.</p>
             </div>
+        </section>
 
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
-                </button>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Conversion Grammes $\rightarrow$ kg et Poids
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Conversions)</span>
             </div>
-            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>$m = \frac{P}{g} = \frac{1500}{10} = \mathbf{150\text{ kg}}$.</p>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une pièce d'aluminium usinée a une masse $m = 650\text{ g}$.<br>
+                2.1. Convertir la masse $m$ en kilogrammes ($\text{kg}$).<br>
+                2.2. Calculer son poids $P$ avec $g = 10\text{ N/kg}$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• 2.1 : $m = \frac{650}{1000} = \mathbf{0{,}65\text{ kg}}$.</p>
+                <p>• 2.2 : $P = 0{,}65 \times 10 = \mathbf{6{,}5\text{ N}}$.</p>
             </div>
-        </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Calcul de la Masse $m = \frac{P}{g}$
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Masse)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un dynamomètre de chantier indique une force de traction $P = 85\text{ N}$ pour soutenir un coffret.<br>
+                Calculer la masse $m$ en kg du coffret en prenant $g = 10\text{ N/kg}$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>$m = \frac{P}{g} = \frac{85}{10} = \mathbf{8{,}5\text{ kg}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Tableau des 4 Caractéristiques
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Caractéristiques)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                On considère un colis de masse $m = 10\text{ kg}$ posé sur une table ($g = 10\text{ N/kg}$, donc $P = 100\text{ N}$).<br>
+                Donner les 4 caractéristiques complètes du vecteur poids $\vec{P}$ du colis.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 1. Point d'application : **Centre de gravité G** du colis.<br>
+                • 2. Direction : **Verticale**.<br>
+                • 3. Sens : **Vers le bas**.<br>
+                • 4. Intensité : **$100\text{ N}$**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Représentation Vectorielle d'une Force
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Vecteur force)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un bidon d'huile a un poids $P = 40\text{ N}$. On souhaite représenter le vecteur poids $\vec{P}$ à l'échelle : $1\text{ cm} \leftrightarrow 10\text{ N}$.<br>
+                5.1. Calculer la longueur en centimètres de la flèche.<br>
+                5.2. Décrire comment tracer cette flèche sur un schéma.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : Longueur = $\frac{40}{10} = \mathbf{4\text{ cm}}$.</p>
+                <p>• 5.2 : Tracer un segment fléché vertical partant du centre de gravité G et dirigé vers le bas de longueur $4\text{ cm}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Comparaison Terre vs Lune
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Pesanteur)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un robot rover d'exploration a une masse $m = 300\text{ kg}$.<br>
+                6.1. Calculer son poids sur Terre avec $g_{\text{Terre}} = 9{,}8\text{ N/kg}$.<br>
+                6.2. Calculer son poids sur la Lune avec $g_{\text{Lune}} = 1{,}6\text{ N/kg}$.<br>
+                6.3. La masse du rover a-t-elle changé sur la Lune ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : $P_{\text{Terre}} = 300 \times 9{,}8 = \mathbf{2940\text{ N}}$.</p>
+                <p>• 6.2 : $P_{\text{Lune}} = 300 \times 1{,}6 = \mathbf{480\text{ N}}$ (6 fois plus léger !).</p>
+                <p>• 6.3 : **Non**, la masse reste strictement égale à $300\text{ kg}$ (quantité de matière invariable).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Étalonnage d'un Dynamomètre
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Dynamomètre)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le ressort d'un dynamomètre s'allonge de $\Delta L = 2{,}0\text{ cm}$ sous une force de traction $F_1 = 10\text{ N}$.<br>
+                7.1. L'allongement étant proportionnel à la force, calculer l'allongement $\Delta L_2$ sous une force $F_2 = 25\text{ N}$.<br>
+                7.2. Quelle force correspond à un allongement mesuré de $4{,}0\text{ cm}$ ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : Coefficient = $\frac{2{,}0}{10} = 0{,}2\text{ cm/N}$. Donc $\Delta L_2 = 25 \times 0{,}2 = \mathbf{5{,}0\text{ cm}}$.</p>
+                <p>• 7.2 : Force = $\frac{4{,}0}{0{,}2} = \mathbf{20\text{ N}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Capacité de Levage d'une Élingue
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Sécurité levage)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une élingue de chantier possède une charge maximale d'utilisation $F_{\text{max}} = 15\,000\text{ N}$. Un ouvrier souhaite lever une palette de briques de masse $m = 1200\text{ kg}$ avec $g = 9{,}81\text{ N/kg}$.<br>
+                8.1. Calculer le poids $P$ de la palette.<br>
+                8.2. L'élingue permet-elle de lever cette charge en toute sécurité ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $P = 1200 \times 9{,}81 = \mathbf{11\,772\text{ N}}$.</p>
+                <p>• 8.2 : Comme $11\,772\text{ N} < 15\,000\text{ N}$, le levage est **autorisé et parfaitement sécurisé**.</p>
+            </div>
+        </section>
 
     </main>
 
-    <!-- SCRIPTS JS -->
     <script>
-        let allShown = false;
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
 
-        function toggleCorrection(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.toggle('hidden');
-        }
-
-        function toggleAllCorrections() {
-            allShown = !allShown;
-            const ids = ['corr-ex1', 'corr-ex2'];
-            ids.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (allShown) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
                 }
             });
-            const btnText = document.getElementById('toggle-all-text');
-            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
         }
     </script>
 </body>

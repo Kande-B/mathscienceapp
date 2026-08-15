@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Actions Mécaniques, Forces & Poids (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+        .propriete-box { border-left: 6px solid #0284c7; background-color: #f0f9ff; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-weight-hanging text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence 4 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Actions Mécaniques, Forces &amp; Poids</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Synthèse de Cours Officielle • 3PM Cycle 4</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Actions Mécaniques, Forces &amp; Poids</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Vecteur force, mesure au dynamomètre, relation $P = m \times g$, gravitation et équilibre.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. ACTIONS MÉCANIQUES                       -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">I</span>
+                Actions Mécaniques : Contact &amp; Distance
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-xs">
+                <h3 class="font-bold text-amber-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-hand-fist text-amber-600"></i> Types d'Interactions
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700 font-medium">
+                    <div class="bg-white p-4 rounded-xl border border-amber-200 space-y-1">
+                        <strong class="text-amber-900 block">• Actions de Contact :</strong>
+                        Nécessitent un contact direct entre l'auteur et le receveur.<br>
+                        Ex : Poussée de la main, tension d'un câble, réaction d'une table, frottements.
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-amber-200 space-y-1">
+                        <strong class="text-amber-900 block">• Actions à Distance :</strong>
+                        S'exercent sans contact physique.<br>
+                        Ex : Attraction gravitationnelle (le poids), attraction magnétique d'un aimant, électrostatique.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. MODÉLISATION D'UNE FORCE                -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                Les 4 Caractéristiques du Vecteur Force $\vec{F}$
+            </h2>
+
+            <div class="methode-box rounded-2xl p-5 space-y-3 text-xs">
+                <h3 class="font-bold text-purple-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-arrows-up-down-left-right text-purple-600"></i> Représentation par un Segment Fléché
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center font-bold">
+                    <div class="bg-purple-100 p-2.5 rounded-xl text-purple-950">1. Point d'application <span class="block text-[10px] font-normal">Point de contact ou centre G</span></div>
+                    <div class="bg-purple-100 p-2.5 rounded-xl text-purple-950">2. Direction <span class="block text-[10px] font-normal">Droite d'action</span></div>
+                    <div class="bg-purple-100 p-2.5 rounded-xl text-purple-950">3. Sens <span class="block text-[10px] font-normal">Vers le haut, bas, droite...</span></div>
+                    <div class="bg-purple-100 p-2.5 rounded-xl text-purple-950">4. Intensité <span class="block text-[10px] font-normal">En Newtons (N)</span></div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-purple-200 text-slate-700 font-medium">
+                    Une force est mesurée avec un <strong>dynamomètre</strong> (ressort étalonné) et dessinée selon une échelle (ex : $1\text{ cm} \leftrightarrow 100\text{ N}$).
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. RELATION DU POIDS P = M * G            -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">III</span>
+                Poids d'un Corps &amp; Relation $P = m \times g$
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-4 text-xs">
+                <h3 class="font-bold text-sky-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced text-sky-600"></i> Formule Fondamentale
+                </h3>
+
+                <div class="bg-white p-4 rounded-xl border border-sky-200 text-center font-bold text-slate-900 text-sm">
+                    $$P = m \times g \quad \Longleftrightarrow \quad m = \frac{P}{g} \quad \Longleftrightarrow \quad g = \frac{P}{m}$$
+                    <div class="grid grid-cols-3 gap-2 text-xs font-normal text-slate-600 mt-2">
+                        <div>$P$ : Poids en Newtons (N)</div>
+                        <div>$m$ : Masse en kilogrammes (kg)</div>
+                        <div>$g$ : Pesanteur en N/kg</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700 font-medium">
+                    <div class="bg-white p-3 rounded-xl border border-sky-200">
+                        <strong class="text-sky-900 block text-xs">• Sur la Terre :</strong>
+                        $g_{\text{Terre}} \approx 9{,}8\text{ N/kg}$ (ou $10\text{ N/kg}$).
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-sky-200">
+                        <strong class="text-sky-900 block text-xs">• Sur la Lune :</strong>
+                        $g_{\text{Lune}} \approx 1{,}6\text{ N/kg}$ (environ 6 fois plus faible).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. CONDITIONS D'ÉQUILIBRE STATIQUE         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-red-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center text-sm">IV</span>
+                Équilibre d'un Solide Soumis à 2 Forces Opposées
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="bg-red-50 border border-red-200 p-5 rounded-2xl space-y-2">
+                    <span class="font-bold text-red-900 block text-sm uppercase">1. Conditions d'Équilibre</span>
+                    <p class="text-slate-700 font-medium">Un objet soumis à 2 forces $\vec{F}_1$ et $\vec{F}_2$ est immobile si et seulement si :</p>
+                    <ul class="space-y-1 text-slate-700 font-bold">
+                        <li>• Elles ont la **même droite d'action**.</li>
+                        <li>• Elles ont des **sens opposés**.</li>
+                        <li>• Elles ont la **même valeur** : $F_1 = F_2 \iff \vec{F}_1 + \vec{F}_2 = \vec{0}$.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
+                    <span class="font-bold text-emerald-900 block text-sm uppercase">2. Exemples d'Atelier</span>
+                    <p class="text-slate-700 font-medium">• **Objet suspendu** : Poids $\vec{P}$ compensé par la tension $\vec{T}$ du câble ($T = P$).</p>
+                    <p class="text-slate-700 font-medium">• **Objet posé** : Poids $\vec{P}$ compensé par la réaction $\vec{R}$ du support ($R = P$).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- V. SYNTHÈSE & FORMULAIRE DNB PRO           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-amber-400 border-b border-slate-800 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-star"></i> Synthèse Mémorisation • Fiche Brevet 3PM
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs">
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-amber-400 font-bold block uppercase tracking-wider">Vecteur Force</span>
+                    <p class="text-sm font-bold font-heading text-white">4 Caractéristiques</p>
+                    <p class="text-slate-400">Origine, droite, sens, valeur (N)</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-sky-400 font-bold block uppercase tracking-wider">Poids &amp; Masse</span>
+                    <p class="text-sm font-bold font-heading text-white">$P = m \times g$ (N)</p>
+                    <p class="text-slate-400">$g = 9{,}8\text{ N/kg}$ sur Terre</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-emerald-400 font-bold block uppercase tracking-wider">Équilibre</span>
+                    <p class="text-sm font-bold font-heading text-white">$\vec{F}_1 + \vec{F}_2 = \vec{0}$</p>
+                    <p class="text-slate-400">Forces directement opposées</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

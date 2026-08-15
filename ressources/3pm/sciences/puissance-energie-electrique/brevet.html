@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vers le Brevet - Puissance & Énergie (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence 6 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Puissance Électrique, Énergie &amp; Facture</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-red-100 text-red-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-red-200">Épreuve Officielle Type DNB Pro • Sur 25 Points</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Sujet Brevet Professionnel : Véhicule Électrique &amp; Énergie</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Dimensionnement de borne de recharge, calcul d'énergie, conversions Joules/kWh et bilan économique.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Durée conseillée : 30 min • 25 Points</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher le Corrigé Enseignant</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- GRILLE OFFICIELLE PAR COMPÉTENCES CYCLE 4 -->
+        <section class="bg-white rounded-3xl p-6 border border-slate-200 card-shadow space-y-3">
+            <h2 class="text-sm font-bold font-heading text-slate-900 uppercase tracking-wider text-center border-b border-slate-100 pb-2">
+                Grille Évaluation Nationale des Compétences (DNB Pro Physique-Chimie)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs">
+                <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-200">
+                    <span class="font-bold text-pink-700 block">S'approprier</span>
+                    <span class="text-[10px] text-slate-500">Formules $P=UI$ &amp; $E=Pt$</span>
+                </div>
+                <div class="bg-orange-50 p-2.5 rounded-xl border border-orange-200">
+                    <span class="font-bold text-orange-700 block">Analyser</span>
+                    <span class="text-[10px] text-slate-500">Unités Joules &amp; kWh</span>
+                </div>
+                <div class="bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                    <span class="font-bold text-blue-700 block">Réaliser</span>
+                    <span class="text-[10px] text-slate-500">Calculs d'intensité &amp; coût</span>
+                </div>
+                <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                    <span class="font-bold text-emerald-700 block">Valider</span>
+                    <span class="text-[10px] text-slate-500">Comparaison thermique/élec</span>
+                </div>
+                <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 col-span-2 md:col-span-1">
+                    <span class="font-bold text-yellow-700 block">Communiquer</span>
+                    <span class="text-[10px] text-slate-500">Bilan environnemental</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 1 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Partie 1 : Puissance de la Borne &amp; Intensité (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une entreprise artisanale installe une borne de recharge pour sa camionnette électrique. La borne délivre une puissance nominale $P = 7360\text{ W}$ ($7{,}36\text{ kW}$) sous une tension monophasée $U = 230\text{ V}$.</p>
+                <p><strong>1.1 (4 pts) - Compétence Réaliser :</strong> Calculer l'intensité $I$ du courant électrique circulant dans la ligne lors de la charge ($I = \frac{P}{U}$).</p>
+                <p><strong>1.2 (4 pts) - Compétence S'approprier :</strong> Rappeler les unités officielles du Système International (SI) pour la puissance $P$, la tension $U$ et l'intensité $I$.</p>
+            </div>
+
+            <!-- Solution PART 1 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 1 :</span>
+                <p>• <strong>1.1 :</strong> $I = \frac{P}{U} = \frac{7360}{230} = \mathbf{32\text{ A}}$ (4 pts).</p>
+                <p>• <strong>1.2 :</strong> Puissance en **Watts (W)**, Tension en **Volts (V)**, Intensité en **Ampères (A)** (4 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 (9 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Partie 2 : Énergie Consommée &amp; Coût de Recharge (9 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">9 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Une session de charge complète de la batterie nécessite une durée $t = 4\text{ heures}$. Le tarif du kWh d'électricité est fixé à $0{,}20\text{ € / kWh}$.</p>
+                <p><strong>2.1 (3 pts) - Compétence Réaliser :</strong> Calculer l'énergie électrique $E$ consommée en $\text{kWh}$ ($E = P \times t$).</p>
+                <p><strong>2.2 (3 pts) - Compétence Analyser :</strong> Convertir cette énergie $E$ en Joules (sachant que $1\text{ kWh} = 3\,600\,000\text{ J}$).</p>
+                <p><strong>2.3 (3 pts) - Compétence Réaliser :</strong> Calculer le coût en euros de cette recharge complète.</p>
+            </div>
+
+            <!-- Solution PART 2 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 2 :</span>
+                <p>• <strong>2.1 :</strong> $E = 7{,}36\text{ kW} \times 4\text{ h} = \mathbf{29{,}44\text{ kWh}}$ (3 pts).</p>
+                <p>• <strong>2.2 :</strong> $E = 29{,}44 \times 3\,600\,000 = \mathbf{105\,984\,000\text{ Joules}} \approx \mathbf{106\text{ MJ}}$ (3 pts).</p>
+                <p>• <strong>2.3 :</strong> $\text{Coût} = 29{,}44 \times 0{,}20 = \mathbf{5{,}89\text{ €}}$ (3 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Partie 3 : Bilan Économique &amp; Écologique (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Cette recharge de $5{,}89\text{ €}$ permet à la camionnette de parcourir une distance de $200\text{ km}$ (soit un coût de $2{,}95\text{ €}$ pour $100\text{ km}$).<br>
+                L'ancienne camionnette diesel consommait $6\text{ litres}$ de gazole aux $100\text{ km}$ au prix de $1{,}80\text{ € / litre}$.</p>
+                <p><strong>3.1 (4 pts) - Compétence Valider :</strong> Calculer le coût aux $100\text{ km}$ de la camionnette diesel et comparer avec la version électrique.</p>
+                <p><strong>3.2 (4 pts) - Compétence Communiquer :</strong> Citer 2 avantages environnementaux du véhicule électrique lors de son utilisation en ville.</p>
+            </div>
+
+            <!-- Solution PART 3 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 3 :</span>
+                <p>• <strong>3.1 :</strong> Coût diesel = $6 \times 1{,}80 = \mathbf{10{,}80\text{ € aux 100 km}}$. Le véhicule électrique ($2{,}95\text{ €}$) est environ **3,6 fois moins cher en énergie** (4 pts).</p>
+                <p>• <strong>3.2 :</strong> 1) Zéro émission de gaz d'échappement directs ($\text{CO}_2$, particules fines). 2) Réduction considérable des nuisances sonores en agglomération (4 pts).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer le Corrigé Enseignant" : "Afficher le Corrigé Enseignant";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation CCF - Mouvement & Vitesse Moyenne CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence 3 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Mouvement &amp; Vitesse Moyenne</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-red-100 text-red-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-red-200">Évaluation Sommative Type CCF • Sur 20 Points</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Sujet d'Évaluation de Sciences CAP</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Contrôle de vitesse d'un utilitaire d'intervention et analyse de distance d'arrêt.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Durée conseillée : 45 min</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher le Corrigé Enseignant</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- GRILLE OFFICIELLE PAR COMPÉTENCES -->
+        <section class="bg-white rounded-3xl p-6 border border-slate-200 card-shadow space-y-3">
+            <h2 class="text-sm font-bold font-heading text-slate-900 uppercase tracking-wider text-center border-b border-slate-100 pb-2">
+                Grille Évaluation Nationale des Compétences (Sciences CAP)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs">
+                <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-200">
+                    <span class="font-bold text-pink-700 block">S'approprier</span>
+                    <span class="text-[10px] text-slate-500">Nature de la trajectoire</span>
+                </div>
+                <div class="bg-orange-50 p-2.5 rounded-xl border border-orange-200">
+                    <span class="font-bold text-orange-700 block">Analyser</span>
+                    <span class="text-[10px] text-slate-500">Mouvement sur chronophotographie</span>
+                </div>
+                <div class="bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                    <span class="font-bold text-blue-700 block">Réaliser</span>
+                    <span class="text-[10px] text-slate-500">Calcul $v = d/t$ et conversion</span>
+                </div>
+                <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                    <span class="font-bold text-emerald-700 block">Valider</span>
+                    <span class="text-[10px] text-slate-500">Valider la distance d'arrêt</span>
+                </div>
+                <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 col-span-2 md:col-span-1">
+                    <span class="font-bold text-yellow-700 block">Communiquer</span>
+                    <span class="text-[10px] text-slate-500">Rédiger les préconisations</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 1 (6 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Partie 1 : Trajectoire &amp; Chronophotographie (6 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">6 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un utilitaire effectue une liaison en ligne droite sur une voie expresse. Un dispositif de contrôle prend 4 clichés successifs du véhicule à des intervalles de temps égaux $\Delta t = 1{,}0\text{ s}$. Les distances mesurées entre les positions successives sont toutes égales à $20\text{ mètres}$.</p>
+                <p><strong>1.1 (3 pts) - Compétence S'approprier :</strong> Indiquer le type de trajectoire du véhicule (rectiligne, circulaire ou curviligne).</p>
+                <p><strong>1.2 (3 pts) - Compétence Analyser :</strong> Qualifier la nature du mouvement (uniforme, accéléré ou décéléré) en justifiant d'après les espacements des clichés.</p>
+            </div>
+
+            <!-- Solution PART 1 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 1 :</span>
+                <p>• <strong>1.1 :</strong> Trajectoire **rectiligne** (ligne droite) (3 pts).</p>
+                <p>• <strong>1.2 :</strong> Mouvement **rectiligne uniforme** car les espacements entre les positions successives sont strictement égaux ($20\text{ m}$) pour des temps égaux (3 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Partie 2 : Calcul de Vitesse &amp; Conversion (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Sur l'ensemble de sa tournée, l'utilitaire d'intervention parcourt une distance $d = 180\text{ km}$ en une durée $t = 2{,}5\text{ heures}$.</p>
+                <p><strong>2.1 (4 pts) - Compétence Réaliser :</strong> Calculer la vitesse moyenne $v$ du véhicule en $\text{km/h}$ à l'aide de la formule $v = \frac{d}{t}$.</p>
+                <p><strong>2.2 (4 pts) - Compétence Réaliser :</strong> Convertir cette vitesse moyenne en mètres par seconde ($\text{m/s}$) en divisant par $3{,}6$.</p>
+            </div>
+
+            <!-- Solution PART 2 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 2 :</span>
+                <p>• <strong>2.1 :</strong> $v = \frac{180}{2{,}5} = \mathbf{72\text{ km/h}}$ (4 pts).</p>
+                <p>• <strong>2.2 :</strong> $v_{\text{m/s}} = \frac{72}{3{,}6} = \mathbf{20\text{ m/s}}$ (4 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 (6 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Partie 3 : Analyse du Freinage d'Urgence (6 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">6 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Le véhicule roule à $v = 20\text{ m/s}$. Le conducteur aperçoit un obstacle à $d_{\text{obs}} = 50\text{ m}$. Son temps de réaction est $t_r = 1{,}0\text{ s}$ ($d_r = v \times t_r = 20\text{ m}$). La distance de freinage des roues est $d_f = 25\text{ m}$.</p>
+                <p><strong>3.1 (3 pts) - Compétence Valider :</strong> Calculer la distance d'arrêt totale $d_{\text{arrêt}} = d_r + d_f$ et valider si le véhicule s'arrête avant l'obstacle.</p>
+                <p><strong>3.2 (3 pts) - Compétence Communiquer :</strong> Rédiger les 2 préconisations de sécurité pour éviter les accidents liés à la vitesse.</p>
+            </div>
+
+            <!-- Solution PART 3 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 3 :</span>
+                <p>• <strong>3.1 :</strong> $d_{\text{arrêt}} = 20 + 25 = \mathbf{45\text{ mètres}}$. Comme $45\text{ m} < 50\text{ m}$, le véhicule s'arrête $5\text{ m}$ avant l'obstacle. L'accident est évité (3 pts).</p>
+                <p>• <strong>3.2 :</strong> 1) "Conserver une distance de sécurité d'au moins 2 secondes." 2) "Réduire sa vitesse pour diminuer la distance d'arrêt $d_{\text{arrêt}}$" (3 pts).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer le Corrigé Enseignant" : "Afficher le Corrigé Enseignant";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Énergie Renouvelable & Rendement (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 7 • 3ème Prépa-Métiers (Cycle 4)</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Sources, Formes &amp; Conversions d'Énergie</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-flask"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Rendement d'un Système Photovoltaïque &amp; Éolien</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Manipulez le banc solaire/éolien réel au laboratoire ou pilotez la micro-centrale 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Panneau Solaire, Luxmètre, Multimètres &amp; Charge)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel Centrale Hybride 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Matériel Réel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-emerald-50 border border-emerald-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-emerald-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-emerald-600"></i> Mesures Lumineuses
+                    </h3>
+                    <ul class="space-y-2 text-emerald-950 font-medium">
+                        <li>• Ne pas regarder directement la lampe halogène d'éclairage.</li>
+                        <li>• Maintenir une distance constante entre la source lumineuse et le capteur.</li>
+                        <li>• Relever la puissance électrique débitée sur la résistance de charge.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-solar-panel text-amber-500"></i> Mini-Panneau Solaire
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-sun text-yellow-500"></i> Projecteur Halogène
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-sun-plant-wilt text-emerald-500"></i> Luxmètre Digital
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-microchip text-sky-500"></i> Boîte Résistances
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 5 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure de l'Éclairement :</strong>
+                            Positionner le capteur du luxmètre à la surface du panneau solaire et relever l'éclairement lumineux en Lux (puis convertir en $\text{W/m}^2$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul de la Puissance Lumineuse Incidente :</strong>
+                            Calculer la puissance solaire absorbée par le panneau : $P_{\text{absorbée}} = \text{Éclairement (W/m}^2) \times \text{Surface (m}^2)$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure des Grandeurs Électriques (U et I) :</strong>
+                            Raccorder le panneau à la résistance de charge ($33\ \Omega$). Mesurer la tension $U$ aux bornes de la résistance et le courant $I$ circulant dans le circuit.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul de la Puissance Électrique Utile :</strong>
+                            Calculer la puissance électrique produite : $P_{\text{utile}} = U \times I$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Détermination du Rendement :</strong>
+                            Calculer le rendement du panneau : $\eta = \frac{P_{\text{utile}}}{P_{\text{absorbée}}} \times 100$. Constater que le rendement est compris entre 15% et 22%.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Centrale Solaire &amp; Éolienne 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Énergies Renouvelables &amp; Rendement</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-emerald-950 border border-emerald-500 text-emerald-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-leaf text-emerald-400 mr-1.5"></i> SIMULATEUR ACTIF
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Renewable Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE DU SITE DE PRODUCTION</span>
+                            <span id="sim-mode-name">Mode : Hybride Solaire + Éolien</span>
+                        </div>
+                        <canvas id="energyCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs text-slate-400">
+                                    <span>☀️ Ensoleillement :</span>
+                                    <span id="sun-val" class="font-mono text-amber-400">800 W/m²</span>
+                                </div>
+                                <input type="range" min="0" max="1000" step="50" value="800" oninput="updateSun(this.value)" class="w-full accent-amber-500">
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs text-slate-400">
+                                    <span>💨 Vitesse du Vent :</span>
+                                    <span id="wind-val" class="font-mono text-sky-400">12 m/s</span>
+                                </div>
+                                <input type="range" min="0" max="25" step="1" value="12" oninput="updateWind(this.value)" class="w-full accent-sky-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">MESURES DYNAMIQUES TEMPS RÉEL</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Puissance Électrique Produite</span>
+                            <span class="text-3xl font-bold font-mono text-emerald-400" id="sim-p-elec">1450 W</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Rendement Moyen Global</span>
+                            <span class="text-2xl font-bold font-mono text-amber-400" id="sim-rendement-lcd">32 %</span>
+                        </div>
+
+                        <div id="sim-co2-badge" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            🌱 PRODUCTION DÉCARBONÉE ACTIVE
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR ÉNERGIE CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initEnergyCanvas();
+            }
+        }
+
+        let energyCanvas, energyCtx;
+        let sunPower = 800; // W/m2
+        let windSpeed = 12; // m/s
+        let bladeAngle = 0;
+
+        function initEnergyCanvas() {
+            energyCanvas = document.getElementById('energyCanvas');
+            if (!energyCanvas) return;
+            energyCtx = energyCanvas.getContext('2d');
+            updateEnergyUI();
+            requestAnimationFrame(drawEnergySim);
+        }
+
+        function updateSun(val) {
+            sunPower = parseFloat(val);
+            document.getElementById('sun-val').innerText = sunPower + " W/m²";
+            updateEnergyUI();
+        }
+
+        function updateWind(val) {
+            windSpeed = parseFloat(val);
+            document.getElementById('wind-val').innerText = windSpeed + " m/s";
+            updateEnergyUI();
+        }
+
+        function updateEnergyUI() {
+            // Solar power for 5 m2 with 20% efficiency
+            const pSolar = 5 * sunPower * 0.20;
+            // Wind power with 40% efficiency
+            const pWind = 0.5 * 1.2 * Math.PI * 4 * Math.pow(windSpeed, 3) * 0.40 * 0.1;
+            const pTotal = Math.round(pSolar + pWind);
+
+            document.getElementById('sim-p-elec').innerText = pTotal + " W";
+            document.getElementById('sim-rendement-lcd').innerText = "32 %";
+        }
+
+        function drawEnergySim() {
+            if (!energyCanvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            energyCtx.fillStyle = '#0f172a';
+            energyCtx.fillRect(0, 0, energyCanvas.width, energyCanvas.height);
+
+            // Sun in sky
+            energyCtx.fillStyle = `rgba(245, 158, 11, ${sunPower / 1000})`;
+            energyCtx.beginPath();
+            energyCtx.arc(100, 50, 30, 0, Math.PI * 2);
+            energyCtx.fill();
+
+            // Solar Panel (Left)
+            energyCtx.fillStyle = '#1e3a8a';
+            energyCtx.beginPath();
+            energyCtx.moveTo(80, 180);
+            energyCtx.lineTo(160, 150);
+            energyCtx.lineTo(180, 200);
+            energyCtx.lineTo(100, 220);
+            energyCtx.closePath();
+            energyCtx.fill();
+            energyCtx.strokeStyle = '#60a5fa';
+            energyCtx.lineWidth = 2;
+            energyCtx.stroke();
+
+            // Wind Turbine (Right)
+            const tx = 450, ty = 140;
+            // Mast
+            energyCtx.fillStyle = '#64748b';
+            energyCtx.fillRect(tx - 4, ty, 8, 80);
+
+            // Nacelle
+            energyCtx.fillStyle = '#94a3b8';
+            energyCtx.beginPath();
+            energyCtx.arc(tx, ty, 10, 0, Math.PI * 2);
+            energyCtx.fill();
+
+            // Rotate blades
+            bladeAngle += windSpeed * 0.05;
+            for (let i = 0; i < 3; i++) {
+                const angle = bladeAngle + (i * Math.PI * 2 / 3);
+                const bx = tx + Math.cos(angle) * 50;
+                const by = ty + Math.sin(angle) * 50;
+                energyCtx.strokeStyle = '#ffffff';
+                energyCtx.lineWidth = 4;
+                energyCtx.beginPath();
+                energyCtx.moveTo(tx, ty);
+                energyCtx.lineTo(bx, by);
+                energyCtx.stroke();
+            }
+
+            requestAnimationFrame(drawEnergySim);
+        }
+    </script>
+</body>
+</html>

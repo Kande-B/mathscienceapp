@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de TD - Équilibre d'un Solide CAP</title>
+    <title>TD & Exercices - Équilibre d'un Solide CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -34,179 +34,264 @@
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
         @media print {
-            header, nav, .no-print { display: none !important; }
-            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
-            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
-            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
         }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
                     <i class="fa-solid fa-dumbbell text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 5 CAP • Sciences Physiques & Chimiques</span>
-                    <h1 class="text-xl font-bold font-heading">Équilibre d'un Solide Soumis à Deux Forces</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 5 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Équilibre d'un Solide</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence CAP Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Équilibre</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- EN-TÊTE DE LA FICHE DE TD -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
-                <div>
-                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
-                        <span>Fiche d'Entraînement A4 Imprimable Avec Figures</span> • <span>Certificat d'Aptitude Professionnelle</span>
-                    </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur l'Équilibre à Deux Forces</h2>
-                </div>
-                <div class="flex items-center gap-2 no-print">
-                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
-                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
-                    </button>
-                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
-                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- GRILLE DES COMPETENCES DU CAP -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Repérer F1 et F2</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Tester la droite d'action</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Calculer F2 = F1</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Vérifier l'immobilité</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Écrire F1 + F2 = 0</div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome CAP</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application avec corrigés pas à pas dépliables.</p>
         </div>
 
-        <!-- EXERCICE 1 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
-                    CAP Électricité : Suspension d'un Lustre d'Atelier
-                </h3>
-                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un électricien installe un lustre de Poids $P = 250\text{ N}$ fixé à un câble vertical. Le système est en équilibre immobile.</p>
-                    <p class="font-bold">Déterminez l'intensité de la force de tension $T$ exercée par le câble.</p>
-                </div>
-                <!-- SVG EX 1 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-eq1" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-eq1)" />
-                        <rect x="30" y="25" width="90" height="50" fill="#ffffff" stroke="#4f46e5" stroke-width="2" rx="6"/>
-                        <text x="75" y="48" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">P = 250 N</text>
-                        <text x="75" y="92" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">T = ? N</text>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices gradués</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
                 </button>
             </div>
-            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>À l'équilibre, $T = P = \mathbf{250\text{ Newtons}}$ (force orientée vers le haut).</p>
-            </div>
         </div>
 
-        <!-- EXERCICE 2 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
-                    CAP Menuiserie : Réaction d'un Établi sur un Carton
-                </h3>
-                <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Réaliser</span>
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Équilibre d'un Objet sur une Table
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (2 Forces)</span>
             </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une boîte d'outils de masse $m = 4\text{ kg}$ repose immobile sur un établi horizontal ($g = 10\text{ N/kg}$).<br>
+                1.1. Calculer le poids $P$ de la boîte d'outils.<br>
+                1.2. Déterminer la direction, le sens et l'intensité de la réaction $\vec{R}$ exercée par l'établi.
+            </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un carton d'outillage de masse $m = 15\text{ kg}$ repose au centre d'un établi. On prend $g = 10\text{ N/kg}$.</p>
-                    <p class="font-bold">1. Calculez son Poids $P$.</p>
-                    <p class="font-bold">2. En déduire l'intensité de la réaction du support $R$.</p>
-                </div>
-                <!-- SVG EX 2 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-eq2" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-eq2)" />
-                        <text x="75" y="48" font-size="9" font-weight="bold" fill="#0f172a" text-anchor="middle">m = 15 kg</text>
-                        <text x="75" y="92" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">R = ? N</text>
-                    </svg>
-                </div>
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• 1.1 : $P = m \times g = 4 \times 10 = \mathbf{40\text{ N}}$.</p>
+                <p>• 1.2 : Direction : **Verticale**, Sens : **Vers le haut**, Intensité : **$R = 40\text{ N}$**.</p>
             </div>
+        </section>
 
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
-                </button>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Suspension par un Câble Vertical
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Tension)</span>
             </div>
-            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>1. $P = m \times g = 15 \times 10 = \mathbf{150\text{ N}}$.</p>
-                <p>2. À l'équilibre, $R = P = \mathbf{150\text{ Newtons}}$ (force exercée par la table vers le haut).</p>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un luminaire de poids $P = 12\text{ N}$ est suspendu au plafond par un câble en équilibre statique.<br>
+                2.1. Donner les caractéristiques de la tension du câble $\vec{T}$.<br>
+                2.2. Écrire la relation vectorielle liant $\vec{P}$ et $\vec{T}$.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• 2.1 : Point : point d'accroche | Direction : verticale | Sens : vers le haut | Intensité : $T = 12\text{ N}$.</p>
+                <p>• 2.2 : $\vec{P} + \vec{T} = \vec{0} \iff \vec{T} = -\vec{P}$.</p>
             </div>
-        </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Relation Vectorielle d'Équilibre
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Vectoriel)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un solide est en équilibre statique sous l'action de deux forces $\vec{F}_1$ et $\vec{F}_2$. L'intensité de $\vec{F}_1$ est $F_1 = 35\text{ N}$.<br>
+                3.1. Quelle est l'intensité de la force $\vec{F}_2$ ?<br>
+                3.2. Quelle condition doivent vérifier les droites d'action et les sens des deux forces ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : $F_2 = F_1 = \mathbf{35\text{ N}}$.</p>
+                <p>• 3.2 : Elles doivent avoir la **même droite d'action** et des **sens opposés**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Concourance des 3 Forces
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Concourance)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un solide est soumis à 3 forces non parallèles $\vec{F}_1$, $\vec{F}_2$ et $\vec{F}_3$. Les droites d'action de $\vec{F}_1$ et $\vec{F}_2$ se coupent en un point O.<br>
+                Par quel point doit impérativement passer la droite d'action de la 3e force $\vec{F}_3$ pour que le solide reste en équilibre ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>La droite d'action de $\vec{F}_3$ doit impérativement **passer par le même point d'intersection O** (les 3 forces sont concourantes en O).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Construction du Triangle des Forces
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Dynamique)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un solide en équilibre est soumis à 3 forces : $\vec{F}_1 = 30\text{ N}$ (horizontale vers la droite), $\vec{F}_2 = 40\text{ N}$ (verticale vers le haut) et $\vec{F}_3$ (oblique vers le bas).<br>
+                5.1. À l'échelle $1\text{ cm} \leftrightarrow 10\text{ N}$, donner les longueurs de $\vec{F}_1$ et $\vec{F}_2$.<br>
+                5.2. En fermant le triangle rectangle, calculer l'intensité de $\vec{F}_3$ ($F_3^2 = F_1^2 + F_2^2$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : $\vec{F}_1 = 3\text{ cm}$ et $\vec{F}_2 = 4\text{ cm}$.</p>
+                <p>• 5.2 : $F_3 = \sqrt{30^2 + 40^2} = \sqrt{900 + 1600} = \sqrt{2500} = \mathbf{50\text{ N}}$ (flèche de $5\text{ cm}$).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Élingage Symétrique d'une Charge
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Élingage)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une poutre de poids $P = 600\text{ N}$ est suspendue à un crochet de grue par deux élingues symétriques verticales ($\vec{T}_1$ et $\vec{T}_2$).<br>
+                Calculer la tension dans chaque élingue à l'équilibre statique ($T_1 + T_2 = P$).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>Par symétrie, $T_1 = T_2 = \frac{P}{2} = \frac{600}{2} = \mathbf{300\text{ N}}$ par élingue.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Solide sur Plan Incliné
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Plan incliné)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un chariot est maintenu immobile sur une rampe inclinée par un câble de treuil. Il est soumis à 3 forces : son poids $\vec{P}$, la réaction perpendiculaire de la rampe $\vec{R}$ et la tension du câble $\vec{T}$.<br>
+                Écrire la condition vectorielle d'équilibre reliant ces 3 forces.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>$$\vec{P} + \vec{R} + \vec{T} = \vec{0}$$</p>
+                <p>Les trois vecteurs mis bout à bout forment un triangle fermé.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Stabilité &amp; Risque de Basculement
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Stabilité)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un chariot de manutention roule sur un sol d'atelier. Le cariste charge une palette très lourde à l'extrémité des fourches.<br>
+                8.1. Vers où se déplace le centre de gravité G de l'ensemble (chariot + charge) ?<br>
+                8.2. Pourquoi le chariot risque-t-il de basculer vers l'avant ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : Le centre de gravité G se déplace vers l'avant (vers la charge).</p>
+                <p>• 8.2 : Si la verticale passant par G passe en avant des roues avant (sortie du polygone de sustentation), le chariot bascule vers l'avant.</p>
+            </div>
+        </section>
 
     </main>
 
-    <!-- SCRIPTS JS -->
     <script>
-        let allShown = false;
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
 
-        function toggleCorrection(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.toggle('hidden');
-        }
-
-        function toggleAllCorrections() {
-            allShown = !allShown;
-            const ids = ['corr-ex1', 'corr-ex2'];
-            ids.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (allShown) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
                 }
             });
-            const btnText = document.getElementById('toggle-all-text');
-            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
         }
     </script>
 </body>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Sécurité & Pictogrammes CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #16a34a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 1 CAP • Sciences Physiques &amp; Chimiques</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Sécurité des Produits Chimiques &amp; Pictogrammes</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Audit d'Étiquetage SGH &amp; Sécurité Chimie</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : paillasse réelle avec flacons anonymes et FDS ou banc d'audit virtuel d'étiquettes SGH Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Labo CAP)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Audit d'Étiquettes Virtuel HTML5
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Consignes d'Urgence
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• Port de la blouse en coton et des lunettes étanches obligatoire.</li>
+                        <li>• Manipuler sous la hotte ventilée d'atelier.</li>
+                        <li>• En cas de contact cutané : rinçage 15 min à l'eau claire.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-vial text-emerald-500"></i> Flacons A, B, C, D Anonymes
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-file-shield text-sky-500"></i> Dossier des 4 FDS
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-icons text-amber-500"></i> Planche Autocollants SGH
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-glasses text-purple-500"></i> Lunettes &amp; Gants Nitrile
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Inspection des Flacons :</strong>
+                            Prendre les 4 flacons anonymes A, B, C, D et consulter les fiches FDS du dossier.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Identification des Dangers :</strong>
+                            Associer chaque flacon au produit chimique correspondant d'après la FDS (Acide chlorhydrique, Solvant acétone, Éthanol 90°, Eau distillée).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Choix du Pictogramme SGH :</strong>
+                            Sélectionner et coller l'autocollant SGH adéquat sur l'étiquette de chaque flacon.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Sélection des EPI Obligatoires :</strong>
+                            Déterminer les Équipements de Protection Individuelle requis pour manipuler le produit sans danger.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Rangement Conforme :</strong>
+                            Indiquer le lieu de rangement sécurisé (Armoire ignifugée, Armoire acides/bases, Étagère standard).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation de l'Audit :</strong>
+                            Compléter le tableau de suivi d'audit de sécurité d'atelier.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau d'Audit d'Étiquetage SGH de Paillasse
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Flacon</th>
+                                <th class="p-3 font-bold border border-slate-200">Produit Chimique</th>
+                                <th class="p-3 font-bold border border-slate-200">Pictogramme SGH</th>
+                                <th class="p-3 font-bold border border-slate-200">EPI Obligatoires</th>
+                                <th class="p-3 font-bold border border-slate-200">Stockage Conforme</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Flacon A</td>
+                                <td class="p-3 font-semibold">Acide Chlorhydrique</td>
+                                <td class="p-3"><select id="pic-a" onchange="checkRealSGH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Sélectionner...</option><option value="corrosif">Corrosif (SGH05)</option><option value="inflammable">Inflammable (SGH02)</option></select></td>
+                                <td class="p-3 font-medium">Gants Nitrile + Lunettes</td>
+                                <td class="p-3"><select id="stk-a" onchange="checkRealSGH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Sélectionner...</option><option value="acides">Armoire Acides/Bases</option><option value="ignifugee">Armoire Ignifugée</option></select></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Flacon B</td>
+                                <td class="p-3 font-semibold">Solvant Acétone</td>
+                                <td class="p-3"><select id="pic-b" onchange="checkRealSGH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Sélectionner...</option><option value="corrosif">Corrosif (SGH05)</option><option value="inflammable">Inflammable (SGH02)</option></select></td>
+                                <td class="p-3 font-medium">Lunettes + Hotte Ventilée</td>
+                                <td class="p-3"><select id="stk-b" onchange="checkRealSGH()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"><option value="">Sélectionner...</option><option value="acides">Armoire Acides/Bases</option><option value="ignifugee">Armoire Ignifugée Solvants</option></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-sgh-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Audit d'Étiquette &amp; Sécurité Chimie 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Interactif d'Étiquette SGH</h2>
+                    </div>
+                    <!-- Sélecteur de Produit Virtuel -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-slate-300">Produit à Auditer :</label>
+                        <select id="sim-product-select" onchange="updateSimSGH()" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-3 py-2 focus:ring-emerald-400">
+                            <option value="acetone">Solvant Acétone Dégraissant</option>
+                            <option value="acide">Acide Sulfurique Concentré</option>
+                            <option value="vernis">Vernis Isolant Industriel</option>
+                            <option value="eau">Eau Déminéralisée Technique</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Label Interactive Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>ÉTIQUETTE CONFORME SGH (VUE INTERACTIVE 60 FPS)</span>
+                            <span id="sim-prod-info">Acétone • CAS 67-64-1</span>
+                        </div>
+                        <canvas id="sghCanvas" width="600" height="260" class="w-full h-56 bg-white rounded-xl border border-slate-300 shadow-inner"></canvas>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Sélection Pictogramme SGH</label>
+                                <select id="sim-pic-user" onchange="updateSimSGH()" class="w-full bg-slate-800 text-white p-2 rounded-xl text-xs font-bold border border-slate-700">
+                                    <option value="inflammable">Flamme (Inflammable SGH02)</option>
+                                    <option value="corrosif">Tubes / Main (Corrosif SGH05)</option>
+                                    <option value="toxique">Tête de Mort (Toxique SGH06)</option>
+                                    <option value="sante">Silhouette (Danger Santé SGH08)</option>
+                                    <option value="neutre">Aucun Pictogramme</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Mention d'Avertissement</label>
+                                <select id="sim-warn-user" onchange="updateSimSGH()" class="w-full bg-slate-800 text-white p-2 rounded-xl text-xs font-bold border border-slate-700">
+                                    <option value="DANGER">DANGER</option>
+                                    <option value="ATTENTION">ATTENTION</option>
+                                    <option value="AUCUNE">AUCUNE MENTION</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-4">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">BILAN D'AUDIT SGH</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Conformité de l'Étiquette</span>
+                            <span class="text-xl font-bold font-mono text-emerald-400" id="sim-audit-status">100% CONFORME</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Niveau de Danger</span>
+                            <span class="text-2xl font-bold font-mono text-amber-400" id="sim-danger-level">ÉLEVÉ (4/5)</span>
+                        </div>
+
+                        <div id="sim-epi-req" class="w-full p-3 rounded-xl border text-xs font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            EPI REQUIRED : GANTS + LUNETTES
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Secours en cas d'accident de Chimie
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Pendant combien de minutes au minimum faut-il rincer la peau ou les yeux à l'eau claire après une projection corrosive ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="1" id="user-time-guess" placeholder="Durée en minutes (ex: 15)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessTime()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Durée
+                    </button>
+                </div>
+                <div id="guess-result-time" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initSGHCanvas();
+            }
+        }
+
+        function checkRealSGH() {
+            const pa = document.getElementById('pic-a').value;
+            const sa = document.getElementById('stk-a').value;
+            const pb = document.getElementById('pic-b').value;
+            const sb = document.getElementById('stk-b').value;
+            const status = document.getElementById('real-sgh-status');
+
+            status.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-amber-100', 'text-amber-900');
+
+            if (pa === 'corrosif' && sa === 'acides' && pb === 'inflammable' && sb === 'ignifugee') {
+                status.classList.add('bg-emerald-100', 'text-emerald-900');
+                status.innerHTML = "🎉 Audit 100% conforme ! Acide Chlorhydrique = Corrosif dans l'armoire acides. Acétone = Inflammable dans l'armoire ignifugée.";
+            } else {
+                status.classList.add('bg-amber-100', 'text-amber-900');
+                status.innerHTML = "⚠️ Vérifiez vos sélections : Acide = Corrosif (Armoire Acides), Solvant = Inflammable (Armoire Ignifugée).";
+            }
+        }
+
+        let canvas, ctx;
+
+        const productDB = {
+            acetone: { name: "ACÉTONE DÉGRAISSANT", pic: "inflammable", warn: "DANGER", risk: "ÉLEVÉ (4/5)", epi: "EPI : GANTS NITRILE + LUNETTES + HOTTE", h: "H225: Liquide et vapeurs très inflammables." },
+            acide: { name: "ACIDE SULFURIQUE 96%", pic: "corrosif", warn: "DANGER", risk: "CRITIQUE (5/5)", epi: "EPI : VISIÈRE FACIALE + GANTS LONGS + TABLIER", h: "H314: Provoque des brûlures graves de la peau." },
+            vernis: { name: "VERNIS ISOLANT PRO", pic: "sante", warn: "ATTENTION", risk: "MOYEN (3/5)", epi: "EPI : GANTS NITRILE + MASQUE VAPEURS", h: "H351: Susceptible de provoquer le cancer." },
+            eau: { name: "EAU DÉMINÉRALISÉE", pic: "neutre", warn: "AUCUNE", risk: "NUL (0/5)", epi: "EPI : LUNETTES STANDARD", h: "Aucune phrase de danger." }
+        };
+
+        function initSGHCanvas() {
+            canvas = document.getElementById('sghCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            requestAnimationFrame(drawSGH);
+            updateSimSGH();
+        }
+
+        function updateSimSGH() {
+            const pKey = document.getElementById('sim-product-select').value;
+            const p = productDB[pKey];
+
+            const userPic = document.getElementById('sim-pic-user').value;
+            const userWarn = document.getElementById('sim-warn-user').value;
+
+            document.getElementById('sim-prod-info').innerText = `${p.name}`;
+            document.getElementById('sim-danger-level').innerText = p.risk;
+            document.getElementById('sim-epi-req').innerText = p.epi;
+
+            const isConform = (userPic === p.pic) && (userWarn === p.warn);
+            const auditElem = document.getElementById('sim-audit-status');
+
+            if (isConform) {
+                auditElem.innerText = "100% CONFORME";
+                auditElem.className = "text-xl font-bold font-mono text-emerald-400";
+            } else {
+                auditElem.innerText = "NON CONFORME";
+                auditElem.className = "text-xl font-bold font-mono text-rose-400";
+            }
+        }
+
+        function drawSGH() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const pKey = document.getElementById('sim-product-select').value;
+            const p = productDB[pKey];
+
+            // Outer Label Border
+            ctx.strokeStyle = '#0284c7';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+            // Title Banner
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(12, 12, canvas.width - 24, 36);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px Outfit';
+            ctx.fillText(p.name, 25, 36);
+
+            // Warning Mention
+            const userWarn = document.getElementById('sim-warn-user').value;
+            ctx.fillStyle = userWarn === 'DANGER' ? '#dc2626' : (userWarn === 'ATTENTION' ? '#d97706' : '#64748b');
+            ctx.font = 'extrabold 14px Outfit';
+            ctx.fillText("MENTION : " + userWarn, 25, 70);
+
+            // Danger H phrase
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 11px Inter';
+            ctx.fillText(p.h, 25, 95);
+
+            // Draw SGH Diamond
+            const userPic = document.getElementById('sim-pic-user').value;
+
+            if (userPic !== 'neutre') {
+                const cx = canvas.width - 90;
+                const cy = 130;
+                const r = 40;
+
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(Math.PI / 4);
+
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(-r, -r, r * 2, r * 2);
+
+                ctx.strokeStyle = '#dc2626';
+                ctx.lineWidth = 5;
+                ctx.strokeRect(-r, -r, r * 2, r * 2);
+
+                ctx.restore();
+
+                // Draw Symbol Text inside
+                ctx.fillStyle = '#0f172a';
+                ctx.font = 'bold 12px Outfit';
+                ctx.textAlign = 'center';
+                if (userPic === 'inflammable') ctx.fillText("FLAMME", cx, cy + 4);
+                else if (userPic === 'corrosif') ctx.fillText("CORROSIF", cx, cy + 4);
+                else if (userPic === 'toxique') ctx.fillText("TOXIQUE", cx, cy + 4);
+                else if (userPic === 'sante') ctx.fillText("SANTÉ", cx, cy + 4);
+                ctx.textAlign = 'left';
+            }
+
+            // Footer of Label
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(12, canvas.height - 45, canvas.width - 24, 33);
+            ctx.fillStyle = '#64748b';
+            ctx.font = '10px Inter';
+            ctx.fillText("Fournisseur : Chimie Pro SAS • Urgence ORFILA : +33 (0)1 45 42 59 59", 25, canvas.height - 24);
+
+            requestAnimationFrame(drawSGH);
+        }
+
+        function checkGuessTime() {
+            const ans = parseFloat(document.getElementById('user-time-guess').value);
+            const target = 15;
+            const res = document.getElementById('guess-result-time');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans >= 15) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Exact ! Le rinçage immédiat à l'eau claire doit durer au moins 15 minutes ininterrompues.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Trop court ! Un rinçage de sécurité doit durer au minimum 15 minutes.";
+            }
+        }
+    </script>
+</body>
+</html>

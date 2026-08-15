@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Solutions Aqueuses, Ions & pH (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 2 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Solutions Aqueuses, Ions &amp; Mesure du pH</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome &amp; Préparation DNB Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices gradués sur les ions, le pH, les tests de précipitation et la neutralisation.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices d'application</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Formation et Écriture des Ions
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Cations / Anions)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                1. Un atome de zinc ($\text{Zn}$) perd 2 électrons. Écrire la formule de l'ion obtenu et préciser s'il s'agit d'un cation ou d'un anion.<br>
+                2. Un atome de fluor ($\text{F}$) gagne 1 électron. Écrire la formule de l'ion fluorure obtenu.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• 1 : L'atome de zinc devient l'ion **$\mathbf{Zn^{2+}}$** (c'est un **cation** car il porte une charge positive).</p>
+                <p>• 2 : L'atome de fluor devient l'ion **$\mathbf{F^-}$** (c'est un **anion** car il porte une charge négative).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Lecture de pH &amp; Classification
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Échelle de pH)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Classer les solutions suivantes en : **Acide**, **Neutre** ou **Basique** :<br>
+                • Vinaigre blanc : $pH = 2{,}8$<br>
+                • Eau de Javel : $pH = 11{,}5$<br>
+                • Eau minérale plate : $pH = 7{,}0$<br>
+                • Sang humain : $pH = 7{,}4$
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• Vinaigre ($pH=2{,}8 < 7$) : **Acide**.</p>
+                <p>• Eau de Javel ($pH=11{,}5 > 7$) : **Basique**.</p>
+                <p>• Eau minérale ($pH=7{,}0$) : **Neutre**.</p>
+                <p>• Sang humain ($pH=7{,}4 > 7$) : **Faiblement basique**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Identification des Ions Métalliques
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Précipités)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Dans 3 tubes à essai contenant des solutions inconnues, on ajoute quelques gouttes de soude ($\text{OH}^-$) :<br>
+                • Tube A : formation d'un précipité bleu.<br>
+                • Tube B : formation d'un précipité rouille.<br>
+                • Tube C : formation d'un précipité vert.<br>
+                Identifier les ions métalliques présents dans chaque tube.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• Tube A (bleu) : **Ions Cuivre II ($\mathbf{Cu^{2+}}$)**.</p>
+                <p>• Tube B (rouille) : **Ions Fer III ($\mathbf{Fe^{3+}}$)**.</p>
+                <p>• Tube C (vert) : **Ions Fer II ($\mathbf{Fe^{2+}}$)**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Structure Atomique de l'Ion Fer III (Fe³⁺)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Structure de l'ion)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                L'atome de fer a pour numéro atomique $Z=26$.<br>
+                4.1. Combien de protons contient le noyau de l'ion $\text{Fe}^{3+}$ ?<br>
+                4.2. Combien d'électrons possède cet ion ? Justifier le calcul.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 4.1 : Le noyau ne change pas : il possède toujours **26 protons** ($Z=26$).</p>
+                <p>• 4.2 : L'ion porte 3 charges positives, il a donc perdu 3 électrons : $26 - 3 = \mathbf{23\text{ électrons}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Dilution d'un Décapant Acide
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Effet de la dilution)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un flacon de décapant pour carrelage a un $pH = 1{,}0$. Un carreleur dilue ce produit en y ajoutant 10 litres d'eau pure ($pH = 7$).<br>
+                5.1. Comment varie le pH lors de l'ajout d'eau ?<br>
+                5.2. Ce pH peut-il atteindre 8 ? Justifier.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : La concentration en ions $\text{H}^+$ diminue, donc le pH **augmente et se rapproche de 7**.</p>
+                <p>• 5.2 : Non, car on ajoute de l'eau neutre ($pH = 7$) : une simple dilution d'un acide ne peut **jamais dépasser 7**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Réaction de Neutralisation
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Équation de réaction)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                On mélange dans un bécher de l'acide chlorhydrique ($\text{H}^+ + \text{Cl}^-$) et de la soude ($\text{Na}^+ + \text{OH}^-$). On constate que le thermomètre monte de $20^\circ\text{C}$ à $28^\circ\text{C}$.<br>
+                6.1. Écrire l'équation simplifiée de la réaction entre les ions $\text{H}^+$ et $\text{OH}^-$.<br>
+                6.2. Comment qualifie-t-on une réaction chimique qui libère de la chaleur ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : $\mathbf{H^+ + OH^- \longrightarrow H_2O}$.</p>
+                <p>• 6.2 : C'est une réaction **exothermique**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Neutralité Électrique des Solutions Ioniques
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Formule ionique)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une solution de chlorure de cuivre contient des ions cuivre II $\text{Cu}^{2+}$ et des ions chlorure $\text{Cl}^-$.<br>
+                7.1. Pourquoi doit-il y avoir 2 ions chlorure $\text{Cl}^-$ pour chaque ion cuivre $\text{Cu}^{2+}$ ?<br>
+                7.2. Écrire la formule statistique et la formule ionique du chlorure de cuivre.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : Pour respecter la **neutralité électrique globale** de la solution : $+2 + 2 \times (-1) = 0$.</p>
+                <p>• 7.2 : Formule ionique : $(\text{Cu}^{2+} + 2\,\text{Cl}^-)$ | Formule statistique : $\text{CuCl}_2$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Contrôle d'un Effluent d'Atelier (Type Brevet)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse Brevet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une cuve d'eaux usées industrielles a un $pH = 3{,}0$. L'ajout de soude donne un précipité bleu et l'ajout de nitrate d'argent donne un précipité blanc qui noircit.<br>
+                8.1. Préciser le nom des deux ions identifiés dans la cuve.<br>
+                8.2. Quel est l'ion responsable du $pH = 3{,}0$ ?<br>
+                8.3. Décrire l'opération à effectuer avant de rejeter cette eau dans l'environnement en respectant les normes de sécurité.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : **Ions Cuivre II ($\text{Cu}^{2+}$)** et **Ions Chlorure ($\text{Cl}^-$)**.</p>
+                <p>• 8.2 : L'**ion hydrogène $\text{H}^+$**.</p>
+                <p>• 8.3 : 1) Neutraliser l'acidité en ajoutant progressivement une base pour amener le pH entre 6,5 et 8,5. 2) Filtrer les boues de précipité métallique ($\text{Cu(OH)}_2$) pour les faire traiter par une filière de recyclage spécialisée.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

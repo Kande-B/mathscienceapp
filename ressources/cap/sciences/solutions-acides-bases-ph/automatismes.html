@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatismes & Ritualisation - Acides, Bases et pH CAP</title>
+    <title>Automatismes - Solutions Aqueuses, Acides & pH CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -31,354 +31,444 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
-
+        
         .perspective-1000 { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
         .rotate-y-180 { transform: rotateY(180deg); }
 
-        .correct-bg { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
-        .wrong-bg { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
+    <!-- Header & Navigation Unifiée -->
     <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
-                    <i class="fa-solid fa-bolt text-lg"></i>
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-vial text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 2 CAP • Sciences Physiques & Chimiques</span>
-                    <h1 class="text-xl font-bold font-heading">Solutions Aqueuses, Acides, Bases et pH</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 2 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Solutions Aqueuses, Acides &amp; pH</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence CAP Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
-                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-yellow-500 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Chimie</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
 
-        <!-- SCOREBOARD EN DIRECT -->
-        <div class="bg-slate-900 text-white p-6 rounded-3xl shadow-xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <span class="bg-yellow-500 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Entraînement Rituel 10 min</span>
-                <h2 class="text-2xl font-extrabold font-heading text-white mt-1">Ritualisation : Acides & pH Flash</h2>
-            </div>
-            <div class="flex items-center gap-4 bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700">
-                <i class="fa-solid fa-trophy text-yellow-400 text-2xl"></i>
-                <div>
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Global</span>
-                    <span id="global-score" class="text-xl font-extrabold text-yellow-400 font-mono">0 / 16</span>
-                </div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes &amp; Échelle de pH</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Reconnaître les domaines acide, neutre et basique, la mesure au papier pH / pH-mètre et les règles de dilution.</p>
         </div>
 
-        <!-- MODULE 1 : 10 FLASHCARDS INTERACTIVES 3D -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-clone text-yellow-500"></i> Module 1 : 10 Flashcards Mémoire (pH et Dilution)
-                </h3>
-                <span class="text-xs font-bold text-slate-500">Cliquez pour retourner</span>
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-emerald-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <!-- FC 1 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 1</span>
-                            <p class="text-xs font-bold text-center">Bornes de l'échelle de pH ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Domaine Acide</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-lemon text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la valeur de pH d'une solution acide ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">De 0 à 14 !</p>
-                            <button onclick="event.stopPropagation(); markFC(1)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">pH inférieur à 7</span>
+                            <div class="my-auto space-y-1">
+                                <p class="text-sm font-bold font-heading text-red-300">$$\text{pH} < 7$$</p>
+                                <p class="text-xs text-slate-300">Plus le pH est petit (vers 0), plus la solution est acide (ex: jus de citron, acide chlorhydrique).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 2 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 2</span>
-                            <p class="text-xs font-bold text-center">pH d'une solution neutre ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Domaine Neutre</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-droplet text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la valeur de pH d'une solution neutre ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">pH = 7 !</p>
-                            <button onclick="event.stopPropagation(); markFC(2)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 3 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 3</span>
-                            <p class="text-xs font-bold text-center">Domaine de pH d'un acide ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">pH &lt; 7 !</p>
-                            <button onclick="event.stopPropagation(); markFC(3)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">pH égal à 7</span>
+                            <div class="my-auto space-y-1">
+                                <p class="text-sm font-bold font-heading text-emerald-300">$$\text{pH} = 7$$</p>
+                                <p class="text-xs text-slate-300">L'eau pure et les solutions neutres ont un pH égal à 7 (autant d'ions $H^+$ que d'ions $HO^-$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 4 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 4</span>
-                            <p class="text-xs font-bold text-center">Domaine de pH d'une base ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-blue-500">
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Domaine Basique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-soap text-4xl text-blue-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la valeur de pH d'une solution basique ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">pH &gt; 7 !</p>
-                            <button onclick="event.stopPropagation(); markFC(4)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 5 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 5</span>
-                            <p class="text-xs font-bold text-center">Ions responsables de l'acidité ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Ions Hydrogène H+ !</p>
-                            <button onclick="event.stopPropagation(); markFC(5)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-blue-400">
+                            <span class="text-xs font-bold text-blue-400 uppercase tracking-widest">pH supérieur à 7</span>
+                            <div class="my-auto space-y-1">
+                                <p class="text-sm font-bold font-heading text-blue-300">$$\text{pH} > 7$$</p>
+                                <p class="text-xs text-slate-300">Plus le pH est grand (vers 14), plus la solution est basique (ex: eau de Javel, déboucheur à la soude).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 6 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 6</span>
-                            <p class="text-xs font-bold text-center">Ions de la basicité ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Mesure du pH</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-[#1e293b] fa-[#1e293b] fa-vial-circle-check text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la différence entre papier pH et pH-mètre ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Ions Hydroxyde HO- !</p>
-                            <button onclick="event.stopPropagation(); markFC(6)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 7 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 7</span>
-                            <p class="text-xs font-bold text-center">Effet dilution sur un acide ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le pH augmente vers 7 !</p>
-                            <button onclick="event.stopPropagation(); markFC(7)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Couleur vs Valeur Précise</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p>• **Papier pH** : changement de couleur (précision $\pm 1$)</p>
+                                <p>• **pH-mètre** : affichage digital précis (précision $\pm 0{,}1$)</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 8 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 8</span>
-                            <p class="text-xs font-bold text-center">Effet dilution sur une base ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Effet de la Dilution</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-glass-water text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment évolue le pH d'un acide lorsqu'on ajoute de l'eau ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le pH diminue vers 7 !</p>
-                            <button onclick="event.stopPropagation(); markFC(8)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FC 9 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 9</span>
-                            <p class="text-xs font-bold text-center">Appareil de mesure précise du pH ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
-                        </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Le pH-mètre étalonné !</p>
-                            <button onclick="event.stopPropagation(); markFC(9)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Augmentation vers 7</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p>Le pH **AUGMENTE et se rapproche de 7**.</p>
+                                <p class="text-slate-300 font-normal">L'acide devient moins concentré et moins dangereux, sans jamais dépasser 7.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- FC 10 -->
-                <div class="h-44 perspective-1000 cursor-pointer" onclick="flipCard(this)">
-                    <div class="relative w-full h-full duration-500 transform-style-3d card-inner">
-                        <div class="absolute w-full h-full bg-slate-900 text-white p-4 rounded-2xl flex flex-col justify-between backface-hidden border border-slate-800">
-                            <span class="text-[10px] font-bold uppercase text-yellow-400">Flashcard 10</span>
-                            <p class="text-xs font-bold text-center">Ordre de mélange dilution d'acide ?</p>
-                            <span class="text-[9px] text-slate-400 text-center">🔄 Voir verso</span>
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Ion Hydrogène</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-atom text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quel ion est responsable de l'acidité d'une solution ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
                         </div>
-                        <div class="absolute w-full h-full bg-yellow-500 text-slate-950 p-4 rounded-2xl flex flex-col justify-between backface-hidden rotate-y-180 border border-yellow-400">
-                            <span class="text-[10px] font-bold uppercase">Réponse</span>
-                            <p class="text-xs font-extrabold text-center">Verser l'Acide dans l'Eau !</p>
-                            <button onclick="event.stopPropagation(); markFC(10)" class="w-full bg-slate-950 text-white text-[10px] py-1 rounded-lg font-bold">Maîtrisé !</button>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Ion H+</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p>L'ion **Hydrogène $H^+$**</p>
+                                <p class="text-slate-300 font-normal">Plus une solution contient d'ions $H^+$, plus elle est acide et son pH est faible.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- MODULE 2 : CALCUL MENTAL RAPIDE (6 DÉFIS) -->
-        <section class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow space-y-6">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h3 class="text-xl font-bold font-heading text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-vial text-emerald-500"></i> Module 2 : Quiz pH & Solutions CAP
-                </h3>
-                <span class="text-xs font-bold text-slate-500">6 Défis</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">1. Une solution de pH = 12 est-elle acide ou basique ?</label>
-                    <select id="m2-q1" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="BASIQUE">Basique (pH &gt; 7)</option>
-                        <option value="ACIDE">Acide (pH &lt; 7)</option>
-                    </select>
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Test de Mémorisation</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes CAP (10 Questions • 20 Pts)</h2>
                 </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">2. Quel est le pH du jus de citron ?</label>
-                    <select id="m2-q2" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="2.5">pH environ 2,5 (Acide)</option>
-                        <option value="11">pH environ 11 (Basique)</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">3. Quel est le pH d'un produit décapant four à la soude ?</label>
-                    <select id="m2-q3" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="13">pH environ 13 (Très Basique)</option>
-                        <option value="3">pH environ 3 (Acide)</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">4. Lors de la dilution de l'Eau de Javel (pH 11), le pH devient-il 9 ou 13 ?</label>
-                    <select id="m2-q4" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="9">pH = 9 (diminue vers 7)</option>
-                        <option value="13">pH = 13 (augmente)</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">5. Quelle bandelette change de couleur selon le pH ?</label>
-                    <select id="m2-q5" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="PAPIER">Le papier pH</option>
-                        <option value="THERMOMETRE">Le thermomètre</option>
-                    </select>
-                </div>
-
-                <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
-                    <label class="font-bold text-slate-900 block">6. Si pH = 7,00, quelle est la concentration en ions H+ et HO- ?</label>
-                    <select id="m2-q6" class="border rounded-xl p-2 w-full font-bold bg-white">
-                        <option value="">Sélectionnez...</option>
-                        <option value="EGALITE">Égalité exacte entre ions H+ et HO-</option>
-                        <option value="PLUS_H">Plus d'ions H+</option>
-                    </select>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-emerald-100 text-emerald-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-emerald-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
                 </div>
             </div>
 
-            <button onclick="checkM2()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-2xl shadow-md transition-colors">
-                <i class="fa-solid fa-check-circle mr-2"></i> Valider mes réponses
-            </button>
-            <div id="fb-m2" class="text-xs hidden p-4 rounded-2xl font-bold"></div>
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-emerald-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
         </section>
 
     </main>
 
-    <!-- JS POUR AUTOMATISMES ET SCOREBOARD -->
+    <!-- SCRIPT DU QUIZ -->
     <script>
-        let fcScores = new Set();
-        let m2Score = 0;
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un produit nettoyant d'atelier indique un pH = 2. Comment qualifie-t-on cette solution ?",
+                options: ["Neutre", "Fortement acide", "Basique", "Sans aucun danger"],
+                correct: 1,
+                explanation: "Tout pH inférieur à 7 caractérise une solution **acide**. Un pH de 2 est fortement acide."
+            },
+            {
+                id: 2,
+                q: "Quelle est la valeur exacte du pH de l'eau pure neutre à 25 °C ?",
+                options: ["0", "7", "14", "10"],
+                correct: 1,
+                explanation: "L'eau pure neutre possède un **$\text{pH} = 7$**."
+            },
+            {
+                id: 3,
+                q: "Une solution de lessive de soude a un pH = 13. Quelle est sa nature ?",
+                options: ["Acide", "Neutre", "Fortement basique", "Liquide inflammable"],
+                correct: 2,
+                explanation: "Tout pH supérieur à 7 caractérise une solution **basique** (ou alcaline)."
+            },
+            {
+                id: 4,
+                q: "Quel instrument permet d'obtenir la valeur numérique la plus précise du pH d'une solution ?",
+                options: ["Le papier pH (couleur)", "Le thermomètre", "Le pH-mètre électronique étalonné", "Le voltmètre"],
+                correct: 2,
+                explanation: "Le **pH-mètre** donne une mesure précise à $\pm 0{,}1$ unité."
+            },
+            {
+                id: 5,
+                q: "Si vous ajoutez un grand volume d'eau dans un bécher d'acide chlorhydrique (dilution), que fait le pH ?",
+                options: ["Le pH diminue vers 0", "Le pH augmente et se rapproche de 7", "Le pH monte à 14", "Le pH ne change pas"],
+                correct: 1,
+                explanation: "La dilution diminue la concentration en ions $H^+$, donc le pH **augmente et se rapproche de 7**."
+            },
+            {
+                id: 6,
+                q: "Quel est l'ion responsable de la basicité d'une solution aqueuse ?",
+                options: ["L'ion Hydrogène H+", "L'ion Hydroxyde HO-", "L'ion Sodium Na+", "L'ion Chlorure Cl-"],
+                correct: 1,
+                explanation: "Les ions **Hydroxydes $HO^-$** caractérisent les solutions basiques."
+            },
+            {
+                id: 7,
+                q: "Quelle est la règle de sécurité absolue lors de la préparation d'une solution d'acide concentré ?",
+                options: ["Verser rapidement l'eau dans l'acide", "Toujours verser l'acide dans l'eau lentement avec EPI", "Mélanger avec un outil en fer", "Fermer hermétiquement le récipient pendant le mélange"],
+                correct: 1,
+                explanation: "Il faut **toujours verser l'acide dans l'eau** pour éviter les projections bouillantes d'acide."
+            },
+            {
+                id: 8,
+                q: "Quel pictogramme SGH figure obligatoirement sur un flacon d'acide fort (pH = 1) ou de soude (pH = 13) ?",
+                options: ["Flamme", "Corrosif (SGH05)", "Explosif", "Environnement"],
+                correct: 1,
+                explanation: "Les acides et bases forts sont des liquides **Corrosifs** qui rongent les tissus."
+            },
+            {
+                id: 9,
+                q: "Le jus de citron a un pH de 2,5. Le jus d'orange a un pH de 3,5. Lequel est le plus acide ?",
+                options: ["Le jus d'orange", "Le jus de citron", "Ils ont la même acidité", "Aucun des deux"],
+                correct: 1,
+                explanation: "Plus la valeur du pH est **petite**, plus la solution est **acide**."
+            },
+            {
+                id: 10,
+                q: "Comment varie le pH d'une solution basique (pH = 12) lorsqu'on la dilue avec de l'eau ?",
+                options: ["Le pH augmente vers 14", "Le pH diminue et se rapproche de 7", "Le pH tombe à 0", "Le pH reste bloqué à 12"],
+                correct: 1,
+                explanation: "Pour une base, la dilution diminue la basicité : le pH **diminue et se rapproche de 7**."
+            }
+        ];
 
-        function flipCard(el) {
-            el.querySelector('.card-inner').classList.toggle('rotate-y-180');
-        }
+        let userAnswers = {};
 
-        function markFC(num) {
-            fcScores.add(num);
-            updateScore();
-        }
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
 
-        function checkM2() {
-            let q1 = document.getElementById('m2-q1').value;
-            let q2 = document.getElementById('m2-q2').value;
-            let q3 = document.getElementById('m2-q3').value;
-            let q4 = document.getElementById('m2-q4').value;
-            let q5 = document.getElementById('m2-q5').value;
-            let q6 = document.getElementById('m2-q6').value;
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-emerald-500 focus:ring-emerald-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
 
-            let score = 0;
-            if (q1 === "BASIQUE") score++;
-            if (q2 === "2.5") score++;
-            if (q3 === "13") score++;
-            if (q4 === "9") score++;
-            if (q5 === "PAPIER") score++;
-            if (q6 === "EGALITE") score++;
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-emerald-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
 
-            m2Score = score;
-            updateScore();
-
-            let fb = document.getElementById('fb-m2');
-            fb.classList.remove('hidden', 'correct-bg', 'wrong-bg');
-
-            if (score === 6) {
-                fb.classList.add('correct-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Parfait ! 6 / 6 dans le quiz pH & solutions !`;
-            } else {
-                fb.classList.add('wrong-bg');
-                fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i> Vous avez obtenu ${score}/6. Réessayez !`;
+            if (window.MathJax) {
+                MathJax.typesetPromise();
             }
         }
 
-        function updateScore() {
-            let total = fcScores.size + m2Score;
-            document.getElementById('global-score').innerText = `${total} / 16`;
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
         }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement l'échelle de pH (0 à 14), la mesure au pH-mètre et les règles de dilution !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions d'acidité et de basicité sont acquises. Pensez à réviser l'effet de la dilution sur le pH.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et réentraînez-vous sur les valeurs repères (pH < 7 acide, pH = 7 neutre, pH > 7 basique).";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
     </script>
+
 </body>
 </html>

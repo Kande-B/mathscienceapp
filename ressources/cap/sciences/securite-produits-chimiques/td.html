@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche de TD - Sécurité & Produits Chimiques CAP</title>
+    <title>TD & Exercices - Sécurité & Pictogrammes CAP</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -34,184 +34,287 @@
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
 
         @media print {
-            header, nav, .no-print { display: none !important; }
-            body { background-color: #ffffff !important; color: #000000 !important; padding-bottom: 0 !important; }
-            main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            .print-card { border: 1px solid #cbd5e1 !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 1.5rem !important; }
-            .print-correction { display: block !important; border-top: 2px dashed #94a3b8 !important; background-color: #f8fafc !important; }
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
         }
     </style>
 </head>
 <body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
 
-    <!-- Header & Nav unifiée pour la Séquence CAP Sciences -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md no-print">
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
                     <i class="fa-solid fa-dumbbell text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 1 CAP • Sciences Physiques & Chimiques</span>
-                    <h1 class="text-xl font-bold font-heading">Sécurité & Produits Chimiques</h1>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 1 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Sécurité des Produits Chimiques &amp; Pictogrammes</h1>
                 </div>
             </div>
-            <!-- Navigation de la Séquence CAP Sciences -->
+            <!-- Navigation Séquence -->
             <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
                 <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
-                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-emerald-400"></i> Activités</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
                 <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
                 <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
-                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Chimie</a>
-                <a href="ccf.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- EN-TÊTE DE LA FICHE DE TD -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm border-l-8 border-l-indigo-600 print-card">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
-                <div>
-                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase text-indigo-600 tracking-wider">
-                        <span>Fiche d'Entraînement A4 Imprimable Avec Figures</span> • <span>Certificat d'Aptitude Professionnelle</span>
-                    </div>
-                    <h2 class="text-2xl font-extrabold text-slate-900 font-heading mt-1">TD : 10 Exercices Métier sur la Sécurité Chimique</h2>
-                </div>
-                <div class="flex items-center gap-2 no-print">
-                    <button onclick="window.print()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-200 transition-colors">
-                        <i class="fa-solid fa-print"></i> Imprimer la fiche TD
-                    </button>
-                    <button onclick="toggleAllCorrections()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-2 border border-indigo-200 transition-colors">
-                        <i class="fa-solid fa-eye"></i> <span id="toggle-all-text">Tout afficher / masquer</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- GRILLE DES COMPETENCES DU CAP -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 text-[11px] font-bold">
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-pink-600 block">S'approprier</span> Relever les pictogrammes</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-orange-600 block">Analyser</span> Évaluer les risques</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-blue-600 block">Réaliser</span> Choisir les EPI</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-green-600 block">Valider</span> Contrôler le stockage</div>
-                <div class="p-2 bg-slate-50 border rounded-lg text-center"><span class="text-yellow-600 block">Communiquer</span> Rédiger les consignes</div>
-            </div>
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome CAP</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices d'application avec corrigés pas à pas dépliables.</p>
         </div>
 
-        <!-- EXERCICE 1 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 1</span>
-                    CAP Peinture : Identification du Pictogramme Solvant
-                </h3>
-                <span class="bg-pink-100 text-pink-800 text-xs font-extrabold px-2.5 py-1 rounded-md">S'approprier</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un peintre en bâtiment utilise un solvant décapant. Sur le bidon figure le pictogramme représenté ci-contre.</p>
-                    <p class="font-bold">1. Nommez ce pictogramme et expliquez le danger encouru.</p>
-                    <p class="font-bold">2. Indiquez la précaution majeure à prendre (EPI + ventilation).</p>
-                </div>
-                <!-- SVG EX 1 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-s1" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-s1)" />
-                        <!-- Losange Inflammable -->
-                        <polygon points="75,15 110,50 75,85 40,50" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
-                        <path d="M 65 65 Q 75 35 85 65" fill="none" stroke="#0f172a" stroke-width="3"/>
-                        <text x="75" y="95" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">Danger = ?</text>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex1')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices gradués</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
                 </button>
             </div>
-            <div id="corr-ex1" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>1. Pictogramme **Inflammable** (flammes) : le produit peut s'enflammer facilement au contact d'une étincelle ou d'une source de chaleur.</p>
-                <p>2. Précautions : Travailler dans un local ventilé, porter un masque à cartouche et des gants, éloigner de toute flamme nue.</p>
-            </div>
         </div>
 
-        <!-- EXERCICE 2 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-6 card-shadow print-card space-y-4">
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                    <span class="w-7 h-7 bg-indigo-100 text-indigo-800 rounded-lg flex items-center justify-center font-bold text-xs">Ex 2</span>
-                    CAP Maintenance : Manipulation d'Acide de Batterie
-                </h3>
-                <span class="bg-orange-100 text-orange-800 text-xs font-extrabold px-2.5 py-1 rounded-md">Analyser</span>
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Association Pictogramme - Danger
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Reconnaissance)</span>
             </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Associer chacun des 4 pictogrammes SGH au danger correspondant :<br>
+                A) Tête de mort dans un losange rouge. <br>
+                B) Flamme dans un losange rouge. <br>
+                C) Tubes versant du liquide sur une main. <br>
+                D) Poisson et arbre mort.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Nommer le danger principal pour A, B, C et D.
+            </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                <div class="md:col-span-2 text-sm text-slate-700 space-y-3">
-                    <p>Un mécanicien automobile manipule un bidon d'acide pour batterie portant le pictogramme **Corrosif**.</p>
-                    <p class="font-bold">Listez les 3 Équipements de Protection Individuelle (EPI) obligatoires.</p>
-                </div>
-                <!-- SVG EX 2 -->
-                <div class="p-3 bg-slate-50 border rounded-xl text-center overflow-x-auto">
-                    <svg width="150" height="100" viewBox="0 0 150 100" class="mx-auto font-sans">
-                        <defs>
-                            <pattern id="grid-s2" width="15" height="15" patternUnits="userSpaceOnUse">
-                                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
-                            </pattern>
-                        </defs>
-                        <rect width="150" height="100" fill="url(#grid-s2)" />
-                        <polygon points="75,15 110,50 75,85 40,50" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
-                        <text x="75" y="55" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">CORROSIF</text>
-                        <text x="75" y="95" font-size="8" font-weight="bold" fill="#dc2626" text-anchor="middle">EPI = ?</text>
-                    </svg>
-                </div>
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• A = **Toxique (Danger mortel)** &nbsp;|&nbsp; B = **Inflammable** &nbsp;|&nbsp; C = **Corrosif (Brûlures)** &nbsp;|&nbsp; D = **Danger pour l'environnement aquatique**.</p>
             </div>
+        </section>
 
-            <div class="mt-4 no-print">
-                <button onclick="toggleCorrection('corr-ex2')" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chevron-down"></i> Voir la correction rédigée
-                </button>
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Décryptage d'une Étiquette de Décapant
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Lecture d'étiquette)</span>
             </div>
-            <div id="corr-ex2" class="hidden mt-4 pt-4 border-t border-dashed border-indigo-200 bg-indigo-50/40 p-4 rounded-xl text-xs space-y-2 text-slate-800 print-correction">
-                <p class="font-bold text-indigo-900">Corrigé rédigé :</p>
-                <p>Les 3 EPI indispensables sont : <br>
-                1. **Lunettes de protection étanches** (protection des yeux contre les projections d'acide). <br>
-                2. **Gants étanches en nitrile ou néoprène** (protection des mains contre les brûlures). <br>
-                3. **Blouse ou tablier de chimie résistant aux acides** (protection de la peau et des vêtements).</p>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                L'étiquette d'un flacon de nettoyant industriel porte la mention d'avertissement **DANGER**, la phrase **H314 (Brûlures graves de la peau et lésions oculaires)** et le conseil **P280**.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                2.1. Quel est le pictogramme obligatoire sur ce produit ?<br>
+                2.2. Que devez-vous porter avant d'utiliser ce produit ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• 2.1 : Le pictogramme **Corrosif** (SGH05).</p>
+                <p>• 2.2 : Porter des **gants de protection et des lunettes de sécurité** étanches.</p>
             </div>
-        </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Choix des EPI par Tâche d'Atelier
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Sécurité atelier)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Indiquer pour chacune des tâches d'atelier suivantes les EPI indispensables :<br>
+                1) Dégraissage de pièces au solvant inflammable. <br>
+                2) Dilution d'acide corrosif pour détartrage. <br>
+                3) Meulage de pièces métalliques.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 1) Gants en nitrile + lunettes de protection + travail sous hotte ventilée.</p>
+                <p>• 2) Visière de protection faciale + gants montants + tablier étanche.</p>
+                <p>• 3) Lunettes panoramiques anti-impact + casque antibruit + gants de travail.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Urgence en Atelier (Secours)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Premiers secours)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Remettre dans l'ordre chronologique les 4 gestes à effectuer en cas d'éclaboussure de produit corrosif sur la main d'un collègue :<br>
+                A) Prévenir le secouriste SST ou le responsable d'atelier. <br>
+                B) Retirer immédiatement les vêtements imbibés si possible. <br>
+                C) Rincer abondamment la peau à l'eau claire pendant au moins 15 minutes. <br>
+                D) Vérifier sur la FDS les consignes spécifiques de secours.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• Ordre correct : **C $\rightarrow$ B $\rightarrow$ A $\rightarrow$ D** (Rincer immédiatement à l'eau est la priorité vitale pour diluer et stopper la corrosion).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Audit des Erreurs de Stockage
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Audit atelier)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Dans une armoire de stockage d'atelier, on observe :<br>
+                1) Un produit nettoyant versé dans une bouteille d'eau Cristaline. <br>
+                2) Un bidon d'acide chlorhydrique posé juste à côté d'un bidon d'essence solvant. <br>
+                3) L'armoire de stockage ouverte sans fermeture à clé.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Expliquer l'erreur commise pour chacun des 3 points.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 1) Risque grave d'ingestion accidentelle (interdiction absolue des récipients alimentaires).</p>
+                <p>• 2) Risque de réaction chimique exothermique violente en cas de fuite entre acide et solvant.</p>
+                <p>• 3) L'armoire de sécurité doit être fermée à clé pour éviter l'accès non autorisé.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Comburant vs Inflammable
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Différenciation)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un flacon A porte la flamme simple (Inflammable). Un flacon B porte la flamme au-dessus d'un rond (Comburant).
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                6.1. Lequel des deux produits brûle lui-même facilement ?<br>
+                6.2. Lequel des deux produits fournit l'oxygène nécessaire pour faire brûler un feu ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : Le produit A (**Inflammable**) brûle lui-même (ex: essence, solvant).</p>
+                <p>• 6.2 : Le produit B (**Comburant**) apporte du dioxygène et active la combustion (ex: dioxygène gazeux, eau oxygénée).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Recherche dans une FDS
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Structure FDS)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une FDS comporte 16 rubriques numérotées de 1 à 16.
+            </p>
+            <p class="text-xs text-slate-700 font-semibold">
+                Dans quelle rubrique exacte devez-vous chercher :<br>
+                A) Les gestes de premiers secours en cas d'accident ? <br>
+                B) Les Équipements de Protection Individuelle (EPI) recommandés ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• A = **Rubrique 4** (Premiers secours).</p>
+                <p>• B = **Rubrique 8** (Contrôle de l'exposition / protection individuelle).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Rédaction d'une Consigne de Poste
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Communication sécurité)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Rédiger une fiche de consigne de sécurité en 3 points clairs destinée au poste de nettoyage chimique d'atelier.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 1) **Vérifier l'étiquette SGH** du flacon avant toute manipulation.</p>
+                <p>• 2) **Mettre les EPI obligatoires** (lunettes + gants nitrile + blouse en coton).</p>
+                <p>• 3) **Ranger les flacons fermés** dans l'armoire de sécurité après usage.</p>
+            </div>
+        </section>
 
     </main>
 
-    <!-- SCRIPTS JS -->
     <script>
-        let allShown = false;
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
 
-        function toggleCorrection(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.toggle('hidden');
-        }
-
-        function toggleAllCorrections() {
-            allShown = !allShown;
-            const ids = ['corr-ex1', 'corr-ex2'];
-            ids.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    if (allShown) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
                 }
             });
-            const btnText = document.getElementById('toggle-all-text');
-            if (btnText) btnText.textContent = allShown ? "Masquer toutes les corrections" : "Afficher toutes les corrections";
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
         }
     </script>
 </body>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Sources & Conversions d'Énergie (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 7 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Sources, Formes &amp; Conversions d'Énergie</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Autonome &amp; Préparation DNB Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices gradués sur l'énergie cinétique $E_c = \frac{1}{2}mv^2$, chaînes énergétiques et rendement $\eta$.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices d'application</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Classification des Sources d'Énergie
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Renouvelable vs Fossile)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Classer les sources d'énergie suivantes en deux catégories (Renouvelables ou Non Renouvelables) :<br>
+                a) Rayonnement solaire • b) Pétrole brut • c) Vent • d) Uranium • e) Biomasse (bois) • f) Gaz naturel.
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• **Sources Renouvelables** : a) Rayonnement solaire, c) Vent, e) Biomasse.</p>
+                <p>• **Sources Non Renouvelables** : b) Pétrole brut (fossile), d) Uranium (nucléaire), f) Gaz naturel (fossile).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Calcul Direct d'Énergie Cinétique
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Formule Ec = 1/2 * m * v^2)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une automobile de masse $m = 1200\text{ kg}$ roule sur une voie rapide à la vitesse $v = 20\text{ m/s}$ ($72\text{ km/h}$).<br>
+                Calculer son énergie cinétique $E_c$ en Joules (J) puis en kiloJoules (kJ).
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>$E_c = \frac{1}{2} \times m \times v^2 = 0{,}5 \times 1200 \times 20^2 = 600 \times 400 = \mathbf{240\,000\text{ Joules}} = \mathbf{240\text{ kJ}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Vitesse Doublée &amp; Énergie Cinétique
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Sécurité routière)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un motard et sa moto ont une masse totale $m = 200\text{ kg}$.<br>
+                3.1. Calculer son énergie cinétique $E_{c1}$ à la vitesse $v_1 = 15\text{ m/s}$ ($54\text{ km/h}$).<br>
+                3.2. Calculer son énergie cinétique $E_{c2}$ si la vitesse double à $v_2 = 30\text{ m/s}$ ($108\text{ km/h}$).<br>
+                3.3. Quel est le rapport $\frac{E_{c2}}{E_{c1}}$ ? Conclure.
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : $E_{c1} = 0{,}5 \times 200 \times 15^2 = 100 \times 225 = \mathbf{22\,500\text{ J}}$ ($22{,}5\text{ kJ}$).</p>
+                <p>• 3.2 : $E_{c2} = 0{,}5 \times 200 \times 30^2 = 100 \times 900 = \mathbf{90\,000\text{ J}}$ ($90\text{ kJ}$).</p>
+                <p>• 3.3 : $\frac{90\,000}{22\,500} = \mathbf{4}$. Lorsque la vitesse est multipliée par 2, l'énergie cinétique est **multipliée par 4**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Rendement d'un Moteur Électrique
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Rendement eta)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un moteur de treuil absorbe une puissance électrique $P_{\text{absorbée}} = 1500\text{ W}$ et fournit une puissance mécanique utile $P_{\text{utile}} = 1200\text{ W}$ pour soulever une charge.<br>
+                4.1. Calculer le rendement $\eta$ de ce moteur en pourcentage.<br>
+                4.2. Calculer la puissance $P_{\text{perdue}}$ dissipée sous forme de chaleur.
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 4.1 : $\eta = \frac{P_{\text{utile}}}{P_{\text{absorbée}}} = \frac{1200}{1500} = 0{,}80 = \mathbf{80\,\%}$.</p>
+                <p>• 4.2 : $P_{\text{perdue}} = 1500 - 1200 = \mathbf{300\text{ Watts}}$ (pertes par effet Joule et frottements).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Chaîne d'une Centrale Hydraulique
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Chaîne de conversion)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Dans un barrage hydroélectrique, l'eau stockée en hauteur chute dans une conduite forcée et entraîne une turbine couplée à un alternateur.<br>
+                5.1. Quelles transformations d'énergie successives ont lieu ?<br>
+                5.2. Quel est le rôle précis de l'alternateur ?
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : **Énergie potentielle de l'eau** $\to$ **Énergie cinétique** $\to$ **Énergie mécanique (turbine)** $\to$ **Énergie électrique (alternateur)**.</p>
+                <p>• 5.2 : L'alternateur transforme l'**énergie mécanique de rotation en énergie électrique**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Énergie Potentielle d'un Château d'Eau
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Formule Ep = m * g * h)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une cuve de château d'eau contient une masse $m = 50\,000\text{ kg}$ d'eau à une hauteur $h = 40\text{ m}$ au-dessus du sol. On donne $g = 9{,}8\text{ N/kg}$.<br>
+                Calculer l'énergie potentielle de pesanteur $E_p$ stockée en Joules puis en MégaJoules (MJ).
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>$E_p = m \times g \times h = 50\,000 \times 9{,}8 \times 40 = \mathbf{19\,600\,000\text{ Joules}} = \mathbf{19{,}6\text{ MJ}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Capteurs Solaires Thermiques vs Photovoltaïques
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Formes d'énergie)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                7.1. Quelle forme d'énergie utile produit un panneau solaire thermique pour une maison ?<br>
+                7.2. Quelle forme d'énergie utile produit un panneau solaire photovoltaïque ?
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : Le panneau thermique produit de l'**énergie thermique (chaleur)** pour chauffer l'eau sanitaire.</p>
+                <p>• 7.2 : Le panneau photovoltaïque produit de l'**énergie électrique**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Récupération d'Énergie au Freinage d'un Bus (Type Brevet)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse Brevet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un bus hybride urbain de masse $m = 10\,000\text{ kg}$ roule à $v = 15\text{ m/s}$ ($54\text{ km/h}$) à l'approche d'un arrêt.<br>
+                8.1. Calculer son énergie cinétique $E_c$ avant le freinage en Joules et en kJ.<br>
+                8.2. Le système de freinage régénératif récupère cette énergie avec un rendement $\eta = 70\%$ pour recharger les batteries. Calculer l'énergie électrique utile $E_{\text{stockée}}$ récupérée.<br>
+                8.3. Quel avantage ce système apporte-t-il sur les lignes de transport urbain avec de nombreux arrêts ?
+            </p>
+
+            <div class="solution-block hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-950 space-y-1">
+                <span class="font-bold text-emerald-900 block border-b border-emerald-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $E_c = 0{,}5 \times 10\,000 \times 15^2 = 5000 \times 225 = \mathbf{1\,125\,000\text{ Joules}} = \mathbf{1125\text{ kJ}}$.</p>
+                <p>• 8.2 : $E_{\text{stockée}} = 1125 \times 0{,}70 = \mathbf{787{,}5\text{ kJ}}$.</p>
+                <p>• 8.3 : Cette énergie réinjectée lors du redémarrage **réduit fortement la consommation de carburant** et l'usure des plaquettes de frein.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

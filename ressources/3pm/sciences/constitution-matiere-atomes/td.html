@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Matière & Atomes (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 1 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Constitution de la Matière &amp; Modèle de l'Atome</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Entraînement Autonome &amp; Préparation DNB Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices gradués sur les atomes, molécules, neutralité électrique et structure lacunaire.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices d'application</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Organisation Microscopique des États
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (États de la matière)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Associer chaque description microscopique à l'état correspondant (Solide, Liquide ou Gazeux) :<br>
+                1. Les molécules sont très espacées et se déplacent à grande vitesse dans tout le récipient.<br>
+                2. Les molécules sont serrées et immobiles, disposées de manière ordonnée.<br>
+                3. Les molécules sont proches les unes des autres mais glissent les unes sur les autres de façon désordonnée.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>• 1 : **État Gazeux** (dispersé et désordonné).</p>
+                <p>• 2 : **État Solide** (compact et ordonné).</p>
+                <p>• 3 : **État Liquide** (compact et désordonné).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Corps Purs &amp; Mélanges
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Classification)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Classer les matières suivantes en : **Corps pur**, **Mélange homogène** ou **Mélange hétérogène** :<br>
+                a) Eau distillée pure • b) Eau de mer • c) Jus d'orange avec pulpe • d) Gaz dioxygène pur.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>• a) Eau distillée : **Corps pur** | d) Dioxygène pur : **Corps pur**.</p>
+                <p>• b) Eau de mer : **Mélange homogène** (eau + sels minéraux dissous).</p>
+                <p>• c) Jus avec pulpe : **Mélange hétérogène** (on distingue les morceaux de pulpe).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Structure de l'Atome de Carbone
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Atome Z=6)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le carbone est un élément chimique fondamental de symbole $\text{C}$ et de numéro atomique $Z=6$. Son noyau contient 6 neutrons.<br>
+                3.1. Combien de protons possède son noyau ?<br>
+                3.2. Combien d'électrons gravitent autour du noyau ? Justifier la réponse.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : Numéro atomique $Z=6 \implies$ **6 protons**.</p>
+                <p>• 3.2 : L'atome étant électriquement neutre, il possède exactement le même nombre d'électrons que de protons, soit **6 électrons**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Neutralité de l'Atome de Cuivre
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Charges électriques)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                L'atome de cuivre ($\text{Cu}$) possède 29 protons de charge électrique $+e$.<br>
+                4.1. Quelle est la charge électrique totale portée par son noyau ?<br>
+                4.2. Quelle est la charge électrique totale de son nuage électronique ?<br>
+                4.3. En déduire la charge électrique globale de l'atome de cuivre.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• 4.1 : Charge du noyau = $\mathbf{+29\,e}$.</p>
+                <p>• 4.2 : Charge du nuage d'électrons = $\mathbf{-29\,e}$.</p>
+                <p>• 4.3 : Charge globale = $+29\,e + (-29\,e) = \mathbf{0}$ (neutralité électrique totale).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Échelle de Dimensions &amp; Vide de l'Atome
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Structure lacunaire)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Le diamètre moyen d'un atome est $D_{\text{atome}} = 10^{-10}\text{ m}$ ($0{,}1\text{ nm}$). Le diamètre de son noyau est $D_{\text{noyau}} = 10^{-15}\text{ m}$.<br>
+                5.1. Combien de fois l'atome est-il plus grand que son noyau ?<br>
+                5.2. Si le noyau était représenté par une bille de $1\text{ mm}$ de diamètre posée au centre d'un stade, à quelle distance se trouveraient les premiers électrons ?
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>• 5.1 : Rapport = $\frac{10^{-10}}{10^{-15}} = 10^5 = \mathbf{100\,000\text{ fois plus grand}}$.</p>
+                <p>• 5.2 : $1\text{ mm} \times 100\,000 = 100\,000\text{ mm} = \mathbf{100\text{ mètres}}$ (la longueur d'un terrain de football ! Entre la bille et les tribunes, il n'y a que du vide).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Analyse de Formules Moléculaires
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Molécules)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Indiquer le nom et le nombre exact de chaque type d'atome présent dans :<br>
+                • La molécule de glucose : $\text{C}_6\text{H}_{12}\text{O}_6$<br>
+                • La molécule de propane : $\text{C}_3\text{H}_8$<br>
+                • La molécule d'acide sulfurique : $\text{H}_2\text{SO}_4$
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• Glucose $\text{C}_6\text{H}_{12}\text{O}_6$ : **6 atomes de carbone**, **12 atomes d'hydrogène**, **6 atomes d'oxygène**.</p>
+                <p>• Propane $\text{C}_3\text{H}_8$ : **3 atomes de carbone**, **8 atomes d'hydrogène**.</p>
+                <p>• Acide sulfurique $\text{H}_2\text{SO}_4$ : **2 atomes d'hydrogène**, **1 atome de soufre (S)**, **4 atomes d'oxygène**.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Conservation de la Matière (Lavoisier)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Équation chimique)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                On réalise la combustion complète d'un morceau de charbon de bois (carbone $\text{C}$) dans du dioxygène $\text{O}_2$. Il se forme du dioxyde de carbone $\text{CO}_2$.<br>
+                7.1. Écrire l'équation de la réaction chimique.<br>
+                7.2. Si l'on brûle $12\text{ g}$ de carbone avec $32\text{ g}$ de dioxygène, quelle masse totale de dioxyde de carbone obtient-on ? Justifier.
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : $\mathbf{C + O_2 \longrightarrow CO_2}$.</p>
+                <p>• 7.2 : D'après la loi de conservation de la masse (Lavoisier), la masse des produits est égale à la somme des masses des réactifs : $m(\text{CO}_2) = 12 + 32 = \mathbf{44\text{ g}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-indigo-100 text-indigo-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Volume et Composition de l'Air d'un Atelier (Type Brevet)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse Brevet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un atelier professionnel a les dimensions suivantes : longueur $L = 10\text{ m}$, largeur $l = 6\text{ m}$, hauteur $h = 3\text{ m}$.<br>
+                8.1. Calculer le volume total d'air $V$ de l'atelier en $\text{m}^3$.<br>
+                8.2. Calculer le volume de dioxygène ($\text{O}_2$) présent dans cet atelier ($21\%$ du volume total).<br>
+                8.3. Calculer le volume de diazote ($\text{N}_2$) présent ($78\%$ du volume total).
+            </p>
+
+            <div class="solution-block hidden bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-950 space-y-1">
+                <span class="font-bold text-indigo-900 block border-b border-indigo-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $V = L \times l \times h = 10 \times 6 \times 3 = \mathbf{180\text{ m}^3}$ (soit $180\,000\text{ Litres}$).</p>
+                <p>• 8.2 : $V(\text{O}_2) = 180 \times 0{,}21 = \mathbf{37{,}8\text{ m}^3}$ (soit $37\,800\text{ L}$).</p>
+                <p>• 8.3 : $V(\text{N}_2) = 180 \times 0{,}78 = \mathbf{140{,}4\text{ m}^3}$ (soit $140\,400\text{ L}$).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

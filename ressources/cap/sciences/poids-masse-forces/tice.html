@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Poids, Masse & Forces CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #16a34a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 4 CAP • Sciences Physiques &amp; Chimiques</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Poids, Masse &amp; Forces</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Mesure du Poids &amp; Détermination de $g$</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : banc dynamométrique réel sur potence ou simulateur interactif d'astrophysique Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Dynamomètre &amp; Masses)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Dynamomètre Virtuel &amp; Gravité Planétaire 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Précautions de Matériel
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• Ne jamais dépasser la graduation maximale du dynamomètre (risque de déformation plastique du ressort).</li>
+                        <li>• Effectuer le tarage du zéro avec le dynamomètre suspendu à vide.</li>
+                        <li>• Poser doucement les masses sans choc mécanique.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler-vertical text-emerald-500"></i> Potence &amp; Tige Support
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-weight-scale text-amber-500"></i> Balance Électronique (0,01 g)
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-cubes-stacked text-sky-500"></i> Jeu de Masses Marquées
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-arrows-up-down text-purple-500"></i> Dynamomètre 5 N
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Installation &amp; Tarage du Zéro :</strong>
+                            Fixer le dynamomètre de 5 N sur la potence verticale. Ajuster la vis supérieure pour que l'index métallique soit exactement sur le 0 N.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure des Masses à la Balance :</strong>
+                            Peser chaque masse marquée (100 g, 200 g, 300 g, 400 g) sur la balance électronique et convertir les valeurs en kilogrammes ($m$ en kg).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure du Poids au Dynamomètre :</strong>
+                            Accrocher doucement les masses au crochet inférieur et relever pour chaque essai l'intensité du poids $P$ en Newtons.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul du Rapport $g = \frac{P}{m}$ :</strong>
+                            Calculer pour chaque ligne du tableau le rapport $\frac{P}{m}$ exprimé en $\text{N/kg}$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Vérification de la Proportionnalité :</strong>
+                            Constater que le rapport $\frac{P}{m}$ reste constant (environ $9{,}8\text{ N/kg}$ sur Terre).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Conclusion Métrologique :</strong>
+                            Valider la relation fondamentale de pesanteur : $P = m \times g$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau de Relevé Métrologique des Mesures
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Masse $m$ en g</th>
+                                <th class="p-3 font-bold border border-slate-200">Masse $m$ en kg</th>
+                                <th class="p-3 font-bold border border-slate-200">Poids $P$ Mesuré (N)</th>
+                                <th class="p-3 font-bold border border-slate-200">Rapport $\frac{P}{m}$ (N/kg)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-mono font-bold">100 g</td>
+                                <td class="p-3 font-mono font-bold text-emerald-700">0,100 kg</td>
+                                <td class="p-3"><input type="number" step="0.01" id="p-1" placeholder="ex: 0.98" oninput="checkRealWeight()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold text-sky-600" id="g-calc-1">-- N/kg</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-mono font-bold">200 g</td>
+                                <td class="p-3 font-mono font-bold text-emerald-700">0,200 kg</td>
+                                <td class="p-3"><input type="number" step="0.01" id="p-2" placeholder="ex: 1.96" oninput="checkRealWeight()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold text-sky-600" id="g-calc-2">-- N/kg</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-mono font-bold">400 g</td>
+                                <td class="p-3 font-mono font-bold text-emerald-700">0,400 kg</td>
+                                <td class="p-3"><input type="number" step="0.01" id="p-3" placeholder="ex: 3.92" oninput="checkRealWeight()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold text-sky-600" id="g-calc-3">-- N/kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-weight-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Banc Dynamométrique &amp; Gravité 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Interactif de Pesanteur</h2>
+                    </div>
+                    <!-- Sélecteur d'Astre -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-slate-300">Lieu d'Expérience :</label>
+                        <select id="sim-astre-select" onchange="updateSimForce()" class="bg-slate-800 border border-slate-700 text-white text-xs font-bold rounded-xl px-3 py-2 focus:ring-emerald-400">
+                            <option value="9.81">Terre (g = 9,81 N/kg)</option>
+                            <option value="1.62">Lune (g = 1,62 N/kg)</option>
+                            <option value="3.72">Mars (g = 3,72 N/kg)</option>
+                            <option value="24.79">Jupiter (g = 24,79 N/kg)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Canvas + Meters Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Spring Bench Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE DYNAMOMÈTRE VIRTUEL &amp; ALLONGEMENT DU RESSORT</span>
+                            <span id="sim-loc-info">Terre • g = 9.81 N/kg</span>
+                        </div>
+                        <canvas id="dynamoCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Controls -->
+                        <div class="space-y-1 text-xs">
+                            <div class="flex justify-between font-bold">
+                                <label class="text-slate-400 text-[10px] uppercase">Masse Suspendue m (kg)</label>
+                                <span class="font-mono text-emerald-300" id="val-sim-mass">0.200 kg (200 g)</span>
+                            </div>
+                            <input type="range" id="sim-mass-slider" min="0.05" max="0.50" step="0.05" value="0.20" oninput="updateSimForce()" class="w-full accent-emerald-500">
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">AFFICHEURS DIGITAUX TEMPS RÉEL</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Masse Invariable m</span>
+                            <span class="text-2xl font-bold font-mono text-emerald-400" id="sim-m-digital">0.200 kg</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Poids Mesuré P = m * g</span>
+                            <span class="text-2xl font-bold font-mono text-amber-400" id="sim-p-digital">1.96 N</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Allongement du Ressort ΔL</span>
+                            <span class="text-2xl font-bold font-mono text-sky-400" id="sim-dl-digital">3.9 cm</span>
+                        </div>
+
+                        <div id="sim-g-nature" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            P = m * g (PROPORTIONNEL)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Déterminer la Masse Suspendue
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Sur Terre ($g = 10\text{ N/kg}$), un dynamomètre indique une force de traction $P = 35\text{ N}$. Quelle est la masse $m$ en kg de l'objet suspendu ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="0.1" id="user-mass-guess" placeholder="Entrer la masse en kg (ex: 3.5)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessMass()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider la Masse
+                    </button>
+                </div>
+                <div id="guess-result-mass" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initDynamoCanvas();
+            }
+        }
+
+        function checkRealWeight() {
+            const p1 = parseFloat(document.getElementById('p-1').value);
+            const p2 = parseFloat(document.getElementById('p-2').value);
+            const p3 = parseFloat(document.getElementById('p-3').value);
+            const status = document.getElementById('real-weight-status');
+
+            if (p1 > 0) {
+                const g1 = p1 / 0.100;
+                document.getElementById('g-calc-1').innerText = g1.toFixed(2) + " N/kg";
+            }
+            if (p2 > 0) {
+                const g2 = p2 / 0.200;
+                document.getElementById('g-calc-2').innerText = g2.toFixed(2) + " N/kg";
+            }
+            if (p3 > 0) {
+                const g3 = p3 / 0.400;
+                document.getElementById('g-calc-3').innerText = g3.toFixed(2) + " N/kg";
+            }
+
+            status.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900');
+            if (p1 > 0 && p2 > 0 && p3 > 0) {
+                status.classList.add('bg-emerald-100', 'text-emerald-900');
+                status.innerHTML = "🎉 Mesures 100% cohérentes ! Le rapport P/m est constant et vérifie l'intensité de pesanteur g ≈ 9,8 N/kg.";
+            }
+        }
+
+        let canvas, ctx;
+        let massKg = 0.20;
+        let gAstre = 9.81;
+
+        function initDynamoCanvas() {
+            canvas = document.getElementById('dynamoCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            updateSimForce();
+            requestAnimationFrame(drawDynamo);
+        }
+
+        function updateSimForce() {
+            gAstre = parseFloat(document.getElementById('sim-astre-select').value);
+            massKg = parseFloat(document.getElementById('sim-mass-slider').value);
+
+            document.getElementById('val-sim-mass').innerText = massKg.toFixed(3) + " kg (" + (massKg * 1000).toFixed(0) + " g)";
+
+            const P = massKg * gAstre;
+            const deltaL = P * 2.0; // 2 cm per Newton scaling
+
+            document.getElementById('sim-m-digital').innerText = massKg.toFixed(3) + " kg";
+            document.getElementById('sim-p-digital').innerText = P.toFixed(2) + " N";
+            document.getElementById('sim-dl-digital').innerText = deltaL.toFixed(1) + " cm";
+
+            const selectElem = document.getElementById('sim-astre-select');
+            const astreName = selectElem.options[selectElem.selectedIndex].text;
+            document.getElementById('sim-loc-info').innerText = astreName;
+        }
+
+        function drawDynamo() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const cx = canvas.width / 2;
+
+            // Stand (Potence)
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(cx - 80, 20);
+            ctx.lineTo(cx + 40, 20);
+            ctx.moveTo(cx - 80, 20);
+            ctx.lineTo(cx - 80, 240);
+            ctx.moveTo(cx - 120, 240);
+            ctx.lineTo(cx - 40, 240);
+            ctx.stroke();
+
+            // Dynamometer Body (Transparent Tube)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillRect(cx - 15, 25, 30, 120);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(cx - 15, 25, 30, 120);
+
+            // Scale graduation on the tube
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = '8px monospace';
+            for (let i = 0; i <= 5; i++) {
+                const y = 35 + i * 20;
+                ctx.fillRect(cx + 8, y, 5, 1);
+                ctx.fillText(i + "N", cx + 18, y + 3);
+            }
+
+            // Spring (Ressort hélicoïdal)
+            const P = massKg * gAstre;
+            const stretch = Math.min(70, P * 14); // pixels
+            const springEndY = 35 + stretch;
+
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(cx, 25);
+            for (let k = 0; k < 8; k++) {
+                const sy = 25 + (k + 1) * (stretch / 8);
+                const offset = (k % 2 === 0) ? -8 : 8;
+                ctx.lineTo(cx + offset, sy);
+            }
+            ctx.lineTo(cx, springEndY);
+            ctx.stroke();
+
+            // Hook & Hanging Mass
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(cx, springEndY);
+            ctx.lineTo(cx, springEndY + 20);
+            ctx.stroke();
+
+            // Weight Cylinder
+            const massRadius = 15 + massKg * 20;
+            ctx.fillStyle = '#10b981';
+            ctx.beginPath();
+            ctx.arc(cx, springEndY + 20 + massRadius / 2, massRadius / 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Text on mass
+            ctx.fillStyle = '#020617';
+            ctx.font = 'bold 9px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText((massKg * 1000).toFixed(0) + "g", cx, springEndY + 23 + massRadius / 2);
+
+            requestAnimationFrame(drawDynamo);
+        }
+
+        function checkGuessMass() {
+            const ans = parseFloat(document.getElementById('user-mass-guess').value);
+            // m = 35 / 10 = 3.5 kg
+            const target = 3.5;
+            const res = document.getElementById('guess-result-mass');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Exact ! m = P / g = 35 / 10 = 3,5 kg.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Indice : Utilisez la formule m = P / g = 35 / 10 = 3,5 kg.";
+            }
+        }
+    </script>
+</body>
+</html>

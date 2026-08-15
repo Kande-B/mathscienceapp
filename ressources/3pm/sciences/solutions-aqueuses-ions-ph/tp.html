@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Mesure du pH & Tests d'Ions (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #059669;
+            color: white;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 2 • 3ème Prépa-Métiers (Cycle 4)</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Solutions Aqueuses, Ions &amp; Mesure du pH</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-flask"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Mesure du pH &amp; Tests de Reconnaissance des Ions</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Manipulez le papier pH, le pH-mètre étalonné et les tubes à essai réels ou testez les précipités dans le simulateur Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Papier pH, pH-mètre &amp; Tubes Réactifs)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel Bécher &amp; Précipités 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Sécurité au Laboratoire
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• Port de la **blouse fermée**, des **lunettes étanches** et des **gants** obligatoire.</li>
+                        <li>• En cas de projection d'acide ou de soude, rincer immédiatement à l'eau courante pendant 15 minutes.</li>
+                        <li>• Rincer la sonde du pH-mètre à l'eau distillée entre chaque mesure.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-note-sticky text-amber-500"></i> Rouleau Papier pH
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-digital-tachograph text-emerald-500"></i> pH-Mètre Étalonné
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-vials text-sky-500"></i> Portoir &amp; Tubes
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-bottle-droplet text-purple-500"></i> Soude &amp; Nitrate Ag
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure Indicative au Papier pH :</strong>
+                            Déposer une goutte de la solution inconnue sur un morceau de papier pH à l'aide d'un agitateur en verre et comparer la couleur au nuancier.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure Précise au pH-Mètre :</strong>
+                            Plonger l'électrode du pH-mètre rincée dans le bécher et noter la valeur stabilisée au dixième près.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Test à la Soude (Hydroxyde de Sodium) :</strong>
+                            Dans un tube à essai contenant 2 mL d'échantillon, verser 3 gouttes de soude ($\text{Na}^+ + \text{OH}^-$) et observer la couleur du précipité (bleu, vert ou rouille).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Test au Nitrate d'Argent :</strong>
+                            Dans un second tube à essai, verser 3 gouttes de nitrate d'argent ($\text{Ag}^+ + \text{NO}_3^-$) et observer la formation éventuelle d'un précipité blanc noircissant à la lumière.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Dilution &amp; Évolution du pH :</strong>
+                            Ajouter 50 mL d'eau distillée dans le bécher et mesurer à nouveau le pH pour constater son évolution vers 7.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Neutralisation &amp; Récupération des Déchets :</strong>
+                            Neutraliser la solution avant de la verser dans le bidon de récupération des déchets chimiques métalliques (ne pas jeter à l'évier !).
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Bécher Interactif &amp; Précipités 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur pH-Mètre &amp; Réactions Chimiques</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-emerald-950 border border-emerald-500 text-emerald-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-flask text-emerald-400 mr-1.5"></i> SIMULATEUR ACTIF
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Beaker Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE DU BÉCHER &amp; SONDE DIGITALE</span>
+                            <span id="sim-sol-name">Solution : Acide Chlorhydrique</span>
+                        </div>
+                        <canvas id="beakerCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+                            <button onclick="setSimSolution('acide')" class="bg-red-900/40 hover:bg-red-800 border border-red-700 text-red-200 p-2.5 rounded-xl font-bold transition-all">
+                                🧪 Solution CuCl₂ (Acide)
+                            </button>
+                            <button onclick="addSimReagent('soude')" class="bg-blue-900/40 hover:bg-blue-800 border border-blue-700 text-blue-200 p-2.5 rounded-xl font-bold transition-all">
+                                💧 Ajouter Soude (OH⁻)
+                            </button>
+                            <button onclick="addSimReagent('eau')" class="bg-emerald-900/40 hover:bg-emerald-800 border border-emerald-700 text-emerald-200 p-2.5 rounded-xl font-bold transition-all">
+                                🌊 Diluer à l'Eau Pure
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">MESURES DYNAMIQUES TEMPS RÉEL</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Valeur du pH Digital</span>
+                            <span class="text-4xl font-bold font-mono text-emerald-400" id="sim-ph-lcd">2.5</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Précipité Observé</span>
+                            <span class="text-sm font-bold font-mono text-amber-400" id="sim-precipitate-lcd">Aucun</span>
+                        </div>
+
+                        <div id="sim-nature-badge" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-red-950/40 border-red-500 text-red-400">
+                            SOLUTION ACIDE (EXCÈS H⁺)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS BÉCHER -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initBeakerCanvas();
+            }
+        }
+
+        let beakerCanvas, beakerCtx;
+        let currentPH = 2.5;
+        let precipitateColor = null;
+        let waterLevel = 140;
+
+        function initBeakerCanvas() {
+            beakerCanvas = document.getElementById('beakerCanvas');
+            if (!beakerCanvas) return;
+            beakerCtx = beakerCanvas.getContext('2d');
+            requestAnimationFrame(drawBeakerSim);
+        }
+
+        function setSimSolution(type) {
+            currentPH = 2.5;
+            precipitateColor = null;
+            waterLevel = 140;
+            updateBeakerUI();
+        }
+
+        function addSimReagent(reagent) {
+            if (reagent === 'soude') {
+                currentPH = Math.min(13.0, currentPH + 2.5);
+                precipitateColor = '#3b82f6'; // Blue for Cu(OH)2
+            } else if (reagent === 'eau') {
+                if (currentPH < 7) currentPH = Math.min(6.8, currentPH + 0.8);
+                if (currentPH > 7) currentPH = Math.max(7.2, currentPH - 0.8);
+                waterLevel = Math.min(180, waterLevel + 15);
+            }
+            updateBeakerUI();
+        }
+
+        function updateBeakerUI() {
+            document.getElementById('sim-ph-lcd').innerText = currentPH.toFixed(1);
+            document.getElementById('sim-precipitate-lcd').innerText = precipitateColor ? "Précipité Bleu Cu(OH)₂" : "Aucun";
+
+            const natureBadge = document.getElementById('sim-nature-badge');
+            if (currentPH < 6.8) {
+                natureBadge.className = "w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-red-950/40 border-red-500 text-red-400";
+                natureBadge.innerText = "SOLUTION ACIDE (EXCÈS H⁺)";
+            } else if (currentPH > 7.2) {
+                natureBadge.className = "w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-blue-950/40 border-blue-500 text-blue-400";
+                natureBadge.innerText = "SOLUTION BASIQUE (EXCÈS OH⁻)";
+            } else {
+                natureBadge.className = "w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400";
+                natureBadge.innerText = "SOLUTION NEUTRE (pH ≈ 7)";
+            }
+        }
+
+        function drawBeakerSim() {
+            if (!beakerCanvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            beakerCtx.fillStyle = '#0f172a';
+            beakerCtx.fillRect(0, 0, beakerCanvas.width, beakerCanvas.height);
+
+            const bx = 220, by = 40, bw = 160, bh = 180;
+
+            // Liquid
+            beakerCtx.fillStyle = currentPH < 6.8 ? 'rgba(239, 68, 68, 0.4)' : (currentPH > 7.2 ? 'rgba(59, 130, 246, 0.4)' : 'rgba(16, 185, 129, 0.4)');
+            beakerCtx.fillRect(bx + 10, by + (bh - waterLevel), bw - 20, waterLevel);
+
+            // Precipitate on bottom
+            if (precipitateColor) {
+                beakerCtx.fillStyle = precipitateColor;
+                beakerCtx.fillRect(bx + 15, by + bh - 18, bw - 30, 15);
+            }
+
+            // Beaker Outline
+            beakerCtx.strokeStyle = '#38bdf8';
+            beakerCtx.lineWidth = 3;
+            beakerCtx.strokeRect(bx, by, bw, bh);
+
+            // Electrode Probe
+            beakerCtx.fillStyle = '#64748b';
+            beakerCtx.fillRect(bx + 60, 10, 16, 150);
+            beakerCtx.fillStyle = '#0284c7';
+            beakerCtx.fillRect(bx + 64, 160, 8, 20);
+
+            requestAnimationFrame(drawBeakerSim);
+        }
+    </script>
+</body>
+</html>

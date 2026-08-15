@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Signaux Sonores & Lumineux (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #6366f1; background-color: #eef2ff; }
+        .propriete-box { border-left: 6px solid #0284c7; background-color: #f0f9ff; }
+        .methode-box { border-left: 6px solid #f59e0b; background-color: #fffbeb; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-tower-broadcast text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 8 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Signaux Sonores &amp; Lumineux pour Communiquer</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Synthèse de Cours Officielle • 3PM Cycle 4</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Signaux Sonores &amp; Lumineux</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Propagation du son ($340\text{ m/s}$) et de la lumière ($300\,000\text{ km/s}$), fréquences, décibels et écho.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. SIGNAUX SONORES                          -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-indigo-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm">I</span>
+                Les Signaux Sonores &amp; Vitesse de Propagation
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-4 text-xs">
+                <p class="text-slate-700 font-medium leading-relaxed">
+                    Un son est produit par la <strong>vibration mécanique</strong> d'un objet (corde vocale, membrane de haut-parleur, diapason) qui se propage de proche en proche dans un <strong>milieu matériel</strong> (gaz, liquide, solide).
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700 font-medium">
+                    <div class="bg-white p-4 rounded-xl border border-indigo-200 text-center space-y-1">
+                        <strong class="text-indigo-900 block font-bold text-sm">Vitesse dans l'air (20 °C)</strong>
+                        <span class="text-xl font-bold font-mono text-indigo-600">v = 340 m/s</span>
+                        <span class="block text-[11px] text-slate-500">Soit environ $1224\text{ km/h}$</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-indigo-200 text-center space-y-1">
+                        <strong class="text-red-900 block font-bold text-sm">Absence de propagation dans le vide</strong>
+                        <span class="text-sm font-bold text-red-600">v = 0 m/s (Vide spatial)</span>
+                        <span class="block text-[11px] text-slate-500">Nécessite impérativement de la matière</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. FRÉQUENCE & AUDIBILITÉ                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                Hauteur, Fréquence (Hz) &amp; Plage d'Audibilité
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-4 text-xs">
+                <p class="text-slate-700 font-medium">
+                    La <strong>fréquence $f$</strong> (en Hertz, Hz) correspond au nombre de vibrations par seconde. Plus la fréquence est élevée, plus le son perçu est <strong>aigu</strong>.
+                </p>
+
+                <!-- Échelle des fréquences -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center font-bold">
+                    <div class="bg-slate-100 p-3 rounded-xl border border-slate-300 text-slate-700">
+                        Infrasons
+                        <span class="block text-xs font-mono text-slate-500 font-normal">&lt; 20 Hz (Éléphants, séismes)</span>
+                    </div>
+                    <div class="bg-emerald-100 p-3 rounded-xl border border-emerald-300 text-emerald-900">
+                        Sons Audibles Humains
+                        <span class="block text-xs font-mono text-emerald-700 font-normal">20 Hz à 20 000 Hz (20 kHz)</span>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-xl border border-purple-300 text-purple-900">
+                        Ultrasons
+                        <span class="block text-xs font-mono text-purple-700 font-normal">&gt; 20 kHz (Chauve-souris, sonars)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. NIVEAU SONORE EN DÉCIBELS (dB)         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">III</span>
+                Niveau d'Intensité Sonore (dB) &amp; Prévention
+            </h2>
+
+            <div class="methode-box rounded-2xl p-5 space-y-3 text-xs">
+                <p class="text-slate-700 font-medium">Le niveau sonore $L$ est mesuré avec un <strong>sonomètre</strong> en <strong>décibels (dB)</strong>.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-xs">
+                    <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                        <span class="font-bold text-emerald-700 block">30 - 60 dB</span>
+                        <span class="text-[10px] text-slate-500">Calme / Conversation</span>
+                    </div>
+                    <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200">
+                        <span class="font-bold text-yellow-700 block">80 dB</span>
+                        <span class="text-[10px] text-slate-500">Alerte EPI conseillé</span>
+                    </div>
+                    <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200">
+                        <span class="font-bold text-amber-700 block">85 dB</span>
+                        <span class="text-[10px] text-slate-500"><strong>Seuil de danger</strong></span>
+                    </div>
+                    <div class="bg-red-50 p-2.5 rounded-xl border border-red-200">
+                        <span class="font-bold text-red-700 block">120 dB</span>
+                        <span class="text-[10px] text-slate-500"><strong>Seuil de douleur</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. SIGNAUX LUMINEUX & FIBRE OPTIQUE        -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">IV</span>
+                Signaux Lumineux &amp; Vitesse de la Lumière
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-xs">
+                <div class="bg-white p-4 rounded-xl border border-emerald-200 text-center font-bold text-slate-900 text-sm">
+                    $$c \approx \mathbf{300\,000\text{ km/s}} = \mathbf{3 \times 10^8\text{ m/s}}$$
+                </div>
+                <p class="text-slate-700 font-medium leading-relaxed">
+                    La lumière se propage en ligne droite dans le vide et dans les milieux transparents. Dans une <strong>fibre optique</strong>, les impulsions laser sont guidées par réflexion totale interne pour transporter des données numériques à très haut débit sans être perturbées par les champs magnétiques industriels.
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- V. SYNTHÈSE & FORMULAIRE DNB PRO           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-indigo-400 border-b border-slate-800 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-star"></i> Synthèse Mémorisation • Fiche Brevet 3PM
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs">
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-indigo-400 font-bold block uppercase tracking-wider">Son</span>
+                    <p class="text-sm font-bold font-heading text-white">$v = 340\text{ m/s}$ (Air)</p>
+                    <p class="text-slate-400">$20\text{ Hz}$ à $20\,000\text{ Hz}$</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-amber-400 font-bold block uppercase tracking-wider">Décibels</span>
+                    <p class="text-sm font-bold font-heading text-white">Danger : $85\text{ dB}$</p>
+                    <p class="text-slate-400">Douleur : $120\text{ dB}$</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-emerald-400 font-bold block uppercase tracking-wider">Lumière & Écho</span>
+                    <p class="text-sm font-bold font-heading text-white">$c = 300\,000\text{ km/s}$</p>
+                    <p class="text-slate-400">Écho : $d = \frac{v \times t}{2}$</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

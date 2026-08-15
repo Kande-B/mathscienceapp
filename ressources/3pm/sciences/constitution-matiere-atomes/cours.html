@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Constitution de la Matière & Atomes (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .definition-box { border-left: 6px solid #059669; background-color: #ecfdf5; }
+        .propriete-box { border-left: 6px solid #0284c7; background-color: #f0f9ff; }
+        .methode-box { border-left: 6px solid #8b5cf6; background-color: #f5f3ff; }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 1 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Constitution de la Matière &amp; Modèle de l'Atome</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE & BARRE D'ACTION -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Synthèse de Cours Officielle • 3PM Cycle 4</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Constitution de la Matière &amp; Atomes</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">États physiques, corps purs, mélanges, modèle de l'atome, structure lacunaire et molécules.</p>
+        </div>
+
+        <button onclick="window.print()" class="no-print mx-auto flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md text-sm">
+            <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+        </button>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- I. ÉTATS DE LA MATIÈRE & MÉLANGES           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-emerald-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm">I</span>
+                États de la Matière, Corps Purs &amp; Mélanges
+            </h2>
+
+            <div class="definition-box rounded-2xl p-5 space-y-3 text-xs">
+                <h3 class="font-bold text-emerald-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-emerald-600"></i> Organisation Microscopique de la Matière
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-slate-700 font-medium">
+                    <div class="bg-white p-3 rounded-xl border border-emerald-200 space-y-1">
+                        <strong class="text-emerald-900 block">• État Solide :</strong>
+                        Molécules très proches, ordonnées et liées entre elles (forme et volume propres).
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-emerald-200 space-y-1">
+                        <strong class="text-emerald-900 block">• État Liquide :</strong>
+                        Molécules compactes mais désordonnées, glissant les unes sur les autres (prend la forme du récipient).
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-emerald-200 space-y-1">
+                        <strong class="text-emerald-900 block">• État Gazeux :</strong>
+                        Molécules très éloignées, très agitées et dispersées (occupe tout le volume disponible).
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-white p-3 rounded-xl border border-emerald-200">
+                        <strong class="text-emerald-900 block text-xs">Corps Pur :</strong>
+                        Constitué d'une seule espèce chimique (ex: eau pure distillée $\text{H}_2\text{O}$).
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-emerald-200">
+                        <strong class="text-emerald-900 block text-xs">Mélange (Homogène / Hétérogène) :</strong>
+                        L'air est un mélange homogène composé de **$78\%$ de diazote ($\text{N}_2$)** et **$21\%$ de dioxygène ($\text{O}_2$)**.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- II. LE MODÈLE DE L'ATOME                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-sky-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm">II</span>
+                Le Modèle de l'Atome &amp; Structure Lacunaire
+            </h2>
+
+            <div class="propriete-box rounded-2xl p-5 space-y-4 text-xs">
+                <h3 class="font-bold text-sky-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-atom text-sky-600"></i> Constitution et Échelle de Dimensions
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700 font-medium">
+                    <div class="bg-white p-4 rounded-xl border border-sky-200 space-y-2">
+                        <strong class="text-sky-900 block text-xs">1. Le Noyau Central :</strong>
+                        <p>• Contient les **protons** (charge électrique positive $+e$).</p>
+                        <p>• Contient les **neutrons** (charge électrique nulle $0$).</p>
+                        <p>• Concentre **$99{,}9\%$ de la masse** de l'atome.</p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-sky-200 space-y-2">
+                        <strong class="text-sky-900 block text-xs">2. Le Nuage Électronique :</strong>
+                        <p>• Les **électrons** (charge électrique négative $-e$) gravitent autour du noyau.</p>
+                        <p>• Masse d'un électron négligeable par rapport au noyau.</p>
+                    </div>
+                </div>
+
+                <div class="bg-sky-50 p-3 rounded-xl border border-sky-200 text-slate-700 font-medium">
+                    <strong>Structure Lacunaire :</strong> Le diamètre de l'atome est d'environ $10^{-10}\text{ m}$ ($0{,}1\text{ nm}$) alors que celui du noyau est de $10^{-15}\text{ m}$. L'atome est **100 000 fois plus grand** que son noyau : il est constitué essentiellement de **vide**.
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- III. NEUTRALITÉ & NUMÉRO ATOMIQUE Z         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-amber-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm">III</span>
+                Numéro Atomique $Z$ &amp; Neutralité Électrique
+            </h2>
+
+            <div class="methode-box rounded-2xl p-5 space-y-3 text-xs">
+                <h3 class="font-bold text-purple-900 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced text-purple-600"></i> Règle Fondamentale de Neutralité
+                </h3>
+                <div class="bg-white p-4 rounded-xl border border-purple-200 text-center font-bold text-slate-900 text-sm">
+                    Dans un atome neutre : $$\text{Nombre d'électrons } (-) = \text{Nombre de protons } (+) = Z$$
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-xs">
+                    <div class="bg-slate-100 p-2 rounded-xl">Hydrogène $\text{H}$ : $Z=1$<br><span class="text-[10px] text-slate-500">1 proton, 1 électron</span></div>
+                    <div class="bg-slate-100 p-2 rounded-xl">Carbone $\text{C}$ : $Z=6$<br><span class="text-[10px] text-slate-500">6 protons, 6 électrons</span></div>
+                    <div class="bg-slate-100 p-2 rounded-xl">Aluminium $\text{Al}$ : $Z=13$<br><span class="text-[10px] text-slate-500">13 protons, 13 électrons</span></div>
+                    <div class="bg-slate-100 p-2 rounded-xl">Fer $\text{Fe}$ : $Z=26$<br><span class="text-[10px] text-slate-500">26 protons, 26 électrons</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- IV. MOLÉCULES ET FORMULES CHIMIQUES         -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-slate-900 border-b-2 border-red-500 pb-2 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center text-sm">IV</span>
+                Molécules, Formules &amp; Conservation de la Matière
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                <div class="bg-red-50 border border-red-200 p-5 rounded-2xl space-y-2">
+                    <span class="font-bold text-red-900 block text-sm uppercase">1. Molécules Courantes</span>
+                    <p class="text-slate-700 font-medium">• **Eau ($\text{H}_2\text{O}$)** : 2 atomes d'hydrogène + 1 atome d'oxygène.</p>
+                    <p class="text-slate-700 font-medium">• **Dioxyde de carbone ($\text{CO}_2$)** : 1 atome de carbone + 2 atomes d'oxygène.</p>
+                    <p class="text-slate-700 font-medium">• **Méthane ($\text{CH}_4$)** : 1 atome de carbone + 4 atomes d'hydrogène.</p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
+                    <span class="font-bold text-emerald-900 block text-sm uppercase">2. Loi de Conservation (Lavoisier)</span>
+                    <p class="text-slate-700 font-medium">Lors d'une transformation chimique :</p>
+                    <p class="text-slate-700 font-bold">« Rien ne se perd, rien ne se crée, tout se transforme. »</p>
+                    <p class="text-slate-700 font-medium">Le nombre d'atomes de chaque élément reste strictement identique entre les réactifs et les produits.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- V. SYNTHÈSE & FORMULAIRE DNB PRO           -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+            <h2 class="text-2xl font-bold font-heading text-emerald-400 border-b border-slate-800 pb-2 flex items-center gap-3">
+                <i class="fa-solid fa-star"></i> Synthèse Mémorisation • Fiche Brevet 3PM
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-xs">
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-emerald-400 font-bold block uppercase tracking-wider">Modèle Atomique</span>
+                    <p class="text-sm font-bold font-heading text-white">Noyau (+) &amp; Électrons (-)</p>
+                    <p class="text-slate-400">Structure lacunaire (vide)</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-sky-400 font-bold block uppercase tracking-wider">Neutralité Électrique</span>
+                    <p class="text-sm font-bold font-heading text-white">Protons (+) = Électrons (-)</p>
+                    <p class="text-slate-400">Numéro atomique $Z$</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-2">
+                    <span class="text-amber-400 font-bold block uppercase tracking-wider">L'Air</span>
+                    <p class="text-sm font-bold font-heading text-white">$78\% \text{ N}_2$ et $21\% \text{ O}_2$</p>
+                    <p class="text-slate-400">Mélange gazeux homogène</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

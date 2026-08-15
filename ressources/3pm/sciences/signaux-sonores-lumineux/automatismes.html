@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Signaux Sonores & Lumineux (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-tower-broadcast text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Séquence 8 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Signaux Sonores &amp; Lumineux pour Communiquer</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Rituel d'Entraînement Rapide • 10 Minutes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes : Signaux Sonores &amp; Lumineux</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Vitesse du son $340\text{ m/s}$, vitesse de la lumière $300\,000\text{ km/s}$, décibels et fréquences.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-indigo-500"></i> 1. Flashcards Mémorisation (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes mémoire</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Vitesse du Son</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-volume-high text-4xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la vitesse du son dans l'air à 20 °C ? Le son se propage-t-il dans le vide ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">340 m/s (Milieu Matériel)</span>
+                            <div class="my-auto space-y-1 text-xs text-indigo-300 font-bold">
+                                <p class="text-sm">$$v_{\text{son}} \approx \mathbf{340\text{ m/s}} \quad (\approx 1224\text{ km/h})$$</p>
+                                <p class="text-slate-300 font-normal">Le son nécessite un support de matière (air, eau, solide) : il **ne se propage pas dans le vide** spatial !</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Vitesse de la Lumière</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-bolt text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la vitesse de la lumière dans le vide et l'air ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">300 000 km/s</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p class="text-sm">$$c \approx \mathbf{300\,000\text{ km/s}} = \mathbf{3 \times 10^8\text{ m/s}}$$</p>
+                                <p class="text-slate-300 font-normal">La lumière est **un million de fois plus rapide** que le son (on voit l'éclair avant d'entendre le tonnerre).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Fréquences Audibles</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-ear-listen text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la plage de fréquences audibles pour l'oreille humaine ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">20 Hz à 20 000 Hz</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p>• **Infrasons** : $< 20\text{ Hz}$ (très graves, inaudibles)</p>
+                                <p>• **Audibles** : $20\text{ Hz}$ (graves) $\to 20\,000\text{ Hz}$ (aigus)</p>
+                                <p>• **Ultrasons** : $> 20\,000\text{ Hz}$ ($> 20\text{ kHz}$, sonars/radars)</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Niveau Sonore & Décibels</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-triangle-exclamation text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">À partir de quel niveau sonore en décibels (dB) y a-t-il danger pour l'audition ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Seuils Réglementaires</span>
+                            <div class="my-auto space-y-1 text-xs text-red-300 font-bold">
+                                <p>• **80 dB** : Port des EPI antibruit recommandé</p>
+                                <p>• **85 dB** : **Seuil de danger** (protection obligatoire)</p>
+                                <p>• **120 dB** : **Seuil de douleur** (lésions irréversibles)</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Écho & Radar Sonar</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-satellite-dish text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment calcule-t-on la distance $d$ avec un signal d'écho aller-retour ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">d = (v * t) / 2</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p class="text-sm">$$d = \frac{v \times t}{2}$$</p>
+                                <p class="text-slate-300 font-normal">On divise par 2 car l'onde parcourt l'**aller et le retour** ($2d = v \times t$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-52 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Signaux Numériques</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-network-wired text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Pourquoi utilise-t-on des signaux lumineux dans la fibre optique ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Très Haut Débit & Insensibilité</span>
+                            <div class="my-auto space-y-1 text-xs text-emerald-300 font-bold">
+                                <p>• Vitesse de transmission ultra-rapide ($c \approx 200\,000\text{ km/s}$ dans le verre).</p>
+                                <p>• Insensible aux parasites électromagnétiques industriels.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Test de Mémorisation</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes 3PM (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-indigo-100 text-indigo-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-indigo-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-indigo-50 border-2 border-indigo-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-indigo-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-indigo-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "Un éclair d'orage est vu instantanément. Le coup de tonnerre est entendu 3 secondes plus tard. À quelle distance se trouve l'orage ?",
+                options: ["340 m", "1020 m (environ 1 km)", "3000 km", "100 m"],
+                correct: 1,
+                explanation: "$d = v \\times t = 340 \\times 3 = \\mathbf{1020\\text{ m}}$ (règle des 3 secondes par kilomètre)."
+            },
+            {
+                id: 2,
+                q: "Dans quel milieu le son NE PEUT PAS se propager ?",
+                options: ["L'eau de mer", "L'acier d'un rail de chemin de fer", "Le vide spatial", "L'air ambiant"],
+                correct: 2,
+                explanation: "Le son a besoin de molécules de matière : il ne se propage pas dans le **vide**."
+            },
+            {
+                id: 3,
+                q: "Quelle est la valeur de la vitesse de la lumière dans le vide et l'air ?",
+                options: ["340 m/s", "300 000 km/s", "1000 km/h", "3000 m/s"],
+                correct: 1,
+                explanation: "$c \\approx \\mathbf{300\\,000\\text{ km/s}} = 3 \\times 10^8\\text{ m/s}$."
+            },
+            {
+                id: 4,
+                q: "Un son dont la fréquence est de 40 000 Hz (40 kHz) est classé comme :",
+                options: ["Un infrason", "Un son audible", "Un ultrason", "Une onde lumineuse"],
+                correct: 2,
+                explanation: "Les fréquences supérieures à 20 000 Hz sont des **ultrasons**."
+            },
+            {
+                id: 5,
+                q: "Quelle unité mesure le niveau d'intensité sonore ?",
+                options: ["Le Hertz (Hz)", "Le Décibel (dB)", "Le Watt (W)", "Le Volt (V)"],
+                correct: 1,
+                explanation: "L'intensité sonore est mesurée en **Décibels (dB)** avec un sonomètre."
+            },
+            {
+                id: 6,
+                q: "À partir de quel niveau sonore le port de protections auditives individuelles (bouchons/casque) est-il obligatoire au travail ?",
+                options: ["30 dB", "60 dB", "85 dB", "150 dB"],
+                correct: 2,
+                explanation: "Le **seuil de danger réglementaire** en atelier est fixé à **85 dB**."
+            },
+            {
+                id: 7,
+                q: "Un télémètre sonar émet un signal ultrasonore qui revient après 0,02 s (v = 340 m/s). La distance de l'obstacle est :",
+                options: ["6,8 m", "3,4 m", "34 m", "0,68 m"],
+                correct: 1,
+                explanation: "$d = \\frac{v \\times t}{2} = \\frac{340 \\times 0{,}02}{2} = \\frac{6{,}8}{2} = \\mathbf{3{,}4\\text{ m}}$."
+            },
+            {
+                id: 8,
+                q: "L'appareil de mesure servant à relever le niveau de bruit en décibels s'appelle un :",
+                options: ["Voltmètre", "Sonomètre", "Dynamomètre", "Tachymètre"],
+                correct: 1,
+                explanation: "C'est le **sonomètre**."
+            },
+            {
+                id: 9,
+                q: "Laquelle de ces ondes peut transporter des données numériques sous forme de lumière dans une fibre optique ?",
+                options: ["Le laser / faisceau lumineux", "Le son d'une sirène", "Une vague d'eau", "Un courant continu 12 V"],
+                correct: 0,
+                explanation: "Le signal est transporté par impulsions **laser lumineuses** guidées par réflexion totale."
+            },
+            {
+                id: 10,
+                q: "Un son plus aigu possède une :",
+                options: ["Fréquence plus élevée", "Vitesse plus rapide", "Couleur bleue", "Masse plus grande"],
+                correct: 0,
+                explanation: "Plus un son est aigu, plus sa **fréquence (en Hz)** est élevée."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-indigo-500 focus:ring-indigo-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-indigo-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent travail ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement les signaux sonores, lumineux, les décibels et les calculs d'écho !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les notions de base sont acquises. Révisez bien la formule d'écho d = (v * t) / 2.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Relisez la fiche de cours et entraînez-vous sur les vitesses de propagation.";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

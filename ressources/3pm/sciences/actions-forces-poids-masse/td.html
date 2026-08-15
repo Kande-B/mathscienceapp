@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Actions Mécaniques, Forces & Poids (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Séquence 4 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Actions Mécaniques, Forces &amp; Poids</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Entraînement Autonome &amp; Préparation DNB Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de Travaux Dirigés (TD)</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 Exercices gradués sur les forces, le dynamomètre, le poids $P = m \times g$ et l'équilibre.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <span class="text-xs font-bold text-slate-500">8 Exercices d'application</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher Tous les Corrigés</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 1                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Exercice 1 : Calcul Direct du Poids
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Formule P = m * g)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Sur un chantier, un sac de ciment a une masse $m = 25\text{ kg}$. L'intensité de pesanteur est $g = 9{,}8\text{ N/kg}$.<br>
+                Calculer la valeur du poids $P$ de ce sac en Newtons.
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 1 :</span>
+                <p>$P = m \times g = 25 \times 9{,}8 = \mathbf{245\text{ N}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 2                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Exercice 2 : Détermination de la Masse
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Masse m = P / g)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un dynamomètre utilisé au laboratoire indique un poids $P = 49\text{ N}$ pour une pièce métallique. On prend $g = 9{,}8\text{ N/kg}$.<br>
+                Calculer la masse $m$ de cette pièce en kilogrammes.
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 2 :</span>
+                <p>$m = \frac{P}{g} = \frac{49}{9{,}8} = \mathbf{5{,}0\text{ kg}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 3                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Exercice 3 : Poids sur Terre vs Lune
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★☆☆ (Pesanteur g)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un astronaute et son équipement ont une masse totale $m = 120\text{ kg}$.<br>
+                On donne : $g_{\text{Terre}} = 9{,}8\text{ N/kg}$ et $g_{\text{Lune}} = 1{,}6\text{ N/kg}$.<br>
+                3.1. Quelle est la masse de l'astronaute sur la Lune ?<br>
+                3.2. Calculer son poids $P_{\text{Terre}}$ sur Terre.<br>
+                3.3. Calculer son poids $P_{\text{Lune}}$ sur la Lune.
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 3 :</span>
+                <p>• 3.1 : La masse est invariable : $m_{\text{Lune}} = \mathbf{120\text{ kg}}$.</p>
+                <p>• 3.2 : $P_{\text{Terre}} = 120 \times 9{,}8 = \mathbf{1176\text{ N}}$.</p>
+                <p>• 3.3 : $P_{\text{Lune}} = 120 \times 1{,}6 = \mathbf{192\text{ N}}$ (environ 6 fois plus léger !).</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 4                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">4</span>
+                    Exercice 4 : Tableau des Caractéristiques des Forces
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (4 Caractéristiques)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une caisse d'outils de poids $P = 150\text{ N}$ est posée immobile sur un établi horizontal. Elle est soumise à son poids $\vec{P}$ et à la réaction $\vec{R}$ de l'établi.<br>
+                Donner les 4 caractéristiques de la force de réaction $\vec{R}$.
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 4 :</span>
+                <p>• Point d'application : Centre de la surface de contact caisse/établi.</p>
+                <p>• Direction : Verticale.</p>
+                <p>• Sens : Vers le haut.</p>
+                <p>• Intensité : $R = P = \mathbf{150\text{ N}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 5                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">5</span>
+                    Exercice 5 : Représentation d'une Force à l'Échelle
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Échelle graphique)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un ouvrier tire sur une corde avec une force de traction $\vec{F}$ horizontale vers la droite d'intensité $F = 350\text{ N}$.<br>
+                On choisit l'échelle : $1\text{ cm} \longleftrightarrow 100\text{ N}$.<br>
+                Calculer la longueur de la flèche représentant la force $\vec{F}$.
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 5 :</span>
+                <p>Longueur = $\frac{350}{100} = \mathbf{3{,}5\text{ cm}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 6                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">6</span>
+                    Exercice 6 : Suspension d'un Projecteur de Scène
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Équilibre statique)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un projecteur d'éclairage de masse $m = 12\text{ kg}$ est suspendu au plafond par une élingue métallique. On prend $g = 9{,}8\text{ N/kg}$.<br>
+                6.1. Calculer le poids $P$ du projecteur.<br>
+                6.2. En déduire la tension $T$ exercée par l'élingue à l'équilibre.
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 6 :</span>
+                <p>• 6.1 : $P = m \times g = 12 \times 9{,}8 = \mathbf{117{,}6\text{ N}}$.</p>
+                <p>• 6.2 : À l'équilibre sous l'action de deux forces opposées : $T = P = \mathbf{117{,}6\text{ N}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 7                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">7</span>
+                    Exercice 7 : Étalonnage d'un Dynamomètre
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★☆ (Allongement du ressort)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Un ressort s'allonge de $\Delta L = 2{,}0\text{ cm}$ lorsqu'on y suspend une masse exerçant une force de $1{,}0\text{ N}$.<br>
+                7.1. L'allongement étant proportionnel à la force, quel sera l'allongement pour une force de $4{,}5\text{ N}$ ?<br>
+                7.2. Quelle force correspond à un allongement mesuré de $7{,}0\text{ cm}$ ?
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 7 :</span>
+                <p>• 7.1 : $\Delta L = 4{,}5 \times 2{,}0 = \mathbf{9{,}0\text{ cm}}$.</p>
+                <p>• 7.2 : $F = \frac{7{,}0}{2{,}0} = \mathbf{3{,}5\text{ N}}$.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- EXERCICE 8                                  -->
+        <!-- ═══════════════════════════════════════════ -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center text-xs font-extrabold">8</span>
+                    Exercice 8 : Grue de Chantier &amp; Sécurité (Type Brevet)
+                </h2>
+                <span class="text-xs font-bold text-slate-400">★★★ (Synthèse Brevet)</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed">
+                Une grue de chantier soulève un bloc de béton armé de volume $V = 0{,}8\text{ m}^3$ et de masse volumique $\rho = 2500\text{ kg/m}^3$. Le câble en acier a une charge maximale d'utilisation de $22\,000\text{ N}$. On prend $g = 9{,}8\text{ N/kg}$.<br>
+                8.1. Calculer la masse $m$ du bloc ($m = \rho \times V$).<br>
+                8.2. Calculer le poids $P$ du bloc.<br>
+                8.3. Le levage peut-il s'effectuer sans risque de rupture du câble ?
+            </p>
+
+            <div class="solution-block hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-1">
+                <span class="font-bold text-amber-900 block border-b border-amber-200 pb-1">Corrigé Exercice 8 :</span>
+                <p>• 8.1 : $m = 2500 \times 0{,}8 = \mathbf{2000\text{ kg}}$.</p>
+                <p>• 8.2 : $P = 2000 \times 9{,}8 = \mathbf{19\,600\text{ N}}$.</p>
+                <p>• 8.3 : Comme $19\,600\text{ N} \le 22\,000\text{ N}$, **le levage est parfaitement sécurisé**.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer Tous les Corrigés" : "Afficher Tous les Corrigés";
+        }
+    </script>
+</body>
+</html>

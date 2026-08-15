@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Loi d'Ohm & Caractéristique (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #ca8a04;
+            color: white;
+            box-shadow: 0 4px 12px rgba(202, 138, 4, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500/20 border border-yellow-400/30 text-yellow-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-flask text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-yellow-400">Séquence 5 • 3ème Prépa-Métiers (Cycle 4)</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Circuits Électriques, Loi d'Ohm &amp; Dipôles</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-yellow-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-flask"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Tracé de la Caractéristique &amp; Loi d'Ohm</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Manipulez le générateur, le résistor et les multimètres réels ou pilotez le simulateur Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Générateur, Voltmètre, Ampèremètre &amp; Résistor)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Simulateur Virtuel Circuit Interactif 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Matériel Réel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-yellow-50 border border-yellow-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-yellow-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-yellow-600"></i> Consignes de Câblage
+                    </h3>
+                    <ul class="space-y-2 text-yellow-950 font-medium">
+                        <li>• Réaliser d'abord la **boucle principale** en série (Générateur $\to$ Ampèremètre $\to$ Résistor $\to$ Interrupteur).</li>
+                        <li>• Brancher le **voltmètre en dernier** aux bornes du résistor en dérivation.</li>
+                        <li>• Faire vérifier le montage par le professeur avant la mise sous tension.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-yellow-600"></i> Matériel Réel à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-car-battery text-yellow-500"></i> Générateur 0-12 V
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-microchip text-sky-500"></i> Résistor $47\ \Omega$
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-digital-tachograph text-emerald-500"></i> 2 Multimètres
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-lines-leaning text-purple-500"></i> Fils de Connexion
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-yellow-600"></i> Protocole Expérimental en 5 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-yellow-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure Préalable à l'Ohmmètre :</strong>
+                            Déconnecter le résistor du circuit et mesurer sa résistance $R_{\text{mesurée}}$ avec le multimètre en position Ohmmètre ($\Omega$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-yellow-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Montage du Circuit :</strong>
+                            Câbler le circuit série avec l'ampèremètre sur le calibre $200\text{ mA}$ DC et connecter le voltmètre sur le calibre $20\text{ V}$ DC en dérivation aux bornes du résistor.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-yellow-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Série de Mesures (U et I) :</strong>
+                            Régler la tension du générateur à $2\text{ V}$, $4\text{ V}$, $6\text{ V}$, $8\text{ V}$ et $10\text{ V}$. Noter dans le tableau les valeurs de $U$ et de $I$ (en A).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-yellow-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Tracé de la Caractéristique $U = f(I)$ :</strong>
+                            Tracer la droite sur papier millimétré ($U$ en ordonnée, $I$ en abscisse). Constater l'alignement avec l'origine.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-yellow-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Validation de la Loi d'Ohm :</strong>
+                            Calculer la pente de la droite $\frac{\Delta U}{\Delta I}$ et comparer la valeur obtenue à la mesure de l'ohmmètre.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-yellow-400 uppercase tracking-widest">Circuit &amp; Multimètres Interactifs 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur Loi d'Ohm U = R * I</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-yellow-950 border border-yellow-500 text-yellow-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-bolt text-yellow-400 mr-1.5"></i> SIMULATEUR ACTIF
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Circuit Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-yellow-400">
+                            <span>VUE DU SCHÉMA ÉLECTRIQUE</span>
+                            <span id="sim-res-val">Résistor : R = 47 Ω</span>
+                        </div>
+                        <canvas id="circuitCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-yellow-900/50 shadow-inner"></canvas>
+
+                        <!-- Controls -->
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-slate-400 font-bold">Tension Générateur (U) :</span>
+                                <input type="range" min="0" max="12" step="0.5" value="6" oninput="updateVoltage(this.value)" class="w-full accent-yellow-500">
+                                <span id="u-slider-label" class="text-xs font-mono font-bold text-yellow-400 w-16 text-right">6.0 V</span>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs pt-1">
+                                <button onclick="setResistance(10)" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 p-2 rounded-xl font-bold transition-all">
+                                    R = 10 Ω
+                                </button>
+                                <button onclick="setResistance(47)" class="bg-yellow-900/40 hover:bg-yellow-800 border border-yellow-700 text-yellow-200 p-2 rounded-xl font-bold transition-all">
+                                    R = 47 Ω
+                                </button>
+                                <button onclick="setResistance(100)" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 p-2 rounded-xl font-bold transition-all">
+                                    R = 100 Ω
+                                </button>
+                                <button onclick="setResistance(220)" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 p-2 rounded-xl font-bold transition-all">
+                                    R = 220 Ω
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider">MESURES DYNAMIQUES TEMPS RÉEL</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Voltmètre V (Tension U)</span>
+                            <span class="text-3xl font-bold font-mono text-yellow-400" id="sim-u-lcd">6.00 V</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Ampèremètre A (Courant I)</span>
+                            <span class="text-2xl font-bold font-mono text-sky-400" id="sim-i-lcd">128 mA</span>
+                        </div>
+
+                        <div id="sim-ohm-check" class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            U / I = 47.0 Ω (LOI D'OHM VÉRIFIÉE)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-yellow-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CIRCUIT CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-yellow-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-yellow-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initCircuitCanvas();
+            }
+        }
+
+        let circuitCanvas, circuitCtx;
+        let currentU = 6.0;
+        let currentR = 47;
+
+        function initCircuitCanvas() {
+            circuitCanvas = document.getElementById('circuitCanvas');
+            if (!circuitCanvas) return;
+            circuitCtx = circuitCanvas.getContext('2d');
+            updateCircuitUI();
+            requestAnimationFrame(drawCircuitSim);
+        }
+
+        function updateVoltage(val) {
+            currentU = parseFloat(val);
+            document.getElementById('u-slider-label').innerText = currentU.toFixed(1) + " V";
+            updateCircuitUI();
+        }
+
+        function setResistance(rVal) {
+            currentR = rVal;
+            document.getElementById('sim-res-val').innerText = `Résistor : R = ${rVal} Ω`;
+            updateCircuitUI();
+        }
+
+        function updateCircuitUI() {
+            const currentI = currentR > 0 ? (currentU / currentR) : 0;
+            const currentImA = currentI * 1000;
+
+            document.getElementById('sim-u-lcd').innerText = currentU.toFixed(2) + " V";
+            document.getElementById('sim-i-lcd').innerText = currentImA < 1000 ? currentImA.toFixed(0) + " mA" : currentI.toFixed(3) + " A";
+
+            const check = document.getElementById('sim-ohm-check');
+            check.innerText = `U / I = ${currentR.toFixed(1)} Ω (LOI D'OHM VÉRIFIÉE)`;
+        }
+
+        function drawCircuitSim() {
+            if (!circuitCanvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            circuitCtx.fillStyle = '#0f172a';
+            circuitCtx.fillRect(0, 0, circuitCanvas.width, circuitCanvas.height);
+
+            // Circuit Wire Loop
+            circuitCtx.strokeStyle = '#eab308';
+            circuitCtx.lineWidth = 4;
+            circuitCtx.beginPath();
+            circuitCtx.rect(80, 40, 440, 180);
+            circuitCtx.stroke();
+
+            // Generator Symbol (Left)
+            circuitCtx.fillStyle = '#0f172a';
+            circuitCtx.fillRect(60, 100, 40, 60);
+            circuitCtx.fillStyle = '#38bdf8';
+            circuitCtx.font = 'bold 16px Inter';
+            circuitCtx.textAlign = 'center';
+            circuitCtx.fillText('G', 80, 136);
+
+            // Resistor Symbol (Right)
+            circuitCtx.fillStyle = '#ca8a04';
+            circuitCtx.fillRect(500, 100, 40, 60);
+            circuitCtx.strokeStyle = '#fef08a';
+            circuitCtx.lineWidth = 2;
+            circuitCtx.strokeRect(500, 100, 40, 60);
+            circuitCtx.fillStyle = '#ffffff';
+            circuitCtx.font = 'bold 12px Inter';
+            circuitCtx.fillText('R', 520, 135);
+
+            // Ammeter Symbol (Top)
+            circuitCtx.fillStyle = '#0f172a';
+            circuitCtx.beginPath();
+            circuitCtx.arc(300, 40, 20, 0, Math.PI * 2);
+            circuitCtx.fill();
+            circuitCtx.strokeStyle = '#38bdf8';
+            circuitCtx.stroke();
+            circuitCtx.fillStyle = '#38bdf8';
+            circuitCtx.fillText('A', 300, 45);
+
+            // Voltmeter in parallel (Bottom branch)
+            circuitCtx.strokeStyle = '#94a3b8';
+            circuitCtx.lineWidth = 2;
+            circuitCtx.beginPath();
+            circuitCtx.moveTo(480, 40);
+            circuitCtx.lineTo(480, 20);
+            circuitCtx.lineTo(560, 20);
+            circuitCtx.lineTo(560, 220);
+            circuitCtx.lineTo(480, 220);
+            circuitCtx.lineTo(480, 220);
+            circuitCtx.stroke();
+
+            requestAnimationFrame(drawCircuitSim);
+        }
+    </script>
+</body>
+</html>

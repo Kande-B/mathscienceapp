@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation CCF - Puissance & Énergie Électrique CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence 7 CAP • Sciences Physiques &amp; Chimiques</span>
+                    <h1 class="text-xl font-bold font-heading">Puissance &amp; Énergie Électrique</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-microchip text-purple-400"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-red-100 text-red-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-red-200">Évaluation Sommative Type CCF • Sur 20 Points</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Sujet d'Évaluation de Sciences CAP</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Bilan énergétique et coût de fonctionnement d'un poste de travail en atelier.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Durée conseillée : 45 min</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher le Corrigé Enseignant</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- GRILLE OFFICIELLE PAR COMPÉTENCES -->
+        <section class="bg-white rounded-3xl p-6 border border-slate-200 card-shadow space-y-3">
+            <h2 class="text-sm font-bold font-heading text-slate-900 uppercase tracking-wider text-center border-b border-slate-100 pb-2">
+                Grille Évaluation Nationale des Compétences (Sciences CAP)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs">
+                <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-200">
+                    <span class="font-bold text-pink-700 block">S'approprier</span>
+                    <span class="text-[10px] text-slate-500">Formule $P = U \cdot I$</span>
+                </div>
+                <div class="bg-orange-50 p-2.5 rounded-xl border border-orange-200">
+                    <span class="font-bold text-orange-700 block">Analyser</span>
+                    <span class="text-[10px] text-slate-500">Unités kW et kWh</span>
+                </div>
+                <div class="bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                    <span class="font-bold text-blue-700 block">Réaliser</span>
+                    <span class="text-[10px] text-slate-500">Calculs $E = P \cdot t$ &amp; Coût</span>
+                </div>
+                <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                    <span class="font-bold text-emerald-700 block">Valider</span>
+                    <span class="text-[10px] text-slate-500">Effet Joule $R \cdot I^2$</span>
+                </div>
+                <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 col-span-2 md:col-span-1">
+                    <span class="font-bold text-yellow-700 block">Communiquer</span>
+                    <span class="text-[10px] text-slate-500">Éco-gestes en atelier</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 1 (6 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Partie 1 : Puissance &amp; Courant Nominal (6 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">6 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un compresseur d'atelier de puissance $P = 2300\text{ W}$ est alimenté sous une tension monophasée de $U = 230\text{ V}$.</p>
+                <p><strong>1.1 (2 pts) - Compétence S'approprier :</strong> Exprimer la puissance $P$ en kiloWatts ($\text{kW}$).</p>
+                <p><strong>1.2 (4 pts) - Compétence Réaliser :</strong> À l'aide de la formule $P = U \times I$, calculer l'intensité $I$ du courant électrique en Ampères ($I = \frac{P}{U}$).</p>
+            </div>
+
+            <!-- Solution PART 1 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 1 :</span>
+                <p>• <strong>1.1 :</strong> $P = \frac{2300}{1000} = \mathbf{2{,}3\text{ kW}}$ (2 pts).</p>
+                <p>• <strong>1.2 :</strong> $I = \frac{P}{U} = \frac{2300}{230} = \mathbf{10{,}0\text{ A}}$ (4 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Partie 2 : Consommation d'Énergie &amp; Facturation (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Le compresseur ($P = 2{,}3\text{ kW}$) fonctionne $t = 5\text{ heures}$ par jour pendant 20 jours ouvrés par mois. Le prix de l'électricité est de $0{,}25\text{ €/kWh}$.</p>
+                <p><strong>2.1 (3 pts) - Compétence Réaliser :</strong> Calculer l'énergie électrique journalière $E_{\text{jour}}$ consommée en kiloWatt-heures ($E = P \times t$).</p>
+                <p><strong>2.2 (2 pts) - Compétence Réaliser :</strong> Calculer l'énergie mensuelle totale $E_{\text{mois}}$ consommée sur les 20 jours.</p>
+                <p><strong>2.3 (3 pts) - Compétence Réaliser :</strong> Calculer le montant mensuel en euros facturé pour l'utilisation de ce compresseur.</p>
+            </div>
+
+            <!-- Solution PART 2 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 2 :</span>
+                <p>• <strong>2.1 :</strong> $E_{\text{jour}} = 2{,}3\text{ kW} \times 5\text{ h} = \mathbf{11{,}5\text{ kWh}}$ (3 pts).</p>
+                <p>• <strong>2.2 :</strong> $E_{\text{mois}} = 11{,}5 \times 20 = \mathbf{230\text{ kWh}}$ (2 pts).</p>
+                <p>• <strong>2.3 :</strong> $\text{Coût} = 230 \times 0{,}25 = \mathbf{57{,}50\text{ €}}$ par mois (3 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 (6 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Partie 3 : Effet Joule &amp; Éco-Gestes Métiers (6 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">6 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p><strong>3.1 (3 pts) - Compétence Valider :</strong> Expliquer pourquoi une rallonge électrique de chantier enroulée sur son dévidoir chauffe fortement lorsqu'on y branche un gros appareil (effet Joule $P = R \times I^2$).</p>
+                <p><strong>3.2 (3 pts) - Compétence Communiquer :</strong> Citer 2 éco-gestes à appliquer dans un atelier pour réduire le gaspillage d'énergie électrique.</p>
+            </div>
+
+            <!-- Solution PART 3 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 3 :</span>
+                <p>• <strong>3.1 :</strong> Le courant intense $I$ dissipe de la chaleur par effet Joule ($P = R \times I^2$). Enroulé, le câble ne peut pas dissiper sa chaleur vers l'air, ce qui provoque une surchauffe et un risque de fusion de l'isolant (3 pts).</p>
+                <p>• <strong>3.2 :</strong> 1) "Éteindre les machines et compresseurs en fin de journée (couper les veilles)." 2) "Remplacer les éclairages halogènes par des projecteurs LED basse consommation" (3 pts).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer le Corrigé Enseignant" : "Afficher le Corrigé Enseignant";
+        }
+    </script>
+</body>
+</html>

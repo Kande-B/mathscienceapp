@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vers le Brevet - Sources & Énergie (3PM Sciences)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+            .solution-block { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Séquence 7 • 3ème Prépa-Métiers (Cycle 4)</span>
+                    <h1 class="text-xl font-bold font-heading">Sources, Formes &amp; Conversions d'Énergie</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-purple-400"></i> TP Expérimental</a>
+                <a href="brevet.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Vers le Brevet (25 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-red-100 text-red-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-red-200">Épreuve Officielle Type DNB Pro • Sur 25 Points</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Sujet Brevet Professionnel : Refuge Autonome en Énergie</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Micro-centrale hydraulique, chaîne énergétique, rendement de l'alternateur et énergie cinétique de l'eau.</p>
+        </div>
+
+        <!-- BARRE D'ACTIONS -->
+        <div class="flex justify-between items-center no-print bg-white p-4 rounded-2xl border border-slate-200 card-shadow">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Durée conseillée : 30 min • 25 Points</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSolutions()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-eye"></i> <span id="btnSolText">Afficher le Corrigé Enseignant</span>
+                </button>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimer (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- GRILLE OFFICIELLE PAR COMPÉTENCES CYCLE 4 -->
+        <section class="bg-white rounded-3xl p-6 border border-slate-200 card-shadow space-y-3">
+            <h2 class="text-sm font-bold font-heading text-slate-900 uppercase tracking-wider text-center border-b border-slate-100 pb-2">
+                Grille Évaluation Nationale des Compétences (DNB Pro Physique-Chimie)
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs">
+                <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-200">
+                    <span class="font-bold text-pink-700 block">S'approprier</span>
+                    <span class="text-[10px] text-slate-500">Sources renouvelables</span>
+                </div>
+                <div class="bg-orange-50 p-2.5 rounded-xl border border-orange-200">
+                    <span class="font-bold text-orange-700 block">Analyser</span>
+                    <span class="text-[10px] text-slate-500">Chaîne énergétique</span>
+                </div>
+                <div class="bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+                    <span class="font-bold text-blue-700 block">Réaliser</span>
+                    <span class="text-[10px] text-slate-500">Rendement &amp; Énergie</span>
+                </div>
+                <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                    <span class="font-bold text-emerald-700 block">Valider</span>
+                    <span class="text-[10px] text-slate-500">Calcul $E_c = \frac{1}{2}mv^2$</span>
+                </div>
+                <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 col-span-2 md:col-span-1">
+                    <span class="font-bold text-yellow-700 block">Communiquer</span>
+                    <span class="text-[10px] text-slate-500">Protection des vannes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 1 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">1</span>
+                    Partie 1 : Sources d'Énergie &amp; Chaîne de Transformation (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Un refuge de haute montagne non raccordé au réseau électrique utilise une micro-centrale hydroélectrique couplée à un groupe électrogène diesel de secours.</p>
+                <p><strong>1.1 (3 pts) - Compétence S'approprier :</strong> Indiquer la source d'énergie renouvelable et la source d'énergie fossile utilisées par le refuge.</p>
+                <p><strong>1.2 (5 pts) - Compétence Analyser :</strong> Compléter la chaîne énergétique de la micro-centrale :<br>
+                Eau en hauteur (Énergie potentielle) $\to$ Turbine $\to$ Alternateur $\to$ Énergie utile &amp; Énergie perdue.</p>
+            </div>
+
+            <!-- Solution PART 1 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 1 :</span>
+                <p>• <strong>1.1 :</strong> Source renouvelable : **L'eau (hydraulique)**. Source fossile : **Le gazole / diesel** (3 pts).</p>
+                <p>• <strong>1.2 :</strong> **Énergie potentielle de l'eau** $\to$ **[Turbine]** (Énergie mécanique) $\to$ **[Alternateur]** $\to$ **Énergie électrique (utile)** + **Énergie thermique (pertes)** (5 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 (9 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">2</span>
+                    Partie 2 : Rendement de l'Alternateur &amp; Production Électrique (9 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">9 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>La turbine transmet à l'alternateur une puissance mécanique $P_{\text{absorbée}} = 12\text{ kW}$. L'alternateur présente un rendement $\eta = 75\%$ ($0{,}75$).</p>
+                <p><strong>2.1 (4 pts) - Compétence Réaliser :</strong> Calculer la puissance électrique utile $P_{\text{utile}}$ fournie par l'alternateur au refuge ($P_{\text{utile}} = \eta \times P_{\text{absorbée}}$).</p>
+                <p><strong>2.2 (5 pts) - Compétence Réaliser :</strong> La centrale fonctionne sans interruption pendant $24\text{ heures}$. Calculer l'énergie électrique totale $E$ produite en une journée en $\text{kWh}$ ($E = P \times t$).</p>
+            </div>
+
+            <!-- Solution PART 2 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 2 :</span>
+                <p>• <strong>2.1 :</strong> $P_{\text{utile}} = 0{,}75 \times 12\text{ kW} = \mathbf{9\text{ kW}}$ (4 pts).</p>
+                <p>• <strong>2.2 :</strong> $E = 9\text{ kW} \times 24\text{ h} = \mathbf{216\text{ kWh / jour}}$ (5 pts).</p>
+            </div>
+        </section>
+
+        <!-- PARTIE 3 (8 PTS) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h2 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <span class="w-7 h-7 bg-red-100 text-red-700 rounded-lg flex items-center justify-center text-xs font-extrabold">3</span>
+                    Partie 3 : Énergie Cinétique de l'Eau dans la Conduite Forcée (8 points)
+                </h2>
+                <span class="text-xs font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">8 Points</span>
+            </div>
+
+            <div class="text-xs space-y-3 text-slate-700">
+                <p>Chaque seconde, une masse d'eau $m = 500\text{ kg}$ frappe les augets de la turbine à la vitesse $v = 8\text{ m/s}$.</p>
+                <p><strong>3.1 (5 pts) - Compétence Valider :</strong> Calculer l'énergie cinétique $E_c$ de cette masse d'eau en Joules puis en kJ ($E_c = \frac{1}{2} m v^2$).</p>
+                <p><strong>3.2 (3 pts) - Compétence Communiquer :</strong> Pourquoi une vanne de sécurité ne doit-elle jamais se refermer trop brutalement ? (Raison physique liée au mouvement et à la pression).</p>
+            </div>
+
+            <!-- Solution PART 3 -->
+            <div class="solution-block hidden bg-red-50 border border-red-200 rounded-xl p-4 text-xs text-red-950 space-y-1">
+                <span class="font-bold text-red-900 block border-b border-red-200 pb-1">Corrigé &amp; Barème Partie 3 :</span>
+                <p>• <strong>3.1 :</strong> $E_c = \frac{1}{2} \times 500 \times 8^2 = 250 \times 64 = \mathbf{16\,000\text{ Joules}} = \mathbf{16\text{ kJ}}$ (5 pts).</p>
+                <p>• <strong>3.2 :</strong> Une fermeture trop brusque stoppe brutalement la masse d'eau en mouvement, créant une onde de surpression destructrice appelée "coup de bélier" risquant d'éclater la conduite forcée (3 pts).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleSolutions() {
+            const blocks = document.querySelectorAll('.solution-block');
+            const btnText = document.getElementById('btnSolText');
+            let isHidden = blocks[0].classList.contains('hidden');
+
+            blocks.forEach(b => {
+                if (isHidden) {
+                    b.classList.remove('hidden');
+                } else {
+                    b.classList.add('hidden');
+                }
+            });
+
+            btnText.innerText = isHidden ? "Masquer le Corrigé Enseignant" : "Afficher le Corrigé Enseignant";
+        }
+    </script>
+</body>
+</html>

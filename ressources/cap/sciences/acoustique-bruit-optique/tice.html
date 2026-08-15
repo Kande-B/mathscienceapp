@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Hybride - Acoustique, Bruit & Optique CAP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        .tab-btn.active {
+            background-color: #16a34a;
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+        }
+
+        @media print {
+            header, nav, .no-print, button, .tab-buttons { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .tab-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Séquence 8 CAP • Sciences Physiques &amp; Chimiques</span>
+                        <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-purple-300/30 flex items-center gap-1 shadow-sm"><i class="fa-solid fa-flask-vial text-yellow-300"></i> Labo Maths Sciences</span>
+                    </div>
+                    <h1 class="text-xl font-bold font-heading">Acoustique, Bruit &amp; Optique</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-yellow-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-indigo-400"></i> TD & Exercices</a>
+                <a href="tice.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> TP Hybride Réel/Virtuel</a>
+                <a href="eval.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Évaluation CCF</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md">
+                <i class="fa-solid fa-atom text-amber-400 text-sm"></i>
+                <span>Laboratoire Virtuel &amp; Réel • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">TP : Sonomètre &amp; Réfraction de la Lumière</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Choisissez le mode de travail : banc de paillasse réelle avec sonomètre et disque optique ou simulateur interactif Canvas 60 FPS.</p>
+        </div>
+
+        <!-- COMMUTATEUR DE MODE (ONGLETS) -->
+        <div class="flex justify-center gap-3 no-print tab-buttons">
+            <button onclick="switchTab('reel')" id="tab-reel-btn" class="tab-btn active px-6 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-flask"></i> Mode 1 : Paillasse Réelle (Sonomètre &amp; Disque Optique)
+            </button>
+            <button onclick="switchTab('virtuel')" id="tab-virtuel-btn" class="tab-btn bg-white text-slate-700 hover:bg-slate-100 px-6 py-3 rounded-2xl font-bold text-sm transition-all border border-slate-200 flex items-center gap-2">
+                <i class="fa-solid fa-laptop-code"></i> Mode 2 : Banc Virtuel Acoustique &amp; Laser 60 FPS
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 1 : PAILLASSE RÉELLE                    -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-reel" class="tab-content space-y-8">
+
+            <!-- Consignes Sécurité & Matériel -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="bg-red-50 border border-red-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-1">
+                    <h3 class="font-bold text-red-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Précautions Laser &amp; Bruit
+                    </h3>
+                    <ul class="space-y-2 text-red-950 font-medium">
+                        <li>• **Laser classe 2** : Ne jamais regarder directement dans l'axe du faisceau.</li>
+                        <li>• Manipuler les blocs optiques en plexiglas par les bords sans rayer les surfaces.</li>
+                        <li>• Limiter la durée des émissions sonores à plus de $85\text{ dB}$.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 text-xs md:col-span-2 card-shadow">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2 uppercase tracking-wider">
+                        <i class="fa-solid fa-boxes-packing text-emerald-600"></i> Matériel Réel Disponible à la Paillasse
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-slate-700 font-medium">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high text-emerald-500"></i> Sonomètre Numérique
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-sun text-amber-500"></i> Source Laser 650 nm
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-compact-disc text-sky-500"></i> Disque Gradué 360°
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-cube text-purple-500"></i> Demi-Cylindre Plexi
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Protocole Expérimental -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-600"></i> Protocole Expérimental en 6 Étapes
+                </h2>
+
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">1</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure du Bruit Résiduel de la Salle :</strong>
+                            Placer le sonomètre au centre de la paillasse et mesurer le niveau sonore ambiant ($L_{\text{ambiant}} \approx 45\text{ dB}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">2</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure d'une Source Sonore puis de Deux Sources (+3 dB) :</strong>
+                            Allumer un émetteur sonore à $1\text{ m}$ ($75\text{ dB}$), puis allumer le second identique et vérifier l'affichage à $78\text{ dB}$ ($+3\text{ dB}$).
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">3</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Installation du Banc Optique de Réfraction :</strong>
+                            Positionner le disque optique gradué bien à plat et placer le demi-cylindre de plexiglas au centre exact.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">4</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Mesure pour un Angle d'Incidence i1 = 30° :</strong>
+                            Envoyer le faisceau laser sur la face plane avec $i_1 = 30^\circ$ et lire sur le disque l'angle de réfraction $i_2 \approx 19{,}5^\circ$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">5</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Calcul du Rapport n2 = sin(i1) / sin(i2) :</strong>
+                            Calculer $\sin(30^\circ) = 0{,}500$ et $\sin(19{,}5^\circ) = 0{,}334$ puis déterminer $n_2 = \frac{0{,}500}{0{,}334} \approx 1{,}50$.
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs flex-shrink-0">6</span>
+                        <div>
+                            <strong class="text-slate-900 block text-sm">Vérification de la Loi de Snell-Descartes :</strong>
+                            Répéter pour $i_1 = 50^\circ$ ($i_2 \approx 30{,}7^\circ$) et valider la constance de l'indice $n_2 = 1{,}50$ du plexiglas.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau de Relevé Expérimental Interactif -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-emerald-600"></i> Tableau de Mesures de Réfraction (Loi de Descartes)
+                </h2>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 font-bold border border-slate-200">Essai</th>
+                                <th class="p-3 font-bold border border-slate-200">Angle d'Incidence $i_1$ (°)</th>
+                                <th class="p-3 font-bold border border-slate-200">Angle Réfracté $i_2$ (°)</th>
+                                <th class="p-3 font-bold border border-slate-200">$\sin(i_1)$</th>
+                                <th class="p-3 font-bold border border-slate-200">$\sin(i_2)$</th>
+                                <th class="p-3 font-bold border border-slate-200">Indice $n = \frac{\sin i_1}{\sin i_2}$</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800">
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Mesure 1</td>
+                                <td class="p-3 font-mono font-bold">30°</td>
+                                <td class="p-3 font-mono font-bold text-emerald-600">19,5°</td>
+                                <td class="p-3 font-mono font-bold">0,500</td>
+                                <td class="p-3 font-mono font-bold">0,334</td>
+                                <td class="p-3 font-mono font-bold text-purple-600">1,50</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-extrabold bg-slate-50 text-emerald-700">Mesure 2</td>
+                                <td class="p-3 font-mono font-bold">50°</td>
+                                <td class="p-3"><input type="number" step="0.1" id="i2-input" placeholder="ex: 30.7" oninput="checkRealOptic()" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold text-emerald-700"></td>
+                                <td class="p-3 font-mono font-bold">0,766</td>
+                                <td class="p-3 font-mono font-bold text-purple-600" id="sin2-calc">--</td>
+                                <td class="p-3 font-mono font-bold text-sky-600" id="n2-calc">--</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="real-optic-status" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB 2 : SIMULATEUR VIRTUEL HTML5 CANVAS     -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div id="tab-virtuel" class="tab-content hidden space-y-8">
+
+            <div class="bg-slate-900 text-white rounded-3xl p-6 md:p-8 card-shadow space-y-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Banc Interactif Optique &amp; Sonomètre 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-white">Simulateur de Réfraction Laser &amp; Niveau Sonore</h2>
+                    </div>
+                    <!-- Statut Badge -->
+                    <div id="sim-status-badge" class="bg-emerald-950 border border-emerald-500 text-emerald-300 px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                        <i class="fa-solid fa-wave-square text-emerald-400 mr-1.5"></i> SIMULATEUR ACTIF
+                    </div>
+                </div>
+
+                <!-- Canvas + Controls Display Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Canvas Optical Table Display -->
+                    <div class="lg:col-span-2 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono text-emerald-400">
+                            <span>VUE DU DISQUE OPTIQUE &amp; TRACÉ DU FAISCEAU LASER</span>
+                            <span id="sim-laser-param">i1: 40° | i2: 25.4° | n: 1.50</span>
+                        </div>
+                        <canvas id="opticCanvas" width="600" height="260" class="w-full h-56 bg-slate-900 rounded-xl border border-emerald-900/50 shadow-inner"></canvas>
+
+                        <!-- Sliders Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Angle d'Incidence i1 (0° à 75°)</label>
+                                <input type="range" id="sim-i1-val" min="0" max="75" step="1" value="40" oninput="updateSimOptic()" class="w-full accent-emerald-500">
+                                <span class="font-mono text-emerald-300 font-bold" id="val-sim-i1">Angle i1 = 40°</span>
+                            </div>
+                            <div>
+                                <label class="text-slate-400 block text-[10px] uppercase font-bold">Niveau Sonore Source (dB)</label>
+                                <input type="range" id="sim-db-val" min="50" max="110" step="1" value="82" oninput="updateSimOptic()" class="w-full accent-amber-500">
+                                <span class="font-mono text-amber-300 font-bold" id="val-sim-db">Machine = 82 dB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Meters Display Cards -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between items-center text-center space-y-3">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">MESURES PHYSIQUES TEMPS RÉEL</span>
+                        
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Angle Réfracté i2 Calculé</span>
+                            <span class="text-2xl font-bold font-mono text-emerald-400" id="sim-i2-lcd">25.4°</span>
+                        </div>
+
+                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 w-full space-y-1">
+                            <span class="text-[10px] text-slate-400 font-bold block uppercase">Sonomètre (2 machines)</span>
+                            <span class="text-2xl font-bold font-mono text-amber-400" id="sim-dbtot-lcd">85.0 dB</span>
+                            <span class="text-[10px] text-red-400 block font-bold" id="sim-epi-warn">EPI OBLIGATOIRES</span>
+                        </div>
+
+                        <div class="w-full p-2.5 rounded-xl border text-[11px] font-bold uppercase tracking-wider bg-emerald-950/40 border-emerald-500 text-emerald-400">
+                            INDICE PLEXIGLAS N = 1.50
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Défi Virtuel Masqué -->
+            <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <h2 class="text-xl font-bold font-heading text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Défi Mystère : Calculer le Niveau Sonore de 2 Tronçonneuses
+                </h2>
+                <p class="text-xs text-slate-700">
+                    Une tronçonneuse émet $L_1 = 90\text{ dB}$. Si deux ouvriers démarrent en même temps deux tronçonneuses identiques de $90\text{ dB}$, quel niveau sonore total en décibels sera mesuré ?
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <input type="number" step="1" id="user-db-guess" placeholder="Entrer les dB (ex: 93)" class="p-2.5 border border-slate-300 rounded-xl text-xs font-bold w-full sm:w-64">
+                    <button onclick="checkGuessOptic()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all w-full sm:w-auto">
+                        Valider les Décibels
+                    </button>
+                </div>
+                <div id="guess-result-optic" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+            </section>
+
+        </div>
+
+        <!-- FOOTER BRANDING LABO MATHS SCIENCES -->
+        <div class="text-center pt-8 border-t border-slate-200 no-print">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-slate-700">
+                <i class="fa-solid fa-flask text-emerald-400"></i>
+                <span>Module Expérimental Hybride (Réel &amp; Virtuel) • Propulsé par <strong>Labo Maths Sciences</strong></span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DU SIMULATEUR CANVAS -->
+    <script>
+        function switchTab(mode) {
+            document.getElementById('tab-reel').classList.add('hidden');
+            document.getElementById('tab-virtuel').classList.add('hidden');
+            document.getElementById('tab-reel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+            document.getElementById('tab-virtuel-btn').classList.remove('active', 'bg-emerald-600', 'text-white');
+
+            if (mode === 'reel') {
+                document.getElementById('tab-reel').classList.remove('hidden');
+                document.getElementById('tab-reel-btn').classList.add('active');
+            } else {
+                document.getElementById('tab-virtuel').classList.remove('hidden');
+                document.getElementById('tab-virtuel-btn').classList.add('active');
+                initOpticCanvas();
+            }
+        }
+
+        function checkRealOptic() {
+            const i2 = parseFloat(document.getElementById('i2-input').value);
+            const status = document.getElementById('real-optic-status');
+
+            if (i2 > 0) {
+                const sin2 = Math.sin((i2 * Math.PI) / 180);
+                const n2 = Math.sin((50 * Math.PI) / 180) / sin2;
+                document.getElementById('sin2-calc').innerText = sin2.toFixed(3);
+                document.getElementById('n2-calc').innerText = n2.toFixed(2);
+
+                if (Math.abs(n2 - 1.50) < 0.05) {
+                    status.classList.remove('hidden', 'bg-red-100', 'text-red-900');
+                    status.classList.add('bg-emerald-100', 'text-emerald-900');
+                    status.innerHTML = "🎉 Mesure conforme ! Pour i1 = 50°, on mesure i2 ≈ 30,7° et on retrouve l'indice n = 1,50 du plexiglas.";
+                }
+            }
+        }
+
+        let canvas, ctx;
+        let i1Deg = 40;
+        let dbSource = 82;
+
+        function initOpticCanvas() {
+            canvas = document.getElementById('opticCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            updateSimOptic();
+            requestAnimationFrame(drawOptic);
+        }
+
+        function updateSimOptic() {
+            i1Deg = parseFloat(document.getElementById('sim-i1-val').value);
+            dbSource = parseFloat(document.getElementById('sim-db-val').value);
+
+            document.getElementById('val-sim-i1').innerText = `Angle i1 = ${i1Deg}°`;
+            document.getElementById('val-sim-db').innerText = `Machine = ${dbSource} dB`;
+
+            // Snell-Descartes : sin(i2) = sin(i1) / 1.50
+            const sin1 = Math.sin((i1Deg * Math.PI) / 180);
+            const sin2 = sin1 / 1.50;
+            const i2Rad = Math.asin(sin2);
+            const i2Deg = (i2Rad * 180) / Math.PI;
+
+            const dbTot = dbSource + 3;
+
+            document.getElementById('sim-i2-lcd').innerText = i2Deg.toFixed(1) + "°";
+            document.getElementById('sim-dbtot-lcd').innerText = dbTot.toFixed(1) + " dB";
+            document.getElementById('sim-laser-param').innerText = `i1: ${i1Deg}° | i2: ${i2Deg.toFixed(1)}° | n: 1.50`;
+
+            const warn = document.getElementById('sim-epi-warn');
+            if (dbTot >= 85) {
+                warn.innerText = "EPI CASQUE OBLIGATOIRE (≥ 85 dB)";
+                warn.className = "text-[10px] text-red-400 block font-bold";
+            } else if (dbTot >= 80) {
+                warn.innerText = "SEUIL DE VIGILANCE (≥ 80 dB)";
+                warn.className = "text-[10px] text-amber-400 block font-bold";
+            } else {
+                warn.innerText = "NIVEAU SÉCURISÉ (< 80 dB)";
+                warn.className = "text-[10px] text-emerald-400 block font-bold";
+            }
+        }
+
+        function drawOptic() {
+            if (!canvas || document.getElementById('tab-virtuel').classList.contains('hidden')) return;
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const cx = 300;
+            const cy = 130;
+            const radius = 90;
+
+            // Optical Disc (D-shaped plexiglas)
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Normal line (vertical dashed)
+            ctx.strokeStyle = '#94a3b8';
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(cx, 20);
+            ctx.lineTo(cx, 240);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Incident Laser Ray (Red)
+            const i1Rad = (i1Deg * Math.PI) / 180;
+            const lx = cx - 120 * Math.sin(i1Rad);
+            const ly = cy - 120 * Math.cos(i1Rad);
+
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(lx, ly);
+            ctx.lineTo(cx, cy);
+            ctx.stroke();
+
+            // Reflected Ray (i1 = r)
+            const rx = cx + 80 * Math.sin(i1Rad);
+            const ry = cy - 80 * Math.cos(i1Rad);
+            ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(rx, ry);
+            ctx.stroke();
+
+            // Refracted Ray inside plexiglas
+            const sin1 = Math.sin(i1Rad);
+            const sin2 = sin1 / 1.50;
+            const i2Rad = Math.asin(sin2);
+            const rx2 = cx + 110 * Math.sin(i2Rad);
+            const ry2 = cy + 110 * Math.cos(i2Rad);
+
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(rx2, ry2);
+            ctx.stroke();
+
+            // Angle labels
+            ctx.fillStyle = '#f87171';
+            ctx.font = 'bold 10px monospace';
+            ctx.fillText(`i1 = ${i1Deg}°`, cx - 50, cy - 30);
+            ctx.fillText(`i2 = ${((i2Rad * 180) / Math.PI).toFixed(1)}°`, cx + 15, cy + 40);
+
+            requestAnimationFrame(drawOptic);
+        }
+
+        function checkGuessOptic() {
+            const ans = parseFloat(document.getElementById('user-db-guess').value);
+            // 90 dB + 90 dB = 93 dB
+            const target = 93;
+            const res = document.getElementById('guess-result-optic');
+
+            res.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+
+            if (ans === target) {
+                res.classList.add('bg-emerald-100', 'text-emerald-900');
+                res.innerText = "🎉 Exact ! Doubler la source sonore ajoute +3 dB : 90 dB + 90 dB = 93 dB.";
+            } else {
+                res.classList.add('bg-red-100', 'text-red-900');
+                res.innerText = "❌ Indice : Les décibels ne s'additionnent pas linéairement : on ajoute toujours +3 dB quand la source est doublée.";
+            }
+        }
+    </script>
+</body>
+</html>
