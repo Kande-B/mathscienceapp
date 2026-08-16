@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Fonctions Exponentielles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Keys */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Exponentielles ($x \mapsto e^{kx}$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Exponentielles &amp; Constantes de Temps</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Manipuler la fonction exponentielle sur la NumWorks pour modéliser des réponses transitoires et déterminer numériquement des durées caractéristiques.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE TECHNIQUE NUMWORKS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Méthodes NumWorks : Fonctions Exponentielles</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-calculator mr-1"></i> Touche e^x &amp; Tableur</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">1. Saisie de $e^{kx}$</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Touche e^x</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Utiliser la touche jaune <span class="nw-key nw-key-yellow">e^x</span> située au-dessus de <span class="nw-key font-bold">ln</span>.</li>
+                        <li>• Pour saisir $f(x) = 24(1 - e^{-20x})$ :
+                            <br>Taper <span class="font-mono font-bold text-indigo-700">24*(1 - e^(-20*x))</span>.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">2. Tableau &amp; Seuil</span>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">Tableau</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans l'application <strong>Fonctions</strong>, ouvrir l'onglet <strong>Tableau</strong>.</li>
+                        <li>• Régler l'intervalle avec un pas adapté (ex: $X_{\min}=0$, $X_{\max}=0{,}3$, pas $=0{,}01$).</li>
+                        <li>• Repérer instantanément l'abscisse où $f(x)$ atteint 63 % ou 95 % de sa valeur finale.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE PROFESSIONNELLE -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Automobile &amp; Véhicules Hybrides</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude de Cas : Décharge Rapide d'un Supercondensateur de Récupération</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-slate-700">
+                <p class="font-bold text-slate-900">Mise en situation :</p>
+                <p>Lors d'une phase de freinage régénératif, un supercondensateur de bus hybride se décharge dans le réseau de bord. La tension $u(t)$ (en volts) en fonction du temps $t$ (en secondes) est modélisée par :</p>
+                <div class="p-2 bg-white border border-purple-200 rounded-xl text-center font-bold text-purple-900">
+                    $$u(t) = 48 e^{-0{,}8 t}$$
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-3 text-sm text-slate-800">
+                <p><strong>1.</strong> Saisir la fonction dans la NumWorks et relever les valeurs de tension pour $t = 0, 1, 2, 3, 5\text{ secondes}$.</p>
+                <p><strong>2.</strong> Calculer la dérivée $u'(t)$ et déterminer la vitesse de décharge initiale à $t = 0\text{ s}$ en $\text{V/s}$.</p>
+                <p><strong>3.</strong> Déterminer l'instant $t$ où la tension passe sous le seuil de sécurité de $12\text{ V}$.</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-6').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Réponses Détaillées
+                </button>
+                <div id="sol-tp-6" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Tableau NumWorks :</strong>
+                            <br>• $t=0$ : $48{,}0\text{ V}$.
+                            <br>• $t=1$ : $21{,}6\text{ V}$.
+                            <br>• $t=2$ : $9{,}7\text{ V}$.
+                            <br>• $t=3$ : $4{,}4\text{ V}$.
+                            <br>• $t=5$ : $0{,}9\text{ V}$.
+                        </li>
+                        <li><strong>2. Vitesse initiale :</strong> $u'(t) = 48(-0{,}8)e^{-0{,}8t} = -38{,}4 e^{-0{,}8t} \implies u'(0) = \mathbf{-38{,}4\text{ V/s}}$.</li>
+                        <li><strong>3. Seuil $12\text{ V}$ :</strong> $48 e^{-0{,}8t} = 12 \iff e^{-0{,}8t} = 0{,}25 \iff -0{,}8t = \ln(0{,}25) \approx -1{,}3863 \implies t \approx \mathbf{1{,}73\text{ seconde}}$.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS ("LABO MATHS SCIENCES") -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Simulateur Virtuel Canvas 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Simulateur de Charge &amp; Décharge Exponentielle</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200"><i class="fa-solid fa-bolt mr-1"></i> Réponse Dynamique</span>
+            </div>
+
+            <!-- Parameters controls -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Tension maximale E (V) :</label>
+                    <input type="range" id="param-exp-e" min="10" max="100" step="2" value="48" oninput="updateExpSim()" class="w-full accent-indigo-600">
+                    <span id="val-exp-e" class="font-mono font-bold text-indigo-700">48 V</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Constante de temps tau (s) :</label>
+                    <input type="range" id="param-exp-tau" min="0.2" max="2.0" step="0.1" value="1.2" oninput="updateExpSim()" class="w-full accent-indigo-600">
+                    <span id="val-exp-tau" class="font-mono font-bold text-indigo-700">1.2 s</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Mode d'évolution :</label>
+                    <select id="param-exp-mode" onchange="updateExpSim()" class="w-full p-2 bg-white border border-slate-300 rounded-xl font-bold text-indigo-700">
+                        <option value="charge">Charge : u(t) = E(1 - e^(-t/tau))</option>
+                        <option value="discharge">Décharge : u(t) = E e^(-t/tau)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Canvas & Dynamic Stats -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                    <canvas id="expCanvas" width="560" height="300" class="w-full h-auto bg-slate-900 rounded-xl"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 flex flex-col justify-between text-xs">
+                    <div class="space-y-3 font-mono">
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Tension à t = tau :</span>
+                            <span id="stat-utau" class="font-bold text-sky-600 block text-sm">30.34 V (63.2 %)</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Tension à t = 3 tau :</span>
+                            <span id="stat-u3tau" class="font-bold text-purple-600 block text-sm">45.61 V (95.0 %)</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Régime permanent (5 tau) :</span>
+                            <span id="stat-u5tau" class="font-bold text-emerald-600 block text-xs">Atteint à t = 6.0 s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Canvas Simulation Script -->
+    <script>
+        function updateExpSim() {
+            const E = parseFloat(document.getElementById('param-exp-e').value);
+            const tau = parseFloat(document.getElementById('param-exp-tau').value);
+            const mode = document.getElementById('param-exp-mode').value;
+
+            document.getElementById('val-exp-e').innerText = `${E} V`;
+            document.getElementById('val-exp-tau').innerText = `${tau.toFixed(1)} s`;
+
+            const uTau = mode === 'charge' ? E * (1 - Math.exp(-1)) : E * Math.exp(-1);
+            const u3Tau = mode === 'charge' ? E * (1 - Math.exp(-3)) : E * Math.exp(-3);
+
+            document.getElementById('stat-utau').innerText = `${uTau.toFixed(2)} V (${(uTau / E * 100).toFixed(1)} %)`;
+            document.getElementById('stat-u3tau').innerText = `${u3Tau.toFixed(2)} V (${(u3Tau / E * 100).toFixed(1)} %)`;
+            document.getElementById('stat-u5tau').innerText = `Atteint à t = ${(5 * tau).toFixed(1)} s`;
+
+            drawExp(E, tau, mode);
+        }
+
+        function drawExp(E, tau, mode) {
+            const canvas = document.getElementById('expCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const tMax = 6 * tau;
+            const toX = t => (t / tMax) * (w - 70) + 45;
+            const toY = u => (h - 35) - (u / (E * 1.15)) * (h - 60);
+
+            // Axes
+            ctx.strokeStyle = "#334155";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(45, toY(0)); ctx.lineTo(w - 20, toY(0));
+            ctx.moveTo(45, 20); ctx.lineTo(45, h - 35);
+            ctx.stroke();
+
+            // Trace Asymptote E
+            if (mode === 'charge') {
+                ctx.strokeStyle = "#64748b";
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(45, toY(E)); ctx.lineTo(w - 20, toY(E));
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // Trace Exponentielle
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            let first = true;
+            for (let px = 45; px <= w - 20; px += 2) {
+                const t = ((px - 45) / (w - 65)) * tMax;
+                const u = mode === 'charge' ? E * (1 - Math.exp(-t / tau)) : E * Math.exp(-t / tau);
+                const py = toY(u);
+                if (first) { ctx.moveTo(px, py); first = false; }
+                else { ctx.lineTo(px, py); }
+            }
+            ctx.stroke();
+
+            // Mark Tau
+            const uT = mode === 'charge' ? E * (1 - Math.exp(-1)) : E * Math.exp(-1);
+            ctx.fillStyle = "#fed100";
+            ctx.beginPath();
+            ctx.arc(toX(tau), toY(uT), 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#cbd5e1";
+            ctx.font = "10px JetBrains Mono";
+            ctx.fillText("t = τ", toX(tau) - 10, h - 15);
+        }
+
+        document.addEventListener('DOMContentLoaded', updateExpSim);
+    </script>
+
+</body>
+</html>

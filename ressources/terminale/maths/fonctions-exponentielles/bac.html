@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vers le Bac Pro - Fonctions Exponentielles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .print-break { page-break-after: always; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Exponentielles ($x \mapsto e^{kx}$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & EXAM INFO -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2 text-center md:text-left">
+                <span class="bg-red-100 text-red-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Épreuve Certificative Baccalauréat Professionnel</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">Évaluation Formative : Fonctions Exponentielles</h1>
+                <p class="text-slate-500 text-xs md:text-sm">Durée recommandée : 1 heure • Barème total : 20 points</p>
+            </div>
+            <div class="flex items-center gap-3 no-print">
+                <button onclick="window.print()" class="px-4 py-2.5 bg-slate-900 text-white hover:bg-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-print"></i> Imprimer le Sujet (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : AUTOMATISMES (5 POINTS - SANS CALCULATRICE) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 font-extrabold rounded-lg text-xs">Partie 1</span>
+                    <h2 class="text-xl font-bold font-heading text-slate-900">Automatismes (5 points • Sans calculatrice • 15 min)</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">5 questions • 1 pt / question</span>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-800">
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">1. Propriété algébrique :</p>
+                    <p>Simplifier sous la forme $e^A$ l'expression : $\frac{e^5 \times e^{-2}}{e^1}$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">2. Dérivée :</p>
+                    <p>Déterminer la dérivée de la fonction $f(x) = 6 e^{-0{,}5x}$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">3. Équation de base :</p>
+                    <p>Donner la solution exacte de l'équation $e^x = 7$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">4. Valeur initiale :</p>
+                    <p>Pour $g(t) = 150 e^{-2t}$, calculer $g(0)$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">5. Sens de variation :</p>
+                    <p>Préciser le sens de variation sur $\mathbb{R}$ de la fonction $h(x) = 10 e^{0{,}3x}$ en justifiant par le signe de sa dérivée.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : PROBLÈME PROFESSIONNEL (15 POINTS - AVEC CALCULATRICE) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 font-extrabold rounded-lg text-xs">Partie 2</span>
+                    <h2 class="text-xl font-bold font-heading text-slate-900">Problème Contextualisé (15 points • Avec calculatrice • 45 min)</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">Énergétique du Bâtiment &amp; Confort Thermique</span>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-red-500 space-y-2">
+                    <h3 class="font-bold text-slate-900">Mise en situation : Déperdition thermique nocturne d'un atelier industriel</h3>
+                    <p>Dans un atelier de fabrication mécanique, le chauffage est coupé le soir à 20h00 ($t = 0\text{ h}$). La température intérieure $T(t)$ (en °C) en fonction du temps $t$ (en heures, pour $t \in [0 ; 12]$) est modélisée par :</p>
+                    <div class="p-2.5 bg-white border border-red-200 rounded-xl text-center font-bold text-red-900">
+                        $$T(t) = 5 + 15 e^{-0{,}12 t}$$
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <p><strong>Question 1 (C1 - S'approprier / 2 pts) :</strong> Déterminer la température initiale de l'atelier à 20h00 ($t = 0$). Quelle est la température extérieure minimale atteinte au cours de la nuit (valeur limite) ?</p>
+                    <p><strong>Question 2 (C3 - Réaliser / 3 pts) :</strong> Calculer la température à minuit ($t = 4\text{ h}$) et à 6h00 du matin ($t = 10\text{ h}$) en arrondissant au dixième de degré.</p>
+                    <p><strong>Question 3 (C3 - Réaliser / 3 pts) :</strong> Déterminer la fonction dérivée $T'(t)$ et préciser son signe pour tout $t \in [0 ; 12]$.</p>
+                    <p><strong>Question 4 (C2 & C3 - Analyser & Réaliser / 3 pts) :</strong> Dresser le tableau de variations complet de la fonction $T$ sur l'intervalle $[0 ; 12]$.</p>
+                    <p><strong>Question 5 (C4 - Valider / 2 pts) :</strong> Pour préserver les machines de mesure tridimensionnelle, la température de l'atelier ne doit pas descendre **en dessous de 12 °C**. Résoudre l'équation $5 + 15 e^{-0{,}12 t} = 12$ pour déterminer l'heure exacte à laquelle le système de chauffage de maintien doit se déclencher.</p>
+                    <p><strong>Question 6 (C5 - Communiquer / 2 pts) :</strong> Rédiger un compte-rendu technique concis à destination du responsable de maintenance de l'usine.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRILLE D'ÉVALUATION PAR COMPÉTENCES -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <h3 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-table-list text-red-500"></i> Grille Nationale des Compétences Évaluées (Bac Pro)
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-slate-200 text-xs md:text-sm">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="p-2 border">Compétence</th>
+                            <th class="p-2 border">Capacités Évaluées</th>
+                            <th class="p-2 border text-center">Questions</th>
+                            <th class="p-2 border text-center">Barème</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr>
+                            <td class="p-2 font-bold text-pink-700 bg-pink-50/50">C1. S'approprier</td>
+                            <td class="p-2">Identifier les conditions initiales et les limites physiques.</td>
+                            <td class="p-2 text-center">Partie 1 (Q4) • Partie 2 (Q1)</td>
+                            <td class="p-2 text-center font-bold">3 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-orange-700 bg-orange-50/50">C2. Analyser / Raisonner</td>
+                            <td class="p-2">Justifier le sens de variation et la décroissance thermique.</td>
+                            <td class="p-2 text-center">Partie 1 (Q5) • Partie 2 (Q4)</td>
+                            <td class="p-2 text-center font-bold">4 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-blue-700 bg-blue-50/50">C3. Réaliser</td>
+                            <td class="p-2">Dériver $C e^{kx}$, calculer des valeurs d'exponentielles et résoudre avec $\ln$.</td>
+                            <td class="p-2 text-center">Partie 1 (Q1, Q2, Q3) • Partie 2 (Q2, Q3)</td>
+                            <td class="p-2 text-center font-bold">9 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-green-700 bg-green-50/50">C4. Valider</td>
+                            <td class="p-2">Calculer le temps de déclenchement du chauffage.</td>
+                            <td class="p-2 text-center">Partie 2 (Q5)</td>
+                            <td class="p-2 text-center font-bold">2 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-yellow-700 bg-yellow-50/50">C5. Communiquer</td>
+                            <td class="p-2">Transmettre une consigne claire d'exploitation technique.</td>
+                            <td class="p-2 text-center">Partie 2 (Q6)</td>
+                            <td class="p-2 text-center font-bold">2 pts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CORRIGÉ COMPLET DÉPLIABLE -->
+        <div class="pt-4 border-t border-slate-200">
+            <button onclick="document.getElementById('sol-bac-6').classList.toggle('hidden')" class="px-5 py-3 bg-red-50 text-red-800 hover:bg-red-100 rounded-2xl font-bold text-xs transition-colors flex items-center gap-2 border border-red-200 shadow-sm mx-auto">
+                <i class="fa-solid fa-eye"></i> Afficher le Corrigé Intégral du Sujet Bac Pro &amp; Barème
+            </button>
+            <div id="sol-bac-6" class="hidden mt-6 p-6 md:p-8 bg-white rounded-3xl border-2 border-red-200 space-y-6 text-xs md:text-sm text-slate-800 card-shadow">
+                <h3 class="font-bold text-lg text-red-900 border-b border-red-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé Officiel Détaillé &amp; Barème
+                </h3>
+
+                <!-- Corrigé Partie 1 -->
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm text-indigo-700">Partie 1 : Automatismes (5 pts)</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>1.</strong> $\frac{e^5 \times e^{-2}}{e^1} = \frac{e^3}{e^1} = e^{3-1} = \mathbf{e^2}$ (1 pt).</li>
+                        <li><strong>2.</strong> $f'(x) = 6(-0{,}5)e^{-0{,}5x} = \mathbf{-3 e^{-0{,}5x}}$ (1 pt).</li>
+                        <li><strong>3.</strong> $e^x = 7 \iff \mathbf{x = \ln(7)} \approx 1{,}946$ (1 pt).</li>
+                        <li><strong>4.</strong> $g(0) = 150 e^0 = \mathbf{150}$ (1 pt).</li>
+                        <li><strong>5.</strong> $h'(x) = 10(0{,}3)e^{0{,}3x} = 3 e^{0{,}3x} > 0$ car l'exponentielle est strictement positive. Donc $h$ est **strictement croissante** sur $\mathbb{R}$ (1 pt).</li>
+                    </ul>
+                </div>
+
+                <!-- Corrigé Partie 2 -->
+                <div class="space-y-2 pt-2 border-t border-slate-100">
+                    <h4 class="font-bold text-slate-900 text-sm text-red-700">Partie 2 : Problème (15 pts)</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Q1.</strong> $T(0) = 5 + 15 e^0 = 5 + 15 = \mathbf{20\text{ °C}}$.
+                            <br>Quand $t$ devient grand, $e^{-0{,}12t} \to 0$, donc la température limite est de $\mathbf{5\text{ °C}}$ (2 pts).
+                        </li>
+                        <li><strong>Q2.</strong>
+                            <br>• À minuit ($t = 4$) : $T(4) = 5 + 15 e^{-0{,}12(4)} = 5 + 15 e^{-0{,}48} \approx 5 + 15(0{,}61878) \approx \mathbf{14{,}3\text{ °C}}$.
+                            <br>• À 6h00 ($t = 10$) : $T(10) = 5 + 15 e^{-0{,}12(10)} = 5 + 15 e^{-1{,}2} \approx 5 + 15(0{,}30119) \approx \mathbf{9{,}5\text{ °C}}$ (3 pts).
+                        </li>
+                        <li><strong>Q3.</strong> $T'(t) = 15(-0{,}12)e^{-0{,}12t} = \mathbf{-1{,}8 e^{-0{,}12t}}$.
+                            <br>Comme $e^{-0{,}12t} > 0$, $T'(t) < 0$ pour tout $t \in [0 ; 12]$ (3 pts).
+                        </li>
+                        <li><strong>Q4.</strong> Tableau de variations : $T$ est strictement décroissante de $20\text{ °C}$ (en $t = 0$) à $T(12) = 5 + 15 e^{-1{,}44} \approx 8{,}6\text{ °C}$ (en $t = 12$) (3 pts).</li>
+                        <li><strong>Q5.</strong> Résolution de $T(t) = 12$ :
+                            $$5 + 15 e^{-0{,}12t} = 12 \iff 15 e^{-0{,}12t} = 7 \iff e^{-0{,}12t} = \frac{7}{15} \approx 0{,}46667$$
+                            $$-0{,}12t = \ln(7/15) \approx -0{,}76214 \iff t = \frac{-0{,}76214}{-0{,}12} \approx \mathbf{6{,}35\text{ heures}}$$
+                            $0{,}35\text{ h} = 0{,}35 \times 60 = 21\text{ minutes}$.
+                            Le chauffage doit donc se déclencher après **6 h 21 min**, soit à **02h21 du matin** (2 pts).
+                        </li>
+                        <li><strong>Q6.</strong> Compte-rendu : Programmer la régulation thermique pour un redémarrage automatique à **02h21** afin de garantir une température minimale de 12 °C et protéger le matériel de métrologie (2 pts).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

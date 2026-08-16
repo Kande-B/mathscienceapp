@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Fonctions du Second Degré (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions du Second Degré &amp; Paraboles</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Progressif aux Épreuves du Bac Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Travaux Dirigés &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 exercices d'application professionnelle sur le second degré, le discriminant $\Delta$, les paraboles et l'optimisation.</p>
+        </div>
+
+        <div class="space-y-6">
+
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 1</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Calcul du discriminant $\Delta$ et racines</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Résoudre dans $\mathbb{R}$ l'équation suivante : $2x^2 - 10x + 8 = 0$.</p>
+                <button onclick="document.getElementById('sol-1').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-1" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p>$\Delta = (-10)^2 - 4(2)(8) = 100 - 64 = \mathbf{36} > 0$.</p>
+                    <p>$x_1 = \frac{10 - 6}{4} = \mathbf{1}$ et $x_2 = \frac{10 + 6}{4} = \mathbf{4}$. $S = \{1 ; 4\}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 2</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Sommet et variations d'une fonction</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Soit $f(x) = -x^2 + 6x - 5$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Déterminer les coordonnées du sommet $S(x_S, y_S)$.</li>
+                    <li>Dresser le tableau de variations de $f$ sur $\mathbb{R}$.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-2').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-2" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $x_S = -\frac{6}{2(-1)} = \mathbf{3}$ et $y_S = f(3) = -(3)^2 + 6(3) - 5 = -9 + 18 - 5 = \mathbf{4}$. $S(3 ; 4)$.</p>
+                    <p><strong>2.</strong> Comme $a = -1 < 0$, $f$ est strictement croissante sur $]-\infty ; 3]$ puis strictement décroissante sur $[3 ; +\infty[$ (Maximum en $y_S = 4$).</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 3</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Automobile : Distance d'arrêt sur chaussée mouillée</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>☆ (Niveau 2)</span>
+                </div>
+                <p class="text-sm text-slate-700">La distance d'arrêt $D(v)$ en mètres d'un véhicule roulant à la vitesse $v$ (en km/h) est donnée par $D(v) = 0{,}008v^2 + 0{,}25v$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer la distance d'arrêt pour une vitesse de $80\text{ km/h}$.</li>
+                    <li>Un obstacle imprévu se trouve à $100\text{ m}$. Résoudre $0{,}008v^2 + 0{,}25v = 100$ pour déterminer la vitesse maximale admissible pour s'arrêter à temps (arrondir au km/h).</li>
+                </ol>
+                <button onclick="document.getElementById('sol-3').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-3" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $D(80) = 0{,}008(80)^2 + 0{,}25(80) = 51{,}2 + 20 = \mathbf{71{,}2\text{ mètres}}$.</p>
+                    <p><strong>2.</strong> $0{,}008v^2 + 0{,}25v - 100 = 0$. $\Delta = (0{,}25)^2 - 4(0{,}008)(-100) = 0{,}0625 + 3{,}2 = \mathbf{3{,}2625}$.</p>
+                    <p>$v = \frac{-0{,}25 + \sqrt{3{,}2625}}{2 \times 0{,}008} \approx \frac{-0{,}25 + 1{,}8062}{0{,}016} \approx \mathbf{97\text{ km/h}}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 4</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Commerce : Maximisation du chiffre d'affaires</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (Niveau 3)</span>
+                </div>
+                <p class="text-sm text-slate-700">Le revenu mensuel $R(p)$ d'un magasin en fonction du prix de vente $p$ (en €) d'un outillage est modélisé par $R(p) = -5p^2 + 300p$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Déterminer pour quel prix $p$ le revenu est nul ($R(p) = 0$).</li>
+                    <li>Déterminer le prix optimal $p_S$ maximisant le revenu et calculer ce revenu maximal.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-4').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-4" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $-5p(p - 60) = 0 \iff p = 0\text{ €}$ ou $p = \mathbf{60\text{ €}}$.</p>
+                    <p><strong>2.</strong> $p_S = -\frac{300}{2(-5)} = \mathbf{30\text{ €}}$. Revenu max : $R(30) = -5(900) + 300(30) = -4\,500 + 9\,000 = \mathbf{4\,500\text{ €}}$.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

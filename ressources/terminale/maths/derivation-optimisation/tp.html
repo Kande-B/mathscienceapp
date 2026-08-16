@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Dérivation & Optimisation (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Keys */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Dérivation, Tangentes &amp; Optimisation</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Tangentes Numériques &amp; Optimisation</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Calculer des nombres dérivés exacts et tracer graphiquement des tangentes dynamiques avec la NumWorks pour résoudre des problèmes industriels d'extremum.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE TECHNIQUE NUMWORKS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Méthodes NumWorks : Dérivées &amp; Tangentes</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-calculator mr-1"></i> Calculer > Tangente</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">1. Nombre dérivé direct</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Calculs</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans l'application <strong class="text-indigo-600">Calculs</strong> :</li>
+                        <li>• Touche <span class="nw-key font-bold">toolbox</span> $\rightarrow$ <em>Analyse</em> $\rightarrow$ <em>Nombre dérivé $\frac{d}{dx}$</em>.</li>
+                        <li>• Saisir l'expression de la fonction et la valeur de $x = a$.</li>
+                        <li>• Valider avec <span class="nw-key nw-key-dark">EXE</span> pour obtenir le nombre dérivé exact $f'(a)$.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">2. Tangente graphique</span>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">Fonctions</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans l'application <strong class="text-sky-600">Fonctions</strong>, tracer la courbe.</li>
+                        <li>• Sur l'onglet <strong>Graphique</strong>, appuyer sur <span class="nw-key nw-key-yellow">OK</span>.</li>
+                        <li>• Aller dans <em>Calculer</em> $\rightarrow$ <strong class="text-purple-700">Tangente</strong>.</li>
+                        <li>• Déplacer le point ou taper l'abscisse $a$ : la NumWorks trace la droite et donne son équation $y = a x + b$.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE PROFESSIONNELLE -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Aéronautique &amp; Portance d'une Aile</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude de Cas : Angle d'Attaque &amp; Finesse Aérodynamique</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-slate-700">
+                <p class="font-bold text-slate-900">Mise en situation :</p>
+                <p>La portance relative $C_z(x)$ d'un profil d'aile en soufflerie en fonction de l'angle d'incidence $x$ (en degrés, pour $x \in [0 ; 16]$) est modélisée par :</p>
+                <div class="p-2 bg-white border border-purple-200 rounded-xl text-center font-bold text-purple-900">
+                    $$C_z(x) = -0{,}002x^3 + 0{,}03x^2 + 0{,}08x + 0{,}20$$
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-3 text-sm text-slate-800">
+                <p><strong>1.</strong> Saisir $C_z(x)$ dans l'application <strong>Fonctions</strong> de votre NumWorks.</p>
+                <p><strong>2.</strong> Utiliser la fonction <em>Calculer > Tangente</em> en $x = 0$ pour déterminer la pente initiale de portance $C_z'(0)$.</p>
+                <p><strong>3.</strong> Déterminer à l'aide de la calculatrice l'angle d'incidence critique $x_{\max}$ assurant la portance maximale (angle de décrochage).</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-5').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Réponses Détaillées
+                </button>
+                <div id="sol-tp-5" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Saisie NumWorks :</strong> $f(x) = -0.002 x^3 + 0.03 x^2 + 0.08 x + 0.20$.</li>
+                        <li><strong>2. Tangente en $x = 0$ :</strong> $C_z'(x) = -0{,}006x^2 + 0{,}06x + 0{,}08 \implies C_z'(0) = \mathbf{0{,}08}$. Équation de tangente : $\mathbf{y = 0{,}08x + 0{,}20}$.</li>
+                        <li><strong>3. Angle optimal :</strong> Annulation de $C_z'(x) = 0 \implies -0{,}006x^2 + 0{,}06x + 0{,}08 = 0$.
+                            <br>$\Delta = (0{,}06)^2 - 4(-0{,}006)(0{,}08) = 0{,}0036 + 0{,}00192 = \mathbf{0{,}00552}$.
+                            <br>$x_{\max} = \frac{-0{,}06 - \sqrt{0{,}00552}}{-0{,}012} \approx \mathbf{11{,}2\text{ degrés}}$ avec une portance maximale $C_z(11{,}2) \approx \mathbf{2{,}05}$.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS ("LABO MATHS SCIENCES") -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Simulateur Virtuel Canvas 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Tangente Dynamique &amp; Nombre Dérivé Mobile</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200"><i class="fa-solid fa-chart-line mr-1"></i> Tangente Réactive</span>
+            </div>
+
+            <!-- Parameters controls -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Position du point de contact (a) :</label>
+                    <input type="range" id="param-pt-a" min="-2.0" max="4.0" step="0.1" value="1.0" oninput="updateTangentSim()" class="w-full accent-indigo-600">
+                    <span id="val-pt-a" class="font-mono font-bold text-indigo-700">1.0</span>
+                </div>
+                <div class="flex items-center justify-center">
+                    <span class="text-slate-600 font-medium">Fonction étudiée : <strong class="text-indigo-700 font-mono">f(x) = x³ - 3x² + 2</strong></span>
+                </div>
+            </div>
+
+            <!-- Canvas & Dynamic Stats -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                    <canvas id="tangentCanvas" width="560" height="300" class="w-full h-auto bg-slate-900 rounded-xl"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 flex flex-col justify-between text-xs">
+                    <div class="space-y-3 font-mono">
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Point de contact A :</span>
+                            <span id="stat-ptA" class="font-bold text-sky-600 block text-sm">A(1.00 ; 0.00)</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Nombre dérivé f'(a) (Pente) :</span>
+                            <span id="stat-fprime" class="font-bold text-purple-600 block text-sm">-3.00</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Équation de la tangente :</span>
+                            <span id="stat-tan-eq" class="font-bold text-emerald-600 block text-xs">y = -3.00x + 3.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Canvas Simulation Script -->
+    <script>
+        function f(x) { return x * x * x - 3 * x * x + 2; }
+        function fPrime(x) { return 3 * x * x - 6 * x; }
+
+        function updateTangentSim() {
+            const a = parseFloat(document.getElementById('param-pt-a').value);
+            document.getElementById('val-pt-a').innerText = a.toFixed(1);
+
+            const fa = f(a);
+            const slope = fPrime(a);
+            const b = fa - slope * a;
+
+            document.getElementById('stat-ptA').innerText = `A(${a.toFixed(2)} ; ${fa.toFixed(2)})`;
+            document.getElementById('stat-fprime').innerText = `${slope.toFixed(2)}`;
+            document.getElementById('stat-tan-eq').innerText = `y = ${slope.toFixed(2)}x ${b >= 0 ? '+ ' + b.toFixed(2) : '- ' + Math.abs(b).toFixed(2)}`;
+
+            drawTangent(a, fa, slope, b);
+        }
+
+        function drawTangent(a, fa, slope, b) {
+            const canvas = document.getElementById('tangentCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const xMin = -3, xMax = 5, yMin = -6, yMax = 6;
+            const toX = x => ((x - xMin) / (xMax - xMin)) * w;
+            const toY = y => h - ((y - yMin) / (yMax - yMin)) * h;
+
+            // Axes
+            ctx.strokeStyle = "#334155";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, toY(0)); ctx.lineTo(w, toY(0));
+            ctx.moveTo(toX(0), 0); ctx.lineTo(toX(0), h);
+            ctx.stroke();
+
+            // Trace Curve f(x)
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            let first = true;
+            for (let px = 0; px <= w; px += 2) {
+                const x = xMin + (px / w) * (xMax - xMin);
+                const y = f(x);
+                const py = toY(y);
+                if (first) { ctx.moveTo(px, py); first = false; }
+                else { ctx.lineTo(px, py); }
+            }
+            ctx.stroke();
+
+            // Trace Tangente Line
+            ctx.strokeStyle = "#a855f7";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            const yStart = slope * xMin + b;
+            const yEnd = slope * xMax + b;
+            ctx.moveTo(toX(xMin), toY(yStart));
+            ctx.lineTo(toX(xMax), toY(yEnd));
+            ctx.stroke();
+
+            // Point A
+            ctx.fillStyle = "#fed100";
+            ctx.beginPath();
+            ctx.arc(toX(a), toY(fa), 6, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateTangentSim);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Suites Numériques (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-arrow-trend-up text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Suites Numériques (Arithmétiques &amp; Géométriques)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Préparation Épreuve Bac Pro • Partie 1 Automatismes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes : Suites Numériques</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Formules fondamentales, calcul de termes généraux $u_n$, sommes de termes et reconnaissance de modèles d'évolution.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-indigo-500"></i> 1. Flashcards Réflexes (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes conceptuelles</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Suite Arithmétique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-plus text-4xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la formule du terme général $u_n$ d'une suite arithmétique de premier terme $u_1$ et de raison $r$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Formule explicite</span>
+                            <div class="my-auto space-y-1 text-xs text-indigo-300 font-bold">
+                                <p class="text-sm">$$u_n = u_1 + (n - 1)r$$</p>
+                                <p class="text-slate-300 font-normal">Si le premier terme est $u_0$, alors $u_n = u_0 + n r$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Suite Géométrique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-xmark text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la formule du terme général $u_n$ d'une suite géométrique de premier terme $u_1$ et de raison $q$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Formule explicite</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p class="text-sm">$$u_n = u_1 \times q^{n - 1}$$</p>
+                                <p class="text-slate-300 font-normal">Si le premier terme est $u_0$, alors $u_n = u_0 \times q^n$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Somme Arithmétique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-sigma text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la formule de la somme $S = u_1 + u_2 + \dots + u_n$ d'une suite arithmétique ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Moyenne des extrêmes</span>
+                            <div class="my-auto space-y-1 text-xs text-emerald-300 font-bold">
+                                <p class="text-sm">$$S = n \times \frac{u_1 + u_n}{2}$$</p>
+                                <p class="text-slate-300 font-normal">$\text{Nombre de termes} \times \frac{\text{1er terme} + \text{Dernier terme}}{2}$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Somme Géométrique</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-calculator text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la formule de la somme $S = u_1 + u_2 + \dots + u_n$ d'une suite géométrique ($q \neq 1$) ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Facteur géométrique</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p class="text-sm">$$S = u_1 \times \frac{1 - q^n}{1 - q}$$</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Taux d'Évolution</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-percent text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment relie-t-on une variation de $t\ \%$ par an à la raison $q$ d'une suite géométrique ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Coefficient multiplicateur</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p>• <strong>Hausse de $t\ \%$ :</strong> $q = 1 + \frac{t}{100}$ (ex: $+3\ \% \implies q = 1{,}03$).</p>
+                                <p>• <strong>Baisse de $t\ \%$ :</strong> $q = 1 - \frac{t}{100}$ (ex: $-5\ \% \implies q = 0{,}95$).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Test de Reconnaissance</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-vial-circle-check text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment prouver qu'une suite est arithmétique ou géométrique à partir de ses valeurs ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Différence vs Quotient</span>
+                            <div class="my-auto space-y-1 text-xs text-red-300 font-bold">
+                                <p>• Arithmétique : $u_{n+1} - u_n = r$ (différence constante).</p>
+                                <p>• Géométrique : $\frac{u_{n+1}}{u_n} = q$ (quotient constant).</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Test de Rapidité • Partie 1 Bac Pro</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-indigo-100 text-indigo-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-indigo-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6"></div>
+
+            <div id="quiz-result" class="hidden bg-indigo-50 border-2 border-indigo-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-indigo-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-indigo-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "Soit une suite arithmétique $(u_n)$ avec $u_1 = 15$ et $r = 4$. Quelle est la valeur de $u_5$ ?",
+                options: ["31", "35", "27", "20"],
+                correct: 0,
+                explanation: "$u_5 = u_1 + (5 - 1) \\times r = 15 + 4 \\times 4 = 15 + 16 = \\mathbf{31}$."
+            },
+            {
+                id: 2,
+                q: "Soit une suite géométrique $(u_n)$ avec $u_1 = 200$ et $q = 1{,}05$. Que vaut $u_2$ ?",
+                options: ["210", "205", "250", "220"],
+                correct: 0,
+                explanation: "$u_2 = u_1 \\times q = 200 \\times 1{,}05 = \\mathbf{210}$."
+            },
+            {
+                id: 3,
+                q: "Une quantité baisse de 8 % chaque année. Quelle est la raison $q$ de la suite géométrique associée ?",
+                options: ["0,92", "0,08", "1,08", "-0,08"],
+                correct: 0,
+                explanation: "$q = 1 - \\frac{8}{100} = 1 - 0{,}08 = \\mathbf{0{,}92}$."
+            },
+            {
+                id: 4,
+                q: "Calculer la somme $S = u_1 + u_2 + u_3 + u_4 + u_5$ d'une suite arithmétique sachant que $u_1 = 10$ et $u_5 = 30$.",
+                options: ["100", "80", "150", "50"],
+                correct: 0,
+                explanation: "$S = 5 \\times \\frac{10 + 30}{2} = 5 \\times \\frac{40}{2} = 5 \\times 20 = \\mathbf{100}$."
+            },
+            {
+                id: 5,
+                q: "Une suite géométrique a pour premier terme $u_1 = 3$ et pour raison $q = 2$. Que vaut $u_4$ ?",
+                options: ["24", "18", "81", "12"],
+                correct: 0,
+                explanation: "$u_4 = 3 \\times 2^{4-1} = 3 \\times 2^3 = 3 \\times 8 = \\mathbf{24}$."
+            },
+            {
+                id: 6,
+                q: "La suite $u_1 = 4$, $u_2 = 12$, $u_3 = 36$ est une suite :",
+                options: ["Géométrique de raison q = 3", "Arithmétique de raison r = 8", "Ni arithmétique ni géométrique", "Constante"],
+                correct: 0,
+                explanation: "$\\frac{12}{4} = 3$ et $\\frac{36}{12} = 3$ : c'est une suite géométrique de raison **$q = 3$**."
+            },
+            {
+                id: 7,
+                q: "La suite $u_1 = 50$, $u_2 = 45$, $u_3 = 40$ est une suite :",
+                options: ["Arithmétique de raison r = -5", "Géométrique de raison q = 0,9", "Arithmétique de raison r = +5", "Géométrique de raison q = -5"],
+                correct: 0,
+                explanation: "$45 - 50 = -5$ et $40 - 45 = -5$ : c'est une suite arithmétique de raison **$r = -5$**."
+            },
+            {
+                id: 8,
+                q: "Un capital de $1\,000\\text{ €}$ est placé à intérêts composés au taux annuel de $4\\ \\%$. Quelle est sa valeur $C_2$ au bout de 2 ans ?",
+                options: ["1 081,60 €", "1 080,00 €", "1 040,00 €", "1 160,00 €"],
+                correct: 0,
+                explanation: "$C_2 = 1000 \\times (1{,}04)^2 = 1000 \\times 1{,}0816 = \\mathbf{1\\,081{,}60\\ \\text{€}}$."
+            },
+            {
+                id: 9,
+                q: "Si $(u_n)$ est une suite géométrique de raison $q = 0{,}85$, que peut-on dire de son sens de variation (avec $u_1 > 0$) ?",
+                options: ["Elle est strictement décroissante", "Elle est strictement croissante", "Elle est constante", "Elle alterne positif et négatif"],
+                correct: 0,
+                explanation: "Comme $0 < q < 1$ et $u_1 > 0$, la suite est **strictement décroissante**."
+            },
+            {
+                id: 10,
+                q: "Dans l'application 'Suites' de la calculatrice NumWorks, comment note-t-on une suite arithmétique de premier terme $u(1)=100$ et de raison $r=15$ ?",
+                options: ["u(n+1) = u(n) + 15", "u(n) = 15n + 100", "u(n+1) = 15 * u(n)", "u(n) = 100 * 15^n"],
+                correct: 0,
+                explanation: "En définition récurrente d'ordre 1 : $u(n+1) = u(n) + 15$ avec $u(1) = 100$."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-indigo-500 focus:ring-indigo-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-indigo-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent niveau ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez les formules de suites arithmétiques et géométriques pour le Bac Pro !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon travail ! (" + score + " / 20)";
+                text.innerText = "Les calculs de termes généraux sont compris. Révisez bien les sommes de termes.";
+            } else {
+                title.innerText = "⚠️ Entraînement recommandé (" + score + " / 20)";
+                text.innerText = "Consultez la fiche de cours et mémorisez les formules explicites.";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

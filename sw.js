@@ -1,55 +1,50 @@
-const CACHE_NAME = 'maths-sciences-v2';
+const CACHE_NAME = 'maths-sciences-v3-premium';
 const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './assets/icons/icon.png'
-  // En production, il faudrait lister ici tous les fichiers CSS/JS.
-  // Pour l'instant, on laisse le navigateur gérer dynamiquement les fetchs.
+  './data/formations.json',
+  './assets/icons/icon.png',
+  './ressources/terminale/progression_sciences.html',
+  './ressources/postbac/progression_postbac.html'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Cache ouvert');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('[PWA] Mise en cache des assets essentiels');
+      return cache.addAll(urlsToCache);
+    }).then(() => self.skipWaiting())
   );
 });
 
-// Stratégie "Cache First, fallback to Network"
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Stratégie hybride Stale-While-Revalidate pour des temps de chargement instantanés
 self.addEventListener('fetch', event => {
+  if (!event.request.url.startsWith('http')) return;
+
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - on retourne la réponse du cache
-        if (response) {
-          return response;
+    caches.match(event.request).then(cachedResponse => {
+      const fetchPromise = fetch(event.request).then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
         }
+        return networkResponse;
+      }).catch(() => cachedResponse);
 
-        // Sinon on fetch sur le réseau et on met en cache
-        return fetch(event.request).then(
-          response => {
-            // Vérifier que la réponse est valide
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // On clone la réponse car c'est un flux
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                // On évite de cacher les requêtes non-http (ex: chrome-extension://)
-                if (event.request.url.startsWith('http')) {
-                  cache.put(event.request, responseToCache);
-                }
-              });
-
-            return response;
-          }
-        );
-      })
+      return cachedResponse || fetchPromise;
+    })
   );
 });

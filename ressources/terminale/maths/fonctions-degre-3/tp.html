@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Fonctions de Degré 3 & Optimisation (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Keys */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Polynômes de Degré 3 ($ax^3 + bx^2 + cx + d$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Étude &amp; Optimisation d'une Fonction Cubique</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Étude complète d'une fonction de degré 3 sur calculatrice NumWorks et analyse graphique dynamique sur simulateur interactif 60 FPS.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE TECHNIQUE NUMWORKS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Méthodes NumWorks : Fonctions &amp; Équations</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-calculator mr-1"></i> Applications Fonctions &amp; Équations</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">1. Tracé &amp; Recherche d'Extremum</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Fonctions</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans <strong class="text-indigo-600">Fonctions</strong>, ajouter l'élément : $f(x) = 2x^3 - 9x^2 + 12x$.</li>
+                        <li>• Aller sur l'onglet <strong>Graphique</strong> et appuyer sur <span class="nw-key font-bold">OK</span>.</li>
+                        <li>• Choisir <strong>Calculer</strong> $\rightarrow$ <strong>Extremum</strong> : la NumWorks place le curseur directement sur le maximum local $(1 ; 5)$ puis sur le minimum local $(2 ; 4)$.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">2. Solveur Polynomial de la Dérivée</span>
+                        <span class="text-[10px] font-bold bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">Équations</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans <strong class="text-purple-600">Équations</strong>, ajouter une équation du second degré : $6x^2 - 18x + 12 = 0$.</li>
+                        <li>• Sélectionner <strong>Résoudre l'équation</strong>.</li>
+                        <li>• La NumWorks affiche instantanément le discriminant $\Delta = 36$ et les deux racines $x_1 = 1$ et $x_2 = 2$.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE PROFESSIONNELLE -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Chaudronnerie Industrielle</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude de Cas : Volume d'un Bac en Inox sans Couvercle</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-slate-700">
+                <p class="font-bold text-slate-900">Mise en situation :</p>
+                <p>On découpe 4 carrés de côté $x$ (en cm, avec $x \in [0 ; 15]$) aux coins d'une plaque d'inox de $50\text{ cm} \times 30\text{ cm}$. Le volume est :</p>
+                <p class="font-bold text-center text-purple-900 font-mono text-base">$$V(x) = 4x^3 - 160x^2 + 1500x$$</p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-3 text-sm text-slate-800">
+                <p><strong>1.</strong> Saisir $V(x)$ dans l'application <strong>Fonctions</strong> de la calculatrice NumWorks.</p>
+                <p><strong>2.</strong> Déterminer à l'aide du menu <strong>Extremum</strong> la découpe $x_{\max}$ assurant le volume maximal (arrondir au dixième de cm).</p>
+                <p><strong>3.</strong> Donner la capacité maximale de ce bac en litres.</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-4').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Réponses Détaillées
+                </button>
+                <div id="sol-tp-4" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. & 2. Découpe optimale :</strong> $V'(x) = 12x^2 - 320x + 1500 = 0 \implies x_{\max} \approx \mathbf{6{,}1\text{ cm}}$.</li>
+                        <li><strong>3. Capacité maximale :</strong> $V(6{,}1) \approx \mathbf{4\,104\text{ cm}^3} \approx \mathbf{4{,}10\text{ Litres}}$.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS ("LABO MATHS SCIENCES") -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Simulateur Virtuel Canvas 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Courbe Cubique Interactive &amp; Tangentes Horizontales</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200"><i class="fa-solid fa-bezier-curve mr-1"></i> Rendu Graphique Dynamique</span>
+            </div>
+
+            <!-- Parameters controls -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Coefficient a :</label>
+                    <input type="range" id="param-a" min="-2" max="2" step="0.2" value="0.4" oninput="updateCubicSim()" class="w-full accent-indigo-600">
+                    <span id="val-a" class="font-mono font-bold text-indigo-700">a = 0.4</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Coefficient b :</label>
+                    <input type="range" id="param-b" min="-6" max="6" step="0.5" value="-1.8" oninput="updateCubicSim()" class="w-full accent-sky-600">
+                    <span id="val-b" class="font-mono font-bold text-sky-700">b = -1.8</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Coefficient c :</label>
+                    <input type="range" id="param-c" min="-10" max="10" step="0.5" value="2.4" oninput="updateCubicSim()" class="w-full accent-purple-600">
+                    <span id="val-c" class="font-mono font-bold text-purple-700">c = 2.4</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Coefficient d :</label>
+                    <input type="range" id="param-d" min="-10" max="10" step="1" value="0" oninput="updateCubicSim()" class="w-full accent-emerald-600">
+                    <span id="val-d" class="font-mono font-bold text-emerald-700">d = 0</span>
+                </div>
+            </div>
+
+            <!-- Canvas & Dynamic Stats -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                    <canvas id="cubicCanvas" width="560" height="300" class="w-full h-auto bg-slate-900 rounded-xl"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 flex flex-col justify-between text-xs">
+                    <div class="space-y-2.5 font-mono">
+                        <div class="p-2 bg-white rounded-xl border border-slate-200 space-y-0.5">
+                            <span class="text-slate-500 font-sans font-bold">Fonction f(x) :</span>
+                            <span id="stat-fx" class="font-bold text-indigo-600 block text-xs">0.4x³ - 1.8x² + 2.4x</span>
+                        </div>
+                        <div class="p-2 bg-white rounded-xl border border-slate-200 space-y-0.5">
+                            <span class="text-slate-500 font-sans font-bold">Dérivée f'(x) :</span>
+                            <span id="stat-fpx" class="font-bold text-purple-600 block text-xs">1.2x² - 3.6x + 2.4</span>
+                        </div>
+                        <div class="p-2 bg-white rounded-xl border border-slate-200 space-y-0.5">
+                            <span class="text-slate-500 font-sans font-bold">Discriminant Δ de f'(x) :</span>
+                            <span id="stat-delta" class="font-bold text-sky-700 block text-xs">Δ = 1.44 > 0</span>
+                        </div>
+                        <div id="stat-extrema-box" class="p-2 rounded-xl border space-y-0.5 bg-emerald-100 border-emerald-300 text-emerald-900">
+                            <span class="font-sans font-bold block">Extremums locaux :</span>
+                            <span id="stat-extrema-text" class="font-bold text-xs">Max en x = 0.89 | Min en x = 2.11</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Canvas Simulation Script -->
+    <script>
+        function updateCubicSim() {
+            const a = parseFloat(document.getElementById('param-a').value);
+            const b = parseFloat(document.getElementById('param-b').value);
+            const c = parseFloat(document.getElementById('param-c').value);
+            const d = parseFloat(document.getElementById('param-d').value);
+
+            document.getElementById('val-a').innerText = `a = ${a.toFixed(1)}`;
+            document.getElementById('val-b').innerText = `b = ${b.toFixed(1)}`;
+            document.getElementById('val-c').innerText = `c = ${c.toFixed(1)}`;
+            document.getElementById('val-d').innerText = `d = ${d.toFixed(1)}`;
+
+            // f'(x) = A x^2 + B x + C
+            const A = 3 * a;
+            const B = 2 * b;
+            const C = c;
+
+            const delta = (B * B) - (4 * A * C);
+
+            document.getElementById('stat-fx').innerText = `${a.toFixed(1)}x³ + (${b.toFixed(1)})x² + (${c.toFixed(1)})x + (${d.toFixed(1)})`;
+            document.getElementById('stat-fpx').innerText = `${A.toFixed(1)}x² + (${B.toFixed(1)})x + (${C.toFixed(1)})`;
+            document.getElementById('stat-delta').innerText = `Δ = ${delta.toFixed(2)} ${delta > 0 ? '> 0' : (delta === 0 ? '= 0' : '< 0')}`;
+
+            const extBox = document.getElementById('stat-extrema-box');
+            const extText = document.getElementById('stat-extrema-text');
+
+            let r1 = null, r2 = null;
+            if (A !== 0 && delta > 0) {
+                r1 = (-B - Math.sqrt(delta)) / (2 * A);
+                r2 = (-B + Math.sqrt(delta)) / (2 * A);
+                extBox.className = "p-2 rounded-xl border space-y-0.5 bg-emerald-100 border-emerald-300 text-emerald-900";
+                extText.innerText = `Extremums en x₁ = ${r1.toFixed(2)} et x₂ = ${r2.toFixed(2)}`;
+            } else if (delta === 0 && A !== 0) {
+                r1 = -B / (2 * A);
+                extBox.className = "p-2 rounded-xl border space-y-0.5 bg-sky-100 border-sky-300 text-sky-900";
+                extText.innerText = `Palier horizontal en x = ${r1.toFixed(2)}`;
+            } else {
+                extBox.className = "p-2 rounded-xl border space-y-0.5 bg-amber-100 border-amber-300 text-amber-900";
+                extText.innerText = `0 extremum (fonction strictement monotone)`;
+            }
+
+            drawCubic(a, b, c, d, r1, r2);
+        }
+
+        function drawCubic(a, b, c, d, r1, r2) {
+            const canvas = document.getElementById('cubicCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const ox = w / 2;
+            const oy = h / 2;
+            const scaleX = 40;
+            const scaleY = 15;
+
+            // Grid
+            ctx.strokeStyle = "#1e293b";
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += scaleX) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+            }
+            for (let y = 0; y < h; y += scaleY * 2) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+            }
+
+            // Axes
+            ctx.strokeStyle = "#475569";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(0, oy); ctx.lineTo(w, oy);
+            ctx.moveTo(ox, 0); ctx.lineTo(ox, h);
+            ctx.stroke();
+
+            // Curve
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            let started = false;
+
+            for (let px = 0; px < w; px += 2) {
+                const x = (px - ox) / scaleX;
+                const y = a * x * x * x + b * x * x + c * x + d;
+                const py = oy - y * scaleY;
+
+                if (!started) {
+                    ctx.moveTo(px, py);
+                    started = true;
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            }
+            ctx.stroke();
+
+            // Draw Extrema Points & Horizontal Tangents
+            function drawExtremum(rx, color, label) {
+                if (rx === null) return;
+                const ry = a * rx * rx * rx + b * rx * rx + c * rx + d;
+                const px = ox + rx * scaleX;
+                const py = oy - ry * scaleY;
+
+                if (px >= 0 && px <= w && py >= 0 && py <= h) {
+                    // Horizontal tangent line
+                    ctx.strokeStyle = color;
+                    ctx.setLineDash([4, 4]);
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(px - 35, py);
+                    ctx.lineTo(px + 35, py);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    // Point
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.arc(px, py, 5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Label
+                    ctx.font = "bold 11px Outfit";
+                    ctx.fillText(label, px + 8, py - 6);
+                }
+            }
+
+            if (r1 !== null) drawExtremum(r1, "#4ade80", "Extremum 1");
+            if (r2 !== null) drawExtremum(r2, "#f87171", "Extremum 2");
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCubicSim);
+    </script>
+
+</body>
+</html>

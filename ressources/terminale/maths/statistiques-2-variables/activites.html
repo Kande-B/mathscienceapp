@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Statistiques à 2 Variables (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables &amp; Ajustement</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation en Contexte Professionnel</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités : Statistiques à Deux Variables</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Modélisation mathématique, calcul du point moyen $G$, ajustement affine par les moindres carrés et prise de décision industrielle.</p>
+        </div>
+
+        <!-- ACTIVITÉ 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Maintenance Automobile &amp; Transports</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 1 : Diagnostic d'Usure des Plaquettes de Frein</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-wrench text-amber-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Dans un centre de maintenance de véhicules utilitaires, le chef d'atelier réalise une étude sur l'usure des garnitures de plaquettes de frein d'une flotte de 6 camionnettes identiques. Il relève le kilométrage $x_i$ (en milliers de kilomètres) et l'épaisseur résiduelle de garniture $y_i$ (en mm).</p>
+                        <p class="text-xs text-slate-500 italic">Norme de sécurité : Le remplacement immédiat des plaquettes est obligatoire dès que l'épaisseur résiduelle atteint <strong>3,0 mm</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto pt-2">
+                    <table class="min-w-full bg-white border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr>
+                                <th class="p-2.5 border-b border-slate-200">Véhicule n°</th>
+                                <th class="p-2.5 border-b border-slate-200">V1</th>
+                                <th class="p-2.5 border-b border-slate-200">V2</th>
+                                <th class="p-2.5 border-b border-slate-200">V3</th>
+                                <th class="p-2.5 border-b border-slate-200">V4</th>
+                                <th class="p-2.5 border-b border-slate-200">V5</th>
+                                <th class="p-2.5 border-b border-slate-200">V6</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-700 bg-slate-50">Kilométrage $x_i$ ($10^3\text{ km}$)</td>
+                                <td class="p-2.5">10</td>
+                                <td class="p-2.5">20</td>
+                                <td class="p-2.5">30</td>
+                                <td class="p-2.5">40</td>
+                                <td class="p-2.5">50</td>
+                                <td class="p-2.5">60</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-700 bg-slate-50">Épaisseur $y_i$ (mm)</td>
+                                <td class="p-2.5">11,2</td>
+                                <td class="p-2.5">9,8</td>
+                                <td class="p-2.5">8,5</td>
+                                <td class="p-2.5">7,1</td>
+                                <td class="p-2.5">5,8</td>
+                                <td class="p-2.5">4,4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>S'approprier :</strong> Indiquer la variable explicative (abscisse $x$) et la variable expliquée (ordonnée $y$). Justifier le fait que l'épaisseur diminue lorsque le kilométrage augmente.</li>
+                    <li><strong>Réaliser :</strong> Calculer la moyenne des kilomètres $\bar{x}$ et la moyenne des épaisseurs $\bar{y}$. En déduire les coordonnées du point moyen $G(\bar{x}; \bar{y})$.</li>
+                    <li><strong>Analyser :</strong> À l'aide de la calculatrice ou d'un tableur, déterminer l'équation de la droite d'ajustement par les moindres carrés $y = ax + b$ (arrondir les coefficients au centième).</li>
+                    <li><strong>Valider :</strong> Vérifier par le calcul que le point moyen $G$ appartient bien à cette droite d'ajustement.</li>
+                    <li><strong>Communiquer :</strong> Estimer l'épaisseur résiduelle des plaquettes pour un utilitaire ayant parcouru $45\,000\text{ km}$ ($x = 45$). S'agit-il d'une interpolation ou d'une extrapolation ?</li>
+                    <li><strong>Prendre une décision :</strong> Déterminer au bout de combien de kilomètres le seuil critique de sécurité ($y = 3{,}0\text{ mm}$) sera atteint. Rédiger la préconisation pour le planning d'entretien.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-1').classList.toggle('hidden')" class="px-4 py-2 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-amber-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 1
+                </button>
+                <div id="sol-act-1" class="hidden mt-4 p-5 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-amber-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Variables :</strong> $x$ est le kilométrage en milliers de km (variable indépendante), $y$ est l'épaisseur en mm. L'épaisseur diminue avec les kilomètres à cause du frottement mécanique lors des freinages.</li>
+                        <li><strong>2. Coordonnées du point moyen $G$ :</strong>
+                            $$\bar{x} = \frac{10 + 20 + 30 + 40 + 50 + 60}{6} = \frac{210}{6} = \mathbf{35}$$
+                            $$\bar{y} = \frac{11{,}2 + 9{,}8 + 8{,}5 + 7{,}1 + 5{,}8 + 4{,}4}{6} = \frac{46{,}8}{6} = \mathbf{7{,}8}$$
+                            Donc $\mathbf{G(35\ ; \ 7{,}8)}$.
+                        </li>
+                        <li><strong>3. Équation de la droite des moindres carrés :</strong>
+                            À la calculatrice : $a \approx -0{,}135 \approx \mathbf{-0{,}14}$ et $b \approx \mathbf{12{,}55}$.<br>
+                            L'équation de la droite d'ajustement est : $$\mathbf{y = -0{,}135x + 12{,}55}$$
+                        </li>
+                        <li><strong>4. Vérification d'appartenance de $G$ :</strong>
+                            $$-0{,}135 \times 35 + 12{,}55 = -4{,}725 + 12{,}55 = 7{,}825 \approx 7{,}8 = \bar{y}$$
+                            Le point $G$ appartient bien à la droite d'ajustement.
+                        </li>
+                        <li><strong>5. Estimation pour $x = 45$ :</strong>
+                            $$y = -0{,}135 \times 45 + 12{,}55 = -6{,}075 + 12{,}55 = \mathbf{6{,}475\text{ mm}} \approx 6{,}5\text{ mm}$$
+                            Comme $45 \in [10; 60]$, c'est une **interpolation**.
+                        </li>
+                        <li><strong>6. Kilométrage limite pour $y = 3{,}0\text{ mm}$ :</strong>
+                            $$3{,}0 = -0{,}135x + 12{,}55 \iff 0{,}135x = 12{,}55 - 3{,}0 \iff 0{,}135x = 9{,}55 \iff x = \frac{9{,}55}{0{,}135} \approx \mathbf{70{,}74}$$
+                            Le seuil critique de 3 mm sera atteint à environ **$70\,740\text{ km}$**. Préconisation : programmer le remplacement des plaquettes dès la révision des $70\,000\text{ km}$.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-sky-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Bâtiment • Énergie &amp; Électrotechnique</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 2 : Consommation de Chauffage &amp; Température Extérieure</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-temperature-arrow-down text-sky-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Un technicien en gestion technique du bâtiment (GTB) analyse les relevés de consommation hebdomadaire de gaz $y_i$ (en $\text{m}^3$) de la chaudière collective d'un lycée en fonction de la température extérieure moyenne $x_i$ (en °C) mesurée sur 7 semaines hivernales.</p>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto pt-2">
+                    <table class="min-w-full bg-white border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr>
+                                <th class="p-2.5 border-b border-slate-200">Semaine</th>
+                                <th class="p-2.5 border-b border-slate-200">S1</th>
+                                <th class="p-2.5 border-b border-slate-200">S2</th>
+                                <th class="p-2.5 border-b border-slate-200">S3</th>
+                                <th class="p-2.5 border-b border-slate-200">S4</th>
+                                <th class="p-2.5 border-b border-slate-200">S5</th>
+                                <th class="p-2.5 border-b border-slate-200">S6</th>
+                                <th class="p-2.5 border-b border-slate-200">S7</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-700 bg-slate-50">Température $x_i$ (°C)</td>
+                                <td class="p-2.5">12</td>
+                                <td class="p-2.5">10</td>
+                                <td class="p-2.5">7</td>
+                                <td class="p-2.5">5</td>
+                                <td class="p-2.5">3</td>
+                                <td class="p-2.5">1</td>
+                                <td class="p-2.5">-1</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-700 bg-slate-50">Consommation $y_i$ ($\text{m}^3$)</td>
+                                <td class="p-2.5">180</td>
+                                <td class="p-2.5">230</td>
+                                <td class="p-2.5">310</td>
+                                <td class="p-2.5">360</td>
+                                <td class="p-2.5">415</td>
+                                <td class="p-2.5">470</td>
+                                <td class="p-2.5">525</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-sky-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>S'approprier :</strong> Calculer la moyenne des températures $\bar{x}$ et la moyenne des consommations $\bar{y}$. Donner les coordonnées du point moyen $G$.</li>
+                    <li><strong>Réaliser :</strong> Déterminer l'équation de la droite d'ajustement affine $y = ax + b$ par la méthode des moindres carrés (arrondir $a$ et $b$ à l'unité).</li>
+                    <li><strong>Analyser :</strong> Interpréter le signe du coefficient directeur $a$ en lien avec la physique du bâtiment.</li>
+                    <li><strong>Valider :</strong> Le coefficient de détermination vaut $R^2 = 0{,}997$. Justifier si l'ajustement affine est pertinent.</li>
+                    <li><strong>Extrapolation :</strong> Météo-France annonce une vague de froid avec une température moyenne de $-6\text{ °C}$. Estimer la consommation hebdomadaire de gaz à prévoir.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-2').classList.toggle('hidden')" class="px-4 py-2 bg-sky-50 text-sky-800 hover:bg-sky-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-sky-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 2
+                </button>
+                <div id="sol-act-2" class="hidden mt-4 p-5 bg-sky-50/60 rounded-2xl border border-sky-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-sky-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Point Moyen $G$ :</strong>
+                            $$\bar{x} = \frac{12 + 10 + 7 + 5 + 3 + 1 + (-1)}{7} = \frac{37}{7} \approx \mathbf{5{,}29\text{ °C}}$$
+                            $$\bar{y} = \frac{180 + 230 + 310 + 360 + 415 + 470 + 525}{7} = \frac{2490}{7} \approx \mathbf{355{,}7\text{ m}^3}$$
+                            Donc $\mathbf{G(5{,}29\ ; \ 355{,}7)}$.
+                        </li>
+                        <li><strong>2. Équation de la droite :</strong>
+                            À la calculatrice : $a \approx -26{,}4 \approx \mathbf{-26}$ et $b \approx \mathbf{495{,}6} \approx \mathbf{496}$.<br>
+                            $$\mathbf{y = -26{,}4x + 495{,}6}$$
+                        </li>
+                        <li><strong>3. Interprétation du signe de $a$ :</strong>
+                            Le coefficient $a = -26{,}4 < 0$ est négatif : plus la température extérieure baisse de $1\text{ °C}$, plus la consommation de gaz augmente d'environ $26{,}4\text{ m}^3$ pour compenser les déperditions thermiques.
+                        </li>
+                        <li><strong>4. Pertinence :</strong>
+                            $R^2 = 0{,}997 > 0{,}90$, ce qui est extrêmement proche de 1. L'ajustement affine est donc **parfaitement pertinent**.
+                        </li>
+                        <li><strong>5. Extrapolation pour $x = -6\text{ °C}$ :</strong>
+                            $$y = -26{,}4 \times (-6) + 495{,}6 = 158{,}4 + 495{,}6 = \mathbf{654\text{ m}^3}$$
+                            Pour une semaine à $-6\text{ °C}$, la consommation estimée est d'environ **$654\text{ m}^3$ de gaz**.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Gestion &amp; Logistique</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 3 : Prévision du Chiffre d'Affaires d'une Plateforme Logistique</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 30 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-truck-ramp-box text-emerald-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Une société de transport et logistique suit l'évolution de son chiffre d'affaires annuel $y_i$ (en millions d'euros) depuis sa création il y a 6 ans. Le rang de l'année est noté $x_i$ ($x_1 = 1$ pour la première année).</p>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto pt-2">
+                    <table class="min-w-full bg-white border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr>
+                                <th class="p-2.5 border-b border-slate-200">Rang Année $x_i$</th>
+                                <th class="p-2.5 border-b border-slate-200">1</th>
+                                <th class="p-2.5 border-b border-slate-200">2</th>
+                                <th class="p-2.5 border-b border-slate-200">3</th>
+                                <th class="p-2.5 border-b border-slate-200">4</th>
+                                <th class="p-2.5 border-b border-slate-200">5</th>
+                                <th class="p-2.5 border-b border-slate-200">6</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-2.5 font-bold text-slate-700 bg-slate-50">Chiffre d'Affaires $y_i$ (M€)</td>
+                                <td class="p-2.5">2,1</td>
+                                <td class="p-2.5">2,6</td>
+                                <td class="p-2.5">3,2</td>
+                                <td class="p-2.5">3,7</td>
+                                <td class="p-2.5">4,1</td>
+                                <td class="p-2.5">4,8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-emerald-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>Réaliser :</strong> Calculer les coordonnées du point moyen $G(\bar{x}; \bar{y})$.</li>
+                    <li><strong>Analyser :</strong> Donner l'équation de la droite d'ajustement par les moindres carrés $y = ax + b$ (arrondir à $10^{-2}$).</li>
+                    <li><strong>Extrapolation :</strong> Estimer le chiffre d'affaires prévisionnel pour l'année de rang $x = 8$.</li>
+                    <li><strong>Objectif :</strong> La direction souhaite atteindre un chiffre d'affaires de $6{,}5\text{ M€}$ pour agrandir son entrepôt. Déterminer en quelle année de rang ce seuil sera franchi.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-3').classList.toggle('hidden')" class="px-4 py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-emerald-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 3
+                </button>
+                <div id="sol-act-3" class="hidden mt-4 p-5 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Point Moyen $G$ :</strong>
+                            $$\bar{x} = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \mathbf{3{,}5}$$
+                            $$\bar{y} = \frac{2{,}1 + 2{,}6 + 3{,}2 + 3{,}7 + 4{,}1 + 4{,}8}{6} = \frac{20{,}5}{6} \approx \mathbf{3{,}42}$$
+                            Donc $\mathbf{G(3{,}5\ ; \ 3{,}42)}$.
+                        </li>
+                        <li><strong>2. Droite des moindres carrés :</strong>
+                            $a \approx \mathbf{0{,}53}$ et $b \approx \mathbf{1{,}56}$.<br>
+                            $$\mathbf{y = 0{,}53x + 1{,}56}$$
+                        </li>
+                        <li><strong>3. Prévision pour l'année 8 ($x = 8$) :</strong>
+                            $$y = 0{,}53 \times 8 + 1{,}56 = 4{,}24 + 1{,}56 = \mathbf{5{,}8\text{ M€}}$$
+                        </li>
+                        <li><strong>4. Année pour atteindre $6{,}5\text{ M€}$ :</strong>
+                            $$6{,}5 = 0{,}53x + 1{,}56 \iff 0{,}53x = 6{,}5 - 1{,}56 = 4{,}94 \iff x = \frac{4{,}94}{0{,}53} \approx \mathbf{9{,}32}$$
+                            Le seuil de 6,5 M€ sera donc franchi au cours de la **10e année** ($x = 10$).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Statistiques à 2 Variables (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .print-break { page-break-after: always; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-500/20 border border-sky-400/30 text-sky-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables &amp; Ajustement</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-sky-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-sky-100 text-sky-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-sky-200">Programme Officiel BO 2020 • Mathématiques Terminale Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Statistiques à Deux Variables</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Nuage de points, point moyen $G$, méthode des moindres carrés, coefficient $R^2$ et prévisions par interpolation/extrapolation.</p>
+            <div class="pt-2 no-print">
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-2 mx-auto">
+                    <i class="fa-solid fa-print"></i> Imprimer le Cours (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- CHAPITRE 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-8 h-8 rounded-xl bg-sky-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">I</span>
+                <h2 class="text-2xl font-bold font-heading text-slate-900">Séries Statistiques à Deux Variables &amp; Nuage de Points</h2>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <div class="bg-sky-50/70 border-l-4 border-sky-500 p-4 rounded-r-xl space-y-2">
+                    <h3 class="font-bold text-sky-900 flex items-center gap-2"><i class="fa-solid fa-bookmark"></i> Définition 1 : Série statistique double</h3>
+                    <p>Une **série statistique à deux variables quantitatives** est l'étude simultanée de deux caractères numériques $X$ et $Y$ sur une même population de $N$ individus :</p>
+                    <p class="text-center font-bold text-slate-900">$(x_1; y_1), \ (x_2; y_2), \ \dots, \ (x_N; y_N)$</p>
+                </div>
+
+                <div class="bg-slate-50 border-l-4 border-slate-400 p-4 rounded-r-xl space-y-2">
+                    <h3 class="font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Définition 2 : Nuage de points</h3>
+                    <p>Dans un repère orthogonal, l'ensemble des points $M_i(x_i; y_i)$ constitue le **nuage de points** associé à la série statistique.</p>
+                    <p>• Si les points sont dispersés sans forme particulière, il n'y a pas de corrélation linéaire évidente.</p>
+                    <p>• Si les points semblent **s'étirer le long d'une droite**, il existe une forte corrélation linéaire entre $X$ et $Y$ : on peut alors réaliser un **ajustement affine**.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-8 h-8 rounded-xl bg-indigo-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">II</span>
+                <h2 class="text-2xl font-bold font-heading text-slate-900">Le Point Moyen $G(\bar{x}; \bar{y})$</h2>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <div class="bg-indigo-50/70 border-l-4 border-indigo-500 p-4 rounded-r-xl space-y-2">
+                    <h3 class="font-bold text-indigo-900 flex items-center gap-2"><i class="fa-solid fa-crosshairs"></i> Propriété &amp; Formule : Point Moyen G</h3>
+                    <p>Le **point moyen** du nuage, noté $G$, a pour coordonnées les moyennes arithmétiques respectives des variables $X$ et $Y$ :</p>
+                    <div class="p-3 bg-white border border-indigo-200 rounded-xl text-center font-bold text-base text-indigo-900">
+                        $$\bar{x} = \frac{\sum_{i=1}^N x_i}{N} = \frac{x_1 + x_2 + \dots + x_N}{N} \quad \text{et} \quad \bar{y} = \frac{\sum_{i=1}^N y_i}{N} = \frac{y_1 + y_2 + \dots + y_N}{N}$$
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl space-y-2">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-2"><i class="fa-solid fa-lightbulb text-amber-600"></i> Exemple d'application :</h4>
+                    <p>Soit la série de 4 relevés : $(1; 12)$, $(2; 18)$, $(3; 25)$, $(4; 33)$.</p>
+                    <p>$$\bar{x} = \frac{1 + 2 + 3 + 4}{4} = \frac{10}{4} = \mathbf{2{,}5} \qquad \bar{y} = \frac{12 + 18 + 25 + 33}{4} = \frac{88}{4} = \mathbf{22}$$</p>
+                    <p>Le point moyen est donc $\mathbf{G(2{,}5\ ; \ 22)}$.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-8 h-8 rounded-xl bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">III</span>
+                <h2 class="text-2xl font-bold font-heading text-slate-900">Droite d'Ajustement Affine par les Moindres Carrés ($y = ax + b$)</h2>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <div class="bg-emerald-50/70 border-l-4 border-emerald-500 p-4 rounded-r-xl space-y-3">
+                    <h3 class="font-bold text-emerald-900 flex items-center gap-2"><i class="fa-solid fa-chart-simple"></i> Principe des Moindres Carrés</h3>
+                    <p>La **droite de régression de $Y$ en $X$** par la méthode des moindres carrés est la droite d'équation $y = ax + b$ qui minimise la somme des carrés des écarts verticaux entre les points réels $M_i(x_i; y_i)$ et les points ajustés de la droite.</p>
+                    <div class="p-3 bg-white border border-emerald-200 rounded-xl text-center font-bold text-emerald-900">
+                        $$y = ax + b$$
+                    </div>
+                </div>
+
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl space-y-2">
+                    <h3 class="font-bold text-red-900 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Théorème Fondamental (Passage par G)</h3>
+                    <p>La droite d'ajustement par les moindres carrés **passe toujours par le point moyen $G(\bar{x}; \bar{y})$** :</p>
+                    <div class="p-2 bg-white border border-red-200 rounded-lg text-center font-bold text-red-900">
+                        $$\bar{y} = a \bar{x} + b \iff \mathbf{b = \bar{y} - a \bar{x}}$$
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl space-y-2 border border-slate-200">
+                    <h4 class="font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-pen-ruler"></i> Méthode pour tracer la droite d'ajustement :</h4>
+                    <ol class="list-decimal list-inside space-y-1 text-slate-700">
+                        <li>Placer le point moyen $G(\bar{x}; \bar{y})$ dans le repère.</li>
+                        <li>Choisir une valeur de $x$ éloignée (par exemple $x_A = x_{\max}$), calculer $y_A = a x_A + b$, et placer le point $A(x_A; y_A)$.</li>
+                        <li>Tracer à la règle la droite passant par $G$ et par $A$.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 4 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-8 h-8 rounded-xl bg-purple-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">IV</span>
+                <h2 class="text-2xl font-bold font-heading text-slate-900">Coefficient de Détermination $R^2$ et Validité</h2>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <p>Sur la calculatrice (ou le tableur), l'ajustement linéaire fournit automatiquement le **coefficient de détermination** $R^2$ (ou le coefficient de corrélation linéaire $r$).</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Ajustement Valide :</h4>
+                        <p class="text-xs">$$\mathbf{R^2 \ge 0{,}90} \quad (\text{ou } |r| \ge 0{,}95)$$</p>
+                        <p class="text-xs text-slate-600">Les points sont fortement alignés. L'ajustement affine est de **très bonne qualité** et permet des prévisions fiables.</p>
+                    </div>
+                    <div class="p-4 bg-red-50 border border-red-200 rounded-2xl space-y-2">
+                        <h4 class="font-bold text-red-900 flex items-center gap-2"><i class="fa-solid fa-circle-xmark text-red-600"></i> Ajustement Non Valide :</h4>
+                        <p class="text-xs">$$\mathbf{R^2 < 0{,}90}$$</p>
+                        <p class="text-xs text-slate-600">Les points ne sont pas suffisamment alignés. Un ajustement linéaire n'est pas pertinent (envisager un autre modèle : exponentiel, logarithmique...).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE 5 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">V</span>
+                <h2 class="text-2xl font-bold font-heading text-slate-900">Interpolation, Extrapolation &amp; Fiche Synthèse Bac Pro</h2>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-2xl space-y-2">
+                        <h3 class="font-bold text-blue-900 flex items-center gap-2"><i class="fa-solid fa-compress text-blue-600"></i> 1. Interpolation</h3>
+                        <p class="text-xs">Consiste à estimer la valeur de $y$ pour un $x$ situé **à l'intérieur** de l'intervalle des données expérimentales $[x_{\min}; x_{\max}]$.</p>
+                        <p class="text-xs font-semibold text-blue-800">Fiabilité : Très élevée.</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 border border-purple-200 rounded-2xl space-y-2">
+                        <h3 class="font-bold text-purple-900 flex items-center gap-2"><i class="fa-solid fa-expand text-purple-600"></i> 2. Extrapolation</h3>
+                        <p class="text-xs">Consiste à estimer la valeur de $y$ pour un $x$ situé **à l'extérieur** de l'intervalle des données (prévisions dans le futur).</p>
+                        <p class="text-xs font-semibold text-purple-800">Fiabilité : Valide sous réserve que la tendance se maintienne.</p>
+                    </div>
+                </div>
+
+                <!-- FICHE SYNTHÈSE A4 IMPRIMABLE -->
+                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-5 bg-slate-50 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-xs uppercase text-slate-500 tracking-wider">Fiche Réflexe Bac Pro • En 4 Étapes</span>
+                        <i class="fa-solid fa-star text-amber-500"></i>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-sky-600">Étape 1 : Calcul de G</span>
+                            <p>$\bar{x} = \frac{\sum x_i}{N}$</p>
+                            <p>$\bar{y} = \frac{\sum y_i}{N}$</p>
+                            <p class="font-bold text-slate-800">Placer $G(\bar{x}; \bar{y})$</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-indigo-600">Étape 2 : Régression</span>
+                            <p>Calculatrice / Tableur</p>
+                            <p class="font-bold text-slate-800">$y = ax + b$</p>
+                            <p>Vérifier $R^2 \ge 0{,}90$</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-emerald-600">Étape 3 : Tracé</span>
+                            <p>Passer par $G$</p>
+                            <p>Calculer 2e point $A(x_A; y_A)$</p>
+                            <p class="font-bold text-slate-800">Tracé à la règle</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <span class="font-bold text-amber-600">Étape 4 : Prévision</span>
+                            <p>Remplacer $x$ dans $y=ax+b$</p>
+                            <p>Ou résoudre $y_0 = ax+b$</p>
+                            <p class="font-bold text-slate-800">Conclure en contexte</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

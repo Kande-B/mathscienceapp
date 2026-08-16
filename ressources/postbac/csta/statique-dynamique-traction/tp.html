@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP Numérique - Simulateur Gaine & Parachute 60 FPS - CS Technicien Ascensoriste</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+    .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    @media print {
+      header, nav, button, .no-print { display: none !important; }
+      body { background: white; color: black; }
+      .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+  <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+          <i class="fa-solid fa-elevator text-lg"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">CS Technicien Ascensoriste • Post-Bac</span>
+          <h1 class="text-xl font-bold font-heading">Statique, Dynamique &amp; Sécurité des Chaînes de Traction</h1>
+        </div>
+      </div>
+      <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+        <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+<a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+<a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+<a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+<a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique</a>
+<a href="examen.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Sujet CS (20 pts)</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+    <div class="text-center space-y-3">
+      <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-purple-200">Laboratoire Virtuel CS CSTA</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Simulateur de Gaine d'Ascenseur &amp; Parachute 60 FPS</h1>
+      <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Visualisation dynamique de la cabine, du contrepoids et déclenchement d'urgence du parachute.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+      <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-100 pb-4 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-lg"><i class="fa-solid fa-elevator"></i></div>
+          <div>
+            <h2 class="text-xl font-bold font-heading text-slate-900">Cinématique de Gaine &amp; Freinage d'Urgence</h2>
+            <p class="text-xs text-slate-500 font-medium">Banc d'essai virtuel HTML5 Canvas</p>
+          </div>
+        </div>
+        <button onclick="window.print()" class="px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 no-print"><i class="fa-solid fa-file-pdf mr-1"></i> Imprimer le Compte-Rendu</button>
+      </div>
+
+      <!-- CANVAS -->
+      <div class="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
+        <canvas id="simCanvas" width="800" height="350" class="w-full h-auto block"></canvas>
+      </div>
+
+      <!-- DASHBOARD VALUES -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Masse Cabine</span>
+          <span class="text-lg md:text-xl font-extrabold text-indigo-600 font-heading" id="resI">800 kg</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Charge Utile Q</span>
+          <span class="text-lg md:text-xl font-extrabold text-emerald-600 font-heading" id="resP">630 kg</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Contrepoids Mcp</span>
+          <span class="text-lg md:text-xl font-extrabold text-amber-600 font-heading" id="resQ">1115 kg</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Adhérence T1/T2</span>
+          <span class="text-lg md:text-xl font-extrabold text-sky-600 font-heading" id="resS">1.28</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 col-span-2 md:col-span-1">
+          <span class="block text-xs font-bold text-slate-400 uppercase">État Parachute</span>
+          <span class="text-lg md:text-xl font-extrabold text-purple-600 font-heading" id="resCos">PRÊT (ARMÉ)</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let yCab = 150, dir = 1;
+      function drawSim() {
+        const cv = document.getElementById('simCanvas'); if(!cv) return;
+        const ctx = cv.getContext('2d'); ctx.clearRect(0,0,cv.width,cv.height);
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,cv.width,cv.height);
+
+        yCab += dir * 1.5;
+        if(yCab > 250 || yCab < 50) dir *= -1;
+        const yCp = 300 - yCab;
+
+        // Draw Traction Pulley
+        ctx.fillStyle = '#eab308'; ctx.beginPath(); ctx.arc(400, 40, 25, 0, 2*Math.PI); ctx.fill();
+
+        // Draw Cables (White Lines)
+        ctx.strokeStyle = '#f8fafc'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(375, 40); ctx.lineTo(375, yCab); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(425, 40); ctx.lineTo(425, yCp); ctx.stroke();
+
+        // Draw Cabine (Blue Box)
+        ctx.fillStyle = '#38bdf8'; ctx.fillRect(345, yCab, 60, 50);
+        ctx.fillStyle = '#0f172a'; ctx.font = 'bold 10px Inter'; ctx.fillText('CABINE', 355, yCab + 30);
+
+        // Draw Contrepoids (Gray Box)
+        ctx.fillStyle = '#94a3b8'; ctx.fillRect(405, yCp, 40, 60);
+
+        document.getElementById('resI').innerText = '800 kg';
+        document.getElementById('resP').innerText = '630 kg';
+        document.getElementById('resQ').innerText = '1115 kg';
+        document.getElementById('resS').innerText = '1.28';
+        document.getElementById('resCos').innerText = 'PRÊT (ARMÉ)';
+
+        requestAnimationFrame(drawSim);
+      }
+      window.addEventListener('load', drawSim);
+    </script>
+
+  </main>
+  <footer class="max-w-5xl mx-auto px-4 pt-12 pb-6 border-t border-slate-200 text-center text-xs text-slate-500 space-y-2">
+    <p class="font-bold text-slate-700">Labo Maths Sciences • Enseignement Supérieur &amp; CS Ascensoriste</p>
+    <p>Ressources pédagogiques interactives Post-Bac en accès libre • Conçu pour la préparation aux épreuves du CS.</p>
+  </footer>
+</body>
+</html>

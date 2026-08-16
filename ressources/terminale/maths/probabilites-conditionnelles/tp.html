@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Probabilités Conditionnelles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Keys */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités Conditionnelles &amp; Arbres Pondérés</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Simulation d'Arbres &amp; Formule de Bayes</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Utiliser la NumWorks pour automatiser le calcul des probabilités composées, des probabilités totales et l'inversion conditionnelle de Bayes.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE TECHNIQUE NUMWORKS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Méthode NumWorks : Calculs de Probabilités Conditionnelles</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-calculator mr-1"></i> Mode Calculs / Probabilités</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">1. Fractions exactes</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Calculs</span>
+                    </div>
+                    <p class="text-slate-600">Dans l'application <strong class="text-indigo-600">Calculs</strong> :</p>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Utiliser la touche fraction <span class="nw-key font-bold">/</span> pour entrer $P_A(B) = \frac{P(A \cap B)}{P(A)}$.</li>
+                        <li>• La NumWorks affiche immédiatement la fraction simplifiée et l'arrondi décimal avec <span class="nw-key nw-key-yellow">OK</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">2. Probabilités Totales</span>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">Somme</span>
+                    </div>
+                    <p class="text-slate-600">Pour calculer $P(B)$ :</p>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Taper directement : <br><span class="font-mono font-bold text-sky-700">P(A)*P_A(B) + P(nonA)*P_nonA(B)</span></li>
+                        <li>• Valider avec la touche <span class="nw-key nw-key-dark">EXE</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">3. Inversion de Bayes</span>
+                        <span class="text-[10px] font-bold bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">Ans</span>
+                    </div>
+                    <p class="text-slate-600">Pour calculer $P_B(A)$ :</p>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Taper la branche $P(A \cap B)$ au numérateur.</li>
+                        <li>• Diviser par <span class="nw-key font-mono">Ans</span> (la réponse précédente correspondant à $P(B)$).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE PROFESSIONNELLE & BANQUE DE DONNÉES -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Aéronautique &amp; Systèmes Embarqués</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude de Cas : Fiabilité d'un Détecteur d'Incendie d'Avion</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 40 min</span>
+            </div>
+
+            <!-- Context -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-slate-700">
+                <p class="font-bold text-slate-900">Mise en situation :</p>
+                <p>Dans un avion de transport, un système opto-électronique détecte la présence de fumée ou feu en soute (événement $F$). La probabilité qu'un incendie se déclare lors d'un vol est estimée à $P(F) = 0{,}001$ ($0{,}1\ \%$).</p>
+                <ul class="list-disc list-inside space-y-1 text-xs md:text-sm">
+                    <li>Si un incendie se déclare, l'alarme sonne (événement $A$) avec une probabilité de <strong>99,5 %</strong> ($P_F(A) = 0{,}995$).</li>
+                    <li>S'il n'y a pas d'incendie, une fausse alerte se déclenche dans <strong>0,4 %</strong> des cas ($P_{\bar{F}}(A) = 0{,}004$).</li>
+                </ul>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-3 text-sm text-slate-800">
+                <p><strong>1.</strong> Construire l'arbre pondéré de probabilités sur votre feuille.</p>
+                <p><strong>2.</strong> Sur votre NumWorks, calculer la probabilité totale qu'une alarme se déclenche : $P(A)$.</p>
+                <p><strong>3.</strong> L'alarme de soute retentit en plein vol. À l'aide de la NumWorks, calculer la probabilité $P_A(F)$ qu'il y ait réellement un feu en soute.</p>
+                <p><strong>4.</strong> Conclure sur le protocole d'urgence des pilotes (procédure d'extinction automatique vs atterrissage forcé immédiat).</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-2').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Réponses Détaillées
+                </button>
+                <div id="sol-tp-2" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Arbre :</strong> $P(F) = 0{,}001$, $P(\bar{F}) = 0{,}999$. $P_F(A) = 0{,}995$, $P_F(\bar{A}) = 0{,}005$. $P_{\bar{F}}(A) = 0{,}004$, $P_{\bar{F}}(\bar{A}) = 0{,}996$.</li>
+                        <li><strong>2. Probabilité totale $P(A)$ :</strong>
+                            $$P(A) = (0{,}001 \times 0{,}995) + (0{,}999 \times 0{,}004) = 0{,}000995 + 0{,}003996 = \mathbf{0{,}004991} \approx 0{,}50\ \%$$
+                        </li>
+                        <li><strong>3. Probabilité conditionnelle inverse $P_A(F)$ :</strong>
+                            $$P_A(F) = \frac{0{,}000995}{0{,}004991} \approx \mathbf{0{,}1993} \approx \mathbf{19{,}9\ \%}$$
+                        </li>
+                        <li><strong>4. Conclusion aéronautique :</strong>
+                            Même si le capteur est fiable à 99,5 %, comme les incendies sont rarissimes (1 sur 1000), 80 % des alarmes déclenchées sont des fausses alertes. Le système d'aviation arme les extincteurs et déclenche une vérification visuelle par caméra avant de couper les circuits.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS ("LABO MATHS SCIENCES") -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Simulateur Virtuel Canvas 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Générateur &amp; Visualiseur d'Arbre Dynamique</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200"><i class="fa-solid fa-code-branch mr-1"></i> Arbre Réactif</span>
+            </div>
+
+            <!-- Parameters controls -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">P(A) :</label>
+                    <input type="range" id="param-pa" min="0.01" max="0.99" step="0.01" value="0.60" oninput="updateTree()" class="w-full accent-indigo-600">
+                    <span id="val-pa" class="font-mono font-bold text-indigo-700">0.60</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">P_A(B) :</label>
+                    <input type="range" id="param-pab" min="0.01" max="0.99" step="0.01" value="0.02" oninput="updateTree()" class="w-full accent-indigo-600">
+                    <span id="val-pab" class="font-mono font-bold text-indigo-700">0.02</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">P_nonA(B) :</label>
+                    <input type="range" id="param-pnab" min="0.01" max="0.99" step="0.01" value="0.05" oninput="updateTree()" class="w-full accent-indigo-600">
+                    <span id="val-pnab" class="font-mono font-bold text-indigo-700">0.05</span>
+                </div>
+            </div>
+
+            <!-- Tree Canvas & Results -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                    <canvas id="treeCanvas" width="560" height="320" class="w-full h-auto bg-slate-900 rounded-xl"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 flex flex-col justify-between text-xs">
+                    <div class="space-y-3 font-mono">
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">P(A ∩ B) :</span>
+                            <span id="tree-pab-inter" class="font-bold text-sky-600 block text-sm">0.0120</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">P(B) (Proba Totale) :</span>
+                            <span id="tree-pb-total" class="font-bold text-purple-600 block text-sm">0.0320</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">P_B(A) (Bayes Inverse) :</span>
+                            <span id="tree-pba-bayes" class="font-bold text-emerald-600 block text-sm">0.3750 (37.5 %)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Canvas Tree Script -->
+    <script>
+        function updateTree() {
+            const pA = parseFloat(document.getElementById('param-pa').value);
+            const pAB = parseFloat(document.getElementById('param-pab').value);
+            const pNAB = parseFloat(document.getElementById('param-pnab').value);
+
+            document.getElementById('val-pa').innerText = pA.toFixed(2);
+            document.getElementById('val-pab').innerText = pAB.toFixed(2);
+            document.getElementById('val-pnab').innerText = pNAB.toFixed(2);
+
+            const pNonA = 1 - pA;
+            const pANonB = 1 - pAB;
+            const pNonANonB = 1 - pNAB;
+
+            const pInterAB = pA * pAB;
+            const pInterANonB = pA * pANonB;
+            const pInterNAB = pNonA * pNAB;
+            const pInterNANonB = pNonA * pNonANonB;
+
+            const pBTotal = pInterAB + pInterNAB;
+            const pBABayes = pBTotal > 0 ? (pInterAB / pBTotal) : 0;
+
+            document.getElementById('tree-pab-inter').innerText = pInterAB.toFixed(4);
+            document.getElementById('tree-pb-total').innerText = pBTotal.toFixed(4);
+            document.getElementById('tree-pba-bayes').innerText = `${pBABayes.toFixed(4)} (${(pBABayes * 100).toFixed(1)} %)`;
+
+            drawTree(pA, pNonA, pAB, pANonB, pNAB, pNonANonB);
+        }
+
+        function drawTree(pA, pNonA, pAB, pANonB, pNAB, pNonANonB) {
+            const canvas = document.getElementById('treeCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            ctx.strokeStyle = "#475569";
+            ctx.lineWidth = 2;
+            ctx.font = "bold 12px Inter, sans-serif";
+            ctx.fillStyle = "#ffffff";
+
+            // Root
+            const rootX = 50, rootY = h / 2;
+
+            // Level 1 Nodes
+            const l1AX = 200, l1AY = 80;
+            const l1NAX = 200, l1NAY = 240;
+
+            // Level 2 Nodes
+            const l2ABX = 400, l2ABY = 40;
+            const l2ANBX = 400, l2ANBY = 120;
+            const l2NABX = 400, l2NABY = 200;
+            const l2NANBX = 400, l2NANBY = 280;
+
+            // Draw branches Root -> Level 1
+            ctx.beginPath();
+            ctx.moveTo(rootX, rootY); ctx.lineTo(l1AX, l1AY);
+            ctx.moveTo(rootX, rootY); ctx.lineTo(l1NAX, l1NAY);
+            ctx.stroke();
+
+            // Draw branches Level 1 -> Level 2
+            ctx.beginPath();
+            ctx.moveTo(l1AX, l1AY); ctx.lineTo(l2ABX, l2ABY);
+            ctx.moveTo(l1AX, l1AY); ctx.lineTo(l2ANBX, l2ANBY);
+            ctx.moveTo(l1NAX, l1NAY); ctx.lineTo(l2NABX, l2NABY);
+            ctx.moveTo(l1NAX, l1NAY); ctx.lineTo(l2NANBX, l2NANBY);
+            ctx.stroke();
+
+            // Branch Labels
+            ctx.fillStyle = "#fed100";
+            ctx.fillText(pA.toFixed(2), 110, 105);
+            ctx.fillText(pNonA.toFixed(2), 110, 225);
+
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillText(pAB.toFixed(2), 290, 50);
+            ctx.fillText(pANonB.toFixed(2), 290, 110);
+            ctx.fillText(pNAB.toFixed(2), 290, 210);
+            ctx.fillText(pNonANonB.toFixed(2), 290, 270);
+
+            // Node Labels
+            ctx.fillStyle = "#ffffff";
+            ctx.fillText("A", l1AX + 10, l1AY + 5);
+            ctx.fillText("Ā", l1NAX + 10, l1NAY + 5);
+
+            ctx.fillStyle = "#a855f7";
+            ctx.fillText("B", l2ABX + 10, l2ABY + 5);
+            ctx.fillText("B̄", l2ANBX + 10, l2ANBY + 5);
+            ctx.fillText("B", l2NABX + 10, l2NABY + 5);
+            ctx.fillText("B̄", l2NANBX + 10, l2NANBY + 5);
+        }
+
+        document.addEventListener('DOMContentLoaded', updateTree);
+    </script>
+
+</body>
+</html>

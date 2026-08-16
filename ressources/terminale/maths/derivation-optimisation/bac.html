@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vers le Bac Pro - Dérivation & Optimisation (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+            .print-break { page-break-after: always; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-red-500/20 border border-red-400/30 text-red-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-red-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Dérivation, Tangentes &amp; Optimisation</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-red-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & EXAM INFO -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2 text-center md:text-left">
+                <span class="bg-red-100 text-red-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Épreuve Certificative Baccalauréat Professionnel</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">Évaluation Formative : Dérivation &amp; Optimisation</h1>
+                <p class="text-slate-500 text-xs md:text-sm">Durée recommandée : 1 heure • Barème total : 20 points</p>
+            </div>
+            <div class="flex items-center gap-3 no-print">
+                <button onclick="window.print()" class="px-4 py-2.5 bg-slate-900 text-white hover:bg-slate-800 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-print"></i> Imprimer le Sujet (PDF A4)
+                </button>
+            </div>
+        </div>
+
+        <!-- PARTIE 1 : AUTOMATISMES (5 POINTS - SANS CALCULATRICE) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 font-extrabold rounded-lg text-xs">Partie 1</span>
+                    <h2 class="text-xl font-bold font-heading text-slate-900">Automatismes (5 points • Sans calculatrice • 15 min)</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">5 questions • 1 pt / question</span>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-800">
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">1. Dérivée polynomiale :</p>
+                    <p>Déterminer la fonction dérivée de $f(x) = 5x^3 - 2x^2 + 8x - 10$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">2. Nombre dérivé :</p>
+                    <p>Pour $g(x) = x^2 - 6x$, calculer la valeur exacte de $g'(4)$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">3. Tangente horizontale :</p>
+                    <p>Pour quelle valeur de $x$ la tangente à la courbe de $h(x) = -3x^2 + 18x + 2$ est-elle parallèle à l'axe des abscisses ?</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">4. Dérivée de l'inverse :</p>
+                    <p>Calculer la dérivée de $k(x) = \frac{8}{x}$ pour tout $x > 0$.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <p class="font-bold">5. Sens de variation :</p>
+                    <p>Soit une fonction $u$ dont la dérivée est $u'(x) = -5x^2 - 2$. Justifier que $u$ est strictement décroissante sur $\mathbb{R}$.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : PROBLÈME PROFESSIONNEL (15 POINTS - AVEC CALCULATRICE) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-red-100 text-red-800 font-extrabold rounded-lg text-xs">Partie 2</span>
+                    <h2 class="text-xl font-bold font-heading text-slate-900">Problème Contextualisé (15 points • Avec calculatrice • 45 min)</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">Design &amp; Efficacité Énergétique Automobile</span>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-red-500 space-y-2">
+                    <h3 class="font-bold text-slate-900">Mise en situation : Optimisation de la traînée aérodynamique d'un hayon arrière</h3>
+                    <p>Dans le cadre de l'optimisation de l'autonomie d'une berline électrique, des ingénieurs modélisent le coefficient de traînée aérodynamique $C_x(\alpha)$ en fonction de l'angle d'inclinaison $\alpha$ du becquet arrière (en degrés, pour $\alpha \in [5 ; 35]$) par la fonction suivante :</p>
+                    <div class="p-2.5 bg-white border border-red-200 rounded-xl text-center font-bold text-red-900">
+                        $$C_x(\alpha) = 0{,}0002\alpha^3 - 0{,}012\alpha^2 + 0{,}18\alpha + 0{,}25$$
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <p><strong>Question 1 (C1 - S'approprier / 2 pts) :</strong> Calculer la valeur initiale du coefficient de traînée pour un becquet réglé à $\alpha = 5\text{°}$ (arrondir au millième).</p>
+                    <p><strong>Question 2 (C3 - Réaliser / 3 pts) :</strong> Déterminer l'expression algébrique de la fonction dérivée $C_x'(\alpha)$.</p>
+                    <p><strong>Question 3 (C3 - Réaliser / 4 pts) :</strong> Résoudre l'équation du second degré $C_x'(\alpha) = 0$ sur l'intervalle $[5 ; 35]$ (utiliser le discriminant $\Delta$).</p>
+                    <p><strong>Question 4 (C2 & C3 - Analyser & Réaliser / 2 pts) :</strong> Dresser le tableau de signes de $C_x'(\alpha)$ et le tableau de variations complet de la fonction $C_x$ sur $[5 ; 35]$.</p>
+                    <p><strong>Question 5 (C4 - Valider / 2 pts) :</strong> Déterminer l'angle d'inclinaison $\alpha_0$ qui rend la traînée aérodynamique **minimale** et calculer la valeur de ce coefficient minimal $C_{x,\min}$.</p>
+                    <p><strong>Question 6 (C5 - Communiquer / 2 pts) :</strong> Déterminer l'équation de la tangente à la courbe au point $\alpha = 10\text{°}$ et rédiger une recommandation technique pour le bureau d'études.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRILLE D'ÉVALUATION PAR COMPÉTENCES -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+            <h3 class="text-lg font-bold font-heading text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-table-list text-red-500"></i> Grille Nationale des Compétences Évaluées (Bac Pro)
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-slate-200 text-xs md:text-sm">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="p-2 border">Compétence</th>
+                            <th class="p-2 border">Capacités Évaluées</th>
+                            <th class="p-2 border text-center">Questions</th>
+                            <th class="p-2 border text-center">Barème</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr>
+                            <td class="p-2 font-bold text-pink-700 bg-pink-50/50">C1. S'approprier</td>
+                            <td class="p-2">Identifier la variable, les bornes de l'intervalle et calculer une image.</td>
+                            <td class="p-2 text-center">Partie 1 (Q2) • Partie 2 (Q1)</td>
+                            <td class="p-2 text-center font-bold">3 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-orange-700 bg-orange-50/50">C2. Analyser / Raisonner</td>
+                            <td class="p-2">Relier le signe de la dérivée aux variations de la traînée.</td>
+                            <td class="p-2 text-center">Partie 1 (Q3, Q5) • Partie 2 (Q4)</td>
+                            <td class="p-2 text-center font-bold">4 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-blue-700 bg-blue-50/50">C3. Réaliser</td>
+                            <td class="p-2">Calculer une dérivée, résoudre $f'(\alpha) = 0$ et équation de tangente.</td>
+                            <td class="p-2 text-center">Partie 1 (Q1, Q4) • Partie 2 (Q2, Q3, Q6)</td>
+                            <td class="p-2 text-center font-bold">9 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-green-700 bg-green-50/50">C4. Valider</td>
+                            <td class="p-2">Vérifier et identifier l'extremum local (minimum).</td>
+                            <td class="p-2 text-center">Partie 2 (Q5)</td>
+                            <td class="p-2 text-center font-bold">2 pts</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 font-bold text-yellow-700 bg-yellow-50/50">C5. Communiquer</td>
+                            <td class="p-2">Rédiger une préconisation technique claire pour les ingénieurs.</td>
+                            <td class="p-2 text-center">Partie 2 (Q6)</td>
+                            <td class="p-2 text-center font-bold">2 pts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CORRIGÉ COMPLET DÉPLIABLE -->
+        <div class="pt-4 border-t border-slate-200">
+            <button onclick="document.getElementById('sol-bac-5').classList.toggle('hidden')" class="px-5 py-3 bg-red-50 text-red-800 hover:bg-red-100 rounded-2xl font-bold text-xs transition-colors flex items-center gap-2 border border-red-200 shadow-sm mx-auto">
+                <i class="fa-solid fa-eye"></i> Afficher le Corrigé Intégral du Sujet Bac Pro &amp; Barème
+            </button>
+            <div id="sol-bac-5" class="hidden mt-6 p-6 md:p-8 bg-white rounded-3xl border-2 border-red-200 space-y-6 text-xs md:text-sm text-slate-800 card-shadow">
+                <h3 class="font-bold text-lg text-red-900 border-b border-red-100 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-check-double text-red-600"></i> Corrigé Officiel Détaillé &amp; Barème
+                </h3>
+
+                <!-- Corrigé Partie 1 -->
+                <div class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm text-indigo-700">Partie 1 : Automatismes (5 pts)</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>1.</strong> $f'(x) = 5(3x^2) - 2(2x) + 8 = \mathbf{15x^2 - 4x + 8}$ (1 pt).</li>
+                        <li><strong>2.</strong> $g'(x) = 2x - 6 \implies g'(4) = 2(4) - 6 = \mathbf{2}$ (1 pt).</li>
+                        <li><strong>3.</strong> $h'(x) = -6x + 18 = 0 \iff 6x = 18 \iff x = \mathbf{3}$ (1 pt).</li>
+                        <li><strong>4.</strong> $k'(x) = 8\left(-\frac{1}{x^2}\right) = \mathbf{-\frac{8}{x^2}}$ (1 pt).</li>
+                        <li><strong>5.</strong> Pour tout $x \in \mathbb{R}$, $x^2 \ge 0 \implies -5x^2 - 2 \le -2 < 0$. Comme la dérivée est strictement négative, $u$ est **strictement décroissante** (1 pt).</li>
+                    </ul>
+                </div>
+
+                <!-- Corrigé Partie 2 -->
+                <div class="space-y-2 pt-2 border-t border-slate-100">
+                    <h4 class="font-bold text-slate-900 text-sm text-red-700">Partie 2 : Problème (15 pts)</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Q1.</strong> $C_x(5) = 0{,}0002(125) - 0{,}012(25) + 0{,}18(5) + 0{,}25 = 0{,}025 - 0{,}300 + 0{,}900 + 0{,}25 = \mathbf{0{,}875}$ (2 pts).</li>
+                        <li><strong>Q2.</strong> $C_x'(\alpha) = 0{,}0002(3\alpha^2) - 0{,}012(2\alpha) + 0{,}18 = \mathbf{0{,}0006\alpha^2 - 0{,}024\alpha + 0{,}18}$ (3 pts).</li>
+                        <li><strong>Q3.</strong> Résolution de $0{,}0006\alpha^2 - 0{,}024\alpha + 0{,}18 = 0$ :
+                            <br>$\Delta = (-0{,}024)^2 - 4(0{,}0006)(0{,}18) = 0{,}000576 - 0{,}000432 = \mathbf{0{,}000144} > 0$.
+                            <br>$\sqrt{\Delta} = 0{,}012$.
+                            <br>$\alpha_1 = \frac{0{,}024 - 0{,}012}{2 \times 0{,}0006} = \frac{0{,}012}{0{,}0012} = \mathbf{10\text{°}}$
+                            <br>$\alpha_2 = \frac{0{,}024 + 0{,}012}{0{,}0012} = \frac{0{,}036}{0{,}0012} = \mathbf{30\text{°}}$ (4 pts).
+                        </li>
+                        <li><strong>Q4.</strong> Signe de $C_x'(\alpha)$ ($a = 0{,}0006 > 0$) : positif à l'extérieur des racines ($[5 ; 10[$ et $]30 ; 35]$), négatif entre les racines ($]10 ; 30[$).
+                            <br>Variations de $C_x$ : croissante sur $[5 ; 10]$, décroissante sur $[10 ; 30]$, croissante sur $[30 ; 35]$ (2 pts).
+                        </li>
+                        <li><strong>Q5.</strong> Le minimum local est atteint en **$\alpha_0 = 30\text{°}$**.
+                            <br>$C_{x,\min} = C_x(30) = 0{,}0002(27000) - 0{,}012(900) + 0{,}18(30) + 0{,}25 = 5{,}4 - 10{,}8 + 5{,}4 + 0{,}25 = \mathbf{0{,}250}$ (2 pts).
+                        </li>
+                        <li><strong>Q6.</strong> Tangente en $\alpha = 10\text{°}$ : comme $C_x'(10) = 0$ et $C_x(10) = 1{,}050$, l'équation est $\mathbf{y = 1{,}050}$ (tangente horizontale).
+                            <br>Recommandation : Régler le becquet à un angle de **30°** pour abaisser le coefficient de traînée à 0,250 et maximiser l'autonomie sur autoroute (2 pts).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

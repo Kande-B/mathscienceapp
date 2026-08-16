@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TD & Exercices - Séries de Fourier - BTS Électrotechnique</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+    .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    @media print {
+      header, nav, button, .no-print { display: none !important; }
+      body { background: white; color: black; }
+      .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+  <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+          <i class="fa-solid fa-chart-simple text-lg"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">BTS Électrotechnique • Séquence 3</span>
+          <h1 class="text-xl font-bold font-heading">Séries de Fourier &amp; Harmoniques</h1>
+        </div>
+      </div>
+      <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+        <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+<a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+<a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+<a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+<a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique</a>
+<a href="examen.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Sujet BTS (20 pts)</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+    <div class="text-center space-y-3">
+      <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Niveau BTS</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Fiche de TD &amp; Exercices BTS</h1>
+      <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 exercices de niveau BTS avec corrigés étape par étape.</p>
+    </div>
+
+    <div class="space-y-6">
+      
+      <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-bold flex items-center justify-center text-xs shadow-sm">1</span>
+            <h2 class="text-xl font-bold font-heading text-slate-900">Exercice 1 : Onde Carrée Alternée Symétrique</h2>
+          </div>
+          <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-bold">Niveau BTS</span>
+        </div>
+        <div class="text-sm text-slate-700 leading-relaxed font-medium bg-slate-50 p-4 rounded-2xl border border-slate-100">Soit $f(t) = +E$ sur $[0 ; T/2]$ et $f(t) = -E$ sur $[T/2 ; T]$.</div>
+        <ul class="space-y-2 text-sm text-slate-800">
+          <li class="flex items-start gap-2"><span class="font-bold text-emerald-600">1.</span> <span>Montrer que $a_0 = 0$ et $a_n = 0$.</span></li>
+          <li class="flex items-start gap-2"><span class="font-bold text-emerald-600">2.</span> <span>Calculer $b_n$ et écrire les 3 premiers termes non nuls.</span></li>
+        </ul>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 transition-colors shadow-sm no-print"><i class="fa-solid fa-key mr-1"></i> Afficher le Corrigé BTS</button>
+        <div class="hidden p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs md:text-sm text-emerald-950 font-medium space-y-2">
+          <div><strong>Q1 :</strong> $f(t)$ est impaire et glissée $\implies a_0 = 0$ et $a_n = 0$.</div>
+          <div><strong>Q2 :</strong> $b_n = \frac{4E}{n\pi}$ pour $n$ impair. $f(t) = \frac{4E}{\pi}\sin\omega t + \frac{4E}{3\pi}\sin 3\omega t + \frac{4E}{5\pi}\sin 5\omega t + \dots$</div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-bold flex items-center justify-center text-xs shadow-sm">2</span>
+            <h2 class="text-xl font-bold font-heading text-slate-900">Exercice 2 : Signal Redressé Double Alternance</h2>
+          </div>
+          <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-bold">Niveau BTS</span>
+        </div>
+        <div class="text-sm text-slate-700 leading-relaxed font-medium bg-slate-50 p-4 rounded-2xl border border-slate-100">Signal $u(t) = |U_{max} \sin \omega t|$.</div>
+        <ul class="space-y-2 text-sm text-slate-800">
+          <li class="flex items-start gap-2"><span class="font-bold text-emerald-600">1.</span> <span>Calculer la valeur moyenne $a_0$.</span></li>
+          <li class="flex items-start gap-2"><span class="font-bold text-emerald-600">2.</span> <span>Montrer que l'harmonique 2 a pour amplitude $\frac{4 U_{max}}{3\pi}$.</span></li>
+        </ul>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 transition-colors shadow-sm no-print"><i class="fa-solid fa-key mr-1"></i> Afficher le Corrigé BTS</button>
+        <div class="hidden p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs md:text-sm text-emerald-950 font-medium space-y-2">
+          <div><strong>Q1 :</strong> $a_0 = \frac{2 U_{max}}{\pi} \approx 0,637 U_{max}$.</div>
+          <div><strong>Q2 :</strong> Par intégration trigonométrique de $\sin x \cos 2x$, $a_2 = -\frac{4 U_{max}}{3\pi}$. L'amplitude de la première ondulation (100 Hz) vaut $43,7\%$ de $a_0$.</div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white font-bold flex items-center justify-center text-xs shadow-sm">3</span>
+            <h2 class="text-xl font-bold font-heading text-slate-900">Exercice 3 : Calcul de THD d'un Gradateur Triphasé</h2>
+          </div>
+          <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-bold">Niveau BTS</span>
+        </div>
+        <div class="text-sm text-slate-700 leading-relaxed font-medium bg-slate-50 p-4 rounded-2xl border border-slate-100">Le courant relevé par l'analyseur de réseau donne : $I_1 = 50\text{ A}, I_3 = 15\text{ A}, I_5 = 10\text{ A}, I_7 = 5\text{ A}$.</div>
+        <ul class="space-y-2 text-sm text-slate-800">
+          <li class="flex items-start gap-2"><span class="font-bold text-emerald-600">1.</span> <span>Calculer le courant efficace total $I_{eff}$ par Parseval.</span></li>
+          <li class="flex items-start gap-2"><span class="font-bold text-emerald-600">2.</span> <span>Calculer le THD global.</span></li>
+        </ul>
+        <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs hover:bg-emerald-700 transition-colors shadow-sm no-print"><i class="fa-solid fa-key mr-1"></i> Afficher le Corrigé BTS</button>
+        <div class="hidden p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs md:text-sm text-emerald-950 font-medium space-y-2">
+          <div><strong>Q1 :</strong> $I_{eff} = \sqrt{50^2 + 15^2 + 10^2 + 5^2} = \sqrt{2500 + 225 + 100 + 25} = \sqrt{2850} \approx 53,39\text{ A}$.</div>
+          <div><strong>Q2 :</strong> $\text{THD} = \frac{\sqrt{15^2+10^2+5^2}}{50} = \frac{\sqrt{350}}{50} = \frac{18,71}{50} = 37,42\%$.</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  <footer class="max-w-5xl mx-auto px-4 pt-12 pb-6 border-t border-slate-200 text-center text-xs text-slate-500 space-y-2">
+    <p class="font-bold text-slate-700">Labo Maths Sciences • Enseignement Supérieur &amp; BTS Électrotechnique</p>
+    <p>Ressources pédagogiques interactives Post-Bac en accès libre • Conçu pour la préparation aux épreuves du BTS.</p>
+  </footer>
+</body>
+</html>

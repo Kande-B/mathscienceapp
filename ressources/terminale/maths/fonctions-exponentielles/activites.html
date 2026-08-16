@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Fonctions Exponentielles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Exponentielles ($x \mapsto e^{kx}$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation en Contexte Professionnel</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités : Fonctions Exponentielles</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Charge de condensateurs industriels, lois de refroidissement thermique et atténuation de signaux optiques.</p>
+        </div>
+
+        <!-- ACTIVITÉ 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Électrotechnique &amp; Électronique de Puissance</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 1 : Charge Transitoire d'un Condensateur de Filtrage</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-bolt text-amber-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Dans l'alimentation d'un variateur de vitesse industriel, un condensateur de filtrage est chargé sous une tension continue de $E = 24\text{ V}$. L'évolution de la tension $u(t)$ aux bornes du condensateur (en volts) en fonction du temps $t$ (en secondes, pour $t \ge 0$) est modélisée par :</p>
+                        <div class="p-2.5 bg-white border border-amber-200 rounded-xl text-center font-bold text-amber-900">
+                            $$u(t) = 24\left(1 - e^{-20t}\right)$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>S'approprier :</strong> Calculer la tension initiale $u(0)$ au moment de la mise sous tension ($t = 0\text{ s}$).</li>
+                    <li><strong>Calculer :</strong> Déterminer la constante de temps $\tau$ du circuit sachant que $u(t) = E(1 - e^{-t/\tau})$. Calculer la tension atteinte à l'instant $t = \tau$. Quel pourcentage de la tension maximale $E$ représente-t-elle ?</li>
+                    <li><strong>Dériver :</strong> Calculer la dérivée $u'(t)$ et justifier que la tension $u(t)$ est strictement croissante.</li>
+                    <li><strong>Résoudre :</strong> On considère que le condensateur est opérationnel dès que sa tension atteint <strong>23,5 V</strong>. Résoudre l'équation $24(1 - e^{-20t}) = 23{,}5$ pour déterminer la durée de charge nécessaire (arrondir au millième de seconde).</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-1').classList.toggle('hidden')" class="px-4 py-2 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-amber-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 1
+                </button>
+                <div id="sol-act-1" class="hidden mt-4 p-5 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-amber-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Tension initiale :</strong>
+                            $$u(0) = 24(1 - e^0) = 24(1 - 1) = \mathbf{0\text{ V}}$$
+                        </li>
+                        <li><strong>2. Constante de temps $\tau$ :</strong>
+                            $$\frac{1}{\tau} = 20 \implies \tau = \frac{1}{20} = \mathbf{0{,}05\text{ s}} \quad (50\text{ ms})$$
+                            $$u(0{,}05) = 24(1 - e^{-1}) = 24(1 - 0{,}36788) = 24 \times 0{,}63212 \approx \mathbf{15{,}17\text{ V}} \quad (\mathbf{63{,}2\ \%}\text{ de } E)$$
+                        </li>
+                        <li><strong>3. Dérivée & Sens de variation :</strong>
+                            $$u'(t) = 24\left(-(-20)e^{-20t}\right) = \mathbf{480 e^{-20t}}$$
+                            Comme $e^{-20t} > 0$, $u'(t) > 0$ pour tout $t \ge 0$, la tension $u(t)$ est **strictement croissante**.
+                        </li>
+                        <li><strong>4. Résolution de $u(t) = 23{,}5\text{ V}$ :</strong>
+                            $$24(1 - e^{-20t}) = 23{,}5 \iff 1 - e^{-20t} = \frac{23{,}5}{24} \approx 0{,}97917$$
+                            $$e^{-20t} = 1 - 0{,}97917 = 0{,}02083 \iff -20t = \ln(0{,}02083) \approx -3{,}8712$$
+                            $$t = \frac{-3{,}8712}{-20} \approx \mathbf{0{,}194\text{ s}} \quad (194\text{ ms})$$
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-sky-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Métallurgie &amp; Traitement Thermique</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 2 : Trempe &amp; Refroidissement d'un Arbre de Transmission</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-temperature-half text-sky-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Après usinage, un arbre de transmission en acier est chauffé à $850\text{ °C}$ puis refroidi dans une cuve d'huile thermostatée à $50\text{ °C}$. La température $T(t)$ de la pièce (en °C) après $t$ minutes de trempe est modélisée par :</p>
+                        <div class="p-2.5 bg-white border border-sky-200 rounded-xl text-center font-bold text-sky-900">
+                            $$T(t) = 50 + 800 e^{-0{,}15 t}$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-sky-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>S'approprier :</strong> Vérifier la température initiale $T(0)$.</li>
+                    <li><strong>Calculer :</strong> Déterminer la température de la pièce après 10 minutes ($t = 10$).</li>
+                    <li><strong>Dériver :</strong> Calculer la dérivée $T'(t)$ et en déduire le sens de variation de la température.</li>
+                    <li><strong>Sécurité :</strong> Les opérateurs peuvent manipuler la pièce sans risque de brûlure grave dès que sa température descend **sous les $80\text{ °C}$**. Déterminer au bout de combien de minutes la pièce peut être sortie de la cuve (arrondir à la minute supérieure).</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-2').classList.toggle('hidden')" class="px-4 py-2 bg-sky-50 text-sky-800 hover:bg-sky-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-sky-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 2
+                </button>
+                <div id="sol-act-2" class="hidden mt-4 p-5 bg-sky-50/60 rounded-2xl border border-sky-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-sky-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Température initiale :</strong>
+                            $$T(0) = 50 + 800 e^0 = 50 + 800 = \mathbf{850\text{ °C}}$$
+                        </li>
+                        <li><strong>2. Après 10 minutes :</strong>
+                            $$T(10) = 50 + 800 e^{-0{,}15(10)} = 50 + 800 e^{-1{,}5} = 50 + 800(0{,}22313) \approx \mathbf{228{,}5\text{ °C}}$$
+                        </li>
+                        <li><strong>3. Dérivée :</strong>
+                            $$T'(t) = 800(-0{,}15)e^{-0{,}15t} = \mathbf{-120 e^{-0{,}15t}}$$
+                            Comme $T'(t) < 0$ pour tout $t$, la température est **strictement décroissante**.
+                        </li>
+                        <li><strong>4. Recherche du seuil $T(t) \le 80\text{ °C}$ :</strong>
+                            $$50 + 800 e^{-0{,}15t} \le 80 \iff 800 e^{-0{,}15t} \le 30 \iff e^{-0{,}15t} \le \frac{30}{800} = 0{,}0375$$
+                            $$-0{,}15t \le \ln(0{,}0375) \approx -3{,}2834 \iff t \ge \frac{-3{,}2834}{-0{,}15} \approx \mathbf{21{,}89\text{ minutes}}$$
+                            La pièce peut être manipulée après **22 minutes**.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Télécommunications &amp; Fibre Optique</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 3 : Atténuation d'un Faisceau Laser dans une Fibre Optique</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 25 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-3">
+                <p class="text-sm text-slate-700">
+                    La puissance $P(x)$ (en mW) d'un signal optique le long d'une liaison par fibre monomode en fonction de la distance $x$ (en km) est donnée par :
+                    $$P(x) = 10 e^{-0{,}046 x}$$
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li>Calculer la puissance du signal après $20\text{ km}$ et après $50\text{ km}$ (arrondir au centième).</li>
+                    <li>Un répéteur optique doit être installé dès que la puissance du signal descend sous $2\text{ mW}$. Déterminer la distance maximale entre deux répéteurs.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-3').classList.toggle('hidden')" class="px-4 py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-emerald-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 3
+                </button>
+                <div id="sol-act-3" class="hidden mt-4 p-5 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Calculs de puissance :</strong>
+                            <br>• $P(20) = 10 e^{-0{,}046(20)} = 10 e^{-0{,}92} \approx \mathbf{3{,}99\text{ mW}}$.
+                            <br>• $P(50) = 10 e^{-0{,}046(50)} = 10 e^{-2{,}30} \approx \mathbf{1{,}00\text{ mW}}$.
+                        </li>
+                        <li><strong>2. Distance maximale :</strong>
+                            $$10 e^{-0{,}046 x} = 2 \iff e^{-0{,}046 x} = 0{,}2 \iff -0{,}046 x = \ln(0{,}2) \approx -1{,}6094$$
+                            $$x = \frac{-1{,}6094}{-0{,}046} \approx \mathbf{35\text{ km}}$$
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

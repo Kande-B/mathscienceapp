@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Fonctions Logarithmes (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Logarithmes ($\ln x$ et $\log x$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation en Contexte Professionnel</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités : Fonctions Logarithmes</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Étude de nuisances sonores industrielles (dB), contrôle du pH de rejets chimiques et calcul de temps de rentabilité.</p>
+        </div>
+
+        <!-- ACTIVITÉ 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Acoustique Industrielle &amp; Prévention SST</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 1 : Mesure du Niveau Sonore en Atelier de Chaudronnerie</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-volume-high text-amber-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Dans un atelier de fabrication, un sonomètre mesure le niveau d'intensité sonore $L$ (en décibels, dB) défini par la relation :</p>
+                        <div class="p-2.5 bg-white border border-amber-200 rounded-xl text-center font-bold text-amber-900">
+                            $$L = 10 \log\left(\frac{I}{I_0}\right) \quad \text{avec } I_0 = 10^{-12}\text{ W/m}^2$$
+                        </div>
+                        <p>Une presse d'emboutissage produit une intensité acoustique $I_1 = 2 \times 10^{-4}\text{ W/m}^2$. Une cisaille guillotine voisine produit une intensité $I_2 = 1{,}5 \times 10^{-4}\text{ W/m}^2$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>S'approprier :</strong> Calculer le niveau sonore $L_1$ produit par la presse seule (arrondir au dixième de dB).</li>
+                    <li><strong>Calculer :</strong> Calculer le niveau sonore $L_2$ produit par la cisaille seule.</li>
+                    <li><strong>Cumul acoustique :</strong> Lorsque les deux machines fonctionnent simultanément, les intensités s'additionnent : $I_{\text{tot}} = I_1 + I_2$. Calculer le niveau sonore total $L_{\text{tot}}$.</li>
+                    <li><strong>Réglementation SST :</strong> Selon le Code du Travail, le port de protections auditives individuelles (bouchons ou casque) est obligatoire dès que le niveau dépasse <strong>85 dB</strong>. Les opérateurs doivent-ils obligatoirement porter des EPI ?</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-1').classList.toggle('hidden')" class="px-4 py-2 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-amber-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 1
+                </button>
+                <div id="sol-act-1" class="hidden mt-4 p-5 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-amber-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Niveau de la presse :</strong>
+                            $$L_1 = 10 \log\left(\frac{2 \times 10^{-4}}{10^{-12}}\right) = 10 \log(2 \times 10^8) = 10(\log 2 + 8) = 10(0{,}301 + 8) = \mathbf{83{,}0\text{ dB}}$$
+                        </li>
+                        <li><strong>2. Niveau de la cisaille :</strong>
+                            $$L_2 = 10 \log\left(\frac{1{,}5 \times 10^{-4}}{10^{-12}}\right) = 10 \log(1{,}5 \times 10^8) = 10(0{,}176 + 8) = \mathbf{81{,}8\text{ dB}}$$
+                        </li>
+                        <li><strong>3. Niveau sonore cumulé :</strong>
+                            $$I_{\text{tot}} = 2 \times 10^{-4} + 1{,}5 \times 10^{-4} = 3{,}5 \times 10^{-4}\text{ W/m}^2$$
+                            $$L_{\text{tot}} = 10 \log\left(\frac{3{,}5 \times 10^{-4}}{10^{-12}}\right) = 10 \log(3{,}5 \times 10^8) = 10(0{,}544 + 8) = \mathbf{85{,}4\text{ dB}}$$
+                        </li>
+                        <li><strong>4. Conclusion SST :</strong>
+                            Comme $85{,}4\text{ dB} > 85\text{ dB}$, le port des protections auditives est **strictement obligatoire** lors du fonctionnement simultané des machines.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-sky-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Chimie Appliquée &amp; Traitement de Surface</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 2 : Contrôle et Neutralisation du pH d'un Bain Acide</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-flask text-sky-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Le potentiel hydrogène (pH) d'une solution aqueuse est relié à la concentration molaire en ions oxonium $[\text{H}_3\text{O}^+]$ (en $\text{mol/L}$) par :</p>
+                        <div class="p-2.5 bg-white border border-sky-200 rounded-xl text-center font-bold text-sky-900">
+                            $$\text{pH} = -\log[\text{H}_3\text{O}^+] \iff [\text{H}_3\text{O}^+] = 10^{-\text{pH}}$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-sky-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>Calculer :</strong> Un bain de décapage présente une concentration $[\text{H}_3\text{O}^+] = 4 \times 10^{-3}\text{ mol/L}$. Calculer son pH (arrondir au centième).</li>
+                    <li><strong>Inverser :</strong> Une eau de rinçage a un $\text{pH} = 5{,}2$. Déterminer sa concentration en ions $[\text{H}_3\text{O}^+]$.</li>
+                    <li><strong>Analyser :</strong> Si on dilue une solution acide par un facteur 10 (la concentration est divisée par 10), de combien d'unités varie son pH ? Justifier avec la propriété $\log(a/10) = \log(a) - 1$.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-2').classList.toggle('hidden')" class="px-4 py-2 bg-sky-50 text-sky-800 hover:bg-sky-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-sky-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 2
+                </button>
+                <div id="sol-act-2" class="hidden mt-4 p-5 bg-sky-50/60 rounded-2xl border border-sky-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-sky-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Calcul du pH :</strong>
+                            $$\text{pH} = -\log(4 \times 10^{-3}) = -(\log 4 - 3) = 3 - 0{,}602 \approx \mathbf{2{,}40}$$
+                        </li>
+                        <li><strong>2. Concentration :</strong>
+                            $$[\text{H}_3\text{O}^+] = 10^{-5{,}2} \approx \mathbf{6{,}31 \times 10^{-6}\text{ mol/L}}$$
+                        </li>
+                        <li><strong>3. Effet d'une dilution par 10 :</strong>
+                            $$\text{pH}' = -\log\left(\frac{[\text{H}_3\text{O}^+]}{10}\right) = -(\log[\text{H}_3\text{O}^+] - 1) = -\log[\text{H}_3\text{O}^+] + 1 = \mathbf{\text{pH} + 1}$$
+                            Le pH **augmente exactement de 1 unité**.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Gestion Énergétique &amp; Investissement</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 3 : Équation $a^x = b$ &amp; Rentabilité Photovoltaïque</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 25 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-3">
+                <p class="text-sm text-slate-700">
+                    Les économies annuelles d'énergie générées par une installation photovoltaïque augmentent de 4 % par an avec l'évolution des tarifs : $E_n = E_0 (1{,}04)^n$.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li>Poser l'équation permettant de trouver le nombre d'années $n$ au bout duquel les économies annuelles auront **doublé** ($E_n = 2 E_0$).</li>
+                    <li>Résoudre cette équation à l'aide de la fonction $\ln$ ou $\log$ (arrondir à l'année supérieure).</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-3').classList.toggle('hidden')" class="px-4 py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-emerald-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 3
+                </button>
+                <div id="sol-act-3" class="hidden mt-4 p-5 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Équation :</strong> $(1{,}04)^n = 2$.</li>
+                        <li><strong>2. Résolution :</strong>
+                            $$\ln((1{,}04)^n) = \ln(2) \iff n \ln(1{,}04) = \ln(2) \iff n = \frac{\ln(2)}{\ln(1{,}04)} = \frac{0{,}69315}{0{,}03922} \approx \mathbf{17{,}67\text{ ans}}$$
+                            Le doublement aura lieu après **18 ans**.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

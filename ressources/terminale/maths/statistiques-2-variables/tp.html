@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Statistiques à 2 Variables (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Badges */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables &amp; Ajustement</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Régression Linéaire sur NumWorks</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Maîtriser l'application <strong>Régression</strong> de la NumWorks : saisie des listes, tracé du nuage, calcul des moindres carrés $y = ax + b$, lecture de $R^2$ et prévisions via l'outil dédié.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE PAS À PAS NUMWORKS INTERACTIF -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Protocole Officiel NumWorks : Les 5 Étapes Clés</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-book-bookmark mr-1"></i> Fiche TICE Examen</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs md:text-sm">
+
+                <!-- Étape 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-house text-indigo-500"></i> 1. Ouvrir l'application</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Menu</span>
+                    </div>
+                    <p class="text-slate-600">Depuis l'écran d'accueil NumWorks :</p>
+                    <ul class="space-y-1.5 text-slate-700 font-medium">
+                        <li>• Naviguer jusqu'à l'icône jaune <strong class="text-amber-600 font-bold">Régression</strong> avec les flèches.</li>
+                        <li>• Valider avec la touche <span class="nw-key nw-key-yellow">OK</span>.</li>
+                    </ul>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-table text-sky-500"></i> 2. Onglet Données</span>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">Saisie</span>
+                    </div>
+                    <p class="text-slate-600">Remplir les colonnes statistiques :</p>
+                    <ul class="space-y-1.5 text-slate-700 font-medium">
+                        <li>• Colonne <span class="font-mono font-bold text-sky-600">X1</span> : Saisir les valeurs $x_i$ (abscisses).</li>
+                        <li>• Colonne <span class="font-mono font-bold text-sky-600">Y1</span> : Saisir les valeurs $y_i$ (ordonnées).</li>
+                        <li>• Valider chaque nombre avec <span class="nw-key nw-key-dark">EXE</span>.</li>
+                    </ul>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-purple-500"></i> 3. Onglet Graphique</span>
+                        <span class="text-[10px] font-bold bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">Tracé</span>
+                    </div>
+                    <p class="text-slate-600">Visualiser le nuage et la droite :</p>
+                    <ul class="space-y-1.5 text-slate-700 font-medium">
+                        <li>• Sélectionner l'onglet supérieur <strong class="text-purple-700">Graphique</strong> puis <span class="nw-key nw-key-yellow">OK</span>.</li>
+                        <li>• Choisir le modèle <strong class="text-slate-900 font-bold">Linéaire ($ax + b$)</strong>.</li>
+                        <li>• La droite et son équation s'affichent en bas d'écran.</li>
+                    </ul>
+                </div>
+
+                <!-- Étape 4 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-calculator text-emerald-500"></i> 4. Outil Prédiction</span>
+                        <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Calculs</span>
+                    </div>
+                    <p class="text-slate-600">Calculer une estimation directement :</p>
+                    <ul class="space-y-1.5 text-slate-700 font-medium">
+                        <li>• Sur le graphique, appuyer sur <span class="nw-key nw-key-yellow">OK</span> $\rightarrow$ choisir <strong class="text-emerald-700 font-bold">Prédiction</strong>.</li>
+                        <li>• Saisir la valeur de $x$ pour obtenir $y$ instantanément.</li>
+                        <li>• Ou saisir $y$ pour obtenir la valeur de $x$ correspondante !</li>
+                    </ul>
+                </div>
+
+                <!-- Étape 5 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900 flex items-center gap-1.5"><i class="fa-solid fa-list-check text-red-500"></i> 5. Onglet Stats</span>
+                        <span class="text-[10px] font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded-full">Résultats</span>
+                    </div>
+                    <p class="text-slate-600">Consulter tous les paramètres :</p>
+                    <ul class="space-y-1.5 text-slate-700 font-medium">
+                        <li>• Aller dans l'onglet <strong class="text-red-700">Stats</strong> pour lire :</li>
+                        <li>• $\bar{x}$ et $\bar{y}$ (coordonnées du point moyen $G$).</li>
+                        <li>• $a$ (pente), $b$ (ordonnée à l'origine).</li>
+                        <li>• $r$ (corrélation) et <strong class="text-slate-900">$r^2$ ou $R^2$</strong> (détermination).</li>
+                    </ul>
+                </div>
+
+                <!-- Astuce NumWorks -->
+                <div class="bg-amber-50 p-5 rounded-2xl border border-amber-200 space-y-2">
+                    <div class="flex items-center gap-2 font-bold text-amber-900 border-b border-amber-200 pb-2">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i> Astuce Examen NumWorks
+                    </div>
+                    <p class="text-xs text-amber-800 leading-relaxed">
+                        Pour réinitialiser rapidement les données d'un tableau avant un nouvel exercice, sélectionnez l'en-tête de colonne <span class="font-mono font-bold">X1</span> ou <span class="font-mono font-bold">Y1</span>, appuyez sur <span class="nw-key nw-key-dark">delete</span> puis validez <em>"Effacer la colonne"</em>.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE DE CAS PROFESSIONNELLE COMPLÈTE -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Mise en Situation d'Atelier • Énergétique &amp; Automobile</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude Réelle : Banc d'Essai d'un Groupe Moto-Propulseur Hybride</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 45 min</span>
+            </div>
+
+            <!-- Pro Context -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-3">
+                <p class="text-sm text-slate-700 leading-relaxed">
+                    Un banc d'essai mesure la consommation spécifique de carburant $y_i$ (en $\text{g/kWh}$) d'un moteur thermique nouvelle génération en fonction de la puissance mécanique développée $x_i$ (en kW). L'équipe d'ingénierie cherche à modéliser cette consommation afin de paramétrer la gestion électronique (ECU) du véhicule.
+                </p>
+
+                <!-- Data Table -->
+                <div class="overflow-x-auto pt-2">
+                    <table class="min-w-full bg-white border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr>
+                                <th class="p-2.5 border-b">Point d'essai</th>
+                                <th class="p-2.5 border-b">P1</th>
+                                <th class="p-2.5 border-b">P2</th>
+                                <th class="p-2.5 border-b">P3</th>
+                                <th class="p-2.5 border-b">P4</th>
+                                <th class="p-2.5 border-b">P5</th>
+                                <th class="p-2.5 border-b">P6</th>
+                                <th class="p-2.5 border-b">P7</th>
+                                <th class="p-2.5 border-b">P8</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-2.5 font-bold bg-slate-50 text-slate-800">Puissance $x_i$ (kW)</td>
+                                <td class="p-2.5">30</td>
+                                <td class="p-2.5">50</td>
+                                <td class="p-2.5">70</td>
+                                <td class="p-2.5">90</td>
+                                <td class="p-2.5">110</td>
+                                <td class="p-2.5">130</td>
+                                <td class="p-2.5">150</td>
+                                <td class="p-2.5">170</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold bg-slate-50 text-slate-800">Consommation $y_i$ (g/kWh)</td>
+                                <td class="p-2.5">285</td>
+                                <td class="p-2.5">268</td>
+                                <td class="p-2.5">252</td>
+                                <td class="p-2.5">235</td>
+                                <td class="p-2.5">218</td>
+                                <td class="p-2.5">202</td>
+                                <td class="p-2.5">185</td>
+                                <td class="p-2.5">168</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tasks -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-purple-600"></i> Travail à réaliser avec votre calculatrice NumWorks :
+                </h3>
+                
+                <div class="space-y-3">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900">Tâche 1 (Saisie) :</p>
+                        <p class="text-slate-600 text-xs">Entrer les données dans l'application <strong>Régression</strong> de la NumWorks ($X_1$ pour la puissance, $Y_1$ pour la consommation).</p>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900">Tâche 2 (Relevé des paramètres statistiques) :</p>
+                        <p class="text-slate-600 text-xs">Dans l'onglet <strong>Stats</strong>, relever les valeurs de : $\bar{x}$, $\bar{y}$, $a$, $b$ et $r^2$ (arrondir au centième).</p>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900">Tâche 3 (Contrôle du point moyen G) :</p>
+                        <p class="text-slate-600 text-xs">Écrire l'équation de la droite $y = ax + b$ et vérifier par le calcul que le point moyen $G(\bar{x}; \bar{y})$ appartient à cette droite.</p>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900">Tâche 4 (Prévision avec l'outil NumWorks) :</p>
+                        <p class="text-slate-600 text-xs">Dans l'onglet <strong>Graphique $\rightarrow$ Prédiction</strong>, déterminer la consommation estimée pour une puissance $x = 100\text{ kW}$ (interpolation) puis pour $x = 190\text{ kW}$ (extrapolation).</p>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900">Tâche 5 (Optimisation et Décision) :</p>
+                        <p class="text-slate-600 text-xs">Le cahier des charges environnemental impose une consommation maximale de $210\text{ g/kWh}$. Déterminer la puissance minimale à partir de laquelle ce seuil est respecté.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution Toggle -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-nw').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Résultats &amp; Captures NumWorks
+                </button>
+                <div id="sol-tp-nw" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-purple-900 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-purple-600"></i> Résultats NumWorks validés :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>Relevé Stats :</strong> $\bar{x} = \mathbf{100\text{ kW}}$, $\bar{y} = \mathbf{226{,}63\text{ g/kWh}}$, donc $\mathbf{G(100\ ; \ 226{,}63)}$.</li>
+                        <li><strong>Paramètres de la droite :</strong> $a = \mathbf{-0{,}833} \approx -0{,}83$ et $b = \mathbf{310{,}0}$.</li>
+                        <li><strong>Équation de régression :</strong> $$\mathbf{y = -0{,}833x + 310{,}0}$$</li>
+                        <li><strong>Coefficient de détermination :</strong> $\mathbf{r^2 = 0{,}999}$ (ajustement quasi-parfait).</li>
+                        <li><strong>Prédictions :</strong>
+                            <br>• Pour $x = 100\text{ kW}$ : $y = -0{,}833 \times 100 + 310{,}0 = \mathbf{226{,}7\text{ g/kWh}}$.
+                            <br>• Pour $x = 190\text{ kW}$ : $y = -0{,}833 \times 190 + 310{,}0 = \mathbf{151{,}7\text{ g/kWh}}$.
+                        </li>
+                        <li><strong>Seuil de $210\text{ g/kWh}$ :</strong>
+                            $$210 = -0{,}833x + 310{,}0 \iff 0{,}833x = 100{,}0 \iff x = \frac{100{,}0}{0{,}833} \approx \mathbf{120\text{ kW}}$$
+                            Le moteur doit développer au moins **$120\text{ kW}$** pour que sa consommation descende sous $210\text{ g/kWh}$.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS (NUMWORKS LOOK) -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Émulateur Virtuel Temps Réel</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Simulateur Visuel NumWorks 60 FPS</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-amber-50 text-amber-800 rounded-lg text-xs font-bold border border-amber-200"><i class="fa-solid fa-display mr-1"></i> Rendu Graphique 60 FPS</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-600">Jeux d'essai :</span>
+                    <button onclick="loadNWCase(1)" class="px-3 py-1.5 bg-white border border-slate-300 hover:bg-amber-50 text-xs font-bold rounded-lg transition-all shadow-sm">1. Banc Moteur Hybride</button>
+                    <button onclick="loadNWCase(2)" class="px-3 py-1.5 bg-white border border-slate-300 hover:bg-amber-50 text-xs font-bold rounded-lg transition-all shadow-sm">2. Usure Plaquettes Frein</button>
+                    <button onclick="loadNWCase(3)" class="px-3 py-1.5 bg-white border border-slate-300 hover:bg-amber-50 text-xs font-bold rounded-lg transition-all shadow-sm">3. Chauffage Bâtiment</button>
+                </div>
+                <button onclick="loadNWCase(1)" class="px-3 py-1.5 bg-slate-800 text-white hover:bg-slate-700 text-xs font-bold rounded-lg transition-all shadow-sm">
+                    <i class="fa-solid fa-arrows-rotate"></i> Réinitialiser
+                </button>
+            </div>
+
+            <!-- Simulator Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Canvas Visualizer -->
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden shadow-inner border border-slate-800">
+                    <div class="w-full flex items-center justify-between text-[11px] text-amber-400 font-mono pb-2 border-b border-slate-800">
+                        <span><i class="fa-solid fa-calculator text-amber-400 mr-1"></i> NUMWORKS GRAPH</span>
+                        <span id="nw-header-eq" class="font-bold text-white">y = -0.833x + 310.0</span>
+                    </div>
+                    <canvas id="nwCanvas" width="560" height="340" class="w-full h-auto bg-slate-900 rounded-xl my-2 border border-slate-800"></canvas>
+                    <div class="w-full flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                        <span><i class="fa-solid fa-circle text-amber-400 mr-1"></i> Points $M_i$</span>
+                        <span><i class="fa-solid fa-crosshairs text-sky-400 mr-1"></i> Point Moyen $G$</span>
+                        <span><i class="fa-solid fa-slash text-purple-400 mr-1"></i> Droite $y = ax+b$</span>
+                    </div>
+                </div>
+
+                <!-- NumWorks Stats Panel -->
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                            <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5"><i class="fa-solid fa-table-cells text-amber-500"></i> Onglet Stats</span>
+                            <span class="text-[10px] font-mono bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-bold">Régression</span>
+                        </div>
+
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between">
+                                <span class="text-slate-500">x̄ (moyenne x) :</span>
+                                <span id="nw-xbar" class="font-bold text-slate-900">100.00</span>
+                            </div>
+                            <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between">
+                                <span class="text-slate-500">ȳ (moyenne y) :</span>
+                                <span id="nw-ybar" class="font-bold text-slate-900">226.63</span>
+                            </div>
+                            <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between">
+                                <span class="text-slate-500">a (pente) :</span>
+                                <span id="nw-a" class="font-bold text-purple-600">-0.833</span>
+                            </div>
+                            <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between">
+                                <span class="text-slate-500">b (ordonnée) :</span>
+                                <span id="nw-b" class="font-bold text-purple-600">310.00</span>
+                            </div>
+                            <div class="p-2 bg-white rounded-lg border border-slate-200 flex justify-between">
+                                <span class="text-slate-500">r² (détermination) :</span>
+                                <span id="nw-r2" class="font-bold text-emerald-600">0.999</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Prediction Input -->
+                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-2">
+                        <span class="font-bold text-xs text-amber-900 flex items-center gap-1.5">
+                            <i class="fa-solid fa-wand-magic-sparkles text-amber-600"></i> Fonction Prédiction
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <label class="text-xs font-bold text-slate-700 font-mono">X =</label>
+                            <input type="number" id="nw-input-x" value="100" oninput="nwComputePrediction()" class="w-20 px-2 py-1 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold text-center">
+                            <span class="text-xs font-bold text-slate-500">$\rightarrow$</span>
+                            <span id="nw-output-y" class="text-xs font-extrabold font-mono text-amber-900 bg-white px-2 py-1 rounded-lg border border-amber-300 flex-1 text-center">Y ≈ 226.7</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS Canvas Simulation NumWorks -->
+    <script>
+        let nwPoints = [];
+        let nwReg = { a: 0, b: 0, r2: 0, xBar: 0, yBar: 0 };
+
+        function loadNWCase(num) {
+            if (num === 1) {
+                nwPoints = [
+                    { x: 30, y: 285 }, { x: 50, y: 268 }, { x: 70, y: 252 }, { x: 90, y: 235 },
+                    { x: 110, y: 218 }, { x: 130, y: 202 }, { x: 150, y: 185 }, { x: 170, y: 168 }
+                ];
+                document.getElementById('nw-input-x').value = 100;
+            } else if (num === 2) {
+                nwPoints = [
+                    { x: 10, y: 11.2 }, { x: 20, y: 9.8 }, { x: 30, y: 8.5 },
+                    { x: 40, y: 7.1 }, { x: 50, y: 5.8 }, { x: 60, y: 4.4 }
+                ];
+                document.getElementById('nw-input-x').value = 45;
+            } else if (num === 3) {
+                nwPoints = [
+                    { x: -1, y: 525 }, { x: 1, y: 470 }, { x: 3, y: 415 },
+                    { x: 5, y: 360 }, { x: 7, y: 310 }, { x: 10, y: 230 }, { x: 12, y: 180 }
+                ];
+                document.getElementById('nw-input-x').value = 6;
+            }
+            nwCalculate();
+            nwRenderCanvas();
+        }
+
+        function nwCalculate() {
+            const n = nwPoints.length;
+            if (n === 0) return;
+
+            let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0, sumY2 = 0;
+            nwPoints.forEach(p => {
+                sumX += p.x;
+                sumY += p.y;
+                sumXY += p.x * p.y;
+                sumX2 += p.x * p.x;
+                sumY2 += p.y * p.y;
+            });
+
+            const xBar = sumX / n;
+            const yBar = sumY / n;
+
+            const varX = (sumX2 / n) - (xBar * xBar);
+            const covXY = (sumXY / n) - (xBar * yBar);
+            const varY = (sumY2 / n) - (yBar * yBar);
+
+            let a = 0, b = 0, r2 = 0;
+            if (varX !== 0) {
+                a = covXY / varX;
+                b = yBar - (a * xBar);
+                if (varY !== 0) {
+                    const r = covXY / Math.sqrt(varX * varY);
+                    r2 = r * r;
+                }
+            }
+
+            nwReg = { a, b, r2, xBar, yBar };
+
+            // Update UI
+            document.getElementById('nw-header-eq').innerText = `y = ${a >= 0 ? '' : '-'}${Math.abs(a).toFixed(3)}x + ${b.toFixed(2)}`;
+            document.getElementById('nw-xbar').innerText = xBar.toFixed(2);
+            document.getElementById('nw-ybar').innerText = yBar.toFixed(2);
+            document.getElementById('nw-a').innerText = a.toFixed(3);
+            document.getElementById('nw-b').innerText = b.toFixed(2);
+            document.getElementById('nw-r2').innerText = r2.toFixed(3);
+
+            nwComputePrediction();
+        }
+
+        function nwComputePrediction() {
+            const valX = parseFloat(document.getElementById('nw-input-x').value);
+            if (!isNaN(valX)) {
+                const predY = nwReg.a * valX + nwReg.b;
+                document.getElementById('nw-output-y').innerText = `Y ≈ ${predY.toFixed(2)}`;
+            }
+        }
+
+        function nwRenderCanvas() {
+            const canvas = document.getElementById('nwCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            if (nwPoints.length === 0) return;
+
+            let minX = Math.min(...nwPoints.map(p => p.x));
+            let maxX = Math.max(...nwPoints.map(p => p.x));
+            let minY = Math.min(...nwPoints.map(p => p.y));
+            let maxY = Math.max(...nwPoints.map(p => p.y));
+
+            const padLeft = 50, padRight = 30, padTop = 30, padBottom = 40;
+            const spanX = (maxX - minX) || 10;
+            const spanY = (maxY - minY) || 10;
+
+            const mapX = (x) => padLeft + ((x - minX) / spanX) * (w - padLeft - padRight);
+            const mapY = (y) => h - padBottom - ((y - minY) / spanY) * (h - padTop - padBottom);
+
+            // Draw NumWorks dark grid
+            ctx.strokeStyle = "#1e293b";
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 6; i++) {
+                const gx = padLeft + (i / 6) * (w - padLeft - padRight);
+                ctx.beginPath();
+                ctx.moveTo(gx, padTop);
+                ctx.lineTo(gx, h - padBottom);
+                ctx.stroke();
+
+                const gy = padTop + (i / 6) * (h - padTop - padBottom);
+                ctx.beginPath();
+                ctx.moveTo(padLeft, gy);
+                ctx.lineTo(w - padRight, gy);
+                ctx.stroke();
+            }
+
+            // Draw Regression Line
+            ctx.strokeStyle = "#a855f7";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            const y1 = nwReg.a * minX + nwReg.b;
+            const y2 = nwReg.a * maxX + nwReg.b;
+            ctx.moveTo(mapX(minX), mapY(y1));
+            ctx.lineTo(mapX(maxX), mapY(y2));
+            ctx.stroke();
+
+            // Draw Points
+            nwPoints.forEach(p => {
+                ctx.fillStyle = "#fed100";
+                ctx.beginPath();
+                ctx.arc(mapX(p.x), mapY(p.y), 5.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#1e293b";
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            });
+
+            // Draw Mean Point G
+            const gx = mapX(nwReg.xBar);
+            const gy = mapY(nwReg.yBar);
+            ctx.fillStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.arc(gx, gy, 7.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Label for G
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = "bold 11px JetBrains Mono, monospace";
+            ctx.fillText("G", gx + 10, gy - 5);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadNWCase(1);
+        });
+    </script>
+
+</body>
+</html>

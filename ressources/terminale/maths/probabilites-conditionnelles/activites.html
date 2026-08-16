@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Probabilités Conditionnelles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités Conditionnelles &amp; Arbres Pondérés</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation en Contexte Professionnel</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités : Probabilités Conditionnelles</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Arbres de probabilités à deux niveaux, formule des probabilités totales, tests de diagnostic et contrôle qualité industriel.</p>
+        </div>
+
+        <!-- ACTIVITÉ 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Industrie &amp; Électronique Automobile</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 1 : Contrôle Qualité de Capteurs de Pression</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-microchip text-amber-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Une usine de composants fabrique des capteurs de pression de suralimentation sur deux lignes de production indépendantes $L_1$ et $L_2$ :</p>
+                        <ul class="list-disc list-inside space-y-1 text-xs md:text-sm">
+                            <li>La ligne $L_1$ assure <strong>60 %</strong> de la production globale ($P(L_1) = 0{,}60$).</li>
+                            <li>La ligne $L_2$ assure le reste de la production ($P(L_2) = 0{,}40$).</li>
+                            <li>Le taux de capteurs défectueux (événement noté $D$) est de <strong>2 %</strong> sur la ligne $L_1$ ($P_{L_1}(D) = 0{,}02$).</li>
+                            <li>Le taux de capteurs défectueux est de <strong>5 %</strong> sur la ligne $L_2$ ($P_{L_2}(D) = 0{,}05$).</li>
+                        </ul>
+                        <p class="text-xs text-slate-500 italic">Un capteur est prélevé au hasard dans la production journalière.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>S'approprier :</strong> Construire et compléter l'arbre pondéré de probabilités modélisant cette situation à deux niveaux (1er niveau : $L_1$ et $L_2$ ; 2e niveau : $D$ et $\bar{D}$).</li>
+                    <li><strong>Réaliser :</strong> Calculer la probabilité que le capteur provienne de la ligne $L_1$ et soit défectueux : $P(L_1 \cap D)$.</li>
+                    <li><strong>Analyser :</strong> En utilisant la formule des probabilités totales, calculer la probabilité globale $P(D)$ qu'un capteur prélevé au hasard soit défectueux.</li>
+                    <li><strong>Valider & Décider (Probabilité Inverse) :</strong> Lors d'un contrôle, un capteur s'avère être <strong>défectueux</strong>. Déterminer la probabilité $P_D(L_2)$ qu'il ait été produit sur la ligne $L_2$. Rédiger une conclusion pour le responsable qualité.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-1').classList.toggle('hidden')" class="px-4 py-2 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-amber-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 1
+                </button>
+                <div id="sol-act-1" class="hidden mt-4 p-5 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-amber-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Arbre pondéré :</strong>
+                            <br>• Branche $L_1$ ($0{,}60$) $\rightarrow$ $D$ ($0{,}02$) et $\bar{D}$ ($1 - 0{,}02 = 0{,}98$).
+                            <br>• Branche $L_2$ ($0{,}40$) $\rightarrow$ $D$ ($0{,}05$) et $\bar{D}$ ($1 - 0{,}05 = 0{,}95$).
+                        </li>
+                        <li><strong>2. Calcul de $P(L_1 \cap D)$ :</strong>
+                            $$P(L_1 \cap D) = P(L_1) \times P_{L_1}(D) = 0{,}60 \times 0{,}02 = \mathbf{0{,}012} \quad (1{,}2\ \%)$$
+                        </li>
+                        <li><strong>3. Formule des probabilités totales pour $P(D)$ :</strong>
+                            $$P(D) = P(L_1 \cap D) + P(L_2 \cap D)$$
+                            $$P(D) = (0{,}60 \times 0{,}02) + (0{,}40 \times 0{,}05) = 0{,}012 + 0{,}020 = \mathbf{0{,}032} \quad (3{,}2\ \%)$$
+                            Globalement, <strong>3,2 %</strong> des capteurs fabriqués sont défectueux.
+                        </li>
+                        <li><strong>4. Calcul de la probabilité conditionnelle inverse $P_D(L_2)$ :</strong>
+                            $$P_D(L_2) = \frac{P(L_2 \cap D)}{P(D)} = \frac{0{,}020}{0{,}032} = \mathbf{0{,}625} \quad (62{,}5\ \%)$$
+                            <strong>Conclusion :</strong> Sachant qu'un capteur est défectueux, il y a **62,5 %** de risques qu'il provienne de la ligne $L_2$. La maintenance doit en priorité auditer la ligne $L_2$.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-sky-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Santé &amp; Sécurité au Travail (SST)</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 2 : Dépistage d'Exposition aux Solvants Chimiques</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-notes-medical text-sky-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Dans un groupe de carrosserie industrielle employant 1 000 salariés, le médecin du travail réalise un test urinaire de dépistage pour détecter une sur-exposition aux vapeurs de solvants aromatiques (événement $E$).</p>
+                        <ul class="list-disc list-inside space-y-1 text-xs md:text-sm">
+                            <li>La prévalence de l'exposition est de <strong>5 %</strong> ($P(E) = 0{,}05$).</li>
+                            <li>Si un salarié est exposé, le test est positif (noté $T$) dans <strong>96 %</strong> des cas ($P_E(T) = 0{,}96$, sensibilité).</li>
+                            <li>Si un salarié n'est pas exposé, le test est négatif dans <strong>90 %</strong> des cas ($P_{\bar{E}}(\bar{T}) = 0{,}90$, spécificité).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-sky-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>Réaliser :</strong> Remplir un tableau croisé d'effectifs théorique pour une population de 1 000 salariés.</li>
+                    <li><strong>Calculer :</strong> Déterminer la probabilité $P(T)$ qu'un test soit positif pour un salarié pris au hasard.</li>
+                    <li><strong>Analyser :</strong> Sachant que le test d'un salarié est <strong>positif</strong>, calculer la probabilité $P_T(E)$ qu'il soit réellement exposé aux solvants.</li>
+                    <li><strong>Communiquer :</strong> Commenter ce résultat. Pourquoi prescrit-on systématiquement un deuxième test de confirmation biologique ?</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-2').classList.toggle('hidden')" class="px-4 py-2 bg-sky-50 text-sky-800 hover:bg-sky-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-sky-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 2
+                </button>
+                <div id="sol-act-2" class="hidden mt-4 p-5 bg-sky-50/60 rounded-2xl border border-sky-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-sky-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Tableau pour 1 000 salariés :</strong>
+                            <br>• Exposés $E$ : $5\ \% \times 1000 = \mathbf{50}$ personnes. Non-exposés $\bar{E}$ : $\mathbf{950}$ personnes.
+                            <br>• Parmi les 50 exposés : Test positif $= 50 \times 0{,}96 = \mathbf{48}$ ; Test négatif $= \mathbf{2}$.
+                            <br>• Parmi les 950 non-exposés : Test négatif $= 950 \times 0{,}90 = \mathbf{855}$ ; Faux positifs (test positif) $= 950 - 855 = \mathbf{95}$.
+                            <br>• Total des tests positifs $T = 48 + 95 = \mathbf{143}$. Total des tests négatifs $\bar{T} = 2 + 855 = \mathbf{857}$.
+                        </li>
+                        <li><strong>2. Probabilité $P(T)$ :</strong>
+                            $$P(T) = \frac{143}{1000} = \mathbf{0{,}143} \quad (14{,}3\ \%)$$
+                        </li>
+                        <li><strong>3. Valeur Prédictive Positive $P_T(E)$ :</strong>
+                            $$P_T(E) = \frac{\text{Vrais Positifs}}{\text{Total des Positifs}} = \frac{48}{143} \approx \mathbf{0{,}3357} \quad (33{,}6\ \%)$$
+                        </li>
+                        <li><strong>4. Conclusion médicale :</strong>
+                            Bien que le test soit sensible à 96 %, un salarié testé positif n'a qu'environ **33,6 % de chance d'être réellement exposé**, en raison du grand nombre de faux positifs (95 sur 143) dans une population où la prévalence est faible (5 %). Un second test de confirmation est donc indispensable.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Logistique &amp; Transport</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 3 : Fiabilité de Livraison &amp; Indépendance d'Événements</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 25 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-3">
+                <p class="text-sm text-slate-700">
+                    Une plateforme logistique expédie ses colis par deux modes : Express (événement $E$, 40 % des envois) et Standard (événement $\bar{E}$, 60 % des envois). Le taux de colis arrivant en retard (événement $R$) est de 5 % pour les colis Express et de 5 % pour les colis Standard.
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li>Calculer $P(E \cap R)$ et $P(R)$.</li>
+                    <li>Vérifier si les événements $E$ (mode Express) et $R$ (retard de livraison) sont <strong>indépendants</strong>. Justifier par deux méthodes différentes.</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-3').classList.toggle('hidden')" class="px-4 py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-emerald-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 3
+                </button>
+                <div id="sol-act-3" class="hidden mt-4 p-5 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Calculs :</strong>
+                            <br>• $P(E \cap R) = 0{,}40 \times 0{,}05 = \mathbf{0{,}020}$.
+                            <br>• $P(R) = (0{,}40 \times 0{,}05) + (0{,}60 \times 0{,}05) = 0{,}020 + 0{,}030 = \mathbf{0{,}050}$ (5 %).
+                        </li>
+                        <li><strong>2. Test d'indépendance :</strong>
+                            <br>• <em>Méthode 1 :</em> $P(E) \times P(R) = 0{,}40 \times 0{,}05 = 0{,}020 = P(E \cap R)$.
+                            <br>• <em>Méthode 2 :</em> $P_E(R) = 0{,}05 = P(R)$.
+                            <br>Les événements $E$ et $R$ sont donc **strictement indépendants** : le mode d'envoi choisi n'a aucun impact sur le risque de retard.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

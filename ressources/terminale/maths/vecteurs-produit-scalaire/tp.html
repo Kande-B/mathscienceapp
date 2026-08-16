@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Vecteurs & Produit Scalaire (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Keys */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Vecteurs &amp; Produit Scalaire ($\vec{u} \cdot \vec{v}$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Produit Scalaire Dynamique &amp; Travail</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Manipuler des vecteurs sur la NumWorks et expérimenter sur simulateur interactif 60 FPS la projection orthogonale, le calcul d'angles et le travail d'une force.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE TECHNIQUE NUMWORKS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Méthodes NumWorks : Vecteurs &amp; Trigonométrie</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-calculator mr-1"></i> Boîte à outils > Vecteurs</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">1. Norme &amp; Produit Scalaire</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Calculs</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans <strong class="text-indigo-600">Calculs</strong> :</li>
+                        <li>• Touche <span class="nw-key font-bold">toolbox</span> $\rightarrow$ <em>Matrices et vecteurs</em> $\rightarrow$ <em>Vecteurs</em>.</li>
+                        <li>• Calcul de norme : taper <span class="font-mono font-bold text-indigo-700">norm([[3],[4]])</span> $\implies 5$.</li>
+                        <li>• Produit scalaire : taper <span class="font-mono font-bold text-indigo-700">dot([[2],[5]],[[3],[-1]])</span> $\implies 1$.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">2. Angle en degrés ($\arccos$)</span>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">Trigonométrie</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Vérifier que l'unité d'angle est réglée sur <strong>deg (Degrés)</strong>.</li>
+                        <li>• Pour trouver l'angle tel que $\cos \theta = \frac{11}{\sqrt{221}}$ :</li>
+                        <li>• Touche <span class="nw-key font-bold">acos</span> (ou <span class="nw-key nw-key-yellow">shift</span> + <span class="nw-key font-bold">cos</span>).</li>
+                        <li>• Saisir la fraction pour obtenir directement $\theta \approx 42{,}3^\circ$.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE PROFESSIONNELLE -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Génie Mécanique &amp; Manutention</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude de Cas : Convoyeur de Pièces Industrielles Incliné</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-slate-700">
+                <p class="font-bold text-slate-900">Mise en situation :</p>
+                <p>Un convoyeur à bande hisse des carters en fonte de masse $m = 40\text{ kg}$ sur une pente inclinée de $15^\circ$ d'une longueur $AB = 8\text{ m}$. Le moteur exerce une force de traction parallèle $\vec{F}_{\text{mot}}$ d'intensité $F = 250\text{ N}$. Les frottements sont modélisés par une force $\vec{f}$ opposée au mouvement d'intensité $f = 35\text{ N}$.</p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-3 text-sm text-slate-800">
+                <p><strong>1.</strong> Calculer le travail du moteur $W(\vec{F}_{\text{mot}})$ sur le déplacement $\vec{AB}$.</p>
+                <p><strong>2.</strong> Calculer le travail résistant des frottements $W(\vec{f})$ ($\alpha = 180^\circ$).</p>
+                <p><strong>3.</strong> Calculer le travail du poids $\vec{P}$ ($P = m \times g = 40 \times 9{,}81 = 392{,}4\text{ N}$, faisant un angle $\alpha = 105^\circ$ avec $\vec{AB}$).</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-8').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Réponses Détaillées
+                </button>
+                <div id="sol-tp-8" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Travail moteur :</strong> $W(\vec{F}_{\text{mot}}) = 250 \times 8 \times \cos(0^\circ) = \mathbf{+2\,000\text{ Joules}}$ (moteur).</li>
+                        <li><strong>2. Travail frottements :</strong> $W(\vec{f}) = 35 \times 8 \times \cos(180^\circ) = 280 \times (-1) = \mathbf{-280\text{ Joules}}$ (résistant).</li>
+                        <li><strong>3. Travail du poids :</strong> $W(\vec{P}) = 392{,}4 \times 8 \times \cos(105^\circ) = 3139{,}2 \times (-0{,}25882) \approx \mathbf{-812{,}5\text{ Joules}}$ (résistant).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS ("LABO MATHS SCIENCES") -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Simulateur Virtuel Canvas 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Produit Scalaire Interactif &amp; Projection Orthogonale</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200"><i class="fa-solid fa-compass-drafting mr-1"></i> Géométrie Active</span>
+            </div>
+
+            <!-- Parameters controls -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Vecteur u : ux</label>
+                    <input type="range" id="param-ux" min="-5" max="5" step="1" value="4" oninput="updateVectorSim()" class="w-full accent-sky-600">
+                    <span id="val-ux" class="font-mono font-bold text-sky-700">ux = 4</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Vecteur u : uy</label>
+                    <input type="range" id="param-uy" min="-5" max="5" step="1" value="2" oninput="updateVectorSim()" class="w-full accent-sky-600">
+                    <span id="val-uy" class="font-mono font-bold text-sky-700">uy = 2</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Vecteur v : vx</label>
+                    <input type="range" id="param-vx" min="-5" max="5" step="1" value="1" oninput="updateVectorSim()" class="w-full accent-purple-600">
+                    <span id="val-vx" class="font-mono font-bold text-purple-700">vx = 1</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Vecteur v : vy</label>
+                    <input type="range" id="param-vy" min="-5" max="5" step="1" value="4" oninput="updateVectorSim()" class="w-full accent-purple-600">
+                    <span id="val-vy" class="font-mono font-bold text-purple-700">vy = 4</span>
+                </div>
+            </div>
+
+            <!-- Canvas & Dynamic Stats -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                    <canvas id="vectorCanvas" width="560" height="300" class="w-full h-auto bg-slate-900 rounded-xl"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3 flex flex-col justify-between text-xs">
+                    <div class="space-y-2.5 font-mono">
+                        <div class="p-2 bg-white rounded-xl border border-slate-200 space-y-0.5">
+                            <span class="text-slate-500 font-sans font-bold">Produit scalaire u · v :</span>
+                            <span id="stat-dot" class="font-bold text-indigo-600 block text-base">12</span>
+                        </div>
+                        <div class="p-2 bg-white rounded-xl border border-slate-200 space-y-0.5">
+                            <span class="text-slate-500 font-sans font-bold">Normes :</span>
+                            <span id="stat-norms" class="font-bold text-slate-800 block text-xs">||u|| = 4.47 | ||v|| = 4.12</span>
+                        </div>
+                        <div class="p-2 bg-white rounded-xl border border-slate-200 space-y-0.5">
+                            <span class="text-slate-500 font-sans font-bold">Angle géométrique θ :</span>
+                            <span id="stat-angle" class="font-bold text-purple-600 block text-xs">θ = 49.4°</span>
+                        </div>
+                        <div id="stat-ortho-box" class="p-2 rounded-xl border space-y-0.5 bg-blue-100 border-blue-300 text-blue-900">
+                            <span class="font-sans font-bold block">Nature de l'angle :</span>
+                            <span id="stat-ortho-text" class="font-bold text-xs">Angle aigu (u · v > 0)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Canvas Simulation Script -->
+    <script>
+        function updateVectorSim() {
+            const ux = parseInt(document.getElementById('param-ux').value);
+            const uy = parseInt(document.getElementById('param-uy').value);
+            const vx = parseInt(document.getElementById('param-vx').value);
+            const vy = parseInt(document.getElementById('param-vy').value);
+
+            document.getElementById('val-ux').innerText = `ux = ${ux}`;
+            document.getElementById('val-uy').innerText = `uy = ${uy}`;
+            document.getElementById('val-vx').innerText = `vx = ${vx}`;
+            document.getElementById('val-vy').innerText = `vy = ${vy}`;
+
+            const dot = ux * vx + uy * vy;
+            const normU = Math.sqrt(ux * ux + uy * uy);
+            const normV = Math.sqrt(vx * vx + vy * vy);
+
+            let angleDeg = 0;
+            if (normU > 0 && normV > 0) {
+                const cosTheta = Math.max(-1, Math.min(1, dot / (normU * normV)));
+                angleDeg = (Math.acos(cosTheta) * 180 / Math.PI);
+            }
+
+            document.getElementById('stat-dot').innerText = `${dot}`;
+            document.getElementById('stat-norms').innerText = `||u|| = ${normU.toFixed(2)} | ||v|| = ${normV.toFixed(2)}`;
+            document.getElementById('stat-angle').innerText = `θ = ${angleDeg.toFixed(1)}°`;
+
+            const orthoBox = document.getElementById('stat-ortho-box');
+            const orthoText = document.getElementById('stat-ortho-text');
+
+            orthoBox.className = "p-2 rounded-xl border space-y-0.5 ";
+            if (dot === 0) {
+                orthoBox.classList.add("bg-emerald-100", "border-emerald-300", "text-emerald-900");
+                orthoText.innerText = "✨ ORTHOGONAUX (Angle Droit 90°)";
+            } else if (dot > 0) {
+                orthoBox.classList.add("bg-sky-100", "border-sky-300", "text-sky-900");
+                orthoText.innerText = "Angle aigu (u · v > 0, travail moteur)";
+            } else {
+                orthoBox.classList.add("bg-amber-100", "border-amber-300", "text-amber-900");
+                orthoText.innerText = "Angle obtus (u · v < 0, travail résistant)";
+            }
+
+            drawVectors(ux, uy, vx, vy);
+        }
+
+        function drawVectors(ux, uy, vx, vy) {
+            const canvas = document.getElementById('vectorCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const ox = w / 2;
+            const oy = h / 2;
+            const scale = 25;
+
+            // Grid
+            ctx.strokeStyle = "#1e293b";
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += scale) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+            }
+            for (let y = 0; y < h; y += scale) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+            }
+
+            // Axes
+            ctx.strokeStyle = "#475569";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(0, oy); ctx.lineTo(w, oy);
+            ctx.moveTo(ox, 0); ctx.lineTo(ox, h);
+            ctx.stroke();
+
+            function drawArrow(x, y, color, label) {
+                const targetX = ox + x * scale;
+                const targetY = oy - y * scale;
+
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = 3;
+
+                ctx.beginPath();
+                ctx.moveTo(ox, oy);
+                ctx.lineTo(targetX, targetY);
+                ctx.stroke();
+
+                // Arrow Head
+                const angle = Math.atan2(oy - targetY, targetX - ox);
+                const headLen = 10;
+                ctx.beginPath();
+                ctx.moveTo(targetX, targetY);
+                ctx.lineTo(targetX - headLen * Math.cos(angle - Math.PI / 6), targetY + headLen * Math.sin(angle - Math.PI / 6));
+                ctx.lineTo(targetX - headLen * Math.cos(angle + Math.PI / 6), targetY + headLen * Math.sin(angle + Math.PI / 6));
+                ctx.closePath();
+                ctx.fill();
+
+                // Label
+                ctx.font = "bold 13px Outfit";
+                ctx.fillText(label, targetX + 8, targetY - 6);
+            }
+
+            drawArrow(ux, uy, "#38bdf8", "u");
+            drawArrow(vx, vy, "#c084fc", "v");
+        }
+
+        document.addEventListener('DOMContentLoaded', updateVectorSim);
+    </script>
+
+</body>
+</html>

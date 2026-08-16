@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Probabilités Conditionnelles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités Conditionnelles &amp; Arbres Pondérés</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Progressif aux Épreuves du Bac Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Travaux Dirigés &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 exercices d'entraînement aux probabilités conditionnelles avec corrigés détaillés pas à pas.</p>
+        </div>
+
+        <div class="space-y-6">
+
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 1</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Lecture dans un tableau croisé d'effectifs</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Dans un parc automobile de 200 véhicules, on note le type de motorisation et l'état des pneus :</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-slate-50 border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr><th class="p-2 border">Motorisation</th><th class="p-2 border">Pneus Usés ($U$)</th><th class="p-2 border">Pneus Bons ($\bar{U}$)</th><th class="p-2 border">Total</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2 font-bold bg-slate-100 border">Électrique ($E$)</td><td class="p-2 border">10</td><td class="p-2 border">70</td><td class="p-2 border font-bold">80</td></tr>
+                            <tr><td class="p-2 font-bold bg-slate-100 border">Thermique ($\bar{E}$)</td><td class="p-2 border">30</td><td class="p-2 border">90</td><td class="p-2 border font-bold">120</td></tr>
+                            <tr><td class="p-2 font-bold bg-slate-200 border">Total</td><td class="p-2 border font-bold">40</td><td class="p-2 border font-bold">160</td><td class="p-2 border font-bold">200</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer la probabilité qu'un véhicule choisi au hasard soit électrique : $P(E)$.</li>
+                    <li>Calculer la probabilité $P(E \cap U)$.</li>
+                    <li>Calculer la probabilité qu'un véhicule électrique ait des pneus usés : $P_E(U)$.</li>
+                    <li>Calculer la probabilité qu'un véhicule ayant des pneus usés soit électrique : $P_U(E)$.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-1').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-1" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $P(E) = \frac{80}{200} = \mathbf{0{,}40}$.</p>
+                    <p><strong>2.</strong> $P(E \cap U) = \frac{10}{200} = \mathbf{0{,}05}$.</p>
+                    <p><strong>3.</strong> $P_E(U) = \frac{10}{80} = \mathbf{0{,}125}$ (12,5 %).</p>
+                    <p><strong>4.</strong> $P_U(E) = \frac{10}{40} = \mathbf{0{,}25}$ (25 %).</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 2</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Arbre pondéré &amp; Probabilités Totales</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">On considère deux événements $A$ et $B$ tels que $P(A) = 0{,}7$, $P_A(B) = 0{,}8$ et $P_{\bar{A}}(B) = 0{,}3$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Donner la valeur de $P(\bar{A})$ et de $P_A(\bar{B})$.</li>
+                    <li>Calculer $P(A \cap B)$ et $P(\bar{A} \cap B)$.</li>
+                    <li>En déduire la probabilité totale $P(B)$.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-2').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-2" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $P(\bar{A}) = 1 - 0{,}7 = \mathbf{0{,}3}$ et $P_A(\bar{B}) = 1 - 0{,}8 = \mathbf{0{,}2}$.</p>
+                    <p><strong>2.</strong> $P(A \cap B) = 0{,}7 \times 0{,}8 = \mathbf{0{,}56}$ et $P(\bar{A} \cap B) = 0{,}3 \times 0{,}3 = \mathbf{0{,}09}$.</p>
+                    <p><strong>3.</strong> $P(B) = P(A \cap B) + P(\bar{A} \cap B) = 0{,}56 + 0{,}09 = \mathbf{0{,}65}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 3</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">BTP : Contrôle de conformité de blocs béton</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>☆ (Niveau 2)</span>
+                </div>
+                <p class="text-sm text-slate-700">Une centrale à béton fabrique des blocs standards (80 %) et des blocs allégés (20 %). Le taux de non-conformité (défaut noté $D$) est de 3 % pour les blocs standards et de 8 % pour les allégés.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Dresser l'arbre pondéré de la situation.</li>
+                    <li>Calculer la probabilité globale qu'un bloc soit défectueux : $P(D)$.</li>
+                    <li>Un bloc prélevé est défectueux. Quelle est la probabilité qu'il s'agisse d'un bloc allégé ?</li>
+                </ol>
+                <button onclick="document.getElementById('sol-3').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-3" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1. Arbre :</strong> $P(S)=0{,}8$, $P(A)=0{,}2$, $P_S(D)=0{,}03$, $P_A(D)=0{,}08$.</p>
+                    <p><strong>2. Proba totale :</strong> $P(D) = (0{,}8 \times 0{,}03) + (0{,}2 \times 0{,}08) = 0{,}024 + 0{,}016 = \mathbf{0{,}040}$ (4 %).</p>
+                    <p><strong>3. Proba inverse :</strong> $P_D(A) = \frac{P(A \cap D)}{P(D)} = \frac{0{,}016}{0{,}040} = \mathbf{0{,}40}$ (40 %).</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 4</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Industrie : Test d'indépendance de production</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (Niveau 3)</span>
+                </div>
+                <p class="text-sm text-slate-700">Dans un atelier d'usinage, on étudie deux événements : $J$ "la pièce est usinée par l'équipe de jour" et $C$ "la pièce est conforme". On relève : $P(J) = 0{,}60$, $P(C) = 0{,}95$ et $P(J \cap C) = 0{,}57$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer $P(J) \times P(C)$.</li>
+                    <li>Les événements $J$ et $C$ sont-ils indépendants ? Que peut-on en déduire pour la qualité du travail des équipes de jour et de nuit ?</li>
+                </ol>
+                <button onclick="document.getElementById('sol-4').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-4" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $P(J) \times P(C) = 0{,}60 \times 0{,}95 = \mathbf{0{,}57}$.</p>
+                    <p><strong>2.</strong> Comme $P(J \cap C) = P(J) \times P(C) = 0{,}57$, les événements $J$ et $C$ sont **indépendants**. Cela signifie que le taux de conformité est exactement le même de jour comme de nuit (aucune baisse de qualité la nuit).</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

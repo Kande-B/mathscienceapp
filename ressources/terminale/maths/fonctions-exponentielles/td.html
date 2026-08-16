@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Fonctions Exponentielles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Exponentielles ($x \mapsto e^{kx}$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Progressif aux Épreuves du Bac Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Travaux Dirigés &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 exercices d'application professionnelle sur les fonctions exponentielles avec corrigés rédigés pas à pas.</p>
+        </div>
+
+        <div class="space-y-6">
+
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 1</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Simplifications algébriques</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Simplifier sous la forme $e^A$ :</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>$A = e^3 \times e^5 \times e^{-2}$</li>
+                    <li>$B = \frac{e^8}{e^2 \times e^4}$</li>
+                </ol>
+                <button onclick="document.getElementById('sol-1').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-1" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $A = e^{3 + 5 - 2} = \mathbf{e^6}$.</p>
+                    <p><strong>2.</strong> $B = \frac{e^8}{e^6} = e^{8-6} = \mathbf{e^2}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 2</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Dérivation de fonctions exponentielles</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Calculer la dérivée des fonctions suivantes :</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>$f(x) = 5 e^{-0{,}4x}$</li>
+                    <li>$g(x) = 100(1 - e^{-0{,}05x})$</li>
+                </ol>
+                <button onclick="document.getElementById('sol-2').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-2" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $f'(x) = 5(-0{,}4)e^{-0{,}4x} = \mathbf{-2 e^{-0{,}4x}}$.</p>
+                    <p><strong>2.</strong> $g'(x) = 100(-(-0{,}05)e^{-0{,}05x}) = \mathbf{5 e^{-0{,}05x}}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 3</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Électrotechnique : Décharge d'un condensateur</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>☆ (Niveau 2)</span>
+                </div>
+                <p class="text-sm text-slate-700">La décharge d'un condensateur est modélisée par $u(t) = 12 e^{-50t}$ ($t$ en secondes).</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer la tension $u(0)$ et $u(0{,}02)$.</li>
+                    <li>Résoudre $12 e^{-50t} = 1$ pour trouver l'instant où la tension résiduelle atteint 1 V (arrondir à la milliseconde).</li>
+                </ol>
+                <button onclick="document.getElementById('sol-3').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-3" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $u(0) = \mathbf{12\text{ V}}$ et $u(0{,}02) = 12 e^{-1} \approx \mathbf{4{,}41\text{ V}}$.</p>
+                    <p><strong>2.</strong> $e^{-50t} = \frac{1}{12} \iff -50t = \ln(1/12) = -\ln(12) \approx -2{,}4849 \implies t = \frac{2{,}4849}{50} \approx \mathbf{0{,}050\text{ s}} \quad (50\text{ ms})$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 4</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">BTP : Montée en résistance d'un béton</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (Niveau 3)</span>
+                </div>
+                <p class="text-sm text-slate-700">La résistance à la compression $R(t)$ en MPa d'un béton en fonction du temps $t$ (en jours) est donnée par $R(t) = 35(1 - e^{-0{,}1 t})$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer la résistance à 28 jours $R(28)$ (résistance normalisée).</li>
+                    <li>Un décoffrage est autorisé dès que la résistance atteint <strong>25 MPa</strong>. Déterminer le temps d'attente minimal (arrondir au jour supérieur).</li>
+                </ol>
+                <button onclick="document.getElementById('sol-4').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-4" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $R(28) = 35(1 - e^{-2{,}8}) = 35(1 - 0{,}0608) \approx \mathbf{32{,}87\text{ MPa}}$.</p>
+                    <p><strong>2.</strong> $35(1 - e^{-0{,}1t}) = 25 \iff 1 - e^{-0{,}1t} = \frac{25}{35} = \frac{5}{7} \iff e^{-0{,}1t} = \frac{2}{7} \approx 0{,}2857$.
+                    <br>$-0{,}1t = \ln(0{,}2857) \approx -1{,}2528 \implies t \approx \mathbf{12{,}5\text{ jours}} \implies \mathbf{13\text{ jours}}$.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

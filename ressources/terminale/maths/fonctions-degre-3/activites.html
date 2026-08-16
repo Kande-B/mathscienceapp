@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités - Fonctions Polynômes de Degré 3 (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-500/20 border border-amber-400/30 text-amber-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-amber-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Polynômes de Degré 3 ($ax^3 + bx^2 + cx + d$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-amber-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-amber-200">Démarche d'Investigation en Contexte Professionnel</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Activités : Fonctions de Degré 3</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Optimisation du volume de bacs industriels, courbes de puissance moteur et raccordements routiers.</p>
+        </div>
+
+        <!-- ACTIVITÉ 1 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Chaudronnerie &amp; Emballage Métallique</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 1 : Volume Maximal d'un Bac de Rétention en Tôle</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-amber-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-box-open text-amber-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>À partir d'une tôle rectangulaire d'aluminium de dimensions $L = 60\text{ cm}$ par $l = 40\text{ cm}$, un chaudronnier découpe 4 carrés identiques de côté $x$ (en cm, avec $x \in [0 ; 20]$) aux quatre angles, puis plie les bords à 90° pour former un bac sans couvercle. Le volume $V(x)$ en $\text{cm}^3$ est donné par :</p>
+                        <div class="p-2.5 bg-white border border-amber-200 rounded-xl text-center font-bold text-amber-900">
+                            $$V(x) = x(60 - 2x)(40 - 2x) = 4x^3 - 200x^2 + 2400x$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>Dériver :</strong> Calculer la fonction dérivée $V'(x)$ pour tout $x \in [0 ; 20]$.</li>
+                    <li><strong>Résoudre :</strong> Résoudre l'équation du second degré $V'(x) = 0$ à l'aide du discriminant $\Delta$. Identifier la seule racine $x_1$ appartenant à l'intervalle $[0 ; 20]$ (arrondir au millimètre).</li>
+                    <li><strong>Dresser le tableau de variations :</strong> Justifier que le volume $V(x)$ admet bien un maximum pour cette valeur de $x_1$.</li>
+                    <li><strong>Dimensionner :</strong> Calculer la valeur de ce volume maximal en $\text{cm}^3$ puis en **litres** ($1\text{ L} = 1000\text{ cm}^3$).</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-1').classList.toggle('hidden')" class="px-4 py-2 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-amber-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 1
+                </button>
+                <div id="sol-act-1" class="hidden mt-4 p-5 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-amber-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Dérivée :</strong>
+                            $$V'(x) = 4(3x^2) - 200(2x) + 2400 = \mathbf{12x^2 - 400x + 2400}$$
+                        </li>
+                        <li><strong>2. Résolution de $V'(x) = 0$ :</strong>
+                            $$\Delta = (-400)^2 - 4(12)(2400) = 160\,000 - 115\,200 = \mathbf{44\,800} > 0$$
+                            $$\sqrt{\Delta} = \sqrt{44\,800} \approx 211{,}66$$
+                            $$x_1 = \frac{400 - 211{,}66}{24} = \frac{188{,}34}{24} \approx \mathbf{7{,}85\text{ cm}} \quad (\in [0 ; 20])$$
+                            $$x_2 = \frac{400 + 211{,}66}{24} \approx 25{,}49\text{ cm} \quad (\text{hors intervalle})$$
+                        </li>
+                        <li><strong>3. Variations :</strong>
+                            Comme $a = 12 > 0$, $V'(x) > 0$ pour $x \in [0 ; 7{,}85[$ et $V'(x) < 0$ pour $x \in ]7{,}85 ; 20]$. La fonction $V$ est croissante puis décroissante : **maximum atteint en $x_1 \approx 7{,}85\text{ cm}$**.
+                        </li>
+                        <li><strong>4. Volume maximal :</strong>
+                            $$V(7{,}85) = 4(7{,}85)^3 - 200(7{,}85)^2 + 2400(7{,}85) \approx 1935 - 12324 + 18840 \approx \mathbf{8\,450\text{ cm}^3} \approx \mathbf{8{,}45\text{ Litres}}$$
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 2 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-sky-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-sky-600 uppercase tracking-wider">Automobile &amp; Banc de Puissance</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 2 : Puissance Optimale d'un Moteur Thermique</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 35 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-sky-500 p-5 rounded-r-2xl space-y-3">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-car text-sky-600 text-xl mt-1"></i>
+                    <div class="space-y-2 text-sm text-slate-700">
+                        <p class="font-bold text-slate-900">Mise en situation professionnelle :</p>
+                        <p>Lors d'un essai sur banc de puissance à rouleaux, la puissance $P(N)$ (en chevaux, ch) d'un moteur turbo en fonction du régime de rotation $N$ (en milliers de tr/min, pour $N \in [1 ; 6{,}5]$) est modélisée par :</p>
+                        <div class="p-2.5 bg-white border border-sky-200 rounded-xl text-center font-bold text-sky-900">
+                            $$P(N) = -2N^3 + 21N^2 - 48N + 80$$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-sky-500"></i> Travail à réaliser :
+                </h3>
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li><strong>Dériver :</strong> Calculer la dérivée $P'(N)$.</li>
+                    <li><strong>Résoudre :</strong> Résoudre l'équation du second degré $P'(N) = 0$.</li>
+                    <li><strong>Optimiser :</strong> Déterminer le régime $N_{\max}$ assurant la puissance de pointe et calculer cette puissance maximale en ch puis en $\text{kW}$ ($1\text{ ch} \approx 0{,}7355\text{ kW}$).</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-2').classList.toggle('hidden')" class="px-4 py-2 bg-sky-50 text-sky-800 hover:bg-sky-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-sky-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 2
+                </button>
+                <div id="sol-act-2" class="hidden mt-4 p-5 bg-sky-50/60 rounded-2xl border border-sky-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-sky-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Dérivée :</strong>
+                            $$P'(N) = -2(3N^2) + 21(2N) - 48 = \mathbf{-6N^2 + 42N - 48}$$
+                        </li>
+                        <li><strong>2. Résolution de $-6N^2 + 42N - 48 = 0$ :</strong>
+                            $$-6(N^2 - 7N + 8) = 0 \implies \Delta = (-7)^2 - 4(1)(8) = 49 - 32 = \mathbf{17} > 0$$
+                            $$N_1 = \frac{7 - \sqrt{17}}{2} \approx \frac{7 - 4{,}123}{2} \approx \mathbf{1{,}44} \quad (\text{minimum local})$$
+                            $$N_2 = \frac{7 + \sqrt{17}}{2} \approx \frac{7 + 4{,}123}{2} \approx \mathbf{5{,}56} \quad (\text{maximum local})$$
+                        </li>
+                        <li><strong>3. Régime et puissance de pointe :</strong>
+                            Régime de puissance maximale : $N_2 \approx \mathbf{5\,560\text{ tr/min}}$.
+                            <br>Puissance maximale : $P(5{,}56) = -2(5{,}56)^3 + 21(5{,}56)^2 - 48(5{,}56) + 80 \approx \mathbf{199{,}4\text{ ch}} \approx \mathbf{146{,}7\text{ kW}}$.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITÉ 3 -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">BTP &amp; Profilage Routier</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Activité 3 : Raccordement Doux d'une Rampe d'Accès en S</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 25 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl space-y-3">
+                <p class="text-sm text-slate-700">
+                    Pour assurer un raccordement sans à-coup entre deux niveaux d'un parking, le profil d'une rampe d'accès est modélisé par :
+                    $$y(x) = -2x^3 + 3x^2 \quad \text{pour } x \in [0 ; 1]$$
+                </p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-4 text-sm text-slate-800">
+                <ol class="list-decimal list-inside space-y-2.5">
+                    <li>Calculer la dérivée $y'(x)$ et vérifier que $y'(0) = 0$ et $y'(1) = 0$ (tangentes horizontales aux raccords).</li>
+                    <li>Déterminer l'abscisse où la pente $y'(x)$ est maximale (point d'inflexion en $x = 0{,}5$).</li>
+                </ol>
+            </div>
+
+            <!-- Toggle Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-act-3').classList.toggle('hidden')" class="px-4 py-2 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-emerald-200">
+                    <i class="fa-solid fa-eye"></i> Afficher le Corrigé Détaillé de l'Activité 3
+                </button>
+                <div id="sol-act-3" class="hidden mt-4 p-5 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600"></i> Corrigé détaillé :</h4>
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Dérivée & Raccords :</strong>
+                            $y'(x) = -6x^2 + 6x = 6x(1 - x)$.
+                            <br>• $y'(0) = 0$ et $y'(1) = 0$. Les tangentes sont parfaitement horizontales aux raccords, garantissant un passage fluide sans secousse.
+                        </li>
+                        <li><strong>2. Pente maximale :</strong>
+                            $y''(x) = -12x + 6 = 0 \iff x = \mathbf{0{,}5}$. Pente maximale : $y'(0{,}5) = -6(0{,}25) + 6(0{,}5) = \mathbf{1{,}5}$ (pente de 150 %).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

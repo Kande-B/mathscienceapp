@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Fonctions Logarithmes (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Fonctions Logarithmes ($\ln x$ et $\log x$)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Progressif aux Épreuves du Bac Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Travaux Dirigés &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 exercices d'application professionnelle sur les logarithmes $\ln$ et $\log$ avec corrigés rédigés pas à pas.</p>
+        </div>
+
+        <div class="space-y-6">
+
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 1</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Simplifications de logarithmes</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Simplifier les expressions suivantes :</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>$A = \ln(8) - \ln(2) + \ln(3)$</li>
+                    <li>$B = \log(500) + \log(2)$</li>
+                </ol>
+                <button onclick="document.getElementById('sol-1').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-1" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $A = \ln(8/2) + \ln(3) = \ln(4) + \ln(3) = \mathbf{\ln(12)}$.</p>
+                    <p><strong>2.</strong> $B = \log(500 \times 2) = \log(1000) = \log(10^3) = \mathbf{3}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 2</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Dérivation de fonctions logarithmiques</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Calculer la dérivée des fonctions suivantes pour $x > 0$ :</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>$f(x) = 4 \ln(x) - 3x + 7$</li>
+                    <li>$g(x) = x^2 - 10 \ln(x)$</li>
+                </ol>
+                <button onclick="document.getElementById('sol-2').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-2" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $f'(x) = 4\left(\frac{1}{x}\right) - 3 = \mathbf{\frac{4}{x} - 3}$.</p>
+                    <p><strong>2.</strong> $g'(x) = 2x - 10\left(\frac{1}{x}\right) = \mathbf{2x - \frac{10}{x}}$.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 3</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Acoustique : Niveaux sonores en décibels</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>☆ (Niveau 2)</span>
+                </div>
+                <p class="text-sm text-slate-700">Le niveau d'un ventilateur d'extraction est de $75\text{ dB}$. On installe un second ventilateur identique côte à côte.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer l'intensité acoustique $I_1$ d'un ventilateur ($I_0 = 10^{-12}\text{ W/m}^2$).</li>
+                    <li>Calculer le niveau sonore total obtenu avec les deux ventilateurs.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-3').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-3" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $75 = 10 \log(I_1 / 10^{-12}) \iff \log(I_1 / 10^{-12}) = 7{,}5 \implies I_1 = 10^{-12} \times 10^{7{,}5} = \mathbf{3{,}16 \times 10^{-5}\text{ W/m}^2}$.</p>
+                    <p><strong>2.</strong> $I_{\text{tot}} = 2 I_1 \implies L_{\text{tot}} = 10 \log(2 I_1 / 10^{-12}) = 10 \log(2) + 75 \approx 3{,}01 + 75 = \mathbf{78{,}0\text{ dB}}$ (+3 dB pour un doublement).</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 4</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Équation $a^n = b$ : Temps de dépréciation machine</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (Niveau 3)</span>
+                </div>
+                <p class="text-sm text-slate-700">Une machine industrielle perd 12 % de sa valeur chaque année : $V_n = 50\,000 \times (0{,}88)^n$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Déterminer après combien d'années la machine vaudra moins de la moitié de son prix d'achat ($V_n \le 25\,000$).</li>
+                </ol>
+                <button onclick="document.getElementById('sol-4').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-4" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1.</strong> $50\,000(0{,}88)^n \le 25\,000 \iff (0{,}88)^n \le 0{,}5$.
+                    <br>$n \ln(0{,}88) \le \ln(0{,}5) \iff n \ge \frac{\ln(0{,}5)}{\ln(0{,}88)}$ (on change de sens car $\ln(0{,}88) < 0$).
+                    <br>$n \ge \frac{-0{,}69315}{-0{,}12783} \approx \mathbf{5{,}42\text{ ans}} \implies \mathbf{6\text{ ans}}$.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

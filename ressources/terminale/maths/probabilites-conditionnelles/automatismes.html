@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatismes - Probabilités Conditionnelles (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        .card-flip {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dice text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Probabilités Conditionnelles &amp; Arbres Pondérés</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-indigo-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-indigo-100 text-indigo-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-indigo-200">Préparation Épreuve Bac Pro • Partie 1 Automatismes</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Automatismes : Probabilités Conditionnelles</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Formule de Bayes, arbres de probabilités, formule des probabilités totales et indépendance d'événements.</p>
+        </div>
+
+        <!-- SECTION 1 : FLASHCARDS INTERACTIVES 3D -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold font-heading text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-indigo-500"></i> 1. Flashcards Réflexes &amp; Règles (Cliquez pour retourner)
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold">6 Cartes conceptuelles</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-indigo-500">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Probabilité Conditionnelle</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-filter text-4xl text-indigo-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la formule fondamentale de la probabilité de $B$ sachant $A$ ($P_A(B)$) ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-indigo-400">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Formule de Bayes</span>
+                            <div class="my-auto space-y-1 text-xs text-indigo-300 font-bold">
+                                <p class="text-sm">$$P_A(B) = \frac{P(A \cap B)}{P(A)}$$</p>
+                                <p class="text-slate-300 font-normal">Condition obligatoire : $P(A) > 0$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-sky-500">
+                            <span class="text-xs font-bold text-sky-600 uppercase tracking-widest">Intersection (ET)</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-intersection text-4xl text-sky-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment calcule-t-on la probabilité de l'intersection $P(A \cap B)$ ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-sky-400">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-widest">Règle du Produit</span>
+                            <div class="my-auto space-y-1 text-xs text-sky-300 font-bold">
+                                <p class="text-sm">$$P(A \cap B) = P(A) \times P_A(B)$$</p>
+                                <p class="text-slate-300 font-normal">Sur un arbre, c'est le produit des probabilités le long d'un même chemin.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-emerald-500">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Règle des Nœuds</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-diagram-project text-4xl text-emerald-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Quelle est la somme des probabilités issues d'un même nœud dans un arbre pondéré ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-emerald-400">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Somme = 1</span>
+                            <div class="my-auto space-y-1 text-xs text-emerald-300 font-bold">
+                                <p class="text-sm">$$P_A(B) + P_A(\bar{B}) = 1$$</p>
+                                <p class="text-slate-300 font-normal">Les branches partant d'un même événement forment une partition de probabilité totale égale à 1.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-purple-500">
+                            <span class="text-xs font-bold text-purple-600 uppercase tracking-widest">Probabilités Totales</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-sigma text-4xl text-purple-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment calculer $P(B)$ à l'aide de la formule des probabilités totales ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-purple-400">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Somme des Chemins</span>
+                            <div class="my-auto space-y-1 text-xs text-purple-300 font-bold">
+                                <p class="text-sm">$$P(B) = P(A \cap B) + P(\bar{A} \cap B)$$</p>
+                                <p class="text-sm">$$= P(A)P_A(B) + P(\bar{A})P_{\bar{A}}(B)$$</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-amber-500">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Indépendance</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-link-slash text-4xl text-amber-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">À quelle condition deux événements $A$ et $B$ sont-ils indépendants ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-amber-400">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Critères d'Indépendance</span>
+                            <div class="my-auto space-y-1 text-xs text-amber-300 font-bold">
+                                <p class="text-sm">$$P(A \cap B) = P(A) \times P(B)$$</p>
+                                <p class="text-slate-300 font-normal">Ou de façon équivalente : $P_A(B) = P(B)$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="h-56 perspective-1000 cursor-pointer" onclick="this.querySelector('.card-flip').classList.toggle('flipped')">
+                    <div class="card-flip relative w-full h-full transform-style-3d shadow-md rounded-2xl border border-slate-200">
+                        <!-- Front -->
+                        <div class="absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-between items-center text-center backface-hidden border-b-4 border-red-500">
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-widest">Tableau Croisé</span>
+                            <div class="my-auto space-y-2">
+                                <i class="fa-solid fa-table-cells text-4xl text-red-500"></i>
+                                <h3 class="font-bold text-slate-800 text-base">Comment lire $P_A(B)$ dans un tableau croisé d'effectifs ?</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 flex items-center gap-1 font-medium"><i class="fa-solid fa-rotate"></i> Cliquer pour voir la réponse</span>
+                        </div>
+                        <!-- Back -->
+                        <div class="absolute inset-0 bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between items-center text-center rotate-y-180 backface-hidden border-b-4 border-red-400">
+                            <span class="text-xs font-bold text-red-400 uppercase tracking-widest">Rapport de sous-population</span>
+                            <div class="my-auto space-y-1 text-xs text-red-300 font-bold">
+                                <p class="text-sm">$$P_A(B) = \frac{\text{Effectif de } (A \cap B)}{\text{Total de la ligne/colonne } A}$$</p>
+                                <p class="text-slate-300 font-normal">On restreint l'univers aux seuls éléments de $A$.</p>
+                            </div>
+                            <span class="text-xs text-slate-400">Cliquez pour revenir</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2 : QUIZ INTERACTIF CHRONOMÉTRÉ SUR 20 PTS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Test de Rapidité • Partie 1 Bac Pro</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">2. Challenge Automatismes (10 Questions • 20 Pts)</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="score-display" class="bg-indigo-100 text-indigo-900 font-extrabold px-4 py-2 rounded-xl text-sm border border-indigo-200">
+                        Score : <span id="current-score">0</span> / 20
+                    </div>
+                    <button onclick="resetQuiz()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all">
+                        <i class="fa-solid fa-arrows-rotate"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected dynamically -->
+            </div>
+
+            <!-- Quiz Footer / Final Score Modal -->
+            <div id="quiz-result" class="hidden bg-indigo-50 border-2 border-indigo-400 rounded-2xl p-6 text-center space-y-4">
+                <div class="w-16 h-16 bg-indigo-500 text-white rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-indigo-900" id="result-title">Bravo !</h3>
+                <p class="text-slate-700 text-base" id="result-text">Vous avez obtenu une note de ...</p>
+                <button onclick="resetQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md">
+                    Refaire le test
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT DU QUIZ -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                q: "On donne $P(A) = 0{,}4$ et $P(A \\cap B) = 0{,}12$. Quelle est la valeur de $P_A(B)$ ?",
+                options: ["0,30", "0,48", "0,52", "0,048"],
+                correct: 0,
+                explanation: "$P_A(B) = \\frac{P(A \\cap B)}{P(A)} = \\frac{0{,}12}{0{,}4} = \\mathbf{0{,}30}$."
+            },
+            {
+                id: 2,
+                q: "Sachant que $P_A(B) = 0{,}85$, quelle est la valeur de $P_A(\\bar{B})$ ?",
+                options: ["0,15", "0,85", "1,15", "0,00"],
+                correct: 0,
+                explanation: "$P_A(\\bar{B}) = 1 - P_A(B) = 1 - 0{,}85 = \\mathbf{0{,}15}$."
+            },
+            {
+                id: 3,
+                q: "Dans un arbre pondéré, $P(A) = 0{,}6$ et $P_A(D) = 0{,}05$. Que vaut $P(A \\cap D)$ ?",
+                options: ["0,03", "0,30", "0,55", "0,65"],
+                correct: 0,
+                explanation: "$P(A \\cap D) = P(A) \\times P_A(D) = 0{,}6 \\times 0{,}05 = \\mathbf{0{,}03}$."
+            },
+            {
+                id: 4,
+                q: "Si $P(A \\cap B) = 0{,}15$ et $P(\\bar{A} \\cap B) = 0{,}25$, quelle est la probabilité totale $P(B)$ ?",
+                options: ["0,40", "0,10", "0,0375", "0,75"],
+                correct: 0,
+                explanation: "D'après la formule des probabilités totales : $P(B) = P(A \\cap B) + P(\\bar{A} \\cap B) = 0{,}15 + 0{,}25 = \\mathbf{0{,}40}$."
+            },
+            {
+                id: 5,
+                q: "On sait que $P(A) = 0{,}5$, $P(B) = 0{,}4$ et $P(A \\cap B) = 0{,}20$. Les événements $A$ et $B$ sont-ils indépendants ?",
+                options: ["Oui car $0{,}5 \\times 0{,}4 = 0{,}20$", "Non car $0{,}5 + 0{,}4 \\neq 0{,}20$", "On ne peut pas savoir", "Uniquement si $P(A)=P(B)$"],
+                correct: 0,
+                explanation: "$P(A) \\times P(B) = 0{,}5 \\times 0{,}4 = 0{,}20 = P(A \\cap B)$, donc les deux événements sont **indépendants**."
+            },
+            {
+                id: 6,
+                q: "Dans une entreprise, 70 % des salariés sont en atelier ($P(A)=0{,}70$). Parmi eux, 20 % portent un masque ($P_A(M)=0{,}20$). Quel pourcentage total de salariés travaillent en atelier AVEC un masque ?",
+                options: ["14 %", "50 %", "90 %", "35 %"],
+                correct: 0,
+                explanation: "$P(A \\cap M) = 0{,}70 \\times 0{,}20 = 0{,}14 = \\mathbf{14\\ \\%}$."
+            },
+            {
+                id: 7,
+                q: "Dans un tableau d'effectifs, il y a 80 pièces de type A dont 8 sont défectueuses. Que vaut $P_A(D)$ ?",
+                options: ["0,10 (10 %)", "0,80 (80 %)", "0,08 (8 %)", "10"],
+                correct: 0,
+                explanation: "$P_A(D) = \\frac{8}{80} = \\mathbf{0{,}10}$ (soit 10 %)."
+            },
+            {
+                id: 8,
+                q: "Que représente concrètement la notation $P_{\\bar{A}}(B)$ ?",
+                options: ["La probabilité de B sachant que l'événement A N'EST PAS réalisé", "La probabilité que ni A ni B ne soient réalisés", "La probabilité de A sachant B", "L'événement contraire de B"],
+                correct: 0,
+                explanation: "C'est la probabilité conditionnelle de $B$ sachant le contraire de $A$ (noté $\\bar{A}$)."
+            },
+            {
+                id: 9,
+                q: "Un arbre à 2 niveaux comporte 4 chemins terminaux. Que vaut obligatoirement la somme des probabilités de ces 4 chemins ?",
+                options: ["1", "4", "0,5", "100"],
+                correct: 0,
+                explanation: "La somme des probabilités de toutes les issues terminales disjointes d'un univers vaut toujours **1**."
+            },
+            {
+                id: 10,
+                q: "Si deux événements sont indépendants et que $P(B) = 0{,}35$, que vaut $P_A(B)$ ?",
+                options: ["0,35", "0,65", "0,00", "1,00"],
+                correct: 0,
+                explanation: "Par définition de l'indépendance, la réalisation de $A$ ne modifie pas la probabilité de $B$ : $P_A(B) = P(B) = \\mathbf{0{,}35}$."
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="selectAnswer(${q.id}, ${optIdx})" class="w-4 h-4 text-indigo-500 focus:ring-indigo-400">
+                            <span class="text-sm font-medium text-slate-800">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <span class="bg-indigo-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-lg">Q${idx + 1}</span>
+                        <div class="flex-1 font-semibold text-slate-900 text-sm md:text-base">${q.q}</div>
+                        <span class="text-xs text-slate-400 font-bold">2 pts</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+                    <div id="feedback_${q.id}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function selectAnswer(qId, optIdx) {
+            userAnswers[qId] = optIdx;
+            checkQuestion(qId);
+            updateTotalScore();
+        }
+
+        function checkQuestion(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const selected = userAnswers[qId];
+            const feedbackDiv = document.getElementById(`feedback_${qId}`);
+            
+            feedbackDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-red-100', 'text-red-900');
+            
+            if (selected === q.correct) {
+                feedbackDiv.classList.add('bg-emerald-100', 'text-emerald-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> <strong>Exact (+2 pts) !</strong> ${q.explanation}`;
+            } else {
+                feedbackDiv.classList.add('bg-red-100', 'text-red-900');
+                feedbackDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-red-600 mr-1.5"></i> <strong>Incorrect (0 pt).</strong> ${q.explanation}`;
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([feedbackDiv]);
+            }
+        }
+
+        function updateTotalScore() {
+            let total = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                if (userAnswers[q.id] !== undefined) {
+                    answeredCount++;
+                    if (userAnswers[q.id] === q.correct) {
+                        total += 2;
+                    }
+                }
+            });
+
+            document.getElementById('current-score').innerText = total;
+
+            if (answeredCount === questionsData.length) {
+                showFinalResult(total);
+            }
+        }
+
+        function showFinalResult(score) {
+            const resultBox = document.getElementById('quiz-result');
+            const title = document.getElementById('result-title');
+            const text = document.getElementById('result-text');
+
+            resultBox.classList.remove('hidden');
+
+            if (score >= 16) {
+                title.innerText = "🏆 Excellent niveau ! (" + score + " / 20)";
+                text.innerText = "Vous maîtrisez parfaitement le calcul des probabilités conditionnelles pour le Bac Pro !";
+            } else if (score >= 10) {
+                title.innerText = "👍 Bon résultat ! (" + score + " / 20)";
+                text.innerText = "Les règles de base sont acquises. Révisez bien la formule des probabilités totales.";
+            } else {
+                title.innerText = "⚠️ Révisez la fiche de cours (" + score + " / 20)";
+                text.innerText = "Entraînez-vous sur les arbres pondérés et la règle du produit sur une branche.";
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('current-score').innerText = '0';
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+
+</body>
+</html>

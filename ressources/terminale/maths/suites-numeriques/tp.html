@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP TICE NumWorks - Suites Numériques (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        numworks: { yellow: '#fed100', dark: '#2b2b2b', gray: '#4a4a4a', light: '#f5f5f5' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* Badge Signature Labo Maths Sciences */
+        .labo-signature {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        /* NumWorks UI Keys */
+        .nw-key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            border-bottom: 2px solid #94a3b8;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .nw-key-yellow {
+            background: #fed100;
+            color: #1e293b;
+            border-color: #eab308;
+            border-bottom-color: #ca8a04;
+        }
+        .nw-key-dark {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #0f172a;
+            border-bottom-color: #020617;
+        }
+
+        @media print {
+            header, nav, .no-print, button { display: none !important; }
+            body { background-color: white; color: black; padding-bottom: 0 !important; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-500/20 border border-purple-400/30 text-purple-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-laptop-code text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-purple-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Suites Numériques (Arithmétiques &amp; Géométriques)</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell text-emerald-400"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique (NumWorks)</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR & BRANDING SIGNATURE -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 card-shadow">
+            <div class="space-y-2 text-center md:text-left">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-calculator text-amber-600"></i> Spécial Calculatrice NumWorks
+                    </span>
+                    <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TP TICE Hybride
+                    </span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold font-heading text-slate-900">TP TICE : Application Suites &amp; Recherche de Seuil</h1>
+                <p class="text-slate-500 text-xs md:text-sm max-w-2xl">
+                    Maîtriser l'application Suites de la NumWorks pour programmer des suites explicites et récurrentes, générer des tableaux de valeurs et déterminer graphiquement ou numériquement un seuil d'amortissement.
+                </p>
+            </div>
+            <!-- Signature Labo Maths Sciences -->
+            <div class="labo-signature text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-lg self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-flask-vial text-2xl text-purple-200"></i>
+                <div class="text-left">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-purple-200 block">Environnement Numérique</span>
+                    <span class="font-extrabold text-sm tracking-tight">Labo Maths Sciences</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1 : GUIDE TECHNIQUE APPLICATION SUITES NUMWORKS -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-sm">1</span>
+                    <h2 class="text-2xl font-bold font-heading text-slate-900">Méthode NumWorks : Application « Suites »</h2>
+                </div>
+                <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200"><i class="fa-solid fa-calculator mr-1"></i> Mode Suites &amp; Tableur</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">1. Saisir la suite</span>
+                        <span class="text-[10px] font-bold bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full">Définition</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Ouvrir l'application <strong class="text-indigo-600">Suites</strong>.</li>
+                        <li>• Sélectionner <span class="nw-key nw-key-yellow">Ajouter une suite</span>.</li>
+                        <li>• Choisir :
+                            <br>- <strong class="text-indigo-700">Explicite</strong> : $u(n) = 1500 \times 1.05^{n-1}$
+                            <br>- <strong class="text-indigo-700">Récurrente d'ordre 1</strong> : $u(n+1) = u(n) + 120$ avec $u(1) = 450$.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">2. Tableau de valeurs</span>
+                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full">Tableau</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Aller sur l'onglet <strong class="text-sky-600">Tableau</strong> en haut.</li>
+                        <li>• Cliquer sur <span class="nw-key">Régler l'intervalle</span> : fixer $n_{\min}=1$, $n_{\max}=20$, pas $=1$.</li>
+                        <li>• Faire défiler les valeurs de $u(n)$ et repérer instantanément les dépassements de seuil.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <span class="font-bold text-slate-900">3. Somme des termes</span>
+                        <span class="text-[10px] font-bold bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">Calculs</span>
+                    </div>
+                    <ul class="space-y-1.5 text-slate-700">
+                        <li>• Dans l'application <strong class="text-purple-600">Calculs</strong> :</li>
+                        <li>• Touche <span class="nw-key font-bold">toolbox</span> $\rightarrow$ <em>Suites</em> $\rightarrow$ <em>Somme des termes $\sum$</em>.</li>
+                        <li>• Ou taper directement la formule de somme pour valider le résultat.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 : ÉTUDE PROFESSIONNELLE -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">2</span>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Maintenance Industrielle &amp; Économie Circulaire</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Étude de Cas : Remplacement d'une Pompe Hydraulique Industrielle</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold self-start md:self-auto"><i class="fa-solid fa-clock mr-1"></i> 40 min</span>
+            </div>
+
+            <!-- Context Box -->
+            <div class="bg-slate-50 border-l-4 border-purple-500 p-5 rounded-r-2xl space-y-2 text-sm text-slate-700">
+                <p class="font-bold text-slate-900">Mise en situation :</p>
+                <p>Une pompe haute pression coûte $u_1 = 15\,000\text{ €}$ neuve la première année. Ses coûts annuels de maintenance $(C_n)$ augmentent de <strong>15 % par an</strong> en raison de l'usure mécanique, avec $C_1 = 800\text{ €}$ la première année ($C_n = 800 \times (1{,}15)^{n-1}$).</p>
+                <p>En parallèle, la valeur marchande résiduelle de la pompe $(V_n)$ diminue de <strong>20 % par an</strong> : $V_1 = 15\,000\text{ €}$ et $V_n = 15\,000 \times (0{,}80)^{n-1}$.</p>
+            </div>
+
+            <!-- Questions -->
+            <div class="space-y-3 text-sm text-slate-800">
+                <p><strong>1.</strong> Saisir les deux suites $(C_n)$ et $(V_n)$ dans l'application <strong>Suites</strong> de votre NumWorks.</p>
+                <p><strong>2.</strong> Dans le tableau de valeurs, relever les coûts de maintenance $C_n$ et la valeur résiduelle $V_n$ pour les 6 premières années.</p>
+                <p><strong>3.</strong> Déterminer à partir de quelle année le coût de maintenance annuel dépasse la valeur résiduelle de la pompe ($C_n > V_n$).</p>
+                <p><strong>4.</strong> Calculer la dépense cumulée totale de maintenance sur les 6 premières années.</p>
+            </div>
+
+            <!-- Solution -->
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="document.getElementById('sol-tp-3').classList.toggle('hidden')" class="px-5 py-2.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-xl font-bold text-xs transition-colors flex items-center gap-2 border border-purple-200">
+                    <i class="fa-solid fa-eye"></i> Afficher les Réponses Détaillées
+                </button>
+                <div id="sol-tp-3" class="hidden mt-4 p-5 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-3 text-xs md:text-sm text-slate-800">
+                    <ul class="space-y-2 list-disc list-inside">
+                        <li><strong>1. Saisie NumWorks :</strong> $u(n) = 800 \times 1.15^{n-1}$ et $v(n) = 15000 \times 0.80^{n-1}$.</li>
+                        <li><strong>2. Tableau de valeurs :</strong>
+                            <br>• $n=1$ : $C_1 = 800\text{ €}$, $V_1 = 15\,000\text{ €}$.
+                            <br>• $n=5$ : $C_5 = 800 \times 1{,}15^4 \approx 1\,399\text{ €}$, $V_5 = 15\,000 \times 0{,}8^4 = 6\,144\text{ €}$.
+                            <br>• $n=8$ : $C_8 \approx 2\,128\text{ €}$, $V_8 \approx 3\,145\text{ €}$.
+                            <br>• $n=9$ : $C_9 \approx 2\,447\text{ €}$, $V_9 \approx 2\,516\text{ €}$.
+                            <br>• $n=10$ : $C_{10} \approx \mathbf{2\,814\text{ €}} > V_{10} \approx \mathbf{2\,013\text{ €}}$.
+                        </li>
+                        <li><strong>3. Seuil de rentabilité :</strong> Le coût annuel d'entretien dépasse la valeur de la machine dès la **10e année**.</li>
+                        <li><strong>4. Somme de maintenance sur 6 ans :</strong>
+                            $$S_6 = 800 \times \frac{1 - 1{,}15^6}{1 - 1{,}15} = 800 \times \frac{-1{,}31306}{-0{,}15} \approx \mathbf{7\,003\text{ €}}$$
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 : SIMULATEUR VIRTUEL CANVAS 60 FPS ("LABO MATHS SCIENCES") -->
+        <section class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-100 pb-4 gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">3</span>
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Simulateur Virtuel Canvas 60 FPS</span>
+                        <h2 class="text-2xl font-bold font-heading text-slate-900">Visualiseur Graphique Dynamique de Suites</h2>
+                    </div>
+                </div>
+                <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200"><i class="fa-solid fa-chart-simple mr-1"></i> Rendu Numérique</span>
+            </div>
+
+            <!-- Parameters controls -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Type de suite :</label>
+                    <select id="param-type" onchange="updateSim()" class="w-full p-2 bg-white border border-slate-300 rounded-xl font-bold text-indigo-700">
+                        <option value="arithmetic">Arithmétique (u_n = u_1 + (n-1)r)</option>
+                        <option value="geometric">Géométrique (u_n = u_1 * q^(n-1))</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Premier terme u1 :</label>
+                    <input type="range" id="param-u1" min="10" max="200" step="5" value="50" oninput="updateSim()" class="w-full accent-indigo-600">
+                    <span id="val-u1" class="font-mono font-bold text-indigo-700">50</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Raison (r ou q) :</label>
+                    <input type="range" id="param-r" min="0.5" max="2.0" step="0.05" value="1.15" oninput="updateSim()" class="w-full accent-indigo-600">
+                    <span id="val-r" class="font-mono font-bold text-indigo-700">1.15</span>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Nombre de termes (N) :</label>
+                    <input type="range" id="param-n" min="5" max="15" step="1" value="10" oninput="updateSim()" class="w-full accent-indigo-600">
+                    <span id="val-n" class="font-mono font-bold text-indigo-700">10</span>
+                </div>
+            </div>
+
+            <!-- Canvas & Dynamic Stats -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                    <canvas id="seqCanvas" width="560" height="300" class="w-full h-auto bg-slate-900 rounded-xl"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-4 flex flex-col justify-between text-xs">
+                    <div class="space-y-3 font-mono">
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Dernier terme u_N :</span>
+                            <span id="stat-un" class="font-bold text-sky-600 block text-base">175.89</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Somme cumulée S_N :</span>
+                            <span id="stat-sn" class="font-bold text-purple-600 block text-base">1012.35</span>
+                        </div>
+                        <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                            <span class="text-slate-500 font-sans font-bold">Tendance de la suite :</span>
+                            <span id="stat-trend" class="font-bold text-emerald-600 block text-xs">Strictement Croissante</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Canvas Simulation Script -->
+    <script>
+        function updateSim() {
+            const type = document.getElementById('param-type').value;
+            const u1 = parseFloat(document.getElementById('param-u1').value);
+            const r = parseFloat(document.getElementById('param-r').value);
+            const N = parseInt(document.getElementById('param-n').value);
+
+            document.getElementById('val-u1').innerText = u1;
+            document.getElementById('val-r').innerText = r.toFixed(2);
+            document.getElementById('val-n').innerText = N;
+
+            const values = [];
+            let sum = 0;
+
+            for (let i = 1; i <= N; i++) {
+                let val = 0;
+                if (type === 'arithmetic') {
+                    val = u1 + (i - 1) * (r * 10 - 10);
+                } else {
+                    val = u1 * Math.pow(r, i - 1);
+                }
+                values.push(val);
+                sum += val;
+            }
+
+            const un = values[N - 1];
+            document.getElementById('stat-un').innerText = un.toFixed(2);
+            document.getElementById('stat-sn').innerText = sum.toFixed(2);
+
+            let trend = "Constante";
+            if (values[1] > values[0]) trend = "Strictement Croissante ↗";
+            else if (values[1] < values[0]) trend = "Strictement Décroissante ↘";
+            document.getElementById('stat-trend').innerText = trend;
+
+            drawGraph(values, N);
+        }
+
+        function drawGraph(values, N) {
+            const canvas = document.getElementById('seqCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const padLeft = 50, padBottom = 40, padTop = 30, padRight = 30;
+            const maxVal = Math.max(...values) * 1.15;
+            const minVal = Math.min(0, Math.min(...values));
+
+            // Grid
+            ctx.strokeStyle = "#334155";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padLeft, padTop); ctx.lineTo(padLeft, h - padBottom);
+            ctx.moveTo(padLeft, h - padBottom); ctx.lineTo(w - padRight, h - padBottom);
+            ctx.stroke();
+
+            const stepX = (w - padLeft - padRight) / N;
+
+            // Draw bars & points
+            for (let i = 0; i < N; i++) {
+                const x = padLeft + (i + 0.5) * stepX;
+                const normalizedY = (values[i] - minVal) / (maxVal - minVal);
+                const y = (h - padBottom) - normalizedY * (h - padBottom - padTop);
+
+                // Bar
+                ctx.fillStyle = "rgba(99, 102, 241, 0.35)";
+                ctx.fillRect(x - 8, y, 16, (h - padBottom) - y);
+
+                // Top Point
+                ctx.fillStyle = "#fed100";
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Axis X Label (n)
+                ctx.fillStyle = "#94a3b8";
+                ctx.font = "10px JetBrains Mono";
+                ctx.textAlign = "center";
+                ctx.fillText(`n=${i+1}`, x, h - padBottom + 15);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateSim);
+    </script>
+
+</body>
+</html>

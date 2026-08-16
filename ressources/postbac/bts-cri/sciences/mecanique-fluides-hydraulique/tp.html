@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP Numérique - Banc Hydraulique 60 FPS - BTS CRI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+    .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    @media print {
+      header, nav, button, .no-print { display: none !important; }
+      body { background: white; color: black; }
+      .card-shadow { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+  <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-indigo-500/20 border border-indigo-400/30 text-indigo-400 rounded-xl flex items-center justify-center font-bold">
+          <i class="fa-solid fa-water text-lg"></i>
+        </div>
+        <div>
+          <span class="text-xs font-bold tracking-widest uppercase text-indigo-400">BTS CRI • Chaudronnerie &amp; Tuyauterie</span>
+          <h1 class="text-xl font-bold font-heading">Mécanique des Fluides &amp; Pertes de Charge</h1>
+        </div>
+      </div>
+      <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+        <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Automatismes</a>
+<a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> Activités</a>
+<a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> Cours</a>
+<a href="td.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+<a href="tp.html" class="px-3 py-2 rounded-lg bg-purple-600 text-white font-extrabold shadow-sm transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code"></i> TP Numérique</a>
+<a href="examen.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap"></i> Sujet BTS (20 pts)</a>
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+    <div class="text-center space-y-3">
+      <span class="bg-purple-100 text-purple-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-purple-200">Laboratoire Virtuel BTS CRI</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Simulateur de Conduites Hydrauliques &amp; Pertes de Charge 60 FPS</h1>
+      <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">Tracé dynamique de la ligne piezométrique et calcul du nombre de Reynolds.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-6">
+      <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-100 pb-4 gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-lg"><i class="fa-solid fa-water"></i></div>
+          <div>
+            <h2 class="text-xl font-bold font-heading text-slate-900">Ligne Piezométrique &amp; Pertes de Charge</h2>
+            <p class="text-xs text-slate-500 font-medium">Banc d'essai hydraulique HTML5 Canvas</p>
+          </div>
+        </div>
+        <button onclick="window.print()" class="px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 no-print"><i class="fa-solid fa-file-pdf mr-1"></i> Imprimer le Compte-Rendu</button>
+      </div>
+
+      <!-- CANVAS -->
+      <div class="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
+        <canvas id="simCanvas" width="800" height="350" class="w-full h-auto block"></canvas>
+      </div>
+
+      <!-- DASHBOARD VALUES -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Débit Q</span>
+          <span class="text-lg md:text-xl font-extrabold text-indigo-600 font-heading" id="resI">40.0 m³/h</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Vitesse v</span>
+          <span class="text-lg md:text-xl font-extrabold text-emerald-600 font-heading" id="resP">2.16 m/s</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Reynolds Re</span>
+          <span class="text-lg md:text-xl font-extrabold text-amber-600 font-heading" id="resQ">174 744</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Pertes Total</span>
+          <span class="text-lg md:text-xl font-extrabold text-sky-600 font-heading" id="resS">8.25 mCE</span>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 col-span-2 md:col-span-1">
+          <span class="block text-xs font-bold text-slate-400 uppercase">Pompe HMT</span>
+          <span class="text-lg md:text-xl font-extrabold text-purple-600 font-heading" id="resCos">23.3 mCE</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let offset = 0;
+      function drawSim() {
+        const cv = document.getElementById('simCanvas'); if(!cv) return;
+        const ctx = cv.getContext('2d'); ctx.clearRect(0,0,cv.width,cv.height);
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,cv.width,cv.height);
+
+        offset += 2;
+        // Piezometric Line (Green)
+        ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 2.5; ctx.beginPath();
+        ctx.moveTo(50, 100); ctx.lineTo(750, 180); ctx.stroke();
+
+        // Pipe Flow Particles (Blue dots)
+        ctx.fillStyle = '#38bdf8';
+        for(let i=0; i<15; i++) {
+          const x = (offset + i*50) % 700 + 50;
+          ctx.beginPath(); ctx.arc(x, 260, 4, 0, 2*Math.PI); ctx.fill();
+        }
+
+        document.getElementById('resI').innerText = '40.0 m³/h';
+        document.getElementById('resP').innerText = '2.16 m/s';
+        document.getElementById('resQ').innerText = '174 744';
+        document.getElementById('resS').innerText = '8.25 mCE';
+        document.getElementById('resCos').innerText = '23.3 mCE';
+
+        requestAnimationFrame(drawSim);
+      }
+      window.addEventListener('load', drawSim);
+    </script>
+
+  </main>
+  <footer class="max-w-5xl mx-auto px-4 pt-12 pb-6 border-t border-slate-200 text-center text-xs text-slate-500 space-y-2">
+    <p class="font-bold text-slate-700">Labo Maths Sciences • Enseignement Supérieur &amp; BTS CRI</p>
+    <p>Ressources pédagogiques interactives Post-Bac en accès libre • Conçu pour la préparation aux épreuves du BTS.</p>
+  </footer>
+</body>
+</html>

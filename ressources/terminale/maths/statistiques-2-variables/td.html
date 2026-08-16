@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD & Exercices - Statistiques à 2 Variables (Terminale Bac Pro)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax pour les formules LaTeX -->
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen pb-20">
+
+    <!-- Header & Navigation Unifiée -->
+    <header class="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/20 border border-emerald-400/30 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-dumbbell text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-emerald-400">Terminale Bac Professionnel • Mathématiques</span>
+                    <h1 class="text-xl font-bold font-heading">Statistiques à Deux Variables &amp; Ajustement</h1>
+                </div>
+            </div>
+            <!-- Navigation Séquence -->
+            <nav class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                <a href="automatismes.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-bolt text-indigo-400"></i> Automatismes</a>
+                <a href="activites.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-400"></i> Activités</a>
+                <a href="cours.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-sky-400"></i> Cours</a>
+                <a href="td.html" class="px-3 py-2 rounded-lg bg-emerald-600 text-white font-extrabold shadow-sm flex items-center gap-1.5"><i class="fa-solid fa-dumbbell"></i> TD & Exercices</a>
+                <a href="tp.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-laptop-code text-purple-400"></i> TP Numérique</a>
+                <a href="bac.html" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-red-400"></i> Vers le Bac (20 pts)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- TITLE BAR -->
+        <div class="text-center space-y-3">
+            <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200">Entraînement Progressif aux Épreuves du Bac Pro</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold font-heading text-slate-900 tracking-tight">Travaux Dirigés &amp; Exercices Gradués</h1>
+            <p class="text-slate-500 text-sm max-w-2xl mx-auto font-medium">8 exercices d'application professionnelle avec corrigés détaillés pas à pas.</p>
+        </div>
+
+        <div class="space-y-6">
+
+            <!-- EXERCICE 1 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 1</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Calcul du point moyen $G$ et contrôle d'appartenance</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">On considère la série statistique suivante :</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-slate-50 border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr><th class="p-2 border-b">Rang $x_i$</th><th class="p-2 border-b">1</th><th class="p-2 border-b">2</th><th class="p-2 border-b">3</th><th class="p-2 border-b">4</th><th class="p-2 border-b">5</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2 font-bold bg-slate-100">Valeur $y_i$</td><td class="p-2">12</td><td class="p-2">15</td><td class="p-2">19</td><td class="p-2">24</td><td class="p-2">30</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Calculer les coordonnées du point moyen $G(\bar{x}; \bar{y})$.</li>
+                    <li>La droite d'ajustement par les moindres carrés a pour équation $y = 4{,}5x + 6{,}5$. Vérifier que le point $G$ appartient à cette droite.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-1').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-1" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1. Coordonnées de G :</strong> $\bar{x} = \frac{1+2+3+4+5}{5} = \mathbf{3}$ et $\bar{y} = \frac{12+15+19+24+30}{5} = \frac{100}{5} = \mathbf{20}$. Donc $\mathbf{G(3\ ; \ 20)}$.</p>
+                    <p><strong>2. Vérification :</strong> $4{,}5 \times 3 + 6{,}5 = 13{,}5 + 6{,}5 = \mathbf{20} = \bar{y}$. Le point $G$ appartient bien à la droite.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 2 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 2</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Interpolation &amp; Extrapolation</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i>☆☆ (Niveau 1)</span>
+                </div>
+                <p class="text-sm text-slate-700">Une droite d'ajustement modélisant le coût de production $y$ (en k€) en fonction du nombre de pièces usinées $x$ (en centaines) est donnée par : $$y = 1{,}8x + 15$$ pour $x \in [5; 25]$.</p>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Estimer le coût pour $x = 18$ ($1800$ pièces). Préciser s'il s'agit d'une interpolation ou d'une extrapolation.</li>
+                    <li>Estimer le coût pour $x = 35$ ($3500$ pièces). Préciser la nature de l'estimation.</li>
+                    <li>Déterminer le nombre de pièces que l'on peut produire avec un budget de $60\text{ k€}$.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-2').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-2" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1. Pour $x = 18$ :</strong> $y = 1{,}8 \times 18 + 15 = 32{,}4 + 15 = \mathbf{47{,}4\text{ k€}}$. Comme $18 \in [5; 25]$, c'est une **interpolation**.</p>
+                    <p><strong>2. Pour $x = 35$ :</strong> $y = 1{,}8 \times 35 + 15 = 63 + 15 = \mathbf{78\text{ k€}}$. Comme $35 > 25$, c'est une **extrapolation**.</p>
+                    <p><strong>3. Budget $y = 60$ :</strong> $60 = 1{,}8x + 15 \iff 1{,}8x = 45 \iff x = \frac{45}{1{,}8} = \mathbf{25}$ centaines, soit **$2\,500$ pièces**.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 3 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 3</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">BTP : Résistance mécanique du béton</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>☆ (Niveau 2)</span>
+                </div>
+                <p class="text-sm text-slate-700">Sur un chantier de génie civil, on mesure la résistance à la compression $y_i$ (en MPa) d'éprouvettes de béton en fonction de la durée de durcissement $x_i$ (en jours) :</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-slate-50 border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr><th class="p-2 border-b">Durée $x_i$ (j)</th><th class="p-2 border-b">3</th><th class="p-2 border-b">7</th><th class="p-2 border-b">14</th><th class="p-2 border-b">21</th><th class="p-2 border-b">28</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2 font-bold bg-slate-100">Résistance $y_i$ (MPa)</td><td class="p-2">12</td><td class="p-2">18</td><td class="p-2">26</td><td class="p-2">31</td><td class="p-2">35</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Déterminer les coordonnées du point moyen $G$.</li>
+                    <li>À la calculatrice, donner l'équation de la droite d'ajustement affine (arrondir au centième).</li>
+                    <li>Le béton est dit « décoffrable sous charge » dès que sa résistance atteint $30\text{ MPa}$. Estimer le nombre de jours nécessaires.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-3').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-3" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1. Point G :</strong> $\bar{x} = \frac{3+7+14+21+28}{5} = \frac{73}{5} = \mathbf{14{,}6\text{ j}}$ et $\bar{y} = \frac{12+18+26+31+35}{5} = \frac{122}{5} = \mathbf{24{,}4\text{ MPa}}$. $\mathbf{G(14{,}6\ ; \ 24{,}4)}$.</p>
+                    <p><strong>2. Droite des moindres carrés :</strong> $a \approx \mathbf{0{,}91}$ et $b \approx \mathbf{11{,}10}$. Donc $$\mathbf{y = 0{,}91x + 11{,}10}$$</p>
+                    <p><strong>3. Résolution $y = 30$ :</strong> $30 = 0{,}91x + 11{,}10 \iff 0{,}91x = 18{,}90 \iff x = \frac{18{,}90}{0{,}91} \approx \mathbf{20{,}8\text{ jours}}$. Il faut environ 21 jours.</p>
+                </div>
+            </div>
+
+            <!-- EXERCICE 4 -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 card-shadow border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">Ex 4</span>
+                        <h3 class="text-lg font-bold font-heading text-slate-900">Électrotechnique : Décharge d'un accumulateur</h3>
+                    </div>
+                    <span class="text-amber-500 text-xs font-bold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (Niveau 3)</span>
+                </div>
+                <p class="text-sm text-slate-700">Lors d'un test sous courant de décharge constant, on mesure la tension $U$ (en V) aux bornes d'une batterie d'onduleur en fonction du temps $t$ (en heures) :</p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-slate-50 border border-slate-200 rounded-xl text-center text-xs md:text-sm">
+                        <thead class="bg-slate-100 font-bold text-slate-700">
+                            <tr><th class="p-2 border-b">Temps $t_i$ (h)</th><th class="p-2 border-b">1</th><th class="p-2 border-b">2</th><th class="p-2 border-b">3</th><th class="p-2 border-b">4</th><th class="p-2 border-b">5</th><th class="p-2 border-b">6</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-2 font-bold bg-slate-100">Tension $U_i$ (V)</td><td class="p-2">12,8</td><td class="p-2">12,5</td><td class="p-2">12,2</td><td class="p-2">11,9</td><td class="p-2">11,6</td><td class="p-2">11,3</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5">
+                    <li>Montrer que la droite d'ajustement affine est exacte et donner son coefficient directeur $a$ et son ordonnée à l'origine $b$.</li>
+                    <li>Déterminer à quel instant précis $t$ la tension atteindra le seuil critique d'arrêt automatique fixé à $10{,}5\text{ V}$.</li>
+                </ol>
+                <button onclick="document.getElementById('sol-4').classList.toggle('hidden')" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors">
+                    <i class="fa-solid fa-eye"></i> Voir la solution
+                </button>
+                <div id="sol-4" class="hidden p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs md:text-sm text-slate-700 space-y-2">
+                    <p><strong>1. Équation de droite :</strong> La tension baisse régulièrement de $0{,}3\text{ V}$ par heure. Donc $a = \mathbf{-0{,}30}$ et pour $t=0$, $b = 12{,}8 + 0{,}3 = \mathbf{13{,}10\text{ V}}$. Equation : $$\mathbf{U = -0{,}30t + 13{,}10}$$</p>
+                    <p><strong>2. Arrêt critique $U = 10{,}5\text{ V}$ :</strong> $10{,}5 = -0{,}30t + 13{,}10 \iff 0{,}30t = 13{,}10 - 10{,}5 = 2{,}60 \iff t = \frac{2{,}60}{0{,}30} \approx \mathbf{8{,}67\text{ h}}$, soit **8 h 40 min**.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
