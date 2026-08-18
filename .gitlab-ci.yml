@@ -1,8 +1,3 @@
-# ==============================================================================
-# Configuration GitLab CI/CD pour La Forge des Communs Numériques Éducatifs
-# Déploiement automatique sur GitLab Pages (forge.apps.education.fr)
-# ==============================================================================
-
 image: alpine:latest
 
 pages:
@@ -10,10 +5,11 @@ pages:
   script:
     - mkdir -p public
     - cp -r index.html manifest.json sw.js robots.txt sitemap.xml CNAME google*.html public/ 2>/dev/null || true
-    - cp -r data/ ressources/ assets/ labo/ actualites/ public/ 2>/dev/null || true
+    - cp -r data ressources assets labo actualites public/ 2>/dev/null || true
     - echo "✅ Maths-Sciences-App déployé avec succès sur La Forge !"
   artifacts:
     paths:
       - public
   rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_COMMIT_BRANCH == "main"
