@@ -1,13 +1,560 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>temp-vite</title>
-    <script type="module" crossorigin src="./assets/index-CSQfkWMX.js"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labo Virtuel Maths &amp; Sciences • Banques de TP &amp; Simulations 60 FPS</title>
+    <meta name="description" content="Plateforme d'expérimentation virtuelle et banque de 101 Travaux Pratiques interactifs en Mathématiques et Physique-Chimie (3PM, CAP, Bac Pro, BTS, CS, FCIL).">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        lab: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                            950: '#022c22'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        .filter-btn.active {
+            background-color: #059669 !important;
+            color: #ffffff !important;
+            border-color: #059669 !important;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.4);
+            border-radius: 9999px;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.15), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3">
+                <a href="../index.html" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-700" title="Retour au portail principal">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-600 to-cyan-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-emerald-500/20">
+                    <i class="fa-solid fa-flask-vial"></i>
+                </div>
+                <div>
+                    <h1 class="font-heading text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
+                        Labo Maths &amp; Sciences
+                        <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-950/80 text-emerald-400 rounded-md border border-emerald-800">101 TP Virtuels</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 font-medium">Lycée Professionnel &amp; Enseignement Supérieur • Eiffel 77</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="hidden md:flex items-center gap-1.5 text-xs font-bold">
+                <button onclick="switchSection('tps')" id="nav-tps" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white shadow-md transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-laptop-code"></i> <span>TP &amp; Simulations (101)</span>
+                </button>
+                <button onclick="switchSection('materiel')" id="nav-materiel" class="px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-microchip"></i> <span>Guide Matériel</span>
+                </button>
+                <button onclick="switchSection('securite')" id="nav-securite" class="px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-400"></i> <span>Sécurité &amp; EPI</span>
+                </button>
+                <button onclick="switchSection('outils')" id="nav-outils" class="px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-cyan-400"></i> <span>Calculateurs Labo</span>
+                </button>
+            </nav>
+
+            <!-- Search Quick Button -->
+            <div class="relative w-40 sm:w-64">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                <input type="text" id="global-tp-search" oninput="filterTPs()" placeholder="Rechercher un TP..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 shadow-inner">
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE TABS BAR -->
+    <div class="md:hidden bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center justify-between gap-1 overflow-x-auto custom-scrollbar text-xs font-bold">
+        <button onclick="switchSection('tps')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white shrink-0">TP (101)</button>
+        <button onclick="switchSection('materiel')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 shrink-0">Matériel</button>
+        <button onclick="switchSection('securite')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 shrink-0">Sécurité</button>
+        <button onclick="switchSection('outils')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 shrink-0">Calculateurs</button>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+        
+        <!-- ================================================================= -->
+        <!-- SECTION 1 : TOUS LES TP & SIMULATIONS (101 TP)                   -->
+        <!-- ================================================================= -->
+        <div id="section-tps" class="space-y-6">
+            
+            <!-- Hero Banner -->
+            <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 border border-emerald-800/40 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-900/60 border border-emerald-700/60 text-emerald-300 text-[11px] font-extrabold uppercase tracking-wider">
+                        <i class="fa-solid fa-sparkles"></i> 101 Bancs d'Essai Virtuels 60 FPS
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">Travaux Pratiques &amp; Expérimentations Virtuelles</h2>
+                    <p class="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">Accédez à l'ensemble des protocoles expérimentaux, bancs de mesure en direct, simulations HTML5 Canvas et fiches de manipulation conformes au CCF et aux épreuves pratiques.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <div class="text-3xl font-extrabold font-heading text-emerald-400" id="tp-counter">101</div>
+                        <div class="text-[11px] text-slate-400 font-medium">TP Prêts à l'emploi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DOMAIN FILTERS -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Filtrer par Domaine Scientifique</span>
+                    <button onclick="resetTPFilters()" class="text-xs text-emerald-400 hover:text-emerald-300 font-semibold">Réinitialiser les filtres</button>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="domain-filters">
+                    <button onclick="filterDomain('all')" class="filter-btn active px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="all">Tous (101)</button>
+                    <button onclick="filterDomain('Électricité')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Électricité"><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Électricité</button>
+                    <button onclick="filterDomain('Mécanique')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Mécanique"><i class="fa-solid fa-gears text-blue-400 mr-1"></i> Mécanique &amp; RDM</button>
+                    <button onclick="filterDomain('Chimie')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Chimie"><i class="fa-solid fa-flask text-emerald-400 mr-1"></i> Chimie &amp; Solutions</button>
+                    <button onclick="filterDomain('Thermodynamique')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Thermodynamique"><i class="fa-solid fa-fire text-rose-400 mr-1"></i> Thermodynamique</button>
+                    <button onclick="filterDomain('Optique')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Optique"><i class="fa-solid fa-eye text-purple-400 mr-1"></i> Optique</button>
+                    <button onclick="filterDomain('Acoustique')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Acoustique"><i class="fa-solid fa-volume-high text-cyan-400 mr-1"></i> Acoustique</button>
+                    <button onclick="filterDomain('Hydraulique & Fluides')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Hydraulique & Fluides"><i class="fa-solid fa-water text-indigo-400 mr-1"></i> Hydraulique</button>
+                    <button onclick="filterDomain('Mathématiques & TICE')" class="filter-btn px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-800 bg-slate-900 text-slate-300" data-domain="Mathématiques & TICE"><i class="fa-solid fa-calculator text-amber-400 mr-1"></i> Maths &amp; TICE</button>
+                </div>
+            </div>
+
+            <!-- LEVEL FILTERS -->
+            <div class="space-y-2">
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Filtrer par Niveau d'Enseignement</span>
+                <div class="flex flex-wrap gap-2" id="level-filters">
+                    <button onclick="filterLevel('all')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-800 text-emerald-400 border border-emerald-800/50" data-level="all">Tous niveaux</button>
+                    <button onclick="filterLevel('3eme')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800" data-level="3eme">3ème Prépa-Métiers</button>
+                    <button onclick="filterLevel('cap')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800" data-level="cap">CAP (RICS)</button>
+                    <button onclick="filterLevel('seconde')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800" data-level="seconde">Seconde Bac Pro</button>
+                    <button onclick="filterLevel('premiere')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800" data-level="premiere">Première Bac Pro</button>
+                    <button onclick="filterLevel('terminale')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800" data-level="terminale">Terminale Bac Pro</button>
+                    <button onclick="filterLevel('bts')" class="level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800" data-level="bts">BTS &amp; Supérieur</button>
+                </div>
+            </div>
+
+            <!-- TP GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="tp-cards-grid">
+                <!-- Dynamically rendered by JS -->
+            </div>
+
+            <div id="tp-empty" class="hidden text-center py-16 space-y-3 bg-slate-900/60 rounded-3xl border border-slate-800 p-8">
+                <i class="fa-solid fa-flask text-3xl text-slate-600"></i>
+                <h3 class="text-base font-bold text-slate-300">Aucun TP ne correspond à vos filtres</h3>
+                <p class="text-xs text-slate-500">Essayez de réinitialiser la recherche ou de changer de domaine.</p>
+                <button onclick="resetTPFilters()" class="px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs">Tout afficher</button>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 2 : GUIDE DU MATÉRIEL DE LABORATOIRE                     -->
+        <!-- ================================================================= -->
+        <div id="section-materiel" class="hidden space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold font-heading text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-microchip text-emerald-400"></i> Guide Technique du Matériel de Laboratoire
+                </h2>
+                <p class="text-xs text-slate-400 font-medium mt-1">Fiches techniques d'utilisation, calibres, réglages et consignes de manipulation pour les séances expérimentales.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-2xl font-bold"><i class="fa-solid fa-wave-square"></i></div>
+                    <h3 class="text-base font-bold text-white">Oscilloscope Numérique</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Visualisation des signaux sinusoïdaux, réglage de la base de temps (s/div), sensibilité verticale (V/div) et mesure de $U_{max}$, $U_{eff}$ et fréquence $f = 1/T$.</p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-400">Calibres : 1 mV/div à 10 V/div</div>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-2xl font-bold"><i class="fa-solid fa-gauge-high"></i></div>
+                    <h3 class="text-base font-bold text-white">Multimètre RMS &amp; Pince Ampèremétrique</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Mesures en courant continu (DC) et alternatif (AC). Voltmètre en dérivation, Ampèremètre en série avec le récepteur, et Ohmmètre hors-tension.</p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-400">Sécurité CAT III 600V</div>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl font-bold"><i class="fa-solid fa-vial"></i></div>
+                    <h3 class="text-base font-bold text-white">pH-mètre Électronique &amp; Étalonnage</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Mesure d'acidité/basicité des solutions aqueuses. Procédure d'étalonnage avec solutions tampons pH 4,00 et pH 7,00, rinçage à l'eau distillée.</p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-400">Précision : ± 0,01 pH</div>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-2xl font-bold"><i class="fa-solid fa-sun"></i></div>
+                    <h3 class="text-base font-bold text-white">Banc d'Optique &amp; Luxmètre</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Étude de la propagation de la lumière, distance focale des lentilles minces convergentes ($f'$), grandissement $gamma = overline{A'B'}/overline{AB}$ et éclairement lumineux $E$ (Lux).</p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-400">Rail gradué 1 m</div>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-2xl font-bold"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+                    <h3 class="text-base font-bold text-white">Calorimètre &amp; Thermomètres Numériques</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Bilan des transferts thermiques par conduction et convection. Mesure de capacité thermique massique $c$ et de flux thermique $Phi = Delta T / R_{th}$.</p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-400">Résolution : 0,1 °C</div>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl font-bold"><i class="fa-solid fa-volume-high"></i></div>
+                    <h3 class="text-base font-bold text-white">Sonomètre Intégrateur dBA</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Mesure du niveau d'intensité acoustique $L = 10 log(I/I_0)$, courbe de pondération A pour la protection de l'oreille humaine et seuils de danger (80 dB, 85 dB).</p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-400">Norme IEC 61672</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 3 : SÉCURITÉ, PICTOGRAMMES & EPI                         -->
+        <!-- ================================================================= -->
+        <div id="section-securite" class="hidden space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold font-heading text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i> Consignes de Sécurité, EPI &amp; Risques Chimiques
+                </h2>
+                <p class="text-xs text-slate-400 font-medium mt-1">Règles fondamentales en atelier et laboratoire de sciences physiques.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-glasses text-emerald-400"></i> Équipements de Protection Individuelle (EPI)
+                    </h3>
+                    <ul class="space-y-2.5 text-xs text-slate-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <strong>Blouse en coton fermée</strong> obligatoire lors de toute manipulation chimique.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <strong>Lunettes de protection enveloppantes</strong> (norme EN 166).</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <strong>Gants en nitrile</strong> adaptés aux acides et bases.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <strong>Cheveux attachés</strong> et pas de vêtements amples près des organes rotatifs.</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-rose-400"></i> Sécurité Électrique &amp; Habilitation
+                    </h3>
+                    <ul class="space-y-2.5 text-xs text-slate-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> Câblage toujours réalisé <strong>hors tension</strong>.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> Vérification par l'enseignant avant mise sous tension.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> Utilisation exclusive de cordons de sécurité double isolation.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-400"></i> Connaissance de l'emplacement du <strong>Coup-de-poing d'Arrêt d'Urgence</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- SECTION 4 : CALCULATEURS DE LABORATOIRE                          -->
+        <!-- ================================================================= -->
+        <div id="section-outils" class="hidden space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold font-heading text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-calculator text-cyan-400"></i> Calculateurs Scientifiques de Paillasse
+                </h2>
+                <p class="text-xs text-slate-400 font-medium mt-1">Outils de calcul direct pour vérifier vos mesures expérimentales en séance de TP.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Calculateur Loi d'Ohm -->
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-sm font-bold text-yellow-400 flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Loi d'Ohm &amp; Puissance ($U = R cdot I$)</h3>
+                    <div class="space-y-2 text-xs">
+                        <div>
+                            <label class="text-slate-400">Résistance $R$ (en $\Omega$)</label>
+                            <input type="number" id="calc-r" value="100" oninput="runOhmCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-2 text-white font-bold border border-slate-700">
+                        </div>
+                        <div>
+                            <label class="text-slate-400">Intensité $I$ (en A)</label>
+                            <input type="number" id="calc-i" value="0.2" step="0.01" oninput="runOhmCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-2 text-white font-bold border border-slate-700">
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                            <div class="text-[11px] text-slate-400">Tension $U$ = <span class="text-emerald-400 font-bold text-sm" id="calc-u-res">20.00 V</span></div>
+                            <div class="text-[11px] text-slate-400">Puissance $P = U \cdot I$ = <span class="text-cyan-400 font-bold text-sm" id="calc-p-res">4.00 W</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculateur Dilution -->
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-vial"></i> Dilution Chimique ($C_1 V_1 = C_2 V_2$)</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-slate-400">$C_1$ mère (mol/L)</label>
+                                <input type="number" id="calc-c1" value="0.1" step="0.01" oninput="runDilutionCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-1.5 text-white font-bold border border-slate-700">
+                            </div>
+                            <div>
+                                <label class="text-slate-400">$C_2$ fille (mol/L)</label>
+                                <input type="number" id="calc-c2" value="0.02" step="0.01" oninput="runDilutionCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-1.5 text-white font-bold border border-slate-700">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-400">Volume fille souhaité $V_2$ (mL)</label>
+                            <input type="number" id="calc-v2" value="100" oninput="runDilutionCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-1.5 text-white font-bold border border-slate-700">
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                            <div class="text-[11px] text-slate-400">Volume mère à prélever $V_1$ :</div>
+                            <div class="text-emerald-400 font-bold text-base mt-1" id="calc-v1-res">20.00 mL</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculateur Niveau Sonore -->
+                <div class="p-6 rounded-3xl bg-slate-900 border border-slate-800 space-y-4">
+                    <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2"><i class="fa-solid fa-volume-high"></i> Somme de Niveaux Sonores</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-slate-400">Source 1 $L_1$ (dB)</label>
+                                <input type="number" id="calc-l1" value="80" oninput="runAcousticCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-1.5 text-white font-bold border border-slate-700">
+                            </div>
+                            <div>
+                                <label class="text-slate-400">Source 2 $L_2$ (dB)</label>
+                                <input type="number" id="calc-l2" value="80" oninput="runAcousticCalc()" class="w-full bg-slate-800 rounded-xl px-3 py-1.5 text-white font-bold border border-slate-700">
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                            <div class="text-[11px] text-slate-400">Niveau total $L_{tot} = 10 \log(10^{L1/10} + 10^{L2/10})$ :</div>
+                            <div class="text-cyan-400 font-bold text-base mt-1" id="calc-ltot-res">83.01 dB</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODALE VISIONNEUSE IMMERSIVE DE TP -->
+    <div id="tp-modal-viewer" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] flex flex-col">
+        <div class="px-5 py-3.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shadow-xl">
+            <div class="flex items-center gap-3">
+                <button onclick="closeTPViewer()" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div>
+                    <h3 class="text-sm font-bold text-white truncate max-w-md sm:max-w-xl" id="tp-viewer-title">Titre du TP</h3>
+                    <span class="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider" id="tp-viewer-meta">Simulation 60 FPS</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <a id="tp-viewer-external" href="#" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white rounded-xl flex items-center gap-1.5 transition-colors" title="Ouvrir dans un nouvel onglet">
+                    <i class="fa-solid fa-external-link"></i> <span class="hidden sm:inline">Plein écran</span>
+                </a>
+                <button onclick="closeTPViewer()" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div class="flex-1 w-full bg-slate-950 relative">
+            <iframe id="tp-viewer-iframe" class="w-full h-full border-none" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- SCRIPT DATA & APP LOGIC -->
+    <script>
+        const allTPs = [{"id":"seq_3pm_p1_1_tp","title":"TP - Statistiques à 1 variable","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/statistiques-1-variable/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 1 : Statistiques à 1 variable","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p1_2_tp","title":"TP - Divisibilité & Nombres Premiers","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/divisibilite-nombres-premiers/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 2 : Divisibilité & Nombres Premiers","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p1_3_tp","title":"TP - Fractions & Opérations Rationnelles","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/operations-nombres-rationnels/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 3 : Fractions & Opérations Rationnelles","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p1_4_tp","title":"TP - Repérage dans le Plan et l'Espace","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/reperage/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 4 : Repérage dans le Plan et l'Espace","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p2_1_tp","title":"TP - Puissances de 10 & Écriture Scientifique","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/puissances/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 5 : Puissances de 10 & Écriture Scientifique","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p2_2_tp","title":"TP - Calcul Littéral & Expressions","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/calcul-litteral/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 6 : Calcul Littéral & Expressions","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p2_3_tp","title":"TP - Équations du 1er Degré","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/equations/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 7 : Équations du 1er Degré","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p3_1_tp","title":"TP - Proportionnalité, Pourcentages & Ratios","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/proportionnalite/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 8 : Proportionnalité, Pourcentages & Ratios","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p3_2_tp","title":"TP - Théorème de Pythagore & Réciproque","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/pythagore/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 9 : Théorème de Pythagore & Réciproque","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p3_3_tp","title":"TP - Théorème de Thalès & Réciproque","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/thales/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 10 : Théorème de Thalès & Réciproque","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p4_1_tp","title":"TP - Fonctions Affines & Linéaires","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/fonctions-affines/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 11 : Fonctions Affines & Linéaires","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p4_2_tp","title":"TP - Trigonométrie dans le Triangle Rectangle","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/trigonometrie/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 12 : Trigonométrie dans le Triangle Rectangle","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p5_1_tp","title":"TP - Agrandissement, Réduction & Transformations","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/agrandissement-reduction/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 13 : Agrandissement, Réduction & Transformations","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p5_2_tp","title":"TP - Aires, Volumes & Conversions d'Unités","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/aires-volumes-conversions/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 14 : Aires, Volumes & Conversions d'Unités","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p5_3_tp","title":"TP - Probabilités & Événements","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/probabilites/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 15 : Probabilités & Événements","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_3pm_p5_4_tp","title":"TP - Algorithmique & Programmation Scratch","desc":"Travaux Pratiques sur tableur (LibreOffice Calc), GeoGebra ou Scratch 3.0.","url":"../ressources/3pm/maths/algorithmique/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"maths","sequenceTitle":"Séquence 16 : Algorithmique & Programmation Scratch","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"3p_s1_sci_tp","title":"TP - Matière & Atomes","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/constitution-matiere-atomes/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 1 : Constitution de la Matière & Modèle de l'Atome","domain":"Sciences","duration":"55 min"},{"id":"3p_s2_sci_tp","title":"TP - Ions & pH","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/solutions-aqueuses-ions-ph/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 2 : Solutions Aqueuses, Ions & Mesure du pH","domain":"Chimie","duration":"55 min"},{"id":"3p_s3_sci_tp","title":"TP - Mouvement & Vitesse","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/mouvement-trajectoire-vitesse/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 3 : Mouvement, Trajectoire & Vitesse Moyenne","domain":"Mécanique","duration":"55 min"},{"id":"3p_s4_sci_tp","title":"TP - Forces & Poids","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/actions-forces-poids-masse/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 4 : Actions Mécaniques, Forces & Poids","domain":"Mécanique","duration":"55 min"},{"id":"3p_s5_sci_tp","title":"TP - Circuits & Loi d'Ohm","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/circuits-electriques-loi-ohm/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 5 : Circuits Électriques & Loi d'Ohm","domain":"Électricité","duration":"55 min"},{"id":"3p_s6_sci_tp","title":"TP - Puissance & Énergie","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/puissance-energie-electrique/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 6 : Puissance & Énergie Électrique","domain":"Électricité","duration":"55 min"},{"id":"3p_s7_sci_tp","title":"TP - Conversions d'Énergie","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/sources-conversions-energie/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 7 : Sources, Formes & Conversions d'Énergie","domain":"Sciences","duration":"55 min"},{"id":"3p_s8_sci_tp","title":"TP - Signaux & Optique","desc":"TP Hybride Paillasse Réelle & Simulateur 60 FPS (Labo Maths Sciences).","url":"../ressources/3pm/sciences/signaux-sonores-lumineux/tp.html","level":"3eme","levelFull":"3ème Prépa Métiers","formationShort":"3ème Prépa Métiers","subject":"sciences","sequenceTitle":"Séquence 8 : Signaux Sonores, Optique & Ondes","domain":"Acoustique","duration":"55 min"},{"id":"cap_m1_tp","title":"TP - Tableur Excel / Calc","desc":"Diagrammes en bâtons sur tableur.","url":"../ressources/cap/maths/statistiques-1-variable/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 1 : Statistiques à une variable","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m2_tp","title":"TP - Graphiques et Tableur","desc":"Vérification d'alignement sur tableur.","url":"../ressources/cap/maths/proportionnalite/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 2 : Proportionnalité & Ratios","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m3_tp","title":"TP - Calculateur de Remises","desc":"Modélisation de devis sur tableur.","url":"../ressources/cap/maths/pourcentages-simples/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 3 : Pourcentages & Évolutions Simples","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m4_tp","title":"TP - GeoGebra & Solveur","desc":"Résolution graphique d'équations.","url":"../ressources/cap/maths/equations-1er-degre/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 4 : Équations du 1er Degré","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m5_tp","title":"TP - Construction GeoGebra","desc":"Vérification d'angles droits sur GeoGebra.","url":"../ressources/cap/maths/pythagore/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 5 : Théorème de Pythagore","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m6_tp","title":"TP - GeoGebra 2D","desc":"Tracé et mesure de figures planes.","url":"../ressources/cap/maths/geometrie-plane-perimetres-aires/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 6 : Géométrie Plane, Périmètres & Aires","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m7_tp","title":"TP - GeoGebra 3D","desc":"Modélisation 3D de réservoirs.","url":"../ressources/cap/maths/volumes-solides/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 7 : Volumes des Solides Usuels","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_m8_tp","title":"TP - Simulation Tableur","desc":"Tirages aléatoires sur tableur.","url":"../ressources/cap/maths/probabilites/tp.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"maths","sequenceTitle":"Séquence 8 : Probabilités & Chance","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"cap_s1_tp","title":"TP Hybride - Sécurité des produits chimiques","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/securite-produits-chimiques/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 1 : Sécurité des produits chimiques","domain":"Sciences","duration":"55 min"},{"id":"cap_s2_tp","title":"TP Hybride - Solutions aqueuses, acides & pH","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/solutions-acides-bases-ph/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 2 : Solutions aqueuses, acides & pH","domain":"Chimie","duration":"55 min"},{"id":"cap_s3_tp","title":"TP Hybride - Mouvement & Vitesse Moyenne","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/mouvement-vitesse/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 3 : Mouvement & Vitesse Moyenne","domain":"Mécanique","duration":"55 min"},{"id":"cap_s4_tp","title":"TP Hybride - Poids, Masse & Forces","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/poids-masse-forces/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 4 : Poids, Masse & Forces","domain":"Mécanique","duration":"55 min"},{"id":"cap_s5_tp","title":"TP Hybride - Équilibre d'un Solide","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/equilibre-solide/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 5 : Équilibre d'un Solide","domain":"Mécanique","duration":"55 min"},{"id":"cap_s6_tp","title":"TP Hybride - Électricité : Tension & Intensité","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/electricite-tension-intensite/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 6 : Électricité : Tension & Intensité","domain":"Électricité","duration":"55 min"},{"id":"cap_s7_tp","title":"TP Hybride - Puissance & Énergie Électrique","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/puissance-energie-electrique/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 7 : Puissance & Énergie Électrique","domain":"Électricité","duration":"55 min"},{"id":"cap_s8_tp","title":"TP Hybride - Acoustique, Bruit & Optique","desc":"TP Hybride Paillasse Réelle & Simulateur Virtuel Canvas 60 FPS avec signature Labo Maths Sciences.","url":"../ressources/cap/sciences/acoustique-bruit-optique/tice.html","level":"cap","levelFull":"CAP RICS - 1ère année (Réalisation Industrielle Chaudronnerie Soudure)","formationShort":"Seconde CAP RICS","subject":"sciences","sequenceTitle":"Séquence 8 : Acoustique, Bruit & Optique","domain":"Optique","duration":"55 min"},{"id":"2nde_m1_tice","title":"TICE - Tableur Excel / Calc","desc":"Travaux Pratiques sur tableur (histogrammes, quartiles).","url":"../ressources/seconde/maths/statistiques-1-variable/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 1 : Statistiques à une variable","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m2_tice","title":"TICE - Tableur Excel / Calc","desc":"TP Tableur sur les taux d'évolution.","url":"../ressources/seconde/maths/pourcentages-proportions/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 2 : Pourcentages, Proportions & Variations","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m3_tice","title":"TICE - GeoGebra","desc":"Résolution d'équations sur GeoGebra.","url":"../ressources/seconde/maths/equations-1er-degre/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 3 : Équations & Inéquations du 1er Degré","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m4_tice","title":"TICE - GeoGebra Droites","desc":"Tracé dynamique de droites affines.","url":"../ressources/seconde/maths/fonctions-reference/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 4 : Fonctions Linéaires & Affines","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m5_tice","title":"TICE - GeoGebra Trigo","desc":"Simulations de triangles et angles.","url":"../ressources/seconde/maths/geometrie-plane-trigonometrie/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 5 : Thalès, Pythagore & Trigonométrie","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m6_tice","title":"TICE - GeoGebra 3D Solides","desc":"Modélisation 3D de pièces.","url":"../ressources/seconde/maths/geometrie-espace-volumes/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 6 : Solides Usuels, Aires & Volumes","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m7_tice","title":"TICE - GeoGebra Vecteurs","desc":"Construction de vecteurs sur GeoGebra.","url":"../ressources/seconde/maths/vecteurs-plan/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 7 : Vecteurs du Plan & Translation","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"2nde_m8_tice","title":"TICE - Tableur Simulation","desc":"Simulation de 1000 tirages sur tableur.","url":"../ressources/seconde/maths/probabilites-fluctuation/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"maths","sequenceTitle":"Séquence 8 : Probabilités & Échantillonnage","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_2pro_s_securite_produits_chimiques_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/securite-produits-chimiques/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 1 : Sécurité des Produits Chimiques (T1.1)","domain":"Sciences","duration":"55 min"},{"id":"seq_2pro_s_solutions_acides_bases_ph_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/solutions-acides-bases-ph/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 2 : Solutions Aqueuses, Acides, Bases et pH (T1.2)","domain":"Chimie","duration":"55 min"},{"id":"seq_2pro_s_mouvement_vitesse_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/mouvement-vitesse/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 3 : Mouvement et Vitesse (T2.1)","domain":"Mécanique","duration":"55 min"},{"id":"seq_2pro_s_poids_masse_forces_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/poids-masse-forces/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 4 : Poids, Masse et Forces (T2.2)","domain":"Mécanique","duration":"55 min"},{"id":"seq_2pro_s_equilibre_solide_moment_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/equilibre-solide-moment/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 5 : Équilibre d'un Solide & Moment d'une Force (T2.3)","domain":"Mécanique","duration":"55 min"},{"id":"seq_2pro_s_electricite_circuit_continu_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/electricite-circuit-continu/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 6 : Circuits Électriques en Courant Continu (T3.1)","domain":"Électricité","duration":"55 min"},{"id":"seq_2pro_s_puissance_energie_electrique_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/puissance-energie-electrique/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 7 : Puissance et Énergie Électrique (T3.2)","domain":"Électricité","duration":"55 min"},{"id":"seq_2pro_s_acoustique_bruit_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/acoustique-bruit/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 8 : Acoustique, Signaux Sonores et Bruit (T4.1)","domain":"Acoustique","duration":"55 min"},{"id":"seq_2pro_s_optique_propagation_reflexion_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/optique-propagation-reflexion/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 9 : Optique - Propagation Rectiligne et Réflexion (T4.2)","domain":"Optique","duration":"55 min"},{"id":"seq_2pro_s_thermique_transferts_isolants_tice","title":"TP Hybride - Paillasse Réelle & Simulateur Virtuel","desc":"Manipulations au labo (matériel réel) + Simulateur numérique HTML5 Canvas.","url":"../ressources/seconde/sciences/thermique-transferts-isolants/tice.html","level":"seconde","levelFull":"Seconde Bac Pro - Maintenance des Matériels et Véhicules","formationShort":"Seconde MMV","subject":"sciences","sequenceTitle":"Séquence 10 : Transferts Thermiques et Isolation (T4.3)","domain":"Thermodynamique","duration":"55 min"},{"id":"1s1_tice","title":"TICE - Dosage Virtuel","desc":"Simulation interactive.","url":"../ressources/premiere/sciences/chimie-dosages-oxydoreduction/tice.html","level":"premiere","levelFull":"Première Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Première MVM","subject":"sciences","sequenceTitle":"Séquence 1 : Chimie des Solutions & Oxydoréduction","domain":"Chimie","duration":"55 min"},{"id":"1s2_tice","title":"TICE - Oscilloscope Virtuel","desc":"Simulation interactive.","url":"../ressources/premiere/sciences/electricite-alternatif/tice.html","level":"premiere","levelFull":"Première Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Première MVM","subject":"sciences","sequenceTitle":"Séquence 2 : Électricité en Courant Alternatif Sinusoïdal","domain":"Électricité","duration":"55 min"},{"id":"1s3_tice","title":"TICE - Simulateur de Chute & Énergie","desc":"Simulation interactive.","url":"../ressources/premiere/sciences/mecanique-energie/tice.html","level":"premiere","levelFull":"Première Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Première MVM","subject":"sciences","sequenceTitle":"Séquence 3 : Mécanique & Énergie Cinétique / Potentielle","domain":"Mécanique","duration":"55 min"},{"id":"1s4_tice","title":"TICE - Banc d'Optique Virtuel","desc":"Simulation interactive.","url":"../ressources/premiere/sciences/optique-lentilles/tice.html","level":"premiere","levelFull":"Première Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Première MVM","subject":"sciences","sequenceTitle":"Séquence 4 : Optique Géométrique & Lentilles Minces","domain":"Optique","duration":"55 min"},{"id":"1s5_tice","title":"TICE - Bilan Thermique DPE","desc":"Simulation interactive.","url":"../ressources/premiere/sciences/thermique-isolation/tice.html","level":"premiere","levelFull":"Première Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Première MVM","subject":"sciences","sequenceTitle":"Séquence 5 : Thermique & Isolation des Bâtiments","domain":"Thermodynamique","duration":"55 min"},{"id":"seq_term_m_1_tp","title":"TP Numérique - Statistiques à 2 variables","desc":"TP Hybride : Tableur/Calculatrices + Simulateur interactif Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/statistiques-2-variables/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 1 : Statistiques à deux variables","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_2_tp","title":"TP Numérique - Probabilités conditionnelles","desc":"TP Hybride NumWorks : Simulation d'arbres, formule de Bayes et simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/probabilites-conditionnelles/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 2 : Probabilités conditionnelles & Arbres pondérés","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_3_tp","title":"TP Numérique - Suites numériques","desc":"TP Hybride NumWorks : Application Suites, recherche de seuil et simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/suites-numeriques/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 3 : Suites numériques (Arithmétiques & Géométriques)","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_4_tp","title":"TP Numérique - Fonctions Polynômes de Degré 3","desc":"TP Hybride NumWorks : Recherche d'extremums & solveur d'équations + simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/fonctions-degre-3/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 4 : Fonctions Polynômes de Degré 3 & Optimisation","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_5_tp","title":"TP Numérique - Dérivation & Optimisation","desc":"TP Hybride NumWorks : Menu Calculer > Tangente & Nombre dérivé + simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/derivation-optimisation/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 5 : Dérivation & Optimisation","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_6_tp","title":"TP Numérique - Fonctions Exponentielles","desc":"TP Hybride NumWorks : Touche e^x, tableau de valeurs et seuil + simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/fonctions-exponentielles/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 6 : Fonctions Exponentielles","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_7_tp","title":"TP Numérique - Fonctions Logarithmes","desc":"TP Hybride NumWorks : Touches ln / log, échelles logarithmiques + simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/fonctions-logarithmes/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 7 : Fonctions Logarithmes","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_m_8_tp","title":"TP Numérique - Vecteurs & Produit Scalaire","desc":"TP Hybride NumWorks : Boîte à outils vecteurs et trigonométrie + simulateur Canvas 60 FPS signé Labo Maths Sciences.","url":"../ressources/terminale/maths/vecteurs-produit-scalaire/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"maths","sequenceTitle":"Séquence 8 : Vecteurs & Produit Scalaire","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"seq_term_s_1_tp","title":"TP Numérique - Wattmètre & Oscilloscope","desc":"Simulateur Canvas 60 FPS R-L-C et déphasage.","url":"../ressources/terminale/sciences/electricite-monophase/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"sciences","sequenceTitle":"Séquence 1 : Régime Sinusoïdal Monophasé, Puissances & Incertitudes (Grp 1 & 2)","domain":"Électricité","duration":"55 min"},{"id":"seq_term_s_3_tp","title":"TP Numérique - Profil de Température & Infrarouge","desc":"Simulateur Canvas 60 FPS du transfert de chaleur.","url":"../ressources/terminale/sciences/thermique-transferts-isolation/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"sciences","sequenceTitle":"Séquence 3 : Transferts Thermiques, Isolation & RE2020 (Grp 1, 2, 3, 4, 6)","domain":"Thermodynamique","duration":"55 min"},{"id":"seq_term_s_4_tp","title":"TP Numérique - Simulation Plan Incliné","desc":"Simulateur Canvas 60 FPS des énergies mécaniques.","url":"../ressources/terminale/sciences/mecanique-dynamique-energie/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"sciences","sequenceTitle":"Séquence 4 : Cinématique, Dynamique & Énergie Mécanique (Grp 2 & 4)","domain":"Mécanique","duration":"55 min"},{"id":"seq_term_s_6_tp","title":"TP Numérique - Décharge de Pile Li-ion","desc":"Simulateur Canvas 60 FPS d'une pile électrochimique.","url":"../ressources/terminale/sciences/chimie-oxydoreduction-combustion/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"sciences","sequenceTitle":"Séquence 6 : Oxydoréduction, Piles/Batteries & Combustion (Grp 1, 2, 4, 5)","domain":"Chimie","duration":"55 min"},{"id":"seq_term_s_7_tp","title":"TP Numérique - Sonomètre Virtuel d'Atelier","desc":"Simulateur Canvas 60 FPS de champ acoustique.","url":"../ressources/terminale/sciences/acoustique-bruit-protection/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Maintenance des Véhicules option Motocycles","formationShort":"Terminale MVM","subject":"sciences","sequenceTitle":"Séquence 7 : Acoustique Physique, Décibels & Protection SST (Grp 3, 4, 6)","domain":"Acoustique","duration":"55 min"},{"id":"seq_term_s_2_tp","title":"TP Numérique - Diagramme de Fresnel Triphasé","desc":"Simulateur Canvas 60 FPS du réseau 400V triphasé.","url":"../ressources/terminale/sciences/electricite-triphase/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Métiers de l'Électricité et ses Environnements Connectés","formationShort":"Terminale MELEC","subject":"sciences","sequenceTitle":"Séquence 2 : Réseaux & Systèmes Triphasés Équilibrés (Grp 1)","domain":"Électricité","duration":"55 min"},{"id":"seq_term_s_8_tp","title":"TP Numérique - Réfraction & Laser Virtuel","desc":"Simulateur Canvas 60 FPS du rayon laser.","url":"../ressources/terminale/sciences/optique-ondes-eclairagisme/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Métiers de l'Électricité et ses Environnements Connectés","formationShort":"Terminale MELEC","subject":"sciences","sequenceTitle":"Séquence 8 : Ondes Électromagnétiques, Fibre Optique & Éclairagisme (Grp 1, 3, 6)","domain":"Optique","duration":"55 min"},{"id":"seq_term_s_5_tp","title":"TP Numérique - Titrage pH-métrique Virtuel","desc":"Simulateur Canvas 60 FPS de burette graduée.","url":"../ressources/terminale/sciences/chimie-solutions-ph-dosage/tp.html","level":"terminale","levelFull":"Terminale Bac Pro - Technicien Chaudronnerie Industrielle","formationShort":"Terminale TCI","subject":"sciences","sequenceTitle":"Séquence 5 : Solutions Aqueuses, pH & Dosages Acido-Basiques (Grp 4, 5, 6)","domain":"Chimie","duration":"55 min"},{"id":"csta_s1_tp","title":"TP Numérique - Simulateur de Gaine 60 FPS","desc":"Simulateur Canvas 60 FPS de traction et parachute.","url":"../ressources/postbac/csta/statique-dynamique-traction/tp.html","level":"postbac","levelFull":"Certification de Spécialisation - Technicien Ascensoriste","formationShort":"CSTA - Technicien Ascensoriste","subject":"maths","sequenceTitle":"Séquence 1 : Statique, Dynamique & Sécurité des Chaînes de Traction","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"csta_s2_tp","title":"TP Numérique - Centrales Oléodynamiques 60 FPS","desc":"Simulateur Canvas 60 FPS de centrale hydraulique.","url":"../ressources/postbac/csta/hydraulique-verins-centrales/tp.html","level":"postbac","levelFull":"Certification de Spécialisation - Technicien Ascensoriste","formationShort":"CSTA - Technicien Ascensoriste","subject":"maths","sequenceTitle":"Séquence 2 : Hydraulique des Vérins & Centrales Oléodynamiques","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"csta_s3_tp","title":"TP Numérique - Simulator VVVF 60 FPS","desc":"Simulateur Canvas 60 FPS.","url":"../ressources/postbac/csta/electrotechnique-variateurs-securite/tp.html","level":"postbac","levelFull":"Certification de Spécialisation - Technicien Ascensoriste","formationShort":"CSTA - Technicien Ascensoriste","subject":"sciences","sequenceTitle":"Séquence 3 : Électrotechnique, Variateurs VVVF & Sécurité","domain":"Électricité","duration":"2h00"},{"id":"cstt_s1_tp","title":"TP Numérique - Visualiseur Piquages 3D 60 FPS","desc":"Simulateur Canvas 60 FPS de piquages et patrons.","url":"../ressources/postbac/cstt/geometrie-3d-piquages-tuyauterie/tp.html","level":"postbac","levelFull":"Certification de Spécialisation - Technicien en Tuyauterie","formationShort":"CSTT - Technicien en Tuyauterie","subject":"maths","sequenceTitle":"Séquence 1 : Géométrie 3D, Tracé & Piquages de Tuyauterie","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"cstt_s2_tp","title":"TP Numérique - Simulator Lyre de Dilatation 60 FPS","desc":"Simulateur Canvas 60 FPS de dilatation thermique.","url":"../ressources/postbac/cstt/rdm-dilatation-thermique/tp.html","level":"postbac","levelFull":"Certification de Spécialisation - Technicien en Tuyauterie","formationShort":"CSTT - Technicien en Tuyauterie","subject":"maths","sequenceTitle":"Séquence 2 : RDM & Dilatation Thermique des Réseaux Sous Pression","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"csmiop_s1_tp","title":"TP Numérique - Banc Hydraulique Proportionnel 60 FPS","desc":"Simulateur Canvas 60 FPS de centrale et limiteur de pression.","url":"../ressources/postbac/csmiop/hydraulique-proportationnelle-puissance/tp.html","level":"postbac","levelFull":"CS - Maintenance des Installations Oléo-Hydrauliques et Pneumatiques","formationShort":"CSMIOP - Maintenance Oléo-Hydraulique","subject":"maths","sequenceTitle":"Séquence 1 : Hydraulique Proportionnelle, Centrales & Pompes de Puissance","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"csmiop_s2_tp","title":"TP Numérique - Simulator Dépollution 60 FPS","desc":"Simulateur Canvas 60 FPS.","url":"../ressources/postbac/csmiop/diagnostic-proprete-huiles/tp.html","level":"postbac","levelFull":"CS - Maintenance des Installations Oléo-Hydrauliques et Pneumatiques","formationShort":"CSMIOP - Maintenance Oléo-Hydraulique","subject":"sciences","sequenceTitle":"Séquence 2 : Diagnostic, Filtration & Propreté ISO 4406","domain":"Hydraulique & Fluides","duration":"2h00"},{"id":"fcil_s1_tp","title":"TP Numérique - Banc de Test Batterie 60 FPS","desc":"Simulateur Canvas 60 FPS de charge/décharge batterie.","url":"../ressources/postbac/fcil-mu/batteries-bms-lithium/tp.html","level":"postbac","levelFull":"Formation Complémentaire d'Initiative Locale - Mobilité Urbaine","formationShort":"FCIL Mobilité Urbaine","subject":"maths","sequenceTitle":"Séquence 1 : Batteries Lithium-Ion, BMS & Diagnostic de Charge","domain":"Mathématiques & TICE","duration":"55 min"},{"id":"fcil_s2_tp","title":"TP Numérique - Simulator FOC 60 FPS","desc":"Simulateur Canvas 60 FPS.","url":"../ressources/postbac/fcil-mu/motorisation-bldc-foc/tp.html","level":"postbac","levelFull":"Formation Complémentaire d'Initiative Locale - Mobilité Urbaine","formationShort":"FCIL Mobilité Urbaine","subject":"sciences","sequenceTitle":"Séquence 2 : Motorisation Brushless BLDC & Contrôleur FOC","domain":"Sciences","duration":"55 min"},{"id":"cri_m1_tp","title":"TP Numérique - Visualiseur 3D Tuyauterie 60 FPS","desc":"Simulateur Canvas 60 FPS.","url":"../ressources/postbac/bts-cri/maths/calcul-vectoriel-geometrie-3d/tp.html","level":"bts","levelFull":"BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)","formationShort":"BTS CRI 1ère année","subject":"maths","sequenceTitle":"Séquence 1 : Calcul Vectoriel & Géométrie 3D dans l'Espace","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"cri_m2_tp","title":"TP Numérique - Carte de Niveau 3D 60 FPS","desc":"Simulateur Canvas 60 FPS d'optimisation.","url":"../ressources/postbac/bts-cri/maths/fonctions-plusieurs-variables/tp.html","level":"bts","levelFull":"BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)","formationShort":"BTS CRI 1ère année","subject":"maths","sequenceTitle":"Séquence 2 : Fonctions à Plusieurs Variables & Dérivées Partielles","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"cri_s1_tp","title":"TP Numérique - Simulateur de Poutre RDM 60 FPS","desc":"Simulateur Canvas 60 FPS de déformée de poutre.","url":"../ressources/postbac/bts-cri/sciences/rdm-poutres-assemblages/tp.html","level":"bts","levelFull":"BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)","formationShort":"BTS CRI 1ère année","subject":"sciences","sequenceTitle":"Séquence 1 : Statique & Résistance des Matériaux (RDM)","domain":"Mécanique","duration":"2h00"},{"id":"cri_s2_tp","title":"TP Numérique - Banc Hydraulique 60 FPS","desc":"Simulateur Canvas 60 FPS de pertes de charge.","url":"../ressources/postbac/bts-cri/sciences/mecanique-fluides-hydraulique/tp.html","level":"bts","levelFull":"BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)","formationShort":"BTS CRI 1ère année","subject":"sciences","sequenceTitle":"Séquence 2 : Mécanique des Fluides & Pertes de Charge","domain":"Mécanique","duration":"2h00"},{"id":"cri_s3_tp","title":"TP Numérique - Simulateur d'Échangeur 60 FPS","desc":"Simulateur Canvas 60 FPS d'échangeur.","url":"../ressources/postbac/bts-cri/sciences/thermodynamique-echangeurs/tp.html","level":"bts","levelFull":"BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)","formationShort":"BTS CRI 1ère année","subject":"sciences","sequenceTitle":"Séquence 3 : Thermodynamique & Échangeurs Thermiques","domain":"Thermodynamique","duration":"2h00"},{"id":"cri_s4_tp","title":"TP Numérique - Simulateur Fe-C & Corrosion 60 FPS","desc":"Simulateur Canvas 60 FPS.","url":"../ressources/postbac/bts-cri/sciences/metallurgie-chimie-soudage/tp.html","level":"bts","levelFull":"BTS Conception et Réalisation en Chaudronnerie Industrielle (GRETA)","formationShort":"BTS CRI 1ère année","subject":"sciences","sequenceTitle":"Séquence 4 : Métallurgie, Chimie des Matériaux & Corrosion","domain":"Chimie","duration":"2h00"},{"id":"elt_m1_tp","title":"TP Numérique - Plan Complexe de Gauss","desc":"Simulateur Canvas 60 FPS d'impédances complexes.","url":"../ressources/postbac/bts-elt/maths/nombres-complexes-impedances/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"maths","sequenceTitle":"Séquence 1 : Nombres Complexes & Impédances Complexes","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"elt_m2_tp","title":"TP Numérique - Simulation Transitoire 60 FPS","desc":"Simulateur Canvas 60 FPS de charge R-L-C.","url":"../ressources/postbac/bts-elt/maths/equations-differentielle-transitoires/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"maths","sequenceTitle":"Séquence 2 : Équations Différentielles & Régimes Transitoires R-L-C","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"elt_m3_tp","title":"TP Numérique - Analyseur de Spectre 60 FPS","desc":"Simulateur Canvas 60 FPS de FFT.","url":"../ressources/postbac/bts-elt/maths/series-fourier-harmoniques/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"maths","sequenceTitle":"Séquence 3 : Séries de Fourier & Harmoniques","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"elt_m4_tp","title":"TP Numérique - Diagrammes de Bode 60 FPS","desc":"Simulateur Canvas 60 FPS de Bode.","url":"../ressources/postbac/bts-elt/maths/transformee-laplace-asservissements/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"maths","sequenceTitle":"Séquence 4 : Transformée de Laplace & Fonctions de Transfert","domain":"Mathématiques & TICE","duration":"2h00"},{"id":"elt_s1_tp","title":"TP Numérique - Oscilloscope MLI 60 FPS","desc":"Simulateur Canvas 60 FPS d'onduleur.","url":"../ressources/postbac/bts-elt/sciences/electronique-puissance-convertisseurs/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"sciences","sequenceTitle":"Séquence 1 : Électronique de Puissance & Convertisseurs Statiques","domain":"Électricité","duration":"2h00"},{"id":"elt_s2_tp","title":"TP Numérique - Banc d'Essai Moteur 60 FPS","desc":"Simulateur Canvas 60 FPS du banc d'essai.","url":"../ressources/postbac/bts-elt/sciences/machines-electriques-entrainements/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"sciences","sequenceTitle":"Séquence 2 : Machines Électriques & Entraînements Industriels","domain":"Électricité","duration":"2h00"},{"id":"elt_s3_tp","title":"TP Numérique - Boucle de Régulation 60 FPS","desc":"Simulateur Canvas 60 FPS de PID.","url":"../ressources/postbac/bts-elt/sciences/asservissements-regulation-pid/tp.html","level":"bts","levelFull":"BTS Electrotechnique par alternance (GRETA)","formationShort":"BTS Electrotechnique 1ère année","subject":"sciences","sequenceTitle":"Séquence 3 : Automatique & Régulation PID","domain":"Sciences","duration":"2h00"}];
+        let activeDomain = 'all';
+        let activeLevel = 'all';
+
+        function renderTPs(tps) {
+            const grid = document.getElementById('tp-cards-grid');
+            const empty = document.getElementById('tp-empty');
+            grid.innerHTML = '';
+
+            if (tps.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                document.getElementById('tp-counter').innerText = '0';
+                return;
+            } else {
+                grid.classList.remove('hidden');
+                empty.classList.add('hidden');
+                document.getElementById('tp-counter').innerText = tps.length;
+            }
+
+            tps.forEach(tp => {
+                const card = document.createElement('div');
+                card.className = "p-5 rounded-3xl bg-slate-900 border border-slate-800 card-hover transition-all flex flex-col justify-between space-y-4 group";
+
+                let domainBadge = "bg-emerald-950/80 text-emerald-400 border-emerald-800";
+                if(tp.domain === 'Électricité') domainBadge = "bg-yellow-950/80 text-yellow-400 border-yellow-800";
+                if(tp.domain === 'Mécanique') domainBadge = "bg-blue-950/80 text-blue-400 border-blue-800";
+                if(tp.domain === 'Chimie') domainBadge = "bg-emerald-950/80 text-emerald-400 border-emerald-800";
+                if(tp.domain === 'Thermodynamique') domainBadge = "bg-rose-950/80 text-rose-400 border-rose-800";
+                if(tp.domain === 'Optique') domainBadge = "bg-purple-950/80 text-purple-400 border-purple-800";
+                if(tp.domain === 'Acoustique') domainBadge = "bg-cyan-950/80 text-cyan-400 border-cyan-800";
+                if(tp.domain === 'Hydraulique & Fluides') domainBadge = "bg-indigo-950/80 text-indigo-400 border-indigo-800";
+
+                card.innerHTML = `
+                    <div class="space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 text-[10px] font-extrabold uppercase rounded-md border ${domainBadge}">${tp.domain}</span>
+                            <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> ${tp.duration}</span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold font-heading text-white group-hover:text-emerald-400 transition-colors line-clamp-2">${tp.title}</h3>
+                            <p class="text-xs text-slate-400 line-clamp-2 mt-1">${tp.desc}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="px-2 py-0.5 text-[10px] font-bold bg-slate-800 text-slate-300 rounded">${tp.formationShort}</span>
+                            <span class="px-2 py-0.5 text-[10px] font-bold bg-slate-800 text-slate-400 rounded">${tp.subject === 'maths' ? 'Maths' : 'Sciences'}</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[11px] font-semibold text-slate-500 truncate max-w-[50%]">${tp.sequenceTitle}</span>
+                        <button onclick="openTPViewer('${tp.url}', '${tp.title.replace(/'/g, "\\'")}', '${tp.domain} • ${tp.formationShort}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/20 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-play text-[10px]"></i> Lancer le TP
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterDomain(dom) {
+            activeDomain = dom;
+            document.querySelectorAll('#domain-filters .filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.domain === dom);
+            });
+            filterTPs();
+        }
+
+        function filterLevel(lvl) {
+            activeLevel = lvl;
+            document.querySelectorAll('#level-filters .level-btn').forEach(btn => {
+                const match = btn.dataset.level === lvl;
+                btn.className = match ? "level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-800 text-emerald-400 border border-emerald-800/50" : "level-btn px-3 py-1 text-xs font-semibold rounded-lg bg-slate-900 text-slate-400 border border-slate-800";
+            });
+            filterTPs();
+        }
+
+        function filterTPs() {
+            const query = document.getElementById('global-tp-search').value.toLowerCase().trim();
+            const filtered = allTPs.filter(tp => {
+                const matchDom = (activeDomain === 'all') || (tp.domain === activeDomain);
+                const matchLvl = (activeLevel === 'all') || (tp.level === activeLevel) || (activeLevel === 'bts' && (tp.level.startsWith('BTS') || tp.level.startsWith('CS') || tp.level.startsWith('FCIL')));
+                const matchSearch = !query || tp.title.toLowerCase().includes(query) || tp.desc.toLowerCase().includes(query) || tp.formationShort.toLowerCase().includes(query);
+                return matchDom && matchLvl && matchSearch;
+            });
+            renderTPs(filtered);
+        }
+
+        function resetTPFilters() {
+            activeDomain = 'all';
+            activeLevel = 'all';
+            document.getElementById('global-tp-search').value = '';
+            filterDomain('all');
+            filterLevel('all');
+        }
+
+        function switchSection(secId) {
+            ['tps', 'materiel', 'securite', 'outils'].forEach(id => {
+                document.getElementById('section-' + id).classList.toggle('hidden', id !== secId);
+                const btn = document.getElementById('nav-' + id);
+                if(btn) {
+                    btn.className = id === secId ? "px-4 py-2.5 rounded-xl bg-emerald-600 text-white shadow-md transition-all flex items-center gap-2" : "px-4 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 transition-all flex items-center gap-2";
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // TP VIEWER MODAL
+        function openTPViewer(url, title, meta) {
+            document.getElementById('tp-viewer-title').innerText = title;
+            document.getElementById('tp-viewer-meta').innerText = meta;
+            document.getElementById('tp-viewer-iframe').src = url;
+            document.getElementById('tp-viewer-external').href = url;
+            document.getElementById('tp-modal-viewer').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTPViewer() {
+            document.getElementById('tp-viewer-iframe').src = '';
+            document.getElementById('tp-modal-viewer').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // CALCULATEURS
+        function runOhmCalc() {
+            const r = parseFloat(document.getElementById('calc-r').value) || 0;
+            const i = parseFloat(document.getElementById('calc-i').value) || 0;
+            const u = r * i;
+            const p = u * i;
+            document.getElementById('calc-u-res').innerText = u.toFixed(2) + ' V';
+            document.getElementById('calc-p-res').innerText = p.toFixed(2) + ' W';
+        }
+
+        function runDilutionCalc() {
+            const c1 = parseFloat(document.getElementById('calc-c1').value) || 0.0001;
+            const c2 = parseFloat(document.getElementById('calc-c2').value) || 0;
+            const v2 = parseFloat(document.getElementById('calc-v2').value) || 0;
+            const v1 = (c2 * v2) / c1;
+            document.getElementById('calc-v1-res').innerText = v1.toFixed(2) + ' mL';
+        }
+
+        function runAcousticCalc() {
+            const l1 = parseFloat(document.getElementById('calc-l1').value) || 0;
+            const l2 = parseFloat(document.getElementById('calc-l2').value) || 0;
+            const lTot = 10 * Math.log10(Math.pow(10, l1/10) + Math.pow(10, l2/10));
+            document.getElementById('calc-ltot-res').innerText = lTot.toFixed(2) + ' dB';
+        }
+
+        // INIT
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTPs(allTPs);
+        });
+    </script>
+</body>
 </html>
